@@ -30,6 +30,7 @@
 ## Документация
 
 - **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — простая установка для игроков.
+- **[docs/COVERAGE.md](docs/COVERAGE.md)** — полная раскладка: что переведено нами, что уже на русском от авторов, что ещё нет.
 - **[docs/ROADMAP.md](docs/ROADMAP.md)** — что сделано и что дальше.
 - **[docs/MAINTAINING.md](docs/MAINTAINING.md)** — как устроены переводы, как добавлять новые, проверка, грабли.
 - **[docs/FOR-AGENTS.md](docs/FOR-AGENTS.md)** — рецепт для ИИ-агентов, если их просят настроить сборку.
