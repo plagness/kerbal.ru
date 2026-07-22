@@ -126,29 +126,17 @@ B9PartSwitch · B9 Procedural Wings · CommunityResourcePack · ConformalDecals 
 
 ClickThroughBlocker · Harmony · KSPBurst · TexturesUnlimited · ToolbarControl · CustomBarnKit · DepthMask · KSPTextureLoader · ModularFlightIntegrator · Shabby · SmokeScreen · SolverEngines · StagedAnimation · TextureReplacer · Waterfall · RealHeat · RealPlume · RSS-Textures · RSSVE · ScattererAtmosphereCache · StockScattererConfigs · ROLib · ROUtils · RP-1-ExpressInstall · RP-1-ExpressInstall-Graphics · Firespitter · Resurfaced · KerbalRenamer
 
-### 3b. Реальные кандидаты для перевода (есть детали/UI) — 17
+### 3b. ⚠️ Пересмотрено 2026-07-22: у большинства из этих 17 переводить нечего
 
-Моды с пользовательским текстом, которые имеет смысл перевести дальше:
+Раньше этот список был построен по ОПИСАНИЮ мода («раз тема — антенны/UI, значит есть текст»), без проверки факта. Проверка показала обратное:
 
-- **RealAntennas** — антенны и UI связи (тема связи), 128 партов, самый крупный из непереведённых.
-- **TestFlight** — надёжность, сообщения об отказах.
-- **Skopos** — симуляция наземных станций связи (RP-1).
-- **DistantObject** — UI и настройки отображения далёких объектов.
-- **CommunityCategoryKit** — названия категорий/вкладок деталей в VAB (высокая видимость — постоянно на экране).
-- **KSPWheel** — шасси/колёса (детали).
-- **BahaSP** *(BDAnimationModules)* — анимированные детали.
-- **RCSBuildAid** — оверлей RCS в редакторе.
-- **AtmosphereAutopilot** — UI автопилота в атмосфере.
-- **KerbalJointReinforcement** — настройки прочности стыков.
-- **EnvironmentalVisualEnhancements** — UI облаков и атмосферных эффектов.
-- **RetractableLiftingSurface** — деталь.
-- **FShangarExtender** — UI расширения ангара.
-- **KSCSwitcher** — названия стартовых площадок.
-- **EngineGroupController** — UI групп двигателей.
-- **PlanetShine** — UI настроек отражённого света.
-- **Scatterer** — UI атмосферных и океанических эффектов.
+- **RealAntennas** — заявленные «128 партов» оказались артефактом методики: это патчи `@PART[стоковая-деталь]`, добавляющие модуль антенны к СТОКОВЫМ деталям, а не свои новые детали. Реального текста — **4 переименования** (`commDish`, `RelayAntenna5/50/100` → «Параболическая антенна…»), уже переведены и применены 2026-07-22.
+- **Skopos** — весь функционал в `Telecom.dll`, единственный `.cfg` содержит только технические радио-параметры (частоты, полосы), не игровой текст. Переводить нечего.
+- **TestFlight, DistantObject, KSPWheel, BahaSP, RCSBuildAid, AtmosphereAutopilot, KerbalJointReinforcement, EnvironmentalVisualEnhancements, RetractableLiftingSurface, FShangarExtender, EngineGroupController, PlanetShine, Scatterer** — проверены на 2026-07-22: **0 полей `title`/`description` в `.cfg`, 0 ссылок на `#LOC_`/`#autoLOC_`** у каждого. Это plugin/UI-моды — весь пользовательский текст зашит в скомпилированные `.dll`, наш метод (добавление `Localization`-файлов) сюда не достаёт в принципе. Перевод потребовал бы правки кода/сборки мода — не наша зона, либо feature-request автору мода на добавление системы ключей.
+- **CommunityCategoryKit** — см. раздел 0b: 4 вкладки категорий VAB захардкожены без системы ключей вообще, тот же вывод.
+- **KSCSwitcher** — сами названия площадок уже переведены (раздел 0b, через `RealSolarSystem/Localization/LaunchSites/ru.cfg`); остальной код мода без своего игрового текста в `.cfg`.
 
-Приоритеты и порядок — в [ROADMAP.md](ROADMAP.md).
+**Практический вывод:** структурно переводимый через `.cfg`+MM-патчи контент этой сборки исчерпан почти полностью. Оставшийся реальный резерв — не новые моды, а **доперевод того, что уже начато**: ROEngines (~215 title), RealismOverhaul (до 36, неясного масштаба), решение загадки SXT/RealChute. См. [ROADMAP.md](ROADMAP.md).
 
 ---
 
