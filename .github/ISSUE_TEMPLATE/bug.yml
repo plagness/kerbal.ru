@@ -1,0 +1,64 @@
+name: Баг установщика или сайта
+description: Воспроизводимая техническая проблема kerbal.ru
+title: "[Баг]: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за точный отчёт. Для пропущенного или неверного перевода используй отдельный шаблон.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Где возникла проблема?
+      options:
+        - Установщик Windows
+        - Установщик Linux / macOS / Steam Deck
+        - Обновление или откат
+        - Сайт kerbal.ru
+        - Инструмент аудита
+        - Другое
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Окружение
+      description: ОС, версия KSP, версия kerbal.ru из .kerbalru-version и важные версии модов.
+      placeholder: Windows 11, KSP 1.12.5, kerbal.ru 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как воспроизвести
+      placeholder: |
+        1. Выполнить…
+        2. Нажать…
+        3. Увидеть…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидаемое поведение
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Фактическое поведение и лог
+      description: Приложи небольшой релевантный фрагмент. Удали токены и личные данные.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Проверка перед отправкой
+      options:
+        - label: Я использую лицензионную KSP 1.12.5 и типовую RO/RSS/RP-1 сборку.
+          required: true
+        - label: Я проверил существующие issues и документацию.
+          required: true
+        - label: Это не приватная уязвимость безопасности.
+          required: true

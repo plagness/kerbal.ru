@@ -1,0 +1,7 @@
+* @plagness
+
+# Наиболее рискованные области требуют явного ревью maintainer.
+/install-ru.sh @plagness
+/install-ru.ps1 @plagness
+/.github/workflows/ @plagness
+/CNAME @plagness

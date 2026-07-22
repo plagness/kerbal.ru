@@ -100,12 +100,33 @@ grep -A15 'name = <РеальноеИмяДетали>$' "GameData/ModuleManager
 
 - `GameData/` — готовые файлы локализации (структура повторяет GameData игры).
 - `install-ru.sh` / `install-ru.ps1` — установщики.
+- `VERSION` — версия следующего стабильного релиза без префикса `v`.
+- `.github/workflows/release.yml` — проверяет совпадение тега с `VERSION` и создаёт GitHub Release.
 - `index.html` + `vendor/three.min.js` — сайт (GitHub Pages). Three.js вендорнут локально (без CDN).
 - `CNAME` — привязка домена kerbal.ru.
 - `docs/` — эта документация.
 - Иконки на сайте — Tabler Icons (MIT), встроены в `index.html`.
 
-## 8. Тестовая сборка (референс)
+## 8. Релиз и обновление
+
+Установщики по умолчанию читают последний GitHub Release. В каталоге KSP они создают:
+
+- `.kerbalru-version` — установленная версия;
+- `.kerbalru-files` — manifest файлов, которыми управляет проект;
+- `kerbal.ru-backups/` — резервные копии перед заменой или удалением managed-файла.
+
+Обычный релизный цикл:
+
+1. обновить `VERSION` по SemVer;
+2. обновить `COVERAGE.md`, `ROADMAP.md` и пользовательские заметки;
+3. проверить чистую установку и обновление поверх предыдущего релиза на обеих реализациях установщика;
+4. влить релизный PR в `main`;
+5. создать и отправить тег `v$(cat VERSION)` — workflow выпустит GitHub Release;
+6. проверить `--check` / `-Check` и обычное обновление через публичный `kerbal.ru`.
+
+Никогда не переиспользуй и не передвигай опубликованный тег. Исправление уже выпущенного релиза получает новый PATCH. Полная пользовательская инструкция — в [UPDATING.md](UPDATING.md).
+
+## 9. Тестовая сборка (референс)
 
 Рабочая сборка стоит на Steam Deck: `~/.local/share/Steam/steamapps/common/Kerbal Space Program`.
 CKAN на Deck запускается из контейнера **distrobox `ckanbox`** (Debian + `mono-complete`), т.к. SteamOS read-only. Лог игры: `KSP.log` в корне установки — грепать по `Config(Localization)` (загрузка), `[ERR`/`Exception` (проблемы).

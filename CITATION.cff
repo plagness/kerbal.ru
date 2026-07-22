@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Если kerbal.ru помог вашему проекту или публикации, укажите репозиторий и использованную версию."
+title: "kerbal.ru: русская локализация RO / RSS / RP-1"
+type: software
+version: 1.0.0
+date-released: 2026-07-22
+authors:
+  - family-names: Tenevoy
+    given-names: Valery
+    alias: plagness
+repository-code: "https://github.com/plagness/kerbal.ru"
+url: "https://kerbal.ru"
+keywords:
+  - Kerbal Space Program
+  - Realism Overhaul
+  - Real Solar System
+  - RP-1
+  - Russian localization
+  - translation

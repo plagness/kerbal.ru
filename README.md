@@ -1,42 +1,147 @@
-# kerbal.ru — русская локализация RO / RSS / RP-1 для Kerbal Space Program
+# kerbal.ru
 
-Русский перевод для реалистичной сборки KSP1 на базе **Realism Overhaul + Real Solar System + RP-1**.
+**Русская локализация Realism Overhaul · Real Solar System · RP-1 для Kerbal Space Program 1.12.5**
 
-🌐 Сайт: **[kerbal.ru](https://kerbal.ru)** · ⬇️ [Скачать (ZIP)](https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip)
+[![Открыть kerbal.ru](https://img.shields.io/badge/kerbal.ru-ОТКРЫТЬ-A7EF68?style=flat-square&labelColor=07130F)](https://kerbal.ru)
+[![Последний релиз](https://img.shields.io/github/v/release/plagness/kerbal.ru?display_name=tag&style=flat-square&label=релиз&labelColor=07130F&color=67D4FF)](https://github.com/plagness/kerbal.ru/releases/latest)
+[![Проверки проекта](https://img.shields.io/github/actions/workflow/status/plagness/kerbal.ru/project-checks.yml?branch=main&style=flat-square&label=проверки&labelColor=07130F)](https://github.com/plagness/kerbal.ru/actions)
+[![Сообщество](https://img.shields.io/badge/community-welcome-F2A65A?style=flat-square&labelColor=07130F)](https://github.com/plagness/kerbal.ru/discussions)
+
+> Реальная космонавтика. Честный перевод. Открытое сообщество.
+>
+> Устанавливается поверх лицензионной KSP и сборки из CKAN. Оригинальные файлы модов не изменяются.
+
+[Сайт](https://kerbal.ru) · [Установка](#установка) · [Обновление](#как-обновляться) · [Покрытие](docs/COVERAGE.md) · [Roadmap](docs/ROADMAP.md) · [Участие](CONTRIBUTING.md)
 
 ---
 
-## Что это
+## Зачем существует kerbal.ru
 
-Набор файлов локализации (`ru.cfg` + вспомогательные ModuleManager-патчи), добавляющих русский язык в 20 популярных модов RO/RP-1 сборки. **Не отдельный мод** — ставится поверх уже собранной через CKAN сборки копированием папки `GameData`. Оригинальные файлы модов не изменяются; для англоязычных игроков ничего не меняется.
+RO/RSS/RP-1 превращает KSP в серьёзный симулятор реальной космонавтики: настоящая Земля, исторические двигатели, сложная орбитальная механика и длинная карьера. kerbal.ru делает эту сборку понятнее русскоязычным игрокам и собирает переводы в одном месте.
+
+Это не репак и не отдельная сборка игры. Репозиторий содержит только добавочные файлы локализации, установщики, инструменты аудита и сайт проекта. Сама KSP и моды устанавливаются легально через Steam и CKAN.
+
+## Состояние проекта
+
+| Что измеряем | Сейчас | Что это означает |
+|---|---:|---|
+| Поддерживаемые нами моды | **20** | Для них kerbal.ru поставляет собственные файлы перевода или MM-патчи |
+| Состав с русским блоком | **38 / 83 · 45,8%** | Учитывает также стоковую KSP и моды, где русский уже был |
+| Проверено деталей | **1 023** | Аудит через реальный `ModuleManager.ConfigCache` |
+| Названия деталей | **53,9%**¹ | Проекция после последнего исправления |
+| Описания деталей | **71,0%**¹ | Проекция после последнего исправления |
+
+¹ Новые значения структурно проверены, но ещё требуют одного живого запуска KSP и повторного аудита кэша. Последняя подтверждённая кэшем база: **36% названий / 54% описаний / 6% производителей**. Мы намеренно показываем обе цифры, а не выдаём наличие `ru.cfg` за стопроцентный перевод. [Методика, таблица по модам и ограничения →](docs/COVERAGE.md)
 
 ## Установка
 
-**Коротко (лицензия, 2 действия):**
+Сначала установи лицензионную **Kerbal Space Program 1.12.5** и сборку `RP-1-ExpressInstall` через [CKAN](https://github.com/KSP-CKAN/CKAN/releases/latest).
 
-1. Собери сборку через [CKAN](https://github.com/KSP-CKAN/CKAN/releases/latest): найди `RP-1-ExpressInstall`, отметь, нажми Apply.
-2. Поставь русский одной командой:
-   - Linux / macOS / Steam Deck: `curl -fsSL https://kerbal.ru/install-ru.sh | bash`
-   - Windows (PowerShell): `irm https://kerbal.ru/install-ru.ps1 | iex`
+### Linux · macOS · Steam Deck
 
-Подробно, с разбивкой по ОС — **[docs/QUICKSTART.md](docs/QUICKSTART.md)** и на сайте.
+```bash
+curl -fsSL https://kerbal.ru/install-ru.sh | bash
+```
 
-## Переведено (20 модов)
+### Windows · PowerShell
 
-**Полная локализация** (родная система мода): AJE, ContractConfigurator, EditorExtensionsRedux, ROCapsules, SXT, Trajectories, VenStockRevamp, KerbalChangelog, KerbalEngineerRedux, RealismOverhaul, SpaceTuxLibrary, BackgroundThrust.
+```powershell
+irm https://kerbal.ru/install-ru.ps1 | iex
+```
 
-**Через дополнительный патч** (у мода не было локализации): ROSolar, ROTanks, ROEngines, ROHeatshields, ProceduralFairings, ProceduralParts, RealChute, ModularLaunchPads.
+Установщик найдёт KSP, скачает последний стабильный релиз, сделает резервную копию заменяемых файлов, скопирует локализацию и включит русский язык. Скрипты открыты: перед запуском их можно [прочитать для Unix](install-ru.sh) или [для Windows](install-ru.ps1). Ручной способ и инструкции по каждой ОС — в [быстром старте](docs/QUICKSTART.md).
 
-⚠️ «20 модов» — это сколько модов затронуто, не значит «100% текста в каждом переведено». Охват названий деталей по игровому кэшу: было **36%**, после исправления 2026-07-22 — **≈54%** (по-разному от 20% до 100% в зависимости от мода; последняя цифра — структурно проверена, но ждёт подтверждения живым запуском) — см. честную раскладку и таблицу по каждому моду в **[docs/COVERAGE.md](docs/COVERAGE.md)**.
+## Как обновляться
 
-## Документация
+Когда выходит следующий релиз, достаточно повторить ту же команду установки. Установщик:
 
-- **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — простая установка для игроков.
-- **[docs/COVERAGE.md](docs/COVERAGE.md)** — полная раскладка: что переведено нами, что уже на русском от авторов, что ещё нет.
-- **[docs/ROADMAP.md](docs/ROADMAP.md)** — что сделано и что дальше.
-- **[docs/MAINTAINING.md](docs/MAINTAINING.md)** — как устроены переводы, как добавлять новые, проверка, грабли.
-- **[docs/FOR-AGENTS.md](docs/FOR-AGENTS.md)** — рецепт для ИИ-агентов, если их просят настроить сборку.
+1. сравнит установленную версию с последним GitHub Release;
+2. сохранит заменяемые файлы в `Kerbal Space Program/kerbal.ru-backups/`;
+3. удалит только устаревшие файлы, которыми раньше управлял kerbal.ru;
+4. установит новые переводы и запишет версию в `.kerbalru-version`.
 
-## Лицензия
+Моды, сохранения и любые посторонние файлы в `GameData` не удаляются. Проверить наличие обновления можно без установки:
 
-Переводы — на условиях, совместимых с лицензиями оригинальных модов (в основном CC-BY-NC-SA). Иконки сайта — [Tabler Icons](https://tabler.io/icons) (MIT). Независимый фан-проект, не аффилирован с авторами оригинальных модов и Squad/Private Division.
+```bash
+curl -fsSL https://kerbal.ru/install-ru.sh | bash -s -- --check
+```
+
+```powershell
+& ([scriptblock]::Create((irm https://kerbal.ru/install-ru.ps1))) -Check
+```
+
+Можно установить конкретный релиз для воспроизводимой сборки или отката: `--version v1.0.0` в Unix и `-Version v1.0.0` в PowerShell. Полный сценарий обновления, каналы `stable`/`main` и восстановление из резервной копии описаны в [docs/UPDATING.md](docs/UPDATING.md).
+
+## Как всё связано
+
+```mermaid
+flowchart LR
+    A["Steam · KSP 1.12.5"] --> B["CKAN · RP-1 Express Install"]
+    B --> C["kerbal.ru · файлы локализации"]
+    C --> D["ModuleManager · итоговый игровой кэш"]
+    D --> E["Русский интерфейс, детали и карьера"]
+    D --> F["audit_ru_coverage.py"]
+    F --> G["Честные проценты покрытия"]
+```
+
+## Где помочь
+
+Проект строится вокруг небольших, проверяемых вкладов. Не обязательно уметь программировать.
+
+| Направление | Хорошая первая задача |
+|---|---|
+| Перевод | Взять один из [17 кандидатов](docs/COVERAGE.md#3b-реальные-кандидаты-для-перевода-есть-деталиui--17) и перевести небольшой блок строк |
+| Проверка в игре | Пересобрать `ModuleManager.ConfigCache`, запустить аудит и приложить результат |
+| Терминология | Проверить названия двигателей, ступеней и космических программ |
+| Установщики | Проверить обновление на Windows, Linux, macOS или Steam Deck |
+| Сайт | Улучшить доступность, производительность и мобильное отображение |
+| Документация | Дополнить FAQ, инструкции или разбор типичной ошибки |
+
+Начни с [CONTRIBUTING.md](CONTRIBUTING.md), предложи идею в [Discussions](https://github.com/plagness/kerbal.ru/discussions) или выбери [открытую задачу](https://github.com/plagness/kerbal.ru/issues). Для первого PR особенно полезны задачи с метками `good first issue` и `help wanted`.
+
+## Устройство репозитория
+
+```text
+GameData/                  готовые файлы локализации для установки в KSP
+assets/                    открытые текстуры и 3D-модель для сайта
+docs/                      установка, покрытие, roadmap и сопровождение
+tools/audit_ru_coverage.py аудит реального игрового кэша
+install-ru.sh              установщик и обновлятор Unix-систем
+install-ru.ps1             установщик и обновлятор Windows
+index.html                 kerbal.ru — статический сайт на Three.js
+.github/                   шаблоны сообщества и автоматические проверки
+```
+
+Технические правила переводов, устройство `ru.cfg` и ModuleManager-патчей описаны в [MAINTAINING.md](docs/MAINTAINING.md).
+
+## Принципы
+
+- **Честные цифры.** Проверяем итоговый игровой кэш, а не только наличие файлов.
+- **Не ломать оригиналы.** Добавляем локализацию поверх модов и не перепаковываем игру.
+- **Реальная терминология.** Апогей, перигей, тяга, сопло — язык реальной космонавтики.
+- **Воспроизводимые релизы.** Версия перевода фиксируется, обновление можно проверить и откатить.
+- **Открытое участие.** Решения обсуждаются публично, вклад принимается через pull request.
+
+## Документы проекта
+
+- [Быстрый старт](docs/QUICKSTART.md) — установка для игрока.
+- [Обновление и откат](docs/UPDATING.md) — переход между релизами.
+- [Покрытие](docs/COVERAGE.md) — фактические цифры и инвентаризация сборки.
+- [Roadmap](docs/ROADMAP.md) — планы и приоритеты.
+- [История изменений](CHANGELOG.md) — содержимое стабильных релизов.
+- [Сопровождение](docs/MAINTAINING.md) — правила переводов и проверки.
+- [Участие](CONTRIBUTING.md) — путь от идеи до pull request.
+- [Управление проектом](GOVERNANCE.md) — роли и принятие решений.
+- [Поддержка](SUPPORT.md) · [Безопасность](SECURITY.md) · [Кодекс поведения](CODE_OF_CONDUCT.md).
+
+## Лицензии и благодарности
+
+kerbal.ru — независимый фанатский проект и не аффилирован со Squad, Private Division, Take-Two или авторами модов. Для игры нужна легальная копия KSP.
+
+Переводы опираются на строки соответствующих модов и сохраняют их лицензионные условия. Оригинальный код и документация kerbal.ru распространяются по MIT; точная разбивка сторонних материалов приведена в [LICENSE.md](LICENSE.md). Планетарные текстуры и модель Saturn V получены из открытых ресурсов NASA/JPL; иконки сайта — [Tabler Icons](https://tabler.io/icons) (MIT).
+
+---
+
+**От первого спутника до Марса — теперь по-русски.**
+
+[Открыть kerbal.ru](https://kerbal.ru) · [Присоединиться к сообществу](https://github.com/plagness/kerbal.ru/discussions)

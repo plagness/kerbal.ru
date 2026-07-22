@@ -1,0 +1,50 @@
+name: Проблема перевода
+description: Английская, неверная, обрезанная или неуместная строка в игре
+title: "[Перевод]: "
+labels: [translation, triage]
+body:
+  - type: input
+    id: mod
+    attributes:
+      label: Мод и версия
+      placeholder: RealAntennas 2.1.1
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Где видна строка
+      placeholder: VAB → категория Communication → деталь …
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Английский оригинал и текущий перевод
+      placeholder: |
+        EN: …
+        RU сейчас: …
+        Предлагаю: …
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Подтверждение
+      description: Скриншот и, если возможно, фрагмент ModuleManager.ConfigCache с name/title.
+  - type: input
+    id: kerbalru
+    attributes:
+      label: Версия kerbal.ru
+      placeholder: 1.0.0 или main-401092d
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Проверка
+      options:
+        - label: После установки перевода я запускал KSP, чтобы ModuleManager пересобрал кэш.
+          required: true
+        - label: Я проверил, что такой issue ещё не открыт.
+          required: true

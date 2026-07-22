@@ -1,0 +1,39 @@
+name: Предложение
+description: Новый перевод, возможность сайта, установщика или процесса
+title: "[Идея]: "
+labels: [enhancement, triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Какую проблему это решает?
+      description: Опиши ситуацию пользователя, а не только желаемую кнопку.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Предлагаемое решение
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Альтернативы и ограничения
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Готов помочь с реализацией?
+      options:
+        - Да, могу открыть PR
+        - Да, могу протестировать
+        - Нужна помощь сообщества
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Проверка
+      options:
+        - label: Я посмотрел roadmap и существующие issues/discussions.
+          required: true

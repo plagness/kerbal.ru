@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Вопрос по установке или обновлению
+    url: https://github.com/plagness/kerbal.ru/discussions/categories/q-a
+    about: Задай вопрос сообществу; это не требует оформлять баг.
+  - name: Идея или общее обсуждение
+    url: https://github.com/plagness/kerbal.ru/discussions/categories/ideas
+    about: Обсудим идею до того, как превращать её в задачу.
+  - name: Приватный отчёт о безопасности
+    url: https://github.com/plagness/kerbal.ru/security/advisories/new
+    about: Не публикуй потенциальную уязвимость в открытой issue.

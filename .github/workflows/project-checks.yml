@@ -1,0 +1,83 @@
+name: Project checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Unix installer
+        run: bash -n install-ru.sh
+
+      - name: Check PowerShell installer
+        shell: pwsh
+        run: |
+          $null = [scriptblock]::Create((Get-Content install-ru.ps1 -Raw))
+
+      - name: Check HTML JavaScript
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const html = fs.readFileSync('index.html', 'utf8');
+          for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
+            new Function(match[1]);
+          }
+          console.log('inline JavaScript: ok');
+          NODE
+
+      - name: Check Python and localization configs
+        run: |
+          python3 - <<'PY'
+          import ast
+          import re
+          from pathlib import Path
+
+          ast.parse(Path('tools/audit_ru_coverage.py').read_text(encoding='utf-8'))
+
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          if not re.fullmatch(r'\d+\.\d+\.\d+', version):
+              raise SystemExit(f'Invalid VERSION: {version!r}')
+
+          configs = list(Path('GameData').rglob('*.cfg'))
+          if not configs:
+              raise SystemExit('No localization configs found')
+          for path in configs:
+              text = path.read_text(encoding='utf-8')
+              uncommented = '\n'.join(line.split('//', 1)[0] for line in text.splitlines())
+              if uncommented.count('{') != uncommented.count('}'):
+                  raise SystemExit(f'Unbalanced braces: {path}')
+          print(f'{len(configs)} localization configs: ok')
+          PY
+
+      - name: Check local Markdown links
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          missing = []
+          for document in Path('.').rglob('*.md'):
+              if '.git' in document.parts:
+                  continue
+              text = document.read_text(encoding='utf-8')
+              for raw in re.findall(r'(?<!!)\[[^]]*\]\(([^)]+)\)', text):
+                  target = raw.strip().split()[0].strip('<>')
+                  if not target or target.startswith(('#', 'http://', 'https://', 'mailto:')):
+                      continue
+                  path_part = unquote(target.split('#', 1)[0].split('?', 1)[0])
+                  resolved = (document.parent / path_part).resolve()
+                  if not resolved.exists():
+                      missing.append(f'{document}: {target}')
+          if missing:
+              raise SystemExit('Missing local links:\n' + '\n'.join(missing))
+          print('local Markdown links: ok')
+          PY
