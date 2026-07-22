@@ -391,7 +391,7 @@ mono ckan.exe update</pre></div>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three/r128/three.min.js"></script>
+<script src="vendor/three.min.js"></script>
 <script>
 /* ---------- UI: tabs + copy + reveal ---------- */
 document.querySelectorAll('.tabs').forEach(function(group){
@@ -539,6 +539,8 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
   var t0=0;
   function loop(t){
     requestAnimationFrame(loop);
+    // skip work when tab hidden or hero scrolled fully off-screen (saves battery on Deck/mobile)
+    if(document.hidden||window.scrollY>window.innerHeight){t0=t;return;}
     var dt=t-t0;t0=t;
     earth.rotation.y+=0.0006*dt*0.06;
     clouds.rotation.y+=0.0006*dt*0.085;
