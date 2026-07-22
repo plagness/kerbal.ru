@@ -26,7 +26,7 @@ RO/RSS/RP-1 превращает KSP в серьёзный симулятор р
 <!-- project-data:start -->
 | Что измеряем | Сейчас | Источник |
 |---|---:|---|
-| Версия русификатора | **[v26.2](https://github.com/plagness/kerbal.ru/releases/tag/v26.2)** | `data/project.json` |
+| Версия русификатора | **[v26.3](https://github.com/plagness/kerbal.ru/releases/tag/v26.3)** | `data/project.json` |
 | Поддерживаемые нами моды | **20** | Собственные `ru.cfg` и MM-патчи |
 | Состав с русским блоком | **38 / 83 · 45,8%** | Полная инвентаризация `GameData` |
 | Проверено деталей | **1 023** | `ModuleManager.ConfigCache` |
