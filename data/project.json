@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-23",
   "release": {
     "version": "v26.3",
     "year": 2026,
@@ -28,21 +28,21 @@
     "verified": {
       "label": "Подтверждено игровым кэшем",
       "status": "cache-verified",
-      "auditedAt": "2026-07-22",
+      "auditedAt": "2026-07-23",
       "parts": 1023,
       "cacheParts": 1247,
       "fields": {
         "title": {
-          "translated": 468,
-          "percent": 45.7
+          "translated": 581,
+          "percent": 56.8
         },
         "description": {
-          "translated": 649,
-          "percent": 63.4
+          "translated": 733,
+          "percent": 71.7
         },
         "manufacturer": {
-          "translated": 58,
-          "percent": 5.7
+          "translated": 142,
+          "percent": 13.9
         }
       }
     },
@@ -116,9 +116,9 @@
     "ProceduralFairings": {
       "parts": 13,
       "verified": {
-        "title": 12,
+        "title": 13,
         "description": 13,
-        "manufacturer": 0
+        "manufacturer": 1
       },
       "projected": {
         "title": 13,
@@ -129,7 +129,7 @@
     "ProceduralParts": {
       "parts": 5,
       "verified": {
-        "title": 0,
+        "title": 1,
         "description": 1,
         "manufacturer": 0
       },
@@ -142,9 +142,9 @@
     "ROCapsules": {
       "parts": 166,
       "verified": {
-        "title": 158,
-        "description": 160,
-        "manufacturer": 9
+        "title": 165,
+        "description": 166,
+        "manufacturer": 14
       },
       "projected": {
         "title": 166,
@@ -155,9 +155,9 @@
     "ROEngines": {
       "parts": 244,
       "verified": {
-        "title": 29,
-        "description": 204,
-        "manufacturer": 37
+        "title": 65,
+        "description": 207,
+        "manufacturer": 48
       },
       "projected": {
         "title": 29,
@@ -195,7 +195,7 @@
       "parts": 18,
       "verified": {
         "title": 6,
-        "description": 5,
+        "description": 6,
         "manufacturer": 0
       },
       "projected": {
@@ -207,8 +207,8 @@
     "RealChute": {
       "parts": 4,
       "verified": {
-        "title": 0,
-        "description": 0,
+        "title": 4,
+        "description": 4,
         "manufacturer": 0
       },
       "projected": {
@@ -221,9 +221,9 @@
       "parts": 36,
       "audit": "indeterminate",
       "verified": {
-        "title": 0,
-        "description": 1,
-        "manufacturer": 0
+        "title": 4,
+        "description": 4,
+        "manufacturer": 2
       },
       "projected": {
         "title": 0,
@@ -234,9 +234,9 @@
     "SXT": {
       "parts": 208,
       "verified": {
-        "title": 9,
-        "description": 12,
-        "manufacturer": 12
+        "title": 57,
+        "description": 65,
+        "manufacturer": 43
       },
       "projected": {
         "title": 65,
@@ -247,9 +247,9 @@
     "VenStockRevamp": {
       "parts": 86,
       "verified": {
-        "title": 22,
-        "description": 21,
-        "manufacturer": 0
+        "title": 34,
+        "description": 35,
+        "manufacturer": 34
       },
       "projected": {
         "title": 35,
