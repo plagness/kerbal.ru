@@ -6,6 +6,8 @@
 
 Изменения, которые уже находятся в `main`, но ещё не вошли в стабильный релиз.
 
+## [26.4] — 2026-07-23
+
 ### 🧪 Новое (экспериментально): русификация интерфейсов модов
 
 Впервые в проекте — перевод не деталей/квестов (данные в `.cfg`), а **интерфейса самих модов**
@@ -113,5 +115,8 @@
 - часть ROEngines намеренно сохраняет реальные латинские обозначения двигателей;
 - 17 модов с пользовательским текстом ещё не имеют русского блока.
 
-[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v26.1...HEAD
+[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v26.4...HEAD
+[26.4]: https://github.com/plagness/kerbal.ru/releases/tag/v26.4
+[26.3]: https://github.com/plagness/kerbal.ru/releases/tag/v26.3
+[26.2]: https://github.com/plagness/kerbal.ru/releases/tag/v26.2
 [26.1]: https://github.com/plagness/kerbal.ru/releases/tag/v26.1

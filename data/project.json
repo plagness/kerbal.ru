@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "updatedAt": "2026-07-23",
   "release": {
-    "version": "v26.3",
+    "version": "v26.4",
     "year": 2026,
-    "sequence": 3,
-    "date": "2026-07-22",
+    "sequence": 4,
+    "date": "2026-07-23",
     "channel": "stable",
-    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.3"
+    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.4"
   },
   "game": {
     "name": "Kerbal Space Program",
