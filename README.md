@@ -27,6 +27,8 @@
 
 **Через дополнительный патч** (у мода не было локализации): ROSolar, ROTanks, ROEngines, ROHeatshields, ProceduralFairings, ProceduralParts, RealChute, ModularLaunchPads.
 
+⚠️ «20 модов» — это сколько модов затронуто, не значит «100% текста в каждом переведено». Реальный проверенный по игре охват — **36% названий деталей** (по-разному от 0% до 98% в зависимости от мода) — см. честную раскладку и таблицу по каждому моду в **[docs/COVERAGE.md](docs/COVERAGE.md)**.
+
 ## Документация
 
 - **[docs/QUICKSTART.md](docs/QUICKSTART.md)** — простая установка для игроков.

@@ -3,18 +3,27 @@
 Состояние проекта и планы. Отмечай `[x]` по мере выполнения.
 Полная раскладка «что переведено / что нет» — в [COVERAGE.md](COVERAGE.md).
 
+## 🔴 Известная проблема (приоритет — читать первым)
+
+Аудит 2026-07-22 по реальному игровому `ModuleManager.ConfigCache` показал, что «переведено 20 модов» ниже означает «файлы написаны и структурно сверены», но **не** «реально показывается в игре». Фактический охват по деталям (партам) — **36% title, 54% description, 6% manufacturer** от 1023 партов в этих 20 модах. Подробности, таблица по каждому моду и оценка объёма (≈1200-1500 строк) — в [COVERAGE.md, раздел 0](COVERAGE.md#0-реальный-охват-по-деталям-партам--проверено-по-кэшу).
+
+Хуже всего: SXT (4% title), RealChute (0%), VenStockRevamp (12%), ROCapsules (43%). Лучше всего (технику можно доверять): ModularLaunchPads (98%), ROSolar (100%), ProceduralFairings (77-85%) — все три через доп-патч (`%title = #key`).
+
+- [ ] **Сначала диагностика**: на SXT нашли случай, где ключ корректно определён (и в оригинале мода, и в нашем `ru.cfg` лежит настоящий переведённый текст, не копия английского), но игра всё равно показывает третий, другой английский текст (`Sputnik PS-1`) — ни файл мода, ни наш файл. BOM и дублирующиеся блоки `ru`/`en-us` исключены. Причина не найдена. Без неё повторный перевод рискует воспроизвести ту же невидимую поломку.
+- [ ] Затем — добить title/description для SXT, ROCapsules, VenStockRevamp, RealChute, ROEngines (без учёта легитимных designator-исключений вроде `RD-0207`), RealismOverhaul (нужна отдельная ручная сверка — 30/36 найденных партов не определились в кэше вообще, возможно правки чужих деталей через `@PART[stock]`, а не свои).
+
 ## Сделано (v1)
 
-- [x] Переведено 20 модов сборки RO/RSS/RP-1 (~3500 строк).
+- [x] Написано 20 модов сборки RO/RSS/RP-1 (~3500 строк) — **но не все реально показываются в игре**, см. проблему выше.
   - 12 «полных» (родная локализация мода): AJE, ContractConfigurator, EditorExtensionsRedux, ROCapsules, SXT, Trajectories, VenStockRevamp, KerbalChangelog, KerbalEngineerRedux, RealismOverhaul, SpaceTuxLibrary, BackgroundThrust.
   - 8 через доп-патч (у мода не было локализации): ROSolar, ROTanks, ROEngines, ROHeatshields, ProceduralFairings, ProceduralParts, RealChute, ModularLaunchPads.
-- [x] Все переводы сверены с апстримом (имена деталей, побайтовый en-us, длина ≤ английской).
-- [x] Установщики `install-ru.sh` / `install-ru.ps1` (Win/Mac/Linux/Deck).
+- [x] Все переводы структурно сверены с апстримом (имена деталей, побайтовый en-us, длина ≤ английской) — структурная сверка прошла, но НЕ гарантирует, что текст резолвится в игре (см. проблему выше).
+- [x] Установщики `install-ru.sh` / `install-ru.ps1` (Win/Mac/Linux/Deck) — живьём протестированы на Steam Deck и на macOS (M1).
 - [x] Сайт kerbal.ru (GitHub Pages) с инструкциями под 4 платформы.
 
 ## Ближайшее (v1.x)
 
-- [ ] Доперевести пропущенные детали в ProceduralFairings (`KzInterstageAdapter2`, `KzResizableFairingBaseRing`) и ModularLaunchPads (`AM_MLP_AtlasLaunchStand`, `AM_MLP_AtlasLaunchStandAlt`, `AM_MLP_LargeLaunchStand`) — их исходные `.cfg` имеют несбалансированные скобки, нужна ручная сверка.
+- [ ] Доперевести пропущенные детали в ProceduralFairings (`KzInterstageAdapter2`, `KzResizableFairingBaseRing`, и новонайденный `KzThrustPlate`) и ModularLaunchPads (`AM_MLP_AtlasLaunchStand`, `AM_MLP_AtlasLaunchStandAlt`, `AM_MLP_LargeLaunchStand`) — их исходные `.cfg` имеют несбалансированные скобки, нужна ручная сверка.
 - [ ] PR в апстрим-репозитории «полных» модов (у них уже есть система локализации → перевод примут проще всего). Начать с ContractConfigurator и KerbalEngineerRedux — их текст игрок видит постоянно.
 - [ ] Русская обёртка для стоковых `#autoLOC`, которые RP-1 переопределяет (см. `RP-1/Localization/LocPatches.cfg`) — там английские строки программ/стратегий.
 
