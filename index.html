@@ -37,6 +37,7 @@
   *{box-sizing:border-box}
   html{scroll-behavior:auto}
   body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.68;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  body.earth-target{cursor:crosshair}
 
   /* backdrop */
   .sky{position:fixed;inset:0;z-index:-3;background:
@@ -48,6 +49,11 @@
     background-size:113px 113px,173px 173px,71px 71px;background-position:17px 31px,81px 43px,5px 67px;}
   .sky::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,8,6,.3),transparent 26%,transparent 78%,rgba(3,8,6,.25));pointer-events:none;}
   #bg3d{position:fixed;inset:0;z-index:-2;width:100%;height:100%;display:block;opacity:.88;}
+  .impact-flash{--impact-x:74vw;--impact-y:34vh;position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--impact-x) var(--impact-y),#fff 0 5%,rgba(255,238,191,.98) 10%,rgba(255,122,34,.8) 24%,rgba(255,55,10,.24) 44%,transparent 68%);mix-blend-mode:screen}
+  body.earth-exploding .impact-flash{animation:earth-impact-flash .92s cubic-bezier(.12,.72,.18,1) both}
+  body.earth-exploding .wrap,body.earth-exploding #bg3d{animation:earth-screen-shake .74s linear both}
+  @keyframes earth-impact-flash{0%{opacity:0}2%{opacity:1}9%{opacity:.96}24%{opacity:.5}52%{opacity:.16}100%{opacity:0}}
+  @keyframes earth-screen-shake{0%,100%{transform:translate3d(0,0,0)}5%{transform:translate3d(-10px,7px,0) rotate(-.28deg)}11%{transform:translate3d(13px,-8px,0) rotate(.32deg)}18%{transform:translate3d(-12px,-5px,0) rotate(-.22deg)}27%{transform:translate3d(9px,8px,0) rotate(.2deg)}38%{transform:translate3d(-7px,4px,0) rotate(-.14deg)}52%{transform:translate3d(6px,-5px,0) rotate(.1deg)}68%{transform:translate3d(-3px,3px,0)}84%{transform:translate3d(2px,-1px,0)}}
 
   .ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none}
 
@@ -136,9 +142,46 @@
   .badge{font-family:var(--sans);font-size:.58rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
   .badge.full{background:rgba(166,223,94,.13);color:var(--green);border:1px solid rgba(166,223,94,.4);}
   .badge.patch{background:rgba(255,157,47,.13);color:var(--orange);border:1px solid rgba(255,157,47,.4);}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-top:16px;}
-  .cell{background:rgba(255,255,255,.015);border:1px solid var(--line);border-radius:9px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:600;font-size:.9rem;transition:.18s;}
-  .cell:hover{border-color:var(--line-cyan);background:rgba(63,208,212,.04);transform:translateY(-1px)}
+  .mods-card{padding:0;overflow:hidden}
+  .mods-intro{padding:26px 31px 22px;border-bottom:1px solid var(--line)}
+  .mods-intro p{max-width:690px;margin:0 0 13px;color:var(--txt-dim)}
+  .mods-intro strong{color:var(--green)}
+  .coverage-summary{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 15px}
+  .coverage-stat{display:inline-flex;align-items:baseline;gap:6px;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:rgba(255,255,255,.018);font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.45px}
+  .coverage-stat b{font-size:.76rem;color:var(--green)}
+  .mod-list{position:relative}
+  .mod-item{position:relative;border-bottom:1px solid var(--line);transition:background .28s ease,border-color .28s ease}
+  .mod-item:last-child{border-bottom:0}
+  .mod-item::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(90deg,rgba(166,232,110,.065),transparent 58%);transition:opacity .28s ease}
+  .mod-item:hover::before,.mod-item.is-open::before{opacity:1}
+  .mod-item.is-open{background:rgba(166,232,110,.025);border-color:rgba(166,232,110,.2)}
+  .mod-summary{position:relative;width:100%;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;padding:18px 24px;display:grid;grid-template-columns:50px minmax(0,1fr) auto 20px;align-items:center;gap:15px}
+  .mod-summary:focus-visible{outline:2px solid var(--green);outline-offset:-3px}
+  .mod-icon{width:50px;height:50px;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;color:var(--green);font-size:1.5rem;background:rgba(166,232,110,.045);box-shadow:inset 0 0 22px rgba(166,232,110,.025);transition:transform .28s ease,border-color .28s ease,color .28s ease}
+  .mod-item:hover .mod-icon,.mod-item.is-open .mod-icon{border-color:var(--line-cyan);color:#d3ffac;transform:translateY(-1px)}
+  .mod-heading{min-width:0}
+  .mod-title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .mod-title{font-size:.98rem;font-weight:750;color:#fff;letter-spacing:.05px}
+  .mod-kicker{font-family:'JetBrains Mono',monospace;font-size:.57rem;line-height:1.2;letter-spacing:.75px;color:var(--orange);text-transform:uppercase}
+  .mod-teaser{display:block;margin-top:2px;color:var(--txt-dim);font-size:.83rem;line-height:1.5}
+  .mod-percent{--coverage:100%;position:relative;min-width:62px;overflow:hidden;border:1px solid rgba(166,223,94,.32);border-radius:7px;padding:6px 8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.2px;text-align:center;background:rgba(166,223,94,.035)}
+  .mod-percent::before{content:'';position:absolute;inset:0 auto 0 0;width:var(--coverage);background:rgba(166,223,94,.09)}
+  .mod-percent span{position:relative}
+  .mod-percent small{font-size:.49rem;font-weight:500;letter-spacing:.5px;color:var(--txt-faint)}
+  .mod-percent.is-na{--coverage:0%;color:var(--txt-dim);border-color:var(--line);background:rgba(255,255,255,.018)}
+  .mod-percent.is-na::before{display:none}
+  .mod-chevron{color:var(--txt-faint);font-size:1.05rem;transition:transform .34s cubic-bezier(.2,.75,.25,1),color .2s}
+  .mod-item.is-open .mod-chevron{transform:rotate(90deg);color:var(--green)}
+  .mod-details{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .42s cubic-bezier(.2,.75,.25,1),opacity .3s ease}
+  .mod-item.is-open .mod-details{grid-template-rows:1fr;opacity:1}
+  .mod-details-inner{min-height:0;overflow:hidden}
+  .mod-copy{padding:0 64px 24px 89px}
+  .mod-copy p{margin:0;color:#c5d0ca;font-size:.91rem;line-height:1.7}
+  .mod-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:15px}
+  .mod-tags{display:flex;gap:7px;flex-wrap:wrap}
+  .mod-tag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.5px;text-transform:uppercase;color:var(--txt-faint);border:1px solid var(--line);border-radius:5px;padding:4px 7px;background:rgba(255,255,255,.018)}
+  .mod-source{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:650;text-decoration:none;color:var(--orange)}
+  .mod-source:hover{color:var(--gold)}
 
   ul.plain{padding-left:0;list-style:none;margin:0}
   ul.plain li{position:relative;padding-left:26px;margin-bottom:12px}
@@ -153,7 +196,7 @@
   /* scroll reveal */
   .reveal{opacity:0;transform:translateY(30px) scale(.994);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
   .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}body.earth-exploding .wrap,body.earth-exploding #bg3d{animation:none}}
   @media(pointer:coarse){.card::before{display:none}}
 
   @media(max-width:680px){
@@ -162,7 +205,13 @@
     .lead{margin-left:auto;margin-right:auto}
     .cta{justify-content:center}
   }
-  @media(max-width:560px){.card{padding:22px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}}
+  @media(max-width:560px){
+    .card{padding:22px 18px}.mods-card{padding:0}.mods-intro{padding:22px 18px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}
+    .mod-summary{grid-template-columns:42px minmax(0,1fr) auto 17px;gap:10px;padding:15px 14px}
+    .mod-icon{width:42px;height:42px;border-radius:12px;font-size:1.25rem}
+    .mod-title{font-size:.9rem}.mod-kicker{font-size:.52rem}.mod-teaser{font-size:.76rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
+    .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}
+  }
 </style>
 </head>
 <body>
@@ -191,10 +240,29 @@
 <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></symbol>
 <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -12"/><path d="M9 9h6v6h-6l0 -6"/><path d="M3 10h2"/><path d="M3 14h2"/><path d="M10 3v2"/><path d="M14 3v2"/><path d="M21 10h-2"/><path d="M21 14h-2"/><path d="M14 21v-2"/><path d="M10 21v-2"/></symbol>
 <symbol id="i-map-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5"/><path d="M9 4v13"/><path d="M15 7v5.5"/><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879"/><path d="M19 18v.01"/></symbol>
+<symbol id="i-propeller" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M14.167 10.5c.722 -1.538 1.156 -3.043 1.303 -4.514c.22 -1.63 -.762 -2.986 -3.47 -2.986s-3.69 1.357 -3.47 2.986c.147 1.471 .581 2.976 1.303 4.514"/><path d="M13.169 16.751c.97 1.395 2.057 2.523 3.257 3.386c1.3 1 2.967 .833 4.321 -1.512c1.354 -2.345 .67 -3.874 -.85 -4.498c-1.348 -.608 -2.868 -.985 -4.562 -1.128"/><path d="M8.664 13c-1.693 .143 -3.213 .52 -4.56 1.128c-1.522 .623 -2.206 2.153 -.852 4.498s3.02 2.517 4.321 1.512c1.2 -.863 2.287 -1.991 3.258 -3.386"/></symbol>
+<symbol id="i-file-description" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 17h6"/><path d="M9 13h6"/></symbol>
+<symbol id="i-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></symbol>
+<symbol id="i-capsule" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v6a6 6 0 0 1 -12 0z"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 2.2 -2.014 4 -4.5 4h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25"/><path d="M7.5 10.5h.01"/><path d="M11.5 7.5h.01"/><path d="M15.5 10.5h.01"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l2 2"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/></symbol>
+<symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 15l4 -6l4 2l4 -5l4 4"/></symbol>
+<symbol id="i-atom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v.01"/><path d="M19.071 4.929c-1.562 -1.562 -6 .337 -9.9 4.243c-3.905 3.905 -5.804 8.337 -4.242 9.9c1.562 1.561 6 -.338 9.9 -4.244c3.905 -3.905 5.804 -8.337 4.242 -9.9"/><path d="M4.929 4.929c-1.562 1.562 .337 6 4.243 9.9c3.905 3.905 8.337 5.804 9.9 4.242c1.561 -1.562 -.338 -6 -4.244 -9.9c-3.905 -3.905 -8.337 -5.804 -9.9 -4.242"/></symbol>
+<symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"/><path d="M4.012 7.26a2 2 0 0 0 -1.012 1.737v10c0 1.1 .9 2 2 2h10c.75 0 1.158 -.385 1.5 -1"/><path d="M11 7h5M11 10h6M11 13h3"/></symbol>
+<symbol id="i-clock-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.984 12.53a9 9 0 1 0 -7.552 8.355"/><path d="M12 7v5l3 3"/><path d="M19 16l-2 3h4l-2 3"/></symbol>
+<symbol id="i-solar-panel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.28 14h15.44a1 1 0 0 0 .97 -1.243l-1.5 -6a1 1 0 0 0 -.97 -.757h-12.44a1 1 0 0 0 -.97 .757l-1.5 6a1 1 0 0 0 .97 1.243"/><path d="M4 10h16M10 6l-1 8M14 6l1 8M12 14v4M7 18h10"/></symbol>
+<symbol id="i-cylinder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6a7 3 0 1 0 14 0a7 3 0 1 0 -14 0"/><path d="M5 6v12c0 1.657 3.134 3 7 3s7 -1.343 7 -3v-12"/></symbol>
+<symbol id="i-shield-half" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"/><path d="M12 3v18"/></symbol>
+<symbol id="i-cone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 17.998v-.5l-8.13 -14.99a1 1 0 0 0 -1.74 0l-8.13 14.989v.5c0 1.659 4.03 3.003 9 3.003s9 -1.344 9 -3.002"/></symbol>
+<symbol id="i-arrows-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M14 10l6 -6M8 20h-4v-4M4 20l6 -6M16 20h4v-4M14 14l6 6M8 4h-4v4M4 4l6 6"/></symbol>
+<symbol id="i-parachute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a10 10 0 1 0 -20 0"/><path d="M22 12c0 -1.66 -1.46 -3 -3.25 -3c-1.8 0 -3.25 1.34 -3.25 3c0 -1.66 -1.57 -3 -3.5 -3s-3.5 1.34 -3.5 3c0 -1.66 -1.46 -3 -3.25 -3c-1.8 0 -3.25 1.34 -3.25 3"/><path d="M2 12l10 10l-3.5 -10M15.5 12l-3.5 10l10 -10"/></symbol>
+<symbol id="i-building-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21v-12l5 4v-4l5 4h4M19 21v-8l-1.436 -9.574a.5 .5 0 0 0 -.495 -.426h-1.145a.5 .5 0 0 0 -.494 .418l-1.43 8.582M9 17h1M14 17h1"/></symbol>
 </svg>
 
 <div class="sky"></div>
 <canvas id="bg3d"></canvas>
+<div class="impact-flash" aria-hidden="true"></div>
 
 <div class="wrap">
 
@@ -326,40 +394,289 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
         <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в <code class="inline">settings.cfg</code> (рядом с папкой GameData):
           <div class="code"><button class="copy">COPY</button><pre>LANGUAGE = ru</pre></div>
         </li>
-        <li>Запусти игру. Готово — интерфейс, детали и карьера RP-1 на русском.</li>
+        <li>Запусти игру. Перевод включится для интерфейса, карьеры и поддержанных деталей; фактическое покрытие каждого мода показано ниже.</li>
       </ol>
     </div>
   </section>
 
   <!-- MODS -->
-  <section class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num">04 / ОХВАТ</span><h2>Что переведено</h2><span class="rule"></span></div>
-    <div class="card">
-      <div class="legend">
-        <span><span class="badge full">FULL</span> родная локализация мода</span>
-        <span><span class="badge patch">PATCH</span> добавлен доп. патч (оригинал не тронут)</span>
+  <section id="mission-end" class="reveal" data-mission-end>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num">04 / МОДЫ</span><h2>Моды сборки</h2><span class="rule"></span></div>
+    <div class="card mods-card">
+      <div class="mods-intro">
+        <p><strong>Перевод проверен по реальному игровому кэшу.</strong> Процент в строке — доля названий деталей, которые действительно загрузились на русском. Для интерфейсных модов стоит «Н/Д»: аудит <code class="inline">PART</code> их не измеряет. <a href="https://github.com/plagness/kerbal.ru/blob/main/docs/COVERAGE.md">Методика и полная таблица</a>.</p>
+        <div class="coverage-summary" aria-label="Общее покрытие перевода среди 1023 деталей">
+          <span class="coverage-stat"><b>36%</b> названия</span>
+          <span class="coverage-stat"><b>54%</b> описания</span>
+          <span class="coverage-stat"><b>6%</b> производители</span>
+          <span class="coverage-stat"><b>1023</b> детали проверены</span>
+        </div>
+        <div class="legend">
+          <span><span class="badge full">FULL</span> перевод в файлах мода</span>
+          <span><span class="badge patch">PATCH</span> патч поверх оригинала</span>
+        </div>
       </div>
-      <div class="grid">
-        <div class="cell">AJE <span class="badge full">FULL</span></div>
-        <div class="cell">ContractConfigurator <span class="badge full">FULL</span></div>
-        <div class="cell">EditorExtensionsRedux <span class="badge full">FULL</span></div>
-        <div class="cell">ROCapsules <span class="badge full">FULL</span></div>
-        <div class="cell">SXT <span class="badge full">FULL</span></div>
-        <div class="cell">Trajectories <span class="badge full">FULL</span></div>
-        <div class="cell">VenStockRevamp <span class="badge full">FULL</span></div>
-        <div class="cell">KerbalChangelog <span class="badge full">FULL</span></div>
-        <div class="cell">KerbalEngineerRedux <span class="badge full">FULL</span></div>
-        <div class="cell">RealismOverhaul <span class="badge full">FULL</span></div>
-        <div class="cell">SpaceTuxLibrary <span class="badge full">FULL</span></div>
-        <div class="cell">BackgroundThrust <span class="badge full">FULL</span></div>
-        <div class="cell">ROSolar <span class="badge patch">PATCH</span></div>
-        <div class="cell">ROTanks <span class="badge patch">PATCH</span></div>
-        <div class="cell">ROEngines <span class="badge patch">PATCH</span></div>
-        <div class="cell">ROHeatshields <span class="badge patch">PATCH</span></div>
-        <div class="cell">ProceduralFairings <span class="badge patch">PATCH</span></div>
-        <div class="cell">ProceduralParts <span class="badge patch">PATCH</span></div>
-        <div class="cell">RealChute <span class="badge patch">PATCH</span></div>
-        <div class="cell">ModularLaunchPads <span class="badge patch">PATCH</span></div>
+
+      <div class="mod-list" data-mod-list>
+        <article class="mod-item">
+          <button id="mod-aje-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-aje">
+            <span class="mod-icon"><svg class="ic"><use href="#i-propeller"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">AJE</span><span class="mod-kicker">Атмосферный полёт</span></span><span class="mod-teaser">Реалистичная работа реактивных двигателей</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-aje" class="mod-details" role="region" aria-labelledby="mod-aje-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Advanced Jet Engine заменяет упрощённую модель турбореактивных двигателей расчётами на базе NASA EngineSim и JSBSim. Тяга, расход и устойчивость теперь зависят от высоты, скорости, числа Маха и работы воздухозаборников — самолёты приходится проектировать как настоящие.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Физика</span><span class="mod-tag">Авиация</span></div><a class="mod-source" href="https://github.com/KSP-RO/AJE"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-contracts-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-contracts">
+            <span class="mod-icon"><svg class="ic"><use href="#i-file-description"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Contract Configurator</span><span class="mod-kicker">Карьера</span></span><span class="mod-teaser">Движок исторических контрактов RP-1</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-contracts" class="mod-details" role="region" aria-labelledby="mod-contracts-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Фреймворк, который создаёт игровые контракты из конфигурационных файлов. В RP-1 на нём построены требования, награды, цели и цепочки миссий: от первых высотных запусков до орбитальных программ и межпланетных аппаратов.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Контракты</span><span class="mod-tag">RP-1</span></div><a class="mod-source" href="https://github.com/KSP-RO/ContractConfigurator"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-editor-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-editor">
+            <span class="mod-icon"><svg class="ic"><use href="#i-layout-grid"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Editor Extensions Redux</span><span class="mod-kicker">VAB / SPH</span></span><span class="mod-teaser">Точная сборка аппаратов без ограничений редактора</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-editor" class="mod-details" role="region" aria-labelledby="mod-editor-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Расширяет инструменты VAB и SPH: добавляет произвольную симметрию, больше шагов угловой привязки, выравнивание деталей, стяжек и топливных линий, снятие лимитов смещения и быстрый выбор корневой детали. Особенно полезен для сложных исторических ракет.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Редактор</span><span class="mod-tag">Инструменты</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/EditorExtensionsRedux"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-capsules-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-capsules">
+            <span class="mod-icon"><svg class="ic"><use href="#i-capsule"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROCapsules</span><span class="mod-kicker">Космические корабли</span></span><span class="mod-teaser">Исторические капсулы в одном наборе</span></span>
+            <span class="mod-percent" style="--coverage:43%" aria-label="На русском 43 процента названий деталей"><span>43% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-capsules" class="mod-details" role="region" aria-labelledby="mod-capsules-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Собирает лучшие модели реальных пилотируемых кораблей и приводит их к стандартам Realism Overhaul. Вместо множества тяжёлых паков игрок получает единый каталог Mercury, Gemini, Apollo и других капсул с корректными размерами и конфигурациями. По игровому кэшу: 43% названий, 45% описаний и 5% производителей на русском.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Детали</span><span class="mod-tag">История</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROCapsules"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-sxt-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-sxt">
+            <span class="mod-icon"><svg class="ic"><use href="#i-packages"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">SXT</span><span class="mod-kicker">Stock eXTension</span></span><span class="mod-teaser">Лёгкий набор дополнительных деталей</span></span>
+            <span class="mod-percent" style="--coverage:4%" aria-label="На русском 4 процента названий деталей"><span>4% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-sxt" class="mod-details" role="region" aria-labelledby="mod-sxt-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Lack’s Stock eXTension добавляет авиационные, ракетные и конструкционные детали, переиспользуя штатные текстуры KSP. По игровому кэшу переводятся только 4% названий, 6% описаний и 6% производителей. Причина расхождения между корректными ключами локализации и реально загруженным текстом пока не найдена.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Детали</span><span class="mod-tag">Лёгкий</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/SXTContinued"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-trajectories-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-trajectories">
+            <span class="mod-icon"><svg class="ic"><use href="#i-route"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Trajectories</span><span class="mod-kicker">Навигация</span></span><span class="mod-teaser">Прогноз аэродинамической траектории и места посадки</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-trajectories" class="mod-details" role="region" aria-labelledby="mod-trajectories-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Показывает реальную линию снижения с учётом сопротивления, подъёмной силы и вращения планеты. Помогает рассчитать аэроторможение, увидеть точку удара и вывести капсулу или космоплан к выбранному району посадки; поддерживает FAR.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Посадка</span><span class="mod-tag">FAR</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/KSPTrajectories"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-ven-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ven">
+            <span class="mod-icon"><svg class="ic"><use href="#i-palette"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Ven’s Stock Revamp</span><span class="mod-kicker">Графика</span></span><span class="mod-teaser">Детализированный облик стандартных деталей</span></span>
+            <span class="mod-percent" style="--coverage:12%" aria-label="На русском 12 процентов названий деталей"><span>12% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-ven" class="mod-details" role="region" aria-labelledby="mod-ven-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Перерисовывает штатные модели и текстуры KSP, делая их аккуратнее, технологичнее и визуально цельнее, а также добавляет связанные варианты деталей. По игровому кэшу: 12% названий и 10% описаний на русском; производители пока не переведены.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Визуал</span><span class="mod-tag">Детали</span></div><a class="mod-source" href="https://github.com/VenVen/Stock-Revamp"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-changelog-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-changelog">
+            <span class="mod-icon"><svg class="ic"><use href="#i-history"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Kerbal Changelog</span><span class="mod-kicker">Интерфейс</span></span><span class="mod-teaser">Список изменений модов прямо в игре</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-changelog" class="mod-details" role="region" aria-labelledby="mod-changelog-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Даёт авторам модов единый формат внутриигровых журналов изменений. После обновления сборки окно один раз показывает, что изменилось в установленных компонентах, а затем не мешает до следующей новой версии.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Сервис</span><span class="mod-tag">Обновления</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/KerbalChangelog"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-ker-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ker">
+            <span class="mod-icon"><svg class="ic"><use href="#i-chart-line"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Kerbal Engineer Redux</span><span class="mod-kicker">Телеметрия</span></span><span class="mod-teaser">Инженерные расчёты для сборки и полёта</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-ker" class="mod-details" role="region" aria-labelledby="mod-ker-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Выводит ключевые параметры корабля в редакторе, полёте и центре слежения: delta-v по ступеням, тяговооружённость, массу, орбитальные элементы, время до событий и характеристики поверхности. Это главный прибор для проверки ракеты до старта.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Delta-v</span><span class="mod-tag">Расчёты</span></div><a class="mod-source" href="https://github.com/jrbudda/KerbalEngineer"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-ro-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ro">
+            <span class="mod-icon"><svg class="ic"><use href="#i-atom"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Realism Overhaul</span><span class="mod-kicker">Ядро сборки</span></span><span class="mod-teaser">Реальные размеры, массы, топливо и характеристики</span></span>
+            <span class="mod-percent is-na" aria-label="PART-аудит не определяет покрытие конфигураций"><span>Н/Д <small>AUDIT</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-ro" class="mod-details" role="region" aria-labelledby="mod-ro-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Центральный слой конфигураций, который переводит детали KSP и совместимых модов на реальные параметры. Его патчи меняют детали других паков, поэтому аудит собственных <code class="inline">PART</code>-узлов не даёт честного процента — здесь показатель отмечен как «Н/Д».</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Физика</span><span class="mod-tag">Конфигурации</span></div><a class="mod-source" href="https://github.com/KSP-RO/RealismOverhaul"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-spacetux-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-spacetux">
+            <span class="mod-icon"><svg class="ic"><use href="#i-library"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">SpaceTux Library</span><span class="mod-kicker">Библиотека</span></span><span class="mod-teaser">Общие инструменты для других модов</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-spacetux" class="mod-details" role="region" aria-labelledby="mod-spacetux-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Служебная библиотека, которой пользуются другие моды: предоставляет журналирование, выбор цвета, подсветку деталей и управление общими кнопками. Самостоятельного геймплея почти не добавляет, зато устраняет дублирование кода и конфликтующие элементы интерфейса.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Зависимость</span><span class="mod-tag">UI</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/SpaceTuxLibrary"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-background-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-background">
+            <span class="mod-icon"><svg class="ic"><use href="#i-clock-bolt"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Background Thrust</span><span class="mod-kicker">Варп времени</span></span><span class="mod-teaser">Длительные включения двигателей без ожидания</span></span>
+            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-background" class="mod-details" role="region" aria-labelledby="mod-background-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Позволяет двигателям работать во время ускорения времени, а с поддерживаемым обработчиком ресурсов — даже когда корабль не выбран. Мод следит за режимом SAS и буферами ресурсов, поэтому многочасовые ионные и другие малотяговые манёвры не требуют реального ожидания.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Время</span><span class="mod-tag">Малая тяга</span></div><a class="mod-source" href="https://github.com/Phantomical/BackgroundThrust"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-rosolar-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-rosolar">
+            <span class="mod-icon"><svg class="ic"><use href="#i-solar-panel"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROSolar</span><span class="mod-kicker">Энергия</span></span><span class="mod-teaser">Масштабируемые солнечные панели без дублей</span></span>
+            <span class="mod-percent" style="--coverage:100%" aria-label="На русском 100 процентов названий деталей"><span>100% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-rosolar" class="mod-details" role="region" aria-labelledby="mod-rosolar-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Объединяет качественные модели солнечных панелей из разных наборов и добавляет управляемое масштабирование. Все названия и описания деталей в игровом кэше загружаются на русском; строки производителей пока остаются исходными.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Энергия</span><span class="mod-tag">Масштаб</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROSolar"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-rotanks-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-rotanks">
+            <span class="mod-icon"><svg class="ic"><use href="#i-cylinder"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROTanks</span><span class="mod-kicker">Конструкция</span></span><span class="mod-teaser">Модульные баки, переходники и межступени</span></span>
+            <span class="mod-percent" style="--coverage:33%" aria-label="На русском 33 процента названий деталей"><span>33% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-rotanks" class="mod-details" role="region" aria-labelledby="mod-rotanks-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Использует переработанную систему SSTU для создания гибких баков Realism Overhaul. Диаметр, длина, форма, текстура и оснащение настраиваются в редакторе. По игровому кэшу: 33% названий и 28% описаний на русском.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Баки</span><span class="mod-tag">Модульность</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROTanks"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-roengines-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-roengines">
+            <span class="mod-icon"><svg class="ic"><use href="#i-engine"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROEngines</span><span class="mod-kicker">Двигатели</span></span><span class="mod-teaser">Единый каталог исторических ракетных двигателей</span></span>
+            <span class="mod-percent" style="--coverage:12%" aria-label="На русском 12 процентов названий деталей"><span>12% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-roengines" class="mod-details" role="region" aria-labelledby="mod-roengines-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Собирает наиболее точные модели реальных ракетных двигателей и связывает их с конфигурациями Realism Overhaul. По кэшу переведены 12% названий, 84% описаний и 15% производителей; часть английских названий — намеренно оставленные реальные обозначения двигателей.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Детали</span><span class="mod-tag">История</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROEngines"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-heatshields-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-heatshields">
+            <span class="mod-icon"><svg class="ic"><use href="#i-shield-half"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROHeatshields</span><span class="mod-kicker">Теплозащита</span></span><span class="mod-teaser">Настраиваемые щиты для разных режимов входа</span></span>
+            <span class="mod-percent" style="--coverage:25%" aria-label="На русском 25 процентов названий деталей"><span>25% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-heatshields" class="mod-details" role="region" aria-labelledby="mod-heatshields-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Добавляет изменяемые по диаметру теплозащитные экраны с разной геометрией и уровнем защиты — от простого теплоотвода до абляционного щита класса Apollo. По игровому кэшу на русском 25% названий и 25% описаний.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Спуск</span><span class="mod-tag">Нагрев</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROHeatshields"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-fairings-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-fairings">
+            <span class="mod-icon"><svg class="ic"><use href="#i-cone"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Procedural Fairings</span><span class="mod-kicker">Аэродинамика</span></span><span class="mod-teaser">Обтекатели, автоматически подогнанные под груз</span></span>
+            <span class="mod-percent" style="--coverage:77%" aria-label="На русском 77 процентов названий деталей"><span>77% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-fairings" class="mod-details" role="region" aria-labelledby="mod-fairings-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Строит створки обтекателя вокруг любого полезного груза и позволяет менять диаметр, длину, профиль, текстуру и логику отделения. По игровому кэшу переведены 10 из 13 названий (77%) и 11 из 13 описаний (85%).</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">10 / 13 названий</span><span class="mod-tag">Обтекатели</span></div><a class="mod-source" href="https://github.com/KSP-RO/ProceduralFairings"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-procedural-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-procedural">
+            <span class="mod-icon"><svg class="ic"><use href="#i-arrows-maximize"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Procedural Parts</span><span class="mod-kicker">Конструкция</span></span><span class="mod-teaser">Детали произвольной формы и размера</span></span>
+            <span class="mod-percent" style="--coverage:0%" aria-label="На русском 0 процентов названий деталей"><span>0% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-procedural" class="mod-details" role="region" aria-labelledby="mod-procedural-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Позволяет создавать цилиндры, усечённые конусы и bezier-формы с нужными размерами и текстурами. Сейчас аудит игрового кэша показывает 0% русских названий и 20% описаний — перевод требует доработки.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">RealFuels</span><span class="mod-tag">Процедурные детали</span></div><a class="mod-source" href="https://github.com/KSP-RO/ProceduralParts"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-realchute-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-realchute">
+            <span class="mod-icon"><svg class="ic"><use href="#i-parachute"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">RealChute</span><span class="mod-kicker">Посадка</span></span><span class="mod-teaser">Полная реалистичная система парашютов</span></span>
+            <span class="mod-percent" style="--coverage:0%" aria-label="На русском 0 процентов названий деталей"><span>0% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-realchute" class="mod-details" role="region" aria-labelledby="mod-realchute-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Заменяет штатный модуль парашютов системой с реалистичным раскрытием и расширенной настройкой. Сейчас игровые названия, описания и производители деталей RealChute загружаются на английском: аудит показывает 0% по всем трём полям.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Парашюты</span><span class="mod-tag">Аэродинамика</span></div><a class="mod-source" href="https://github.com/ChrisViral/RealChute"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
+
+        <article class="mod-item">
+          <button id="mod-mlp-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-mlp">
+            <span class="mod-icon"><svg class="ic"><use href="#i-building-factory"/></svg></span>
+            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Modular Launch Pads</span><span class="mod-kicker">Стартовый комплекс</span></span><span class="mod-teaser">Реальные пусковые столы, башни и фермы</span></span>
+            <span class="mod-percent" style="--coverage:98%" aria-label="На русском 98 процентов названий деталей"><span>98% <small>RU</small></span></span>
+            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
+          </button>
+          <div id="mod-mlp" class="mod-details" role="region" aria-labelledby="mod-mlp-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
+            <p>Превращает стандартные стартовые зажимы в полноценные комплексы: основания, башни обслуживания, кабель-мачты, фермы, лифты и площадки. В кэше на русском 229 из 234 названий и описаний (98%); производители пока не переведены.</p>
+            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">229 / 234 детали</span><span class="mod-tag">Старт</span></div><a class="mod-source" href="https://github.com/AlphaMensae/Modular-Launch-Pads"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
+          </div></div></div>
+        </article>
       </div>
     </div>
   </section>
@@ -369,8 +686,8 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
     <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-map-2"/></svg></span><span class="sec-num">05 / ПЛАНЫ</span><h2>Roadmap</h2><span class="rule"></span></div>
     <div class="card">
       <ul class="plain">
-        <li><svg class="ic"><use href="#i-circle-check"/></svg><b style="color:var(--green)">Готово:</b> 20 модов, ~3500 строк, сверено с апстримом; установщики и сайт.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Ближайшее:</b> доперевод пропущенных деталей, PR в апстрим «полных» модов, обёртка стоковых строк RP-1.</li>
+        <li><svg class="ic"><use href="#i-circle-check"/></svg><b style="color:var(--green)">Готово:</b> переводы для 20 модов, установщики, сайт и проверяемый аудит через <code class="inline">ModuleManager.ConfigCache</code>.</li>
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Приоритет №1:</b> поднять реальное покрытие названий выше текущих 36% и разобраться, почему часть корректных ключей не появляется в игре.</li>
         <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Дальше:</b> оставшиеся ~50 модов сборки, единый глоссарий терминов, установка через CKAN (netkan), поток контрибуций.</li>
       </ul>
       <p style="margin-bottom:0"><a href="https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md">Полный roadmap →</a> · <a href="https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md">как помочь с переводом →</a></p>
@@ -378,13 +695,13 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
   </section>
 
   <!-- LIMITS -->
-  <section id="mission-end" class="reveal" data-mission-end>
+  <section id="nuances" class="reveal">
     <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-alert-triangle"/></svg></span><span class="sec-num">06 / НЮАНСЫ</span><h2>Что важно знать</h2><span class="rule"></span></div>
     <div class="card">
       <ul class="plain">
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Переведено 20 модов из полного набора сборки — остальные пока на английском. Список открыт для расширения.</li>
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Русские файлы подготовлены для 20 ключевых модов, но это не означает 100% покрытия: в игровом кэше на русском 36% названий и 54% описаний деталей.</li>
         <li><svg class="ic"><use href="#i-chevron-right"/></svg>Контракты, созданные <em>до</em> установки перевода в уже начатом сохранении, останутся на английском: их текст «запекается» в момент создания. Новые контракты будут на русском.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Несколько отдельных деталей (в ProceduralFairings и ModularLaunchPads) оставлены на английском — их исходные файлы устроены так, что нельзя было надёжно сверить перевод с оригиналом.</li>
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Проверка по совпадению ключей и исходных файлов недостаточна. Золотой тест — текст, который реально загрузился в <code class="inline">ModuleManager.ConfigCache</code>; именно его проценты показаны выше.</li>
       </ul>
     </div>
   </section>
@@ -412,6 +729,18 @@ document.querySelectorAll('.tabs').forEach(function(group){
     var key=tab.getAttribute('data-tab');
     scope.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-panel')===key)});
   });});
+});
+document.querySelectorAll('.mod-summary').forEach(function(button){
+  var panel=button.closest('.mod-item').querySelector('.mod-details');panel.setAttribute('inert','');
+  button.addEventListener('click',function(){
+    var item=button.closest('.mod-item'),willOpen=!item.classList.contains('is-open');
+    document.querySelectorAll('.mod-item.is-open').forEach(function(openItem){
+      openItem.classList.remove('is-open');
+      var openButton=openItem.querySelector('.mod-summary'),openPanel=openItem.querySelector('.mod-details');
+      openButton.setAttribute('aria-expanded','false');openPanel.setAttribute('aria-hidden','true');openPanel.setAttribute('inert','');
+    });
+    if(willOpen){item.classList.add('is-open');button.setAttribute('aria-expanded','true');panel.setAttribute('aria-hidden','false');panel.removeAttribute('inert');}
+  });
 });
 document.querySelectorAll('.code .copy').forEach(function(btn){
   btn.addEventListener('click',function(){
@@ -557,6 +886,51 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
   var trailMat=new THREE.PointsMaterial({map:pointMap,color:0xffb15c,size:.095,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}),rocketTrail=new THREE.Points(trailGeo,trailMat);scene.add(rocketTrail);
   var launchPuffs=[];for(var lp=0;lp<9;lp++){var puffMat=new THREE.SpriteMaterial({map:pointMap,color:lp%3===0?0xff7338:0xffbb6c,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}),puff=new THREE.Sprite(puffMat);puff.userData={angle:-.82+(lp-4)*.055,offset:lp*.045};puff.scale.setScalar(.01);scene.add(puff);launchPuffs.push(puff)}
 
+  // The Earth is the only destructive click target. Its fragments and sound are created lazily.
+  var earthExploded=false,earthExplosionAge=0,earthShake=0,earthChunks=[],earthChunkMaterials=[],earthSmoke=[],earthSparkPoints=null,earthSparkVelocity=null,earthRaycaster=new THREE.Raycaster(),earthPointer=new THREE.Vector2(),earthHover=false,impactFlash=document.querySelector('.impact-flash');
+  var earthBlastGroup=new THREE.Group();planetGroup.add(earthBlastGroup);canvas.setAttribute('data-earth-state','intact');
+  var earthFlashMaterial=new THREE.SpriteMaterial({map:pointMap,color:0xffe3aa,transparent:true,opacity:0,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending}),earthFlash=new THREE.Sprite(earthFlashMaterial);earthFlash.visible=false;earthFlash.scale.setScalar(.1);earthBlastGroup.add(earthFlash);
+  function playEarthExplosionSound(){
+    var AudioEngine=window.AudioContext||window.webkitAudioContext;if(!AudioEngine)return;
+    var audio;
+    try{audio=new AudioEngine()}catch(e){return}
+    var now=audio.currentTime,mix=audio.createGain(),bassBoost=audio.createBiquadFilter(),clipper=audio.createWaveShaper(),compressor=audio.createDynamicsCompressor(),output=audio.createGain(),curve=new Float32Array(44100);
+    bassBoost.type='lowshelf';bassBoost.frequency.setValueAtTime(135,now);bassBoost.gain.setValueAtTime(19,now);for(var ci=0;ci<curve.length;ci++){var cx=ci*2/(curve.length-1)-1;curve[ci]=Math.max(-1,Math.min(1,cx*4.8))}clipper.curve=curve;clipper.oversample='4x';
+    compressor.threshold.setValueAtTime(-13,now);compressor.knee.setValueAtTime(5,now);compressor.ratio.setValueAtTime(14,now);compressor.attack.setValueAtTime(.001,now);compressor.release.setValueAtTime(.42,now);output.gain.setValueAtTime(.68,now);output.gain.exponentialRampToValueAtTime(.0001,now+4.1);
+    mix.connect(bassBoost);bassBoost.connect(clipper);clipper.connect(compressor);compressor.connect(output);output.connect(audio.destination);
+    function noiseBuffer(duration){var count=Math.floor(audio.sampleRate*duration),buffer=audio.createBuffer(1,count,audio.sampleRate),data=buffer.getChannelData(0),last=0;for(var i=0;i<count;i++){var white=Math.random()*2-1;last=last*.86+white*.14;data[i]=white*.58+last*.82}return buffer}
+    var boom=audio.createOscillator(),boomGain=audio.createGain();boom.type='sine';boom.frequency.setValueAtTime(92,now);boom.frequency.exponentialRampToValueAtTime(21,now+2.15);boomGain.gain.setValueAtTime(.0001,now);boomGain.gain.exponentialRampToValueAtTime(1.35,now+.009);boomGain.gain.exponentialRampToValueAtTime(.0001,now+2.6);boom.connect(boomGain);boomGain.connect(mix);boom.start(now);boom.stop(now+2.65);
+    var sub=audio.createOscillator(),subGain=audio.createGain();sub.type='triangle';sub.frequency.setValueAtTime(47,now);sub.frequency.exponentialRampToValueAtTime(18,now+2.8);subGain.gain.setValueAtTime(.0001,now);subGain.gain.exponentialRampToValueAtTime(.95,now+.018);subGain.gain.exponentialRampToValueAtTime(.0001,now+3.1);sub.connect(subGain);subGain.connect(mix);sub.start(now);sub.stop(now+3.15);
+    var blast=audio.createBufferSource(),blastFilter=audio.createBiquadFilter(),blastGain=audio.createGain();blast.buffer=noiseBuffer(3.35);blastFilter.type='lowpass';blastFilter.frequency.setValueAtTime(2100,now);blastFilter.frequency.exponentialRampToValueAtTime(72,now+3.1);blastFilter.Q.setValueAtTime(1.1,now);blastGain.gain.setValueAtTime(1.25,now);blastGain.gain.exponentialRampToValueAtTime(.0001,now+3.3);blast.connect(blastFilter);blastFilter.connect(blastGain);blastGain.connect(mix);blast.start(now);
+    var crack=audio.createBufferSource(),crackFilter=audio.createBiquadFilter(),crackGain=audio.createGain();crack.buffer=noiseBuffer(.42);crackFilter.type='bandpass';crackFilter.frequency.setValueAtTime(980,now);crackFilter.Q.setValueAtTime(.65,now);crackGain.gain.setValueAtTime(1.15,now);crackGain.gain.exponentialRampToValueAtTime(.0001,now+.39);crack.connect(crackFilter);crackFilter.connect(crackGain);crackGain.connect(mix);crack.start(now);
+    var rumble=audio.createBufferSource(),rumbleFilter=audio.createBiquadFilter(),rumbleGain=audio.createGain();rumble.buffer=noiseBuffer(4);rumbleFilter.type='lowpass';rumbleFilter.frequency.setValueAtTime(175,now);rumbleFilter.frequency.exponentialRampToValueAtTime(38,now+3.8);rumbleGain.gain.setValueAtTime(.0001,now);rumbleGain.gain.exponentialRampToValueAtTime(.88,now+.07);rumbleGain.gain.exponentialRampToValueAtTime(.0001,now+3.9);rumble.connect(rumbleFilter);rumbleFilter.connect(rumbleGain);rumbleGain.connect(mix);rumble.start(now+.025);
+    if(audio.state==='suspended')audio.resume();setTimeout(function(){if(audio.state!=='closed')audio.close()},4700);
+  }
+  function makeEarthSparks(){
+    var count=reducedMotion?140:420,positions=new Float32Array(count*3);earthSparkVelocity=new Float32Array(count*3);
+    for(var i=0;i<count;i++){var direction=new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).normalize(),radius=rand(.35,1.62),speed=rand(.0011,.0048);positions[i*3]=direction.x*radius;positions[i*3+1]=direction.y*radius;positions[i*3+2]=direction.z*radius;earthSparkVelocity[i*3]=direction.x*speed+rand(-.00035,.00035);earthSparkVelocity[i*3+1]=direction.y*speed+rand(-.00035,.00035);earthSparkVelocity[i*3+2]=direction.z*speed+rand(-.00035,.00035)}
+    var geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));var material=new THREE.PointsMaterial({map:pointMap,color:0xff6a25,size:.13,transparent:true,opacity:1,alphaTest:.015,depthWrite:false,blending:THREE.AdditiveBlending});earthSparkPoints=new THREE.Points(geometry,material);earthBlastGroup.add(earthSparkPoints);
+  }
+  function earthDebrisTexture(type){
+    var c=mk(96,96),x=c.getContext('2d'),base=type==='dirt'?'#34251b':(type==='rock'?'#242829':'#180504');x.fillStyle=base;x.fillRect(0,0,96,96);
+    if(type==='magma'){for(var m=0;m<85;m++){var glow=x.createRadialGradient(rand(0,96),rand(0,96),0,rand(0,96),rand(0,96),rand(3,16));glow.addColorStop(0,m%3===0?'rgba(255,218,82,.95)':'rgba(255,64,12,.9)');glow.addColorStop(1,'rgba(70,6,0,0)');x.fillStyle=glow;x.fillRect(0,0,96,96)}for(var crack=0;crack<18;crack++){x.beginPath();x.moveTo(rand(-8,104),rand(-8,104));for(var cs=0;cs<5;cs++)x.lineTo(rand(-8,104),rand(-8,104));x.strokeStyle=crack%3===0?'rgba(255,225,112,.85)':'rgba(255,58,8,.72)';x.lineWidth=rand(.5,2.4);x.stroke()}}
+    else{for(var n=0;n<170;n++){var shade=type==='dirt'?(n%3===0?'rgba(126,85,48,.34)':'rgba(29,19,13,.3)'):(n%4===0?'rgba(126,134,132,.22)':'rgba(6,9,9,.3)');x.fillStyle=shade;x.beginPath();x.arc(rand(0,96),rand(0,96),rand(.5,5),0,Math.PI*2);x.fill()}}
+    return setupTex(c,true);
+  }
+  function triggerEarthExplosion(e){
+    if(earthExploded)return;earthExploded=true;earthExplosionAge=0;earthShake=1;canvas.setAttribute('data-earth-state','exploded');document.body.classList.remove('earth-target');pulse=1;
+    if(impactFlash){impactFlash.style.setProperty('--impact-x',(e?e.clientX:innerWidth*.74)+'px');impactFlash.style.setProperty('--impact-y',(e?e.clientY:innerHeight*.34)+'px')}document.body.classList.remove('earth-exploding');void document.body.offsetWidth;document.body.classList.add('earth-exploding');setTimeout(function(){document.body.classList.remove('earth-exploding')},960);playEarthExplosionSound();
+    earth.visible=false;clouds.visible=false;ring.visible=false;
+    earthBlastGroup.rotation.copy(earth.rotation);var dirtMap=earthDebrisTexture('dirt'),rockMap=earthDebrisTexture('rock'),magmaMap=earthDebrisTexture('magma'),rockMaterial=new THREE.MeshStandardMaterial({map:rockMap,color:0x5c605c,roughness:1,flatShading:true,side:THREE.DoubleSide,emissive:0x120300,emissiveIntensity:.2}),magmaMaterial=new THREE.MeshStandardMaterial({map:magmaMap,emissiveMap:magmaMap,color:0x4c170b,roughness:.8,flatShading:true,side:THREE.DoubleSide,emissive:0xff3210,emissiveIntensity:3.8}),dirtMaterial=new THREE.MeshStandardMaterial({map:dirtMap,color:0x8a6847,roughness:1,flatShading:true,side:THREE.DoubleSide,emissive:0x180500,emissiveIntensity:.12});rockMaterial.userData.baseGlow=.04;magmaMaterial.userData.baseGlow=3.2;dirtMaterial.userData.baseGlow=.025;earthChunkMaterials.push(rockMaterial,magmaMaterial,dirtMaterial);
+    var dirtGeometry=ruggedSphere(1,12,9,.19),rockGeometry=ruggedSphere(1,8,6,.27),magmaGeometry=ruggedSphere(1,10,7,.22),coreCount=reducedMotion?52:112;for(var i=0;i<coreCount;i++){var coreDirection=new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).normalize(),coreRadius=i<coreCount*.68?rand(.92,1.62):rand(.08,1.15),debrisRoll=Math.random(),debrisMaterial=debrisRoll<.45?dirtMaterial:(debrisRoll<.73?rockMaterial:magmaMaterial),debrisGeometry=debrisRoll<.45?dirtGeometry:(debrisRoll<.73?rockGeometry:magmaGeometry),coreSize=debrisRoll<.45?rand(.16,.4):rand(.1,.31),coreSpeed=debrisRoll<.45?rand(.0005,.00135):(debrisRoll<.73?rand(.00048,.0013):rand(.00078,.00215)),coreChunk=new THREE.Mesh(debrisGeometry,debrisMaterial);coreChunk.position.copy(coreDirection).multiplyScalar(coreRadius);coreChunk.scale.set(coreSize*rand(.72,1.28),coreSize*rand(.72,1.42),coreSize*rand(.72,1.3));coreChunk.rotation.set(rand(0,Math.PI),rand(0,Math.PI),rand(0,Math.PI));coreChunk.userData.velocity=coreDirection.multiplyScalar(coreSpeed).add(new THREE.Vector3(rand(-.00018,.00018),rand(-.00018,.00018),rand(-.00018,.00018)));coreChunk.userData.spin=new THREE.Vector3(rand(-.00135,.00135),rand(-.00135,.00135),rand(-.00135,.00135));earthBlastGroup.add(coreChunk);earthChunks.push(coreChunk)}
+    makeEarthSparks();
+    var smokeCount=reducedMotion?7:18;for(var s=0;s<smokeCount;s++){var smokeMaterial=new THREE.SpriteMaterial({map:pointMap,color:s%3===0?0x4d4841:0x74695d,transparent:true,opacity:.3,depthWrite:false}),smoke=new THREE.Sprite(smokeMaterial),smokeDirection=new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).normalize();smoke.position.copy(smokeDirection).multiplyScalar(rand(.3,1.15));smoke.scale.setScalar(rand(.22,.52));smoke.userData.velocity=smokeDirection.multiplyScalar(rand(.00022,.00072));smoke.userData.baseScale=smoke.scale.x;earthBlastGroup.add(smoke);earthSmoke.push(smoke)}
+    earthFlash.visible=true;
+  }
+  function pointerHitsEarth(e){
+    if(earthExploded||!earth.visible)return false;var blocked=e.target&&e.target.closest&&e.target.closest('a,button,.card,footer');if(blocked)return false;
+    var rect=canvas.getBoundingClientRect();earthPointer.set((e.clientX-rect.left)/rect.width*2-1,-((e.clientY-rect.top)/rect.height)*2+1);scene.updateMatrixWorld(true);earthRaycaster.setFromCamera(earthPointer,camera);return earthRaycaster.intersectObject(earth,false).length>0;
+  }
   // Two depths of stars make cursor and scroll parallax visible but restrained.
   var starGeo=new THREE.BufferGeometry(),SN=2500,pos=new Float32Array(SN*3),starColors=new Float32Array(SN*3),starColor=new THREE.Color();
   for(var s=0;s<SN;s++){var rr=rand(24,80),th=Math.random()*Math.PI*2,ph=Math.acos(rand(-1,1));
@@ -594,8 +968,9 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
   function elementTop(element){return element?window.scrollY+element.getBoundingClientRect().top:0}
   function updateMissionBounds(){missionStartY=elementTop(missionStartEl);var anchorTop=elementTop(missionEndEl);missionEndY=Math.max(missionStartY+window.innerHeight,anchorTop-window.innerHeight*.55)}
   function syncScrollState(){var next=window.scrollY,bounded=clamp(next,missionStartY,missionEndY)-missionStartY;scrollEnergy=Math.min(2.5,scrollEnergy+Math.abs(next-lastScroll)/180);lastScroll=next;scrollTarget=bounded/window.innerHeight;pageTarget=bounded/Math.max(1,missionEndY-missionStartY)}
-  window.addEventListener('mousemove',function(e){mx=e.clientX/window.innerWidth-.5;my=e.clientY/window.innerHeight-.5;mouseEnergy=Math.min(1,mouseEnergy+Math.hypot(e.clientX-lastX,e.clientY-lastY)/140);lastX=e.clientX;lastY=e.clientY},{passive:true});
-  window.addEventListener('pointerdown',function(){pulse=1},{passive:true});
+  window.addEventListener('mousemove',function(e){mx=e.clientX/window.innerWidth-.5;my=e.clientY/window.innerHeight-.5;mouseEnergy=Math.min(1,mouseEnergy+Math.hypot(e.clientX-lastX,e.clientY-lastY)/140);lastX=e.clientX;lastY=e.clientY;var overEarth=pointerHitsEarth(e);if(overEarth!==earthHover){earthHover=overEarth;document.body.classList.toggle('earth-target',earthHover)}},{passive:true});
+  window.addEventListener('pointerdown',function(e){if(typeof e.button==='number'&&e.button!==0)return;if(pointerHitsEarth(e))triggerEarthExplosion(e)},{passive:true});
+  document.documentElement.addEventListener('mouseleave',function(){earthHover=false;document.body.classList.remove('earth-target')},{passive:true});
   window.addEventListener('scroll',syncScrollState,{passive:true});
 
   var t0=0;
@@ -606,12 +981,21 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
     scrollSmooth+=(scrollTarget-scrollSmooth)*(reducedMotion?1:.055);pageSmooth+=(pageTarget-pageSmooth)*(reducedMotion?1:.045);missionProgress=Math.max(missionProgress,pageSmooth);scrollEnergy*=.93;
     var heroProgress=Math.min(1,scrollSmooth*1.08);if(hero){hero.style.setProperty('--hero-shift',reducedMotion?0:(heroProgress*28).toFixed(2));hero.style.setProperty('--hero-fade',reducedMotion?0:(heroProgress*.88).toFixed(3))}
     earth.rotation.y+=dt*.000026*motion;clouds.rotation.y+=dt*.000047*motion;stars.rotation.y+=dt*.0000025*motion;
+    if(earthExploded){
+      earthExplosionAge+=dt;var explosionDrag=Math.pow(.99972,dt),flashProgress=smooth(earthExplosionAge/680);
+      earthChunks.forEach(function(chunk){chunk.position.addScaledVector(chunk.userData.velocity,dt);chunk.userData.velocity.multiplyScalar(explosionDrag);chunk.rotation.x+=chunk.userData.spin.x*dt;chunk.rotation.y+=chunk.userData.spin.y*dt;chunk.rotation.z+=chunk.userData.spin.z*dt});
+      earthChunkMaterials.forEach(function(material){var baseGlow=material.userData.baseGlow||0;material.emissiveIntensity=baseGlow+(1-smooth(earthExplosionAge/1300))*(baseGlow>1?1.8:.55)});
+      earthFlash.scale.setScalar(1.25+flashProgress*5.4);earthFlashMaterial.opacity=Math.max(0,(1-flashProgress)*1.18);if(earthExplosionAge>760)earthFlash.visible=false;
+      if(earthSparkPoints){var sparkPositions=earthSparkPoints.geometry.attributes.position.array,sparkFade=Math.max(0,1-earthExplosionAge/2600);for(var ep=0;ep<sparkPositions.length;ep+=3){sparkPositions[ep]+=earthSparkVelocity[ep]*dt;sparkPositions[ep+1]+=earthSparkVelocity[ep+1]*dt;sparkPositions[ep+2]+=earthSparkVelocity[ep+2]*dt;earthSparkVelocity[ep]*=explosionDrag;earthSparkVelocity[ep+1]*=explosionDrag;earthSparkVelocity[ep+2]*=explosionDrag}earthSparkPoints.geometry.attributes.position.needsUpdate=true;earthSparkPoints.material.opacity=sparkFade}
+      earthSmoke.forEach(function(smoke){smoke.position.addScaledVector(smoke.userData.velocity,dt);var smokeScale=smoke.userData.baseScale*(1+earthExplosionAge*.00048);smoke.scale.setScalar(smokeScale);smoke.material.opacity=Math.max(0,.3*(1-earthExplosionAge/3900))});
+    }
     var ma=t*.000055+.5;mun.position.set(Math.cos(ma)*3.45,0,Math.sin(ma)*3.45);mun.rotation.y+=dt*.000012;
     var pha=t*.00004+1.25;phobos.position.set(Math.cos(pha)*2.04,0,Math.sin(pha)*2.04*.9);phobos.rotation.y+=dt*.00008*motion;phobos.rotation.x+=dt*.000035*motion;
     var dea=t*.000021+1.45;deimos.position.set(Math.cos(dea)*2.43,0,Math.sin(dea)*2.43*.94);deimos.rotation.y-=dt*.00004*motion;deimos.rotation.z+=dt*.000018*motion;
     tx+=(mx*.72-tx)*.035;ty+=(my*.46-ty)*.035;mouseEnergy*=.94;pulse*=.92;
     var cameraProgress=pageSmooth;
-    camera.position.x=tx;camera.position.y=-ty;camera.position.z=8;camera.lookAt(.9+tx*.12,.2-ty*.08,0);
+    earthShake*=Math.pow(.9968,dt);var shakePower=earthShake*earthShake*(reducedMotion?.025:.14);
+    camera.position.x=tx+Math.sin(t*.17)*shakePower;camera.position.y=-ty+Math.cos(t*.21)*shakePower*.8;camera.position.z=8+Math.sin(t*.13+1.4)*shakePower*.45;camera.lookAt(.9+tx*.12,.2-ty*.08,0);
     // Earth departure and Mars approach share this exact progress value and therefore start together.
     var transferProgress=smooth(cameraProgress),earthExit=transferProgress;planetGroup.rotation.y=tx*.055;planetGroup.rotation.x=ty*.035;planetGroup.rotation.z=.24-earthExit*.15;
     planetGroup.position.y=.9+earthExit*1.45;planetGroup.position.x=baseX+earthExit*1.55;planetGroup.scale.setScalar(baseScale*(1-earthExit*.56)*(1+pulse*.025));ring.rotation.z=earthExit*.22;
