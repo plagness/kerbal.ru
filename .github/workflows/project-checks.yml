@@ -61,13 +61,11 @@ jobs:
           configs = list(Path('GameData').rglob('*.cfg'))
           if not configs:
               raise SystemExit('No localization configs found')
-          for path in configs:
-              text = path.read_text(encoding='utf-8')
-              uncommented = '\n'.join(line.split('//', 1)[0] for line in text.splitlines())
-              if uncommented.count('{') != uncommented.count('}'):
-                  raise SystemExit(f'Unbalanced braces: {path}')
-          print(f'{len(configs)} localization configs: ok')
+          print(f'{len(configs)} localization configs found')
           PY
+
+      - name: Validate localization structure
+        run: python3 tools/validate_localization.py
 
       - name: Check local Markdown links
         run: |
