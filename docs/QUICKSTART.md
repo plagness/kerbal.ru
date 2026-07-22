@@ -20,11 +20,11 @@
 
 - **Linux / macOS / Steam Deck** — в терминале:
   ```bash
-  curl -fsSL https://kerbal.ru/install-ru.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash
   ```
 - **Windows** — в PowerShell:
   ```powershell
-  irm https://kerbal.ru/install-ru.ps1 | iex
+  irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1 | iex
   ```
   Скрипт сам найдёт установку KSP, скачает переводы, скопирует их и включит русский язык.
 
