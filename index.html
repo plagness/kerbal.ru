@@ -3,271 +3,413 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kerbal.ru — русская локализация RO/RSS/RP-1</title>
+<title>kerbal.ru — русская локализация RO / RSS / RP-1 для Kerbal Space Program</title>
+<meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-deep: #05070d;
-    --bg-space: #0a0e1a;
-    --bg-card: rgba(20, 26, 43, 0.65);
-    --border: rgba(255, 159, 28, 0.22);
-    --border-strong: rgba(255, 159, 28, 0.5);
-    --text: #dbe4f0;
-    --text-dim: #8a97ad;
-    --orange: #ff9f1c;
-    --orange-glow: rgba(255, 159, 28, 0.35);
-    --kerbal-green: #9fd356;
-    --code-bg: rgba(5, 8, 15, 0.8);
+  :root{
+    --bg-0:#04060c;
+    --bg-1:#070b16;
+    --panel:rgba(15,21,38,.62);
+    --panel-solid:#0e1424;
+    --line:rgba(255,163,44,.20);
+    --line-hot:rgba(255,163,44,.55);
+    --line-cool:rgba(120,170,255,.20);
+    --txt:#dde5f2;
+    --txt-dim:#8593ab;
+    --txt-faint:#5b667e;
+    --orange:#ffa32c;
+    --orange-2:#ff7b18;
+    --orange-glow:rgba(255,163,44,.4);
+    --green:#a6df5e;
+    --green-glow:rgba(166,223,94,.35);
+    --blue:#78aaff;
+    --code:#05080f;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: 'Rajdhani', -apple-system, sans-serif;
-    background:
-      radial-gradient(1px 1px at 20px 30px, #fff, transparent),
-      radial-gradient(1px 1px at 140px 80px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 60px 160px, #fff, transparent),
-      radial-gradient(1px 1px at 200px 220px, #fff, transparent),
-      radial-gradient(1px 1px at 320px 60px, #cdd, transparent),
-      radial-gradient(1.5px 1.5px at 380px 190px, #fff, transparent),
-      radial-gradient(1px 1px at 240px 340px, #fff, transparent),
-      radial-gradient(1px 1px at 100px 400px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 350px 380px, #cdd, transparent),
-      radial-gradient(1px 1px at 10px 480px, #fff, transparent),
-      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-space) 40%, #0d1220 100%);
-    background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, no-repeat;
-    background-size: 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 420px 460px, 100% 100%;
-    background-attachment: fixed;
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  .wrap { max-width: 780px; margin: 0 auto; padding: 56px 20px 90px; }
-
-  .hero { text-align: center; margin-bottom: 20px; }
-  .hero .tag {
-    display: inline-block;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 3px;
-    color: var(--kerbal-green);
-    background: rgba(159, 211, 86, 0.08);
-    border: 1px solid rgba(159, 211, 86, 0.35);
-    border-radius: 20px;
-    padding: 5px 16px;
-    margin-bottom: 18px;
-    text-transform: uppercase;
-  }
-  h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 800;
-    font-size: 2.6rem;
-    margin: 0 0 6px;
-    letter-spacing: 1px;
-    background: linear-gradient(180deg, #fff 0%, var(--orange) 120%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 40px var(--orange-glow);
-  }
-  .subtitle { color: var(--text-dim); font-size: 1.15rem; font-weight: 500; margin-bottom: 8px; }
-
-  h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-top: 52px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--orange);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  h2::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--border-strong), transparent);
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--txt);
+    background:var(--bg-0);
+    line-height:1.65;
+    overflow-x:hidden;
   }
 
-  .card {
-    background: var(--bg-card);
-    backdrop-filter: blur(6px);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px 28px;
-    margin: 18px 0;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.02), 0 20px 60px -20px rgba(0,0,0,0.6);
-  }
+  /* ---------- STARFIELD ---------- */
+  .sky{position:fixed;inset:0;z-index:-3;background:
+    radial-gradient(ellipse 120% 80% at 50% -20%, #12203f 0%, transparent 55%),
+    radial-gradient(ellipse 90% 60% at 80% 10%, rgba(255,123,24,.10) 0%, transparent 60%),
+    linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 55%,#0a1120 100%);}
+  .stars,.stars2,.stars3{position:fixed;inset:-200px 0;z-index:-2;pointer-events:none;}
+  .stars{background-image:
+    radial-gradient(1px 1px at 20px 30px,#fff,transparent),
+    radial-gradient(1px 1px at 140px 80px,#cfe0ff,transparent),
+    radial-gradient(1px 1px at 200px 220px,#fff,transparent),
+    radial-gradient(1px 1px at 320px 60px,#fff,transparent),
+    radial-gradient(1px 1px at 100px 400px,#e8eeff,transparent),
+    radial-gradient(1px 1px at 380px 330px,#fff,transparent);
+    background-size:420px 460px;animation:drift 140s linear infinite;opacity:.9;}
+  .stars2{background-image:
+    radial-gradient(1.6px 1.6px at 60px 160px,#fff,transparent),
+    radial-gradient(1.6px 1.6px at 350px 190px,#cfe0ff,transparent),
+    radial-gradient(1.6px 1.6px at 240px 340px,#fff,transparent),
+    radial-gradient(1.6px 1.6px at 30px 300px,#fff,transparent);
+    background-size:520px 560px;animation:drift 90s linear infinite;opacity:.75;}
+  .stars3{background-image:
+    radial-gradient(2.4px 2.4px at 130px 90px,#fff,transparent),
+    radial-gradient(2.4px 2.4px at 420px 260px,#ffe9cf,transparent),
+    radial-gradient(2.4px 2.4px at 260px 420px,#fff,transparent);
+    background-size:680px 720px;animation:drift 60s linear infinite,twinkle 6s ease-in-out infinite;opacity:.9;}
+  @keyframes drift{from{transform:translateY(0)}to{transform:translateY(-460px)}}
+  @keyframes twinkle{0%,100%{opacity:.9}50%{opacity:.5}}
+  @media(prefers-reduced-motion:reduce){.stars,.stars2,.stars3{animation:none}}
 
-  .mod-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .mod-pill {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 9px 12px;
-    font-size: 0.92rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: border-color 0.15s;
-  }
-  .mod-pill:hover { border-color: var(--border-strong); }
+  /* planet arc bottom */
+  .horizon{position:fixed;left:50%;bottom:-58vw;width:150vw;height:150vw;transform:translateX(-50%);z-index:-2;border-radius:50%;
+    background:radial-gradient(circle at 50% 0%, #16305e 0%, #0c1a34 32%, #060c18 46%, transparent 60%);
+    box-shadow:0 -1px 60px 6px rgba(120,170,255,.15), inset 0 4px 40px rgba(255,163,44,.10);pointer-events:none;}
 
-  code, pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.88rem;
-    color: var(--kerbal-green);
-  }
-  code { padding: 2px 7px; }
-  pre { padding: 14px 18px; overflow-x: auto; }
-  pre code { border: none; padding: 0; }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
 
-  a { color: var(--orange); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  /* ---------- TOP BAR ---------- */
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--txt-faint);letter-spacing:1px;}
+  .topbar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green-glow);margin-right:7px;vertical-align:middle;animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-  ol, ul { padding-left: 24px; }
-  li { margin-bottom: 10px; }
-  li::marker { color: var(--orange); font-family: 'Orbitron', sans-serif; }
+  /* ---------- HERO ---------- */
+  .hero{text-align:center;padding:36px 0 30px;}
+  .kicker{display:inline-block;font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:4px;color:var(--green);
+    background:rgba(166,223,94,.07);border:1px solid rgba(166,223,94,.32);border-radius:30px;padding:6px 18px;text-transform:uppercase;margin-bottom:26px;}
+  h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.6rem,9vw,5.2rem);line-height:.95;margin:0;letter-spacing:2px;
+    background:linear-gradient(180deg,#fff 0%,#ffd9a3 40%,var(--orange) 105%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 60px var(--orange-glow);}
+  .hero .lead{color:var(--txt-dim);font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:500;max-width:620px;margin:16px auto 0;}
+  .divider{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--orange);opacity:.65;margin:26px 0 4px;font-size:1.1rem;}
+  .divider::before,.divider::after{content:'';height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--line-hot),transparent);}
 
-  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
-  .btn {
-    display: inline-block;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    background: linear-gradient(180deg, var(--orange) 0%, #e08a10 100%);
-    color: #1a0f00;
-    padding: 12px 22px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px -4px var(--orange-glow);
-  }
-  .btn:hover { text-decoration: none; filter: brightness(1.08); }
-  .btn.secondary {
-    background: transparent;
-    border: 1px solid var(--border-strong);
-    color: var(--text);
-    box-shadow: none;
-  }
+  .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Orbitron',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.6px;text-transform:uppercase;
+    padding:14px 26px;border-radius:9px;text-decoration:none;transition:transform .12s,filter .12s,box-shadow .12s;}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(180deg,var(--orange) 0%,var(--orange-2) 100%);color:#1a0d00;box-shadow:0 6px 30px -6px var(--orange-glow);}
+  .btn-primary:hover{box-shadow:0 10px 40px -6px var(--orange-glow);filter:brightness(1.06);}
+  .btn-ghost{background:rgba(255,255,255,.03);border:1px solid var(--line-hot);color:var(--txt);}
+  .btn-ghost:hover{background:rgba(255,163,44,.08)}
 
-  .badge {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.62rem;
-    padding: 3px 8px;
-    border-radius: 5px;
-    letter-spacing: 0.5px;
-  }
-  .badge.full { background: rgba(159, 211, 86, 0.15); color: var(--kerbal-green); border: 1px solid rgba(159, 211, 86, 0.4); }
-  .badge.patch { background: rgba(255, 159, 28, 0.15); color: var(--orange); border: 1px solid rgba(255, 159, 28, 0.4); }
+  .stats{display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:38px;}
+  .stat{text-align:center}
+  .stat .n{font-family:'Orbitron',sans-serif;font-weight:800;font-size:2rem;color:var(--orange);text-shadow:0 0 20px var(--orange-glow);line-height:1;}
+  .stat .l{font-size:.78rem;color:var(--txt-faint);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;}
 
-  .legend { color: var(--text-dim); font-size: 0.9rem; margin-top: 14px; }
+  /* ---------- SECTIONS ---------- */
+  section{padding:38px 0;}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:4px;}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--orange);border:1px solid var(--line-hot);border-radius:6px;padding:3px 9px;white-space:nowrap;}
+  h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.15rem,3.5vw,1.5rem);letter-spacing:1px;text-transform:uppercase;color:#fff;margin:0;}
+  .sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line-hot),transparent);}
 
-  footer {
-    margin-top: 64px;
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    text-align: center;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
+  .card{position:relative;background:var(--panel);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-top:18px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 24px 60px -30px #000;}
+  .card::before,.card::after{content:'';position:absolute;width:14px;height:14px;border:2px solid var(--line-hot);opacity:.7;}
+  .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:6px;}
+  .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:6px;}
+  .card p:first-child{margin-top:0}
+  .card p:last-child{margin-bottom:0}
+  strong{color:#fff;font-weight:700}
 
-  .rocket-divider {
-    text-align: center;
-    color: var(--orange);
-    opacity: 0.6;
-    margin: 8px 0 0;
-    font-size: 1.2rem;
-    letter-spacing: 8px;
+  /* ---------- TABS ---------- */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .tab{font-family:'Orbitron',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.5px;color:var(--txt-dim);cursor:pointer;
+    background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:11px 16px;display:flex;align-items:center;gap:8px;transition:.14s;}
+  .tab:hover{border-color:var(--line-hot);color:var(--txt)}
+  .tab.active{background:linear-gradient(180deg,rgba(255,163,44,.16),rgba(255,163,44,.04));border-color:var(--line-hot);color:var(--orange);}
+  .tab .ico{font-size:1rem}
+  .panel{display:none;animation:fade .25s ease;}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0 0;}
+  ol.steps>li{position:relative;padding:0 0 20px 44px;margin:0;}
+  ol.steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;
+    background:rgba(255,163,44,.10);border:1px solid var(--line-hot);color:var(--orange);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.82rem;
+    display:flex;align-items:center;justify-content:center;}
+  ol.steps>li:not(:last-child)::after{content:'';position:absolute;left:13px;top:30px;bottom:2px;width:1px;background:linear-gradient(180deg,var(--line-hot),transparent);}
+  ol.steps>li b{color:#fff}
+
+  /* ---------- CODE ---------- */
+  .code{position:relative;background:var(--code);border:1px solid var(--line);border-radius:9px;margin:10px 0;overflow:hidden;}
+  .code pre{margin:0;padding:14px 52px 14px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.84rem;color:var(--green);}
+  .code .copy{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:6px;color:var(--txt-dim);
+    font-family:'Orbitron',sans-serif;font-size:.62rem;letter-spacing:.5px;padding:5px 9px;cursor:pointer;transition:.14s;}
+  .code .copy:hover{border-color:var(--line-hot);color:var(--orange)}
+  .code .copy.done{color:var(--green);border-color:rgba(166,223,94,.5)}
+  code.inline{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--green);}
+
+  .note{border-left:2px solid var(--line-hot);background:rgba(255,163,44,.05);border-radius:0 8px 8px 0;padding:10px 16px;margin:14px 0;font-size:.94rem;color:var(--txt-dim);}
+  .note b{color:var(--orange)}
+
+  .pathtable{width:100%;border-collapse:collapse;margin-top:8px;font-size:.86rem;}
+  .pathtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .pathtable td:first-child{color:var(--orange);font-family:'Orbitron',sans-serif;font-size:.72rem;letter-spacing:.5px;white-space:nowrap;padding-right:18px;}
+  .pathtable td:last-child{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.78rem;word-break:break-all;}
+
+  /* ---------- MOD GRID ---------- */
+  .legend{color:var(--txt-dim);font-size:.92rem;margin-top:8px;display:flex;gap:20px;flex-wrap:wrap;}
+  .badge{font-family:'Orbitron',sans-serif;font-size:.6rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;}
+  .badge.full{background:rgba(166,223,94,.14);color:var(--green);border:1px solid rgba(166,223,94,.4);}
+  .badge.patch{background:rgba(255,163,44,.14);color:var(--orange);border:1px solid rgba(255,163,44,.4);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:16px;}
+  .cell{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;font-weight:500;font-size:.92rem;transition:.14s;}
+  .cell:hover{border-color:var(--line-hot);background:rgba(255,163,44,.04);}
+
+  ul.plain{padding-left:20px}
+  ul.plain li{margin-bottom:10px}
+  ul.plain li::marker{color:var(--orange)}
+
+  footer{text-align:center;color:var(--txt-faint);font-size:.85rem;padding:44px 0 60px;margin-top:20px;border-top:1px solid var(--line);}
+  footer a{color:var(--orange);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  @media(max-width:560px){
+    .card{padding:20px 18px}
+    .topbar .hide-sm{display:none}
   }
 </style>
 </head>
 <body>
+<div class="sky"></div><div class="stars"></div><div class="stars2"></div><div class="stars3"></div><div class="horizon"></div>
+
 <div class="wrap">
 
-  <div class="hero">
-    <span class="tag">Mission Control · Русская локализация</span>
+  <div class="topbar">
+    <span><span class="dot"></span>KERBAL.RU · MISSION CONTROL</span>
+    <span class="hide-sm">KSP 1.12.5 · RO / RSS / RP-1 · LANG=RU</span>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="kicker">Русская локализация · Realism Overhaul</span>
     <h1>KERBAL.RU</h1>
-    <div class="subtitle">Русская локализация для сборки Realism Overhaul · Real Solar System · RP-1</div>
-    <div class="rocket-divider">✧ ── 🚀 ── ✧</div>
-  </div>
-
-  <div class="card">
-    Это набор файлов локализации для реалистичной карьеры KSP1 на базе <strong>Realism&nbsp;Overhaul</strong>, <strong>Real&nbsp;Solar&nbsp;System</strong> и <strong>RP-1</strong> (Realistic Progression One). Не отдельный мод — устанавливается поверх уже собранной сборки, копированием одной папки в <code>GameData</code>.
-    <div class="btn-row">
-      <a class="btn" href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">⬇ Скачать ZIP</a>
-      <a class="btn secondary" href="https://github.com/plagness/kerbal.ru">Репозиторий на GitHub</a>
+    <p class="lead">Реалистичная сборка Kerbal Space Program на русском. Real Solar System, настоящая орбитальная механика, карьера от первых ракет до наших дней — <strong>с переводом интерфейса и деталей</strong>.</p>
+    <div class="divider">✦ &nbsp;🚀&nbsp; ✦</div>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">⬇ Скачать русификатор</a>
+      <a class="btn btn-ghost" href="#install">Инструкция по установке</a>
     </div>
-  </div>
+    <div class="stats">
+      <div class="stat"><div class="n">20</div><div class="l">модов переведено</div></div>
+      <div class="stat"><div class="n">3500+</div><div class="l">строк текста</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">платформы</div></div>
+    </div>
+  </header>
 
-  <h2>🚀 Установка</h2>
-  <div class="card">
-    <ol>
-      <li>Собери базовую сборку через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a>: <code>RP-1-ExpressInstall</code> + <code>RP-1-ExpressInstall-Graphics-Low</code> + <code>RP-1</code>.</li>
-      <li>Скачай этот репозиторий (кнопка выше) и распакуй архив.</li>
-      <li>Скопируй содержимое папки <code>GameData</code> из архива в папку <code>GameData</code> своей установки KSP — файлы разложатся по нужным подпапкам автоматически.</li>
-      <li>Выбери русский язык в настройках KSP (или напрямую в <code>settings.cfg</code>):
-        <pre><code>LANGUAGE = ru</code></pre>
-      </li>
-    </ol>
-  </div>
+  <!-- WHAT -->
+  <section id="about">
+    <div class="sec-head"><span class="sec-num">00 / ОБЗОР</span><h2>Что это</h2><span class="rule"></span></div>
+    <div class="card">
+      <p><strong>RO / RSS / RP-1</strong> — флагманская реалистичная сборка KSP1. Она заменяет игрушечную кербальскую систему на настоящую Солнечную (Земля в реальном масштабе), делает физику, топливо и двигатели приближенными к жизни и добавляет историческую карьеру. Это признанный сообществом «тот самый» реалистичный режим.</p>
+      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в 20 ключевых модов сборки и устанавливается копированием одной папки. Для англоязычных игроков ничего не меняется — перевод активируется только при выборе русского языка.</p>
+    </div>
+  </section>
 
-  <h2>📡 Что переведено — 20 модов</h2>
-  <div class="legend">
-    <span class="badge full">FULL</span> — родная локализация мода, добавлен только <code>ru.cfg</code>.
-    <span class="badge patch">PATCH</span> — своей локализации не было, добавлен ещё MM-патч, безопасно переключающий поля деталей на переведённые ключи (оригинальные файлы мода не тронуты).
-  </div>
-  <div class="mod-grid">
-    <div class="mod-pill">AJE <span class="badge full">FULL</span></div>
-    <div class="mod-pill">ContractConfigurator <span class="badge full">FULL</span></div>
-    <div class="mod-pill">EditorExtensionsRedux <span class="badge full">FULL</span></div>
-    <div class="mod-pill">ROCapsules <span class="badge full">FULL</span></div>
-    <div class="mod-pill">SXT <span class="badge full">FULL</span></div>
-    <div class="mod-pill">Trajectories <span class="badge full">FULL</span></div>
-    <div class="mod-pill">VenStockRevamp <span class="badge full">FULL</span></div>
-    <div class="mod-pill">KerbalChangelog <span class="badge full">FULL</span></div>
-    <div class="mod-pill">KerbalEngineerRedux <span class="badge full">FULL</span></div>
-    <div class="mod-pill">RealismOverhaul <span class="badge full">FULL</span></div>
-    <div class="mod-pill">SpaceTuxLibrary <span class="badge full">FULL</span></div>
-    <div class="mod-pill">BackgroundThrust <span class="badge full">FULL</span></div>
-    <div class="mod-pill">ROSolar <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ROTanks <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ROEngines <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ROHeatshields <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ProceduralFairings <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ProceduralParts <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">RealChute <span class="badge patch">PATCH</span></div>
-    <div class="mod-pill">ModularLaunchPads <span class="badge patch">PATCH</span></div>
-  </div>
+  <!-- INSTALL STEP 1 -->
+  <section id="install">
+    <div class="sec-head"><span class="sec-num">01 / СБОРКА</span><h2>Шаг 1 · Ставим CKAN</h2><span class="rule"></span></div>
+    <div class="card">
+      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (нужна версия 1.12.5), затем CKAN — по вкладке своей ОС:</p>
 
-  <h2>⚠ Известные ограничения</h2>
-  <div class="card">
-    <ul>
-      <li>Переведено 20 модов из полного набора большой сборки — остальные (~50) пока на английском.</li>
-      <li>Контракты, сгенерированные <em>до</em> установки перевода в уже существующем сохранении, останутся на английском — текст запекается в момент создания контракта. Новые контракты будут на русском.</li>
-      <li>Несколько отдельных деталей (в ProceduralFairings и ModularLaunchPads) не переведены — их исходные файлы содержат структурные особенности, из-за которых нельзя было надёжно сверить перевод с оригиналом.</li>
-    </ul>
-  </div>
+      <div class="tabs" data-group="os">
+        <div class="tab active" data-tab="win"><span class="ico">🪟</span>Windows</div>
+        <div class="tab" data-tab="mac"><span class="ico">🍎</span>macOS</div>
+        <div class="tab" data-tab="lin"><span class="ico">🐧</span>Linux</div>
+        <div class="tab" data-tab="deck"><span class="ico">🎮</span>Steam Deck</div>
+      </div>
+
+      <!-- WINDOWS -->
+      <div class="panel active" data-panel="win">
+        <ol class="steps">
+          <li>Убедись, что установлен <b>.NET Framework 4.8</b> — в Windows 10 и 11 он уже есть по умолчанию.</li>
+          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a> и положи в любую папку (не внутрь игры).</li>
+          <li>Запусти <code class="inline">ckan.exe</code> двойным кликом — откроется графический интерфейс.</li>
+          <li>При первом запуске укажи путь к установленной игре — CKAN обычно находит Steam-копию сам.</li>
+        </ol>
+      </div>
+
+      <!-- MAC -->
+      <div class="panel" data-panel="mac">
+        <ol class="steps">
+          <li>Скачай <b>CKAN.dmg</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a>.</li>
+          <li>Открой образ и перетащи <code class="inline">CKAN.app</code> в любую папку, затем запусти двойным кликом.</li>
+          <li>На современных macOS (10.15+) CKAN открывается как <b>текстовый интерфейс в Терминале</b> — Apple убрала поддержку 32-битного GUI. Разреши доступ к Терминалу, если система спросит.</li>
+          <li>Укажи путь к установленной игре и переходи к шагу 2.</li>
+        </ol>
+        <div class="note"><b>Совет:</b> навигация в консольном интерфейсе — стрелки, Enter, Tab. Либо собери сборку на ПК с Windows и просто скопируй папку игры на Mac.</div>
+      </div>
+
+      <!-- LINUX -->
+      <div class="panel" data-panel="lin">
+        <ol class="steps">
+          <li>Установи Mono (движок для запуска CKAN):
+            <div class="code"><button class="copy">COPY</button><pre># Debian / Ubuntu
+sudo apt install mono-complete
+
+# Fedora
+sudo dnf install mono-complete
+
+# Arch
+sudo pacman -S mono</pre></div>
+          </li>
+          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов</a> (либо ставь <code class="inline">.deb</code>/<code class="inline">.rpm</code> из тех же релизов).</li>
+          <li>Запусти графический интерфейс:
+            <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe</pre></div>
+          </li>
+          <li>Укажи путь к игре — обычно <code class="inline">~/.local/share/Steam/steamapps/common/Kerbal Space Program</code>.</li>
+        </ol>
+      </div>
+
+      <!-- STEAM DECK -->
+      <div class="panel" data-panel="deck">
+        <p style="margin-top:16px">У SteamOS файловая система «только для чтения», поэтому чистый способ — контейнер Debian через <b>distrobox</b> (он уже есть на Deck). Всё делается в <b>режиме рабочего стола</b> в приложении Konsole.</p>
+        <ol class="steps">
+          <li>Создай контейнер и войди в него:
+            <div class="code"><button class="copy">COPY</button><pre>distrobox create -n ckanbox -i debian:12 -Y
+distrobox enter ckanbox</pre></div>
+          </li>
+          <li>Внутри контейнера поставь Mono и CKAN:
+            <div class="code"><button class="copy">COPY</button><pre>sudo apt update && sudo apt install -y mono-complete
+curl -L -o ckan.exe https://github.com/KSP-CKAN/CKAN/releases/latest/download/ckan.exe</pre></div>
+          </li>
+          <li>Подключи игру (домашняя папка видна из контейнера напрямую):
+            <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe instance add --headless "KSP" \
+"$HOME/.local/share/Steam/steamapps/common/Kerbal Space Program"
+mono ckan.exe instance default KSP
+mono ckan.exe update</pre></div>
+          </li>
+          <li>Дальше — команды установки из шага 2 (в том же контейнере).</li>
+        </ol>
+        <div class="note"><b>Проще:</b> если есть ПК — собери сборку там через CKAN и скопируй папку <code class="inline">Kerbal Space Program</code> на Deck целиком. Тогда контейнер не нужен.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL STEP 2 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02 / МОДЫ</span><h2>Шаг 2 · Ставим RO / RSS / RP-1</h2><span class="rule"></span></div>
+    <div class="card">
+      <p>В CKAN найди и отметь <strong>RP-1-ExpressInstall</strong> — это официальный мета-пак, который подтянет Realism Overhaul, Real Solar System, RP-1 и все зависимости. Через GUI: поставь галочки, нажми Apply. Через терминал (Linux / Steam Deck) — одной командой:</p>
+      <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe install --headless --no-recommends \
+  RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1</pre></div>
+      <div class="note"><b>Graphics-Low</b> выбран сознательно: низкое разрешение текстур экономит память и лучше идёт на слабом железе и Steam Deck. Первый запуск игры будет долгим — Module Manager собирает конфиги десятков модов.</div>
+    </div>
+  </section>
+
+  <!-- INSTALL STEP 3 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03 / РУСИФИКАТОР</span><h2>Шаг 3 · Ставим русский</h2><span class="rule"></span></div>
+    <div class="card">
+      <ol class="steps">
+        <li><b>Скачай русификатор</b> — <a href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">ZIP-архив</a> — и распакуй.</li>
+        <li><b>Скопируй содержимое папки <code class="inline">GameData</code></b> из архива в <code class="inline">GameData</code> своей установки игры. Файлы лягут в нужные подпапки сами. Где находится игра:
+          <table class="pathtable">
+            <tr><td>Windows</td><td>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData</td></tr>
+            <tr><td>macOS</td><td>~/Library/Application Support/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+            <tr><td>Linux</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+            <tr><td>Steam&nbsp;Deck</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+          </table>
+        </li>
+        <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в файле <code class="inline">settings.cfg</code> (лежит рядом с папкой GameData):
+          <div class="code"><button class="copy">COPY</button><pre>LANGUAGE = ru</pre></div>
+        </li>
+        <li>Запусти игру. Готово — интерфейс, детали и карьера RP-1 на русском. 🚀</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- MODS -->
+  <section id="mods">
+    <div class="sec-head"><span class="sec-num">04 / ОХВАТ</span><h2>Что переведено</h2><span class="rule"></span></div>
+    <div class="card">
+      <div class="legend">
+        <span><span class="badge full">FULL</span> родная локализация мода</span>
+        <span><span class="badge patch">PATCH</span> добавлен доп. патч (оригинал не тронут)</span>
+      </div>
+      <div class="grid">
+        <div class="cell">AJE <span class="badge full">FULL</span></div>
+        <div class="cell">ContractConfigurator <span class="badge full">FULL</span></div>
+        <div class="cell">EditorExtensionsRedux <span class="badge full">FULL</span></div>
+        <div class="cell">ROCapsules <span class="badge full">FULL</span></div>
+        <div class="cell">SXT <span class="badge full">FULL</span></div>
+        <div class="cell">Trajectories <span class="badge full">FULL</span></div>
+        <div class="cell">VenStockRevamp <span class="badge full">FULL</span></div>
+        <div class="cell">KerbalChangelog <span class="badge full">FULL</span></div>
+        <div class="cell">KerbalEngineerRedux <span class="badge full">FULL</span></div>
+        <div class="cell">RealismOverhaul <span class="badge full">FULL</span></div>
+        <div class="cell">SpaceTuxLibrary <span class="badge full">FULL</span></div>
+        <div class="cell">BackgroundThrust <span class="badge full">FULL</span></div>
+        <div class="cell">ROSolar <span class="badge patch">PATCH</span></div>
+        <div class="cell">ROTanks <span class="badge patch">PATCH</span></div>
+        <div class="cell">ROEngines <span class="badge patch">PATCH</span></div>
+        <div class="cell">ROHeatshields <span class="badge patch">PATCH</span></div>
+        <div class="cell">ProceduralFairings <span class="badge patch">PATCH</span></div>
+        <div class="cell">ProceduralParts <span class="badge patch">PATCH</span></div>
+        <div class="cell">RealChute <span class="badge patch">PATCH</span></div>
+        <div class="cell">ModularLaunchPads <span class="badge patch">PATCH</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIMITS -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05 / НЮАНСЫ</span><h2>Что важно знать</h2><span class="rule"></span></div>
+    <div class="card">
+      <ul class="plain" style="margin:0">
+        <li>Переведено 20 модов из полного набора сборки — остальные пока на английском. Список открыт для расширения.</li>
+        <li>Контракты, созданные <em>до</em> установки перевода в уже начатом сохранении, останутся на английском: их текст «запекается» в момент создания. Новые контракты будут на русском.</li>
+        <li>Несколько отдельных деталей (в ProceduralFairings и ModularLaunchPads) оставлены на английском — их исходные файлы устроены так, что нельзя было надёжно сверить перевод с оригиналом.</li>
+      </ul>
+    </div>
+  </section>
 
   <footer>
-    Независимый фан-проект, не аффилированный с авторами оригинальных модов.<br>
-    Источники: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a>
+    Независимый фан-проект, не аффилирован с авторами оригинальных модов.<br>
+    Исходники сборки: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a><br>
+    <span class="mono" style="opacity:.6">kerbal.ru · github.com/plagness/kerbal.ru</span>
   </footer>
 
 </div>
+
+<script>
+  // OS tabs
+  document.querySelectorAll('.tabs').forEach(function(group){
+    var tabs=group.querySelectorAll('.tab');
+    var scope=group.closest('.card');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        tabs.forEach(function(t){t.classList.remove('active')});
+        tab.classList.add('active');
+        var key=tab.getAttribute('data-tab');
+        scope.querySelectorAll('.panel').forEach(function(p){
+          p.classList.toggle('active',p.getAttribute('data-panel')===key);
+        });
+      });
+    });
+  });
+  // copy buttons
+  document.querySelectorAll('.code .copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.parentElement.querySelector('pre');
+      var text=pre.innerText;
+      navigator.clipboard.writeText(text).then(function(){
+        var old=btn.textContent;btn.textContent='OK ✓';btn.classList.add('done');
+        setTimeout(function(){btn.textContent=old;btn.classList.remove('done')},1400);
+      });
+    });
+  });
+</script>
 </body>
 </html>
