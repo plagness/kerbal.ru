@@ -7,10 +7,11 @@
 <meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Icons: Tabler Icons (MIT License) — https://tabler.io/icons -->
 <style>
   :root{
+    --sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Inter",system-ui,"Segoe UI",sans-serif;
     --bg-0:#03050b;
     --bg-1:#060a15;
     --panel:rgba(13,19,34,.66);
@@ -34,7 +35,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--txt);background:var(--bg-0);line-height:1.6;overflow-x:hidden;}
+  body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
   /* backdrop */
   .sky{position:fixed;inset:0;z-index:-3;background:
@@ -57,17 +58,17 @@
 
   /* HERO */
   .hero{text-align:center;padding:40px 0 26px;}
-  .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Orbitron',sans-serif;font-size:.68rem;letter-spacing:3px;color:var(--cyan);
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.68rem;letter-spacing:3px;color:var(--cyan);
     background:rgba(63,208,212,.07);border:1px solid var(--line-cyan);border-radius:30px;padding:7px 18px;text-transform:uppercase;margin-bottom:26px;}
   .kicker .ic{color:var(--cyan);font-size:1rem}
-  h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.7rem,10vw,5.6rem);line-height:.92;margin:0;letter-spacing:2px;
+  h1{font-family:var(--sans);font-weight:800;font-size:clamp(3rem,11vw,6.2rem);line-height:.92;margin:0;letter-spacing:-.03em;
     background:linear-gradient(180deg,#fff 0%,#ffe0b3 42%,var(--orange) 110%);-webkit-background-clip:text;background-clip:text;color:transparent;
     text-shadow:0 0 70px var(--orange-glow);filter:drop-shadow(0 2px 30px rgba(255,157,47,.25));}
   .lead{color:var(--txt-dim);font-size:clamp(1.05rem,2.4vw,1.32rem);font-weight:500;max-width:640px;margin:18px auto 0;}
   .lead b{color:#fff}
 
   .cta{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;margin-top:32px;}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Orbitron',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.6px;text-transform:uppercase;
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:.82rem;letter-spacing:.6px;text-transform:uppercase;
     padding:14px 26px;border-radius:10px;text-decoration:none;transition:transform .13s,filter .13s,box-shadow .13s;}
   .btn .ic{font-size:1.15rem}
   .btn:hover{transform:translateY(-2px)}
@@ -82,7 +83,7 @@
   .ro{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:13px 20px;min-width:130px;position:relative;overflow:hidden;}
   .ro::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),transparent);}
   .ro .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.7rem;color:var(--cyan);letter-spacing:1px;line-height:1;text-shadow:0 0 16px var(--cyan-glow);}
-  .ro .l{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--txt-faint);letter-spacing:1.2px;text-transform:uppercase;margin-top:8px;font-family:'Orbitron',sans-serif;}
+  .ro .l{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--txt-faint);letter-spacing:1.2px;text-transform:uppercase;margin-top:8px;font-family:var(--sans);}
   .ro .l .ic{color:var(--orange);font-size:.95rem}
 
   /* SECTIONS */
@@ -90,7 +91,7 @@
   .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:2px;}
   .sec-ico{width:38px;height:38px;border:1px solid var(--line-hot);border-radius:10px;display:grid;place-items:center;color:var(--orange);background:rgba(255,157,47,.06);flex:none;font-size:1.25rem;box-shadow:inset 0 0 20px rgba(255,157,47,.05);}
   .sec-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--cyan);border:1px solid var(--line-cyan);border-radius:6px;padding:3px 8px;white-space:nowrap;letter-spacing:.5px;}
-  h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.15rem,3.4vw,1.5rem);letter-spacing:1px;text-transform:uppercase;color:#fff;margin:0;}
+  h2{font-family:var(--sans);font-weight:700;font-size:clamp(1.15rem,3.4vw,1.5rem);letter-spacing:1px;text-transform:uppercase;color:#fff;margin:0;}
   .sec-head .rule{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line-hot) 0 10px,transparent 10px 16px);}
 
   .card{position:relative;background:var(--panel);backdrop-filter:blur(9px);border:1px solid var(--line);border-radius:16px;padding:26px 30px;margin-top:18px;
@@ -105,7 +106,7 @@
 
   /* TABS */
   .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
-  .tab{font-family:'Orbitron',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.4px;color:var(--txt-dim);cursor:pointer;
+  .tab{font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.4px;color:var(--txt-dim);cursor:pointer;
     background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:9px;transition:.14s;}
   .tab .ic{font-size:1.15rem}
   .tab:hover{border-color:var(--line-cyan);color:var(--txt)}
@@ -126,7 +127,7 @@
   .code::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--line-cyan),transparent);}
   .code pre{margin:0;padding:15px 58px 15px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.83rem;color:var(--green);}
   .code .copy{position:absolute;top:9px;right:9px;background:rgba(63,208,212,.06);border:1px solid var(--line);border-radius:6px;color:var(--txt-dim);
-    font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:.5px;padding:5px 9px;cursor:pointer;transition:.14s;}
+    font-family:var(--sans);font-size:.6rem;letter-spacing:.5px;padding:5px 9px;cursor:pointer;transition:.14s;}
   .code .copy:hover{border-color:var(--line-cyan);color:var(--cyan)}
   .code .copy.done{color:var(--green);border-color:rgba(166,223,94,.5)}
   code.inline{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:.81rem;color:var(--green);word-break:break-word;}
@@ -138,12 +139,12 @@
   .pathtable{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem;}
   .pathtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle;}
   .pathtable tr:last-child td{border-bottom:0}
-  .pathtable td:first-child{color:var(--orange);font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:.5px;white-space:nowrap;padding-right:16px;}
+  .pathtable td:first-child{color:var(--orange);font-family:var(--sans);font-size:.7rem;letter-spacing:.5px;white-space:nowrap;padding-right:16px;}
   .pathtable td .ic{margin-right:7px;vertical-align:-.15em}
   .pathtable td:last-child{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.76rem;word-break:break-all;}
 
   .legend{color:var(--txt-dim);font-size:.92rem;margin-top:6px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
-  .badge{font-family:'Orbitron',sans-serif;font-size:.58rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
+  .badge{font-family:var(--sans);font-size:.58rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
   .badge.full{background:rgba(166,223,94,.13);color:var(--green);border:1px solid rgba(166,223,94,.4);}
   .badge.patch{background:rgba(255,157,47,.13);color:var(--orange);border:1px solid rgba(255,157,47,.4);}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-top:16px;}
@@ -156,7 +157,7 @@
 
   footer{text-align:center;color:var(--txt-faint);font-size:.85rem;padding:46px 0 64px;margin-top:22px;border-top:1px solid var(--line);}
   footer a{color:var(--cyan);text-decoration:none}footer a:hover{text-decoration:underline}
-  footer .gh{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;color:var(--txt);font-family:'Orbitron',sans-serif;font-size:.8rem}
+  footer .gh{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;color:var(--txt);font-family:var(--sans);font-size:.8rem}
   footer .gh .ic{font-size:1.2rem}
   .mono{font-family:'JetBrains Mono',monospace}
 
@@ -201,15 +202,10 @@
 
 <div class="wrap">
 
-  <div class="hud">
-    <span class="live"><span class="dot"></span>KERBAL.RU · MISSION CONTROL · <span class="live">ONLINE</span></span>
-    <span class="hide r">KSP 1.12.5 · RO/RSS/RP-1 · LANG=RU</span>
-  </div>
-
   <!-- HERO -->
   <header class="hero">
     <span class="kicker"><svg class="ic"><use href="#i-language"/></svg>Русская локализация · Realism Overhaul</span>
-    <h1>KERBAL.RU</h1>
+    <h1>KERBAL</h1>
     <p class="lead">Реалистичная сборка Kerbal Space Program на русском. Настоящая Солнечная система, честная орбитальная механика, историческая карьера — <b>с переводом интерфейса и деталей</b>.</p>
     <div class="cta">
       <a class="btn btn-primary" href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip"><svg class="ic"><use href="#i-download"/></svg>Скачать русификатор</a>
