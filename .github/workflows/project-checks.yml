@@ -67,6 +67,9 @@ jobs:
       - name: Validate localization structure
         run: python3 tools/validate_localization.py
 
+      - name: Validate UI translation dictionaries
+        run: python3 tools/ui-translator/validate_dict.py
+
       - name: Check local Markdown links
         run: |
           python3 - <<'PY'

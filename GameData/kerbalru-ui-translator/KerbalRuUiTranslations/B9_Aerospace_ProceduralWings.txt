@@ -1,0 +1,170 @@
+# B9_Aerospace_ProceduralWings — wing/control-surface shape editor
+# (chord/thickness/sweep/edges, the "press J to edit" window).
+#
+# MAJOR FINDING: this mod already ships a FULL, complete Russian localization
+# via KSP's stock #autoLOC_ system:
+#   GameData/B9_Aerospace_ProceduralWings/Localization/ru.cfg (171 keys)
+# matched 1:1 against the English source in Localization/refactor.cfg. It
+# covers literally the entire shape editor: every field label, every dropdown
+# value (Rounded/Biconvex/Triangular/Uniform/Standard/Reinforced...), every
+# tooltip paragraph, and the 3 part title/description blocks. This looks like
+# prior work from this same kerbal.ru project (ru.cfg's mtime is newer than
+# every other file the mod ships, and its phrasing matches this project's
+# established RU terminology).
+#
+# The 116 pairs below are extracted directly from refactor.cfg/ru.cfg (same
+# approach as ConformalDecals.txt) so the SAME Harmony dictionary also covers
+# this mod if the game runs in English locale — Text.text still ends up
+# holding the English string in that case, which is exactly what this
+# framework matches on. Skipped only the 4 entries where English == Russian
+# already (a literal "#", the separator line, and the material names
+# LRSI/HRSI which stay as acronyms in Russian too).
+#
+# GAP FOUND BY DIRECT ldstr INSPECTION: a handful of tooltip/label strings are
+# NOT in ru.cfg at all — they're literal English fallback branches inside
+# WingProcedural::UpdateTooltipText() / DrawCheck() calls for tooltip ids
+# 105-107, 301 (0x69-0x6b, 0x12d) that sit right next to sibling ids which DO
+# route through Localizer.Format("#autoLOC_..."). Looks like these were added
+# in a mod update after the last "make localization" pass and never
+# backported to ru.cfg. Also found: two custom difficulty-settings page
+# titles ("Controls"/"Log Settings", WPSensitivity/WPDebug.get_Title()) and
+# a crash-tolerance difficulty field, an "Invalid" tank-setup fallback label,
+# and two reflection-fallback strings (TitleNotAvailable/VersionNotAvailable)
+# shown only if the assembly's own version metadata is missing. These 13
+# entries are new translations (not sourced from ru.cfg) — worth a follow-up
+# PR to add them to B9's own ru.cfg too, since that's the more correct fix.
+#
+# Skipped as non-UI (confirmed by tracing call sites): hundreds of
+# Debug.Log-only strings, FAR/NEAR integration diagnostics, shader/material
+# property names (_MainTex, sharedMaterialEL...), reflection field names
+# (ctrlHandleLength1, handleWidthRootBack...), GameObject.Find() lookups
+# ("Normal", "CtrlSurf"), format specifiers (F2/F3/G5), and the
+# install-path-check popup's long error paragraphs (not part of the shape
+# editor itself). "OK" skipped — same in Russian UI convention, no-op.
+
+Last:	Посл.:
+Property editor	Редактор параметров
+LeftCtrl: Auto Axis Locking\nX: lock Offset. Y: lock Length\n_________________________	LeftCtrl: автоблок. оси\nX: блок. смещение. Y: блок. длину\n_________________________
+Close	Закрыть
+Handles	Маркеры
+Preference	Настройки
+Use angles to define the wing	Задавать крыло углами
+No	Нет
+Yes	Да
+Scale edges to thickness	Масштаб кромок по толщине
+Base	База
+Length	Длина
+Width (root)	Ширина (у корня)
+Width (tip)	Ширина (у конца)
+Offset (tip)	Смещение (у конца)
+Swept angle(front)	Стреловидность (перед)
+Swept angle(back)	Стреловидность (зад)
+Thickness (root)	Толщина (у корня)
+Thickness (tip)	Толщина (у конца)
+Offset (root)	Смещение (у корня)
+Edge (leading)	Кромка (передняя)
+Shape	Форма
+Edge (trailing)	Кромка (задняя)
+Surface (top)	Поверхность (верх)
+Material	Материал
+Opacity	Непрозрачность
+Hue	Оттенок
+Saturation	Насыщенность
+Brightness	Яркость
+Surface (bottom)	Поверхность (низ)
+Surface (trailing edge)	Поверхность (задняя кромка)
+Surface (leading edge)	Поверхность (передняя кромка)
+_________________________\n\nPress J to exit edit mode\nOptions below allow you to change default values	_________________________\n\nJ — выйти из режима правки\nНиже — смена значений по умолчанию
+| Next tank setup	| След. вариант бака
+Save as default	Сохранить как основной
+Restore default	Восстановить основной
+_________________________\n\nOptions options allow you to match the part properties to it's parent	_________________________\n\nНиже — подгонка параметров детали под родителя
+Edges	Кромки
+Color	Цвет
+Align with back edges	Выровнять по задним кромкам
+Align with fore edges	Выровнять по передним кромкам
+Exiting edit mode...\n	Выход из режима правки...\n
+Press J while pointing at a\nprocedural part to edit it	Наведите на деталь и нажмите J\nдля правки
+Additional info on edited \nproperties is displayed here	Здесь показана справка \nпо редактируемому параметру
+Lateral measurement of the wing, \nalso referred to as semispan	Поперечный размер крыла \n(полуразмах)
+Lateral measurement of the control \nsurface at it's root	Поперечный размер поверхности \nуправления у корня
+Longitudinal measurement of the wing \nat the root cross section	Продольный размер крыла \nв сечении у корня
+Longitudinal measurement of \nthe root chord	Продольный размер \nхорды у корня
+Longitudinal measurement of the wing \nat the tip cross section	Продольный размер крыла \nв сечении у конца
+This property shouldn't be accessible \non a wing	Этот параметр недоступен \nдля крыла
+Offset of the trailing edge \nroot corner on the lateral axis	Смещение угла задней кромки \nу корня по поперечной оси
+Distance between midpoints of the cross \nsections on the longitudinal axis	Расстояние между серединами сечений \nпо продольной оси
+Offset of the trailing edge \ntip corner on the lateral axis	Смещение угла задней кромки \nу конца по поперечной оси
+Thickness at the root cross section \nUsually kept proportional to edge width	Толщина в сечении у корня \nОбычно пропорциональна ширине кромки
+Thickness at the tip cross section \nUsually kept proportional to edge width	Толщина в сечении у конца \nОбычно пропорциональна ширине кромки
+Shape of the trailing edge cross \nsection (round/biconvex/sharp)	Форма сечения задней кромки \n(круглая/двояковыпуклая/острая)
+Longitudinal measurement of the trailing \nedge cross section at wing root	Продольный размер сечения \nзадней кромки у корня крыла
+Longitudinal measurement of the trailing \nedge cross section at with root	Продольный размер сечения \nзадней кромки у корня крыла
+Longitudinal measurement of the trailing \nedge cross section at wing tip	Продольный размер сечения \nзадней кромки у конца крыла
+Longitudinal measurement of the trailing \nedge cross section at with tip	Продольный размер сечения \nзадней кромки у конца крыла
+Shape of the leading edge cross \nsection (round/biconvex/sharp)	Форма сечения передней кромки \n(круглая/двояковыпуклая/острая)
+Longitudinal measurement of the leading \nedge cross section at wing root	Продольный размер сечения \nпередней кромки у корня крыла
+Longitudinal measurement of the leading \nedge cross section at with tip	Продольный размер сечения \nпередней кромки у конца крыла
+Surface material (uniform fill, plating, \nLRSI/HRSI tiles and so on)	Материал поверхности (заливка, обшивка, \nплитки LRSI/HRSI и т.п.)
+Fairly self-explanatory, controls the paint \nopacity: no paint at 0, full coverage at 1	Непрозрачность окраски: \nнет краски при 0, полная при 1
+Controls the paint hue (HSB axis): \nvalues from zero to one make full circle	Оттенок окраски (ось HSB): \nот 0 до 1 — полный круг
+Controls the paint saturation (HSB axis): \ncolorless at 0, full color at 1	Насыщенность окраски (ось HSB): \nсерая при 0, полная при 1
+Controls the paint brightness (HSB axis): black at 0, white at 1, primary at 0.5	Яркость окраски (ось HSB): чёрный при 0, белый при 1, основной при 0.5
+Use front and back sweptback angles to define wings,\nor just select no to use the good old lengths.	Задавать крыло углами стреловидности,\nили нет — тогда обычными длинами.
+Scale edge lengths when changing thickness.	Масштабировать длину кромок при смене толщины.
+Angle between front edge and root.\n<90 deg is to the back	Угол между передней кромкой и корнем.\n<90° — назад
+Angle between back edge and root.\n<90 deg is to the back.	Угол между задней кромкой и корнем.\n<90° — назад.
+Unknown field\n	Неизвестное поле\n
+Inactive	Неактивно
+Control surface	Поверхность управления
+All-moving control surface	Цельноповоротная поверхность
+Wing	Крыло
+Mass	Масса
+Stock lifting area	Площадь (для игры)
+MAC	САХ
+Semispan	Полуразмах
+Mid Chord Sweep	Стреловидность по 50%
+Taper Ratio	Сужение
+Next configuration	След. конфигурация
+Uniform	Однородный
+Standard	Стандарт
+Reinforced	Усиленный
+Unknown material	Неизвестный материал
+No edge	Без кромки
+Rounded	Скруглённая
+Biconvex	Двояковыпуклая
+Triangular	Треугольная
+Unknown	Неизвестно
+Leading Edge Root Width	Ширина передней кромки у корня
+Leading Edge Tip Width	Ширина передней кромки у конца
+Trailing Leading Edge Root Width	Ширина задней кромки у корня
+Trailing Leading Edge Tip Width	Ширина задней кромки у конца
+Root Width	Ширина у корня
+Tip Width	Ширина у конца
+AngleDefine	По углам
+Thick Scale	Масштаб толщины
+Include edges in definitions	Учитывать кромки в размерах
+Edge Included	Кромка учтена
+Include or exclude edges \nwhen changing properties of the wing.	Учитывать кромки \nпри смене параметров крыла.
+Surface Config: Lifting	Поверхность: несущая
+Surface Config: Not Lifting	Поверхность: ненесущая
+B9-PW Procedural wing	B9-PW Процедурное крыло
+B9-PCST Procedural control surface	B9-PCST Процедурная поверхность управления
+B9-PCSA Procedural control surface (all-moving)	B9-PCSA Процедурная поверхность управления (цельноповоротная)
+Procedural wing you can shape in any way you want using the context menu. Press J while pointing at this part to open the editor window allowing you to edit the shape and materials of this part. You can exit the editing mode by switching to editing of another part in the very same way, or by pressing J again, or by closing the window. The window can also be opened and closed using the B9 button in the bottom-right corner of the screen.	Процедурное крыло — форма и материалы настраиваются в контекстном меню. Наведите на деталь и нажмите J, чтобы открыть окно редактора формы и материалов. Выйти из правки можно переключением на другую деталь тем же способом, повторным J или закрытием окна. Окно также открывается кнопкой B9 внизу справа экрана.
+Procedural control surface you can shape in any way you want using the context menu. Press J while pointing at this part to open the editor window allowing you to edit the shape and materials of this part. You can exit the editing mode by switching to editing of another part in the very same way, or by pressing J again, or by closing the window. The window can also be opened and closed using the B9 button in the bottom-right corner of the screen.	Процедурная поверхность управления — форма и материалы настраиваются в контекстном меню. Наведите на деталь и нажмите J, чтобы открыть окно редактора формы и материалов. Выйти из правки можно переключением на другую деталь тем же способом, повторным J или закрытием окна. Окно также открывается кнопкой B9 внизу справа экрана.
+Procedural all-moving surface that can be used for stabilators and canards. Press J while pointing at this part to open the editor window allowing you to edit the shape and materials of this part. You can exit the editing mode by switching to editing of another part in the very same way, or by pressing J again, or by closing the window. The window can also be opened and closed using the B9 button in the bottom-right corner of the screen.	Процедурная цельноповоротная поверхность для стабилизаторов и дестабилизаторов (передних рулей). Наведите на деталь и нажмите J, чтобы открыть окно редактора формы и материалов. Выйти из правки можно переключением на другую деталь тем же способом, повторным J или закрытием окна. Окно также открывается кнопкой B9 внизу справа экрана.
+Change wing root width \ninstead of wing tip for angle define 	Изменять ширину у корня крыла \nвместо ширины у конца при задании угла
+Lock wing tip offset \n instead of wing root offset for angle define	Блокировать смещение у конца крыла \nвместо смещения у корня при задании угла
+Lock wing width \n while modify angles	Блокировать ширину крыла \nпри изменении углов
+Lock Tip	Блокировать конец
+Lock Tip width instead of base width	Блокировать ширину у конца вместо ширины у корня
+Lock Tip mid-point instead of base	Блокировать середину у конца вместо базовой
+Lock width and change offset only	Блокировать ширину и менять только смещение
+Longitudinal measurement of \nthe tip chord	Продольный размер \nхорды у конца
+Controls	Управление
+Log Settings	Журналирование
+Amount of crash tolerance you would like to add	Дополнительный запас прочности при ударе
+Invalid	Некорректно
+TitleNotAvailable	Название недоступно
+VersionNotAvailable	Версия недоступна

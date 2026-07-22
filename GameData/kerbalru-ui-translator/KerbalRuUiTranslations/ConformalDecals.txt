@@ -1,0 +1,144 @@
+# ConformalDecals — decal placement/editing tool.
+#
+# IMPORTANT DIFFERENCE from RCSBuildAid: this mod does NOT use IMGUI
+# (GUI.Label/GUILayout.*) at all — grep of ConformalDecals.dll found zero
+# calls to those APIs. Its editor overlay (Scale/Depth/Opacity sliders,
+# text entry, font/color pickers) is a Unity UI prefab loaded from
+# conformaldecals.assetbundle, and its labels are populated at runtime via
+# stock KSP's Localizer.Format("#LOC_ConformalDecals_...") -> Text.text.
+#
+# The mod ALREADY SHIPS a complete, community-made Russian localization:
+#   GameData/ConformalDecals/Localization/ru.cfg (134 keys, matches en-us.cfg 1:1)
+# If KSP's game language is set to "ru" in-game, ConformalDecals is already
+# fully Russian natively — no Harmony intervention needed.
+#
+# The pairs below are extracted directly from en-us.cfg/ru.cfg (not from
+# the DLL) so that this same Harmony dictionary also catches ConformalDecals'
+# text if the game is run in English locale (Text.text ends up set to the
+# English string in that case, which is exactly what this framework matches
+# on). Scope: gui-* control labels, part titles, and decal variant names
+# (all things actually shown as label/button/dropdown text in the VAB).
+# Skipped: agency bio text, part descriptions, and part-list search tags —
+# long flavor paragraphs / hidden metadata, not compact UI labels, and both
+# already fully covered by ru.cfg if the user just switches game language.
+#
+# Every literal ldstr string actually found inside ConformalDecals.dll was
+# internal/technical (font-loader log lines, regex patterns, shader
+# property names, TextMeshPro style keywords 'bold'/'italic'/'regular',
+# GameObject.Find("Template") lookups) — none of it is player-facing text,
+# so none of it is included here.
+
+Decals	Наклейки
+Scale	Масштаб
+Depth	Глубина
+Opacity	Непрозрачность
+Cutoff	Отсечение
+Edge Wear	Износ краев
+Aspect Ratio	Соотношение сторон
+Select Flag	Выбрать флаг
+Reset Flag	Сбросить флаг
+Set Text	Установить текст
+Fill	Заливка
+Outline	Контур
+Set Fill Color	Установить цвет заливки
+Outline Width	Ширина контура
+Set Outline Color	Установить цвет контура
+CDL-F Flag Decal	Наклейка флага CDL-F
+CDL-T Text Decal	Текстовая наклейка CDL-T
+CDL-1 Generic Decal	Общая наклейка CDL-1
+Hazard Warning	Предупреждение об опасности
+High Voltage Warning	Предупреждение о высоком напряжении
+Radiation Warning	Предупреждение о радиации
+RF Warning	Предупреждение о РЧ
+Ejection Seat	Катапультируемое кресло
+Ejection Seat Triangle	Треугольник катапультируемого кресла
+Danger Explosive	Опасность взрыва
+NFPA-704 (Hydrazine)	NFPA-704 (Гидразин)
+Rescue Arrow	Спасательная стрелка
+Explosive Bolts	Пироболты
+Jet Intake (Left)	Воздухозаборник (Левый)
+Jet Intake (Right)	Воздухозаборник (Правый)
+Remove Before Flight	Удалить перед полетом
+Avgas Only	Только авиационный бензин
+Jet Fuel Only	Только реактивное топливо
+No Step	Не ступать
+Diagonal Stripes	Диагональные полосы
+Plain Stripe	Простая полоса
+Ground	Земля
+Numeral 1	Цифра 1
+Numeral 2	Цифра 2
+Numeral 3	Цифра 3
+Numeral 4	Цифра 4
+Numeral 5	Цифра 5
+Numeral 6	Цифра 6
+Numeral 7	Цифра 7
+Numeral 8	Цифра 8
+Numeral 9	Цифра 9
+Numeral 0	Цифра 0
+Do Not Touch	Не трогать
+CDL-2 Semiotic Standard Decal	Стандартная семиотическая наклейка CDL-2
+Hazard	Опасность
+Blank	Пусто
+Pressurized Gravity	Под давлением с гравитацией
+Pressurized 0G	Под давлением без гравитации
+CryoVault	Криокамера
+Airlock	Шлюз
+Bulkhead Door	Дверь переборки
+Unpressurized Area	Негерметичная зона
+Suit Locker	Шкаф для костюмов
+Photonic System	Фотонная система
+Laser	Лазер
+Electronic System	Электронная система
+Life Support System	Система жизнеобеспечения
+Bridge	Мостик
+Computer Terminal	Компьютерный терминал
+Intercom	Интерком
+Ladder	Лестница
+Maintenance	Обслуживание
+Storage	Хранение
+Storage (Food)	Хранение (Продукты)
+Storage (Refrigerated)	Хранение (Холодильное)
+Storage (Hazardous)	Хранение (Опасное)
+Galley	Камбуз
+Coffee	Кофе
+AutoDoc	Автодок
+Direction Arrow	Стрелка направления
+High Radioactivity	Высокая радиоактивность
+Radiation Hazard	Радиационная опасность
+Radiation Bunker	Радиационный бункер
+Exhaust	Выхлоп
+CDL-3 Surface Base Decal	Наклейка для поверхностной базы CDL-3
+Severe Danger	Крайняя опасность
+Danger	Опасность
+Warning	Предупреждение
+Bulkhead	Переборка
+Hatch	Люк
+Hatch (Pressurized)	Люк (Под давлением)
+Doorway	Дверной проем
+Do Not Obstruct	Не загромождать
+Airlock (Interior)	Шлюз (Внутренний)
+Airlock (Exterior)	Шлюз (Внешний)
+Check All Seals	Проверьте все уплотнения
+Pressure Seal	Уплотнение под давлением
+Danger Vacuum	Опасность вакуума
+Breathing Apparatus Required	Требуется дыхательный аппарат
+Oxygen Rich Environment	Обогащенная кислородом среда
+Heavy Robotic Work Ahead	Впереди тяжелая роботизированная работа
+Explosion Hazard	Опасность взрыва
+Annihilation Hazard	Опасность аннигиляции
+High Voltage	Высокое напряжение
+Extreme Voltage	Экстремальное напряжение
+Autonomous Device	Автономное устройство
+Gravity Adjust	Регулировка гравитации
+Strong EM Field	Сильное ЭМ поле
+Mind Step	Осторожно, ступенька
+Class 1 Hazard: Flammable Liquid	Класс 1 Опасность: Легковоспламеняющаяся жидкость
+Class 2 Hazard: Flammable Solid	Класс 2 Опасность: Легковоспламеняющееся твердое вещество
+Class 3 Hazard: Magnetic Field	Класс 3 Опасность: Магнитное поле
+Class 4 Hazard: Electric Field	Класс 4 Опасность: Электрическое поле
+Class 5 Hazard: Pressurized Fuel	Класс 5 Опасность: Топливо под давлением
+Class 6 Hazard: Pressurized Coolant	Класс 6 Опасность: Охладитель под давлением
+Class 7 Hazard: Cryogenic Liquid	Класс 7 Опасность: Криогенная жидкость
+Class 8 Hazard: Radioactive	Класс 8 Опасность: Радиоактивное
+Class 9 Hazard: Ionized Gas	Класс 9 Опасность: Плазма
+Class 10 Hazard: Antimatter	Класс 10 Опасность: Антивещество

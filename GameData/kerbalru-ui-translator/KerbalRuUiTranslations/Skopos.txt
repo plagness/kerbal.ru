@@ -1,0 +1,98 @@
+# Skopos (Telecom.dll) -- UI translation dictionary for kerbalru-ui-translator
+# Format: English<TAB>Russian. Exact-string match only (see docs/MAINTAINING.md and
+# tools/ui-translator/src/KerbalRuUiTranslator.cs). Extracted from Telecom.dll
+# (ldstr literals in the #US heap).
+Antenna inspector	Инспектор антенны
+ on 	 на 
+Power usage:	Использование мощности:
+{0:N1} W to {1} for {2} {3}	{0:N1} Вт на {1} для {2} {3}
+{0:N1} W to {1} for {2} broadcast from {3} to {4}	{0:N1} Вт на {1} для {2}, трансляция от {3} до {4}
+Spectrum usage:	Использование спектра:
+ transmitting to 	 передача на 
+ for 	 для 
+ broadcast from 	 трансляция от 
+ to 	 до 
+ receiving from 	 приём от 
+Inspect	Осмотреть
+{0:P2} over a {1}-day period ending yesterday	{0:P2} за период {1} дн., закончившийся вчера
+{0:P2} over the last {1} days	{0:P2} за последние {1} дн.
+Will be measured in {0:MMMM yyyy}	Будет измерено в {0:MMMM yyyy}
+Will be measured on {0:yyyy-MM-dd}	Будет измерено {0:yyyy-MM-dd}
+Will be measured between {0:yyyy-MM-dd} and {1:yyyy-MM-dd}	Будет измерено между {0:yyyy-MM-dd} и {1:yyyy-MM-dd}
+ so far	 пока что
+{0:P2} in {1:MMMM yyyy}{2}	{0:P2} в {1:MMMM yyyy}{2}
+{0:P2} on {1:yyyy-MM-dd}{2}	{0:P2} на {1:yyyy-MM-dd}{2}
+{0:P2} between {1:yyyy-MM-dd} and {2:yyyy-MM-dd}{3}	{0:P2} между {1:yyyy-MM-dd} и {2:yyyy-MM-dd}{3}
+Connection inspector	Инспектор соединения
+Draws: {0:N1} W / Total: {1:N1} W / Max: {2:N1} W	Потребляет: {0:N1} Вт / Всего: {1:N1} Вт / Макс: {2:N1} Вт
+Power-limited, would need: {0:N1} W / Available: {1:N1} W / Max: {2:N1} W	Ограничено мощностью, требуется: {0:N1} Вт / Доступно: {1:N1} Вт / Макс: {2:N1} Вт
+Would draw: {0:N1} W / Available: {1:N1} W / Max: {2:N1} W	Потребовалось бы: {0:N1} Вт / Доступно: {1:N1} Вт / Макс: {2:N1} Вт
+Draws: {0:N1} W / Max: {1:N1} W	Потребляет: {0:N1} Вт / Макс: {1:N1} Вт
+Power-limited, would need: {0:N1} W / Max: {1:N1} W	Ограничено мощностью, требуется: {0:N1} Вт / Макс: {1:N1} Вт
+Would draw: {0:N1} W / Max: {1:N1} W	Потребовалось бы: {0:N1} Вт / Макс: {1:N1} Вт
+Uses: 	Использует: 
+Hz / Total: 	Гц / Всего: 
+Hz / Max: 	Гц / Макс: 
+Bandwidth-limited, would need: 	Ограничено полосой пропускания, требуется: 
+Hz / Available: 	Гц / Доступно: 
+Would use: 	Использовалось бы: 
+ {0:N0} ms	 {0:N0} мс
+Data rate: 	Скорость передачи данных: 
+Latency limit: {0:N0} ms	Предел задержки: {0:N0} мс
+Improved service latency: {0:N0} ms	Улучшенная задержка обслуживания: {0:N0} мс
+Disconnected	Отключено
+Connected	Подключено
+Transmission from 	Передача от 
+Broadcast to:	Трансляция на:
+ Limited by capacity: available in isolation:	 Ограничено пропускной способностью: доступно отдельно:
+ Latency-limited: available at {0:N0} ms:	 Ограничено задержкой: доступно при {0:N0} мс:
+ Limited by data rate: available at 	 Ограничено скоростью передачи: доступно при 
+ Limited by both latency and data rate: available at 	 Ограничено и задержкой, и скоростью передачи: доступно при 
+{0}, {1:N0} ms	{0}, {1:N0} мс
+One-way data rate: 	Скорость передачи в одну сторону: 
+Round-trip latency limit: {0:N0} ms	Предел задержки туда-обратно: {0:N0} мс
+Improved service round-trip latency: {0:N0} ms	Улучшенная задержка обслуживания туда-обратно: {0:N0} мс
+Connected ({0:N0} ms)	Подключено ({0:N0} мс)
+Duplex between 	Дуплекс между 
+ and 	 и 
+ Limited by capacity: available in simplex:	 Ограничено пропускной способностью: доступно в симплексе:
+ Latency-limited: available at {0:N0} ms	 Ограничено задержкой: доступно при {0:N0} мс
+ Telecom network overview	 Обзор телеком-сети
+Please wait for the 	Пожалуйста, подождите, пока 
+ Telecom network to initialize...	 телеком-сеть инициализируется...
+Show network	Показать сеть
+Alerts stop warp in RP-1 sim	Оповещения останавливают ускорение времени в симуляции RP-1
+Suppress duplicate SLA alerts within	Подавлять повторные оповещения SLA в течение
+days ({0})	дн. ({0})
+Contracted connections: {0}	Законтрактованных соединений: {0}
+Fixed Updates: {0}	Фиксированных обновлений: {0}
+Average Runtime: {0:F2} ms	Среднее время выполнения: {0:F2} мс
+From 	От 
+Broadcast from 	Трансляция от 
+ to:	 до:
+Support broadcast from 	Обеспечьте трансляцию от 
+ to the following stations, with a data rate of 	 на следующие станции со скоростью передачи 
+ and a latency of at most 	 и задержкой не более 
+Support transmission from 	Обеспечьте передачу от 
+, with a data rate of 	, со скоростью передачи 
+Support duplex communication between 	Обеспечьте дуплексную связь между 
+, with a one-way data rate of 	, с односторонней скоростью передачи 
+ and a round-trip latency of at most 	 и задержкой туда-обратно не более 
+ connection from 	 соединение от 
+ duplex connection between 	 дуплексное соединение между 
+Metric is not computable from {0} days	Метрику нельзя вычислить за {0} дн.
+Currently disconnected	Сейчас не подключено
+Currently connected	Сейчас подключено
+: availability is back to normal	: доступность вернулась в норму
+ is back to normal	 вернулось в норму
+The availability is {0}, back above the target of {1:P2}.	Доступность составляет {0}, снова выше целевого значения {1:P2}.
+WARNING: {0}: availability is below {1:P2}.	ВНИМАНИЕ: {0}: доступность ниже {1:P2}.
+Out of SLA on 	Нарушение SLA на 
+The availability is {0}, below the target of {1:P2}.	Доступность составляет {0}, ниже целевого значения {1:P2}.
+No definition for station 	Нет описания для станции 
+No definition for connection 	Нет описания для соединения 
+ already present	 уже существует
+After {0:s}	После {0:s}
+Before {0:s}	До {0:s}
+Wait until {0:s}	Дождитесь {0:s}
+Complete before {0:s}	Завершите до {0:s}

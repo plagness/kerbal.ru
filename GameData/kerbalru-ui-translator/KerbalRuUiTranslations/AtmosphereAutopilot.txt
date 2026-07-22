@@ -1,0 +1,193 @@
+# AtmosphereAutopilot — UI strings extracted from AtmosphereAutopilot.dll + AtmosphereAutopilot.UI.dll
+# (v1.6.1.0 / UI v1.0.0.0). Two extraction passes were needed:
+#  1) `strings -a` on the raw DLL bytes (finds identifiers + AutoGuiAttr/AutoHotkeyAttr custom
+#     attribute argument strings, which .NET stores as compact UTF-8 in the attribute blob heap).
+#  2) A custom UTF-16LE scanner (macOS `strings` cannot see this) for ldstr literals used directly
+#     in GUILayout.Label/Window calls — this is where most toast messages and window titles live.
+# Skipped by design: type/method/field identifiers, ConfigNode persistence keys (snake_case),
+# .pdb/.dll paths, exception messages from the internal matrix-math library, version/GUID/copyright
+# metadata, string.Format templates with {0}-style placeholders (the substituted runtime text never
+# equals the template, so they can never match), and strings containing an embedded literal newline
+# (the loader's File.ReadAllLines splits on those before the tab-parser ever sees them, so such
+# strings can never be represented as a single dictionary line).
+
+
+# --- Window / panel titles ---
+Hotkeys manager	Менеджер горячих клавиш
+Flight model	Модель полёта
+Director controller	Контроллер направления
+Director controller GUI	Панель контроллера направления
+Thrust controller GUI	Панель контроллера тяги
+Mouse Director	Управление мышью
+Cruise Flight controller	Контроллер крейсерского полёта
+Pitch ang acc controller	Контроллер углового ускорения тангажа
+Yaw ang acc controller	Контроллер углового ускорения рыскания
+Roll ang acc controller	Контроллер углового ускорения крена
+Pitch ang vel controller	Контроллер угловой скорости тангажа
+Roll ang vel controller	Контроллер угловой скорости крена
+Yaw ang vel controller	Контроллер угловой скорости рыскания
+AoA-hold controller	Контроллер удержания угла атаки
+Prograde thrust controller	Контроллер тяги по вектору скорости
+Sideslip controller	Контроллер скольжения
+AoA controller	Контроллер угла атаки
+Standard Fly-By-Wire	Стандартная ЭДСУ
+Autopilot module manager	Менеджер модулей автопилота
+Craft settings	Настройки аппарата
+pitch trainer	Тренер тангажа
+roll trainer	Тренер крена
+yaw trainer	Тренер рыскания
+lift trainer	Тренер подъёмной силы
+slide trainer	Тренер бокового скольжения
+
+# --- Toggle / status messages (screen messages on hotkey press) ---
+Thrust balancing disabled	Балансировка тяги отключена
+Thrust balancing enabled	Балансировка тяги включена
+Mouse Director enabled	Управление мышью включено
+Mouse Director disabled	Управление мышью отключено
+Cruise Flight enabled	Крейсерский полёт включён
+Cruise Flight disabled	Крейсерский полёт отключён
+CF key input mode disabled	Режим ввода клавиш (круиз) отключён
+CF key input mode enabled	Режим ввода клавиш (круиз) включён
+Vertical motion control disabled	Управление верт. перемещением отключено
+Vertical motion control enabled	Управление верт. перемещением включено
+AoA-hold enabled	Удержание угла атаки включено
+AoA-hold disabled	Удержание угла атаки отключено
+Pitch moderation disabled	Ограничение тангажа отключено
+Pitch moderation enabled	Ограничение тангажа включено
+Speed control disabled	Управление скоростью отключено
+Speed control enabled	Управление скоростью включено
+Standard Fly-By-Wire enabled	Стандартная ЭДСУ включена
+Standard Fly-By-Wire disabled	Стандартная ЭДСУ отключена
+Rocket mode disabled	Режим ракеты отключён
+Rocket mode enabled	Режим ракеты включён
+Moderation disabled	Ограничение отключено
+Moderation enabled	Ограничение включено
+Coord turn disabled	Координированный разворот отключён
+Coord turn enabled	Координированный разворот включён
+Autopilot module manager enabled	Менеджер модулей автопилота включён
+Autopilot module manager disabled	Менеджер модулей автопилота отключён
+Waypoint reached	Путевая точка достигнута
+No target to select	Нет цели для выбора
+No waypoint available	Путевая точка не задана
+Waypoint selected	Путевая точка выбрана
+No high-level autopilot modules were found	Модули автопилота верхнего уровня не найдены
+Can't pick waypoint when the Cruise Flight controller is disabled	Нельзя выбрать путевую точку — контроллер крейсерского полёта отключён
+Can't select target when the Cruise Flight controller is disabled	Нельзя выбрать цель — контроллер крейсерского полёта отключён
+Can't select waypoint when the Cruise Flight controller is disabled	Нельзя выбрать точку — контроллер крейсерского полёта отключён
+
+# --- Buttons / toggles / field labels ---
+Pick waypoint	Выбрать точку
+Pick	Выбрать
+Level	Уровень
+Heading	Курс
+Waypoint	Точка
+desired course	желаемый курс
+map:	карта:
+from:	из:
+WPT 	ПТ 
+Vertical motion	Вертикальное перемещение
+Altitude	Высота
+Altitude control	Управление высотой
+Vertical speed control	Управление верт. скоростью
+Flight path angle control	Управление углом траектории
+Advanced options	Дополнительные параметры
+Cancelled	Отменено
+Picked	Выбрано
+Missed	Промах
+Speed control	Управление скоростью
+Speed control toggle	Переключатель управления скоростью
+Use PID	Использовать ПИД
+Use breaks	Использовать тормоза
+use keys	использовать клавиши
+hotkey sensitivity	чувствительность горячих клавиш
+cubic mode	кубический режим
+Rocket mode	Режим ракеты
+Coordinated turn	Координированный разворот
+Master switch	Главный переключатель
+MASTER SWITCH	ГЛАВНЫЙ ВЫКЛЮЧАТЕЛЬ
+Snap wings to level	Выровнять крылья
+Snap angle	Угол защёлкивания
+Wing leveler	Выравнивание крыла
+Write telemetry	Записывать телеметрию
+Csurf output	Выход рул. поверхности
+has csurf	есть рул. поверхности
+desired acc	требуемое ускорение
+ApplyTrim	Применить триммер
+
+# --- Moderation (AoA/G-force/sideslip limiting) ---
+Moderate AoA	Ограничение угла атаки
+Moderate G	Ограничение перегрузки
+Moderate G-force	Ограничение перегрузки
+Moderate Sideslip	Ограничение скольжения
+Moderate side-G	Ограничение боковой перегрузки
+Pitch moderation	Ограничение тангажа
+Moderation	Ограничение
+max AoA	макс. угол атаки
+max G-force	макс. перегрузка
+watch precision mode	отслеживать точный режим
+pitch rate limit	предел скорости тангажа
+roll rate limit	предел скорости крена
+yaw rate limit	предел скорости рыскания
+director strength	интенсивность управления направлением
+
+# --- Cruise Flight (CF) sub-panel ---
+CF keys input mode	Круиз: режим ввода клавиш
+CF vertical control	Круиз: управление по высоте
+CF altitude\vertical speed	Круиз: высота / верт. скорость
+course = 	курс = 
+Altitude = 	Высота = 
+Vert speed = 	Верт. скорость = 
+FPA = 	Угол траектории = 
+
+# --- Fly-By-Wire (FBW) sub-panel ---
+FBW moderation	Ограничение ЭДСУ
+FBW rocket mode	Ракетный режим ЭДСУ
+FBW coord turn	Координированный разворот ЭДСУ
+
+# --- Diagnostics / telemetry column labels ---
+ang vel = 	угл. скорость = 
+ang acc = 	угл. ускорение = 
+AoA = 	Угол атаки = 
+SPD = 	Скорость = 
+pitch	тангаж
+roll	крен
+angular error	угловая ошибка
+angular acc	угловое ускорение
+angular vel	угловая скорость
+output acceleration	выходное ускорение
+output	выход
+authority	эффективность управления
+Input deriv limit	Предел производной ввода
+Max v construction	Макс. скорость (расчёт)
+DEBUG desired_v	ОТЛАДКА: desired_v
+quadr Kp	Kp (квадратичный)
+pid_Kp	Kp (ПИД)
+pid_Ki	Ki (ПИД)
+pid_Kd	Kd (ПИД)
+strength	интенсивность
+strength_mult	множитель интенсивности
+max value decay	макс. затухание значения
+linear criteria	критерий линейности
+max age	макс. возраст
+linear decay factor	коэфф. линейного затухания
+nonlinear decay factor	коэфф. нелинейного затухания
+zero immediate	мгновенное обнуление
+base gen weight	базовый вес генерации
+break spd margin %	запас скорости торможения, %
+
+# --- Vessel-model / thrust-balancing panel ---
+Thrust balancing	Балансировка тяги
+Lift acc	Ускорение подъёмной силы
+Slide acc	Боковое ускорение
+Vessel mass	Масса корабля
+Reaction wheels	Маховики
+RCS pos	RCS (полож.)
+RCS neg	RCS (отриц.)
+
+# --- AtmosphereAutopilot.UI.dll (Unity Canvas UI: status line text, keep-direction label) ---
+DISABLED	ОТКЛЮЧЕНО
+FLYBYWIRE	ЭДСУ
+CRUISECTRL	КРУИЗ-КОНТРОЛЬ
+MOUSEDIR	МЫШЬ
+picking waypoint	выбор путевой точки
+keep direction	сохранять направление

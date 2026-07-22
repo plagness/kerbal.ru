@@ -1,0 +1,174 @@
+# Scatterer — русская локализация UI (окна настроек океана/атмосферы/солнца)
+# Формат: Английский<TAB>Русский. Извлечено из Scatterer.dll (strings + IL-анализ ldstr).
+
+# --- Главное окно / вкладки ---
+Planet settings	Настройки планеты
+Sunflare settings	Настройки солнечного блика
+Atmosphere	Атмосфера
+Ocean	Океан
+Config points	Точки конфигурации
+Planet:	Планета:
+Map EVE clouds	Отобразить облака EVE
+Toggle WireFrame	Переключить каркасный режим
+Reload shader bundles	Перезагрузить пакеты шейдеров
+Quality Presets	Пресеты качества
+Customize Settings	Настроить параметры
+Current preset:	Текущий пресет:
+Apply preset	Применить пресет
+Scattering	Рассеяние
+Sunflare	Солнечный блик
+Lighting	Освещение
+Shadows	Тени
+EVE Clouds	Облака EVE
+Misc	Прочее
+Misc.	Прочее.
+Menu scroll section height	Высота прокручиваемой области меню
+.cfg file used (display only):	Используемый .cfg-файл (только для отображения):
+.cfg file used:	Используемый .cfg-файл:
+ModuleManager patch detected, saving disabled	Обнаружен патч ModuleManager, сохранение отключено
+
+# --- Misc/качество/производительность ---
+Legacy terrain godrays (Requires long-distance shadows and shadowMapResolution override, Directx11 only)	Лучи солнца сквозь рельеф (старый метод) (требует дальних теней и переопределения shadowMapResolution, только DirectX11)
+Temporal Antialiasing (TAA), can combine with SMAA	Временное сглаживание (TAA), можно сочетать с SMAA
+Stationary blending	Смешение в стационарном режиме
+   Motion blending	   Смешение в движении
+   Sample spread	   Разброс сэмплов
+   Sharpness	   Резкость
+Disable TAA below framerate threshold (when SMAA is enabled)	Отключать TAA ниже порога FPS (если включён SMAA)
+Subpixel Morphological Antialiasing (SMAA), can combine with TAA	Субпиксельное морфологическое сглаживание (SMAA), можно сочетать с TAA
+SMAA quality (1:normal,2:high)	Качество SMAA (1: обычное, 2: высокое)
+Tonemapper (0:disabled,1:bruneton,2:uncharted)	Тонмаппер (0: выкл, 1: bruneton, 2: uncharted)
+Use low resolution atmosphere (for slower machines that get white atmos)	Использовать атмосферу в низком разрешении (для слабых машин, у которых атмосфера становится белой)
+Ocean shaders	Шейдеры океана
+Fourier grid size (64:fast,128:normal,256:HQ)	Размер сетки Фурье (64: быстро, 128: обычно, 256: высокое качество)
+Mesh resolution (pixels covered by a mesh quad, lower is better but slower)	Разрешение сетки (пикселей на квад сетки; меньше — лучше, но медленнее)
+Transparency and refractions	Прозрачность и преломления
+Foam	Пена
+Sky reflections	Отражения неба
+Surface receives shadows	Поверхность принимает тени
+Secondary lights compatibility (huge performance hit when lights on)	Совместимость с дополнительными источниками света (сильно снижает производительность при включении)
+Underwater caustics	Подводные каустики
+Underwater light rays	Подводные лучи света
+Waves interact with ships (Requires asyncGPU readback, Directx11 only)	Волны взаимодействуют с кораблями (требует asyncGPU readback, только DirectX11)
+Override water crash tolerance	Переопределить допуск столкновения с водой
+Crash tolerance (default is 1.2)	Допуск столкновения (по умолчанию 1.2)
+Override water drag	Переопределить сопротивление воды
+Override max water recovery velocity	Переопределить макс. скорость восстановления на воде
+Maximum recovery velocity (default is 0.3)	Максимальная скорость восстановления (по умолчанию 0.3)
+Eclipses (WIP, sky/orbit only for now)	Затмения (в разработке, пока только небо/орбита)
+Kopernicus ring shadows (linear only, tiled rings not supported)	Тени колец Kopernicus (только линейные, тайловые кольца не поддерживаются)
+Disable scaled space ambient light	Отключить фоновое освещение в масштабированном пространстве
+Sunlight extinction (direct sun light changes color with sunset/dusk)	Затухание солнечного света (прямой свет меняет цвет на закате/в сумерках)
+Dim light underwater	Приглушённый свет под водой
+1.9+ Directx11 flickering shadows fix (recommended for 1.9, 1.10)	Фикс мерцания теней DirectX11 для 1.9+ (рекомендуется для 1.9, 1.10)
+Long-Distance Terrain shadows	Дальние тени рельефа
+[Inactive] 	[Неактивно]
+[Active] 	[Активно]
+Shadows Distance (in meters):	Дальность теней (в метрах):
+Shadowmap resolution (power of 2, zero for no override):	Разрешение карты теней (степень двойки, 0 — без переопределения):
+Shadow cascade splits (zeroes for no override):	Разбиение каскадов теней (нули — без переопределения):
+Shadow bias (0 for no override)	Смещение теней (0 — без переопределения)
+Normal bias (0 for no override)	Смещение нормалей (0 — без переопределения)
+Lens flare shader	Шейдер блика объектива
+Integrate effects with EVE clouds (may require restart)	Интегрировать эффекты с облаками EVE (может потребоваться перезапуск)
+Override Near ClipPlane (not recommended - restart on disable)	Переопределить ближнюю плоскость отсечения (не рекомендуется — при отключении нужен перезапуск)
+Use dithering (Reduces color banding in sky and scattering, disable if you notice dithering patterns	Использовать дизеринг (уменьшает цветовые полосы в небе и рассеянии; отключите, если заметны паттерны дизеринга)
+
+# --- Sunflare ---
+Edit Selected	Редактировать выбранное
+Reimport	Повторный импорт
+Apply	Применить
+Sun	Солнце
+Copy to clipboard	Скопировать в буфер обмена
+Print to Log	Вывести в лог
+
+# --- Config points / Atmosphere tuning ---
+New point altitude:	Высота новой точки:
+Add	Добавить
+Config point:	Точка конфигурации:
+Delete	Удалить
+Point altitude	Высота точки
+(settings with a * are global and not cfgPoint dependent)	(настройки с * общие и не зависят от конфигурационной точки)
+Sky	Небо
+Sky Alpha	Альфа неба
+Sky Extinction Tint	Оттенок затухания неба
+Scattering and Extinction	Рассеяние и затухание
+Extinction Thickness (scaled+local)	Толщина затухания (масштаб+локально)
+Noon Sunlight Extinction strength*	Сила затухания полуденного солнечного света*
+Post Processing	Постобработка
+Post Processing Alpha	Альфа постобработки
+Post Processing Depth	Глубина постобработки
+Godrays	Лучи солнца сквозь облака
+Legacy Godrays strength*	Сила лучей солнца (старый метод)*
+Set	Установить
+EVE integration	Интеграция с EVE
+2d Cloud Sky irradiance Multiplier*	Множитель освещённости 2D-облаков от неба*
+Particle Volumetrics Color Multiplier*	Множитель цвета объёмных частиц*
+Preserve 2d cloud colors*	Сохранять цвета 2D-облаков*
+Toggle	Переключить
+ScaledSpace model	Модель ScaledSpace
+RimBlend*	RimBlend (смешение обводки)*
+RimPower*	RimPower (сила обводки)*
+Spec*: R	Блик*: R
+shine*	блеск*
+Flatten scaled mesh	Сгладить масштабированную сетку
+Adjust scaled texture	Настроить масштабированную текстуру
+Land (brightness/contrast/saturation)	Суша (яркость/контраст/насыщенность)
+Ocean (brightness/contrast/saturation)	Океан (яркость/контраст/насыщенность)
+Current state:Lowest configPoint, cfgPoint 0	Текущее состояние: самая нижняя точка конфигурации, cfgPoint 0
+Save atmo	Сохранить атмосферу
+Load atmo	Загрузить атмосферу
+Save ocean	Сохранить океан
+Load ocean	Загрузить океан
+Apply settings/Rebuild ocean	Применить настройки/Пересоздать океан
+
+# --- Atmosphere config point details ---
+Atmosphere start radius     	Начальный радиус атмосферы
+Scale start radius	Начальный радиус масштабирования
+Atmo height (auto)	Высота атмосферы (авто)
+Rayleigh Scattering - Beta_R:	Рассеяние Рэлея — Beta_R:
+Thicken	Утолщение
+Go	Перейти
+Mie Scattering - Beta_MSca:	Рассеяние Ми — Beta_MSca:
+Mie G (Mie phase function asymmetry)	Mie G (асимметрия фазовой функции Ми)
+Rayleigh density scale height	Высота масштабирования плотности Рэлея
+HR (in KM)	HR (в км)
+Mie density scale height	Высота масштабирования плотности Ми
+HM (in KM)	HM (в км)
+Ozone absorption:	Поглощение озоном:
+Ozone layer altitude (km)	Высота озонового слоя (км)
+Ozone layer falloff/extents (km)	Спад/протяжённость озонового слоя (км)
+Auto rescale	Автомасштабирование
+Average ground reflectance	Средняя отражающая способность поверхности
+Generate	Сгенерировать
+Delete atmo cache	Удалить кэш атмосферы
+
+# --- Ocean physical model (ModularGUI panel) ---
+To apply press "rebuild ocean" and wait	Чтобы применить, нажмите «Пересоздать океан» и подождите
+Keep in mind this saves your current settings	Учтите: это сохранит ваши текущие настройки
+Waves physical model settings	Настройки физической модели волн
+Wave amplitude (AMP)	Амплитуда волн (AMP)
+Wind Speed (m/s)	Скорость ветра (м/с)
+Omega (inverse wave age)	Omega (обратный возраст волны)
+Gravity (m/s², set to 0 for auto)	Гравитация (м/с², 0 — автоматически)
+Off screen vertex coverage (Increase with big waves)	Покрытие вершин за экраном (увеличьте при больших волнах)
+Surface shading settings	Настройки затенения поверхности
+Transparency Depth	Глубина прозрачности
+Foam strength (m_whiteCapStr)	Сила пены (m_whiteCapStr)
+Shore/shallow foam strength	Сила пены у берега/на мелководье
+Far foam strength (m_farWhiteCapStr)	Сила дальней пены (m_farWhiteCapStr)
+Far foam strength radius (alphaRadius)	Радиус дальней пены (alphaRadius)
+Sky reflection strength	Сила отражения неба
+Underwater shading Settings	Настройки подводного затенения
+Refraction Index	Коэффициент преломления
+Darkness Depth	Глубина затемнения
+Caustics/lightrays Settings	Настройки каустики/лучей света
+Caustics texture path	Путь к текстуре каустики
+Caustics texture multiply	Множитель текстуры каустики
+Caustics underwater light boost	Усиление подводного света от каустики
+Caustics minimum brightness (of dark areas in the caustics texture)	Минимальная яркость каустики (тёмных участков текстуры каустики)
+Caustics blur depth	Глубина размытия каустики
+Light rays strength	Сила лучей света
+Performance settings	Настройки производительности
+Current fourierGridSize (change from KSC menu): 	Текущий fourierGridSize (изменяется из меню КЦК):
+Current mesh resolution (change from KSC menu): 	Текущее разрешение сетки (изменяется из меню КЦК):

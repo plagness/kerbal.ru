@@ -1,0 +1,109 @@
+# ProceduralParts — procedural tank/part shape & size editor.
+#
+# METHOD NOTE: unlike RCSBuildAid, almost none of this mod's field labels are
+# ldstr literals passed to GUILayout.Label. ProceduralParts is a modern
+# KSPField-based part module: labels like "Diameter"/"Length"/"Fillet" are
+# compile-time literals baked as NAMED ARGUMENTS inside the KSPField /
+# UI_FloatEdit / UI_Toggle custom-attribute blobs (e.g. [KSPField(guiName =
+# "Fairing", guiUnits = "m", groupDisplayName = "ProceduralParts")]), which
+# `strings`/plain ldstr search cannot see at all (they're stored as .NET
+# custom-attribute metadata, not IL instructions). Had to write a small
+# custom-attribute-blob decoder (ECMA-335 §II.23.3) over the monodis IL dump
+# to pull guiName/guiUnits/groupDisplayName/enabledText/disabledText out of
+# ~70 attribute blobs. These strings DO reach UnityEngine.UI.Text.text at
+# runtime (KSP's stock Part Action Window reads them via reflection and
+# assigns them into a UI Text component), so they are legitimate, high-value
+# targets for the translator even though they never appear as `ldstr`.
+#
+# A handful of remaining entries (Shape, Close, Decoupler/Separator toggle,
+# Show/Hide toggle, Enabled/Disabled toggle) came from ordinary ldstr ->
+# GUILayout/BaseField.set_guiName call sites in the DLL.
+#
+# BONUS: the Bezier-cone "Style:" dropdown preset names (Straight, Round #1,
+# Round #2, Round #3, Peaked #1, Peaked #2, Sharp #1, Sharp #2, Waisted) and
+# the "Custom" fallback are not in the DLL at all — they are read at runtime
+# from GameData/ProceduralParts/ProceduralParts.cfg (ProceduralPartsSettings
+# -> Shape { name / displayName }). Included here since they're shown in the
+# very same shape editor and match the mod's own displayName casing.
+#
+# Skipped (not real UI, confirmed by tracing call sites):
+# - "Diameter"/"Shape" ldstr occurrences used purely as ConfigNode section
+#   keys or dictionary keys (same English word, different, non-UI call site
+#   — harmless duplicate, only one dictionary entry needed either way).
+# - "Both" (PartResource.flowMode value), "Original" (default texture-set
+#   id), "Custom"-as-comparison, "Follower:" (GameObject naming) — internal
+#   identifiers/log strings, not label text shown to the player.
+# - "F0"/"F1"/"F4" — .NET numeric format specifiers passed to
+#   KSPUtil.LocalizeNumber()/float.ToString(), never the actual rendered text.
+# - guiUnits symbols (m, kN, s, K/s, #, °, " kN*s") — universal SI/keyboard
+#   symbols, no translation needed; "T" (tonnes) also skipped — a single
+#   capital letter is too high-collision-risk to safely swap game-wide.
+# - "Isp" — kept in English by RU KSP-community convention, same as
+#   RCSBuildAid's TWR/Vac/ASL/Vt.
+# - Hundreds of Debug.Log-only strings, shader/property names
+#   (_BumpMap, _MainTex...), reflection field names (bottomDiameter,
+#   curve_x...), and exception messages — never reach a GUI text sink.
+
+Bottom	Низ
+Bottom D	Диам. низа
+Bottom diameters	Диаметры низа
+Burn Time	Время работы
+Circumdiameter	Описанный диаметр
+Corners	Углы
+Curve	Кривая
+Curve.w	Кривая.w
+Curve.x	Кривая.x
+Curve.y	Кривая.y
+Curve.z	Кривая.z
+Deflection	Отклонение
+Diameter	Диаметр
+Diameters	Диаметры
+Ends Texture	Текстура торцов
+Fairing	Обтекатель
+Fillet	Скругление
+Heat	Тепло
+Impulse	Импульс
+Inner	Внутренний
+Legacy Textures	Старые текстуры
+Length	Длина
+Mass	Масса
+Offset	Смещение
+Offset Angle	Угол смещения
+Outer	Внешний
+Rod D	Диам. стержня
+Rods	Стержни
+SRB Type	Тип РДТТ
+Shape	Форма
+Stringer Mass	Масса стрингеров
+Style:	Стиль:
+Symmetrical rods	Симметричные стержни
+Tank Type	Тип топлива
+Texture	Текстура
+Texture Selector GUI	Окно выбора текстуры
+Thrust	Тяга
+Tilt Angle	Угол наклона
+Top	Верх
+Top D	Диам. верха
+Top diameters	Диаметры верха
+Volume	Объём
+cost	Стоимость
+ProceduralParts	Процедурные детали
+ProceduralSRB	Процедурный РДТТ
+TankContentSwitcher	Переключатель содержимого бака
+Enabled	Включено
+Disabled	Отключено
+Show	Показать
+Hide	Скрыть
+Decoupler	Разделитель ступени
+Separator	Сепаратор
+Close	Закрыть
+Straight	Прямой
+Round #1	Круглый №1
+Round #2	Круглый №2
+Round #3	Круглый №3
+Peaked #1	Заострённый №1
+Peaked #2	Заострённый №2
+Sharp #1	Острый №1
+Sharp #2	Острый №2
+Waisted	С перетяжкой
+Custom	Свой

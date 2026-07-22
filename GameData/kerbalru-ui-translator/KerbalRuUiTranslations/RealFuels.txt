@@ -1,0 +1,91 @@
+# RealFuels — UI strings extracted from RealFuels.dll: the tank-type/propellant configuration
+# window (ModuleFuelTanks / RealFuelsWindow — tank type switcher, volume bar, wet/dry mass), the
+# engine-config GUI with its reliability simulation charts (RFEngineConfigGUI — survival
+# probability vs. burn time, failure-probability heatmap), and the Master-Status-Display-style
+# column headers used by both.
+#
+# Method: `monodis --userstrings` for the raw string heap, then a full IL disassembly
+# (`monodis --output`, KSP's Managed/ dir on MONO_PATH) to check what each candidate ldstr
+# actually feeds:
+#   - kept when passed directly to RealFuelsWindow.MassCell/SetTooltip, stored as its own
+#     string[] array element (table/legend/tab-name arrays — e.g. the Failure Risk legend, the
+#     Min%/Ignition%/Pres-Fed/0-DU/Max-DU column-header array, the R&D/Settings KSC-window tab
+#     array), returned whole from a GetModuleTitle()-style override, or used as a PopupDialog
+#     title.
+#   - dropped when immediately combined via string::Concat/Format with a run-time value before
+#     display (e.g. "  Gimbal " + Gimbal.Info() into a StringBuilder, "Requires: " + techName,
+#     "Surv@" + FormatBurnTimeDisplay(...)) — confirmed by tracing the IL, since the text the UI
+#     actually receives always differs from the bare literal.
+# Also skipped: the #RF_* Localizer keys (RealFuels' own Localization/*.cfg owns those — this
+# file only covers text hardcoded straight into IL), B9PartSwitch/TestFlightCore reflection
+# type-name strings, *RFMEC*/[RF]/[MFS]/[MFT] Debug-log-only diagnostics and exceptions, ConfigNode
+# parsing errors, ullage/gimbal ConfigNode key names, ModuleManager patch identifiers, and a
+# module-name string compared with string::Equals (internal logic, never shown as text).
+
+# --- Compatibility-checker popup (shared boilerplate, also fires from RealFuels' own copy) ---
+Incompatible Mods Detected	Обнаружены несовместимые моды
+
+# --- Engine right-click menu / bimodal-engine mode info ---
+Perf. Loss	Потери произв.
+Reduced Thrust	Сниженная тяга
+Explode	Взрыв
+
+# --- Engine reliability config GUI (RFEngineConfigGUI) — simulation chart ---
+Survival Probability vs Burn Time	Вероятность выживания от времени работы
+Failure Probability Heatmap	Тепловая карта вероятности отказа
+Time to Reach Survival %	Время до достижения вероятности выживания, %
+Burn Time	Время работы
+Survival Probability %	Вероятность выживания, %
+Data Units (DU)	Единицы данных (DU)
+Failure Risk	Риск отказа
+< 5% (Safe)	< 5% (Безопасно)
+> 30% (High)	> 30% (Высокий)
+0 Data	0 данных
+Current Data	Текущие данные
+Max Data	Макс. данные
+Show Sim	Показать симуляцию
+Hide Sim	Скрыть симуляцию
+Show Chart	Показать график
+Hide Chart	Скрыть график
+No reliability data available for this configuration.	Нет данных о надёжности для этой конфигурации.
+RCS thrusters do not use burn-cycle reliability data.	RCS-двигатели не используют данные о надёжности по циклам работы.
+Column Settings	Настройки столбцов
+Min%	Мин.%
+Ignition %	Запуск, %
+Max-DU	Макс-DU
+Font Scale	Масштаб шрифта
+Pres-Fed	Вытесн.подача
+Ign%	Зап.%
+<color=#FFEB3B>Gnd</color>	<color=#FFEB3B>Зем</color>
+Simulate:	Симуляция:
+Survival %:	Выживаемость, %:
+Burn Time (s):	Время работы (с):
+Burn Time (m:ss):	Время работы (мин:с):
+Data (du):	Данные (du):
+Include Ignition	Учитывать запуск
+# of Engines:	Кол-во двигателей:
+Set to Current du	Установить текущее (du)
+Starting DU	Начальный DU
+Current DU	Текущий DU
+Max DU	Макс. DU
+No valid engine	Нет подходящего двигателя
+
+# --- Fuel tank type/volume configuration window (ModuleFuelTanks / RealFuelsWindow) ---
+Modular Fuel Tank	Модульный топливный бак
+PROPELLANT CONFIGURATION	КОНФИГУРАЦИЯ ТОПЛИВА
+WINDOW SETTINGS	НАСТРОЙКИ ОКНА
+WINDOW WIDTH	ШИРИНА ОКНА
+UI SCALE	МАСШТАБ ИНТЕРФЕЙСА
+Scale affects font sizes and row heights.	Масштаб влияет на размер шрифта и высоту строк.
+TANK VOLUME	ОБЪЁМ БАКА
+WET MASS	МАССА С ТОПЛИВОМ
+DRY MASS	СУХАЯ МАССА
+REMOVE ALL	УДАЛИТЬ ВСЁ
+0s	0с
+Double the volume of all unlocked resources, capped at available space.	Удвоить объём всех разблокированных ресурсов, ограничено доступным пространством.
+# NOTE: the runtime string below has two embedded *real* newline characters (SetTooltip
+# argument built as "...capacity.\nLocked...\nReserve..."). A literal newline can't be
+# represented as a dictionary key in this line-based TAB file (File.ReadAllLines would split
+# it and corrupt the entry), so this can never actually match — kept only as a best-effort
+# single-line fallback in case the same sentence is ever reused unprefixed elsewhere.
+Fill all unlocked resources proportionally to capacity. Locked resources are untouched. Reserve space is respected.	Заполнить все разблокированные ресурсы пропорционально вместимости. Заблокированные ресурсы не затрагиваются. Резервное пространство учитывается.

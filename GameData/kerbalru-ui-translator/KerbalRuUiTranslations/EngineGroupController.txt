@@ -1,0 +1,23 @@
+# EngineGroupController — панель группировки двигателей и ограничения тяги в полёте
+# (часть Realism Overhaul). Собственный GUI на базе стороннего UnityGUIFramework
+# (asmitech.com), окна описаны embedded-XML-ресурсами (EngineFlightUI.xml,
+# EngineGroupNameUI.xml) внутри самой DLL.
+# Извлечено: строки из #US-кучи (UTF-16LE ldstr) + текстовые атрибуты Text=""
+# встроенных XML-ресурсов + guiName полей/событий KSPField/KSPEvent.
+#
+# Пропущено намеренно:
+# - Debug.Log-сообщения ("OnVesselWasModified called on...", "Creating a group
+#   {0}", "Cleaning group {0}: {1} engine(s)" и т.п.) — разработческая диагностика.
+# - "EGN_LOCK" — служебный ключ InputLockManager, не текст.
+# - Имена файлов/классов/полей (EngineFlightUI.xml как идентификатор ресурса,
+#   EngineGroupModule, EngineGroupController и т.п.).
+
+Engine Groups Controller	Контроллер групп двигателей
+No engine groups defined.	Группы двигателей не заданы.
+Engine Group Id	ID группы двигателей
+Group ID:	ID группы:
+OK	ОК
+Cancel	Отмена
+Assign Group ID	Назначить ID группы
+Clear Group ID	Очистить ID группы
+Engine Group ID is 	ID группы двигателей: 

@@ -1,0 +1,29 @@
+# FShangarExtender (HangerExtenderExtended.dll) — категория "Hangar Extender" в меню
+# Difficulty Options/Settings, окно настройки хоткея и диалог ошибки установки.
+# Извлечено дизассемблированием IL (monodis) HangerExtenderExtended.dll.
+#
+# "Hangar Extender" / "General Settings" — Section/DisplaySection/Title класса, реализующего
+# GameParameters.CustomParameterNode: рендерятся стоковым меню настроек KSP через UnityEngine.UI.Text
+# (перехватывается патчем Text.text-сеттера).
+#
+# ВАЖНО, найдено при разборе: "EVA Fuel Settings" — заголовок окна хоткея (передаётся 4-м
+# аргументом в GUILayout.Window). Сам KerbalRuUiTranslator.cs НЕ патчит GUI.Window/GUILayout.Window
+# (только Label/Button/Box/Toggle/GUIContent/UI.Text) — значит заголовки окон сейчас в принципе
+# не перехватываются, независимо от содержимого словаря. Запись ниже оставлена как задел на
+# будущее (когда/если патч на Window добавят), сейчас она неактивна. Само название "EVA Fuel
+# Settings" в этом окне — вероятно, скопированная из другого проекта заглушка автора мода
+# (в реальности это настройка хоткея показа/скрытия Hangar Extender, не топлива EVA), переведено
+# дословно как есть в оригинале, а не "исправлено" по смыслу.
+#
+# Пропущено: все "advancedDebug(...)"-строки (Detach Nodes, Reattaching Node, update Button,
+# extend/shrink scene и т.д. — это Debugger-логи, не GUI), пути текстур, ключи конфигурации,
+# конкатенированный текст диалога об ошибке установки (динамически дополняется списком путей —
+# точное совпадение с ним невозможно в принципе, переведён только статичный заголовок).
+
+Hangar Extender	Расширитель ангара
+General Settings	Общие настройки
+Enter desired hotkey: 	Введите нужную клавишу:
+OK	ОК
+Incorrect Hangar Extender Installation	Неверная установка «Расширителя ангара»
+# Заголовок окна — см. пояснение выше, пока не перехватывается патчем.
+EVA Fuel Settings	Настройки топлива EVA

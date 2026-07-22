@@ -1,0 +1,151 @@
+# RealAntennas -- UI translation dictionary for kerbalru-ui-translator
+# Format: English<TAB>Russian. Exact-string match only (see docs/MAINTAINING.md and
+# tools/ui-translator/src/KerbalRuUiTranslator.cs). Extracted from RealAntennas.dll
+# (ldstr literals in the #US heap + KSPField/KSPEvent attribute strings).
+Antenna Targeting	Наведение антенны
+Antenna Planning	Планирование антенны
+Debug Antenna	Отладка антенны
+Disable antenna permanently	Отключить антенну навсегда
+Condition	Состояние
+Enabled	Включено
+Disabled	Отключено
+Permanently shutdown	Отключено навсегда
+Broken	Неисправно
+<color=red><b>Disabled</b></color>	<color=red><b>Отключено</b></color>
+<color=green>Enabled</color>	<color=green>Включено</color>
+Gain	Усиление
+ dBi	 дБи
+ dBm	 дБм
+Transmit Power (dBm)	Мощность передачи (дБм)
+Tech Level	Уровень технологий
+<color=yellow>Tech Level</color>	<color=yellow>Уровень технологий</color>
+<color=orange>Tech Level</color>	<color=orange>Уровень технологий</color>
+RF Band	РЧ-диапазон
+Power (Active)	Мощность (активна)
+Power (Idle)	Мощность (ожидание)
+Antenna Target	Цель антенны
+Active Transmission Time	Время активной передачи
+-Band	-диапазон
+Apply Minimum Dish Distance	Учитывать минимальную дистанцию тарелки
+"Antenna Cones" directional antennas cannot point at a target that is too close.	«Конусы антенн»: направленные антенны не могут навестись на слишком близкую цель.
+Performance UI Button	Кнопка UI производительности
+Enable / Disable RealAntennas UI (shows performance metrics), also MOD+I	Включить/выключить UI RealAntennas (показывает метрики производительности), также MOD+I
+Periodic Debug Logging	Периодическое отладочное логирование
+Dump RealAntennas state on interval for debugging.	Периодически выгружать состояние RealAntennas в лог для отладки.
+Periodic Debug Interval	Интервал отладочного логирования
+Interval (sec) at which to send RealAntennas state data to debug log.	Интервал (сек), с которым состояние RealAntennas отправляется в лог отладки.
+Maximum Min Dish Distance	Максимум мин. дистанции тарелки
+Beyond this distance, a directional antenna can always point at a target.	За пределами этой дистанции направленная антенна всегда может навестись на цель.
+Maximum Tech Level	Максимальный уровень технологий
+Rescale transmission rate for stock science	Масштабировать скорость передачи стоковой науки
+Multiplier to transmission rate for stock science.  Available for balancing purposes: turn it down if science transmits too quickly, or up if too slowly.	Множитель скорости передачи для стоковой науки.  Служит для баланса: уменьшите, если наука передаётся слишком быстро, увеличьте — если слишком медленно.
+Yes	Да
+Disable antenna	Отключить антенну
+Are you sure you want to permanently disable the antenna? Doing this will prevent it from consuming power but the operation is irreversible.	Вы уверены, что хотите навсегда отключить антенну? Это остановит потребление энергии, но действие необратимо.
+Antenna Debugger: 	Отладчик антенны: 
+<color=green>Omni-directional</color>: {0:F1} dBi	<color=green>Всенаправленная</color>: {0:F1} дБи
+Ground Station TechLevel: {0:F0}	Уровень технологий наземной станции: {0:F0}
+Ground Station (Planning) TechLevel: {0}	Уровень технологий наземной станции (план): {0}
+Apply	Применить
+Set Ground Station TL to {0} and reset Home antenna to {1}	Установить уровень технологий наземной станции {0} и сбросить домашнюю антенну на {1}
+Ground Station Sort Order: 	Порядок сортировки наземных станций: 
+Desc.	По убыв.
+Asc.	По возр.
+Antenna Selection	Выбор антенны
+Primary	Основная
+Peer	Партнёр
+Remote Body Presets	Пресеты небесного тела
+Parameters	Параметры
+Primary Antenna: {0} {1}	Основная антенна: {0} {1}
+Peer Antenna: {0} {1}	Антенна партнёра: {0} {1}
+Distance Max:	Макс. дистанция:
+Distance Min:	Мин. дистанция:
+Plan!	План!
+Show Details	Показать подробности
+Close	Закрыть
+TARGET	ЦЕЛЬ
+Planning Antenna Debugger: 	Отладчик планирования антенны: 
+Tx/Rx rate at max distance: 	Скорость Tx/Rx на макс. дистанции: 
+Tx/Rx rate at min distance: 	Скорость Tx/Rx на мин. дистанции: 
+  <color=orange><b>(No Connection)</b></color>	  <color=orange><b>(Нет соединения)</b></color>
+<color=orange><b>(No Connection)</b></color>	<color=orange><b>(Нет соединения)</b></color>
+RealAntennas Settings	Настройки RealAntennas
+iter: {0} TimePerRun: {1:F2} ms	итер: {0} Время/запуск: {1:F2} мс
+Vessels: {0}	Кораблей: {0}
+GroundStations: {0}	Наземных станций: {0}
+Antennas/vessel: {0:F1}	Антенн на корабль: {0:F1}
+Name	Имя
+Iterations	Итерации
+Avg Time (ms)	Ср. время (мс)
+Runs/sec	Запусков/с
+Pathfinding	Поиск пути
+Network Rebuild Complete	Пересборка сети завершена
+EarlyRebuild	Ранняя пересборка
+Precompute LateRebuild	Предрасчёт (поздняя пересборка)
+Full LateRebuild	Полная поздняя пересборка
+Rebuild	Пересборка
+Hide Config Window	Скрыть окно настроек
+Show Config Window	Показать окно настроек
+Launch Control Console	Открыть консоль управления
+Close Control Console	Закрыть консоль управления
+Vessel: 	Корабль: 
+Antenna: 	Антенна: 
+Band: {0}       Power: {1}dBm	Диапазон: {0}       Мощность: {1}дБм
+Target: {0}	Цель: {0}
+Target Mode: 	Режим цели: 
+Antenna Control Center	Центр управления антенной
+Sort Mode: {0}	Режим сортировки: {0}
+Target	Цель
+Debug	Отладка
+Az/El: {0:F1}/{1:F1}	Аз/Эл: {0:F1}/{1:F1}
+OrbitRelative: {0:F1}/{1:F1}	Относительно орбиты: {0:F1}/{1:F1}
+Invalid	Некорректно
+Debugging {0}	Отладка {0}
+Connection Debugger	Отладчик соединения
+Transmitter	Передатчик
+(null)	(нет)
+ on 	 на 
+Power: {0}dBm	Мощность: {0}дБм
+Position: {0:F0}, {1:F0}, {2:F0}	Позиция: {0:F0}, {1:F0}, {2:F0}
+Beamwidth (3dB full-width): {0:F2}	Ширина луча (полная по уровню 3 дБ): {0:F2}
+Antenna AoA: {0:F1}	Угол прихода сигнала: {0:F1}
+Receiver	Приёмник
+Received Power: {0}dBm	Принятая мощность: {0}дБм
+Antenna Elevation: {0:F1}	Угол места антенны: {0:F1}
+Noise	Шум
+Atmosphere: {0:F0}K	Атмосфера: {0:F0}K
+Body: {0:F0}K	Тело: {0:F0}K
+Receiver: {0:F0}K	Приёмник: {0:F0}K
+Total Noise: {0:F2}K	Общий шум: {0:F2}K
+Losses	Потери
+Path Loss: {0}m ({1:F1}dB)	Потери в тракте: {0}м ({1:F1}дБ)
+Pointing Loss: {0:F1}dB  (Tx: {1:F1}dB + Rx:  {2:F1}dB)	Потери наведения: {0:F1}дБ  (Tx: {1:F1}дБ + Rx:  {2:F1}дБ)
+Link Budget	Энергетический бюджет канала связи
+RxPower = TxGain ({0:F1} dBi) + TxPower ({1:F1} dBm) - Losses ({2:F1} dB) + RxGain ({3:F1} dBi) = {4:F1} dBm	RxPower = TxGain ({0:F1} дБи) + TxPower ({1:F1} дБм) - Потери ({2:F1} дБ) + RxGain ({3:F1} дБи) = {4:F1} дБм
+Min Link Channel Noise Power = N0 ({0:F1} dBm/Hz) * Bandwidth ({1}Hz ({2:F1} dB)) = {3:F1} dBm	Мин. шумовая мощность канала = N0 ({0:F1} дБм/Гц) * Полоса пропускания ({1}Гц ({2:F1} дБ)) = {3:F1} дБм
+Encoder: {0}	Кодер: {0}
+Min Link Eb/N0 = RxPower ({0:F1} dBm) - Channel Noise Power ({1:F1} dBm) - Margin ({2:F1} dB) = {3:F1}	Мин. Eb/N0 линии = RxPower ({0:F1} дБм) - Шумовая мощность канала ({1:F1} дБм) - Запас ({2:F1} дБ) = {3:F1}
+Achieved Rate: {0:F1}	Достигнутая скорость: {0:F1}
+Valid Rates: {0:F1} - {1:F1}	Допустимые скорости: {0:F1} - {1:F1}
+Steps: {0}	Шагов: {0}
+  TxP: {0:F1}dBm	  TxP: {0:F1}дБм
+  RxP: {0:F1}dBm	  RxP: {0:F1}дБм
+  Noise:{0:F2}	  Шум:{0:F2}
+  N0:{0:F2}dB/Hz	  N0:{0:F2}дБ/Гц
+ConeMode: {0}	Режим конусов: {0}
+Link End Mode: {0}	Режим концов линий связи: {0}
+TargetLine: {0}	Линия к цели: {0}
+3dB Cones: {0}	Конусы 3 дБ: {0}
+10dB Cones: {0}	Конусы 10 дБ: {0}
+Lat/Lon Format: 	Формат Шир/Долг: 
+Hemisphere	Полушарие
+Signed	Со знаком
+3D Drawing Distance {0:F0}, Max: {1:F1}	Дистанция 3D-отрисовки {0:F0}, макс.: {1:F1}
+Link Line Brightness: {0:F1}	Яркость линий связи: {0:F1}
+Cone Circles	Окружности конусов
+Cone Opacity	Непрозрачность конусов
+Signal (Tx/Rx) : {0:F0}%/{1:F0}%  -  {2}	Сигнал (Tx/Rx) : {0:F0}%/{1:F0}%  -  {2}
+RealAntennas: CommNet Disabled in Difficulty Settings	RealAntennas: CommNet отключён в настройках сложности
+RealAntennas: CommNet enabled, requires scene change to take effect	RealAntennas: CommNet включён, для применения нужна смена сцены
+RealAntennas Antenna Condition upgrader	Обновление состояния антенн RealAntennas
+Update crafts to use new condition enum	Обновляет аппараты для использования нового перечисления состояний

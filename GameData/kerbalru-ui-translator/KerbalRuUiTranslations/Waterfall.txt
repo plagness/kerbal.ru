@@ -1,0 +1,241 @@
+# Waterfall — UI strings extracted from Waterfall.dll (v0.11.0.0). Effect-editor mod, mostly
+# used by advanced players/config authors. Two extraction passes:
+#  1) `strings -a` on the raw DLL (identifiers + custom-attribute display names for the 15
+#     controller types, e.g. [ControllerUIOptions("Gimbal")] style annotations -> UTF-8 attribute blob).
+#  2) A custom UTF-16LE scanner (macOS `strings` cannot see .NET ldstr literals, which are UTF-16)
+#     for the actual GUILayout.Label/Window text used throughout the in-game effect editor.
+# Skipped by design: type/method/field identifiers, ConfigNode section/key names (CONTROLLER,
+# EFFECTTEMPLATE, MODULE, engineID, etc. — these are .cfg schema keywords, not on-screen text),
+# Debug.Log-only diagnostic/error messages ("[XController]: Could not find..."), shader/particle
+# property ids (_MainTex, _Intensity...), .pdb paths, version/GUID/copyright metadata, and any
+# string.Format template containing {0}-style placeholders (the substituted runtime text never
+# equals the template verbatim, so such entries could never produce an exact match). Strings with
+# an embedded literal newline are also skipped: the loader reads the file with File.ReadAllLines
+# before it ever looks for the tab delimiter, so a dictionary line can't itself contain a newline.
+
+
+# --- Controller type display names (Add Controller dropdown) ---
+Atmosphere Density	Плотность атмосферы
+Custom (Pull)	Пользовательский (считывание)
+Custom (Push)	Пользовательский (запись)
+Engine Event	Событие двигателя
+Engine On State	Состояние двигателя (вкл/выкл)
+Gimbal	Гимбал
+Light	Свет
+Mach	Число Маха
+Randomness	Случайность
+Remap	Переотображение
+Scalar Module (AnimateGeneric)	Скалярный модуль (AnimateGeneric)
+Throttle	Газ
+Thrust	Тяга
+Velocity	Скорость
+DEBUG	ОТЛАДКА
+
+# --- Main window / editor titles ---
+WaterfallFX Editor	Редактор WaterfallFX
+Color Picker	Выбор цвета
+Curve Editor	Редактор кривой
+Gradient Editor	Редактор градиента
+Light Editor	Редактор света
+Material Editor	Редактор материала
+Model Editor	Редактор модели
+Particle System Editor	Редактор системы частиц
+Texture Picker	Выбор текстуры
+Modifier Editor	Редактор модификатора
+Modifier Editor - Light Color Match	Редактор модификатора — соответствие цвета света
+Modifier Editor - Material Color	Редактор модификатора — цвет материала
+Modifier Editor - Material Parameter	Редактор модификатора — параметр материала
+Modifier Editor - Light Color	Редактор модификатора — цвет света
+Modifier Editor - Light Float Parameter	Редактор модификатора — числовой параметр света
+Modifier Editor - Particle Color	Редактор модификатора — цвет частиц
+Modifier Editor - Particle Parameter	Редактор модификатора — параметр частиц
+Modifier Editor - Transform Position	Редактор модификатора — позиция
+Modifier Editor - Transform Rotation	Редактор модификатора — поворот
+Modifier Editor - Transform Scale	Редактор модификатора — масштаб
+Modifier Editor - UV Scroll	Редактор модификатора — прокрутка UV
+Couldn't find any effects modules on this craft, add modules via config before using this editor..	На этом аппарате не найдено модулей эффектов. Добавьте модули через конфиг перед использованием этого редактора.
+
+# --- Rich-text section headers (<b>...</b> IMGUI labels) ---
+<b>Swatches</b>	<b>Образцы цветов</b>
+<b>Light Parameters</b>	<b>Параметры света</b>
+<b>SELECT MATERIAL</b>	<b>ВЫБОР МАТЕРИАЛА</b>
+<b>TEXTURE PARAMETERS</b>	<b>ПАРАМЕТРЫ ТЕКСТУРЫ</b>
+<b>MATERIAL PARAMETERS</b>	<b>ПАРАМЕТРЫ МАТЕРИАЛА</b>
+<b>Low:</b>	<b>Нижний:</b>
+<b>High:</b>	<b>Верхний:</b>
+<b>SELECT SYSTEM</b>	<b>ВЫБОР СИСТЕМЫ</b>
+<b>PARTICLE PARAMETERS</b>	<b>ПАРАМЕТРЫ ЧАСТИЦ</b>
+<b>SELECTED</b>	<b>ВЫБРАНО</b>
+<b>LOADED TEXTURES</b>	<b>ЗАГРУЖЕННЫЕ ТЕКСТУРЫ</b>
+<b>SELECT WORKFLOW</b>	<b>ВЫБОР РАБОЧЕГО ПРОЦЕССА</b>
+<b>Model</b>	<b>Модель</b>
+<b>Shader</b>	<b>Шейдер</b>
+<b>Particle</b>	<b>Частицы</b>
+<b>CONTROLLERS</b>	<b>КОНТРОЛЛЕРЫ</b>
+<b>Override</b>	<b>Переопределение</b>
+  <b>Name</b>	  <b>Имя</b>
+<b>TEMPLATES</b>	<b>ШАБЛОНЫ</b>
+<b>EXPORT</b>	<b>ЭКСПОРТ</b>
+<b>FX MODULES ON VESSEL</b>	<b>МОДУЛИ ЭФФЕКТОВ НА АППАРАТЕ</b>
+<b>EFFECTS</b>	<b>ЭФФЕКТЫ</b>
+<b>Effect Modifiers</b>	<b>Модификаторы эффекта</b>
+    <b>Modifier Name</b>	    <b>Имя модификатора</b>
+<b>Type</b>	<b>Тип</b>
+<b>Controller</b>	<b>Контроллер</b>
+<b>Mode</b>	<b>Режим</b>
+
+# --- Common buttons ---
+Save	Сохранить
+Remove	Удалить
+Delete	Удалить
+Cancel	Отмена
+Apply	Применить
+Edit	Изменить
+Copy	Копировать
+Paste	Вставить
+Copy out	Копировать выходную
+Paste in	Вставить во входную
+Add Node	Добавить узел
+Add New	Добавить
+New Curve	Новая кривая
+Smooth Tangents	Сгладить касательные
+Enabled	Включено
+Confirm Delete	Подтвердите удаление
+Add new Effect	Добавить новый эффект
+Add new Modifier	Добавить новый модификатор
+Add new Controller	Добавить новый контроллер
+Edit Controller	Изменить контроллер
+EDIT MATERIAL	РЕДАКТИРОВАТЬ МАТЕРИАЛ
+EDIT LIGHT	РЕДАКТИРОВАТЬ СВЕТ
+EDIT PARTICLES	РЕДАКТИРОВАТЬ ЧАСТИЦЫ
+Copy offsets	Копировать смещения
+Randomize Effect Seed	Рандомизировать сид эффекта
+Please specify a valid Transform name	Укажите корректное имя трансформа
+
+# --- Curve / gradient editor fields ---
+In Tangent	Входная касательная
+Out Tangent	Выходная касательная
+Click on a key to edit it. Drag a key to move it. Right click to delete it	Щёлкните по ключу, чтобы изменить его. Перетащите ключ, чтобы переместить. ПКМ — удалить.
+Minimum	Минимум
+Maximum	Максимум
+Curve	Кривая
+TwoCurves	Две кривые
+Constant	Константа
+TwoConstants	Две константы
+CurveRange	Диапазон кривой
+TwoColors	Два цвета
+Gradient	Градиент
+TwoGradients	Два градиента
+Red Curve	Кривая (красный)
+Green Curve	Кривая (зелёный)
+Blue Curve	Кривая (синий)
+Alpha Curve	Кривая (альфа)
+Float Curve	Кривая числового значения
+X Curve	Кривая X
+Y Curve	Кривая Y
+Z Curve	Кривая Z
+Controller Value vs Color	Значение контроллера → цвет
+Controller Value vs Low Color	Значение контроллера → мин. цвет
+Controller Value vs High Color	Значение контроллера → макс. цвет
+Controller Value vs Constant	Значение контроллера → константа
+Controller Value vs Low Constant	Значение контроллера → мин. константа
+Controller Value vs High Constant	Значение контроллера → макс. константа
+Gradient mode parameters are not supported	Параметры режима градиента не поддерживаются
+Two gradient mode parameters are not supported	Параметры режима с двумя градиентами не поддерживаются
+Curve mode parameters are not supported	Параметры режима кривой не поддерживаются
+Two curve mode parameters are not supported	Параметры режима с двумя кривыми не поддерживаются
+
+# --- Light editor fields ---
+Alpha	Альфа
+Time	Время
+Spot	Прожектор
+Point	Точечный
+Light Type	Тип света
+Spot Angle	Угол прожектора
+SpotAngle	Угол прожектора
+Current Colour	Текущий цвет
+Light Transform Name	Имя трансформа света
+Shader Color Name	Имя цвета шейдера
+Color Saturation	Насыщенность цвета
+Shader Float Name	Имя числового параметра шейдера
+Light Float Name	Имя числового параметра света
+Light Material Color	Цвет материала света
+
+# --- Material / texture editor fields ---
+Texture Path	Путь к текстуре
+UV Scale	Масштаб UV
+UV Offset	Смещение UV
+UV Scroll	Прокрутка UV
+X Scroll Rate	Скорость прокрутки X
+Y Scroll Rate	Скорость прокрутки Y
+
+# --- Particle / material / effect editor common parameter names ---
+Material Color From Light	Цвет материала от источника света
+Material Color	Цвет материала
+Material Float	Числовой параметр материала
+Light Color	Цвет света
+Light Float	Числовой параметр света
+Particle System Color Parameter	Параметр цвета системы частиц
+Particle System Numeric Parameter	Числовой параметр системы частиц
+Particle Numeric	Числовой параметр частиц
+Particle Color	Цвет частиц
+Position	Положение
+Rotation	Вращение
+Rotation 	Поворот 
+Scale	Масштаб
+Range	Диапазон
+Offset	Смещение
+Position Offset	Смещение позиции
+Rotation Offset	Смещение поворота
+Scale Offset	Смещение масштаба
+Modifier Name	Имя модификатора
+Modifier name	Имя модификатора
+Modifier type	Тип модификатора
+Controller	Контроллер
+Controller name	Имя контроллера
+Combine Mode	Режим объединения
+Use Randomness	Использовать случайность
+Particle Parameter Name	Имя параметра частиц
+Positioned Transform Name	Имя перемещаемого трансформа
+Scaled Transform Name	Имя масштабируемого трансформа
+Transform Target 	Целевой трансформ 
+Target transform name	Имя целевого трансформа
+Material	Материал
+Particle	Частицы
+
+# --- Effect / template management ---
+Effect Name	Имя эффекта
+Effect Parent [required]	Родитель эффекта [обязательно]
+Exported template name	Имя экспортируемого шаблона
+Module Type	Тип модуля
+Member	Элемент
+
+# --- Controller-specific config fields (per controller type) ---
+EngineID Field Name	Имя поля EngineID
+Predicate Field Name	Имя поля-предиката
+Min Expected Value	Мин. ожидаемое значение
+Max Expected Value	Макс. ожидаемое значение
+Response Rate Up	Скорость нарастания
+Response Rate Down	Скорость спада
+Ramp Rate Up	Скорость нарастания
+Ramp Rate Down	Скорость спада
+Engine ID	ID двигателя
+Event Name	Имя события
+Event duration	Длительность события
+Zero on Flameout	Обнулять при остановке двигателя
+Gimbal axis	Ось гимбала
+Random type	Тип случайности
+Min/Max	Мин/Макс
+Random Seed	Случайный сид
+Seed	Сид
+Speed	Скорость
+Source controller	Исходный контроллер
+Scalar Module ID	ID скалярного модуля
+Controller type	Тип контроллера
+Surface	Поверхность
+Orbit	Орбита
+Vertical	Вертикальная
+Velocity Mode	Режим скорости
+
+# --- Floating-origin toggle (particle system editor) ---
+World/Floating Origin Simulation	Симуляция плавающего начала координат

@@ -1,0 +1,44 @@
+# DistantObject -- UI translation dictionary for kerbalru-ui-translator
+# Format: English<TAB>Russian. Exact-string match only (see docs/MAINTAINING.md and
+# tools/ui-translator/src/KerbalRuUiTranslator.cs). Extracted from DistantObject.dll
+# (ldstr literals in the #US heap).
+DarkenSky enabled	Затемнение неба включено
+DarkenSky disabled	Затемнение неба отключено
+FlareDraw enabled	Отрисовка бликов включена
+FlareDraw disabled	Отрисовка бликов отключена
+Fly Over Text	Текст при наведении
+Font Size/Name	Размер/имя шрифта
+Flare Rendering	Отрисовка бликов
+Enable Flares	Включить блики
+Show names on mouseover	Показывать имена при наведении
+Flare Saturation	Насыщенность бликов
+Flare Size	Размер бликов
+Flare Brightness	Яркость бликов
+Show Debris Flares	Показывать блики обломков
+Debris Brightness	Яркость обломков
+Distant Vessel	Далёкие корабли
+Distant Vessel Rendering	Отрисовка далёких кораблей
+Max Distance to Render	Макс. дистанция отрисовки
+Change	Изменить
+Ignore Debris	Игнорировать обломки
+Skybox Dimming	Затемнение неба
+Dynamic Sky Dimming	Динамическое затемнение неба
+Maximum Sky Brightness	Максимальная яркость неба
+Reference Body Size	Опорный размер тела
+Minimum Significant Body Size	Минимальный значимый размер тела
+Minimum Target Relative Angle	Минимальный относительный угол цели
+Debug Mode	Режим отладки
+Use KSP AppLauncher (may require restart)	Использовать AppLauncher KSP (может потребоваться перезапуск)
+Show AppLauncher only in Space Center	Показывать AppLauncher только в Космическом центре
+Use Blizzy's Toolbar (may require restart)	Использовать Blizzy's Toolbar (может потребоваться перезапуск)
+Reset To Default	Сбросить по умолчанию
+Apply	Применить
+ Settings	 Настройки
+Distant Object Enhancement Settings	Настройки Distant Object Enhancement
+Render Targeted Vessel Only	Отрисовывать только корабль-цель
+Render All Unloaded Vessels	Отрисовывать все выгруженные корабли
+Render All Unloaded Vessels Smoother (memory intensive!)	Отрисовывать все выгруженные корабли плавнее (требует много памяти!)
+ Debug	 Отладка
+ by LisiasT, TheDarkBadger, MOARdV, Rubber Ducky	 — авторы: LisiasT, TheDarkBadger, MOARdV, Rubber Ducky
+Version {0}	Версия {0}
+Settings	Настройки

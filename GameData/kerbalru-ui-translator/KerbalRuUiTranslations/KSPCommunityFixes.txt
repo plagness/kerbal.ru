@@ -1,0 +1,93 @@
+# KSPCommunityFixes — своя страница в стоковых настройках сложности игры (список
+# переключателей отдельных багфиксов), плюс пара всплывающих диалогов и отладочный
+# инструмент "drag cube debugger".
+# Извлечено из #US-кучи (User Strings) DLL сканом UTF-16LE строк-литералов (`ldstr`).
+#
+# Пропущено намеренно:
+# - Debug.Log/исключения ("[KSPCF...]", "Exception...", "...not found", транспайлер-
+#   диагностика) — не GUI, разработческие сообщения.
+# - Многострочные описания фиксов, склеенные в рантайме через `+`/`\n` из нескольких
+#   отдельных строковых литералов (напр. текст про stock maneuver tool/Kopernicus,
+#   два IVA-буллета "-Disable all : ..."/"-Use placeholder : ..." — у них внутри
+#   буквальный символ TAB, из-за которого их вообще невозможно записать одной строкой
+#   в TSV-формате этого словаря). Итоговая строка, которую реально увидит GUI.Label,
+#   это склейка нескольких кусков — точное совпадение с любым отдельным куском не
+#   сработает, поэтому переводить кусок по отдельности бессмысленно.
+# - "KSP Community Fixes"/"KSPCommunityFixes" (имя мода) — оставлено как есть,
+#   имена модов принято не переводить.
+# - "] Version " — фрагмент строки, склеиваемой с именем мода и номером версии
+#   (динамические данные), точного совпадения не будет никогда.
+# - Шейдеры (KSP/Bumped Specular...), имена типов/полей, версии сборки — не текст UI.
+
+# --- Настройка "Позиция альтиметра" ---
+Altimeter pos (Left<->Right)	Позиция альтиметра (влево-вправо)
+Set the horizontal position of the flight scene altimeter widget	Задаёт горизонтальное положение виджета альтиметра в полёте
+
+# --- Настройка IVA (интерьеры кабин) ---
+IVA (interior view)	IVA (вид из кабины)
+Keep all	Сохранять всё
+Disable all	Отключить всё
+Use placeholder	Использовать заглушку
+Disable IVA functionality: reduce RAM/VRAM usage and increase FPS.	Отключает функциональность IVA: снижает нагрузку на ОЗУ/видеопамять и повышает FPS.
+<i>Changes will take effect after relaunching KSP</i>	<i>Изменения вступят в силу после перезапуска KSP</i>
+
+# --- Making History DLC ---
+Making History DLC not installed	DLC Making History не установлен
+Making History features	Функции Making History
+Disable the Making History DLC mission editor and additional launch sites	Отключает редактор миссий Making History DLC и дополнительные стартовые площадки
+The Making History parts will still be available	Детали Making History останутся доступны
+Will reduce memory usage and increase loading speed	Снижает использование памяти и увеличивает скорость загрузки
+Changes will take effect after restarting KSP	Изменения вступят в силу после перезапуска KSP
+
+# --- Кэширование PNG-текстур (настройка + диалог согласия) ---
+Texture caching optimization	Оптимизация кэширования текстур
+Cache PNG textures on disk instead of converting them on every KSP launch.	Кэширует PNG-текстуры на диске вместо их конвертации при каждом запуске KSP.
+Speedup loading time but increase disk space usage.	Ускоряет загрузку, но увеличивает расход места на диске.
+KSPCommunityFixes can cache converted PNG textures on disk to speed up loading time.	KSPCommunityFixes умеет кэшировать конвертированные PNG-текстуры на диске, чтобы ускорить загрузку.
+In your current install, this should reduce future loading time by about <b><color=#FF8000><<1>> seconds</color></b>.	В вашей текущей установке это должно сократить время загрузки примерно на <b><color=#FF8000><<1>> сек.</color></b>.
+However, this will use about <b><color=#FF8000><<1>> MB</color></b> of additional disk space, and potentially much more if you install additional mods.	Однако это займёт около <b><color=#FF8000><<1>> МБ</color></b> дополнительного места на диске, а при установке других модов — возможно, значительно больше.
+You can change this setting later in the in-game settings menu	Эту настройку можно изменить позже в игровом меню настроек
+Do you want to enable this optimization ?	Включить эту оптимизацию?
+
+# --- Настройка "лаг CPU / физический шаг" ---
+How the game handle lag in CPU bound situations.	Как игра справляется с лагами при нагрузке на процессор.
+Mostly relevant with large part count vessels.	Особенно важно для аппаратов с большим числом деталей.
+Lower value :	Меньшее значение:
+Higher and smoother FPS, but game time might advance slower than real time.	Выше и плавнее FPS, но игровое время может течь медленнее реального.
+Higher value :	Большее значение:
+Lower and choppier FPS, but game time will advance closer to real time.	Ниже и рывками FPS, но игровое время будет ближе к реальному.
+
+# --- Экран загрузки (FastLoader) ---
+Loading configs...	Загрузка конфигураций...
+Waiting for PNGTextureCache opt-in...	Ожидание решения о кэшировании PNG-текстур...
+Searching assets to load...	Поиск ресурсов для загрузки...
+Loading sound assets...	Загрузка звуковых ресурсов...
+Loading texture assets...	Загрузка текстур...
+Loading model assets...	Загрузка моделей...
+Loading has failed due to an unhandled error	Загрузка не удалась из-за необработанной ошибки
+Loading failed	Загрузка не удалась
+Load failed due to missing dependencies	Загрузка не удалась из-за отсутствующих зависимостей
+The following plugin(s) failed to load :	Не удалось загрузить следующие плагины:
+Quit	Выйти
+Copy to clipboard	Скопировать в буфер обмена
+
+# --- Отладочный инструмент "drag cube debugger" ---
+Open KSPCF drag cube debugger	Открыть отладчик кубов сопротивления KSPCF
+Close	Закрыть
+Select part	Выбрать деталь
+Using part prefab	Используется префаб детали
+Drag cubes :	Кубы сопротивления:
+Copy drag cube config to clipboard	Скопировать конфигурацию куба сопротивления в буфер обмена
+Down (YP)	Вниз (YP)
+Left (XP)	Влево (XP)
+Up (YN)	Вверх (YN)
+Back (ZP)	Назад (ZP)
+Right (XN)	Вправо (XN)
+Forward (ZN)	Вперёд (ZN)
+Hover on a part and press [ENTER] to select it.	Наведите курсор на деталь и нажмите [ENTER], чтобы выбрать её.
+Press any other key to abort.	Нажмите любую другую клавишу для отмены.
+Using selected part	Используется выбранная деталь
+Selected part : 	Выбранная деталь: 
+
+# --- Разное (PAW/GetInfo) ---
+Efficiency	Эффективность

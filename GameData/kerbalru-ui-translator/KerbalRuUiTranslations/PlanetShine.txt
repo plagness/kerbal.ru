@@ -1,0 +1,46 @@
+# PlanetShine — русская локализация UI (окно настроек отражённого света планет)
+# Формат: Английский<TAB>Русский. Извлечено из PlanetShine.dll (strings + IL-анализ ldstr).
+
+PlanetShine Settings	Настройки PlanetShine
+--- PLANETSHINE DEBUG ---	--- ОТЛАДКА PLANETSHINE ---
+Performance	Производительность
+Intensity	Интенсивность
+Advanced	Дополнительно
+Reset	Сброс
+
+Quality preset	Пресет качества
+Low	Низкое
+Medium	Среднее
+High	Высокое
+
+Lights quantity	Количество источников света
+Single	Один
+Multiple (area)	Несколько (area)
+Lights rendering	Рендер источников света
+Vertex mode	Вершинный режим
+Pixel mode	Пиксельный режим
+Update frequency	Частота обновления
+10 per second	10 раз в секунду
+25 per second	25 раз в секунду
+50 per second	50 раз в секунду
+
+Planetshine light intensity: 	Интенсивность света PlanetShine:
+Vacuum ambient light level: 	Уровень фонового света в вакууме:
+Ground and atmosphere ambient light intensity: 	Интенсивность фонового света земли и атмосферы:
+Ground ambient light override: 	Переопределение фонового света земли:
+Planetshine maximum range: 	Максимальная дальность PlanetShine:
+(approximately 	(примерно
+km from 	км от
+
+Planetshine global ON/OFF	PlanetShine вкл/выкл
+Use stock toolbar	Использовать штатную панель инструментов
+Debug mode	Режим отладки
+
+Planetshine fade altitude: 	Высота затухания PlanetShine:
+Ground ambient fade altitude: 	Высота затухания фонового света земли:
+ to 	 до 
+(from 	(от 
+km to 	км до
+km on 	км на
+Min	Мин
+Max	Макс

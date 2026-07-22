@@ -1,0 +1,14 @@
+# KSCSwitcher — окно выбора альтернативной стартовой площадки на экране Космического центра.
+# Извлечено дизассемблированием IL (monodis) KSCSwitcher.dll.
+#
+# Мод маленький: реально в GUI.Button/GUI.Label попадают только 2 статичные строки.
+# Всё остальное (имена площадок, координаты, tooltip-описания) — динамический текст
+# из config-узлов LaunchSites (LaunchSite.displayName/description), точное совпадение
+# с ним в принципе невозможно и не нужно — при отрисовке подставляется как есть.
+#
+# Пропущено намеренно: ключи конфигурации (DefaultSite, PQSCity, name, position, ...),
+# отладочные Debug.Log-строки ("[KSCSwitcher] ...", "KSCSwitcher initialized" и т.п.),
+# пути текстур кнопок.
+
+Launch Sites	Стартовые площадки
+Cannot set launch site to active site.	Эта стартовая площадка уже активна.

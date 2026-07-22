@@ -1,0 +1,206 @@
+# RealChute — UI strings extracted from RealChute.dll (v1.4.9.5). Parachute configuration
+# window (diameter, deployment altitude/speed, presets, materials) plus the part right-click
+# menu and info panel. Two extraction passes:
+#  1) `strings -a` on the raw DLL — finds identifiers plus KSPField/KSPEvent "guiName"/"guiActive"
+#     custom-attribute argument strings (.NET stores these as compact UTF-8 in the attribute blob
+#     heap, which is why they show up in the plain byte scan while method-body literals don't).
+#     Two guiName values ("Repack chute", "Is Safe to Deploy?") were reconstructed from adjacent
+#     ECMA-335 attribute-blob flag bytes that `strings` folded into the text (verified against the
+#     sibling GUIDeploy/GUIArm/GUIDisarm/GUICut/GUIRepack method-naming pattern) — flagged here as
+#     moderate- rather than full-confidence.
+#  2) A custom UTF-16LE scanner (macOS `strings` cannot see .NET ldstr literals, which are UTF-16)
+#     for the actual GUILayout.Label text used throughout the in-editor Parachute Editor window,
+#     the advanced-calculations sub-window, and the info window.
+# Skipped by design: type/method/field identifiers, ConfigNode persistence keys and section names
+# (chuteID, PARACHUTE, MATERIAL, CASE_TEXTURE...), Debug-log-only "[RealChute]: ..." diagnostic
+# messages, .pdb paths, version/GUID/copyright metadata, numeric default values, the stock
+# celestial-body name "Kerbin" (already localized by the base game), string.Format templates with
+# {0}-style placeholders (the substituted runtime text never equals the template verbatim), and
+# any fragment that is clearly just one half of a string built via runtime concatenation (e.g.
+# 'The "' + presetName + '" preset was successfully saved!') since only the full concatenated
+# string is ever passed to GUI.Label, and that fragment would never equal it. Two entries with an
+# embedded literal tab ("\t\tCase cost: ", "\tTotal part cost: ") and one with a leading literal
+# newline ("\nTotal part mass: ") are included with the leading whitespace stripped instead: the
+# loader's line.IndexOf('\t') would otherwise treat the embedded tab as the field delimiter (or
+# File.ReadAllLines would split the entry on the embedded newline), corrupting the entry, so the
+# literal-tab/newline versions can never be represented in this file format at all — the stripped
+# versions are a best-effort fallback in case the same label text is reused elsewhere unprefixed.
+
+
+# --- Window / dialog titles ---
+RealChute Parachute Editor 	Редактор парашюта RealChute 
+Hide Parachute Editor	Скрыть редактор парашюта
+Show Parachute Editor	Показать редактор парашюта
+RealChute Settings	Настройки RealChute
+RealChute Settings 	Настройки RealChute 
+RealChute Info Window 	Информационное окно RealChute 
+Incompatible Mods Detected	Обнаружены несовместимые моды
+Preset saved	Пресет сохранён
+
+# --- Common dialog buttons / status words ---
+Error	Ошибка
+Error!	Ошибка!
+Success	Успешно
+Warning	Предупреждение
+Cancel	Отмена
+Close	Закрыть
+Save...	Сохранить...
+Save as preset	Сохранить как пресет
+Save as preset...	Сохранить как пресет...
+Select a preset	Выберите пресет
+Select preset	Выбрать пресет
+Delete preset	Удалить пресет
+Preset name:	Имя пресета:
+Preset description	Описание пресета
+Preset name cannot be empty!	Имя пресета не может быть пустым!
+Are you sure you wish to delete this preset?	Вы уверены, что хотите удалить этот пресет?
+Warning: there is already a preset saved under this name. Are you sure you wish to proceed?	Предупреждение: пресет с таким именем уже сохранён. Продолжить?
+No saved presets	Нет сохранённых пресетов
+Presets	Пресеты
+Description: 	Описание: 
+Description:  	Описание:  
+
+# --- Main editor window fields ---
+Selected part: 	Выбранная деталь: 
+Symmetry counterparts: 	Симметричные копии: 
+Case mass: 	Масса корпуса: 
+Case cost: 	Стоимость корпуса: 
+Total part mass: 	Общая масса детали: 
+Total part cost: 	Общая стоимость детали: 
+Target planet:	Целевая планета:
+Cycle part size	Сменить размер детали
+Previous size	Предыдущий размер
+Next size	Следующий размер
+Must go down to deploy:	Раскрывать только при снижении:
+Deploy on ground contact:	Раскрывать при касании земли:
+Deployment timer:	Таймер раскрытия:
+Spare chutes:	Запасные парашюты:
+Autocut speed (m/s):	Скорость автоотстрела (м/с):
+Landing alt (m):	Высота приземления (м):
+Main chute:	Основной парашют:
+Apply settings	Применить настройки
+Apply to all symmetry counterparts	Применить ко всем симметричным копиям
+The application of the parameters succeeded!	Параметры успешно применены!
+Warning: The mass of the craft was too high and the parachutes have been set at their limit. Please review the stats to make sure no problem may occur.	Предупреждение: масса аппарата оказалась слишком большой, и парашюты выставлены на предельные значения. Проверьте характеристики, чтобы убедиться в отсутствии проблем.
+Deployment timer	Таймер раскрытия
+Spare chutes	Запасные парашюты
+Autocut speed	Скорость автоотстрела
+Landing altitude	Высота приземления
+General:	Общее:
+Chutes:	Парашюты:
+
+# --- Settings window ---
+Parachutes	Парашюты
+Automatically arm when staging	Автоматически взводить при отделении ступени
+Activate April Fools' joke (DANGER!!)	Включить первоапрельскую шутку (ОПАСНО!!)
+Activate NyanMode	Включить режим Nyan
+Only engineers can repack in career	В карьере переукладывать могут только инженеры
+Engineer minimum level to repack:	Минимальный уровень инженера для переукладки:
+
+# --- Part right-click context menu (KSPEvent) ---
+Toggle info	Показать/скрыть информацию
+Deploy chute	Раскрыть парашют
+Cut main chute	Отстрелить основной парашют
+Cut chute	Отстрелить парашют
+Arm parachute	Взвести парашют
+Disarm parachute	Снять с взвода
+Repack chute	Переукладка парашюта
+Is Safe to Deploy?	Безопасно раскрывать?
+Only an engineer can repack a parachute	Переукладывать парашют может только инженер
+
+# --- Part info panel (right-click 'info') ---
+This RealChute part can be tweaked from the Action Groups window.	Эту деталь RealChute можно настроить из окна групп действий.
+Main chute	Основной парашют
+Secondary chute	Дополнительный парашют
+Chute #	Парашют №
+<b>Parachute count:</b> 	<b>Количество парашютов:</b> 
+Parachute deployment failed.	Не удалось раскрыть парашют.
+Reason: parachute is in fairings	Причина: парашют находится под обтекателем
+Reason: stopped on the ground.	Причина: аппарат остановился на земле.
+Reason: in space.	Причина: аппарат в космосе.
+Reason: too high.	Причина: слишком большая высота.
+Must go downwards to deploy	Раскрывается только при снижении
+Automatically deploys on ground contact	Автоматически раскрывается при касании земли
+Spare chutes: 	Запасные парашюты: 
+Spare chutes: inf	Запасные парашюты: не ограничено
+Copy to symmetry counterparts	Копировать в симметричные копии
+Copy to others chutes	Копировать в другие парашюты
+Part name: 	Имя детали: 
+Part mass: 	Масса детали: 
+Autocut speed: 	Скорость автоотстрела: 
+Deployment timer: 	Таймер раскрытия: 
+Material: 	Материал: 
+Drag coefficient: 	Коэффициент сопротивления: 
+Predeployed diameter: 	Диаметр частичного раскрытия: 
+Deployed diameter: 	Диаметр полного раскрытия: 
+Deployment safety: safe	Безопасность раскрытия: безопасно
+Deployment safety: risky	Безопасность раскрытия: рискованно
+Deployment safety: dangerous	Безопасность раскрытия: опасно
+Chute max temperature: 	Макс. температура купола: 
+Current chute temperature: 	Текущая температура купола: 
+Predeployment:	Частичное раскрытие:
+Autocut altitude: 	Высота автоотстрела: 
+Predeployment speed: 	Скорость частичного раскрытия: 
+Deployment speed: 	Скорость раскрытия: 
+
+# --- Advanced calculations sub-window ---
+Craft mass	Масса аппарата
+Landing speed	Скорость приземления
+Mains planned deployment alt	Плановая высота раскрытия основных
+Wanted deceleration	Желаемое замедление
+Parachute count	Количество парашютов
+Predeployed diameter	Диаметр частичного раскрытия
+Deployed diameter	Диаметр полного раскрытия
+Predeployment altitude	Высота частичного раскрытия
+Predeployment pressure	Давление частичного раскрытия
+Deployment altitude	Высота раскрытия
+Autocut altitude	Высота автоотстрела
+Predeployment speed	Скорость частичного раскрытия
+Deployment speed	Скорость раскрытия
+Case texture:	Текстура корпуса:
+Chute texture:	Текстура купола:
+Chute model: 	Модель купола: 
+Current material: 	Текущий материал: 
+Change material	Сменить материал
+Calculations mode:	Режим расчёта:
+Use current craft mass	Использовать текущую массу аппарата
+Input craft mass	Ввести массу аппарата
+Currently using 	Сейчас используется 
+wet mass	масса с топливом
+dry mass	сухая масса
+Switch to 	Переключить на 
+Mass to use (t):	Используемая масса (т):
+Wanted touchdown speed (m/s):	Желаемая скорость касания (м/с):
+Wanted speed at target alt (m/s):	Желаемая скорость на целевой высоте (м/с):
+Planned landing speed (m/s):	Плановая скорость приземления (м/с):
+Target altitude (m):	Целевая высота (м):
+Wanted deceleration (m/s	Желаемое замедление (м/с
+Parachutes used (parachutes):	Используется парашютов (шт.):
+Predeployed diameter (m):	Диаметр частичного раскрытия (м):
+Resulting area: 	Итоговая площадь: 
+Resulting predeployed area: --- m	Итоговая площадь частичного раскрытия: --- м
+Deployed diameter (m):	Диаметр полного раскрытия (м):
+Resulting deployed area: --- m	Итоговая площадь полного раскрытия: --- м
+Pressure predeployment	Частичное раскрытие по давлению
+Altitude predeployment	Частичное раскрытие по высоте
+Predeployment pressure (atm):	Давление частичного раскрытия (атм):
+Predeployment altitude (m):	Высота частичного раскрытия (м):
+Autocut altitude (m):	Высота автоотстрела (м):
+Pre deployment speed (s):	Скорость частичного раскрытия (с):
+Deployment speed (s):	Скорость раскрытия (с):
+Drag coefficient:  	Коэффициент сопротивления:  
+Area density:  	Плотность площади:  
+Area cost:  	Стоимость площади:  
+Max temperature: 	Макс. температура: 
+Specific heat: 	Удельная теплоёмкость: 
+Emissivity constant: 	Коэффициент излучения: 
+Choose material	Выбрать материал
+Automatic	Автоматически
+Manual	Вручную
+We don't know much about this, it might as well be made of fishnets	Мы мало что знаем об этом материале — он вполне может быть сделан из рыболовной сети
+
+# --- Part-list category filters ---
+Filter by Function	Фильтр по функции
+Parachute	Парашют
+Filter by Module	Фильтр по модулю
+Procedural Chute	Процедурный парашют

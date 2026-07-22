@@ -1,0 +1,36 @@
+# PatchManager — отдельное меню для включения/выключения ModuleManager-патчей.
+# Извлечено из #US-кучи (User Strings) DLL сканом UTF-16LE строк-литералов (`ldstr`).
+#
+# ВАЖНО: почти весь GUI этого мода (кнопки OK/Отмена/"Применить всё", диалог
+# "Изменения вступят в силу...", настройки "Всегда показывать кнопку" и т.д.) уже
+# переведён штатным способом — через ключи Localizer (`pm_ok`, `pm_applyall`,
+# `pm_alwaysShow` и т.п.), определённые в самом моде:
+#   GameData/PatchManager/Lang/en-us.cfg (английский оригинал)
+#   GameData/PatchManager/Lang/ru.cfg    (готовый русский перевод, уже есть в моде)
+# Сверка ключ-в-ключ подтвердила: en-us.cfg и ru.cfg содержат одинаковый набор
+# pm_*-ключей — перевод полный. Эти строки резолвятся Localizer'ом ДО того, как
+# попадают в GUI.Label/GUIContent, поэтому Harmony-перехватчику там ловить нечего
+# (и дублировать их здесь не нужно и рискованно — легко разойтись в формулировках
+# с уже вычитанным переводом мода).
+#
+# Ниже — то немногое, что реально зашито в коде как хардкод (не через Localizer):
+# сообщения об ошибке неправильной установки мода, диалог сохранения и один
+# тултип тумблера "Mod Enabled".
+#
+# Пропущено намеренно:
+# - Все pm_*-строки (см. выше — уже переведены в Lang/ru.cfg).
+# - "TitleNotAvailable"/"VersionNotAvailable" — служебные заглушки-сентинелы на
+#   случай, если через reflection не удалось получить название/версию мода;
+#   не связный UI-текст, переводить нечего.
+# - "] Version " — фрагмент строки, склеиваемой в рантайме с именем мода и
+#   номером версии (динамические данные), точного совпадения никогда не будет.
+# - Debug.Log-сообщения ("PatchManager loaded configs, count: ", "Removing active
+#   patch: ", "tryExit stopped/ended" и т.п.) — разработческая диагностика, не GUI.
+
+Incorrect Patch Manager Installation	Неверная установка Patch Manager
+Patch Manager has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/PatchManager. Do not move any files from inside that folder.	Patch Manager установлен неверно и не будет работать корректно. Все файлы должны находиться в KSP/GameData/PatchManager. Не перемещайте файлы из этой папки.
+Incorrect path(s):	Неверные пути:
+Incorrect Patch Manager Installation: Patch Manager has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/PatchManager/Plugins. Do not move any files from inside that folder.	Неверная установка Patch Manager: Patch Manager установлен неверно и не будет работать корректно. Все файлы должны находиться в KSP/GameData/PatchManager/Plugins. Не перемещайте файлы из этой папки.
+Game saved.	Игра сохранена.
+Can't save game.	Не удалось сохранить игру.
+Mod Enabled	Мод включён

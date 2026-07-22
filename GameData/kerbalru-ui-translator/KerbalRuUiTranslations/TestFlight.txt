@@ -1,0 +1,83 @@
+# TestFlight — UI strings extracted from TestFlight.dll, TestFlightCore.dll and TestFlightAPI.dll
+# (part reliability/failure-curve display, Master Status Display (MSD) HUD, Settings window,
+# R&D/engineering-team window). TestFlightContracts.dll contains zero real UI text.
+#
+# Method: `monodis --userstrings` for the raw string heap, then a full IL disassembly
+# (`monodis --output`, KSP's Managed/ dir on MONO_PATH) to check what actually consumes each
+# candidate ldstr:
+#   - kept when followed directly by List<string>.Add (TestFlight's GetTestFlightInfo() builds
+#     a list of independent info lines — a static line with no {0}-placeholder in its own
+#     literal really is one exact, unchanging list entry), a KSPPluginFramework DrawToggle/
+#     DrawButton/DrawLabel call, GUIContent's constructor, a GameParameters difficulty-tab
+#     string, or PopupDialog.SpawnPopupDialog's title argument.
+#   - dropped when the ldstr is immediately combined via string::Concat/string::Format with a
+#     *second*, run-time value (a formatted number, a part title, another message fragment)
+#     before ever reaching the UI — the text actually displayed always differs from the literal,
+#     so a dictionary entry for it can never match. This eliminated most of the rich-text
+#     "<b>Label</b>: {0}" reliability/ignition tooltip lines and the whole y/d/h/m/s duration
+#     formatter (TestFlightAPI.TestFlightUtil.FormatTime): its unit-name fragments are spliced
+#     between live numbers via string.Format+Concat before any Label call, confirmed by tracing
+#     FormatTime's IL directly.
+# Also skipped: Debug.Log-only messages (the many "XyzWindow: ..."/"[TestFlight...] ..." prefixed
+# strings), exceptions, ConfigNode/file-path errors, and internal narration strings used only to
+# pick a code branch (e.g. "Part is not being researched.  Show research buttons").
+
+# --- Reliability / ignition part-info headers (TestFlight.dll, standalone List<string> lines) ---
+Rated Burn Time	Расчётное время работы
+Rated Cumulative Burn Time	Расчётное суммарное время работы
+<b>Base Reliability</b>	<b>Базовая надёжность</b>
+<b>Engine Cycle</b>	<b>Цикл двигателя</b>
+<b>Ignition Reliability</b>	<b>Надёжность запуска</b>
+<b>Dynamic pressure modifiers</b>	<b>Модификаторы динамического давления</b>
+<B>Restart timing modifiers</b>	<B>Модификаторы времени перезапуска</b>
+<color=orange>Failed</color>	<color=orange>Отказ</color>
+
+# --- Popups ---
+Ignition Failure	Ошибка запуска
+
+# --- Difficulty settings tab ---
+TestFlight Options	Настройки TestFlight
+
+# --- MSD (Master Status Display) HUD ---
+<b>Core</b>	<b>Ядро</b>
+TestFlight is starting up...	TestFlight запускается...
+TestFlight is not currently tracking any vessels	TestFlight пока не отслеживает ни одного аппарата
+Status OK	Всё в порядке
+Middle click to show TestFlight info...	Средняя кнопка мыши — показать информацию TestFlight...
+
+# --- Settings window ---
+Visual Settings	Визуальные настройки
+Difficulty/Performance Settings	Настройки сложности/производительности
+SaveGame Settings	Настройки сохранения
+Open Settings Panel	Открыть панель настроек
+Close Settings Panel	Закрыть панель настроек
+Show Failed Parts Only	Показывать только отказавшие детали
+Short Part Names	Короткие имена деталей
+Show Flight Data	Показывать полётные данные
+Show MTBF	Показывать MTBF
+Show Failure Rate	Показывать частоту отказов
+Show Current Run Time	Показывать текущее время работы
+Show Cumulative Run Time	Показывать суммарное время работы
+Show Part Status Text	Показывать текст статуса детали
+Lock MSD Position	Зафиксировать позицию MSD
+MSD Size	Размер MSD
+Flight Data Multiplier	Множитель полётных данных
+Flight Data Engineer Multiplier	Множитель полётных данных от инженеров
+Use a single scope for all data	Единая область накопления данных для всех аппаратов
+Enable Debugging	Включить отладку
+TestFlight Enabled	TestFlight включён
+Parts always have Maximum Data	У деталей всегда максимум данных
+
+# --- R&D / engineering teams window ---
+R&D	НИОКР
+Research & Development	Исследования и разработки
+Part flight data meets or exceeds maximum lab R&D amount	Полётные данные детали достигли или превысили максимум для лабораторных исследований
+Hire Research Team	Нанять исследовательскую команду
+Research teams deduct funds and add flight data to your part	Исследовательские команды тратят фонды и добавляют полётные данные детали
+At the end of each cycle, funds will be deducted and data added	В конце каждого цикла будут списаны фонды и добавлены данные
+The costs and research rate varies by team	Стоимость и скорость исследования зависят от команды
+Hire Team	Нанять команду
+Stop Research	Остановить исследование
+Lock Window	Зафиксировать окно
+Visual settings for the Master Status Display can be set in the settings page in the Flight scene	Визуальные настройки для панели состояния (MSD) можно задать на странице настроек в полётной сцене
+Apply discount to tech node cost for flown parts	Применять скидку на стоимость узла технологий для летавших деталей

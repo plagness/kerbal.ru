@@ -1,0 +1,248 @@
+# MechJeb2 -- словарь UI-строк, извлечённых напрямую из скомпилированного MechJeb2.dll
+# (строки, НЕ покрытые встроенной локализацией мода через Localizer/#MechJeb_-ключи --
+#  та часть уже переведена штатным ru.cfg мода). Формат: Английский<TAB>Русский.
+# Несовпадение = строка остаётся как есть (см. tools/ui-translator).
+
+# --- Заголовки окон / разделов ---
+Aircraft Autopilot	Автопилот самолёта
+Ascent Path Editor	Редактор траектории взлёта
+Ascent Settings	Настройки взлёта
+PVG Settings	Настройки PVG
+Ascent Guidance	Управление взлётом
+Attitude Adjustment	Настройка ориентации
+Custom Window Editor	Редактор пользовательских окон
+Docking Autopilot	Автопилот стыковки
+Flight Recorder	Бортовой самописец
+Landing Guidance	Управление посадкой
+Maneuver Node Editor	Редактор узла манёвра
+Maneuver Planner	Планировщик манёвров
+RCS Balancer	Балансировщик RCS
+Rendezvous Autopilot	Автопилот сближения
+Rendezvous Planner	Планировщик сближения
+Rover Autopilot	Автопилот ровера
+Rover Controller	Контроллер ровера
+Waypoint Help	Справка по точкам маршрута
+Routes Help	Справка по маршрутам
+ILS Guidance	Управление ILS
+Aircraft Approach & Autoland	Заход на посадку и автопосадка самолёта
+Warp Helper	Помощник ускорения времени
+Utilities	Утилиты
+Translatron	Транслатрон
+Automation	Автоматизация
+Settings	Настройки
+
+# --- Кнопки / действия ---
+Extend	Выдвинуть
+Retract	Втянуть
+RCS Burn	Манёвр на RCS
+Kill Rotation	Погасить вращение
+Abort Adding	Отменить добавление
+Add Waypoint	Добавить точку маршрута
+Reverse	Развернуть
+Remove	Удалить
+Clear	Очистить
+Down	Вниз
+Bottom	В конец
+Help	Справка
+Delete	Удалить
+Save	Сохранить
+Load	Загрузить
+Reset to PVG/RO Defaults	Сбросить к настройкам PVG/RO по умолчанию
+Reset Tuning Values	Сбросить настройки тюнинга
+Soften	Смягчить
+MechJeb Execute Next Node	MechJeb: выполнить следующий узел
+MechJeb Autostage Once	MechJeb: автоступень (один раз)
+MechJeb Auto-warp	MechJeb: авто-ускорение времени
+Show Advanced Window Settings	Показать расширенные настройки окна
+Draw Trajectory on Map	Рисовать траекторию на карте
+Override Warp to Plane	Отключить ускорение до плоскости
+Auto	Авто
+
+# --- Настройки взлёта (Ascent) ---
+Update Interval	Интервал обновления
+Flight Path Angle	Угол траектории полёта
+Coast Before	Пассивный участок до
+Coast After	Пассивный участок после
+Fixed Coast Length:	Фиксированная длина пассивного участка:
+Ullage lead time: 	Время осадки топлива заранее: 
+Spinup stage: 	Ступень раскрутки: 
+Spinup lead time: 	Время раскрутки заранее: 
+Q Trigger:	Порог по скоростному напору:
+PVG After Stage:	PVG после ступени:
+Min 	Мин 
+Last Stage: 	Последняя ступень: 
+Early Shutoff Stage: 	Ступень раннего отключения: 
+Unguided Stages: 	Неуправляемые ступени: 
+Coast Stage: 	Ступень пассивного участка: 
+
+# --- Источники крутящего момента (Vessel Info) ---
+Torque sources	Источники момента
+Others (FAR)	Другие (FAR)
+ReactionWheel	Маховики
+ControlSurface	Аэродинамические поверхности
+Gimbal	Гимбал
+Diff Throttle	Дифференциальная тяга
+IntakeAir	Воздухозаборники
+
+# --- Настройка ориентации / PID-тюнинг (Attitude Adjustment) ---
+Maximum Stopping Time	Максимальное время остановки
+Minimum Flip Time	Минимальное время разворота
+Velocity	Скорость
+Position	Положение
+Deadband	Мёртвая зона
+SmoothIn	Плавный вход
+SmoothOut	Плавный выход
+Pos PTerm	П-член (позиция)
+Pos ITerm	И-член (позиция)
+Pos DTerm	Д-член (позиция)
+Vel PTerm	П-член (скорость)
+Vel ITerm	И-член (скорость)
+Vel DTerm	Д-член (скорость)
+Smooth Torque	Плавный момент
+Current	Текущее
+Desired	Целевое
+Error	Ошибка
+Response Speed	Скорость отклика
+Control Torque	Управляющий момент
+Applied Torque	Приложенный момент
+Mass	Масса
+TargetOmega	Целевая угловая скорость
+Omega	Угловая скорость
+TargetAlpha	Целевое угловое ускорение
+MaxAlpha	Макс. угловое ускорение
+MaxOmega	Макс. угловая скорость
+RollControlRange	Диапазон управления креном
+Actuation	Управляющее воздействие
+TargetTorque	Целевой момент
+ControlTorque	Управляющий момент
+
+# --- Ровер: точки маршрута, таблица (Waypoints) ---
+Latitude	Широта
+Longitude	Долгота
+Target	Цель
+Radius	Радиус
+Name	Имя
+MinSpeed	Мин. скорость
+MaxSpeed	Макс. скорость
+Quicksave	Быстрое сохранение
+Body	Тело
+Mode	Режим
+Rover	Ровер
+Routes	Маршруты
+Controller	Контроллер
+Index	Индекс
+Index 	Индекс 
+ of 	 из 
+ Waypoints	 точки маршрута
+Routes for 	Маршруты для 
+
+# --- Ровер: справка по автопилоту (тултипы) ---
+Holding a set Heading	Удержание заданного курса
+To hold a specific heading just tick the box next to 'Heading control' and the autopilot will try to keep going for the entered heading.	Чтобы удерживать определённый курс, просто поставьте галочку рядом с «Управление курсом» — автопилот будет стараться держать введённый курс.
+This also needs to be enabled when the autopilot is supposed to drive to a waypoint'Heading Error' simply shows the error between current heading and target heading.	Это также должно быть включено, если автопилот должен ехать к точке маршрута. «Ошибка курса» просто показывает разницу между текущим и целевым курсом.
+Holding a set Speed	Удержание заданной скорости
+To hold a specific speed just tick the box next to 'Speed control' and the autopilot will try to keep going at the entered speed.	Чтобы удерживать определённую скорость, поставьте галочку рядом с «Управление скоростью» — автопилот будет стараться держать введённую скорость.
+This also needs to be enabled when the autopilot is supposed to drive to a waypoint'Speed Error' simply shows the error between current speed and target speed.	Это также должно быть включено, если автопилот должен ехать к точке маршрута. «Ошибка скорости» просто показывает разницу между текущей и целевой скоростью.
+More stability while driving and nice landings	Больше устойчивости при движении и мягкие приземления
+If you turn on 'Stability Control' then the autopilot will use the reaction wheel's torque to keep the rover aligned with the surface.	Если включить «Контроль устойчивости», автопилот будет использовать момент маховиков, чтобы удерживать ровер выровненным по поверхности.
+This means that if you make a jump the autopilot will try to align the rover in the best possible way to land as straight and flat as possible given the available time and torque.	Это значит, что при прыжке автопилот постарается выровнять ровер как можно лучше, чтобы приземлиться максимально ровно и плоско — насколько позволяют время и момент маховиков.
+Be aware that this doesn't make your rover indestructible, only relatively unlikely to land in a bad way.	Учтите: это не делает ровер неразрушимым — лишь снижает вероятность неудачного приземления.
+'Stability Control' will also limit the brake to reduce the chances of flipping over from too much braking power.	«Контроль устойчивости» также ограничивает торможение, чтобы снизить риск переворота от слишком резкого торможения.
+See 'Settings' -> 'Traction and Braking'. This setting is also saved per vessel.	См. «Настройки» -> «Сцепление и торможение». Эта настройка также сохраняется отдельно для каждого аппарата.
+Brake on Pilot Eject	Торможение при вылете пилота
+With this option enabled the rover will stop if the pilot (on manned rovers) should get thrown out of his seat.	Если эта опция включена, ровер остановится, если пилота (на пилотируемых роверах) выбросит из кресла.
+Target Speed	Целевая скорость
+Current speed the autopilot tries to achieve.	Скорость, которую автопилот пытается достичь.
+Waypoint Index	Номер точки маршрута
+Overview of waypoints and which the autopilot is currently driving to.	Обзор точек маршрута и той, к которой сейчас едет автопилот.
+Button 'Waypoints'	Кнопка «Точки маршрута»
+Opens the waypoint list to set up a route.	Открывает список точек маршрута для настройки маршрута.
+Button 'Follow' / 'Stop'	Кнопка «Следовать» / «Стоп»
+This sets the autopilot to drive along the set route starting at the first waypoint. Only visible when atleast one waypoint is set.	Заставляет автопилот ехать по заданному маршруту, начиная с первой точки. Видна, только если задана хотя бы одна точка маршрута.
+Alt click will set the autopilot to 'Loop Mode' which will make it go for the first waypoint again after reaching the last.If the only waypoint happens to be a target it will keep following that instead of only going to it once.	Alt+клик переключает автопилот в «Режим петли» — после достижения последней точки он снова поедет к первой. Если единственная точка маршрута — это цель, автопилот будет продолжать следовать за ней, а не поедет к ней один раз.
+If the autopilot is already active the 'Follow' button will turn into the 'Stop' button which will obviously stop it when pressed.	Если автопилот уже активен, кнопка «Следовать» превращается в кнопку «Стоп», которая, соответственно, останавливает его при нажатии.
+Button 'To Target'	Кнопка «К цели»
+Clears the route, adds the target as only waypoint and starts the autopilot. Only visible with a selected target.	Очищает маршрут, добавляет цель как единственную точку маршрута и запускает автопилот. Видна, только если выбрана цель.
+Alt click will set the autopilot to 'Loop Mode' which will make it continue to follow the target, pausing when near it instead of turning off then.	Alt+клик переключает автопилот в «Режим петли» — он продолжит следовать за целью, приостанавливаясь рядом с ней вместо отключения.
+Button 'Add Target'	Кнопка «Добавить цель»
+Adds the selected target as a waypoint either at the end of the route or before the selected waypoint. Only visible with a selected target.	Добавляет выбранную цель как точку маршрута — в конец маршрута или перед выбранной точкой. Видна, только если выбрана цель.
+Adding Waypoints	Добавление точек маршрута
+Adds a new waypoint to the route at the end or before the currently selected waypoint, simply click the terrain or somewhere on the body in Mapview.	Добавляет новую точку маршрута в конец или перед выбранной точкой — просто кликните по рельефу или по телу на карте.
+Alt clicking will reverse the route for easier going back and holding Alt while clicking the terrain or body in Mapview will allow to add more waypoints without having to click the button again.	Alt+клик разворачивает маршрут для удобного возврата назад, а удержание Alt при клике по рельефу или телу на карте позволяет добавлять точки подряд, не нажимая кнопку заново.
+Removing Waypoints	Удаление точек маршрута
+Removes the currently selected waypoint.	Удаляет выбранную точку маршрута.
+Alt clicking will remove all waypoints.	Alt+клик удаляет все точки маршрута.
+Reordering Waypoints	Изменение порядка точек маршрута
+'Up' and 'Down' will move the selected waypoint up or down in the list, Alt clicking will move it to the top or bottom respectively.	«Вверх» и «Вниз» перемещают выбранную точку маршрута вверх или вниз по списку, Alt+клик перемещает её в начало или конец соответственно.
+Waypoint Radius	Радиус точки маршрута
+Radius defines the distance to the center of the waypoint after which the waypoint will be considered 'reached'.	Радиус задаёт расстояние до центра точки маршрута, при попадании в которое точка считается «достигнутой».
+A radius of 5m (default) simply means that when you're 5m from the waypoint away the autopilot will jump to the next or turn off if it was the last.	Радиус 5 м (по умолчанию) означает, что на расстоянии 5 м от точки автопилот перейдёт к следующей или отключится, если это была последняя точка.
+The 'A' button behind the textfield will set the entered radius for all waypoints.	Кнопка «A» рядом с полем ввода применяет введённый радиус ко всем точкам маршрута.
+Speedlimits	Ограничения скорости
+The two speed textfields represent the minimum and maximum speed for the waypoint.	Два поля скорости задают минимальную и максимальную скорость для точки маршрута.
+The maximum speed is the speed the autopilot tries to reach to get to the waypoint.	Максимальная скорость — это скорость, которую автопилот пытается развить, направляясь к точке маршрута.
+The minimum speed was before used to set the speed with which the autopilot will go through the waypoint, but that got reworked now to be based on the next waypoint's max. speed and the turn needed at the waypoint.	Минимальная скорость раньше задавала скорость прохождения точки маршрута, но теперь это переработано и основано на макс. скорости следующей точки и повороте, нужном на этой точке.
+I have no idea what this will currently do if set so better just leave it at 0...	Автор понятия не имеет, что сейчас будет, если её задать — лучше оставить 0...
+The 'A' buttons set their respective speed for all waypoints.	Кнопки «A» применяют соответствующую скорость ко всем точкам маршрута.
+Quicksaving at a Waypoint	Быстрое сохранение в точке маршрута
+Clicking the 'QS' button will turn on QuickSave for that waypoint.	Нажатие кнопки «QS» включает быстрое сохранение для этой точки маршрута.
+This will make the autopilot stop and try to quicksave at that waypoint and then continue. A QuickSave waypoint has yellow text instead of white.	Автопилот остановится в этой точке, попробует сделать быстрое сохранение и продолжит движение. Точка с быстрым сохранением отображается жёлтым текстом вместо белого.
+Small sideeffect: leaving the throttle up will prevent the saving from occurring effectively pausing the autopilot at that point until interefered with. (Discovered by Greys)	Небольшой побочный эффект: если газ остаётся включённым, сохранение не произойдёт, и автопилот фактически замрёт в этой точке до вмешательства. (Обнаружено Greys)
+Alt clicking will toggle QS for all waypoints including the clicked one.	Alt+клик переключает быстрое сохранение для всех точек маршрута, включая ту, по которой кликнули.
+Changing the current target Waypoint	Смена текущей целевой точки маршрута
+Alt clicking a waypoint will mark it as the current target waypoint. The active waypoint has a green tinted background.	Alt+клик по точке маршрута делает её текущей целевой точкой. Активная точка выделена зеленоватым фоном.
+The empty textfield is for saving routes, enter a name there before clicking 'Save'.	Пустое поле ввода нужно для сохранения маршрутов — введите туда имя перед нажатием «Сохранить».
+To load a route simply select one from the list and click 'Load'.	Чтобы загрузить маршрут, выберите его из списка и нажмите «Загрузить».
+To delete a route simply select it and a 'Delete' button will appear right of it.	Чтобы удалить маршрут, выберите его — рядом появится кнопка «Удалить».
+Heading / Speed PID	ПИД курса / скорости
+These parameters control the behaviour of the heading's / speed's PID. Saved globally so NO TOUCHING unless you know what you're doing (or atleast know how to write down numbers to restore it if you mess up)	Эти параметры управляют поведением ПИД-регулятора курса и скорости. Сохраняются глобально, так что НЕ ТРОГАЙТЕ их, если не знаете, что делаете (или хотя бы не записали исходные числа, чтобы восстановить в случае ошибки)
+Safe Turn Speed	Безопасная скорость поворота
+'Safe Turn Speed' tells the autopilot which speed the rover can usually go full turn through corners without tipping over.	«Безопасная скорость поворота» указывает автопилоту, на какой скорости ровер обычно может проходить крутые повороты, не переворачиваясь.
+Given how differently terrain can be and other influences you can just leave it at 3 m/s but if you're impatient or just want to experiment feel free to test around. Saved per vessel type (same named vessels will share the setting).	Поскольку рельеф и другие факторы сильно различаются, можно просто оставить 3 м/с, но если не терпится — экспериментируйте. Сохраняется для каждого типа аппарата (одноимённые аппараты используют общую настройку).
+Traction and Braking	Сцепление и торможение
+'Traction' shows in % how many wheels have ground contact.	«Сцепление» показывает в процентах, сколько колёс касается земли.
+'Traction Brake Limit' defines what traction is atleast needed for the autopilot to still apply the brakes (given 'Stability Control' is active) even if you hold the brake down.	«Порог сцепления для торможения» задаёт минимальное сцепление, при котором автопилот всё ещё применяет тормоза (если включён «Контроль устойчивости»), даже если вы удерживаете тормоз.
+This means the default setting of 75 will make it brake only if atleast 3 wheels have ground contact.	Это значит, что при значении по умолчанию 75 торможение будет применяться, только если земли касаются минимум 3 колеса.
+'Traction Brake Limit' is saved per vessel type.	«Порог сцепления для торможения» сохраняется для каждого типа аппарата.
+If you have 'Stability Control' off then it won't take care of your brake and you can flip as much as you want.	Если «Контроль устойчивости» выключен, он не будет управлять торможением, и вы можете переворачиваться сколько угодно.
+Changing the route height in Mapview	Изменение высоты маршрута на карте
+These values define offsets for the route height in Mapview. Given how weird it's set up it can be that they are too high or too low so I added these for easier adjusting. Saved globally, I think.	Эти значения задают смещения высоты маршрута на карте. Из-за особенностей реализации они могут оказаться слишком большими или маленькими, поэтому добавлена возможность их подстройки. Сохраняются глобально, кажется.
+
+# --- Аэродром / заход на посадку (Aircraft Approach & Autoland) ---
+Runways	Полосы
+Runway	Полоса
+KSC Runway 09	Полоса KSC 09
+KSC Runway 27	Полоса KSC 27
+Island Runway 09	Полоса на острове 09
+Island Runway 27	Полоса на острове 27
+start	старт
+touchdown	точка касания
+altitude	высота
+
+# --- Приборная строка автопилота самолёта ---
+ Alt:	 Высота:
+ Vel:	 Скорость:
+ AirVel:	 Возд. скорость:
+ SoS:	 Скорость звука:
+ mach:	 Мах:
+ dynP:	 Дин. давление:
+ Temp:	 Темп-ра:
+ Lat:	 Широта:
+
+# --- Разное / манёвры / статусы ---
+Plan insertion burn	Запланировать манёвр выхода на орбиту
+Rendezvous	Сближение
+Transfer	Перелёт
+New eccentricity:	Новый эксцентриситет:
+change eccentricity	изменить эксцентриситет
+Ejection Optimization failed; try manual selection	Оптимизация манёвра не удалась, попробуйте выбрать время вручную
+KSC Pad	Стартовый стол KSC
+Maneuver burn vector not set	Вектор манёвра не задан
+No maneuver nodes	Нет узлов манёвра
+Exception in the last simulation	Ошибка в последнем расчёте
+Not enough data to calculate trend line	Недостаточно данных для расчёта линии тренда
+Exported as	Экспортировано как
+Display Module	Отображать модуль
+Display Module Icon	Отображать значок модуля
+Disengaging autopilot!	Автопилот отключается!
+Vessel landed!	Аппарат приземлился!

@@ -1,0 +1,18 @@
+# EnvironmentalVisualEnhancements (EVE) — русская локализация UI
+# Формат: Английский<TAB>Русский.
+# Извлечено из EVEManager.dll (окно редактора конфигов "EVE Config Editor") и Utils.dll
+# (общий GUI-хелпер, используемый EVE). Остальные .dll модуля (Atmosphere, CityLights,
+# Terrain, CelestialShadows, PQSManager, PartFX, ShaderLoader, TextureConfig,
+# _BuildManager) проверены strings-дампом IL — реального UI-текста не содержат,
+# только лог-сообщения, ключи ConfigNode и шейдерные свойства.
+
+# --- EVEManager: "EVE ... Config Editor" ---
+Apply	Применить
+Save	Сохранить
+Add	Добавить
+Remove	Удалить
+No config! Please add a config with the content of "	Нет конфигурации! Добавьте конфиг с содержимым "
+{}" to populate.	{}", чтобы заполнить.
+
+# --- Utils.dll: общий GUI-хелпер (генерируемый список узлов) ---
+Invalid Name!	Некорректное имя!

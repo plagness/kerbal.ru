@@ -1,0 +1,84 @@
+# FerramAerospaceResearch (FAR) — UI strings extracted from FerramAerospaceResearch.dll
+# (FerramAerospaceResearch.Base.dll and ferramGraph.dll contain zero real UI text — only
+# logging, shader/asset paths and reflection helper strings — so nothing from them is here).
+#
+# Method: `monodis --userstrings` to dump the DLL's user-string heap, then `monodis --output`
+# for a full IL disassembly (with KSP's Managed/ dir on MONO_PATH so types resolve), grepping
+# each candidate ldstr's surrounding bytecode to check what actually consumes it:
+#   - ldstr followed directly by a call to GUILayout.Toggle/Label, FARGUI.GUIUtils.TextEntryField/
+#     TextEntryForDouble (FAR's own labeled-field helper), IButton.set_ToolTip, a GameParameters
+#     difficulty-tab string[] array, or List<string>.Add => kept (verified to reach the UI as-is).
+#   - ldstr immediately followed by string::Concat/Format with another *runtime* value, or only
+#     ever passed to a Debug.Log-style helper => dropped, since the text KSP.Label actually
+#     receives always differs from the literal (a live number/name is spliced in) or is never
+#     shown to the player at all.
+# Also skipped by design: Localizer tags (bare identifiers like FARFlightStabLabel — FAR's own
+# Localization/*.cfg already owns those, this file only covers text hardcoded straight into IL),
+# Unity's built-in physcs layer names (Ignore Raycast / Local Scenery / Disconnected Parts — not
+# FAR's to translate), embedded RealChuteLite/Blizzy-Toolbar/config-loader plumbing, stack
+# traces, exceptions, and solver convergence logs (Secant/Brent method messages).
+
+# --- FAR Debug Options window ---
+FAR Debug Options	Настройки отладки FAR
+Ctrl Surf Time Constant:	Постоянная времени рул. поверхности:
+Flap Time Constant:	Постоянная времени закрылков:
+Spoiler Time Constant:	Постоянная времени спойлеров:
+Celestial Body Atmospheric Properties	Атмосферные свойства небесного тела
+Gas Viscosity:	Вязкость газа:
+Ref Temp for Viscosity:	Опорная темп. для вязкости:
+(global)	(глобально)
+Name:	Название:
+Axial (Y-axis) Max Stress:	Макс. осевое напряжение (ось Y):
+Lateral (X,Z-axis) Max Stress:	Макс. поперечное напряжение (оси X,Z):
+Requires Crew Compartment	Требуется отсек экипажа
+Min Num Resources:	Мин. число ресурсов:
+Req Resources:	Требуемые ресурсы:
+Exclude Resources:	Исключаемые ресурсы:
+Reject Unlisted Res	Отклонять неуказанные ресурсы
+Requires Specific Flow Mode	Требуется определённый режим подачи
+Special Hardcoded Usage	Особое встроенное использование
+Debug / Cheat Options	Настройки отладки / читов
+Allow Aero-structural Failures	Разрешить аэродинамически-конструкционные разрушения
+Editor GUI Graph Colors	Цвета графиков в редакторе
+Other Options	Прочие настройки
+Aero Failures Create Explosions	Аэродинамические разрушения вызывают взрывы
+Show Torque Arrows in Aero Overlay	Показывать стрелки момента в аэродин. оверлее
+Use Blizzy78 Toolbar instead of Stock AppManager	Использовать Toolbar Blizzy78 вместо панели приложений
+
+# --- Difficulty settings tabs (GameParameters custom category) ---
+Difficulty and Debug	Сложность и отладка
+Aerodynamic Failure	Аэродинамические разрушения
+Atm Composition	Состав атмосферы
+
+# --- Transonic drag / voxel detail settings window ---
+Transonic Drag Settings	Настройки трансзвукового сопротивления
+Absolute magnitude of drag can be scaled, as can how lenient FAR is about enforcing proper area ruling.	Абсолютную величину сопротивления можно масштабировать, как и то, насколько строго FAR следит за правилом площадей.
+Frac Mach 1 Drag: 	Доля сопротивления на M=1:
+The below are used in controlling leniency of design.  Higher values for all will result in more leniency	Ниже расположены настройки, определяющие строгость проверки конструкции. Более высокие значения означают большую снисходительность
+% Vehicle Length for Smoothing	% длины аппарата для сглаживания
+Smoothing Passes, Cross-Sectional Area	Проходы сглаживания площади сечения
+Smoothing Passes, area 2nd deriv	Проходы сглаживания 2-й производной площади
+Choose Custom Settings	Выбрать пользовательские настройки
+Switch Back To Presets	Вернуться к пресетам
+Voxel Detail Settings; increasing these will improve accuracy at the cost of performance	Настройки детализации вокселей; увеличение повышает точность за счёт производительности
+Voxels Controllable Vessel: 	Вокселей на управляемый аппарат:
+Voxels Debris: 	Вокселей на обломки:
+Min Phys Ticks per Voxel Update: 	Мин. физ. тиков на обновление вокселей:
+Use Higher Res SubVoxels: 	Использовать субвоксели повыш. разрешения:
+Low Res SubVoxels	Субвоксели низкого разрешения
+High Res SubVoxels	Субвоксели высокого разрешения
+Mesh: use 32 bit indices: 	Меш: использовать 32-битные индексы:
+16 bit indices	16-битные индексы
+32 bit indices	32-битные индексы
+
+# --- Popup dialogs ---
+Incorrect FAR Installation	Неверная установка FAR
+
+# --- Part right-click menu (KSPEvent) ---
+Asteroid Geometry Update	Обновление геометрии астероида
+Fairing Geometry Update	Обновление геометрии обтекателя
+
+# --- Misc labels ---
+FAR Editor	Редактор FAR
+unknown ship	неизвестный аппарат
+Voxelization Time (ms): 	Время вокселизации (мс):

@@ -1,0 +1,102 @@
+# RCS Build Aid — UI strings extracted from RCSBuildAid.dll (strings -> monodis IL, ldstr literals
+# traced to GUI.Label/GUILayout.Label/GUILayout.Button/GUILayout.Toggle/GUIContent call sites).
+# RCSBuildAidToolbar.dll checked separately: contains only icon texture paths, no label text.
+#
+# Skipped by design (see task report): TWR, Vac, ASL, Vt, F0/F3/0.## format specifiers,
+# GameObject names (e.g. "ACoM Marker"), asset/config paths, Settings.cfg keys (snake_case),
+# resource internal ids (LiquidFuel, Oxidizer...), Debug.Log-only messages, version string.
+
+<b>Module forces</b>	<b>Силы модуля</b>
+<b>ModuleEngine</b> 	<b>Модуль двигателя</b> 
+<b>Selected celestial body:</b> 	<b>Выбранное небесное тело:</b>
+<b>Vessel forces</b>	<b>Силы корабля</b>
+<b>Vessel stats:</b>	<b>Статистика корабля:</b>
+
+Amnt	Кол-во
+Ang Acc	Угл. ускорение
+Attitude	Ориентация
+Body	Тело
+Burn time	Время работы
+Celestial bodies	Небесные тела
+DCoM offset	Смещение DCoM
+DCoM offset readout	Индикатор смещения DCoM
+DEBUG	ОТЛАДКА
+Debug info	Отладочная информация
+Direction	Направление
+Dry mass	Сухая масса
+Engine forces count: 	Количество сил двигателей:
+Engines	Двигатели
+Fuel mass	Масса топлива
+Gimbals	Гимбалы
+In flight angular data	Угловые данные в полёте
+In flight vessel tree	Дерево корабля в полёте
+Include RCS	Учитывать RCS
+Launch in orbit	Запуск на орбите
+Marker autoscaling	Автомасштаб маркеров
+Markers	Маркеры
+Mass	Масса
+Massless resources	Безмассовые ресурсы
+MoI	Момент инерции
+More info	Подробнее
+Mouse	Мышь
+Name	Имя
+No RCS thrusters attached	Нет установленных RCS-двигателей
+No RCS thrusters in place.	Нет установленных RCS-двигателей.
+No atmosphere	Нет атмосферы
+No attitude control elements attached	Нет элементов управления ориентацией
+No attitude control elements in place.	Нет элементов управления ориентацией.
+No engines attached	Нет установленных двигателей
+No parachutes attached	Нет установленных парашютов
+No vessel parts	Нет деталей корабля
+None	Нет
+Part list	Список деталей
+Press any key	Нажмите любую клавишу
+RCS TWR readout	Индикатор TWR RCS
+RCS forces count: 	Количество сил RCS:
+Reference	Точка отсчёта
+Resources	Ресурсы
+Rotation	Вращение
+Select mode	Выбор режима
+Settings	Настройки
+Show in Actions Screen	Показывать на экране действий
+Show in Cargo Screen	Показывать на экране груза
+Show in Crew Screen	Показывать на экране экипажа
+Show vector magnitudes	Показывать величины векторов
+Size	Размер
+Thrust	Тяга
+Toggle part list window	Показать/скрыть список деталей
+Toggle vessel tree window	Показать/скрыть дерево корабля
+Torque	Крутящий момент
+Touchdown	До посадки
+Translation	Перемещение
+Use application launcher	Использовать панель приложений
+Use blizzy's toolbar	Использовать Toolbar blizzy78
+Vessel Parts	Детали корабля
+Vessel mass	Масса корабля
+Wet mass	Полная масса
+
+# Debug-window column headers / toggle buttons (DebugVesselTree, MenuDebug) — low priority but harmless to include
+children	потомки
+mass	масса
+mass info	инфо о массе
+module	модуль
+mouseover a part	навести на деталь
+no vessel	нет корабля
+p. mass	масса дет.
+part	деталь
+physics	физика
+resource	ресурс
+total	итого
+
+# Direction labels (RCSBuildAid.Direction dictionary, used as button text in Translation mode)
+forward	вперёд
+backward	назад
+up	вверх
+down	вниз
+left	влево
+right	вправо
+none	нет
+
+# Fragments concatenated into a label (leading space kept intentionally)
+ no force module	 нет силового модуля
+ s	 с

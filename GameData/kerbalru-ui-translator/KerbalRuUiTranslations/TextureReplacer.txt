@@ -1,0 +1,22 @@
+# TextureReplacer — окно персонализации скафандров/шлемов (TRGui) + панель отражений.
+# Извлечено дизассемблированием IL (monodis) TextureReplacer.dll — только строки, реально
+# доходящие до GUILayout.Label/Button/Toggle (перехватываются Harmony-патчем).
+#
+# Пропущено намеренно:
+# - "TextureReplacer" (заголовок окна, GUILayout.Window) — бренд/имя мода, не переводим;
+#   к тому же заголовки Window сейчас НЕ перехватываются патчем (см. отчёт агента).
+# - "<" / ">" — кнопки-стрелки навигации по списку кербалов/скафандров, не текст.
+# - "Reflections" — не UI-строка, это имя логгера (TextureReplacer.Log ctor), в GUI не попадает.
+# - Служебные ключи конфигурации, пути текстур/шейдеров, имена мешей/материалов — не UI.
+
+Enable real-time reflections	Отражения в реальном времени
+Personalise suits	Персонализировать скафандры
+Hide cargo and parachute backpacks	Скрыть рюкзаки груза и парашюта
+Reset to Defaults	Сбросить настройки
+Default	Стандартный
+Unset/Generic	Общий
+Veteran	Ветеран
+Slim	Стройный
+Vintage	Винтажный
+Future	Футуристический
+Dump	Дамп

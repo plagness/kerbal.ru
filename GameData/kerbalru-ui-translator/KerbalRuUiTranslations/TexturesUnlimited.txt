@@ -1,0 +1,57 @@
+# 000_TexturesUnlimited — русская локализация UI (панель перекраски деталей SSTURecolorGUI + debug-окна)
+# Формат: Английский<TAB>Русский. Извлечено из TexturesUnlimited.dll (strings + IL-анализ ldstr).
+
+# --- SSTURecolorGUI: панель перекраски детали в редакторе ---
+Part Recoloring	Перекраска детали
+Close	Закрыть
+Section	Секция
+Main	Основная
+Second	Дополнительная
+Detail	Детальная
+Recolorable	Перекрашиваемая
+Recolor	Перекраска
+Editing: 	Редактирование:
+Red	Красный
+Green	Зелёный
+Blue	Синий
+Specular	Блик
+Metallic	Металличность
+Hardness	Жёсткость
+Palette	Палитра
+Detail %	Детализация, %
+Load Pattern	Загрузить узор
+Store Pattern	Сохранить узор
+Load Color	Загрузить цвет
+Store Color	Сохранить цвет
+Select a preset color: 	Выберите пресет цвета:
+Select	Выбрать
+Secondary	Дополнительный
+Unknown	Неизвестно
+This part has configurable colors.	У этой детали настраиваемые цвета.
+
+# --- Textures Unlimited: debug/dev-инструменты ---
+Textures Unlimited Development Mode	Режим разработчика Textures Unlimited
+Dump ReflectionData	Выгрузить данные отражений
+Export UV and Model Data	Экспортировать UV и данные модели
+Toggle	Переключить
+Textures Unlimited - GFX API Check	Textures Unlimited — проверка графического API
+The Graphics API Detected: 	Обнаруженный графический API:
+Is unsupported by Textures Unlimited, and some graphics may not render correctly.	не поддерживается Textures Unlimited, часть графики может отображаться некорректно.
+For best results, use the -force-d3d11 or -force-glcore command line option to start KSP using either DirectX11 or the OpenGL Core graphics API	Для лучшего результата запускайте KSP с параметром командной строки -force-d3d11 или -force-glcore, чтобы использовать графический API DirectX11 или OpenGL Core
+Acknowledge & Close	Понятно, закрыть
+Reflections Enabled	Отражения включены
+Render Galaxy	Отрисовывать галактику
+Render Atmo	Отрисовывать атмосферу
+Render Scaled	Отрисовывать масштабированную модель
+Render Scenery	Отрисовывать окружение
+Alternate Render	Альтернативный рендер
+Eve Fix	Фикс EVE
+Toggle Debug Sphere	Переключить отладочную сферу
+Force Reflection Probe Update	Принудительно обновить пробник отражений
+Export Debug Cube Maps	Экспортировать отладочные кубические карты
+Export Debug Cube Layer	Экспортировать отладочный слой куба
+Dump world data	Выгрузить данные мира
+Dump cam data	Выгрузить данные камеры
+Dump Stock Refl Data	Выгрузить штатные данные отражений
+Dump model UV Maps	Выгрузить UV-карты модели
+Calculate Normalization Data	Рассчитать данные нормализации
