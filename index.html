@@ -1195,9 +1195,6 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
     refreshCelestialColliders();for(var i=0;i<asteroids.length;i++){var asteroid=asteroids[i];for(var c=0;c<celestialColliders.length;c++){var collider=celestialColliders[c];if(!collider.enabled())continue;asteroidDelta.copy(collider.center).sub(asteroid.position);var distanceSq=Math.max(.8,asteroidDelta.lengthSq());asteroid.userData.velocity.addScaledVector(asteroidDelta.normalize(),collider.asteroidGravity*dt/distanceSq);collideAsteroidWithCelestial(asteroid,collider)}asteroid.position.addScaledVector(asteroid.userData.velocity,dt);asteroid.rotation.x+=asteroid.userData.angularVelocity.x*dt;asteroid.rotation.y+=asteroid.userData.angularVelocity.y*dt;asteroid.rotation.z+=asteroid.userData.angularVelocity.z*dt;if(Math.abs(asteroid.position.x)>13.8||Math.abs(asteroid.position.y)>9.2||asteroid.position.z>4.4||asteroid.position.z<-18)placeAsteroid(asteroid,asteroid.userData.index,false)}for(var a=0;a<asteroids.length;a++)for(var b=a+1;b<asteroids.length;b++)collideAsteroidPair(asteroids[a],asteroids[b]);
   }
 
-  var hazeMatA=new THREE.SpriteMaterial({map:pointMap,color:0x245f47,transparent:true,opacity:.065,depthWrite:false,blending:THREE.AdditiveBlending}),hazeA=new THREE.Sprite(hazeMatA);hazeA.position.set(-5,2,-13);hazeA.scale.set(12,12,1);scene.add(hazeA);
-  var hazeMatB=hazeMatA.clone(),hazeB=new THREE.Sprite(hazeMatB);hazeMatB.color.set(0x24576b);hazeMatB.opacity=.045;hazeB.position.set(7,-3,-15);hazeB.scale.set(15,15,1);scene.add(hazeB);
-
   var shooters=[];
 
   var sun=new THREE.DirectionalLight(0xfff2dc,1.7);sun.position.set(-6,2,5);scene.add(sun);
@@ -1266,7 +1263,6 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
     var launchFx=smooth(flightProgress/.035)*(1-smooth((flightProgress-.025)/.2)),launchX=baseX-1.45*baseScale,launchY=.9+1.35*baseScale;launchPuffs.forEach(function(puff,index){var spread=.09+puff.userData.offset+launchFx*(.18+index*.035);puff.position.set(launchX+Math.cos(puff.userData.angle)*spread,launchY+Math.sin(puff.userData.angle)*spread,1.22);var ps=.08+launchFx*(.12+index*.018);puff.scale.set(ps,ps,1);puff.material.opacity=launchFx*(.4-index*.024)});
     stars.material.opacity=.64+Math.sin(t*.0007)*.07;stars.position.y=scrollSmooth*.24;stars.rotation.z=scrollSmooth*.012;
     nearStars.material.opacity=.28+Math.sin(t*.0011+1.2)*.08;nearStars.position.x=-tx*.7+scrollSmooth*.08;nearStars.position.y=ty*.55+scrollSmooth*.62;nearStars.rotation.z=-scrollSmooth*.02;
-    hazeA.position.x=-5+tx*.7;hazeA.position.y=2+scrollSmooth*.35;hazeB.position.x=7-tx*.45;hazeB.position.y=-3+scrollSmooth*.7;
     shooters.forEach(function(shooter,index){var cycle=(t*.000034+shooter.userData.phase+scrollSmooth*.028)%1;if(!reducedMotion&&cycle<.085){var p=cycle/.085;shooter.position.x=-9+p*18;shooter.position.y=shooter.userData.y-p*2.1+scrollSmooth*.25;shooter.material.opacity=Math.sin(p*Math.PI)*(.2+Math.min(scrollEnergy,1)*.16);shooter.scale.x=2.1+Math.min(scrollEnergy,1.5)*.7}else{shooter.material.opacity=0}});
     renderer.render(scene,camera);
   }
