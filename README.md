@@ -139,6 +139,7 @@ index.html                 kerbal.ru — статический сайт на Th
 - [Roadmap](docs/ROADMAP.md) — планы и приоритеты.
 - [История изменений](CHANGELOG.md) — содержимое стабильных релизов.
 - [Сопровождение](docs/MAINTAINING.md) — правила переводов и проверки.
+- [Инструкция для ИИ-агентов](AGENTS.md) — безопасная установка и post-install сценарий.
 - [Участие](CONTRIBUTING.md) — путь от идеи до pull request.
 - [Управление проектом](GOVERNANCE.md) — роли и принятие решений.
 - [Поддержка](SUPPORT.md) · [Безопасность](SECURITY.md) · [Кодекс поведения](CODE_OF_CONDUCT.md).
