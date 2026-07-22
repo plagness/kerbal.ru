@@ -7,251 +7,259 @@
 <meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Icons: Tabler Icons (MIT License) — https://tabler.io/icons -->
 <style>
   :root{
-    --bg-0:#04060c;
-    --bg-1:#070b16;
-    --panel:rgba(15,21,38,.62);
-    --panel-solid:#0e1424;
-    --line:rgba(255,163,44,.20);
-    --line-hot:rgba(255,163,44,.55);
-    --line-cool:rgba(120,170,255,.20);
-    --txt:#dde5f2;
-    --txt-dim:#8593ab;
-    --txt-faint:#5b667e;
-    --orange:#ffa32c;
-    --orange-2:#ff7b18;
-    --orange-glow:rgba(255,163,44,.4);
+    --bg-0:#03050b;
+    --bg-1:#060a15;
+    --panel:rgba(13,19,34,.66);
+    --panel-2:rgba(9,14,26,.8);
+    --line:rgba(63,208,212,.16);
+    --line-2:rgba(255,157,47,.18);
+    --line-hot:rgba(255,157,47,.5);
+    --line-cyan:rgba(63,208,212,.45);
+    --txt:#dbe6f0;
+    --txt-dim:#8695ab;
+    --txt-faint:#586275;
+    --orange:#ff9d2f;
+    --orange-2:#ff7a12;
+    --orange-glow:rgba(255,157,47,.42);
+    --gold:#f5b53d;
+    --cyan:#3fd0d4;
+    --cyan-glow:rgba(63,208,212,.4);
     --green:#a6df5e;
-    --green-glow:rgba(166,223,94,.35);
-    --blue:#78aaff;
-    --code:#05080f;
+    --green-glow:rgba(166,223,94,.4);
+    --code:#04070e;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif;
-    color:var(--txt);
-    background:var(--bg-0);
-    line-height:1.65;
-    overflow-x:hidden;
-  }
+  body{margin:0;font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--txt);background:var(--bg-0);line-height:1.6;overflow-x:hidden;}
 
-  /* ---------- STARFIELD ---------- */
+  /* backdrop */
   .sky{position:fixed;inset:0;z-index:-3;background:
-    radial-gradient(ellipse 120% 80% at 50% -20%, #12203f 0%, transparent 55%),
-    radial-gradient(ellipse 90% 60% at 80% 10%, rgba(255,123,24,.10) 0%, transparent 60%),
-    linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 55%,#0a1120 100%);}
-  .stars,.stars2,.stars3{position:fixed;inset:-200px 0;z-index:-2;pointer-events:none;}
-  .stars{background-image:
-    radial-gradient(1px 1px at 20px 30px,#fff,transparent),
-    radial-gradient(1px 1px at 140px 80px,#cfe0ff,transparent),
-    radial-gradient(1px 1px at 200px 220px,#fff,transparent),
-    radial-gradient(1px 1px at 320px 60px,#fff,transparent),
-    radial-gradient(1px 1px at 100px 400px,#e8eeff,transparent),
-    radial-gradient(1px 1px at 380px 330px,#fff,transparent);
-    background-size:420px 460px;animation:drift 140s linear infinite;opacity:.9;}
-  .stars2{background-image:
-    radial-gradient(1.6px 1.6px at 60px 160px,#fff,transparent),
-    radial-gradient(1.6px 1.6px at 350px 190px,#cfe0ff,transparent),
-    radial-gradient(1.6px 1.6px at 240px 340px,#fff,transparent),
-    radial-gradient(1.6px 1.6px at 30px 300px,#fff,transparent);
-    background-size:520px 560px;animation:drift 90s linear infinite;opacity:.75;}
-  .stars3{background-image:
-    radial-gradient(2.4px 2.4px at 130px 90px,#fff,transparent),
-    radial-gradient(2.4px 2.4px at 420px 260px,#ffe9cf,transparent),
-    radial-gradient(2.4px 2.4px at 260px 420px,#fff,transparent);
-    background-size:680px 720px;animation:drift 60s linear infinite,twinkle 6s ease-in-out infinite;opacity:.9;}
-  @keyframes drift{from{transform:translateY(0)}to{transform:translateY(-460px)}}
-  @keyframes twinkle{0%,100%{opacity:.9}50%{opacity:.5}}
-  @media(prefers-reduced-motion:reduce){.stars,.stars2,.stars3{animation:none}}
+    radial-gradient(ellipse 130% 90% at 72% -10%, #13284d 0%, transparent 52%),
+    radial-gradient(ellipse 90% 60% at 20% 8%, rgba(63,208,212,.07) 0%, transparent 60%),
+    linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 55%,#081020 100%);}
+  #bg3d{position:fixed;inset:0;z-index:-2;width:100%;height:100%;display:block;}
 
-  /* planet arc bottom */
-  .horizon{position:fixed;left:50%;bottom:-58vw;width:150vw;height:150vw;transform:translateX(-50%);z-index:-2;border-radius:50%;
-    background:radial-gradient(circle at 50% 0%, #16305e 0%, #0c1a34 32%, #060c18 46%, transparent 60%);
-    box-shadow:0 -1px 60px 6px rgba(120,170,255,.15), inset 0 4px 40px rgba(255,163,44,.10);pointer-events:none;}
+  .ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none}
 
-  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
 
-  /* ---------- TOP BAR ---------- */
-  .topbar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--txt-faint);letter-spacing:1px;}
-  .topbar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green-glow);margin-right:7px;vertical-align:middle;animation:pulse 2.4s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  /* HUD top strip */
+  .hud{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:1px;color:var(--txt-faint);}
+  .hud .live{color:var(--green)}
+  .hud .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green-glow);margin-right:7px;vertical-align:middle;animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hud .r{color:var(--cyan);opacity:.75}
+  @media(max-width:620px){.hud .hide{display:none}}
 
-  /* ---------- HERO ---------- */
-  .hero{text-align:center;padding:36px 0 30px;}
-  .kicker{display:inline-block;font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:4px;color:var(--green);
-    background:rgba(166,223,94,.07);border:1px solid rgba(166,223,94,.32);border-radius:30px;padding:6px 18px;text-transform:uppercase;margin-bottom:26px;}
-  h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.6rem,9vw,5.2rem);line-height:.95;margin:0;letter-spacing:2px;
-    background:linear-gradient(180deg,#fff 0%,#ffd9a3 40%,var(--orange) 105%);-webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 0 60px var(--orange-glow);}
-  .hero .lead{color:var(--txt-dim);font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:500;max-width:620px;margin:16px auto 0;}
-  .divider{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--orange);opacity:.65;margin:26px 0 4px;font-size:1.1rem;}
-  .divider::before,.divider::after{content:'';height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--line-hot),transparent);}
+  /* HERO */
+  .hero{text-align:center;padding:40px 0 26px;}
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-family:'Orbitron',sans-serif;font-size:.68rem;letter-spacing:3px;color:var(--cyan);
+    background:rgba(63,208,212,.07);border:1px solid var(--line-cyan);border-radius:30px;padding:7px 18px;text-transform:uppercase;margin-bottom:26px;}
+  .kicker .ic{color:var(--cyan);font-size:1rem}
+  h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.7rem,10vw,5.6rem);line-height:.92;margin:0;letter-spacing:2px;
+    background:linear-gradient(180deg,#fff 0%,#ffe0b3 42%,var(--orange) 110%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 70px var(--orange-glow);filter:drop-shadow(0 2px 30px rgba(255,157,47,.25));}
+  .lead{color:var(--txt-dim);font-size:clamp(1.05rem,2.4vw,1.32rem);font-weight:500;max-width:640px;margin:18px auto 0;}
+  .lead b{color:#fff}
 
-  .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
+  .cta{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;margin-top:32px;}
   .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Orbitron',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.6px;text-transform:uppercase;
-    padding:14px 26px;border-radius:9px;text-decoration:none;transition:transform .12s,filter .12s,box-shadow .12s;}
+    padding:14px 26px;border-radius:10px;text-decoration:none;transition:transform .13s,filter .13s,box-shadow .13s;}
+  .btn .ic{font-size:1.15rem}
   .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:linear-gradient(180deg,var(--orange) 0%,var(--orange-2) 100%);color:#1a0d00;box-shadow:0 6px 30px -6px var(--orange-glow);}
-  .btn-primary:hover{box-shadow:0 10px 40px -6px var(--orange-glow);filter:brightness(1.06);}
-  .btn-ghost{background:rgba(255,255,255,.03);border:1px solid var(--line-hot);color:var(--txt);}
-  .btn-ghost:hover{background:rgba(255,163,44,.08)}
+  .btn-primary{background:linear-gradient(180deg,var(--orange),var(--orange-2));color:#180b00;box-shadow:0 8px 34px -8px var(--orange-glow);}
+  .btn-primary:hover{filter:brightness(1.06);box-shadow:0 12px 44px -8px var(--orange-glow);}
+  .btn-ghost{background:rgba(63,208,212,.04);border:1px solid var(--line-cyan);color:var(--txt);}
+  .btn-ghost:hover{background:rgba(63,208,212,.1)}
+  .btn-ghost .ic{color:var(--cyan)}
 
-  .stats{display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:38px;}
-  .stat{text-align:center}
-  .stat .n{font-family:'Orbitron',sans-serif;font-weight:800;font-size:2rem;color:var(--orange);text-shadow:0 0 20px var(--orange-glow);line-height:1;}
-  .stat .l{font-size:.78rem;color:var(--txt-faint);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;}
+  /* telemetry stat readouts */
+  .readouts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
+  .ro{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:13px 20px;min-width:130px;position:relative;overflow:hidden;}
+  .ro::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),transparent);}
+  .ro .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.7rem;color:var(--cyan);letter-spacing:1px;line-height:1;text-shadow:0 0 16px var(--cyan-glow);}
+  .ro .l{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--txt-faint);letter-spacing:1.2px;text-transform:uppercase;margin-top:8px;font-family:'Orbitron',sans-serif;}
+  .ro .l .ic{color:var(--orange);font-size:.95rem}
 
-  /* ---------- SECTIONS ---------- */
-  section{padding:38px 0;}
-  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:4px;}
-  .sec-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--orange);border:1px solid var(--line-hot);border-radius:6px;padding:3px 9px;white-space:nowrap;}
-  h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.15rem,3.5vw,1.5rem);letter-spacing:1px;text-transform:uppercase;color:#fff;margin:0;}
-  .sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line-hot),transparent);}
+  /* SECTIONS */
+  section{padding:34px 0;}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:2px;}
+  .sec-ico{width:38px;height:38px;border:1px solid var(--line-hot);border-radius:10px;display:grid;place-items:center;color:var(--orange);background:rgba(255,157,47,.06);flex:none;font-size:1.25rem;box-shadow:inset 0 0 20px rgba(255,157,47,.05);}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--cyan);border:1px solid var(--line-cyan);border-radius:6px;padding:3px 8px;white-space:nowrap;letter-spacing:.5px;}
+  h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.15rem,3.4vw,1.5rem);letter-spacing:1px;text-transform:uppercase;color:#fff;margin:0;}
+  .sec-head .rule{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line-hot) 0 10px,transparent 10px 16px);}
 
-  .card{position:relative;background:var(--panel);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-top:18px;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 24px 60px -30px #000;}
-  .card::before,.card::after{content:'';position:absolute;width:14px;height:14px;border:2px solid var(--line-hot);opacity:.7;}
-  .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:6px;}
-  .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:6px;}
-  .card p:first-child{margin-top:0}
-  .card p:last-child{margin-bottom:0}
+  .card{position:relative;background:var(--panel);backdrop-filter:blur(9px);border:1px solid var(--line);border-radius:16px;padding:26px 30px;margin-top:18px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 30px 70px -34px #000;}
+  /* HUD corner brackets */
+  .card::before,.card::after{content:'';position:absolute;width:15px;height:15px;border:2px solid var(--line-cyan);opacity:.8;}
+  .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:5px;}
+  .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:5px;}
+  .card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}
   strong{color:#fff;font-weight:700}
+  a{color:var(--orange)}a:hover{color:var(--gold)}
 
-  /* ---------- TABS ---------- */
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
-  .tab{font-family:'Orbitron',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.5px;color:var(--txt-dim);cursor:pointer;
-    background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:11px 16px;display:flex;align-items:center;gap:8px;transition:.14s;}
-  .tab:hover{border-color:var(--line-hot);color:var(--txt)}
-  .tab.active{background:linear-gradient(180deg,rgba(255,163,44,.16),rgba(255,163,44,.04));border-color:var(--line-hot);color:var(--orange);}
-  .tab .ico{font-size:1rem}
-  .panel{display:none;animation:fade .25s ease;}
+  /* TABS */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+  .tab{font-family:'Orbitron',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.4px;color:var(--txt-dim);cursor:pointer;
+    background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:9px;transition:.14s;}
+  .tab .ic{font-size:1.15rem}
+  .tab:hover{border-color:var(--line-cyan);color:var(--txt)}
+  .tab.active{background:linear-gradient(180deg,rgba(255,157,47,.15),rgba(255,157,47,.03));border-color:var(--line-hot);color:var(--orange);}
+  .panel{display:none;animation:fade .28s ease;}
   .panel.active{display:block}
-  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 
-  ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0 0;}
-  ol.steps>li{position:relative;padding:0 0 20px 44px;margin:0;}
-  ol.steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;
-    background:rgba(255,163,44,.10);border:1px solid var(--line-hot);color:var(--orange);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.82rem;
-    display:flex;align-items:center;justify-content:center;}
-  ol.steps>li:not(:last-child)::after{content:'';position:absolute;left:13px;top:30px;bottom:2px;width:1px;background:linear-gradient(180deg,var(--line-hot),transparent);}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0 0;}
+  ol.steps>li{position:relative;padding:0 0 20px 46px;margin:0;}
+  ol.steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:9px;
+    background:rgba(63,208,212,.08);border:1px solid var(--line-cyan);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;
+    display:flex;align-items:center;justify-content:center;text-shadow:0 0 10px var(--cyan-glow);}
+  ol.steps>li:not(:last-child)::after{content:'';position:absolute;left:14px;top:32px;bottom:0;width:1px;background:linear-gradient(180deg,var(--line-cyan),transparent);}
   ol.steps>li b{color:#fff}
 
-  /* ---------- CODE ---------- */
-  .code{position:relative;background:var(--code);border:1px solid var(--line);border-radius:9px;margin:10px 0;overflow:hidden;}
-  .code pre{margin:0;padding:14px 52px 14px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.84rem;color:var(--green);}
-  .code .copy{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:6px;color:var(--txt-dim);
-    font-family:'Orbitron',sans-serif;font-size:.62rem;letter-spacing:.5px;padding:5px 9px;cursor:pointer;transition:.14s;}
-  .code .copy:hover{border-color:var(--line-hot);color:var(--orange)}
+  .code{position:relative;background:var(--code);border:1px solid var(--line);border-radius:9px;margin:11px 0;overflow:hidden;}
+  .code::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--line-cyan),transparent);}
+  .code pre{margin:0;padding:15px 58px 15px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.83rem;color:var(--green);}
+  .code .copy{position:absolute;top:9px;right:9px;background:rgba(63,208,212,.06);border:1px solid var(--line);border-radius:6px;color:var(--txt-dim);
+    font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:.5px;padding:5px 9px;cursor:pointer;transition:.14s;}
+  .code .copy:hover{border-color:var(--line-cyan);color:var(--cyan)}
   .code .copy.done{color:var(--green);border-color:rgba(166,223,94,.5)}
-  code.inline{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--green);}
+  code.inline{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:.81rem;color:var(--green);word-break:break-word;}
 
-  .note{border-left:2px solid var(--line-hot);background:rgba(255,163,44,.05);border-radius:0 8px 8px 0;padding:10px 16px;margin:14px 0;font-size:.94rem;color:var(--txt-dim);}
-  .note b{color:var(--orange)}
+  .note{display:flex;gap:11px;border-left:2px solid var(--gold);background:rgba(245,181,61,.06);border-radius:0 9px 9px 0;padding:11px 16px;margin:14px 0;font-size:.94rem;color:var(--txt-dim);}
+  .note .ic{color:var(--gold);font-size:1.15rem;margin-top:2px}
+  .note b{color:var(--gold)}
 
-  .pathtable{width:100%;border-collapse:collapse;margin-top:8px;font-size:.86rem;}
-  .pathtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
-  .pathtable td:first-child{color:var(--orange);font-family:'Orbitron',sans-serif;font-size:.72rem;letter-spacing:.5px;white-space:nowrap;padding-right:18px;}
-  .pathtable td:last-child{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.78rem;word-break:break-all;}
+  .pathtable{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem;}
+  .pathtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .pathtable tr:last-child td{border-bottom:0}
+  .pathtable td:first-child{color:var(--orange);font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:.5px;white-space:nowrap;padding-right:16px;}
+  .pathtable td .ic{margin-right:7px;vertical-align:-.15em}
+  .pathtable td:last-child{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.76rem;word-break:break-all;}
 
-  /* ---------- MOD GRID ---------- */
-  .legend{color:var(--txt-dim);font-size:.92rem;margin-top:8px;display:flex;gap:20px;flex-wrap:wrap;}
-  .badge{font-family:'Orbitron',sans-serif;font-size:.6rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;}
-  .badge.full{background:rgba(166,223,94,.14);color:var(--green);border:1px solid rgba(166,223,94,.4);}
-  .badge.patch{background:rgba(255,163,44,.14);color:var(--orange);border:1px solid rgba(255,163,44,.4);}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:16px;}
-  .cell{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;font-weight:500;font-size:.92rem;transition:.14s;}
-  .cell:hover{border-color:var(--line-hot);background:rgba(255,163,44,.04);}
+  .legend{color:var(--txt-dim);font-size:.92rem;margin-top:6px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+  .badge{font-family:'Orbitron',sans-serif;font-size:.58rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
+  .badge.full{background:rgba(166,223,94,.13);color:var(--green);border:1px solid rgba(166,223,94,.4);}
+  .badge.patch{background:rgba(255,157,47,.13);color:var(--orange);border:1px solid rgba(255,157,47,.4);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-top:16px;}
+  .cell{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:600;font-size:.9rem;transition:.14s;}
+  .cell:hover{border-color:var(--line-cyan);background:rgba(63,208,212,.04);transform:translateY(-1px)}
 
-  ul.plain{padding-left:20px}
-  ul.plain li{margin-bottom:10px}
-  ul.plain li::marker{color:var(--orange)}
+  ul.plain{padding-left:0;list-style:none;margin:0}
+  ul.plain li{position:relative;padding-left:26px;margin-bottom:12px}
+  ul.plain li .ic{position:absolute;left:0;top:3px;color:var(--orange)}
 
-  footer{text-align:center;color:var(--txt-faint);font-size:.85rem;padding:44px 0 60px;margin-top:20px;border-top:1px solid var(--line);}
-  footer a{color:var(--orange);text-decoration:none}
-  footer a:hover{text-decoration:underline}
+  footer{text-align:center;color:var(--txt-faint);font-size:.85rem;padding:46px 0 64px;margin-top:22px;border-top:1px solid var(--line);}
+  footer a{color:var(--cyan);text-decoration:none}footer a:hover{text-decoration:underline}
+  footer .gh{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;color:var(--txt);font-family:'Orbitron',sans-serif;font-size:.8rem}
+  footer .gh .ic{font-size:1.2rem}
   .mono{font-family:'JetBrains Mono',monospace}
 
-  @media(max-width:560px){
-    .card{padding:20px 18px}
-    .topbar .hide-sm{display:none}
-  }
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media(max-width:560px){.card{padding:22px 18px}}
 </style>
 </head>
 <body>
-<div class="sky"></div><div class="stars"></div><div class="stars2"></div><div class="stars3"></div><div class="horizon"></div>
+
+<!-- ===== ICON SPRITE (Tabler Icons, MIT) ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"/><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"/><path d="M14 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/></symbol>
+<symbol id="i-planet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18.816 13.58c2.292 2.138 3.546 4 3.092 4.9c-.745 1.46 -5.783 -.259 -11.255 -3.838c-5.47 -3.579 -9.304 -7.664 -8.56 -9.123c.464 -.91 2.926 -.444 5.803 .805"/><path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/></symbol>
+<symbol id="i-satellite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.707 6.293l2.586 -2.586a1 1 0 0 1 1.414 0l5.586 5.586a1 1 0 0 1 0 1.414l-2.586 2.586a1 1 0 0 1 -1.414 0l-5.586 -5.586a1 1 0 0 1 0 -1.414"/><path d="M6 10l-3 3l3 3l3 -3"/><path d="M10 6l3 -3l3 3l-3 3"/><path d="M12 12l1.5 1.5"/><path d="M14.5 17a2.5 2.5 0 0 0 2.5 -2.5"/><path d="M15 21a6 6 0 0 0 6 -6"/></symbol>
+<symbol id="i-world" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M3.6 9h16.8"/><path d="M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18"/><path d="M12.5 3a17 17 0 0 1 0 18"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M13.41 10.59l2.59 -2.59"/><path d="M7 12a5 5 0 0 1 5 -5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></symbol>
+<symbol id="i-alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M9 12l2 2l4 -4"/></symbol>
+<symbol id="i-book-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12"/><path d="M19 16h-12a2 2 0 0 0 -2 2"/><path d="M9 8h6"/></symbol>
+<symbol id="i-brand-windows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 20l-12 -1.5c-1 -.1 -1.8 -.9 -1.8 -1.9v-9.2c0 -1 .8 -1.8 1.8 -1.9l12 -1.5c1.2 -.1 2.2 .8 2.2 1.9v12.1c0 1.2 -1.1 2.1 -2.2 1.9l0 .1"/><path d="M12 5l0 14"/><path d="M4 12l16 0"/></symbol>
+<symbol id="i-brand-apple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.286 7.008c-3.216 0 -4.286 3.23 -4.286 5.92c0 3.229 2.143 8.072 4.286 8.072c1.165 -.05 1.799 -.538 3.214 -.538c1.406 0 1.607 .538 3.214 .538s4.286 -3.229 4.286 -5.381c-.03 -.011 -2.649 -.434 -2.679 -3.23c-.02 -2.335 2.589 -3.179 2.679 -3.228c-1.096 -1.606 -3.162 -2.113 -3.75 -2.153c-1.535 -.12 -3.032 1.077 -3.75 1.077c-.729 0 -2.036 -1.077 -3.214 -1.077"/><path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2"/></symbol>
+<symbol id="i-brand-debian" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17c-2.397 -.943 -4 -3.153 -4 -5.635c0 -2.19 1.039 -3.14 1.604 -3.595c2.646 -2.133 6.396 -.27 6.396 3.23c0 2.5 -2.905 2.121 -3.5 1.5c-.595 -.621 -1 -1.5 -.5 -2.5"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/></symbol>
+<symbol id="i-brand-steam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 5a4.5 4.5 0 1 1 -.653 8.953l-4.347 3.009l0 .038a3 3 0 0 1 -2.824 3l-.176 0a3 3 0 0 1 -2.94 -2.402l-2.56 -1.098v-3.5l3.51 1.755a2.989 2.989 0 0 1 2.834 -.635l2.727 -3.818a4.5 4.5 0 0 1 4.429 -5.302"/><path d="M15.5 9.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" fill="currentColor"/></symbol>
+<symbol id="i-language" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629"/><path d="M4 6.371h7"/><path d="M5 9c0 2.144 2.252 3.908 6 4"/><path d="M12 20l4 -9l4 9"/><path d="M19.1 18h-6.2"/><path d="M6.694 3l.793 .582"/></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6"/></symbol>
+<symbol id="i-brand-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v6"/><path d="M12 5v3"/><path d="M10 5h4"/><path d="M5 13h-2"/><path d="M6 10h2l2 -2h3.382a1 1 0 0 1 .894 .553l1.448 2.894a1 1 0 0 0 .894 .553h1.382v-2h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2v-2h-3v2a1 1 0 0 1 -1 1h-3.465a1 1 0 0 1 -.832 -.445l-1.703 -2.555h-2v-6"/></symbol>
+<symbol id="i-packages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5"/><path d="M2 13.5v5.5l5 3"/><path d="M7 16.545l5 -3.03"/><path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5"/><path d="M12 19l5 3"/><path d="M17 16.5l5 -3"/><path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5"/><path d="M7 5.03v5.455"/><path d="M12 8l5 -3"/></symbol>
+<symbol id="i-adjustments" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M6 4v4"/><path d="M6 12v8"/><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M12 4v10"/><path d="M12 18v2"/><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M18 4v1"/><path d="M18 9v11"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></symbol>
+</svg>
+
+<div class="sky"></div>
+<canvas id="bg3d"></canvas>
 
 <div class="wrap">
 
-  <div class="topbar">
-    <span><span class="dot"></span>KERBAL.RU · MISSION CONTROL</span>
-    <span class="hide-sm">KSP 1.12.5 · RO / RSS / RP-1 · LANG=RU</span>
+  <div class="hud">
+    <span class="live"><span class="dot"></span>KERBAL.RU · MISSION CONTROL · <span class="live">ONLINE</span></span>
+    <span class="hide r">KSP 1.12.5 · RO/RSS/RP-1 · LANG=RU</span>
   </div>
 
   <!-- HERO -->
   <header class="hero">
-    <span class="kicker">Русская локализация · Realism Overhaul</span>
+    <span class="kicker"><svg class="ic"><use href="#i-language"/></svg>Русская локализация · Realism Overhaul</span>
     <h1>KERBAL.RU</h1>
-    <p class="lead">Реалистичная сборка Kerbal Space Program на русском. Real Solar System, настоящая орбитальная механика, карьера от первых ракет до наших дней — <strong>с переводом интерфейса и деталей</strong>.</p>
-    <div class="divider">✦ &nbsp;🚀&nbsp; ✦</div>
+    <p class="lead">Реалистичная сборка Kerbal Space Program на русском. Настоящая Солнечная система, честная орбитальная механика, историческая карьера — <b>с переводом интерфейса и деталей</b>.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">⬇ Скачать русификатор</a>
-      <a class="btn btn-ghost" href="#install">Инструкция по установке</a>
+      <a class="btn btn-primary" href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip"><svg class="ic"><use href="#i-download"/></svg>Скачать русификатор</a>
+      <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg>Инструкция</a>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="n">20</div><div class="l">модов переведено</div></div>
-      <div class="stat"><div class="n">3500+</div><div class="l">строк текста</div></div>
-      <div class="stat"><div class="n">4</div><div class="l">платформы</div></div>
+    <div class="readouts">
+      <div class="ro"><div class="n">20</div><div class="l"><svg class="ic"><use href="#i-packages"/></svg>модов</div></div>
+      <div class="ro"><div class="n">3500+</div><div class="l"><svg class="ic"><use href="#i-language"/></svg>строк</div></div>
+      <div class="ro"><div class="n">04</div><div class="l"><svg class="ic"><use href="#i-cpu"/></svg>платформы</div></div>
     </div>
   </header>
 
-  <!-- WHAT -->
-  <section id="about">
-    <div class="sec-head"><span class="sec-num">00 / ОБЗОР</span><h2>Что это</h2><span class="rule"></span></div>
+  <!-- ABOUT -->
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">00 / ОБЗОР</span><h2>Что это</h2><span class="rule"></span></div>
     <div class="card">
-      <p><strong>RO / RSS / RP-1</strong> — флагманская реалистичная сборка KSP1. Она заменяет игрушечную кербальскую систему на настоящую Солнечную (Земля в реальном масштабе), делает физику, топливо и двигатели приближенными к жизни и добавляет историческую карьеру. Это признанный сообществом «тот самый» реалистичный режим.</p>
-      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в 20 ключевых модов сборки и устанавливается копированием одной папки. Для англоязычных игроков ничего не меняется — перевод активируется только при выборе русского языка.</p>
+      <p><strong>RO / RSS / RP-1</strong> — флагманская реалистичная сборка KSP1. Она заменяет игрушечную кербальскую систему на настоящую Солнечную (Земля в реальном масштабе), приближает физику, топливо и двигатели к жизни и добавляет историческую карьеру. Признанный сообществом «тот самый» реалистичный режим.</p>
+      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в 20 ключевых модов и ставится копированием одной папки. Для англоязычных игроков ничего не меняется — перевод включается только при выборе русского языка.</p>
     </div>
   </section>
 
-  <!-- INSTALL STEP 1 -->
-  <section id="install">
-    <div class="sec-head"><span class="sec-num">01 / СБОРКА</span><h2>Шаг 1 · Ставим CKAN</h2><span class="rule"></span></div>
+  <!-- STEP 1 -->
+  <section id="install" class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / СБОРКА</span><h2>Шаг 1 · Ставим CKAN</h2><span class="rule"></span></div>
     <div class="card">
-      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (нужна версия 1.12.5), затем CKAN — по вкладке своей ОС:</p>
-
+      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (версия 1.12.5), затем CKAN — по вкладке своей ОС:</p>
       <div class="tabs" data-group="os">
-        <div class="tab active" data-tab="win"><span class="ico">🪟</span>Windows</div>
-        <div class="tab" data-tab="mac"><span class="ico">🍎</span>macOS</div>
-        <div class="tab" data-tab="lin"><span class="ico">🐧</span>Linux</div>
-        <div class="tab" data-tab="deck"><span class="ico">🎮</span>Steam Deck</div>
+        <div class="tab active" data-tab="win"><svg class="ic"><use href="#i-brand-windows"/></svg>Windows</div>
+        <div class="tab" data-tab="mac"><svg class="ic"><use href="#i-brand-apple"/></svg>macOS</div>
+        <div class="tab" data-tab="lin"><svg class="ic"><use href="#i-brand-debian"/></svg>Linux</div>
+        <div class="tab" data-tab="deck"><svg class="ic"><use href="#i-brand-steam"/></svg>Steam Deck</div>
       </div>
 
-      <!-- WINDOWS -->
       <div class="panel active" data-panel="win">
         <ol class="steps">
-          <li>Убедись, что установлен <b>.NET Framework 4.8</b> — в Windows 10 и 11 он уже есть по умолчанию.</li>
+          <li>Убедись, что установлен <b>.NET Framework 4.8</b> — в Windows 10 и 11 он есть по умолчанию.</li>
           <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a> и положи в любую папку (не внутрь игры).</li>
           <li>Запусти <code class="inline">ckan.exe</code> двойным кликом — откроется графический интерфейс.</li>
-          <li>При первом запуске укажи путь к установленной игре — CKAN обычно находит Steam-копию сам.</li>
+          <li>При первом запуске укажи путь к игре — CKAN обычно находит Steam-копию сам.</li>
         </ol>
       </div>
 
-      <!-- MAC -->
       <div class="panel" data-panel="mac">
         <ol class="steps">
           <li>Скачай <b>CKAN.dmg</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a>.</li>
-          <li>Открой образ и перетащи <code class="inline">CKAN.app</code> в любую папку, затем запусти двойным кликом.</li>
+          <li>Открой образ, перетащи <code class="inline">CKAN.app</code> в любую папку и запусти двойным кликом.</li>
           <li>На современных macOS (10.15+) CKAN открывается как <b>текстовый интерфейс в Терминале</b> — Apple убрала поддержку 32-битного GUI. Разреши доступ к Терминалу, если система спросит.</li>
-          <li>Укажи путь к установленной игре и переходи к шагу 2.</li>
+          <li>Укажи путь к игре и переходи к шагу 2.</li>
         </ol>
-        <div class="note"><b>Совет:</b> навигация в консольном интерфейсе — стрелки, Enter, Tab. Либо собери сборку на ПК с Windows и просто скопируй папку игры на Mac.</div>
+        <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Проще:</b> собери сборку на ПК с Windows и просто скопируй папку игры на Mac — тогда возня с консолью не нужна.</span></div>
       </div>
 
-      <!-- LINUX -->
       <div class="panel" data-panel="lin">
         <ol class="steps">
           <li>Установи Mono (движок для запуска CKAN):
@@ -264,7 +272,7 @@ sudo dnf install mono-complete
 # Arch
 sudo pacman -S mono</pre></div>
           </li>
-          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов</a> (либо ставь <code class="inline">.deb</code>/<code class="inline">.rpm</code> из тех же релизов).</li>
+          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов</a> (либо ставь <code class="inline">.deb</code>/<code class="inline">.rpm</code> оттуда же).</li>
           <li>Запусти графический интерфейс:
             <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe</pre></div>
           </li>
@@ -272,15 +280,14 @@ sudo pacman -S mono</pre></div>
         </ol>
       </div>
 
-      <!-- STEAM DECK -->
       <div class="panel" data-panel="deck">
-        <p style="margin-top:16px">У SteamOS файловая система «только для чтения», поэтому чистый способ — контейнер Debian через <b>distrobox</b> (он уже есть на Deck). Всё делается в <b>режиме рабочего стола</b> в приложении Konsole.</p>
+        <p style="margin-top:16px">У SteamOS файловая система «только для чтения», поэтому чистый путь — контейнер Debian через <b>distrobox</b> (он уже есть на Deck). Всё делается в <b>режиме рабочего стола</b>, в приложении Konsole.</p>
         <ol class="steps">
           <li>Создай контейнер и войди в него:
             <div class="code"><button class="copy">COPY</button><pre>distrobox create -n ckanbox -i debian:12 -Y
 distrobox enter ckanbox</pre></div>
           </li>
-          <li>Внутри контейнера поставь Mono и CKAN:
+          <li>Поставь Mono и CKAN внутри контейнера:
             <div class="code"><button class="copy">COPY</button><pre>sudo apt update && sudo apt install -y mono-complete
 curl -L -o ckan.exe https://github.com/KSP-CKAN/CKAN/releases/latest/download/ckan.exe</pre></div>
           </li>
@@ -290,49 +297,49 @@ curl -L -o ckan.exe https://github.com/KSP-CKAN/CKAN/releases/latest/download/ck
 mono ckan.exe instance default KSP
 mono ckan.exe update</pre></div>
           </li>
-          <li>Дальше — команды установки из шага 2 (в том же контейнере).</li>
+          <li>Дальше — команда установки из шага 2 (в том же контейнере).</li>
         </ol>
-        <div class="note"><b>Проще:</b> если есть ПК — собери сборку там через CKAN и скопируй папку <code class="inline">Kerbal Space Program</code> на Deck целиком. Тогда контейнер не нужен.</div>
+        <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Проще:</b> если есть ПК — собери сборку там и скопируй папку <code class="inline">Kerbal Space Program</code> на Deck целиком. Контейнер тогда не нужен.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- INSTALL STEP 2 -->
-  <section>
-    <div class="sec-head"><span class="sec-num">02 / МОДЫ</span><h2>Шаг 2 · Ставим RO / RSS / RP-1</h2><span class="rule"></span></div>
+  <!-- STEP 2 -->
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-engine"/></svg></span><span class="sec-num">02 / МОДЫ</span><h2>Шаг 2 · Ставим RO / RSS / RP-1</h2><span class="rule"></span></div>
     <div class="card">
-      <p>В CKAN найди и отметь <strong>RP-1-ExpressInstall</strong> — это официальный мета-пак, который подтянет Realism Overhaul, Real Solar System, RP-1 и все зависимости. Через GUI: поставь галочки, нажми Apply. Через терминал (Linux / Steam Deck) — одной командой:</p>
+      <p>В CKAN найди и отметь <strong>RP-1-ExpressInstall</strong> — официальный мета-пак, который подтянет Realism Overhaul, Real Solar System, RP-1 и все зависимости. Через GUI — галочки и Apply. Через терминал (Linux / Steam Deck) — одной командой:</p>
       <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe install --headless --no-recommends \
   RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1</pre></div>
-      <div class="note"><b>Graphics-Low</b> выбран сознательно: низкое разрешение текстур экономит память и лучше идёт на слабом железе и Steam Deck. Первый запуск игры будет долгим — Module Manager собирает конфиги десятков модов.</div>
+      <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Graphics-Low</b> выбран сознательно: низкое разрешение текстур экономит память и лучше идёт на слабом железе и Steam Deck. Первый запуск игры будет долгим — Module Manager собирает конфиги десятков модов.</span></div>
     </div>
   </section>
 
-  <!-- INSTALL STEP 3 -->
-  <section>
-    <div class="sec-head"><span class="sec-num">03 / РУСИФИКАТОР</span><h2>Шаг 3 · Ставим русский</h2><span class="rule"></span></div>
+  <!-- STEP 3 -->
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-language"/></svg></span><span class="sec-num">03 / РУСИФИКАТОР</span><h2>Шаг 3 · Ставим русский</h2><span class="rule"></span></div>
     <div class="card">
       <ol class="steps">
         <li><b>Скачай русификатор</b> — <a href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">ZIP-архив</a> — и распакуй.</li>
-        <li><b>Скопируй содержимое папки <code class="inline">GameData</code></b> из архива в <code class="inline">GameData</code> своей установки игры. Файлы лягут в нужные подпапки сами. Где находится игра:
+        <li><b>Скопируй содержимое папки <code class="inline">GameData</code></b> из архива в <code class="inline">GameData</code> своей игры. Файлы лягут в нужные подпапки сами. Где находится игра:
           <table class="pathtable">
-            <tr><td>Windows</td><td>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData</td></tr>
-            <tr><td>macOS</td><td>~/Library/Application Support/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
-            <tr><td>Linux</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
-            <tr><td>Steam&nbsp;Deck</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+            <tr><td><svg class="ic"><use href="#i-brand-windows"/></svg>Windows</td><td>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData</td></tr>
+            <tr><td><svg class="ic"><use href="#i-brand-apple"/></svg>macOS</td><td>~/Library/Application Support/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+            <tr><td><svg class="ic"><use href="#i-brand-debian"/></svg>Linux</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
+            <tr><td><svg class="ic"><use href="#i-brand-steam"/></svg>Deck</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
           </table>
         </li>
-        <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в файле <code class="inline">settings.cfg</code> (лежит рядом с папкой GameData):
+        <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в <code class="inline">settings.cfg</code> (рядом с папкой GameData):
           <div class="code"><button class="copy">COPY</button><pre>LANGUAGE = ru</pre></div>
         </li>
-        <li>Запусти игру. Готово — интерфейс, детали и карьера RP-1 на русском. 🚀</li>
+        <li>Запусти игру. Готово — интерфейс, детали и карьера RP-1 на русском.</li>
       </ol>
     </div>
   </section>
 
   <!-- MODS -->
-  <section id="mods">
-    <div class="sec-head"><span class="sec-num">04 / ОХВАТ</span><h2>Что переведено</h2><span class="rule"></span></div>
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num">04 / ОХВАТ</span><h2>Что переведено</h2><span class="rule"></span></div>
     <div class="card">
       <div class="legend">
         <span><span class="badge full">FULL</span> родная локализация мода</span>
@@ -364,52 +371,192 @@ mono ckan.exe update</pre></div>
   </section>
 
   <!-- LIMITS -->
-  <section>
-    <div class="sec-head"><span class="sec-num">05 / НЮАНСЫ</span><h2>Что важно знать</h2><span class="rule"></span></div>
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-alert-triangle"/></svg></span><span class="sec-num">05 / НЮАНСЫ</span><h2>Что важно знать</h2><span class="rule"></span></div>
     <div class="card">
-      <ul class="plain" style="margin:0">
-        <li>Переведено 20 модов из полного набора сборки — остальные пока на английском. Список открыт для расширения.</li>
-        <li>Контракты, созданные <em>до</em> установки перевода в уже начатом сохранении, останутся на английском: их текст «запекается» в момент создания. Новые контракты будут на русском.</li>
-        <li>Несколько отдельных деталей (в ProceduralFairings и ModularLaunchPads) оставлены на английском — их исходные файлы устроены так, что нельзя было надёжно сверить перевод с оригиналом.</li>
+      <ul class="plain">
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Переведено 20 модов из полного набора сборки — остальные пока на английском. Список открыт для расширения.</li>
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Контракты, созданные <em>до</em> установки перевода в уже начатом сохранении, останутся на английском: их текст «запекается» в момент создания. Новые контракты будут на русском.</li>
+        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Несколько отдельных деталей (в ProceduralFairings и ModularLaunchPads) оставлены на английском — их исходные файлы устроены так, что нельзя было надёжно сверить перевод с оригиналом.</li>
       </ul>
     </div>
   </section>
 
-  <footer>
+  <footer class="reveal">
+    <a class="gh" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru</a><br>
     Независимый фан-проект, не аффилирован с авторами оригинальных модов.<br>
     Исходники сборки: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a><br>
-    <span class="mono" style="opacity:.6">kerbal.ru · github.com/plagness/kerbal.ru</span>
+    <span class="mono" style="opacity:.55;display:inline-block;margin-top:10px">иконки — Tabler Icons (MIT)</span>
   </footer>
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three/r128/three.min.js"></script>
 <script>
-  // OS tabs
-  document.querySelectorAll('.tabs').forEach(function(group){
-    var tabs=group.querySelectorAll('.tab');
-    var scope=group.closest('.card');
-    tabs.forEach(function(tab){
-      tab.addEventListener('click',function(){
-        tabs.forEach(function(t){t.classList.remove('active')});
-        tab.classList.add('active');
-        var key=tab.getAttribute('data-tab');
-        scope.querySelectorAll('.panel').forEach(function(p){
-          p.classList.toggle('active',p.getAttribute('data-panel')===key);
-        });
-      });
-    });
+/* ---------- UI: tabs + copy + reveal ---------- */
+document.querySelectorAll('.tabs').forEach(function(group){
+  var tabs=group.querySelectorAll('.tab'), scope=group.closest('.card');
+  tabs.forEach(function(tab){tab.addEventListener('click',function(){
+    tabs.forEach(function(t){t.classList.remove('active')});tab.classList.add('active');
+    var key=tab.getAttribute('data-tab');
+    scope.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-panel')===key)});
+  });});
+});
+document.querySelectorAll('.code .copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var t=btn.parentElement.querySelector('pre').innerText;
+    navigator.clipboard.writeText(t).then(function(){var o=btn.textContent;btn.textContent='OK';btn.classList.add('done');setTimeout(function(){btn.textContent=o;btn.classList.remove('done')},1300);});
   });
-  // copy buttons
-  document.querySelectorAll('.code .copy').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var pre=btn.parentElement.querySelector('pre');
-      var text=pre.innerText;
-      navigator.clipboard.writeText(text).then(function(){
-        var old=btn.textContent;btn.textContent='OK ✓';btn.classList.add('done');
-        setTimeout(function(){btn.textContent=old;btn.classList.remove('done')},1400);
-      });
+});
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+/* ---------- Three.js: Earth + atmosphere + clouds + satellite + stars ---------- */
+(function(){
+  if(typeof THREE==='undefined')return;
+  var canvas=document.getElementById('bg3d');
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio=renderer.setPixelRatio||function(){};
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.75));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,200);
+  camera.position.set(0,0,7);
+
+  /* --- procedural textures --- */
+  function mk(w,h){var c=document.createElement('canvas');c.width=w;c.height=h;return c;}
+  function rand(a,b){return a+Math.random()*(b-a);}
+
+  // continents seed shared by day + night
+  var conts=[];
+  for(var i=0;i<8;i++){conts.push({x:rand(0,1024),y:rand(70,442),r:rand(60,140)});}
+
+  function earthTex(){
+    var c=mk(1024,512),x=c.getContext('2d');
+    var g=x.createLinearGradient(0,0,0,512);
+    g.addColorStop(0,'#0a1e40');g.addColorStop(.5,'#0e3c74');g.addColorStop(1,'#0a2247');
+    x.fillStyle=g;x.fillRect(0,0,1024,512);
+    // land
+    conts.forEach(function(ct){
+      for(var k=0;k<46;k++){
+        var a=Math.random()*Math.PI*2,d=Math.random()*ct.r;
+        var px=ct.x+Math.cos(a)*d,py=ct.y+Math.sin(a)*d*0.7,rr=rand(10,34);
+        var greens=['#2f5d33','#3a6b39','#4f6b34','#5c6535','#356b40'];
+        x.fillStyle=greens[(k+ct.r|0)%greens.length];
+        x.globalAlpha=.55;x.beginPath();x.arc(px,py,rr,0,7);x.fill();
+      }
     });
+    x.globalAlpha=1;
+    // ice caps
+    var ic=x.createLinearGradient(0,0,0,60);ic.addColorStop(0,'#eaf3ff');ic.addColorStop(1,'rgba(234,243,255,0)');
+    x.fillStyle=ic;x.fillRect(0,0,1024,60);
+    var ic2=x.createLinearGradient(0,452,0,512);ic2.addColorStop(0,'rgba(234,243,255,0)');ic2.addColorStop(1,'#eaf3ff');
+    x.fillStyle=ic2;x.fillRect(0,452,1024,60);
+    return new THREE.CanvasTexture(c);
+  }
+  function nightTex(){
+    var c=mk(1024,512),x=c.getContext('2d');
+    x.fillStyle='#000';x.fillRect(0,0,1024,512);
+    conts.forEach(function(ct){
+      for(var k=0;k<120;k++){
+        var a=Math.random()*Math.PI*2,d=Math.random()*ct.r*.85;
+        var px=ct.x+Math.cos(a)*d,py=ct.y+Math.sin(a)*d*0.7;
+        x.fillStyle='rgba(255,180,90,'+rand(.35,.95).toFixed(2)+')';
+        x.fillRect(px,py,rand(.8,2.1),rand(.8,2.1));
+      }
+    });
+    return new THREE.CanvasTexture(c);
+  }
+  function cloudTex(){
+    var c=mk(1024,512),x=c.getContext('2d');
+    x.clearRect(0,0,1024,512);
+    for(var k=0;k<40;k++){
+      var px=rand(0,1024),py=rand(40,472),rr=rand(30,90);
+      var g=x.createRadialGradient(px,py,0,px,py,rr);
+      g.addColorStop(0,'rgba(255,255,255,'+rand(.28,.6).toFixed(2)+')');g.addColorStop(1,'rgba(255,255,255,0)');
+      x.fillStyle=g;x.beginPath();x.arc(px,py,rr,0,7);x.fill();
+    }
+    return new THREE.CanvasTexture(c);
+  }
+
+  var planetGroup=new THREE.Group();
+  planetGroup.position.set(2.6,1.15,0);
+  planetGroup.rotation.z=0.41; // axial tilt
+  scene.add(planetGroup);
+
+  var earth=new THREE.Mesh(
+    new THREE.SphereGeometry(1.7,64,64),
+    new THREE.MeshStandardMaterial({map:earthTex(),emissiveMap:nightTex(),emissive:0xffb060,emissiveIntensity:.85,roughness:1,metalness:0})
+  );
+  planetGroup.add(earth);
+
+  var clouds=new THREE.Mesh(
+    new THREE.SphereGeometry(1.74,48,48),
+    new THREE.MeshStandardMaterial({map:cloudTex(),transparent:true,opacity:.5,depthWrite:false,roughness:1,metalness:0})
+  );
+  planetGroup.add(clouds);
+
+  // atmosphere (fresnel rim, additive)
+  var atmoMat=new THREE.ShaderMaterial({
+    uniforms:{c:{value:new THREE.Color(0x4fbfff)}},
+    vertexShader:'varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
+    fragmentShader:'uniform vec3 c;varying vec3 vN;void main(){float i=pow(0.72-dot(vN,vec3(0,0,1.0)),2.4);gl_FragColor=vec4(c,1.0)*i;}',
+    blending:THREE.AdditiveBlending,side:THREE.BackSide,transparent:true,depthWrite:false
   });
+  planetGroup.add(new THREE.Mesh(new THREE.SphereGeometry(1.95,48,48),atmoMat));
+
+  // orbit ring + satellite
+  var ring=new THREE.Group();ring.rotation.x=1.15;ring.rotation.y=.3;planetGroup.add(ring);
+  var rP=[],R=2.7;for(var a=0;a<=128;a++){var t=a/128*Math.PI*2;rP.push(new THREE.Vector3(Math.cos(t)*R,0,Math.sin(t)*R));}
+  ring.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(rP),new THREE.LineBasicMaterial({color:0xff9d2f,transparent:true,opacity:.32})));
+  var sat=new THREE.Group();
+  sat.add(new THREE.Mesh(new THREE.BoxGeometry(.12,.12,.16),new THREE.MeshStandardMaterial({color:0xdfe6f0,roughness:.5,metalness:.4})));
+  var panelMat=new THREE.MeshStandardMaterial({color:0x1b3a6b,emissive:0x14243f,roughness:.4,metalness:.3});
+  var pL=new THREE.Mesh(new THREE.BoxGeometry(.3,.02,.11),panelMat);pL.position.x=-.22;sat.add(pL);
+  var pR=pL.clone();pR.position.x=.22;sat.add(pR);
+  ring.add(sat);
+
+  // stars
+  var starGeo=new THREE.BufferGeometry(),SN=2600,pos=new Float32Array(SN*3);
+  for(var s=0;s<SN;s++){var rr=rand(24,80),th=Math.random()*Math.PI*2,ph=Math.acos(rand(-1,1));
+    pos[s*3]=rr*Math.sin(ph)*Math.cos(th);pos[s*3+1]=rr*Math.sin(ph)*Math.sin(th);pos[s*3+2]=rr*Math.cos(ph);}
+  starGeo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  var stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:.16,sizeAttenuation:true,transparent:true,opacity:.85}));
+  scene.add(stars);
+
+  // lights (sun from left → terminator)
+  var sun=new THREE.DirectionalLight(0xfff2e0,1.6);sun.position.set(-6,2,4);scene.add(sun);
+  scene.add(new THREE.AmbientLight(0x25406a,.35));
+
+  // interaction
+  var mx=0,my=0,tx=0,ty=0;
+  window.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5);my=(e.clientY/window.innerHeight-.5);});
+
+  var t0=0;
+  function loop(t){
+    requestAnimationFrame(loop);
+    var dt=t-t0;t0=t;
+    earth.rotation.y+=0.0006*dt*0.06;
+    clouds.rotation.y+=0.0006*dt*0.085;
+    stars.rotation.y+=0.00001*dt;
+    var st=t*0.00035;
+    sat.position.set(Math.cos(st)*R,0,Math.sin(st)*R);
+    sat.rotation.y=-st;
+    tx+=(mx*0.5-tx)*0.04;ty+=(my*0.3-ty)*0.04;
+    camera.position.x=tx;camera.position.y=-ty;camera.lookAt(1.1,0.4,0);
+    renderer.render(scene,camera);
+  }
+  requestAnimationFrame(loop);
+
+  window.addEventListener('resize',function(){
+    camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+})();
 </script>
 </body>
 </html>
