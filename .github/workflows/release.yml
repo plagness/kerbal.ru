@@ -34,4 +34,4 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             --verify-tag \
             --generate-notes \
-            --title "kerbal.ru $GITHUB_REF_NAME"
+            --title "$GITHUB_REF_NAME"
