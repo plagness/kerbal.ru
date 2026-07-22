@@ -44,13 +44,13 @@ RO/RSS/RP-1 превращает KSP в серьёзный симулятор р
 ### Linux · macOS · Steam Deck
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash
+curl -fsSL https://kerbal.ru/install-ru.sh | bash
 ```
 
 ### Windows · PowerShell
 
 ```powershell
-irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1 | iex
+irm https://kerbal.ru/install-ru.ps1 | iex
 ```
 
 Установщик найдёт KSP, скачает последний стабильный релиз, сделает резервную копию заменяемых файлов, скопирует локализацию и включит русский язык. Скрипты открыты: перед запуском их можно [прочитать для Unix](install-ru.sh) или [для Windows](install-ru.ps1). Ручной способ и инструкции по каждой ОС — в [быстром старте](docs/QUICKSTART.md).
@@ -67,11 +67,11 @@ irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1 | i
 Моды, сохранения и любые посторонние файлы в `GameData` не удаляются. Проверить наличие обновления можно без установки:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash -s -- --check
+curl -fsSL https://kerbal.ru/install-ru.sh | bash -s -- --check
 ```
 
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1))) -Check
+& ([scriptblock]::Create((irm https://kerbal.ru/install-ru.ps1))) -Check
 ```
 
 Можно установить конкретный релиз для воспроизводимой сборки или отката: `--version v26.1` в Unix и `-Version v26.1` в PowerShell. Полный сценарий обновления, каналы `stable`/`main` и восстановление из резервной копии описаны в [docs/UPDATING.md](docs/UPDATING.md).

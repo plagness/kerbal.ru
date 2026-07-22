@@ -9,13 +9,13 @@
 ### Linux, macOS, Steam Deck
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash
+curl -fsSL https://kerbal.ru/install-ru.sh | bash
 ```
 
 ### Windows PowerShell
 
 ```powershell
-irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1 | iex
+irm https://kerbal.ru/install-ru.ps1 | iex
 ```
 
 Если стояла `v26.1`, а последним релизом стала `v26.2`, установщик увидит разницу, сделает резервную копию и поставит новый выпуск. Повторный запуск на той же версии ничего не перезаписывает.
@@ -34,11 +34,11 @@ irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1 | i
 ## Проверить обновление без установки
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash -s -- --check
+curl -fsSL https://kerbal.ru/install-ru.sh | bash -s -- --check
 ```
 
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1))) -Check
+& ([scriptblock]::Create((irm https://kerbal.ru/install-ru.ps1))) -Check
 ```
 
 Команда выводит установленную и доступную версии и не меняет файлы.
@@ -48,11 +48,11 @@ curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.
 Это полезно для одинаковой сборки у нескольких игроков или временного отката.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash -s -- --version v26.1
+curl -fsSL https://kerbal.ru/install-ru.sh | bash -s -- --version v26.1
 ```
 
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1))) -Version v26.1
+& ([scriptblock]::Create((irm https://kerbal.ru/install-ru.ps1))) -Version v26.1
 ```
 
 Указанный тег должен существовать в [GitHub Releases](https://github.com/plagness/kerbal.ru/releases).
@@ -62,11 +62,11 @@ curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.
 В `main` могут находиться переводы, ещё не вошедшие в релиз и не подтверждённые живым запуском. Канал нужен тестировщикам, не обычной игре.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.sh | bash -s -- --channel main
+curl -fsSL https://kerbal.ru/install-ru.sh | bash -s -- --channel main
 ```
 
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/plagness/kerbal.ru/main/install-ru.ps1))) -Channel main
+& ([scriptblock]::Create((irm https://kerbal.ru/install-ru.ps1))) -Channel main
 ```
 
 Версия такого обновления выглядит как `main-401092d`. Чтобы вернуться на stable, снова выполни обычную команду без параметров.
