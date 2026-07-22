@@ -3,7 +3,7 @@ name: Publish release
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*.*"
 
 permissions:
   contents: write
@@ -23,6 +23,9 @@ jobs:
             echo "Tag $GITHUB_REF_NAME does not match VERSION ($expected)" >&2
             exit 1
           fi
+
+      - name: Verify generated project data
+        run: python3 tools/sync_project_data.py --check
 
       - name: Create GitHub Release
         env:

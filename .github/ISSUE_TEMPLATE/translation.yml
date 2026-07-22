@@ -36,7 +36,7 @@ body:
     id: kerbalru
     attributes:
       label: Версия kerbal.ru
-      placeholder: 1.0.0 или main-401092d
+      placeholder: 26.1 или main-401092d
     validations:
       required: true
   - type: checkboxes

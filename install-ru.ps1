@@ -43,7 +43,7 @@ $currentVersion = if (Test-Path $versionFile) { (Get-Content $versionFile -First
 # Выбрать источник и версию.
 if ($Version) {
   $remoteVersion = $Version.TrimStart("v")
-  if ($remoteVersion -notmatch '^\d+\.\d+\.\d+$') { Die "Версия должна выглядеть как v1.2.3" }
+  if ($remoteVersion -notmatch '^\d{2}\.[1-9]\d*$') { Die "Версия должна выглядеть как v26.1" }
   $archiveUrl = "https://github.com/$repo/archive/refs/tags/v$remoteVersion.zip"
 } elseif ($Channel -eq "main") {
   $commit = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/commits/main"

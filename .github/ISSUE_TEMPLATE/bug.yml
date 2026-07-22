@@ -25,7 +25,7 @@ body:
     attributes:
       label: Окружение
       description: ОС, версия KSP, версия kerbal.ru из .kerbalru-version и важные версии модов.
-      placeholder: Windows 11, KSP 1.12.5, kerbal.ru 1.0.0
+      placeholder: Windows 11, KSP 1.12.5, kerbal.ru 26.1
     validations:
       required: true
   - type: textarea

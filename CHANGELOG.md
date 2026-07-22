@@ -1,15 +1,19 @@
 # История изменений
 
-Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют [Semantic Versioning](https://semver.org/lang/ru/).
+Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/). Номера релизов имеют вид `vYY.N`, где `YY` — год, а `N` — номер выпуска в этом году.
 
 ## [Unreleased]
 
 Изменения, которые уже находятся в `main`, но ещё не вошли в стабильный релиз.
 
-## [1.0.0] — 2026-07-22
+## [26.1] — 2026-07-22
 
 ### Добавлено
 
+- `data/project.json` как единый источник версии, состава и показателей перевода для сайта и GitHub;
+- автоматическая подстановка версии, общих процентов и помодового покрытия на сайте;
+- синхронизация README, `VERSION` и `CITATION.cff`, обновление цифр напрямую из аудита игрового кэша;
+- релизная схема `vГОД.НОМЕР` и команда автоматического повышения версии.
 - русская локализация 20 ключевых модов RO/RSS/RP-1;
 - Unix- и PowerShell-установщики для Windows, Linux, macOS и Steam Deck;
 - безопасное обновление между релизами с manifest, backup и выбором версии;
@@ -25,5 +29,5 @@
 - часть ROEngines намеренно сохраняет реальные латинские обозначения двигателей;
 - 17 модов с пользовательским текстом ещё не имеют русского блока.
 
-[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/plagness/kerbal.ru/releases/tag/v1.0.0
+[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v26.1...HEAD
+[26.1]: https://github.com/plagness/kerbal.ru/releases/tag/v26.1

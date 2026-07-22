@@ -30,20 +30,32 @@ jobs:
           for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
             new Function(match[1]);
           }
-          console.log('inline JavaScript: ok');
+          const data = JSON.parse(fs.readFileSync('data/project.json', 'utf8'));
+          const siteMods = [...html.matchAll(/data-mod="([^"]+)"/g)].map(match => match[1]);
+          if (siteMods.length !== data.inventory.kerbalRuMods) {
+            throw new Error(`site catalog has ${siteMods.length} mods, expected ${data.inventory.kerbalRuMods}`);
+          }
+          for (const mod of siteMods) {
+            if (!data.mods[mod]) throw new Error(`site mod has no project data: ${mod}`);
+          }
+          if (!html.includes("fetch('data/project.json'")) throw new Error('site does not load project data');
+          console.log(`inline JavaScript and ${siteMods.length} dynamic mods: ok`);
           NODE
 
-      - name: Check Python and localization configs
+      - name: Check project data, Python and localization configs
         run: |
+          python3 tools/sync_project_data.py --check
           python3 - <<'PY'
           import ast
           import re
           from pathlib import Path
 
           ast.parse(Path('tools/audit_ru_coverage.py').read_text(encoding='utf-8'))
+          ast.parse(Path('tools/sync_project_data.py').read_text(encoding='utf-8'))
+          ast.parse(Path('tools/bump_release.py').read_text(encoding='utf-8'))
 
           version = Path('VERSION').read_text(encoding='utf-8').strip()
-          if not re.fullmatch(r'\d+\.\d+\.\d+', version):
+          if not re.fullmatch(r'\d{2}\.[1-9]\d*', version):
               raise SystemExit(f'Invalid VERSION: {version!r}')
 
           configs = list(Path('GameData').rglob('*.cfg'))
