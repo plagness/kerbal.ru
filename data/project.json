@@ -24,7 +24,7 @@
     "serviceComponents": 28
   },
   "coverage": {
-    "active": "projected",
+    "active": "verified",
     "verified": {
       "label": "Подтверждено игровым кэшем",
       "status": "cache-verified",
@@ -32,9 +32,18 @@
       "parts": 1023,
       "cacheParts": 1247,
       "fields": {
-        "title": { "translated": 368, "percent": 36.0 },
-        "description": { "translated": 549, "percent": 53.7 },
-        "manufacturer": { "translated": 58, "percent": 5.7 }
+        "title": {
+          "translated": 468,
+          "percent": 45.7
+        },
+        "description": {
+          "translated": 649,
+          "percent": 63.4
+        },
+        "manufacturer": {
+          "translated": 58,
+          "percent": 5.7
+        }
       }
     },
     "projected": {
@@ -43,81 +52,210 @@
       "auditedAt": "2026-07-22",
       "parts": 1023,
       "fields": {
-        "title": { "translated": 551, "percent": 53.9 },
-        "description": { "translated": 726, "percent": 71.0 },
-        "manufacturer": { "translated": 58, "percent": 5.7 }
+        "title": {
+          "translated": 551,
+          "percent": 53.9
+        },
+        "description": {
+          "translated": 726,
+          "percent": 71.0
+        },
+        "manufacturer": {
+          "translated": 58,
+          "percent": 5.7
+        }
       }
     }
   },
   "mods": {
-    "AJE": { "parts": 0, "audit": "not-applicable" },
-    "BackgroundThrust": { "parts": 0, "audit": "not-applicable" },
-    "ContractConfigurator": { "parts": 0, "audit": "not-applicable" },
-    "EditorExtensionsRedux": { "parts": 0, "audit": "not-applicable" },
-    "KerbalChangelog": { "parts": 0, "audit": "not-applicable" },
-    "KerbalEngineer": { "parts": 0, "audit": "not-applicable" },
-    "SpaceTuxLibrary": { "parts": 0, "audit": "not-applicable" },
-    "Trajectories": { "parts": 0, "audit": "not-applicable" },
+    "AJE": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "BackgroundThrust": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "ContractConfigurator": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "EditorExtensionsRedux": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "KerbalChangelog": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "KerbalEngineer": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "SpaceTuxLibrary": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
+    "Trajectories": {
+      "parts": 0,
+      "audit": "not-applicable"
+    },
     "ModularLaunchPads": {
       "parts": 234,
-      "verified": { "title": 229, "description": 229, "manufacturer": 0 },
-      "projected": { "title": 229, "description": 229, "manufacturer": 0 }
+      "verified": {
+        "title": 229,
+        "description": 229,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 229,
+        "description": 229,
+        "manufacturer": 0
+      }
     },
     "ProceduralFairings": {
       "parts": 13,
-      "verified": { "title": 10, "description": 11, "manufacturer": 0 },
-      "projected": { "title": 13, "description": 13, "manufacturer": 0 }
+      "verified": {
+        "title": 12,
+        "description": 13,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 13,
+        "description": 13,
+        "manufacturer": 0
+      }
     },
     "ProceduralParts": {
       "parts": 5,
-      "verified": { "title": 0, "description": 1, "manufacturer": 0 },
-      "projected": { "title": 1, "description": 1, "manufacturer": 0 }
+      "verified": {
+        "title": 0,
+        "description": 1,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 1,
+        "description": 1,
+        "manufacturer": 0
+      }
     },
     "ROCapsules": {
       "parts": 166,
-      "verified": { "title": 72, "description": 74, "manufacturer": 9 },
-      "projected": { "title": 166, "description": 166, "manufacturer": 9 }
+      "verified": {
+        "title": 158,
+        "description": 160,
+        "manufacturer": 9
+      },
+      "projected": {
+        "title": 166,
+        "description": 166,
+        "manufacturer": 9
+      }
     },
     "ROEngines": {
       "parts": 244,
-      "verified": { "title": 29, "description": 204, "manufacturer": 37 },
-      "projected": { "title": 29, "description": 204, "manufacturer": 37 }
+      "verified": {
+        "title": 29,
+        "description": 204,
+        "manufacturer": 37
+      },
+      "projected": {
+        "title": 29,
+        "description": 204,
+        "manufacturer": 37
+      }
     },
     "ROHeatshields": {
       "parts": 8,
-      "verified": { "title": 2, "description": 2, "manufacturer": 0 },
-      "projected": { "title": 2, "description": 2, "manufacturer": 0 }
+      "verified": {
+        "title": 2,
+        "description": 2,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 2,
+        "description": 2,
+        "manufacturer": 0
+      }
     },
     "ROSolar": {
       "parts": 1,
-      "verified": { "title": 1, "description": 1, "manufacturer": 0 },
-      "projected": { "title": 1, "description": 1, "manufacturer": 0 }
+      "verified": {
+        "title": 1,
+        "description": 1,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 1,
+        "description": 1,
+        "manufacturer": 0
+      }
     },
     "ROTanks": {
       "parts": 18,
-      "verified": { "title": 6, "description": 5, "manufacturer": 0 },
-      "projected": { "title": 6, "description": 5, "manufacturer": 0 }
+      "verified": {
+        "title": 6,
+        "description": 5,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 6,
+        "description": 5,
+        "manufacturer": 0
+      }
     },
     "RealChute": {
       "parts": 4,
-      "verified": { "title": 0, "description": 0, "manufacturer": 0 },
-      "projected": { "title": 4, "description": 4, "manufacturer": 0 }
+      "verified": {
+        "title": 0,
+        "description": 0,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 4,
+        "description": 4,
+        "manufacturer": 0
+      }
     },
     "RealismOverhaul": {
       "parts": 36,
       "audit": "indeterminate",
-      "verified": { "title": 0, "description": 1, "manufacturer": 0 },
-      "projected": { "title": 0, "description": 1, "manufacturer": 0 }
+      "verified": {
+        "title": 0,
+        "description": 1,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 0,
+        "description": 1,
+        "manufacturer": 0
+      }
     },
     "SXT": {
       "parts": 208,
-      "verified": { "title": 9, "description": 12, "manufacturer": 12 },
-      "projected": { "title": 65, "description": 65, "manufacturer": 12 }
+      "verified": {
+        "title": 9,
+        "description": 12,
+        "manufacturer": 12
+      },
+      "projected": {
+        "title": 65,
+        "description": 65,
+        "manufacturer": 12
+      }
     },
     "VenStockRevamp": {
       "parts": 86,
-      "verified": { "title": 10, "description": 9, "manufacturer": 0 },
-      "projected": { "title": 35, "description": 35, "manufacturer": 0 }
+      "verified": {
+        "title": 22,
+        "description": 21,
+        "manufacturer": 0
+      },
+      "projected": {
+        "title": 35,
+        "description": 35,
+        "manufacturer": 0
+      }
     }
   },
   "links": {
