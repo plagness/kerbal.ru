@@ -68,44 +68,46 @@ ModularLaunchPads · ProceduralFairings · ProceduralParts · ROEngines · ROHea
 
 > Примечание: несколько отдельных деталей в ProceduralFairings и ModularLaunchPads оставлены на английском (несбалансированные скобки в исходниках, см. [ROADMAP](ROADMAP.md)).
 
-## 2. Уже на русском от авторов мода (не мы) — 20
+## 2. Уже содержат русский вне kerbal.ru — 18 компонентов
 
-Эти моды поставляются с русской локализацией из коробки — переводить не нужно:
+Перепроверено 2026-07-22 по реально установленной `GameData`: в каждом из этих каталогов найден блок `ru`. Это 17 модов и стоковая KSP:
 
-Astrogator · B9PartSwitch · B9 Procedural Wings · CommunityResourcePack · ConformalDecals · Ferram Aerospace Research (FAR) · KSPCommunityFixes · Kerbalism · Kerbalism-Config · Kopernicus · MechJeb2 · Docking Port Alignment Indicator *(папка NavyFish)* · PreciseManeuver · RP-1 · RSSDateTimeFormatter · ReStock · ReStock+ · RealFuels · Real Solar System · **стоковая KSP** *(папка Squad)*
+B9PartSwitch · B9 Procedural Wings · CommunityResourcePack · ConformalDecals · Ferram Aerospace Research (FAR) · KSPCommunityFixes · Kerbalism · Kerbalism-Config · Kopernicus · MechJeb2 · PatchManager · RP-1 · RSSDateTimeFormatter · ReStock · ReStock+ · RealFuels · Real Solar System · **стоковая KSP** *(папка Squad)*
 
-## 3. Ещё на английском — 44
+## 3. Без русского блока — 45 компонентов
 
-### 3a. Служебные — перевод не требуется (нет пользовательского текста)
+Полная текущая инвентаризация: **83 каталога** в установленной `GameData` = 20 модов kerbal.ru + 18 компонентов с собственным русским + 45 позиций ниже. Общий охват состава по наличию блока `ru` — **38 / 83 = 45,8%**. Это не показатель глубины перевода строк; реальная глубина наших 20 модов проверяется отдельно в разделе 0.
+
+### 3a. Служебные — перевод не требуется (нет пользовательского текста) — 28
 
 Библиотеки, плагины, эффекты, текстуры, конфиги без видимых игроку строк:
 
-ClickThroughBlocker · Harmony · KSPBurst · TexturesUnlimited · ToolbarControl · CustomBarnKit · DepthMask · KSPTextureLoader · ModularFlightIntegrator · PatchManager · Shabby · SmokeScreen · SolverEngines · StagedAnimation · TextureReplacer · Waterfall · RealHeat · RealPlume · RSS-Textures · ROLib · ROUtils · RP-1-ExpressInstall · RP-1-ExpressInstall-Graphics · Firespitter · Resurfaced · KerbalRenamer · Output *(артефакт сборки KerbalEngineer)*
+ClickThroughBlocker · Harmony · KSPBurst · TexturesUnlimited · ToolbarControl · CustomBarnKit · DepthMask · KSPTextureLoader · ModularFlightIntegrator · Shabby · SmokeScreen · SolverEngines · StagedAnimation · TextureReplacer · Waterfall · RealHeat · RealPlume · RSS-Textures · RSSVE · ScattererAtmosphereCache · StockScattererConfigs · ROLib · ROUtils · RP-1-ExpressInstall · RP-1-ExpressInstall-Graphics · Firespitter · Resurfaced · KerbalRenamer
 
-### 3b. Реальные кандидаты для перевода (есть детали/UI) — план на будущее
+### 3b. Реальные кандидаты для перевода (есть детали/UI) — 17
 
 Моды с пользовательским текстом, которые имеет смысл перевести дальше:
 
 - **RealAntennas** — антенны и UI связи (тема связи), 128 партов, самый крупный из непереведённых.
 - **TestFlight** — надёжность, сообщения об отказах.
 - **Skopos** — симуляция наземных станций связи (RP-1).
-- **ASET** — пропсы IVA, названия агентств.
+- **DistantObject** — UI и настройки отображения далёких объектов.
 - **CommunityCategoryKit** — названия категорий/вкладок деталей в VAB (высокая видимость — постоянно на экране).
 - **KSPWheel** — шасси/колёса (детали).
 - **BahaSP** *(BDAnimationModules)* — анимированные детали.
 - **RCSBuildAid** — оверлей RCS в редакторе.
 - **AtmosphereAutopilot** — UI автопилота в атмосфере.
 - **KerbalJointReinforcement** — настройки прочности стыков.
-- **BetterTimeWarpContinued** — UI ускорения времени.
+- **EnvironmentalVisualEnhancements** — UI облаков и атмосферных эффектов.
 - **RetractableLiftingSurface** — деталь.
 - **FShangarExtender** — UI расширения ангара.
 - **KSCSwitcher** — названия стартовых площадок.
 - **EngineGroupController** — UI групп двигателей.
-- **Kerbal Alarm Clock / Transfer Window Planner** *(папка TriggerTech)* — UI будильников/окон.
-- **RasterPropMonitor** *(папка JSI)* — тексты приборных панелей IVA.
+- **PlanetShine** — UI настроек отражённого света.
+- **Scatterer** — UI атмосферных и океанических эффектов.
 
 Приоритеты и порядок — в [ROADMAP.md](ROADMAP.md).
 
 ---
 
-*Раздел 0 построен скриптом `audit_ru_coverage.py`, сверяющим реальные имена деталей с `ModuleManager.ConfigCache`. Разделы 1-3 — более старая раскладка по факту наличия блока `ru` в cfg-файлах модов (не проверяет, резолвится ли текст реально).*
+*Раздел 0 построен скриптом `audit_ru_coverage.py`, сверяющим реальные имена деталей с `ModuleManager.ConfigCache`. Разделы 1-3 описывают наличие блока `ru` и полный состав текущей установленной сборки; наличие блока само по себе не доказывает, что каждая строка реально резолвится в игре.*
