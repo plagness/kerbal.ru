@@ -46,6 +46,9 @@ def load_and_validate() -> dict:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     errors: list[str] = []
 
+    if data.get("schemaVersion") != 2:
+        errors.append("schemaVersion должен быть 2")
+
     release = data.get("release", {})
     version = release.get("version", "")
     match = re.fullmatch(r"v(\d{2})\.([1-9]\d*)", version)
@@ -58,6 +61,9 @@ def load_and_validate() -> dict:
             errors.append("release.sequence не совпадает с номером в версии")
 
     inventory = data.get("inventory", {})
+    mods = data.get("mods", {})
+    if inventory.get("kerbalRuMods") != len(mods):
+        errors.append("inventory.kerbalRuMods не равен числу записей в mods")
     russian_sum = (
         inventory.get("kerbalRuMods", 0)
         + inventory.get("upstreamRussianMods", 0)
@@ -78,7 +84,6 @@ def load_and_validate() -> dict:
     if active not in {"verified", "projected"}:
         errors.append("coverage.active должен быть verified или projected")
 
-    mods = data.get("mods", {})
     for stage_name in ("verified", "projected"):
         stage = coverage.get(stage_name, {})
         total_parts = sum(mod.get("parts", 0) for mod in mods.values())
@@ -111,6 +116,99 @@ def load_and_validate() -> dict:
                 if not 0 <= value <= parts:
                     errors.append(f"{mod_name}.{stage_name}.{field} вне диапазона")
 
+    site = data.get("site", {})
+    catalog = site.get("modCatalog", [])
+    catalog_ids = [entry.get("id") for entry in catalog if isinstance(entry, dict)]
+    if len(catalog) != inventory.get("kerbalRuMods"):
+        errors.append("site.modCatalog должен содержать все поддерживаемые моды")
+    if len(catalog_ids) != len(set(catalog_ids)):
+        errors.append("site.modCatalog содержит повторяющиеся id")
+    missing_catalog = sorted(set(mods) - set(catalog_ids))
+    extra_catalog = sorted(set(catalog_ids) - set(mods))
+    if missing_catalog:
+        errors.append("site.modCatalog не содержит: " + ", ".join(missing_catalog))
+    if extra_catalog:
+        errors.append("site.modCatalog содержит неизвестные моды: " + ", ".join(extra_catalog))
+    required_catalog_fields = {
+        "id",
+        "name",
+        "kicker",
+        "teaser",
+        "icon",
+        "description",
+        "tags",
+        "source",
+    }
+    for entry in catalog:
+        if not isinstance(entry, dict):
+            errors.append("site.modCatalog должен состоять из объектов")
+            continue
+        missing = sorted(required_catalog_fields - set(entry))
+        if missing:
+            errors.append(f"site.modCatalog.{entry.get('id', '?')} без полей: {', '.join(missing)}")
+        if not re.fullmatch(r"i-[a-z0-9-]+", entry.get("icon", "")):
+            errors.append(f"site.modCatalog.{entry.get('id', '?')}.icon должен быть id Tabler-иконки")
+        if not isinstance(entry.get("tags"), list) or not entry.get("tags"):
+            errors.append(f"site.modCatalog.{entry.get('id', '?')}.tags должен быть непустым списком")
+        if not str(entry.get("source", "")).startswith("https://"):
+            errors.append(f"site.modCatalog.{entry.get('id', '?')}.source должен быть HTTPS-ссылкой")
+
+    groups = site.get("inventoryGroups", [])
+    groups_by_id = {
+        group.get("id"): group for group in groups if isinstance(group, dict)
+    }
+    expected_group_counts = {
+        "upstream": inventory.get("upstreamRussianMods", 0)
+        + inventory.get("stockRussian", 0),
+        "candidates": inventory.get("translationCandidates", 0),
+        "service": inventory.get("serviceComponents", 0),
+    }
+    if set(groups_by_id) != set(expected_group_counts):
+        errors.append("site.inventoryGroups должен содержать upstream, candidates и service")
+    inventory_names: list[str] = []
+    for group_id, expected_count in expected_group_counts.items():
+        group = groups_by_id.get(group_id, {})
+        entries = group.get("entries", [])
+        if len(entries) != expected_count:
+            errors.append(
+                f"site.inventoryGroups.{group_id}: {len(entries)} записей, ожидается {expected_count}"
+            )
+        for entry in entries:
+            if not isinstance(entry, dict) or not entry.get("name") or not entry.get("note"):
+                errors.append(f"site.inventoryGroups.{group_id} содержит неполную запись")
+                continue
+            inventory_names.append(entry["name"])
+    if len(inventory_names) != len(set(inventory_names)):
+        errors.append("site.inventoryGroups содержит повторяющиеся компоненты")
+
+    ui = data.get("uiTranslation", {})
+    for field in (
+        "label",
+        "status",
+        "statusLabel",
+        "summary",
+        "modsCovered",
+        "linesTranslated",
+        "uniqueKeys",
+    ):
+        if not ui.get(field):
+            errors.append(f"uiTranslation.{field} обязателен")
+    if ui.get("modsCovered", 0) < len(ui.get("modsNotInstalledInThisBuild", [])):
+        errors.append("uiTranslation.modsCovered меньше числа отсутствующих модов")
+
+    required_links = {
+        "repository",
+        "releases",
+        "coverage",
+        "discussions",
+        "uiTranslation",
+        "roadmap",
+        "maintaining",
+    }
+    missing_links = sorted(required_links - set(data.get("links", {})))
+    if missing_links:
+        errors.append("links не содержит: " + ", ".join(missing_links))
+
     if errors:
         raise ValueError("\n".join(f"- {error}" for error in errors))
     return data
@@ -120,6 +218,7 @@ def generated_readme_block(data: dict) -> str:
     release = data["release"]
     inventory = data["inventory"]
     coverage = data["coverage"]
+    ui = data["uiTranslation"]
     active = coverage[coverage["active"]]
     verified = coverage["verified"]
     composition = percent(inventory["withRussian"], inventory["components"])
@@ -136,6 +235,7 @@ def generated_readme_block(data: dict) -> str:
             "|---|---:|---|",
             f'| Версия русификатора | **[{release["version"]}]({release["url"]})** | `data/project.json` |',
             f'| Поддерживаемые нами моды | **{inventory["kerbalRuMods"]}** | Собственные `ru.cfg` и MM-патчи |',
+            f'| Интерфейс модов | **{ui["modsCovered"]} словаря · {spaced(ui["linesTranslated"])} строк** | {ui["statusLabel"]} |',
             f'| Состав с русским блоком | **{inventory["withRussian"]} / {inventory["components"]} · {ru_percent(composition)}** | Полная инвентаризация `GameData` |',
             f'| Проверено деталей | **{spaced(active["parts"])}** | `ModuleManager.ConfigCache` |',
             f'| Названия деталей | **{ru_percent(title["percent"])} · {title["translated"]}/{active["parts"]}** | {active["label"]} |',

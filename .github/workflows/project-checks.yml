@@ -31,7 +31,7 @@ jobs:
             new Function(match[1]);
           }
           const data = JSON.parse(fs.readFileSync('data/project.json', 'utf8'));
-          const siteMods = [...html.matchAll(/data-mod="([^"]+)"/g)].map(match => match[1]);
+          const siteMods = data.site.modCatalog.map(mod => mod.id);
           if (siteMods.length !== data.inventory.kerbalRuMods) {
             throw new Error(`site catalog has ${siteMods.length} mods, expected ${data.inventory.kerbalRuMods}`);
           }
@@ -39,7 +39,10 @@ jobs:
             if (!data.mods[mod]) throw new Error(`site mod has no project data: ${mod}`);
           }
           if (!html.includes("fetch('data/project.json'")) throw new Error('site does not load project data');
-          console.log(`inline JavaScript and ${siteMods.length} dynamic mods: ok`);
+          if (!html.includes('renderModCatalog(data,active)')) throw new Error('site does not render the JSON mod catalog');
+          if (!html.includes('renderInventory(data)')) throw new Error('site does not render the JSON inventory');
+          if (!html.includes('[data-ui-translation]')) throw new Error('site does not render uiTranslation');
+          console.log(`inline JavaScript, ${siteMods.length} dynamic mods and ${data.site.inventoryGroups.length} inventory groups: ok`);
           NODE
 
       - name: Check project data, Python and localization configs

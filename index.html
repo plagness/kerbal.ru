@@ -163,9 +163,22 @@
   .coverage-summary{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 15px}
   .coverage-stat{display:inline-flex;align-items:baseline;gap:6px;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:rgba(255,255,255,.018);font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.45px}
   .coverage-stat b{font-size:.76rem;color:var(--green)}
+  .ui-translation{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:17px;align-items:center;margin:17px 0 16px;padding:17px 18px;border:1px solid rgba(96,201,255,.2);border-radius:12px;background:linear-gradient(110deg,rgba(96,201,255,.07),rgba(166,232,110,.025) 62%,transparent)}
+  .ui-translation[hidden]{display:none}
+  .ui-translation-icon{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(96,201,255,.24);border-radius:14px;color:#9de1ff;background:rgba(96,201,255,.055);font-size:1.45rem}
+  .ui-translation-copy{min-width:0}
+  .ui-translation-state{display:block;margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.75px;text-transform:uppercase;color:var(--orange)}
+  .ui-translation h3{margin:0 0 4px;color:#fff;font-size:1rem}
+  .ui-translation p{max-width:620px!important;margin:0!important;font-size:.78rem;line-height:1.55}
+  .ui-translation a{display:inline-flex;align-items:center;gap:6px;margin-top:7px;font-size:.72rem;font-weight:700;text-decoration:none;color:#9de1ff}
+  .ui-translation-stats{display:grid;grid-template-columns:repeat(2,minmax(82px,1fr));gap:7px}
+  .ui-stat{min-width:82px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.15);font-family:'JetBrains Mono',monospace;font-size:.51rem;line-height:1.4;letter-spacing:.45px;text-transform:uppercase;color:var(--txt-faint)}
+  .ui-stat b{display:block;font-size:.82rem;color:#b9f47b}
   .catalog-label{display:flex;align-items:center;gap:11px;padding:15px 24px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.014);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:1.2px;color:var(--txt-faint);text-transform:uppercase}
   .catalog-label b{color:var(--green);font-size:.66rem}
   .mod-list{position:relative}
+  .data-load-error{margin:18px;padding:17px 18px;border:1px solid rgba(255,157,47,.28);border-radius:10px;background:rgba(255,157,47,.055);color:var(--txt-dim);font-size:.82rem;line-height:1.55}
+  .data-load-error b{display:block;margin-bottom:3px;color:var(--orange)}
   .mod-item{position:relative;border-bottom:1px solid var(--line);transition:background .28s ease,border-color .28s ease}
   .mod-item:last-child{border-bottom:0}
   .mod-item::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(90deg,rgba(166,232,110,.065),transparent 58%);transition:opacity .28s ease}
@@ -249,7 +262,7 @@
   }
   @media(max-width:560px){
     .card{padding:22px 18px}.mods-card{padding:0}.mods-intro{padding:22px 18px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}
-    .coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.inventory-head{padding:21px 18px 15px}.inventory-group>summary{padding:15px 14px;grid-template-columns:34px minmax(0,1fr) auto 16px;gap:9px}.inventory-group-icon{width:34px;height:34px}.inventory-body{padding:0 13px 17px}.inventory-grid{grid-template-columns:1fr}.catalog-label{padding:14px}
+    .coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.ui-translation{grid-template-columns:42px minmax(0,1fr);padding:14px;gap:12px}.ui-translation-icon{width:42px;height:42px}.ui-translation-stats{grid-column:1/-1;grid-template-columns:repeat(2,1fr);width:100%}.inventory-head{padding:21px 18px 15px}.inventory-group>summary{padding:15px 14px;grid-template-columns:34px minmax(0,1fr) auto 16px;gap:9px}.inventory-group-icon{width:34px;height:34px}.inventory-body{padding:0 13px 17px}.inventory-grid{grid-template-columns:1fr}.catalog-label{padding:14px}
     .project-meta{justify-content:flex-start}
     .mod-summary{grid-template-columns:42px minmax(0,1fr) auto 17px;gap:10px;padding:15px 14px}
     .mod-icon{width:42px;height:42px;border-radius:12px;font-size:1.25rem}
@@ -319,7 +332,7 @@
       <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg>Инструкция</a>
     </div>
     <div class="project-meta">
-      <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span>stable</span><b data-project-version>v26.1</b></a>
+      <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
       <span class="project-data-state">обновлено <time data-project-updated datetime="2026-07-22">22.07.2026</time></span>
     </div>
   </header>
@@ -329,7 +342,7 @@
     <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">00 / ОБЗОР</span><h2>Что это</h2><span class="rule"></span></div>
     <div class="card">
       <p><strong>RO / RSS / RP-1</strong> — флагманская реалистичная сборка KSP1. Она заменяет игрушечную кербальскую систему на настоящую Солнечную (Земля в реальном масштабе), приближает физику, топливо и двигатели к жизни и добавляет историческую карьеру. Признанный сообществом «тот самый» реалистичный режим.</p>
-      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в 20 ключевых модов и ставится копированием одной папки. Для англоязычных игроков ничего не меняется — перевод включается только при выборе русского языка.</p>
+      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в <span data-inventory-supported>20</span> ключевых модов и ставится копированием одной папки. Для англоязычных игроков ничего не меняется — перевод включается только при выборе русского языка.</p>
     </div>
   </section>
 
@@ -337,7 +350,7 @@
   <section id="install" class="reveal">
     <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / СБОРКА</span><h2>Шаг 1 · Ставим CKAN</h2><span class="rule"></span></div>
     <div class="card">
-      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (версия 1.12.5), затем CKAN — по вкладке своей ОС:</p>
+      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (версия <span data-game-version>1.12.5</span>), затем CKAN — по вкладке своей ОС:</p>
       <div class="tabs" data-group="os" role="tablist" aria-label="Операционная система">
         <button class="tab active" type="button" role="tab" aria-selected="true" data-tab="win"><svg class="ic"><use href="#i-brand-windows"/></svg>Windows</button>
         <button class="tab" type="button" role="tab" aria-selected="false" data-tab="mac"><svg class="ic"><use href="#i-brand-apple"/></svg>macOS</button>
@@ -442,7 +455,7 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
         <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в <code class="inline">settings.cfg</code> (рядом с папкой GameData):
           <div class="code"><button class="copy">COPY</button><pre>LANGUAGE = ru</pre></div>
         </li>
-        <li>Запусти игру. Перевод включится для интерфейса, карьеры и поддержанных деталей; фактическое покрытие каждого мода показано ниже.</li>
+        <li>Запусти игру. Перевод включится для интерфейса модов, карьеры и поддержанных деталей; фактическое покрытие и статус проверки показаны ниже.</li>
       </ol>
     </div>
   </section>
@@ -470,275 +483,30 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
           <span class="coverage-stat"><b data-coverage-field="manufacturer">6%</b> производители</span>
           <span class="coverage-stat"><b data-coverage-parts>1023</b> детали проверены</span>
         </div>
+        <section class="ui-translation" data-ui-translation hidden aria-labelledby="ui-translation-title">
+          <span class="ui-translation-icon"><svg class="ic"><use href="#i-layout-grid"/></svg></span>
+          <div class="ui-translation-copy">
+            <span class="ui-translation-state" data-ui-status>ожидает проверки</span>
+            <h3 id="ui-translation-title"><span data-ui-label>Русификация интерфейса модов</span></h3>
+            <p data-ui-summary>Окна, кнопки и подсказки переводятся через Harmony-патч.</p>
+            <a data-project-link="uiTranslation" href="https://github.com/plagness/kerbal.ru/blob/main/docs/UI-TRANSLATION.md"><svg class="ic"><use href="#i-chevron-right"/></svg>Как это работает и что проверено</a>
+          </div>
+          <div class="ui-translation-stats" aria-label="Статистика перевода интерфейса">
+            <span class="ui-stat"><b data-ui-mods>24</b>мода</span>
+            <span class="ui-stat"><b data-ui-lines>1926</b>строк</span>
+            <span class="ui-stat"><b data-ui-keys>1867</b>ключей</span>
+            <span class="ui-stat"><b data-ui-fixes>42</b>исправления</span>
+          </div>
+        </section>
         <div class="legend">
           <span><span class="badge full">FULL</span> перевод в файлах мода</span>
           <span><span class="badge patch">PATCH</span> патч поверх оригинала</span>
-          <a href="https://github.com/plagness/kerbal.ru/blob/main/docs/COVERAGE.md">Методика и исходные цифры →</a>
+          <a data-project-link="coverage" href="https://github.com/plagness/kerbal.ru/blob/main/docs/COVERAGE.md">Методика и исходные цифры →</a>
         </div>
       </div>
 
       <div class="catalog-label"><b data-inventory-supported>20</b> модов переводит kerbal.ru · нажми на строку для подробностей</div>
-      <div class="mod-list" data-mod-list>
-        <article class="mod-item" data-mod="AJE">
-          <button id="mod-aje-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-aje">
-            <span class="mod-icon"><svg class="ic"><use href="#i-propeller"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">AJE</span><span class="mod-kicker">Атмосферный полёт</span></span><span class="mod-teaser">Реалистичная работа реактивных двигателей</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-aje" class="mod-details" role="region" aria-labelledby="mod-aje-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Advanced Jet Engine заменяет упрощённую модель турбореактивных двигателей расчётами на базе NASA EngineSim и JSBSim. Тяга, расход и устойчивость теперь зависят от высоты, скорости, числа Маха и работы воздухозаборников — самолёты приходится проектировать как настоящие.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Физика</span><span class="mod-tag">Авиация</span></div><a class="mod-source" href="https://github.com/KSP-RO/AJE"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ContractConfigurator">
-          <button id="mod-contracts-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-contracts">
-            <span class="mod-icon"><svg class="ic"><use href="#i-file-description"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Contract Configurator</span><span class="mod-kicker">Карьера</span></span><span class="mod-teaser">Движок исторических контрактов RP-1</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-contracts" class="mod-details" role="region" aria-labelledby="mod-contracts-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Фреймворк, который создаёт игровые контракты из конфигурационных файлов. В RP-1 на нём построены требования, награды, цели и цепочки миссий: от первых высотных запусков до орбитальных программ и межпланетных аппаратов.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Контракты</span><span class="mod-tag">RP-1</span></div><a class="mod-source" href="https://github.com/KSP-RO/ContractConfigurator"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="EditorExtensionsRedux">
-          <button id="mod-editor-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-editor">
-            <span class="mod-icon"><svg class="ic"><use href="#i-layout-grid"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Editor Extensions Redux</span><span class="mod-kicker">VAB / SPH</span></span><span class="mod-teaser">Точная сборка аппаратов без ограничений редактора</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-editor" class="mod-details" role="region" aria-labelledby="mod-editor-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Расширяет инструменты VAB и SPH: добавляет произвольную симметрию, больше шагов угловой привязки, выравнивание деталей, стяжек и топливных линий, снятие лимитов смещения и быстрый выбор корневой детали. Особенно полезен для сложных исторических ракет.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Редактор</span><span class="mod-tag">Инструменты</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/EditorExtensionsRedux"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ROCapsules">
-          <button id="mod-capsules-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-capsules">
-            <span class="mod-icon"><svg class="ic"><use href="#i-capsule"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROCapsules</span><span class="mod-kicker">Космические корабли</span></span><span class="mod-teaser">Исторические капсулы в одном наборе</span></span>
-            <span class="mod-percent" style="--coverage:100%" aria-label="На русском 100 процентов названий деталей"><span>100% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-capsules" class="mod-details" role="region" aria-labelledby="mod-capsules-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Собирает лучшие модели реальных пилотируемых кораблей и приводит их к стандартам Realism Overhaul. Вместо множества тяжёлых паков игрок получает единый каталог Mercury, Gemini, Apollo и других капсул с корректными размерами и конфигурациями.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Детали</span><span class="mod-tag">История</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROCapsules"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="SXT">
-          <button id="mod-sxt-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-sxt">
-            <span class="mod-icon"><svg class="ic"><use href="#i-packages"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">SXT</span><span class="mod-kicker">Stock eXTension</span></span><span class="mod-teaser">Лёгкий набор дополнительных деталей</span></span>
-            <span class="mod-percent" style="--coverage:31%" aria-label="На русском 31 процент названий деталей"><span>31% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-sxt" class="mod-details" role="region" aria-labelledby="mod-sxt-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Lack’s Stock eXTension добавляет авиационные, ракетные и конструкционные детали, переиспользуя штатные текстуры KSP. Для него особенно важно отличать написанные ключи локализации от текста, который действительно загрузил Module Manager.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Детали</span><span class="mod-tag">Лёгкий</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/SXTContinued"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="Trajectories">
-          <button id="mod-trajectories-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-trajectories">
-            <span class="mod-icon"><svg class="ic"><use href="#i-route"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Trajectories</span><span class="mod-kicker">Навигация</span></span><span class="mod-teaser">Прогноз аэродинамической траектории и места посадки</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-trajectories" class="mod-details" role="region" aria-labelledby="mod-trajectories-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Показывает реальную линию снижения с учётом сопротивления, подъёмной силы и вращения планеты. Помогает рассчитать аэроторможение, увидеть точку удара и вывести капсулу или космоплан к выбранному району посадки; поддерживает FAR.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Посадка</span><span class="mod-tag">FAR</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/KSPTrajectories"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="VenStockRevamp">
-          <button id="mod-ven-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ven">
-            <span class="mod-icon"><svg class="ic"><use href="#i-palette"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Ven’s Stock Revamp</span><span class="mod-kicker">Графика</span></span><span class="mod-teaser">Детализированный облик стандартных деталей</span></span>
-            <span class="mod-percent" style="--coverage:41%" aria-label="На русском 41 процент названий деталей"><span>41% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-ven" class="mod-details" role="region" aria-labelledby="mod-ven-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Перерисовывает штатные модели и текстуры KSP, делая их аккуратнее, технологичнее и визуально цельнее, а также добавляет связанные варианты деталей.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Визуал</span><span class="mod-tag">Детали</span></div><a class="mod-source" href="https://github.com/VenVen/Stock-Revamp"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="KerbalChangelog">
-          <button id="mod-changelog-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-changelog">
-            <span class="mod-icon"><svg class="ic"><use href="#i-history"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Kerbal Changelog</span><span class="mod-kicker">Интерфейс</span></span><span class="mod-teaser">Список изменений модов прямо в игре</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-changelog" class="mod-details" role="region" aria-labelledby="mod-changelog-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Даёт авторам модов единый формат внутриигровых журналов изменений. После обновления сборки окно один раз показывает, что изменилось в установленных компонентах, а затем не мешает до следующей новой версии.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Сервис</span><span class="mod-tag">Обновления</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/KerbalChangelog"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="KerbalEngineer">
-          <button id="mod-ker-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ker">
-            <span class="mod-icon"><svg class="ic"><use href="#i-chart-line"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Kerbal Engineer Redux</span><span class="mod-kicker">Телеметрия</span></span><span class="mod-teaser">Инженерные расчёты для сборки и полёта</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-ker" class="mod-details" role="region" aria-labelledby="mod-ker-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Выводит ключевые параметры корабля в редакторе, полёте и центре слежения: delta-v по ступеням, тяговооружённость, массу, орбитальные элементы, время до событий и характеристики поверхности. Это главный прибор для проверки ракеты до старта.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Delta-v</span><span class="mod-tag">Расчёты</span></div><a class="mod-source" href="https://github.com/jrbudda/KerbalEngineer"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="RealismOverhaul">
-          <button id="mod-ro-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-ro">
-            <span class="mod-icon"><svg class="ic"><use href="#i-atom"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Realism Overhaul</span><span class="mod-kicker">Ядро сборки</span></span><span class="mod-teaser">Реальные размеры, массы, топливо и характеристики</span></span>
-            <span class="mod-percent is-na" aria-label="PART-аудит не определяет покрытие конфигураций"><span>Н/Д <small>AUDIT</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-ro" class="mod-details" role="region" aria-labelledby="mod-ro-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Центральный слой конфигураций, который переводит детали KSP и совместимых модов на реальные параметры. Его патчи меняют детали других паков, поэтому аудит собственных <code class="inline">PART</code>-узлов не даёт честного процента — здесь показатель отмечен как «Н/Д».</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Физика</span><span class="mod-tag">Конфигурации</span></div><a class="mod-source" href="https://github.com/KSP-RO/RealismOverhaul"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="SpaceTuxLibrary">
-          <button id="mod-spacetux-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-spacetux">
-            <span class="mod-icon"><svg class="ic"><use href="#i-library"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">SpaceTux Library</span><span class="mod-kicker">Библиотека</span></span><span class="mod-teaser">Общие инструменты для других модов</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-spacetux" class="mod-details" role="region" aria-labelledby="mod-spacetux-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Служебная библиотека, которой пользуются другие моды: предоставляет журналирование, выбор цвета, подсветку деталей и управление общими кнопками. Самостоятельного геймплея почти не добавляет, зато устраняет дублирование кода и конфликтующие элементы интерфейса.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Зависимость</span><span class="mod-tag">UI</span></div><a class="mod-source" href="https://github.com/linuxgurugamer/SpaceTuxLibrary"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="BackgroundThrust">
-          <button id="mod-background-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-background">
-            <span class="mod-icon"><svg class="ic"><use href="#i-clock-bolt"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Background Thrust</span><span class="mod-kicker">Варп времени</span></span><span class="mod-teaser">Длительные включения двигателей без ожидания</span></span>
-            <span class="mod-percent is-na" aria-label="Аудит деталей неприменим"><span>Н/Д <small>UI</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-background" class="mod-details" role="region" aria-labelledby="mod-background-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Позволяет двигателям работать во время ускорения времени, а с поддерживаемым обработчиком ресурсов — даже когда корабль не выбран. Мод следит за режимом SAS и буферами ресурсов, поэтому многочасовые ионные и другие малотяговые манёвры не требуют реального ожидания.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">FULL</span><span class="mod-tag">Время</span><span class="mod-tag">Малая тяга</span></div><a class="mod-source" href="https://github.com/Phantomical/BackgroundThrust"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ROSolar">
-          <button id="mod-rosolar-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-rosolar">
-            <span class="mod-icon"><svg class="ic"><use href="#i-solar-panel"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROSolar</span><span class="mod-kicker">Энергия</span></span><span class="mod-teaser">Масштабируемые солнечные панели без дублей</span></span>
-            <span class="mod-percent" style="--coverage:100%" aria-label="На русском 100 процентов названий деталей"><span>100% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-rosolar" class="mod-details" role="region" aria-labelledby="mod-rosolar-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Объединяет качественные модели солнечных панелей из разных наборов и добавляет управляемое масштабирование.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Энергия</span><span class="mod-tag">Масштаб</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROSolar"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ROTanks">
-          <button id="mod-rotanks-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-rotanks">
-            <span class="mod-icon"><svg class="ic"><use href="#i-cylinder"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROTanks</span><span class="mod-kicker">Конструкция</span></span><span class="mod-teaser">Модульные баки, переходники и межступени</span></span>
-            <span class="mod-percent" style="--coverage:33%" aria-label="На русском 33 процента названий деталей"><span>33% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-rotanks" class="mod-details" role="region" aria-labelledby="mod-rotanks-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Использует переработанную систему SSTU для создания гибких баков Realism Overhaul. Диаметр, длина, форма, текстура и оснащение настраиваются в редакторе.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Баки</span><span class="mod-tag">Модульность</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROTanks"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ROEngines">
-          <button id="mod-roengines-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-roengines">
-            <span class="mod-icon"><svg class="ic"><use href="#i-engine"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROEngines</span><span class="mod-kicker">Двигатели</span></span><span class="mod-teaser">Единый каталог исторических ракетных двигателей</span></span>
-            <span class="mod-percent" style="--coverage:12%" aria-label="На русском 12 процентов названий деталей"><span>12% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-roengines" class="mod-details" role="region" aria-labelledby="mod-roengines-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Собирает наиболее точные модели реальных ракетных двигателей и связывает их с конфигурациями Realism Overhaul. Часть английских названий — намеренно оставленные реальные обозначения двигателей.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Детали</span><span class="mod-tag">История</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROEngines"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ROHeatshields">
-          <button id="mod-heatshields-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-heatshields">
-            <span class="mod-icon"><svg class="ic"><use href="#i-shield-half"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">ROHeatshields</span><span class="mod-kicker">Теплозащита</span></span><span class="mod-teaser">Настраиваемые щиты для разных режимов входа</span></span>
-            <span class="mod-percent" style="--coverage:25%" aria-label="На русском 25 процентов названий деталей"><span>25% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-heatshields" class="mod-details" role="region" aria-labelledby="mod-heatshields-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Добавляет изменяемые по диаметру теплозащитные экраны с разной геометрией и уровнем защиты — от простого теплоотвода до абляционного щита класса Apollo.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Спуск</span><span class="mod-tag">Нагрев</span></div><a class="mod-source" href="https://github.com/KSP-RO/ROHeatshields"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ProceduralFairings">
-          <button id="mod-fairings-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-fairings">
-            <span class="mod-icon"><svg class="ic"><use href="#i-cone"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Procedural Fairings</span><span class="mod-kicker">Аэродинамика</span></span><span class="mod-teaser">Обтекатели, автоматически подогнанные под груз</span></span>
-            <span class="mod-percent" style="--coverage:100%" aria-label="На русском 100 процентов названий деталей"><span>100% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-fairings" class="mod-details" role="region" aria-labelledby="mod-fairings-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Строит створки обтекателя вокруг любого полезного груза и позволяет менять диаметр, длину, профиль, текстуру и логику отделения.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Обтекатели</span></div><a class="mod-source" href="https://github.com/KSP-RO/ProceduralFairings"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ProceduralParts">
-          <button id="mod-procedural-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-procedural">
-            <span class="mod-icon"><svg class="ic"><use href="#i-arrows-maximize"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Procedural Parts</span><span class="mod-kicker">Конструкция</span></span><span class="mod-teaser">Детали произвольной формы и размера</span></span>
-            <span class="mod-percent" style="--coverage:20%" aria-label="На русском 20 процентов названий деталей"><span>20% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-procedural" class="mod-details" role="region" aria-labelledby="mod-procedural-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Позволяет создавать цилиндры, усечённые конусы и bezier-формы с нужными размерами и текстурами. Перевод этого небольшого набора требует отдельной проверки после применения патчей RealFuels.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">RealFuels</span><span class="mod-tag">Процедурные детали</span></div><a class="mod-source" href="https://github.com/KSP-RO/ProceduralParts"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="RealChute">
-          <button id="mod-realchute-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-realchute">
-            <span class="mod-icon"><svg class="ic"><use href="#i-parachute"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">RealChute</span><span class="mod-kicker">Посадка</span></span><span class="mod-teaser">Полная реалистичная система парашютов</span></span>
-            <span class="mod-percent" style="--coverage:100%" aria-label="На русском 100 процентов названий деталей"><span>100% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-realchute" class="mod-details" role="region" aria-labelledby="mod-realchute-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Заменяет штатный модуль парашютов системой с реалистичным раскрытием, расчётом материалов и расширенной настройкой в редакторе.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Парашюты</span><span class="mod-tag">Аэродинамика</span></div><a class="mod-source" href="https://github.com/ChrisViral/RealChute"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-
-        <article class="mod-item" data-mod="ModularLaunchPads">
-          <button id="mod-mlp-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="mod-mlp">
-            <span class="mod-icon"><svg class="ic"><use href="#i-building-factory"/></svg></span>
-            <span class="mod-heading"><span class="mod-title-row"><span class="mod-title">Modular Launch Pads</span><span class="mod-kicker">Стартовый комплекс</span></span><span class="mod-teaser">Реальные пусковые столы, башни и фермы</span></span>
-            <span class="mod-percent" style="--coverage:98%" aria-label="На русском 98 процентов названий деталей"><span>98% <small>RU</small></span></span>
-            <svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg>
-          </button>
-          <div id="mod-mlp" class="mod-details" role="region" aria-labelledby="mod-mlp-trigger" aria-hidden="true"><div class="mod-details-inner"><div class="mod-copy">
-            <p>Превращает стандартные стартовые зажимы в полноценные комплексы: основания, башни обслуживания, кабель-мачты, фермы, лифты и площадки.</p>
-            <div class="mod-foot"><div class="mod-tags"><span class="mod-tag">PATCH</span><span class="mod-tag">Старт</span></div><a class="mod-source" href="https://github.com/AlphaMensae/Modular-Launch-Pads"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div>
-          </div></div></div>
-        </article>
-      </div>
+      <div class="mod-list" data-mod-list aria-live="polite"></div>
 
       <div class="inventory" data-full-inventory>
         <div class="inventory-head">
@@ -746,101 +514,7 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
           <p>Ниже — остальные <span data-inventory-other>63</span> позиции из реально установленной <code class="inline">GameData</code>. Вместе с <span data-inventory-supported>20</span> модами kerbal.ru выше это полный список текущей сборки.</p>
         </div>
 
-        <details class="inventory-group">
-          <summary>
-            <span class="inventory-group-icon"><svg class="ic"><use href="#i-language"/></svg></span>
-            <span class="inventory-group-title">Русский уже есть <small><span data-inventory-upstream>17</span> модов + стоковая KSP</small></span>
-            <span class="inventory-count" data-inventory-upstream-total>18</span>
-            <svg class="ic inventory-chevron"><use href="#i-chevron-right"/></svg>
-          </summary>
-          <div class="inventory-body"><div class="inventory-grid">
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>B9PartSwitch</b><small>RU от автора · варианты деталей</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>B9 Procedural Wings</b><small>RU от автора · крылья</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>CommunityResourcePack</b><small>RU от автора · ресурсы</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>ConformalDecals</b><small>RU от автора · декали</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Ferram Aerospace Research</b><small>RU от автора · FAR</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>KSPCommunityFixes</b><small>RU от автора · исправления</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>PatchManager</b><small>RU от автора · управление патчами</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Kerbalism</b><small>RU от автора · жизнеобеспечение</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Kerbalism-Config</b><small>RU от автора · конфигурации</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Kopernicus</b><small>RU от автора · планетные системы</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>MechJeb2</b><small>RU от автора · автопилот</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>RP-1</b><small>RU от автора · карьера</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>RSSDateTimeFormatter</b><small>RU от автора · даты RSS</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>ReStock</b><small>RU от автора · модели деталей</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>ReStock+</b><small>RU от автора · дополнительные детали</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>RealFuels</b><small>RU от автора · топливо</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Real Solar System</b><small>RU от автора · Солнечная система</small></span></div>
-            <div class="inventory-entry"><svg class="ic"><use href="#i-circle-check"/></svg><span><b>Kerbal Space Program</b><small>Стоковая KSP · папка Squad</small></span></div>
-          </div></div>
-        </details>
-
-        <details class="inventory-group">
-          <summary>
-            <span class="inventory-group-icon"><svg class="ic"><use href="#i-alert-triangle"/></svg></span>
-            <span class="inventory-group-title">Кандидаты на перевод <small>есть детали или интерфейс</small></span>
-            <span class="inventory-count" data-inventory-candidates>17</span>
-            <svg class="ic inventory-chevron"><use href="#i-chevron-right"/></svg>
-          </summary>
-          <div class="inventory-body"><div class="inventory-grid">
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>RealAntennas</b><small>128 деталей и UI связи</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>TestFlight</b><small>Надёжность и сообщения об отказах</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>Skopos</b><small>Наземные станции связи RP-1</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>DistantObject</b><small>Настройки далёких объектов</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>CommunityCategoryKit</b><small>Категории деталей в VAB</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>KSPWheel</b><small>Шасси и колёса</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>BahaSP</b><small>BDAnimationModules · анимации деталей</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>RCSBuildAid</b><small>Оверлей RCS в редакторе</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>AtmosphereAutopilot</b><small>UI атмосферного автопилота</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>KerbalJointReinforcement</b><small>Настройки прочности стыков</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>EnvironmentalVisualEnhancements</b><small>Интерфейс облаков и атмосферы</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>RetractableLiftingSurface</b><small>Убираемые аэродинамические детали</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>FShangarExtender</b><small>Интерфейс расширения ангара</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>KSCSwitcher</b><small>Названия стартовых площадок</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>EngineGroupController</b><small>UI групп двигателей</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>PlanetShine</b><small>Настройки отражённого света</small></span></div>
-            <div class="inventory-entry is-candidate"><svg class="ic"><use href="#i-chevron-right"/></svg><span><b>Scatterer</b><small>Интерфейс атмосферных эффектов</small></span></div>
-          </div></div>
-        </details>
-
-        <details class="inventory-group">
-          <summary>
-            <span class="inventory-group-icon"><svg class="ic"><use href="#i-cpu"/></svg></span>
-            <span class="inventory-group-title">Служебные компоненты <small>перевод не требуется</small></span>
-            <span class="inventory-count" data-inventory-service>28</span>
-            <svg class="ic inventory-chevron"><use href="#i-chevron-right"/></svg>
-          </summary>
-          <div class="inventory-body"><div class="inventory-grid">
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ClickThroughBlocker</b><small>Служебный · видимого текста нет</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>Harmony</b><small>Служебный · библиотека патчей</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>KSPBurst</b><small>Служебный · библиотека</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>TexturesUnlimited</b><small>Служебный · шейдеры</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ToolbarControl</b><small>Служебный · управление кнопками</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>CustomBarnKit</b><small>Служебный · параметры построек</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>DepthMask</b><small>Служебный · графический эффект</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>KSPTextureLoader</b><small>Служебный · загрузчик текстур</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ModularFlightIntegrator</b><small>Служебный · интеграция физики</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>Shabby</b><small>Служебный · шейдеры</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>SmokeScreen</b><small>Служебный · эффекты частиц</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>SolverEngines</b><small>Служебный · расчёты двигателей</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>StagedAnimation</b><small>Служебный · модуль анимаций</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>TextureReplacer</b><small>Служебный · замена текстур</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>Waterfall</b><small>Служебный · эффекты двигателей</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RealHeat</b><small>Служебный · тепловая модель</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RealPlume</b><small>Служебный · эффекты струй</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RSS-Textures</b><small>Служебный · текстуры планет</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RSSVE</b><small>Служебный · визуальные конфигурации RSS</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ScattererAtmosphereCache</b><small>Служебный · кэш атмосферы</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>StockScattererConfigs</b><small>Служебный · конфигурации Scatterer</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ROLib</b><small>Служебный · библиотека RO</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>ROUtils</b><small>Служебный · утилиты RO</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RP-1-ExpressInstall</b><small>Служебный · метапак сборки</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>RP-1-ExpressInstall-Graphics</b><small>Служебный · графический метапак</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>Firespitter</b><small>Служебный · модуль деталей</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>Resurfaced</b><small>Служебный · материалы</small></span></div>
-            <div class="inventory-entry is-service"><svg class="ic"><use href="#i-cpu"/></svg><span><b>KerbalRenamer</b><small>Служебный · генератор имён</small></span></div>
-          </div></div>
-        </details>
+        <div data-inventory-groups aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -854,7 +528,7 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
         <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Приоритет №1:</b> поднять покрытие названий выше текущих <span data-coverage-field="title">54%</span> и подтвердить проекцию новым игровым кэшем.</li>
         <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Дальше:</b> <span data-inventory-candidates>17</span> реальных кандидатов из полного состава, единый глоссарий терминов, установка через CKAN (netkan), поток контрибуций. Ещё <span data-inventory-service>28</span> служебных компонентов перевода не требуют.</li>
       </ul>
-      <p style="margin-bottom:0"><a href="https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md">Полный roadmap →</a> · <a href="https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md">как помочь с переводом →</a></p>
+      <p style="margin-bottom:0"><a data-project-link="roadmap" href="https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md">Полный roadmap →</a> · <a data-project-link="maintaining" href="https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md">как помочь с переводом →</a></p>
     </div>
   </section>
 
@@ -871,7 +545,7 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
   </section>
 
   <footer id="footer" class="reveal">
-    <a class="gh" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru · <span data-project-version>v26.1</span></a><br>
+    <a class="gh" data-project-link="repository" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru · <span data-project-version>v26.1</span></a><br>
     Независимый фан-проект, не аффилирован с авторами оригинальных модов.<br>
     Исходники сборки: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a><br>
     <span class="mono" style="opacity:.55;display:inline-block;margin-top:10px">иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS</span>
@@ -891,32 +565,59 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   function percent(value,total,precise){var result=total?100*value/total:0;return (precise?result.toLocaleString('ru-RU',{maximumFractionDigits:1}):Math.round(result).toLocaleString('ru-RU'))+'%'}
   function displayDate(value){var parts=String(value||'').split('-');return parts.length===3?parts[2]+'.'+parts[1]+'.'+parts[0]:value}
   function partsWord(value){var mod100=value%100,mod10=value%10;return mod100>=11&&mod100<=14?'деталей':mod10===1?'деталь':mod10>=2&&mod10<=4?'детали':'деталей'}
+  function spaced(value){return Number(value||0).toLocaleString('ru-RU')}
+  function escapeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(char){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]})}
+  function safeIcon(value){return/^i-[a-z0-9-]+$/i.test(value||'')?value:'i-packages'}
+  function slug(value){return String(value||'mod').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+  function renderModCatalog(data,active){
+    var list=document.querySelector('[data-mod-list]'),catalog=data.site&&data.site.modCatalog;if(!list||!Array.isArray(catalog))return;
+    list.innerHTML=catalog.map(function(entry){
+      var mod=data.mods[entry.id],id='mod-'+slug(entry.id),badgeClass='mod-percent',badgeText='',badgeAria='',coverageStyle='',live='';
+      if(!mod||mod.audit==='not-applicable'||mod.audit==='indeterminate'){
+        var indeterminate=mod&&mod.audit==='indeterminate';badgeClass+=' is-na';badgeText='Н/Д <small>'+(indeterminate?'AUDIT':'UI')+'</small>';badgeAria=indeterminate?'PART-аудит не определяет покрытие конфигураций':'Аудит деталей неприменим';
+      }else{
+        var counts=mod[data.coverage.active]||mod.verified,titlePercent=percent(counts.title,mod.parts,false),preciseTitle=percent(counts.title,mod.parts,true),preciseDescription=percent(counts.description,mod.parts,true),preciseManufacturer=percent(counts.manufacturer,mod.parts,true);
+        badgeText=titlePercent+' <small>RU</small>';badgeAria='На русском '+preciseTitle+' названий деталей';coverageStyle=' style="--coverage:'+titlePercent+'"';
+        live='<p class="mod-coverage-live"><b>'+escapeHtml(active.label)+'</b> · '+mod.parts+' '+partsWord(mod.parts)+' · названия '+counts.title+'/'+mod.parts+' ('+preciseTitle+') · описания '+counts.description+'/'+mod.parts+' ('+preciseDescription+') · производители '+counts.manufacturer+'/'+mod.parts+' ('+preciseManufacturer+')</p>';
+      }
+      var tags=(entry.tags||[]).map(function(tag){return'<span class="mod-tag">'+escapeHtml(tag)+'</span>'}).join('');
+      return'<article class="mod-item" data-mod="'+escapeHtml(entry.id)+'"><button id="'+id+'-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="'+id+'"><span class="mod-icon"><svg class="ic"><use href="#'+safeIcon(entry.icon)+'"/></svg></span><span class="mod-heading"><span class="mod-title-row"><span class="mod-title">'+escapeHtml(entry.name)+'</span><span class="mod-kicker">'+escapeHtml(entry.kicker)+'</span></span><span class="mod-teaser">'+escapeHtml(entry.teaser)+'</span></span><span class="'+badgeClass+'"'+coverageStyle+' aria-label="'+escapeHtml(badgeAria)+'"><span>'+badgeText+'</span></span><svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg></button><div id="'+id+'" class="mod-details" role="region" aria-labelledby="'+id+'-trigger" aria-hidden="true" inert><div class="mod-details-inner"><div class="mod-copy"><p>'+escapeHtml(entry.description)+'</p>'+live+'<div class="mod-foot"><div class="mod-tags">'+tags+'</div><a class="mod-source" href="'+escapeHtml(entry.source)+'"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div></div></div></div></article>';
+    }).join('');
+  }
+  function renderInventory(data){
+    var target=document.querySelector('[data-inventory-groups]'),groups=data.site&&data.site.inventoryGroups;if(!target||!Array.isArray(groups))return;
+    target.innerHTML=groups.map(function(group){
+      var itemClass=group.kind==='candidate'?' is-candidate':group.kind==='service'?' is-service':'';
+      var entries=(group.entries||[]).map(function(entry){return'<div class="inventory-entry'+itemClass+'"><svg class="ic"><use href="#'+safeIcon(group.entryIcon)+'"/></svg><span><b>'+escapeHtml(entry.name)+'</b><small>'+escapeHtml(entry.note)+'</small></span></div>'}).join('');
+      return'<details class="inventory-group"><summary><span class="inventory-group-icon"><svg class="ic"><use href="#'+safeIcon(group.icon)+'"/></svg></span><span class="inventory-group-title">'+escapeHtml(group.title)+' <small>'+escapeHtml(group.subtitle)+'</small></span><span class="inventory-count">'+(group.entries||[]).length+'</span><svg class="ic inventory-chevron"><use href="#i-chevron-right"/></svg></summary><div class="inventory-body"><div class="inventory-grid">'+entries+'</div></div></details>';
+    }).join('');
+  }
   function applyProjectData(data){
-    var inventory=data.inventory,coverage=data.coverage,active=coverage[coverage.active],release=data.release;
+    var inventory=data.inventory,coverage=data.coverage,active=coverage[coverage.active],release=data.release,ui=data.uiTranslation||{},links=data.links||{};
     var composition=percent(inventory.withRussian,inventory.components,false),untranslated=inventory.translationCandidates+inventory.serviceComponents;
-    all('[data-project-version]',release.version);all('[data-project-updated]',displayDate(data.updatedAt));
+    all('[data-project-version]',release.version);all('[data-project-updated]',displayDate(data.updatedAt));all('[data-release-channel]',release.channel);all('[data-game-version]',data.game.version);
     document.querySelectorAll('[data-project-updated]').forEach(function(node){node.setAttribute('datetime',data.updatedAt)});
     document.querySelectorAll('[data-release-link]').forEach(function(link){link.href=release.url});
-    document.querySelectorAll('[data-release-download]').forEach(function(link){link.href='https://github.com/plagness/kerbal.ru/archive/refs/tags/'+release.version+'.zip'});
+    document.querySelectorAll('[data-release-download]').forEach(function(link){link.href=links.repository+'/archive/refs/tags/'+release.version+'.zip'});
+    document.querySelectorAll('[data-project-link]').forEach(function(link){var key=link.getAttribute('data-project-link');if(links[key])link.href=links[key]});
     all('[data-inventory-components]',inventory.components);all('[data-inventory-with-russian]',inventory.withRussian);all('[data-inventory-supported]',inventory.kerbalRuMods);all('[data-inventory-upstream]',inventory.upstreamRussianMods);all('[data-inventory-upstream-total]',inventory.upstreamRussianMods+inventory.stockRussian);all('[data-inventory-candidates]',inventory.translationCandidates);all('[data-inventory-service]',inventory.serviceComponents);all('[data-inventory-untranslated]',untranslated);all('[data-inventory-mod-folders]',inventory.components-inventory.stockRussian);all('[data-inventory-other]',inventory.components-inventory.kerbalRuMods);
     all('[data-composition-percent]',composition);all('[data-coverage-parts]',active.parts);all('[data-coverage-mode]',active.label);
     document.querySelectorAll('[data-composition-label]').forEach(function(node){node.setAttribute('aria-label',composition+' компонентов сборки имеют русский язык')});
     ['title','description','manufacturer'].forEach(function(field){all('[data-coverage-field="'+field+'"]',percent(active.fields[field].translated,active.parts,false))});
     var summary=document.querySelector('[data-coverage-summary]');if(summary)summary.setAttribute('aria-label',active.label+': '+active.parts+' деталей в '+inventory.kerbalRuMods+' модах kerbal.ru');
-    document.querySelectorAll('[data-mod]').forEach(function(item){
-      var mod=data.mods[item.getAttribute('data-mod')],badge=item.querySelector('.mod-percent'),copy=item.querySelector('.mod-copy');if(!mod||!badge||!copy)return;
-      if(mod.audit==='not-applicable'||mod.audit==='indeterminate'){
-        badge.classList.add('is-na');badge.style.setProperty('--coverage','0%');badge.setAttribute('aria-label',mod.audit==='indeterminate'?'PART-аудит не определяет покрытие конфигураций':'Аудит деталей неприменим');
-        badge.querySelector('span').innerHTML='Н/Д <small>'+(mod.audit==='indeterminate'?'AUDIT':'UI')+'</small>';return;
-      }
-      var counts=mod[coverage.active]||mod.verified,titlePercent=percent(counts.title,mod.parts,false),preciseTitle=percent(counts.title,mod.parts,true),preciseDescription=percent(counts.description,mod.parts,true),preciseManufacturer=percent(counts.manufacturer,mod.parts,true);
-      badge.classList.remove('is-na');badge.style.setProperty('--coverage',titlePercent);badge.setAttribute('aria-label','На русском '+preciseTitle+' названий деталей');badge.querySelector('span').innerHTML=titlePercent+' <small>RU</small>';
-      var live=copy.querySelector('.mod-coverage-live');if(!live){live=document.createElement('p');live.className='mod-coverage-live';copy.insertBefore(live,copy.querySelector('.mod-foot'))}
-      live.innerHTML='<b>'+active.label+'</b> · '+mod.parts+' '+partsWord(mod.parts)+' · названия '+counts.title+'/'+mod.parts+' ('+preciseTitle+') · описания '+counts.description+'/'+mod.parts+' ('+preciseDescription+') · производители '+counts.manufacturer+'/'+mod.parts+' ('+preciseManufacturer+')';
-    });
+    all('[data-ui-status]',ui.statusLabel);all('[data-ui-label]',ui.label);all('[data-ui-summary]',ui.summary);all('[data-ui-mods]',ui.modsCovered);all('[data-ui-lines]',spaced(ui.linesTranslated));all('[data-ui-keys]',spaced(ui.uniqueKeys));all('[data-ui-fixes]',ui.confirmedBugsFixedBeforeRelease);
+    var uiBlock=document.querySelector('[data-ui-translation]');if(uiBlock)uiBlock.hidden=!ui.modsCovered;
+    renderModCatalog(data,active);renderInventory(data);
+    window.__kerbalProjectData=data;
     document.documentElement.dataset.projectData='loaded';
+    document.dispatchEvent(new CustomEvent('kerbalprojectdata',{detail:data}));
   }
-  fetch('data/project.json',{cache:'no-cache'}).then(function(response){if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}).then(applyProjectData).catch(function(error){document.documentElement.dataset.projectData='fallback';console.warn('project data fallback:',error.message)});
+  fetch('data/project.json',{cache:'no-cache'}).then(function(response){if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}).then(applyProjectData).catch(function(error){
+    document.documentElement.dataset.projectData='fallback';
+    var message='<div class="data-load-error" role="status"><b>Данные проекта временно недоступны</b>Обнови страницу: каталог и проценты загружаются из <code class="inline">data/project.json</code>.</div>';
+    var modTarget=document.querySelector('[data-mod-list]'),inventoryTarget=document.querySelector('[data-inventory-groups]');if(modTarget)modTarget.innerHTML=message;if(inventoryTarget)inventoryTarget.innerHTML=message;
+    console.warn('project data fallback:',error.message)
+  });
 })();
 /* ---------- UI: tabs + copy + reveal ---------- */
 document.querySelectorAll('.tabs').forEach(function(group){
@@ -927,17 +628,16 @@ document.querySelectorAll('.tabs').forEach(function(group){
     scope.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-panel')===key)});
   });});
 });
-document.querySelectorAll('.mod-summary').forEach(function(button){
-  var panel=button.closest('.mod-item').querySelector('.mod-details');panel.setAttribute('inert','');
-  button.addEventListener('click',function(){
-    var item=button.closest('.mod-item'),willOpen=!item.classList.contains('is-open');
-    document.querySelectorAll('.mod-item.is-open').forEach(function(openItem){
-      openItem.classList.remove('is-open');
-      var openButton=openItem.querySelector('.mod-summary'),openPanel=openItem.querySelector('.mod-details');
-      openButton.setAttribute('aria-expanded','false');openPanel.setAttribute('aria-hidden','true');openPanel.setAttribute('inert','');
-    });
-    if(willOpen){item.classList.add('is-open');button.setAttribute('aria-expanded','true');panel.setAttribute('aria-hidden','false');panel.removeAttribute('inert');}
+var modList=document.querySelector('[data-mod-list]');
+if(modList)modList.addEventListener('click',function(event){
+  var button=event.target.closest('.mod-summary');if(!button||!modList.contains(button))return;
+  var item=button.closest('.mod-item'),panel=item.querySelector('.mod-details'),willOpen=!item.classList.contains('is-open');
+  modList.querySelectorAll('.mod-item.is-open').forEach(function(openItem){
+    openItem.classList.remove('is-open');
+    var openButton=openItem.querySelector('.mod-summary'),openPanel=openItem.querySelector('.mod-details');
+    openButton.setAttribute('aria-expanded','false');openPanel.setAttribute('aria-hidden','true');openPanel.setAttribute('inert','');
   });
+  if(willOpen){item.classList.add('is-open');button.setAttribute('aria-expanded','true');panel.setAttribute('aria-hidden','false');panel.removeAttribute('inert')}
 });
 document.querySelectorAll('.code .copy').forEach(function(btn){
   btn.addEventListener('click',function(){
@@ -1273,7 +973,7 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
   window.advanceTime=function(ms){var remaining=clamp(Number(ms)||0,0,1200);while(remaining>0){var step=Math.min(1000/60,remaining);simulationTime+=step;updateScene(simulationTime,step);remaining-=step}return Promise.resolve()};
   function roundedVector(vector){return{x:+vector.x.toFixed(3),y:+vector.y.toFixed(3),z:+vector.z.toFixed(3)}}
   function preciseVector(vector){return{x:+vector.x.toFixed(6),y:+vector.y.toFixed(6),z:+vector.z.toFixed(6)}}
-  window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0;asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
+  window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0,projectData=window.__kerbalProjectData;asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',project:{dataState:document.documentElement.dataset.projectData||'loading',version:projectData&&projectData.release.version,catalogMods:projectData&&projectData.site.modCatalog.length,uiTranslationMods:projectData&&projectData.uiTranslation.modsCovered},mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
   if(location.hostname==='127.0.0.1'||location.hostname==='localhost')window.__kerbalSpaceQA={asteroidDepths:function(){return asteroids.map(function(asteroid,index){return{index:index,x:asteroid.position.x,y:asteroid.position.y,z:asteroid.position.z,speed:asteroid.userData.velocity.length(),orbitRadius:asteroid.position.distanceTo(asteroidOrbitFocus)}})},impactStage:function(index){index=index||0;detachRocketStage(index);var stage=nasaStages[index],asteroid=asteroids[0];if(!stage||!stage.userData.detached||!asteroid)return false;stage.userData.age=240;stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);asteroid.position.copy(stageWorldCenter).add(new THREE.Vector3(stage.userData.collisionRadius+asteroid.userData.radius-.012,0,0));asteroid.userData.velocity.copy(stage.userData.velocity).add(new THREE.Vector3(-.00028,0,0));scene.updateMatrixWorld(true);return true}};
   requestAnimationFrame(loop);
 

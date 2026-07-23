@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "updatedAt": "2026-07-23",
   "release": {
     "version": "v26.4",
@@ -69,8 +69,10 @@
     }
   },
   "uiTranslation": {
-    "label": "Русификация интерфейса модов (не деталей — окна/кнопки/тултипы)",
+    "label": "Русификация интерфейса модов",
     "status": "pending-live-verification",
+    "statusLabel": "Ожидает первого живого запуска",
+    "summary": "Harmony-патч переводит окна, кнопки, переключатели и подсказки модов поверх их исходного интерфейса. Словари обновляются без пересборки DLL.",
     "addedAt": "2026-07-23",
     "method": "Harmony-патч GameData/kerbalru-ui-translator, перехват GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги, GUIContent, UnityEngine.UI.Text, Dropdown",
     "modsCovered": 24,
@@ -247,10 +249,312 @@
       }
     }
   },
+  "site": {
+    "modCatalog": [
+      {
+        "id": "AJE",
+        "name": "AJE",
+        "kicker": "Атмосферный полёт",
+        "teaser": "Реалистичная работа реактивных двигателей",
+        "icon": "i-propeller",
+        "description": "Advanced Jet Engine заменяет упрощённую модель турбореактивных двигателей расчётами на базе NASA EngineSim и JSBSim. Тяга, расход и устойчивость теперь зависят от высоты, скорости, числа Маха и работы воздухозаборников — самолёты приходится проектировать как настоящие.",
+        "tags": ["FULL", "Физика", "Авиация"],
+        "source": "https://github.com/KSP-RO/AJE"
+      },
+      {
+        "id": "ContractConfigurator",
+        "name": "Contract Configurator",
+        "kicker": "Карьера",
+        "teaser": "Движок исторических контрактов RP-1",
+        "icon": "i-file-description",
+        "description": "Фреймворк, который создаёт игровые контракты из конфигурационных файлов. В RP-1 на нём построены требования, награды, цели и цепочки миссий: от первых высотных запусков до орбитальных программ и межпланетных аппаратов.",
+        "tags": ["FULL", "Контракты", "RP-1"],
+        "source": "https://github.com/KSP-RO/ContractConfigurator"
+      },
+      {
+        "id": "EditorExtensionsRedux",
+        "name": "Editor Extensions Redux",
+        "kicker": "VAB / SPH",
+        "teaser": "Точная сборка аппаратов без ограничений редактора",
+        "icon": "i-layout-grid",
+        "description": "Расширяет инструменты VAB и SPH: добавляет произвольную симметрию, больше шагов угловой привязки, выравнивание деталей, стяжек и топливных линий, снятие лимитов смещения и быстрый выбор корневой детали. Особенно полезен для сложных исторических ракет.",
+        "tags": ["FULL", "Редактор", "Инструменты"],
+        "source": "https://github.com/linuxgurugamer/EditorExtensionsRedux"
+      },
+      {
+        "id": "ROCapsules",
+        "name": "ROCapsules",
+        "kicker": "Космические корабли",
+        "teaser": "Исторические капсулы в одном наборе",
+        "icon": "i-capsule",
+        "description": "Собирает лучшие модели реальных пилотируемых кораблей и приводит их к стандартам Realism Overhaul. Вместо множества тяжёлых паков игрок получает единый каталог Mercury, Gemini, Apollo и других капсул с корректными размерами и конфигурациями.",
+        "tags": ["FULL", "Детали", "История"],
+        "source": "https://github.com/KSP-RO/ROCapsules"
+      },
+      {
+        "id": "SXT",
+        "name": "SXT",
+        "kicker": "Stock eXTension",
+        "teaser": "Лёгкий набор дополнительных деталей",
+        "icon": "i-packages",
+        "description": "Lack’s Stock eXTension добавляет авиационные, ракетные и конструкционные детали, переиспользуя штатные текстуры KSP. Для него особенно важно отличать написанные ключи локализации от текста, который действительно загрузил Module Manager.",
+        "tags": ["FULL", "Детали", "Лёгкий"],
+        "source": "https://github.com/linuxgurugamer/SXTContinued"
+      },
+      {
+        "id": "Trajectories",
+        "name": "Trajectories",
+        "kicker": "Навигация",
+        "teaser": "Прогноз аэродинамической траектории и места посадки",
+        "icon": "i-route",
+        "description": "Показывает реальную линию снижения с учётом сопротивления, подъёмной силы и вращения планеты. Помогает рассчитать аэроторможение, увидеть точку удара и вывести капсулу или космоплан к выбранному району посадки; поддерживает FAR.",
+        "tags": ["FULL", "Посадка", "FAR"],
+        "source": "https://github.com/linuxgurugamer/KSPTrajectories"
+      },
+      {
+        "id": "VenStockRevamp",
+        "name": "Ven’s Stock Revamp",
+        "kicker": "Графика",
+        "teaser": "Детализированный облик стандартных деталей",
+        "icon": "i-palette",
+        "description": "Перерисовывает штатные модели и текстуры KSP, делая их аккуратнее, технологичнее и визуально цельнее, а также добавляет связанные варианты деталей.",
+        "tags": ["FULL", "Визуал", "Детали"],
+        "source": "https://github.com/VenVen/Stock-Revamp"
+      },
+      {
+        "id": "KerbalChangelog",
+        "name": "Kerbal Changelog",
+        "kicker": "Интерфейс",
+        "teaser": "Список изменений модов прямо в игре",
+        "icon": "i-history",
+        "description": "Даёт авторам модов единый формат внутриигровых журналов изменений. После обновления сборки окно один раз показывает, что изменилось в установленных компонентах, а затем не мешает до следующей новой версии.",
+        "tags": ["FULL", "Сервис", "Обновления"],
+        "source": "https://github.com/linuxgurugamer/KerbalChangelog"
+      },
+      {
+        "id": "KerbalEngineer",
+        "name": "Kerbal Engineer Redux",
+        "kicker": "Телеметрия",
+        "teaser": "Инженерные расчёты для сборки и полёта",
+        "icon": "i-chart-line",
+        "description": "Выводит ключевые параметры корабля в редакторе, полёте и центре слежения: delta-v по ступеням, тяговооружённость, массу, орбитальные элементы, время до событий и характеристики поверхности. Это главный прибор для проверки ракеты до старта.",
+        "tags": ["FULL", "Delta-v", "Расчёты"],
+        "source": "https://github.com/jrbudda/KerbalEngineer"
+      },
+      {
+        "id": "RealismOverhaul",
+        "name": "Realism Overhaul",
+        "kicker": "Ядро сборки",
+        "teaser": "Реальные размеры, массы, топливо и характеристики",
+        "icon": "i-atom",
+        "description": "Центральный слой конфигураций, который переводит детали KSP и совместимых модов на реальные параметры. Его патчи меняют детали других паков, поэтому аудит собственных PART-узлов не даёт честного процента — здесь показатель отмечен как «Н/Д».",
+        "tags": ["FULL", "Физика", "Конфигурации"],
+        "source": "https://github.com/KSP-RO/RealismOverhaul"
+      },
+      {
+        "id": "SpaceTuxLibrary",
+        "name": "SpaceTux Library",
+        "kicker": "Библиотека",
+        "teaser": "Общие инструменты для других модов",
+        "icon": "i-library",
+        "description": "Служебная библиотека, которой пользуются другие моды: предоставляет журналирование, выбор цвета, подсветку деталей и управление общими кнопками. Самостоятельного геймплея почти не добавляет, зато устраняет дублирование кода и конфликтующие элементы интерфейса.",
+        "tags": ["FULL", "Зависимость", "UI"],
+        "source": "https://github.com/linuxgurugamer/SpaceTuxLibrary"
+      },
+      {
+        "id": "BackgroundThrust",
+        "name": "Background Thrust",
+        "kicker": "Варп времени",
+        "teaser": "Длительные включения двигателей без ожидания",
+        "icon": "i-clock-bolt",
+        "description": "Позволяет двигателям работать во время ускорения времени, а с поддерживаемым обработчиком ресурсов — даже когда корабль не выбран. Мод следит за режимом SAS и буферами ресурсов, поэтому многочасовые ионные и другие малотяговые манёвры не требуют реального ожидания.",
+        "tags": ["FULL", "Время", "Малая тяга"],
+        "source": "https://github.com/Phantomical/BackgroundThrust"
+      },
+      {
+        "id": "ROSolar",
+        "name": "ROSolar",
+        "kicker": "Энергия",
+        "teaser": "Масштабируемые солнечные панели без дублей",
+        "icon": "i-solar-panel",
+        "description": "Объединяет качественные модели солнечных панелей из разных наборов и добавляет управляемое масштабирование.",
+        "tags": ["PATCH", "Энергия", "Масштаб"],
+        "source": "https://github.com/KSP-RO/ROSolar"
+      },
+      {
+        "id": "ROTanks",
+        "name": "ROTanks",
+        "kicker": "Конструкция",
+        "teaser": "Модульные баки, переходники и межступени",
+        "icon": "i-cylinder",
+        "description": "Использует переработанную систему SSTU для создания гибких баков Realism Overhaul. Диаметр, длина, форма, текстура и оснащение настраиваются в редакторе.",
+        "tags": ["PATCH", "Баки", "Модульность"],
+        "source": "https://github.com/KSP-RO/ROTanks"
+      },
+      {
+        "id": "ROEngines",
+        "name": "ROEngines",
+        "kicker": "Двигатели",
+        "teaser": "Единый каталог исторических ракетных двигателей",
+        "icon": "i-engine",
+        "description": "Собирает наиболее точные модели реальных ракетных двигателей и связывает их с конфигурациями Realism Overhaul. Часть английских названий — намеренно оставленные реальные обозначения двигателей.",
+        "tags": ["PATCH", "Детали", "История"],
+        "source": "https://github.com/KSP-RO/ROEngines"
+      },
+      {
+        "id": "ROHeatshields",
+        "name": "ROHeatshields",
+        "kicker": "Теплозащита",
+        "teaser": "Настраиваемые щиты для разных режимов входа",
+        "icon": "i-shield-half",
+        "description": "Добавляет изменяемые по диаметру теплозащитные экраны с разной геометрией и уровнем защиты — от простого теплоотвода до абляционного щита класса Apollo.",
+        "tags": ["PATCH", "Спуск", "Нагрев"],
+        "source": "https://github.com/KSP-RO/ROHeatshields"
+      },
+      {
+        "id": "ProceduralFairings",
+        "name": "Procedural Fairings",
+        "kicker": "Аэродинамика",
+        "teaser": "Обтекатели, автоматически подогнанные под груз",
+        "icon": "i-cone",
+        "description": "Строит створки обтекателя вокруг любого полезного груза и позволяет менять диаметр, длину, профиль, текстуру и логику отделения.",
+        "tags": ["PATCH", "Обтекатели"],
+        "source": "https://github.com/KSP-RO/ProceduralFairings"
+      },
+      {
+        "id": "ProceduralParts",
+        "name": "Procedural Parts",
+        "kicker": "Конструкция",
+        "teaser": "Детали произвольной формы и размера",
+        "icon": "i-arrows-maximize",
+        "description": "Позволяет создавать цилиндры, усечённые конусы и bezier-формы с нужными размерами и текстурами. Перевод этого небольшого набора требует отдельной проверки после применения патчей RealFuels.",
+        "tags": ["PATCH", "RealFuels", "Процедурные детали"],
+        "source": "https://github.com/KSP-RO/ProceduralParts"
+      },
+      {
+        "id": "RealChute",
+        "name": "RealChute",
+        "kicker": "Посадка",
+        "teaser": "Полная реалистичная система парашютов",
+        "icon": "i-parachute",
+        "description": "Заменяет штатный модуль парашютов системой с реалистичным раскрытием, расчётом материалов и расширенной настройкой в редакторе.",
+        "tags": ["PATCH", "Парашюты", "Аэродинамика"],
+        "source": "https://github.com/ChrisViral/RealChute"
+      },
+      {
+        "id": "ModularLaunchPads",
+        "name": "Modular Launch Pads",
+        "kicker": "Стартовый комплекс",
+        "teaser": "Реальные пусковые столы, башни и фермы",
+        "icon": "i-building-factory",
+        "description": "Превращает стандартные стартовые зажимы в полноценные комплексы: основания, башни обслуживания, кабель-мачты, фермы, лифты и площадки.",
+        "tags": ["PATCH", "Старт"],
+        "source": "https://github.com/AlphaMensae/Modular-Launch-Pads"
+      }
+    ],
+    "inventoryGroups": [
+      {
+        "id": "upstream",
+        "title": "Русский уже есть",
+        "subtitle": "локализация от авторов и стоковая KSP",
+        "icon": "i-language",
+        "entryIcon": "i-circle-check",
+        "kind": "translated",
+        "entries": [
+          {"name": "B9PartSwitch", "note": "RU от автора · варианты деталей"},
+          {"name": "B9 Procedural Wings", "note": "RU от автора · крылья"},
+          {"name": "CommunityResourcePack", "note": "RU от автора · ресурсы"},
+          {"name": "ConformalDecals", "note": "RU от автора · декали"},
+          {"name": "Ferram Aerospace Research", "note": "RU от автора · FAR"},
+          {"name": "KSPCommunityFixes", "note": "RU от автора · исправления"},
+          {"name": "PatchManager", "note": "RU от автора · управление патчами"},
+          {"name": "Kerbalism", "note": "RU от автора · жизнеобеспечение"},
+          {"name": "Kerbalism-Config", "note": "RU от автора · конфигурации"},
+          {"name": "Kopernicus", "note": "RU от автора · планетные системы"},
+          {"name": "MechJeb2", "note": "RU от автора · автопилот"},
+          {"name": "RP-1", "note": "RU от автора · карьера"},
+          {"name": "RSSDateTimeFormatter", "note": "RU от автора · даты RSS"},
+          {"name": "ReStock", "note": "RU от автора · модели деталей"},
+          {"name": "ReStock+", "note": "RU от автора · дополнительные детали"},
+          {"name": "RealFuels", "note": "RU от автора · топливо"},
+          {"name": "Real Solar System", "note": "RU от автора · Солнечная система"},
+          {"name": "Kerbal Space Program", "note": "Стоковая KSP · папка Squad"}
+        ]
+      },
+      {
+        "id": "candidates",
+        "title": "Кандидаты на перевод",
+        "subtitle": "есть детали или интерфейс",
+        "icon": "i-alert-triangle",
+        "entryIcon": "i-chevron-right",
+        "kind": "candidate",
+        "entries": [
+          {"name": "RealAntennas", "note": "128 деталей и UI связи"},
+          {"name": "TestFlight", "note": "Надёжность и сообщения об отказах"},
+          {"name": "Skopos", "note": "Наземные станции связи RP-1"},
+          {"name": "DistantObject", "note": "Настройки далёких объектов"},
+          {"name": "CommunityCategoryKit", "note": "Категории деталей в VAB"},
+          {"name": "KSPWheel", "note": "Шасси и колёса"},
+          {"name": "BahaSP", "note": "BDAnimationModules · анимации деталей"},
+          {"name": "RCSBuildAid", "note": "Оверлей RCS в редакторе"},
+          {"name": "AtmosphereAutopilot", "note": "UI атмосферного автопилота"},
+          {"name": "KerbalJointReinforcement", "note": "Настройки прочности стыков"},
+          {"name": "EnvironmentalVisualEnhancements", "note": "Интерфейс облаков и атмосферы"},
+          {"name": "RetractableLiftingSurface", "note": "Убираемые аэродинамические детали"},
+          {"name": "FShangarExtender", "note": "Интерфейс расширения ангара"},
+          {"name": "KSCSwitcher", "note": "Названия стартовых площадок"},
+          {"name": "EngineGroupController", "note": "UI групп двигателей"},
+          {"name": "PlanetShine", "note": "Настройки отражённого света"},
+          {"name": "Scatterer", "note": "Интерфейс атмосферных эффектов"}
+        ]
+      },
+      {
+        "id": "service",
+        "title": "Служебные компоненты",
+        "subtitle": "перевод не требуется",
+        "icon": "i-cpu",
+        "entryIcon": "i-cpu",
+        "kind": "service",
+        "entries": [
+          {"name": "ClickThroughBlocker", "note": "Служебный · видимого текста нет"},
+          {"name": "Harmony", "note": "Служебный · библиотека патчей"},
+          {"name": "KSPBurst", "note": "Служебный · библиотека"},
+          {"name": "TexturesUnlimited", "note": "Служебный · шейдеры"},
+          {"name": "ToolbarControl", "note": "Служебный · управление кнопками"},
+          {"name": "CustomBarnKit", "note": "Служебный · параметры построек"},
+          {"name": "DepthMask", "note": "Служебный · графический эффект"},
+          {"name": "KSPTextureLoader", "note": "Служебный · загрузчик текстур"},
+          {"name": "ModularFlightIntegrator", "note": "Служебный · интеграция физики"},
+          {"name": "Shabby", "note": "Служебный · шейдеры"},
+          {"name": "SmokeScreen", "note": "Служебный · эффекты частиц"},
+          {"name": "SolverEngines", "note": "Служебный · расчёты двигателей"},
+          {"name": "StagedAnimation", "note": "Служебный · модуль анимаций"},
+          {"name": "TextureReplacer", "note": "Служебный · замена текстур"},
+          {"name": "Waterfall", "note": "Служебный · эффекты двигателей"},
+          {"name": "RealHeat", "note": "Служебный · тепловая модель"},
+          {"name": "RealPlume", "note": "Служебный · эффекты струй"},
+          {"name": "RSS-Textures", "note": "Служебный · текстуры планет"},
+          {"name": "RSSVE", "note": "Служебный · визуальные конфигурации RSS"},
+          {"name": "ScattererAtmosphereCache", "note": "Служебный · кэш атмосферы"},
+          {"name": "StockScattererConfigs", "note": "Служебный · конфигурации Scatterer"},
+          {"name": "ROLib", "note": "Служебный · библиотека RO"},
+          {"name": "ROUtils", "note": "Служебный · утилиты RO"},
+          {"name": "RP-1-ExpressInstall", "note": "Служебный · метапак сборки"},
+          {"name": "RP-1-ExpressInstall-Graphics", "note": "Служебный · графический метапак"},
+          {"name": "Firespitter", "note": "Служебный · модуль деталей"},
+          {"name": "Resurfaced", "note": "Служебный · материалы"},
+          {"name": "KerbalRenamer", "note": "Служебный · генератор имён"}
+        ]
+      }
+    ]
+  },
   "links": {
     "repository": "https://github.com/plagness/kerbal.ru",
     "releases": "https://github.com/plagness/kerbal.ru/releases",
     "coverage": "https://github.com/plagness/kerbal.ru/blob/main/docs/COVERAGE.md",
-    "discussions": "https://github.com/plagness/kerbal.ru/discussions"
+    "discussions": "https://github.com/plagness/kerbal.ru/discussions",
+    "uiTranslation": "https://github.com/plagness/kerbal.ru/blob/main/docs/UI-TRANSLATION.md",
+    "roadmap": "https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md",
+    "maintaining": "https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md"
   }
 }
