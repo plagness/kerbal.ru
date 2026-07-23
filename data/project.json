@@ -2,12 +2,12 @@
   "schemaVersion": 3,
   "updatedAt": "2026-07-23",
   "release": {
-    "version": "v26.4",
+    "version": "v26.5",
     "year": 2026,
-    "sequence": 4,
+    "sequence": 5,
     "date": "2026-07-23",
     "channel": "stable",
-    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.4"
+    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.5"
   },
   "game": {
     "name": "Kerbal Space Program",
@@ -33,58 +33,58 @@
       "cacheParts": 1247,
       "fields": {
         "title": {
-          "translated": 581,
-          "percent": 56.8
+          "translated": 589,
+          "percent": 57.6
         },
         "description": {
-          "translated": 733,
-          "percent": 71.7
+          "translated": 767,
+          "percent": 75.0
         },
         "manufacturer": {
-          "translated": 142,
-          "percent": 13.9
+          "translated": 171,
+          "percent": 16.7
         }
       }
     },
     "projected": {
-      "label": "Структурно проверенная проекция (ждёт следующего живого запуска)",
-      "status": "pending-live-cache",
+      "label": "Проекция реализована — совпадает с verified",
+      "status": "cache-verified",
       "auditedAt": "2026-07-23",
       "parts": 1023,
-      "note": "Дельта к verified: 2 новых собственных парта RealismOverhaul (ROAdvCapsule, RO-OldFighterCockpit) + фикс техдерева (RDNode вложен в @TechTree, не в этот процент по деталям не входит). Отдельно, не отражено здесь (нужен пересчёт по мод-суммам): исправление плейсхолдера \"abc\" в ROEngines (21 деталь, +21 description) + ProceduralParts (5 новых переведённых вариантов после RealFuels-переименования) — см. coverage.real ниже и docs/COVERAGE.md.",
+      "note": "Все предыдущие проекции подтверждены живым кэшем 2026-07-23 (вечер): 2 новых парта RealismOverhaul (ROAdvCapsule, RO-OldFighterCockpit) резолвятся, техдерево (332 узла) работает на 97.9%, abc-плейсхолдеры ROEngines и ProceduralParts-варианты вошли в кэш. Отложенной дельты к verified больше нет — projected == verified. Скорректированный на несуществующие детали знаменатель — см. coverage.real.",
       "fields": {
         "title": {
-          "translated": 583,
-          "percent": 57.0
+          "translated": 589,
+          "percent": 57.6
         },
         "description": {
-          "translated": 735,
-          "percent": 71.8
+          "translated": 767,
+          "percent": 75.0
         },
         "manufacturer": {
-          "translated": 143,
-          "percent": 14.0
+          "translated": 171,
+          "percent": 16.7
         }
       }
     },
     "real": {
-      "label": "Скорректировано на реально существующие в игре детали",
-      "status": "structural-estimate",
+      "label": "Скорректировано на реально существующие в игре детали (прямой замер)",
+      "status": "cache-measured",
       "auditedAt": "2026-07-23",
-      "parts": 764,
-      "note": "1023 - 259 деталей, для которых подтверждено (по логам ModuleManager, не предположено), что они физически не существуют в этой сборке при текущих настройках RP-1/RealismOverhaul: HardRemoveNonRP0/-NonRO (жёсткий реализм карьеры вырезает детали без RP0conf/RSSROConfig), клонирование-с-удалением (RealismOverhaul заменяет базовую деталь типизированными вариантами и подтверждённо переводит их под новыми именами), патчи для не установленных модов-зависимостей (FASA, RaiderNick, Cormorant Aeronology). SXT экстраполирован по выборке 15/148 (Wilson CI 95% ≈ [70%,93%] на \"именно этот механизм\", но ~100% на \"деталь реально не существует\" тем или иным способом, включая ~7% артефактов regex-подсчёта в самом audit-скрипте). Не входит в coverage.active — вспомогательная метрика, требует полной (не выборочной) проверки прежде чем стать основной.",
+      "parts": 767,
+      "note": "Теперь это ПРЯМОЙ замер по свежему кэшу, а не экстраполяция по выборке: из 1023 имён деталей, которые определяют наши моды, только 767 физически присутствуют в собранном ModuleManager.ConfigCache — остальные 256 удалены из этой сборки при текущих настройках RP-1/RealismOverhaul (HardRemoveNonRP0/-NonRO вырезает детали без RP0conf/RSSROConfig; клонирование-с-удалением; патчи для не установленных модов). Знаменатель = 767 реально существующих деталей. Описания переведены у 100% существующих деталей. Заголовки — 76.8%, оставшийся остаток почти целиком легитимные обозначения двигателей (RD-107, Merlin 1D и т.п., латиница по конвенции). Производители — 22.3%, остаток в основном легитимные западные бренды (Aerojet, Rocketdyne, Thiokol). coverage.active остаётся verified (знаменатель 1023) как более консервативная витрина.",
       "fields": {
         "title": {
-          "translated": 583,
-          "percent": 76.3
+          "translated": 589,
+          "percent": 76.8
         },
         "description": {
-          "translated": 756,
-          "percent": 99.0
+          "translated": 767,
+          "percent": 100.0
         },
         "manufacturer": {
-          "translated": 144,
-          "percent": 18.8
+          "translated": 171,
+          "percent": 22.3
         }
       }
     }
@@ -200,13 +200,13 @@
     "ModularLaunchPads": {
       "parts": 234,
       "verified": {
-        "title": 229,
-        "description": 229,
+        "title": 233,
+        "description": 233,
         "manufacturer": 0
       },
       "projected": {
-        "title": 229,
-        "description": 229,
+        "title": 233,
+        "description": 233,
         "manufacturer": 0
       }
     },
@@ -236,15 +236,15 @@
       "verified": {
         "title": 165,
         "description": 166,
-        "manufacturer": 14
+        "manufacturer": 16
       }
     },
     "ROEngines": {
       "parts": 244,
       "verified": {
-        "title": 65,
-        "description": 207,
-        "manufacturer": 48
+        "title": 67,
+        "description": 235,
+        "manufacturer": 65
       }
     },
     "ROHeatshields": {
@@ -252,12 +252,12 @@
       "verified": {
         "title": 2,
         "description": 2,
-        "manufacturer": 0
+        "manufacturer": 2
       },
       "projected": {
         "title": 2,
         "description": 2,
-        "manufacturer": 0
+        "manufacturer": 2
       }
     },
     "ROSolar": {
@@ -278,7 +278,7 @@
       "verified": {
         "title": 6,
         "description": 6,
-        "manufacturer": 0
+        "manufacturer": 6
       }
     },
     "RealChute": {
@@ -298,9 +298,9 @@
       "parts": 36,
       "audit": "indeterminate",
       "verified": {
-        "title": 4,
-        "description": 4,
-        "manufacturer": 2
+        "title": 6,
+        "description": 6,
+        "manufacturer": 3
       },
       "projected": {
         "title": 6,
@@ -313,7 +313,7 @@
       "verified": {
         "title": 57,
         "description": 65,
-        "manufacturer": 43
+        "manufacturer": 44
       }
     },
     "VenStockRevamp": {
