@@ -1,0 +1,66 @@
+# ToolbarControl (001_ToolbarControl) — мод-обёртка панелей инструментов KSP.
+# Даёт единый интерфейс к стоковой панели (ApplicationLauncher) и к сторонней
+# «Blizzy Toolbar»; позволяет для каждого мода выбрать, на какую панель поместить
+# его кнопку. DLL: GameData/001_ToolbarControl/Plugins/ToolbarControl.dll.
+#
+# Метод: UTF-16LE-скан ldstr + полный monodis-IL (MONO_PATH = ферма всех
+# Plugins/*.dll + KSP Managed). Каждая строка прослежена по IL до реальной
+# перехватываемой функции.
+#
+# Что переведено (какие окна):
+# 1. Окно настроек (заголовок "Toolbar Controller") — BlizzyOptions.DoWindow,
+#    вызывается по кнопке на панели: два поясняющих Label, заголовки колонок
+#    выбора (Стоковая/Blizzy/Обе/Нет), кнопка Close. Легаси GUILayout.Label/Button
+#    + заголовок окна через ClickThruBlocker.GUILayoutWindow → GUILayout.Window.
+# 2. Приветственное окно (заголовок "Toolbar Controller Intro") —
+#    IntroWindowClass, показывается при старте: кнопки OK и «скрыть при запуске».
+# 3. Раздел в игровом меню «Настройки» — TC : GameParameters.CustomParameterNode
+#    (DisplaySection "Toolbar Control") с полями-переключателями; их подписи и
+#    всплывающие toolTip заданы атрибутами CustomParameterUI/CustomFloatParameterUI
+#    → рендерятся через TMPro (перехватывается).
+# 4. Заголовок диалога ошибки установки (PopupDialog → TMPro).
+#
+# Пропущено намеренно:
+# - Тело приветственного окна: читается построчно из внешнего файла
+#   PluginData/Intro.txt (File.ReadAllLines → GUILayout.Label на каждую строку),
+#   это не строки DLL и не наш файл — не трогаем (переводить чужой Intro.txt
+#   запрещено; построчный текст динамический).
+# - Подписи строк списка модов в окне настроек: Concat(" ", mod.displayName) —
+#   динамика, точного совпадения нет.
+# - Всплывающая подсказка-окно (SetupTooltip/TooltipWindow/DrawTooltip): текст
+#   динамический (GUIContent из имени наведённой кнопки), заголовок GUI.Window тоже.
+# - Кнопка «?» (символ-переключатель помощи) и Label " " — не текст.
+# - Тела сообщений диалогов установки: содержат \n и склеены Concat со списком
+#   путей — динамика.
+# - Debug/Log-строки ("Impossible Error", "TEST:", "AddToAlltoolbars main...",
+#   "stockButton is null...", "-ERROR- " и т.п.) — разработческая диагностика.
+# - Ключи ConfigNode ("useStock","useBlizzy","showWindowAtStartup","debugMode",
+#   "displayName","name","ToolbarControlData","ToolbarController") и пути/расширения
+#   файлов (".png",".dds","GameData/..." и пр.).
+# - Имена для рефлексии (getType/getMethod/getProperty): "Toolbar.ToolbarManager",
+#   "Update","Draw","AddOption","OnClick","Enabled","Important","ToolTip","Text" и др.
+# - Формат-строки ToString ("X" = hex, "0.00", "0.0") и «n/a» (заглушка версии).
+#
+# Термины: toolbar = панель (инструментов); Stock = стоковая; Blizzy = бренд
+# (blizzy78), латиницей; Toolbar Controller = Контроллер панелей.
+
+Toolbar Controller	Контроллер панелей
+Toolbar Controller Intro	Контроллер панелей — введение
+For each mod, select which toolbar to put it's button on.	Для каждого мода выберите, на какую панель поместить кнопку.
+If the Blizzy toolbar is not installed, all buttons will be put on the stock toolbar, regardless of the setting	Если панель Blizzy не установлена, все кнопки попадут на стоковую панель, независимо от настройки
+Stock	Сток
+Both	Обе
+None	Нет
+Close	Закрыть
+OK	ОК
+Hide this window at startup	Не показывать при запуске
+Toolbar Control	Управление панелями
+Show tooltips for stock & Blizzy toolbar	Показывать подсказки для стоковой панели и Blizzy
+Blzzy tooltip setting may need to restart SKP	Настройка подсказок Blizzy может потребовать перезапуска KSP
+Tooltip timeout	Задержка подсказки
+Time tooltip stays around	Как долго держится подсказка
+Allow the Toolbar Control button to be hidden	Разрешить скрывать кнопку Контроллера панелей
+When hidden, you can't change anything	Когда скрыта, ничего нельзя изменить
+Debug mode	Режим отладки
+Writes extra data to the log file	Пишет доп. данные в лог-файл
+Incorrect Toolbar Controller Installation	Неверная установка Контроллера панелей

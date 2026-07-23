@@ -335,3 +335,203 @@ Yearly Upkeep:	Годовое содержание:
 Yes	Да
 You must finish reconditioning at least one pad before you can roll out to it!	Нужно завершить восстановление хотя бы одной площадки, прежде чем вывозить на неё!
 You must repair the launchpad before you can roll out to it!	Нужно отремонтировать стартовую площадку, прежде чем вывозить на неё!
+# === Окно "Integration Info" (сборка/интеграция KCT, RenderBuildMode/RenderEditMode + GUIContent-кэш) -- добор ===
+Integration Info	Сведения об интеграции
+No LC Available	Нет доступного СК
+No LC Available Now	Сейчас нет доступного СК
+New LC	Новый СК
+Build a new one.	Постройте новый.
+There is no operational launch complex. Build a new one or wait for an existing one to finish construction.	Нет действующего стартового комплекса. Постройте новый или дождитесь окончания строительства существующего.
+Build a new launch complex to support this vessel, with a margin of 10% to vessel mass and size upgrades.	Построить новый стартовый комплекс под этот аппарат, с запасом 10% на улучшения массы и размеров аппарата.
+Switch to LC	Переключиться на СК
+The Hangar is currently selected; this will switch to a launch complex, needed for rockets.	Сейчас выбран Ангар; переключит на стартовый комплекс, нужный для ракет.
+Display integration rate for max engineers	Показать темп интеграции при макс. числе инженеров
+Display integration rate for current engineers	Показать темп интеграции при текущем числе инженеров
+Hangar Unavailable	Ангар недоступен
+The Hangar is currently being modified.	Ангар сейчас перестраивается.
+Switch to Hangar	Переключиться на Ангар
+A Launch Complex is currently selected; this will switch to the Hangar, needed for planes.	Сейчас выбран стартовый комплекс; переключит на Ангар, нужный для самолётов.
+The extra salary paid above the idle rate for these engineers	Дополнительная зарплата сверх ставки простоя для этих инженеров
+Launch costs consist of rollout + pad reconditioning	Затраты на запуск состоят из вывоза + восстановления площадки
+Time left takes efficiency increase into account based on vessel's current place in the integration list	Оставшееся время учитывает рост эффективности исходя из текущего места аппарата в очереди интеграции
+Time left takes efficiency increase into account based on assuming vessel will be placed at head of integration list	Оставшееся время учитывает рост эффективности при условии, что аппарат встанет в начало очереди интеграции
+# --- KCT/Space Center windows: launch-complex management, integration, rollout/recovery, simulation config, crew training, avionics, tooling (GUILayout/GUIContent/DialogGUI, verified by IL). ---
+Airlaunch cancelled	Воздушный старт отменён
+Loading screen images have moved to a new mod, ROLoadingImages. Use CKAN to install it if you want custom loading images.	Картинки загрузочного экрана перенесены в новый мод ROLoadingImages. Установите его через CKAN, если хотите свои картинки загрузки.
+RP-1 Loading Screen Images	Картинки загрузочного экрана RP-1
+Cockpit is above the safe altitude which will lead to crew incapacitation and eventually to death	Кабина выше безопасной высоты, что приведёт к потере сознания экипажа и в итоге к гибели
+Destroy Vessel?	Уничтожить аппарат?
+Cannot shut down avionics while crewed	Нельзя отключить авионику при наличии экипажа
+Cannot shut down avionics on this part	Нельзя отключить авионику на этой детали
+Are you sure you want to permanently disable the avionics unit? Doing this will prevent avionics from consuming power but it will no longer provide any control nor use its internal antenna. Note that disabling the last avionics unit on the vessel will also disable all antennas. (internal and external, ingoing and outgoing)	Точно навсегда отключить блок авионики? Это прекратит потребление энергии авионикой, но она больше не даст управления и не будет использовать внутреннюю антенну. Учтите: отключение последнего блока авионики на аппарате также отключит все антенны (внутренние и внешние, приём и передачу).
+Purchase Tooling	Купить оснастку
+Warp to Fund Target	Перемотка до целевой суммы
+Warps to the fund target you specify in the resulting dialog	Перематывает время до заданной вами суммы средств в открывшемся окне
+Fund Target	Целевая сумма
+Warp To Funds	Перемотка до средств
+Estimate Time	Оценить время
+Yes, Warp	Да, перемотать
+Add Warp Target	Добавить цель перемотки
+Confirm Warp	Подтвердить перемотку
+View details	Подробнее
+Tooling Purchase	Покупка оснастки
+Press to preview fully tooled integration time & cost	Нажмите для предпросмотра времени и стоимости интеграции при полной оснастке
+Hold the button pressed and watch the cost & time values change in the Integration Info window	Удерживайте кнопку и следите за изменением стоимости и времени в окне «Сведения об интеграции»
+Refit	Переоснащение
+Timewarp was stopped because there's insufficient funds to continue the construction	Ускорение времени остановлено: недостаточно средств для продолжения стройки
+At 100% work rate	При 100% скорости работы
+Uses shared efficiency:	Использует общую эффективность:
+Increases in efficiency will be fully shared between these two LCs.	Прирост эффективности полностью делится между этими двумя СК.
+Starting Efficiency:	Начальная эффективность:
+Based on current efficiency of the closest LC, if any, and the current tech level. Will be recalculated when this LC becomes operational.	На основе текущей эффективности ближайшего СК (если есть) и текущего уровня технологий. Будет пересчитано, когда этот СК станет рабочим.
+The specified mass, size, and/or supported resources are incompatible with the current vessel in the editor. Are you sure you wish to commence construction?	Указанные масса, размер и/или поддерживаемые ресурсы несовместимы с текущим аппаратом в редакторе. Точно начать строительство?
+Are You Sure?	Вы уверены?
+Please enter a valid size	Введите корректный размер
+Please enter a valid tonnage limit	Введите корректный предел тоннажа
+Please wait for any rollout, rollback, or recovery to complete	Дождитесь завершения вывоза, отката или возврата
+Enter a name for the new launch complex	Введите имя нового стартового комплекса
+Another launch complex with the same name already exists	Стартовый комплекс с таким именем уже существует
+Efficiency:	Эффективность:
+The hangar has no specific efficiency, and instead uses the maximum possible efficiency at your current tech level.	У ангара нет отдельной эффективности — он использует максимально возможную для вашего уровня технологий.
+LC efficiency increases as the LC is used, proportional to the number of engineers vs the max, and lowers only if the complex is modified. Efficiency will not increase if the LC is rushing.	Эффективность СК растёт по мере использования, пропорционально числу инженеров относительно максимума, и падает только при переоснащении комплекса. При форсировании эффективность не растёт.
+Researching new Electronics Research nodes and gathering more science will increase this	Исследование новых узлов «Электроника» и сбор науки увеличат это значение
+Auto hire	Автонаём
+Schedules staff to be hired over time	Планирует наём персонала со временем
+Reserve funds	Резерв средств
+Chute	Парашют
+Include Parachute	Учитывать парашют
+Include EVA pack	Учитывать набор EVA
+Dismantle failed: can't dismantle the Hangar	Разбор не удался: ангар разобрать нельзя
+Dismantle failed: Launch Complex in use	Разбор не удался: стартовый комплекс используется
+Dismantle failed: a vessel is currently waiting on the launch pad.	Разбор не удался: на площадке сейчас ждёт аппарат.
+Edits cancelled.	Правки отменены.
+Enter a name for the new launchpad	Введите имя новой площадки
+Another launchpad with the same name already exists	Площадка с таким именем уже существует
+Transfer time: 	Время перелёта: 
+Leave blank to derive from the transfer.	Оставьте пустым, чтобы взять из перелёта.
+Inclination (degrees): 	Наклонение (градусы): 
+LAN (degrees): 	Долгота восх. узла (градусы): 
+Time to periapsis: 	Время до перигея: 
+Seconds before periapsis at which to place the vessel. Accepts "3h", "1d 2h", or plain seconds. 0 = at periapsis.	За сколько секунд до перигея разместить аппарат. Принимает «3h», «1d 2h» или просто секунды. 0 = в перигее.
+Autostage to stage: 	Автоотделение до ступени: 
+Blank disables autostage. Parts in stages above this number will be shed and destroyed at sim start (highlighted red in the editor; retained parts blue).	Пусто отключает автоотделение. Детали ступеней выше этого номера будут сброшены и уничтожены при старте симуляции (в редакторе выделены красным; сохранённые — синим).
+ From Now	 от текущего момента
+If selected the game will warp forwards by the entered value. Otherwise the date and time will be set to the entered value.	Если включено, игра перемотает вперёд на введённое значение. Иначе дата и время будут установлены на введённое значение.
+Couldn't read departure/transfer time from the KAC alarm; enter those manually.	Не удалось считать время отправления/перелёта из будильника KAC; введите их вручную.
+Can't simulate without a vessel	Нельзя симулировать без аппарата
+Hyperbolic mode requires an origin body	Гиперболический режим требует исходное тело
+Enter a positive transfer time	Введите положительное время перелёта
+Couldn't parse time to periapsis; using earliest in SOI	Не удалось разобрать время до перигея; используется самое раннее в сфере влияния
+Value must be of format "1y 2d 3h 4m 5s" or "31719845" when "From Now" is selected.	Значение должно быть в формате «1y 2d 3h 4m 5s» или «31719845», когда выбрано «от текущего момента».
+Please enter a valid time value.	Введите корректное значение времени.
+Cannot set time further back than the game start	Нельзя задать время раньше начала игры
+Going backwards in time isn't allowed with Principia	Перемотка назад во времени недоступна с Principia
+Vessel must have a name other than 'Untitled Space Craft'.	Аппарат должен иметь имя, отличное от «Untitled Space Craft».
+Vessel must have a name	У аппарата должно быть имя
+Are you sure you want to remove this vessel from the plans?	Точно убрать этот аппарат из планов?
+Delete plan	Удалить план
+Some engineers are idle!	Часть инженеров простаивает!
+Cancel Construction?	Отменить строительство?
+Cancel Node?	Отменить узел?
+Engineers assigned / max	Инженеров назначено / макс.
+Design and build a new Launch Complex	Спроектировать и построить новый стартовый комплекс
+Manage LCs	Управление СК
+View, reorder, and manage all Launch Complexes	Просмотр, порядок и управление всеми стартовыми комплексами
+Are you sure you want to cancel this repair?	Точно отменить этот ремонт?
+Cancel Repair	Отменить ремонт
+Scrap Vessel	Утилизировать аппарат
+Rollout	Вывоз
+Select a launch pad to roll out to:	Выберите площадку для вывоза:
+Roll Out	Вывезти
+You must repair the runway prior to launch!	Перед запуском нужно отремонтировать ВПП!
+Prep for airlaunch	Подготовить к воздушному старту
+Unmount	Снять
+Rename this Launch Complex	Переименовать этот стартовый комплекс
+Dismantle this Launch Complex.	Разобрать этот стартовый комплекс.
+New Pad	Новая площадка
+Build an additional launch pad for this LC	Построить дополнительную площадку для этого СК
+Rename this launch pad	Переименовать эту площадку
+Choose KerbalKonstructs launch site	Выбрать площадку KerbalKonstructs
+Dismantle	Разобрать
+Are you sure you want to delete the selected Preset, file and all? This cannot be undone!	Точно удалить выбранный пресет вместе с файлом? Это нельзя отменить!
+Confirm Deletion	Подтвердить удаление
+Extra Pad Cost:	Стоимость доп. площадки:
+Cost to build additional pads past the first once LC is constructed	Стоимость постройки дополнительных площадок сверх первой после возведения СК
+Clean	Минимум
+Set the LC stats to support only the current vessel, removing support for other vessels to reduce maintenance costs in exchange for a longer renovation time	Настроить СК только под текущий аппарат, убрав поддержку других, чтобы снизить расходы на содержание ценой более долгой переделки
+Existing	Существующий
+Set the LC stats to match the currently existing LC	Настроить параметры СК под уже существующий СК
+Delete Vessels	Удалить аппараты
+Vessels Contain Missing Parts	В аппаратах есть отсутствующие детали
+Go to Flight scene	Перейти в сцену полёта
+Vessels can only be recovered for reuse in the Flight scene	Аппараты можно вернуть для повторного использования только в сцене полёта
+Recover Vessel	Вернуть аппарат
+Recover to SPH	Вернуть в SPH
+Recover to VAB	Вернуть в VAB
+Normal recovery	Обычный возврат
+Allows the vessel to be launched again after a short recovery delay.	Позволяет снова запустить аппарат после короткой задержки на возврат.
+Repair failures	Ремонт отказов
+Recover	Вернуть
+Recover vessel	Вернуть аппарат
+Insufficient funds to unlock parts	Недостаточно средств для разблокировки деталей
+Vessel cannot be built!	Аппарат нельзя построить!
+Cancel integration	Отменить интеграцию
+Integrate anyway	Всё равно интегрировать
+Tool them in the RP-1 menu to reduce vessel cost and integration time.	Оснастите их в меню RP-1, чтобы снизить стоимость аппарата и время интеграции.
+Untooled parts	Неоснащённые детали
+Not Enough Funds To Integrate!	Недостаточно средств для интеграции!
+This vessel contains prototype configs that haven't been unlocked yet.	Этот аппарат содержит прототипные конфигурации, ещё не разблокированные.
+Issues in <color=green>green</color> can be resolved.	Проблемы, отмеченные <color=green>зелёным</color>, можно устранить.
+Select for training	Выбрать для тренировки
+Cancel training	Отменить тренировку
+Remove from training	Убрать из тренировки
+Remove from Training?	Убрать из тренировки?
+Cancel Training?	Отменить тренировку?
+Add alarm	Добавить будильник
+Additional tank volume: 	Доп. объём бака: 
+Amount of excess tank volume	Величина избыточного объёма бака
+Apply (resize to fit)	Применить (подогнать размер)
+Applies the parameters above and resizes the part to have the optimal amount of volume	Применяет параметры выше и меняет размер детали до оптимального объёма
+Apply (preserve dimensions)	Применить (сохранить размеры)
+Tries to apply the parameters above but doesn't resize the part even if there isn't enough volume, or if there's extra volume	Пытается применить параметры выше, не меняя размер детали, даже если объёма не хватает или он избыточен
+Your selected avionics type does not match the current tab shown. Close window anyway?	Выбранный тип авионики не соответствует открытой вкладке. Всё равно закрыть окно?
+Avionics Mismatch	Несовпадение авионики
+Whether samples can be transferred and stored in the avionics unit.	Можно ли передавать и хранить образцы в блоке авионики.
+Whether the avionics unit can enter hibernation mode that greatly reduces power consumption.	Может ли блок авионики переходить в спящий режим, сильно снижающий энергопотребление.
+Whether fore-aft translation is allowed despite having insufficient controllable mass or being outside the max range of Near-Earth avionics.	Разрешено ли продольное смещение при недостаточной управляемой массе или вне макс. дальности околоземной авионики.
+Invalid controllable mass value	Некорректное значение управляемой массы
+EC amount needs to be larger than 0	Заряд энергии должен быть больше 0
+Total Effective Cost	Полная эффективная стоимость
+Effective Cost after Leader effects (conditional only)	Эффективная стоимость после эффектов лидеров (только условных)
+Unconditional integration speed buffs/debuffs are ignored.	Безусловные бонусы/штрафы к скорости интеграции не учитываются.
+Ind. Effective Cost	Инд. эффективная стоимость
+Global effective-cost modifiers are not included unless they originate from the part.	Глобальные модификаторы эффективной стоимости не учитываются, если не исходят от детали.
+Fill origin, departure date, transfer time, insertion ΔV and periapsis from the matching Kerbal Alarm Clock transfer-window alarm.	Заполнить исходное тело, дату отправления, время перелёта, ΔV торможения и перигей из соответствующего будильника окна перелёта Kerbal Alarm Clock.
+Heliocentric transfer duration from the origin body (TWP arrival date − departure date).	Длительность гелиоцентрического перелёта от исходного тела (дата прибытия TWP − дата отправления).
+Insertion ΔV (m/s): 	ΔV торможения (м/с): 
+Insertion / capture ΔV at the target body from a transfer-window planner. Should match the periapsis altitude TWP assumed.	ΔV торможения/захвата у целевого тела из планировщика окна перелёта. Должно совпадать с высотой перигея, принятой в TWP.
+# --- New-game/difficulty setup settings (GameParameters CustomParameterUI: boolean toggle labels -> DialogGUIToggle, and toolTips -> Tooltip_Text TMP set_text; verified in Assembly-CSharp DifficultyOptionsMenu. Numeric-param titles use "{0}: {1}" concat and are NOT included.) ---
+Include craft files	Включать файлы аппаратов
+Crews require proficiency training	Экипажам нужна квалификационная тренировка
+Crews require mission training	Экипажам нужна тренировка под миссию
+Enable crew retirement	Включить выход экипажа на пенсию
+Downtime post mission	Отдых после миссии
+Enable career progress logging	Вести журнал прогресса карьеры
+Kerbalism resource handling for avionics	Обработка ресурсов Kerbalism для авионики
+Procedural avionics window auto opens	Автооткрытие окна процедурной авионики
+Show tooling reminders	Показывать напоминания об оснастке
+Make firing cooldown alarm	Будильник задержки увольнения
+Make hiring cooldown alarm	Будильник задержки найма
+Make free to remove alarm	Будильник свободного увольнения
+Make program complete alarm	Будильник завершения программы
+Astronauts must complete lengthy proficiency training prior to their first launch in each cockpit or capsule.	Космонавты должны пройти длительную квалификационную тренировку перед первым запуском в каждой кабине или капсуле.
+Crews also require shorter mission-specific training prior to each launch.	Экипажам также нужна более короткая тренировка под конкретную миссию перед каждым запуском.
+Re-enabling this option can cause some of the older crewmembers to instantly retire.	Повторное включение этой опции может мгновенно отправить часть старших членов экипажа на пенсию.
+Enable crew downtime post mission, crew will be unavailable for flight/training.	Включить отдых экипажа после миссии; экипаж будет недоступен для полёта/тренировки.
+Use Kerbalism (enabled) or Stock (disabled) rules for resource consumption during the flight scene.	Использовать правила Kerbalism (вкл.) или стоковые (выкл.) для расхода ресурсов в сцене полёта.
+When enabled, the Procedural Avionics configuration window is automatically opened when you right click on a part with Proc Avionics.	Если включено, окно настройки процедурной авионики открывается автоматически при правом клике на детали с Proc Avionics.
+When enabled, a warning is shown on integration when the vessel has untooled parts.	Если включено, при интеграции показывается предупреждение, когда у аппарата есть неоснащённые детали.
+When enabled, an alarm will be automatically created when a leader is recruited that shows when that leader can be removed with a penalty.	Если включено, при найме лидера автоматически создаётся будильник, показывающий, когда лидера можно уволить со штрафом.
+When enabled, an alarm will be automatically created when a leader is removed that shows when the leader can be re-hired.	Если включено, при увольнении лидера автоматически создаётся будильник, показывающий, когда лидера можно снова нанять.
+When enabled, an alarm will be automatically created when a leader is recruited that shows when that leader can be removed without penalties.	Если включено, при найме лидера автоматически создаётся будильник, показывающий, когда лидера можно уволить без штрафов.
+When enabled, an alarm will be automatically created when a program is activated that shows when that program must be completed by to avoid penalties.	Если включено, при активации программы автоматически создаётся будильник, показывающий, к какому сроку нужно завершить программу, чтобы избежать штрафов.

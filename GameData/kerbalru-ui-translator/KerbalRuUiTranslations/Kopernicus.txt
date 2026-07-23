@@ -4,11 +4,15 @@
 # (см. tools/ui-translator/src/KerbalRuUiTranslator.cs). Сравнение Ordinal, без раскрытия escape.
 #
 # Извлечение: полная дизассемблировка monodis (MONO_PATH = KSP Managed + все GameData-плагины,
-# иначе падает на 0Harmony/Assembly-CSharp) + разбор IL по каждому реальному UI-стоку. У мода
-# НЕТ legacy IMGUI и НЕТ GUIContent -- вся UI идёт через TMPro: stock PopupDialog/MultiOptionDialog/
-# DialogGUIButton, собственный Kopernicus.UI.UIBuilder (CreateText/CreateButton/CreateTitleBar ->
-# TMP_Text.set_text) и ScreenMessages (ScreenMessagesText.SetText -> set_text). Каждая строка
-# прослежена по IL до set_text БЕЗ конкатенации/форматирования.
+# иначе падает на 0Harmony/Assembly-CSharp; для ПОЛНОГО дампа надёжнее ikdasm -- monodis сегфолтит
+# на транспайлере PQSLandControlFixer, обрывая вывод) + разбор IL по каждому реальному UI-стоку.
+# Основная UI идёт через TMPro: stock PopupDialog/MultiOptionDialog/DialogGUIButton, собственный
+# Kopernicus.UI.UIBuilder (CreateText/CreateButton/CreateTitleBar -> TMP_Text.set_text) и
+# ScreenMessages (ScreenMessagesText.SetText -> set_text). ИСКЛЮЧЕНИЕ: окно config-редактора
+# (Kopernicus.UI.ToolbarButton, кнопка тулбара КЦ, заголовок "Kopernicus Release-247") -- это
+# ЕДИНСТВЕННЫЙ legacy-IMGUI в моде: GUILayout.Label/Toggle/Button(string, GUIStyle) -- перехватывается
+# теми же патчами. Строки этого окна добавлены в конец файла. Каждая строка прослежена по IL до
+# перехватываемой функции БЕЗ конкатенации/форматирования.
 #
 # Локализация Kopernicus: часть строк идёт через KSP Localizer.Format("#Kopernicus_..."); их
 # англ. значения взяты из GameData/Kopernicus/Localization/en-us.cfg (игра работает на английском,
@@ -53,3 +57,19 @@ Calculating color data	Расчёт данных цвета
 Exporting planet maps: Color	Экспорт карт планеты: цвет
 Exporting planet maps: Height	Экспорт карт планеты: высота
 Exporting planet maps: Normal	Экспорт карт планеты: нормали
+# --- Config-editor toolbar window (Kopernicus.UI.ToolbarButton, legacy GUILayout Label/Toggle/Button; window titled "Kopernicus Release-247"). Key identifiers kept literal (map 1:1 to Kopernicus_Config.cfg). ---
+Kopernicus_Config.cfg Editor	Редактор Kopernicus_Config.cfg
+EnableKopernicusShadowManager: Whether or not to run the Internal Kopernicus Shadow System. True by default.	EnableKopernicusShadowManager: запускать ли встроенную систему теней Kopernicus. По умолчанию включено.
+ DisableMainMenuMunScene: Whether or not to disable the Mun main menu scene. Only uncheck this if you want that scene back.	 DisableMainMenuMunScene: отключать ли сцену Муны в главном меню. Снимайте галочку, только если хотите вернуть эту сцену.
+ KSCLightsAlwaysOn: Whether or not to force the KSC Lights to always be on. Requires game restart to take effect.	 KSCLightsAlwaysOn: держать ли огни КЦ всегда включёнными. Требует перезапуска игры.
+ UseOriginalKSC2: Whether or not to force the original, uncompacted KSC2 to load.  Will not be editable in any form by Kopernicus.	 UseOriginalKSC2: загружать ли оригинальный несжатый KSC2.  Kopernicus не сможет его редактировать.
+HandleHomeworldAtmosphericUnitDisplay: This is for calculating 1atm unit at home world.  Normally should be checked, but mods like PlanetaryInfoPlus may want to change this.	HandleHomeworldAtmosphericUnitDisplay: расчёт единицы 1 атм на родной планете.  Обычно должно быть включено, но моды вроде PlanetaryInfoPlus могут это менять.
+DisableFarAwayColliders: Fix a raycast physics bug occuring in large systems, notably resulting in wheels and landing legs falling through the ground.	DisableFarAwayColliders: исправляет баг физики (raycast) в больших системах, из-за которого колёса и опоры проваливаются сквозь грунт.
+EnableAtmosphericExtinction: Whether to use built-in atmospheric extinction effect of lens flares. This is somewhat expensive - O(nlog(n)) on average.	EnableAtmosphericExtinction: использовать ли встроенное атмосферное ослабление бликов линз. Слегка затратно — в среднем O(nlog(n)).
+UseStockMohoTemplate: This uses the stock Moho template with the Mohole bug / feature.Planet packs may customize this as desired.Be aware unchecking this disables the Mohole.	UseStockMohoTemplate: использует стоковый шаблон Мохо с багом/фичей Mohole. Планетные паки могут менять это по желанию. Снятие галочки отключает Mohole.
+UseOnDemandLoader: Turning this on can save ram and thus improve perforamnce situationally but will break some mods requiring long distance viewing and also increase stutter.	UseOnDemandLoader: включение экономит ОЗУ и местами повышает производительность, но ломает моды, которым нужен обзор на большом расстоянии, и усиливает подтормаживания.
+UseKopernicusAsteroidSystem: Three valid values, True, False, and Stock. True means use the old customizable Kopernicus asteroid generator with no comet support,  False means don't do anything/wait for an external generator. Stock means use the internal games generator.	UseKopernicusAsteroidSystem: три значения — True, False и Stock. True — старый настраиваемый генератор астероидов Kopernicus без комет,  False — ничего не делать / ждать внешний генератор. Stock — встроенный генератор игры.
+RESTART REQUIRED WHEN CHANGING ASTEROID SPAWNER	ТРЕБУЕТСЯ ПЕРЕЗАПУСК ПРИ СМЕНЕ ГЕНЕРАТОРА АСТЕРОИДОВ
+SolarRefreshRate: A number defining the number of seconds between EC calculations when using the multistar cfg file. Can be used to finetune performance.	SolarRefreshRate: число секунд между расчётами энергии при использовании multistar-конфига. Помогает тонко настроить производительность.
+ShadowRangeCap: A number defining the maximum distance at which shadows may be cast. Lower numbers yield less shadow cascading artifacts.	ShadowRangeCap: максимальная дистанция отбрасывания теней. Меньшие значения дают меньше артефактов каскадов теней.
+SCENE SWITCH REQUIRED WHEN CHANGING THIS SETTING	ТРЕБУЕТСЯ СМЕНА СЦЕНЫ ПРИ ИЗМЕНЕНИИ ЭТОЙ НАСТРОЙКИ
