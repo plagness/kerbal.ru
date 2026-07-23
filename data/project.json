@@ -47,25 +47,44 @@
       }
     },
     "projected": {
-      "label": "Структурно проверенная проекция",
+      "label": "Структурно проверенная проекция (ждёт следующего живого запуска)",
       "status": "pending-live-cache",
-      "auditedAt": "2026-07-22",
+      "auditedAt": "2026-07-23",
       "parts": 1023,
+      "note": "Дельта к verified: 2 новых собственных парта RealismOverhaul (ROAdvCapsule, RO-OldFighterCockpit) + фикс техдерева (RDNode вложен в @TechTree, не в этот процент по деталям не входит, см. coverage раздел 0b в COVERAGE.md).",
       "fields": {
         "title": {
-          "translated": 551,
-          "percent": 53.9
+          "translated": 583,
+          "percent": 57.0
         },
         "description": {
-          "translated": 726,
-          "percent": 71.0
+          "translated": 735,
+          "percent": 71.8
         },
         "manufacturer": {
-          "translated": 58,
-          "percent": 5.7
+          "translated": 143,
+          "percent": 14.0
         }
       }
     }
+  },
+  "uiTranslation": {
+    "label": "Русификация интерфейса модов (не деталей — окна/кнопки/тултипы)",
+    "status": "pending-live-verification",
+    "addedAt": "2026-07-23",
+    "method": "Harmony-патч GameData/kerbalru-ui-translator, перехват GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги, GUIContent, UnityEngine.UI.Text, Dropdown",
+    "modsCovered": 24,
+    "linesTranslated": 1926,
+    "uniqueKeys": 1867,
+    "confirmedBugsFixedBeforeRelease": 42,
+    "lowRiskNotesForLiveReview": 53,
+    "modsNotInstalledInThisBuild": [
+      "KerbalEngineer",
+      "Trajectories",
+      "Kerbalism",
+      "EditorExtensionsRedux"
+    ],
+    "docs": "docs/UI-TRANSLATION.md"
   },
   "mods": {
     "AJE": {
@@ -119,11 +138,6 @@
         "title": 13,
         "description": 13,
         "manufacturer": 1
-      },
-      "projected": {
-        "title": 13,
-        "description": 13,
-        "manufacturer": 0
       }
     },
     "ProceduralParts": {
@@ -145,11 +159,6 @@
         "title": 165,
         "description": 166,
         "manufacturer": 14
-      },
-      "projected": {
-        "title": 166,
-        "description": 166,
-        "manufacturer": 9
       }
     },
     "ROEngines": {
@@ -158,11 +167,6 @@
         "title": 65,
         "description": 207,
         "manufacturer": 48
-      },
-      "projected": {
-        "title": 29,
-        "description": 204,
-        "manufacturer": 37
       }
     },
     "ROHeatshields": {
@@ -197,11 +201,6 @@
         "title": 6,
         "description": 6,
         "manufacturer": 0
-      },
-      "projected": {
-        "title": 6,
-        "description": 5,
-        "manufacturer": 0
       }
     },
     "RealChute": {
@@ -226,9 +225,9 @@
         "manufacturer": 2
       },
       "projected": {
-        "title": 0,
-        "description": 1,
-        "manufacturer": 0
+        "title": 6,
+        "description": 6,
+        "manufacturer": 3
       }
     },
     "SXT": {
@@ -237,11 +236,6 @@
         "title": 57,
         "description": 65,
         "manufacturer": 43
-      },
-      "projected": {
-        "title": 65,
-        "description": 65,
-        "manufacturer": 12
       }
     },
     "VenStockRevamp": {
@@ -250,11 +244,6 @@
         "title": 34,
         "description": 35,
         "manufacturer": 34
-      },
-      "projected": {
-        "title": 35,
-        "description": 35,
-        "manufacturer": 0
       }
     }
   },
