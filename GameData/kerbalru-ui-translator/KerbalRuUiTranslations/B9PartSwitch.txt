@@ -1,53 +1,52 @@
-# B9PartSwitch — намеренно ПУСТОЙ файл (0 строк перевода). Причина, проверено полным
-# IL-дизассемблированием (monodis, с резолвом зависимостей: Assembly-CSharp.dll +
-# UnityEngine.*Module.dll из установленной игры через MONO_PATH — без них monodis не грузит
-# сигнатуры и падает на "Could not load file or assembly").
+# B9PartSwitch — второй проход. KerbalRuUiTranslator.cs получил патч на
+# TMPro.TMP_Text.text (setter) — раньше физически не мог поймать ничего в этом моде
+# (см. историю ниже), теперь часть диалоговых строк реально достижима. Перепроверено
+# заново с нуля полным IL-дизассемблированием (monodis, независимая пересборка
+# B9PartSwitch.dll + Assembly-CSharp.dll через MONO_PATH), не скопировано вслепую.
 #
-# Полный грep по дизассемблированному B9PartSwitch.il дал НОЛЬ совпадений на все точки
-# перехвата нашего Harmony-патча: GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги,
-# все 4 конструктора GUIContent(string,...), UnityEngine.UI.Text.text (сеттер),
-# UnityEngine.UI.Dropdown.OptionData.text. Мод их просто не вызывает — ни разу, нигде.
+# Подтверждено по IL-трассировке (PopupDialog.SpawnPopupDialog(...) и
+# MultiOptionDialog(name,msg,title,...) → PopupDialog читает MultiOptionDialog.title →
+# DialogGUIBase.SetUpTextObject(TMPro.TextMeshProUGUI, string value, ...), первая
+# инструкция которого — `text.set_text(value)` без изменений; DialogGUIButton.Create()
+# использует тот же хелпер для текста кнопки):
 #
-# Куда на самом деле уходит текст интерфейса (3 канала, ни один не патчится нашим
-# фреймворком):
+# - FatalErrorHandler.UpsertDialog: title="B9PartSwitch - Fatal Error" (message —
+#   string.Concat из списка ошибок, динамический, не входит), кнопка "Quit".
+# - LockedSubtypeWarningHandler.UpsertDialog: title="B9PartSwitch - Locked Subtypes",
+#   кнопка "OK".
+# - SeriousWarningHandler.UpsertDialog: title="B9PartSwitch - Serious Warning",
+#   кнопка "OK" (message динамический, как выше).
+# - InstallChecker.Start(): PopupDialog.SpawnPopupDialog(..., title=
+#   "Incorrect B9PartSwitch Installation", message=..., button="OK") — первый вызов (сток
+#   GameData/B9PartSwitch); message динамический (Join путей). Второй похожий текст
+#   ("Incorrect B9PartSwitch Installation: ...Plugins...") уходит ТОЛЬКО в Debug.Log,
+#   никогда не в диалог — не включён.
 #
-# 1) Диалоги (Fatal Error / Locked Subtypes / Serious Warning / подтверждение сброса
-#    ресурсов / проверка установки мода) построены через KSP MultiOptionDialog +
-#    DialogGUILabel/DialogGUIButton (в т.ч. через удобный оверлоад
-#    PopupDialog.SpawnPopupDialog(Vector2,Vector2,string,string,string,string,...),
-#    который сам заворачивает строку сообщения в MultiOptionDialog внутри Assembly-CSharp).
-#    IL-трассировка DialogGUILabel::Create → DialogGUIBase::SetUpTextObject(TMPro.TextMeshProUGUI,
-#    string, ...) подтверждает: текст рендерится через TMPro.TextMeshProUGUI, а не через
-#    UnityEngine.UI.Text — наш патч ловит только Text.text, TMP_Text.text не перехватывается
-#    нигде в KerbalRuUiTranslator.cs. Строки вроде "Quit", "B9PartSwitch - Fatal Error",
-#    "Incorrect B9PartSwitch Installation", "B9PartSwitch - Locked Subtypes",
-#    "B9PartSwitch - Serious Warning" реально существуют в DLL, но физически не могут
-#    попасть в наш словарь-перехватчик этим путём.
+# НЕ достижимо (перепроверено, всё ещё Local/config-driven, а не хардкод):
+# - UIPartActionSubtypeSelector.switcherDescriptionText/subtypeTitleText — оба реально
+#   вызывают TMP_Text.set_text(...), но аргумент — ModuleB9PartSwitch.switcherDescription /
+#   PartSubtype.title / UIPartActionSubtypeButton.get_Title(), т.е. per-part/per-subtype
+#   значение ИЗ КОНФИГА, разное у каждой детали, а не единый хардкод-литерал — глобальный
+#   плоский словарь для этого не подходит. Эти значения резолвятся штатным KSP Localizer по
+#   ключам #LOC_B9PartSwitch_*, для которых у мода уже есть полный ru.cfg (перевод Sooll3).
+# - Заголовок модуля, "Объём", описания подтипов, аббревиатуры баков и т.д. — всё так же
+#   через #LOC_B9PartSwitch_* до рендера, наш словарь их не увидит на английском.
 #
-# 2) Окно выбора подтипа в VAB/SPH (B9PartSwitch.UI.UIPartActionSubtypeSelector) —
-#    поля switcherDescriptionText/subtypeTitleText типизированы напрямую как
-#    TMPro.TextMeshProUGUI (не UnityEngine.UI.Text) — тот же непатчиваемый канал.
-#
-# 3) Всё содержательное (заголовок модуля, "Объём", описания вида/конфигурации, подписи
-#    диалога выбора подтипа, аббревиатуры типов баков ЖТ/ЖТ+Ок/Монотопливо/Батарея,
-#    "Макс. температура" и т.д.) идёт через штатный KSP Localizer по ключам
-#    #LOC_B9PartSwitch_* — это НЕ хардкод, ключи резолвятся до того, как текст доходит
-#    до любого рендер-вызова. У мода уже есть полный русский перевод этих ключей в
-#    самой поставке: GameData/B9PartSwitch/Localization/ru.cfg (перевод Sooll3, сверено
-#    построчно с en-us.cfg — набор ключей идентичен). Дублировать их здесь бессмысленно
-#    и рискованно (см. рассуждение в KerbalChangelog.txt/PatchManager.txt — тот же
-#    паттерн: Localizer резолвит строку в ru ДО того, как она попадёт в GUI-вызов,
-#    Harmony-словарь её просто не увидит на английском для сравнения).
-#
-# Остальные строки-кандидаты в IL — Debug.Log-диагностика ("[Part {0}] {1}",
-# "[WARNING]...", "[FatalExceptionHandler]..." и т.п.), сообщения исключений
-# (ArgumentException/ConfigNode-парсинг), имена ConfigNode-ключей (RESOURCE, MODULE,
-# moduleID, dryMass...), имена шейдерных свойств (_MainTex, _BumpMap, _Color), служебные
-# имена трансформов/GameObject для Transform.Find() (Tooltip_TitleAndText, Text, Title,
-# Label_Variants) и строки с плейсхолдерами формата ("<b>{0} {1}</b>", "{0}: {1}" и т.д.,
-# идут через string.Format/string.Concat — точного совпадения по построению никогда не
-# будет). Ни один из этих случаев не подходит под критерий п.2 методологии
-# (docs/UI-TRANSLATION.md) — точная неизменная строка на входе патчащейся функции.
-#
-# Итог: добавлять в этот файл нечего. 0 строк — осознанный результат проверки, а не
-# пропуск исследования.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+B9PartSwitch - Fatal Error	B9PartSwitch — фатальная ошибка
+Quit	Выйти
+B9PartSwitch - Locked Subtypes	B9PartSwitch — заблокированные подтипы
+B9PartSwitch - Serious Warning	B9PartSwitch — серьёзное предупреждение
+Incorrect B9PartSwitch Installation	Неверная установка B9PartSwitch
+OK	ОК
+
+# --- История (первый проход, до появления патча TMP_Text.text) ---
+# Полный грep по дизассемблированному B9PartSwitch.il тогда дал НОЛЬ совпадений на все
+# точки перехвата: GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги, 4 конструктора
+# GUIContent(string,...), UnityEngine.UI.Text.text, UnityEngine.UI.Dropdown.OptionData.text —
+# мод их не вызывает вообще. Диалоги и UIPartActionSubtypeSelector рендерятся через
+# TMPro.TextMeshProUGUI, который тогда не патчился. Остальные строки-кандидаты в IL —
+# Debug.Log-диагностика, сообщения исключений, имена ConfigNode-ключей, имена шейдерных
+# свойств, служебные имена трансформов/GameObject и строки с плейсхолдерами формата
+# (string.Format/string.Concat — точного совпадения по построению никогда не будет).

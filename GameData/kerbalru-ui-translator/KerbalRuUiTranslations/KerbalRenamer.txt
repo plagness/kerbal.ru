@@ -1,0 +1,39 @@
+# KerbalRenamer -- словарь UI-строк, извлечённых напрямую из скомпилированного Renamer.dll
+# (linuxgurugamer/KerbalRenamer, https://github.com/linuxgurugamer/KerbalRenamer).
+# Единственная текстовая поверхность мода -- страница "Kerbal Renamer" в стоковом экране
+# Difficulty Options (GameParameters.CustomParameterNode). Файла не было (0 строк) до второго
+# прохода KerbalRuUiTranslator.cs: страница рендерится через TMPro.TMP_Text, который тогда не
+# патчился.
+#
+# Реальность подтверждена полным monodis-дизассемблированием Renamer.dll + Assembly-CSharp.dll:
+# - RenamerCustomParams.get_Title()/.get_DisplaySection()/.get_Section() и custom-атрибуты
+#   [GameParameters.CustomParameterUI("...")] / [GameParameters.CustomFloatParameterUI("...")] --
+#   статичные литералы, не строятся через string.Concat/Format.
+# - Прослежен полный путь до экрана: DifficultyOptionsMenu читает CustomParameterUI.get_title()
+#   и создаёт new DialogGUIToggle(Func<bool>, string title, ...) / new DialogGUILabel(string, ...) /
+#   new DialogGUIToggleButton(...) -- все три (через DialogGUIToggle.Create() и
+#   DialogGUILabel.Create()) вызывают статический хелпер
+#   DialogGUIBase.SetUpTextObject(TMPro.TextMeshProUGUI text, string value, ...), первая
+#   инструкция которого -- `text.set_text(value)` БЕЗ каких-либо преобразований value.
+#   Значит title-строка доходит до TMP_Text.text ровно в исходном виде -- патч ловит её.
+# - Тултипы (toolTip) НЕ включены: они проходят через отдельное поле DialogGUIBase.tooltipText
+#   и KSP.Localization.Localizer.Format(), путь до финального рендера не прослежен в этом
+#   проходе -- не выдумываем перевод, который не проверен.
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+Kerbal Renamer Options	Настройки Kerbal Renamer
+Preserve Original 4	Сохранить исходную четвёрку
+Preserve Original Traits	Сохранить исходные профессии
+Female Percentage	Процент женщин
+Badass Percentage	Процент бесстрашных
+Use Bell Curve Method	Метод нормального распределения
+Don't Insult Me	Не оскорбляй меня
+CCCP	СССР
+CUSTOM	Свой
+
+# Намеренно НЕ переведены (устоявшиеся акронимы/собственные имена реальных космических
+# агентств, см. правило "имена-бренды не переводить" -- MAINTAINING.md §3.5): NASA, ESA, ISRO,
+# CNSA. "1951" -- год, число не нуждается в переводе. "Kerbal Renamer" сам по себе (DisplaySection/
+# Section, без "Options") -- название мода, бренд, не переводится, хотя технически тоже
+# достижимо через тот же TMP_Text.text патч.

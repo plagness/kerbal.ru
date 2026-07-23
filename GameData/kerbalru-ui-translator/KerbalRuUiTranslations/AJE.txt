@@ -1,0 +1,84 @@
+# AJE (Advanced Jet Engine, KSP-RO/AJE, https://github.com/KSP-RO/AJE) -- словарь UI-строк,
+# извлечённых напрямую из скомпилированного AJE.dll. Файла не было (0 строк) до второго прохода
+# KerbalRuUiTranslator.cs: весь UI-текст мода — значения атрибутов KSPField(guiName=...) /
+# KSPAction(guiName=...) на полях турбин/винтов/вертолётных роторов, рендерится стоковыми
+# виджетами окна действий детали (UIPartActionFloatRange/MinMaxRange/ProgressBar/ResourceToggle) —
+# все они написаны на TMPro, которая тогда не патчилась.
+#
+# Проверено заново с нуля (не скопировано вслепую) полным monodis-дизассемблированием
+# AJE.dll + Assembly-CSharp.dll + SolverEngines.dll:
+# - Все guiName-значения ниже извлечены программным разбором бинарных custom-attribute
+#   блобов [KSPField]/[KSPAction] (именованные аргументы ECMA-335: тег 0x54=PROPERTY,
+#   тип 0x0E=STRING, compressed-length-prefixed UTF8) — не переписаны на глаз построчно.
+# - Реальность пути до экрана прослежена в Assembly-CSharp.il: UIPartActionMinMaxRange,
+#   UIPartActionProgressBar, UIPartActionResourceToggle и UIPartActionFloatRange все делают
+#   `this.fieldName.text = this.Field.get_guiName()` -- т.е. вызывают
+#   `TMPro.TMP_Text::set_text(string)` С НЕИЗМЕНЁННЫМ значением guiName. Патч ловит его.
+# - Два поля переименовываются в рантайме через BaseField.set_guiName(string) с ДРУГИМ
+#   статичным литералом (ModuleEnginesAJEPropeller.SetFields(): "engineTemp" -> "Exhaust Temp",
+#   "VolETweak" -> "Power Multiplier") -- тоже статичные литералы, тоже включены.
+# - GetInfo()/GetModuleTitle() НЕ проверялись на предмет включения: там текст обязательно
+#   собирается через StringBuilder с другими модулями ДО попадания в TMPro (см. методологию,
+#   docs/UI-TRANSLATION.md) -- точного совпадения там в принципе быть не может, не включено.
+#
+# Не переведены намеренно:
+# - CtTweak / CpTweak / VolEFficMult / MachPowTweak -- внутренние отладочные названия полей
+#   подстройки коэффициентов пропеллера (не связный английский текст, а служебные
+#   идентификаторы). Устоявшегося русского термина нет, гадать не будем -- см.
+#   "state uncertainty explicitly, never guess". Оставлены как есть.
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+# --- Турбореактивные/турбовинтовые модули ---
+Compression Ratio	Степень сжатия
+Core Throttle	Дроссель ядра
+Afterburner Throttle	Дроссель форсажа
+Manifold Pressure	Давление наддува
+Charge Air Temp	Темп. наддув. воздуха
+Exhaust Thrust	Тяга выхлопа
+Meredith Effect	Эффект Мередита
+Brake Shaft Power	Эффективная мощность вала
+Boost	Наддув
+Exhaust Temp	Темп. выхлопа
+Power Multiplier	Множитель мощности
+
+# --- Винтомоторные (Prop) модули ---
+Prop RPM	Обороты винта
+Prop Pitch	Шаг винта
+Prop Thrust	Тяга винта
+RPM Lever	Рычаг оборотов
+Mixture	Смесь
+Max take-off weight (kg)	Макс. взлётная масса (кг)
+Max Power (HP)	Макс. мощность (л.с.)
+
+# --- Вертолётные роторы и система управления (циклический/общий шаг, стабилизация) ---
+Rotor RPM	Обороты ротора
+Radius (m)	Радиус (м)
+Yaw Coeff.	Коэфф. рыскания
+Pitch ctrl by Collective Diff.	Тангаж от разницы шага
+Yaw ctrl by Roll Diff.	Рыскание от разницы крена
+Roll ctrl by Collective Diff.	Крен от разницы шага
+Yaw ctrl by Pitch Diff.	Рыскание от разницы тангажа
+Reverse Rotation	Обратное вращение
+Cyclic Control Authority	Эффективность циклического управления
+Roll Kp	Крен Kp
+Roll Ki	Крен Ki
+Roll Kd	Крен Kd
+Pitch Kp	Тангаж Kp
+Pitch Ki	Тангаж Ki
+Pitch Kd	Тангаж Kd
+Yaw Kp	Рыскание Kp
+Yaw Ki	Рыскание Ki
+Yaw Kd	Рыскание Kd
+Trim Cyclic against Speed	Триммирование по скорости
+Shaft Power	Мощность вала
+Torque Multiplier	Множитель момента
+Matching Rotor RPM	Совпад. оборотов ротора
+Distance to Rotor Axis (m)	Расстояние до оси ротора (м)
+Matching Max Power (HP)	Совпад. макс. мощность (л.с.)
+Tail Rotor active	Хвостовой ротор активен
+
+# --- KSPAction (пункты меню действий) ---
+Increase Cyclic Control	Увеличить циклическое управление
+Decrease Cyclic Control	Уменьшить циклическое управление
+toggle Tail Rotor	Переключить хвостовой ротор

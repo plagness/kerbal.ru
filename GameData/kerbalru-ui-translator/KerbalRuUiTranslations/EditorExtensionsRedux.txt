@@ -18,3 +18,15 @@ nodeTransform null	трансформ узла null
 # --- SettingsWindow: чекбокс, не переведённый автором (соседний #LOC_EEX_121 "Toggle No Offset
 # Limit:" переведён как "Без лимита смещения:" -- используем тот же устоявшийся термин) ---
 No Offset Limit enabled	Без лимита смещения
+
+# --- PartInfoWindow: вкладки GUILayout.Toolbar(int, string[], GUILayoutOption[]) ---
+# Второй проход: KerbalRuUiTranslator.cs получил патч на GUILayout.Toolbar (не патчился раньше).
+# Перепроверено по monodis: PartInfoWindow._toolbarStrings -- жёстко закодированный string[5],
+# без единого #LOC_EEX_* ключа и без Localizer.Format (в отличие от SettingsWindow._toolbarStrings,
+# который целиком построен из #LOC_EEX_93/94/95 -- туда лезть не нужно). Patch_GUILayout_Toolbar_s
+# мутирует массив на месте при первой отрисовке -- перевод применяется штатно.
+Part	Деталь
+strut	Растяжка
+srfAttach	Поверхность
+attachNodes	Узлы
+camera	Камера

@@ -1,0 +1,74 @@
+# KerbalJointReinforcement (KJR, v3.8.7) — UI strings extracted from KerbalJointReinforcement.dll.
+# Формат: Английский<TAB>Русский.
+#
+# Метод: полная IL-дизассемблировка (`monodis`, с KSP/.../Managed на MONO_PATH для резолва
+# ссылок на Assembly-CSharp/UnityEngine.*) плюс байт-точное декодирование блобов
+# custom-attribute (compact ECMA-335 length-prefixed UTF-8) для строк, которые monodis печатает
+# только как hex+ASCII-комментарий. Каждая строка-кандидат проверена по IL до реального
+# достижения одной из точек перехвата KerbalRuUiTranslator.cs — не по совпадению текста "на глаз".
+#
+# Найдено ДВА независимых, реально работающих UI-поверхности (обе патчатся):
+#
+# 1) Легаси-окно отладки KJRManager.WindowFunction (видно только при KJRSettings.debug = true,
+#    но это реальный игровой UI, не мёртвый код) — GUILayout.Window/Toggle/Label, перехватывается
+#    GUI/GUILayout-патчами (уже были во фреймворке до расширения). Динамические строки-шаблоны
+#    "{0} unique additional/interstage joints:", проходящие через string.Format ДО GUILayout.Label
+#    — пропущены: runtime-текст, который реально доходит до Label, содержит число и никогда не
+#    совпадёт с ключом словаря побайтово (тот же принцип, что и во всех предыдущих файлах проекта).
+#    Строки конкретных имён деталей/joint'ов в цикле — тоже пропущены (динамические).
+#
+# 2) Панель настроек мода в стоковом меню KSP Настройки → Сложность → KJR — KJRSettings
+#    (GameParameters.CustomParameterNode). Заголовки чекбоксов и тултипы заданы через
+#    [GameParameters.CustomParameterUI("...", toolTip = "...")] на полях — эти строки лежат в
+#    custom-attribute блобе, не в теле метода, monodis показывает их только hex-дампом.
+#    Проверено по IL стокового Assembly-CSharp.dll (не предположение): DialogGUIToggle.Create()
+#    вызывает DialogGUIBase.SetUpTextObject(TextMeshProUGUI, string, ...), который делает
+#    textItem.text = value — т.е. TMPro.TMP_Text::set_text(string), ровно патч, добавленный в этом
+#    расширении фреймворка. Тултипы идут через KSP.UI.TooltipTypes.TooltipController_Text,
+#    у которого Update()/SetText() тоже заканчиваются TMP_Text::set_text(string) — отдельно
+#    подтверждено тем же способом. Заголовок категории ("General Options", свойство Title)
+#    оборачивается в DialogGUIBox → дочерний DialogGUILabel → та же SetUpTextObject → тот же
+#    сеттер. Это первый мод в проекте, для которого реально нашёлся текст, доходящий именно до
+#    нового TMP_Text-патча (раньше TMPro был задокументирован только как пробел фреймворка на
+#    KerbalRenamer/B9PartSwitch/AJE — здесь наоборот, находка).
+#
+# Пропущено по этой же поверхности:
+#  - Section/DisplaySection ("KJR") — короткий бренд-акроним мода, как и его название в целом
+#    (правило проекта: имена-бренды не переводятся); переводить нечего, значение не отличалось
+#    бы от оригинала.
+#  - Числовые поля (angularMaxForceFactor, breakForceMultiplier и т.д.) — на них нет атрибута
+#    CustomParameterUI вообще, подпись строится KSP рефлексией по имени поля в рантайме, это не
+#    строковый литерал в этой сборке.
+#  - Все "[KJR] ..."-строки (десятки, GatherAndShowDebugInformation/UpdatePartJoint и т.п.) —
+#    проверены по IL, 100% уходят только в Debug.Log(object), ни разу не доходят до патченной
+#    функции отрисовки текста.
+#  - Длинный дамп параметров сустава ("Std. Joint Parameters", "Connected Body: ", "X Drive" и
+#    десятки похожих) — строится в StringBuilder и тоже уходит только в Debug.Log(object), не в UI.
+#  - GameObject/Shader-имена ("JointLineRenderer", "ProceduralFairingDecoupler", "Legacy
+#    Shaders/Particles/Additive") — не текст, видимый игроком.
+#  - Нет ни одного [KSPField]/[KSPEvent] с guiName (подтверждено `monodis --customattr`) — значит
+#    правой кнопкой мыши (PAW) у этого мода нечего переводить, у него вообще нет полей на деталях.
+#
+# Термины: vessel = аппарат; joint = соединение; decoupler = отделитель (стоковый термин, см.
+# #autoLOC_501784 "Отделитель TD-12" в Squad/Localization/dictionary.cfg); launch clamp = пусковая
+# мачта (стоковый термин, см. #autoLOC_500888 "Пусковая мачта TT18-A"); interstage = межступенчатый.
+
+# --- Debug-окно KJRManager (GUILayout, видно при KJRSettings.debug = true) ---
+KJR Debug	Отладка KJR
+Disable all joints	Отключить все соединения
+Show Additional Joints	Показать дополнительные соединения
+Show Interstage Joints	Показать межступенчатые соединения
+
+# --- Настройки → Сложность → KJR (KJRSettings : GameParameters.CustomParameterNode, TMPro) ---
+General Options	Общие настройки
+Toggle stiffening of all vessel joints	Переключить усиление всех соединений аппарата
+Toggle additional stiffening	Переключить дополнительное усиление
+Toggles additional stiffening by connecting parts in a stack one part further, but at a weaker strength	Добавляет усиление, соединяя детали в стеке на одну деталь дальше, но с меньшей прочностью
+Toggle stiffening of interstage connections	Переключить усиление межступенчатых соединений
+Toggle stiffening of launch clamp connections	Переключить усиление соединений пусковых мачт
+Attach vessel to ground	Прикрепить аппарат к земле
+Connects the heaviest parts of the vessel directly to ground if it is waiting to be launched and has launch clamps	Напрямую соединяет самые тяжёлые части аппарата с землёй, если он ждёт старта и имеет пусковые мачты
+Calculate by area	Считать по площади
+Switches to calculating connection area based on volume, not area; not technically correct, but allows a better approximation of very large rockets	Переключает расчёт площади соединения на объём вместо площади; не совсем корректно технически, но даёт лучшее приближение для очень больших ракет
+Toggle debug info	Переключить отладочную информацию
+Toggles debug output to log; please activate and provide log if making a bug report	Включает вывод отладки в лог; при составлении отчёта об ошибке включите и приложите лог

@@ -50,3 +50,47 @@
 Not enough sample storage available	Недостаточно места для образцов
 There is no more useful data here	Здесь больше нет полезных данных
 Comms connection too weak	Слишком слабый сигнал связи
+
+# --- Второй проход (KerbalRuUiTranslator.cs получил патчи на GUIContent(Texture,string) и
+# TMPro.TMP_Text.text) — перепроверено с нуля, 0 новых строк, но по ДРУГОЙ причине, чем раньше ---
+#
+# 1) GUIContent(Texture,string) (тултипы иконок Panel::AddRightIcon/SetLeftIcon) теперь МЕХАНИЧЕСКИ
+#    патчится, но перепроверка по IL показала: сам конструктор получает `tooltip` не из ldstr, а
+#    из ЧТЕНИЯ ПОЛЯ `Panel/Icon::tooltip` — это поле заполняется аргументом, переданным КАЖДЫМ
+#    из 25 вызовов AddRightIcon/SetLeftIcon по всему Kerbalism.dll (DevManager, FileManager,
+#    Monitor, Telemetry, VesselConfig) — все 25 сайтов прослежены поимённо: каждый передаёт
+#    ЛИБО `ldsfld string KERBALISM.Local::*` (уже покрыто апстримным ru.cfg), ЛИБО `ldnull`
+#    (без тултипа), ЛИБО string.Concat/Join с динамикой — ни один не хардкодит английский
+#    литерал напрямую. Тот же вывод, что и раньше, но теперь подтверждён на уровне КАЖДОГО
+#    вызова, а не только Panel::Render.
+#    Отдельно та же (Texture,string)-перегрузка ловит и Planner-иконки солнца/тени
+#    (Planner::b__ — 3 сайта, sun_white/solar_panel/sun_black + KERBALISM.Local::Planner_*):
+#    здесь найден РЕАЛЬНЫЙ пробел апстрима — `#KERBALISM_Planner_SunlightSimulated` в
+#    Kerbalism/Localization/ru.cfg побайтово совпадает с en-us.cfg (переводчик пропустил именно
+#    эту строку, соседние Planner_SunlightNominal/Planner_Shadow переведены). НЕ добавлено в
+#    словарь: значение содержит буквальный перенос строки внутри (`In sunlight\n<b>Estimated</b>
+#    solar panel output\n<i>...</i>`), а формат словаря — одна запись на строку файла
+#    (см. docs/UI-TRANSLATION.md, "Известные ограничения"). Если у кого-то дойдут руки чинить
+#    сам upstream-перевод Kerbalism — правильное место `GameData/Kerbalism/Localization/ru.cfg`,
+#    не этот файл.
+#
+# 2) TMPro.TMP_Text.text теперь патчится и МЕХАНИЧЕСКИ реально ловит текст: подтверждено, что
+#    KERBALISM.KsmGui.KsmGuiText.ctor (12 прямых вызовов) И все виджеты-обёртки поверх него —
+#    KsmGuiButton/KsmGuiHeader/KsmGuiTextBox/KsmGuiToggle/KsmGuiToggleListElement<T> (ещё 19
+#    вызовов, единственные во всём Kerbalism.dll — только в ExperimentSubjectList/
+#    ScienceArchiveWindow/ExperimentPopup) — в конце концов вызывают `TMP_Text::set_text(value)`
+#    без изменений. Но ВСЕ 31 сайт без исключения передают `value` из `ldsfld string
+#    KERBALISM.Local::SCIENCEARCHIVE_*` (RnD/Flight/Value/Completed/title/EXPERIMENTS/
+#    REQUIREMENTS/STATUS/filter1-3/forcedrun/forcedrun_desc/...) — та же архитектура Local-
+#    источника, что и у легаси-IMGUI Panel::, все переведены апстримом (сверено с ru.cfg
+#    построчно — все совпали, кроме единственного случая из п.1 выше, который сюда не относится).
+#    Обещание из первого прохода ("целые окна на KsmGui сейчас непереводимы этим фреймворком
+#    независимо от содержимого словаря") ЧАСТИЧНО устарело: инструментально патч теперь ловит
+#    TMP_Text.text — но по содержанию добавлять по-прежнему нечего, потому что упомянутых окон
+#    (Habitat/Planner/Monitor) не оказалось СРЕДИ вызывающих KsmGuiText/Button/Header/TextBox/
+#    Toggle в этой версии DLL — они остались на легаси-IMGUI Panel:: (см. верх файла), не на
+#    KsmGui. Единственный код, реально построенный на KsmGui-виджетах — окно "Научный архив"
+#    (Science Archive) и всплывающее окно эксперимента, оба на 100% Local-sourced.
+#
+# Итог второго прохода: 0 строк добавлено — не пропуск исследования, оба новых патча
+# перепроверены на каждом достижимом сайте по отдельности.

@@ -1,0 +1,58 @@
+# RetractableLiftingSurface (RetractableLiftingSurface.dll, v0.2.1.2) -- UI translation
+# dictionary for kerbalru-ui-translator. Format: English<TAB>Russian, exact-string match
+# only (see docs/MAINTAINING.md and tools/ui-translator/src/KerbalRuUiTranslator.cs).
+#
+# Extracted by full IL disassembly (monodis, dependencies resolved via MONO_PATH against
+# the installed KSP.app/Contents/Resources/Data/Managed) of the whole DLL -- only 3
+# classes / 15 methods / 25 ldstr literals total, all read end-to-end (no sampling).
+# Every ldstr candidate was traced by hand through the IL call graph to confirm (or rule
+# out) that it actually reaches one of KerbalRuUiTranslator's patched entry points
+# (GUI/GUILayout Label/Button/Box/Toggle/Window, GUIContent ctors x5, GUILayout.Toolbar,
+# UnityEngine.UI.Text/Dropdown.OptionData setters, TMPro.TMP_Text.set_text).
+#
+# Only 2 of the 25 literals qualify:
+Incorrect Retractable Lifting Surface Installation	Неверная установка «Убираемой несущей поверхности»
+OK	ОК
+#
+# Both come from InstallChecker.Start() -> PopupDialog.SpawnPopupDialog(Vector2, Vector2,
+# dialogName, title, message, buttonMessage, ...) -- a stock KSP call, only reachable if
+# the mod is installed to the wrong GameData path. Confirmed by disassembling
+# Assembly-CSharp.dll itself (not assumed from the framework's header comment): this
+# overload wraps the arguments into a MultiOptionDialog, whose title and the button's
+# OptionText are each pushed through PopupDialog.SetPopupData / DialogGUIButton.Create into
+# DialogGUIBase.SetUpTextObject(TMPro.TextMeshProUGUI, string, ...), which does
+# `callvirt instance void class TMPro.TMP_Text::set_text(string)` directly on the exact
+# string handed to it -- i.e. Patch_TMP_Text_set_text fires on both.
+#
+# Everything else in the same call was checked and rejected, with a concrete reason each:
+# - "test" (SpawnPopupDialog's `dialogName` arg) -- confirmed via Assembly-CSharp.dll's
+#   MultiOptionDialog ctor (string name, string msg, string windowTitle, ...) that this is
+#   the `name` field, used only for internal GameObject lookups (`<name> dialog handler`);
+#   it is never routed through SetUpTextObject/TMP_Text and is not player-visible text.
+# - The install-error body text ("Retractable Lifting Surface has been installed
+#   incorrectly ... Incorrect path(s):\n") IS proven to reach SetUpTextObject/TMP_Text.text
+#   the same way as the title -- but by the time it gets there it has already been
+#   string.Concat'd (in IL, before the SpawnPopupDialog call) with a runtime-built,
+#   per-installation list of the actual wrong paths. The value TMP_Text.set_text receives
+#   is therefore never the same twice and can never exactly match a fixed dictionary key --
+#   same "concatenated with dynamic data, no exact match possible" situation already
+#   documented for FShangarExtender/PatchManager's identical install-checker boilerplate.
+#   Only the static title could be pulled out and translated; the message body cannot,
+#   regardless of dictionary content.
+# - A second, near-duplicate long string (mentions ".../Plugins" specifically) is built the
+#   same way but is only ever passed to UnityEngine.Debug.Log(object) -- console/log only,
+#   never reaches any UI render call, so not in scope at all (same class of exclusion as
+#   the AJE precedent: mod calls something, but never a patched entry point).
+# - "n/a", "TitleNotAvailable", "VersionNotAvailable", "[", "] Version ", "-ERROR- ",
+#   "][", "0.00", "X" (numeric ToString format, not text), "]: Exception caught while
+#   cleaning up old files.\n", "RetractableLiftingSurface/Plugins" (a literal path used only
+#   in an `==`/`!=` comparison), "RetractableLiftingSurface can't find a deploy animation
+#   for: ", "{0} ERROR: {1}", "RetractableLiftingSurface" (format arg) -- all Debug.Log/
+#   Debug.LogError diagnostics or comparison literals, never reach any GUI/TMPro render call.
+# - "Retracted Relative Wing Area: " / "\nExtended Relative Wing Area: " (RetractableLiftingSurface.GetInfo(),
+#   the part-info text shown in the VAB/SPH part tooltip) -- both are string.Concat'd with a
+#   live KSPField float value (retractedDeflectionLiftCoeff / extendedDeflectionLiftCoeff) via
+#   `string.Concat(object[])` before the result leaves GetInfo(); whatever renders the info
+#   panel would only ever see the combined, numerically-suffixed string, so exact-match
+#   translation is not possible here either -- excluded for the same reason as the message
+#   body above, independent of which render path GetInfo() output actually takes.

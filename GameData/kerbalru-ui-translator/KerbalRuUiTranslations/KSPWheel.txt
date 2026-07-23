@@ -1,0 +1,83 @@
+# KSPWheel -- словарь UI-строк, извлечённых напрямую из скомпилированного KSPWheel.dll
+# (shadowmage45/KSPWheel 0.16.14.33, https://github.com/shadowmage45/KSPWheel). У мода нет
+# собственной системы Localization -- весь текст задаётся строковыми литералами прямо в аргументах
+# GUILayout.Label/Button и GUI.Window, перехватываемых Harmony-патчами tools/ui-translator.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (см. tools/ui-translator).
+#
+# Извлечение: полная дизассемблировка monodis + разбор IL по каждому вызову Label/Button/Window
+# (единственные патчащиеся сигнатуры, реально используемые в этом DLL -- GUIContent, GUI.Label/
+# Box/Toggle, UnityEngine.UI.Text/Dropdown, TMPro в сборке отсутствуют полностью, 0 обращений).
+# Каждая строка проверена по IL до конкретного вызова (CFG-симулятор стека, не текстовый grep).
+#
+# Строки, НЕ вошедшие в словарь (сознательно, не пропуск):
+# - fY/fZ/fX/sZ/sX -- заголовки столбцов силы/проскальзывания по осям в отладочной таблице
+#   (get_springForce/get_longitudinalForce/get_lateralForce/get_longitudinalSlip/get_lateralSlip);
+#   это математическая нотация "компонента по оси", не англ. слово -- в рус. текстах о физике
+#   пишется так же латиницей, перевод исказил бы смысл.
+# - "<" / ">" -- кнопки-стрелки листания (не текст, не требуют перевода).
+# - Числовые значения (float/int ToString(), string.Format, Type.ToString(), произвольные строки
+#   из .cfg вроде wheelGroup) -- динамические, никогда не совпадут ключом словаря побайтово.
+#
+# "Prefix: True"/"Prefix: False" ниже -- это не GUIContent с раздельным текстом, а результат
+# string.Concat(ldstr "Prefix: ", boolField.ToString()) в самом IL. bool.ToString() в .NET всегда
+# культуронезависим и даёт ровно "True"/"False" -- поэтому здесь 2 фиксированные строки на кнопку,
+# перехватываемые как обычно точным совпадением всей строки целиком.
+
+# --- Заголовки окон ---
+Wheel Controls	Управление колёсами
+Wheel Debug Display	Отладка колёс
+
+# --- Панель управления (KSPWheelVesselControl) ---
+Highlight	Подсветка
+Spring	Пружина
+Damp Ratio	Демпфирование
+Low Speed Limit	Лимит малой скорости
+High Speed Limit	Лимит высокой скорости
+Response Speed	Скорость отклика
+Bias	Смещение
+Motor Limit	Лимит мотора
+Close	Закрыть
+
+# --- Кнопки-переключатели руления/мотора (склеены из префикса и bool.ToString(), см. шапку) ---
+Invert: True	Инверсия: Да
+Invert: False	Инверсия: Нет
+Lock: True	Блокировка: Да
+Lock: False	Блокировка: Нет
+Invert Motor: True	Инверсия мотора: Да
+Invert Motor: False	Инверсия мотора: Нет
+Lock Motor: True	Блокировка мотора: Да
+Lock Motor: False	Блокировка мотора: Нет
+Lock Steering: True	Блокировка поворота: Да
+Lock Steering: False	Блокировка поворота: Нет
+Invert Steering: True	Инверсия поворота: Да
+Invert Steering: False	Инверсия поворота: Нет
+Half Track Mode: True	Полугусеничный режим: Да
+Half Track Mode: False	Полугусеничный режим: Нет
+
+# --- Окна отладки (KSPWheelDebug -- одно колесо, KSPWheelVesselDebug -- весь аппарат) ---
+Long Friction	Продольное трение
+Lat Friction	Боковое трение
+Sweep Type	Тип трассировки
+Prev	Пред.
+Next	Далее
+Toggle Debug Rendering	Переключить отладку рендера
+Dump Wheel Debug Data	Выгрузить данные отладки колеса
+
+# --- Заголовки столбцов таблицы отладки (узкие ячейки -- переведено так же кратко) ---
+idx	№
+name	имя
+grp	грп
+rad	рад
+mass	масса
+len	дл
+spr	пруж
+dmp	дмп
+ang	угл
+vel	ск
+trq	мнт
+brk	трм
+comp	сж
+comp%	сж%
+timeB	буст
+hit	конт
+none	нет
