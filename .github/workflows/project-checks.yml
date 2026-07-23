@@ -32,15 +32,24 @@ jobs:
           }
           const data = JSON.parse(fs.readFileSync('data/project.json', 'utf8'));
           const siteMods = data.site.modCatalog.map(mod => mod.id);
+          const inventoryComponents = data.site.inventoryGroups.reduce(
+            (total, group) => total + group.entries.length,
+            0
+          );
           if (siteMods.length !== data.inventory.kerbalRuMods) {
             throw new Error(`site catalog has ${siteMods.length} mods, expected ${data.inventory.kerbalRuMods}`);
+          }
+          if (siteMods.length + inventoryComponents !== data.inventory.components) {
+            throw new Error(
+              `unified catalog has ${siteMods.length + inventoryComponents} components, expected ${data.inventory.components}`
+            );
           }
           for (const mod of siteMods) {
             if (!data.mods[mod]) throw new Error(`site mod has no project data: ${mod}`);
           }
           if (!html.includes("fetch('data/project.json'")) throw new Error('site does not load project data');
           if (!html.includes('renderModCatalog(data,active)')) throw new Error('site does not render the JSON mod catalog');
-          if (!html.includes('renderInventory(data)')) throw new Error('site does not render the JSON inventory');
+          if (!html.includes('normalizeCatalog(data)')) throw new Error('site does not merge the JSON inventory into the catalog');
           if (!html.includes('[data-ui-translation]')) throw new Error('site does not render uiTranslation');
           console.log(`inline JavaScript, ${siteMods.length} dynamic mods and ${data.site.inventoryGroups.length} inventory groups: ok`);
           NODE
