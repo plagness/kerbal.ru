@@ -7,11 +7,11 @@ ROOT = Path(__file__).resolve().parents[2]
 TDIR = ROOT / "GameData" / "kerbalru-ui-translator" / "KerbalRuUiTranslations"
 
 # Same English key genuinely means something different in these mods' UIs (confirmed by manual
-# review, not an accidental collision): "Bottom" is a reorder-to-end button in MechJeb2's Custom
-# Info Window editor, but a part-geometry direction in ProceduralParts. A flat global dictionary
-# can't disambiguate by caller, so one of the two wins at runtime (whichever file loads last) -
-# accepted trade-off, see docs/UI-TRANSLATION.md.
-KNOWN_CROSS_MOD_AMBIGUITIES = {"Bottom"}
+# review, not an accidental collision): "Bottom"/"Top" are reorder-to-end/reorder-to-top buttons
+# in MechJeb2 (Custom Info Window editor / Rover Waypoint window), but a part-geometry direction
+# in ProceduralParts. A flat global dictionary can't disambiguate by caller, so one of the two
+# wins at runtime (whichever file loads last) - accepted trade-off, see docs/UI-TRANSLATION.md.
+KNOWN_CROSS_MOD_AMBIGUITIES = {"Bottom", "Top"}
 
 def main():
     errors = []

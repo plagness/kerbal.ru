@@ -246,3 +246,65 @@ Display Module	Отображать модуль
 Display Module Icon	Отображать значок модуля
 Disengaging autopilot!	Автопилот отключается!
 Vessel landed!	Аппарат приземлился!
+
+# --- Второй проход (2026-07-23): строки, извлечённые из DLL заново через monodis/IL-анализ
+# и проверенные поштучно (каждая строка сверена с байткодом на предмет прямой передачи в
+# GUILayout.Label/Button/Toggle или в MechJeb-хелперы SimpleTextBox/SimpleLabel, которые
+# гарантированно НЕ склеивают строку с динамическими значениями перед отрисовкой) ---
+
+# --- PID-тюнинг / SmartASS (короткие оси и кнопки) ---
+Yaw	Рыскание
+HDG	Курс
+PIT	Тангаж
+ROL	Крен
+YAW	Рыскание
+CUR	ТЕК
+Pos	Полож.
+Neg	Отриц.
+
+# --- Rover Autopilot: окно точек маршрута (Waypoint Window) ---
+Set	Установить
+Top	В начало
+Add	Добавить
+Up	Вверх
+  Radius: 	  Радиус: 
+- Speed: 	- Скорость: 
+Lat 	Шир. 
+ -  Lon 	 -  Долг. 
+Waypoints	Точки маршрута
+
+# --- Ascent Settings / PVG: единицы измерения и переключатели ---
+sec	с
+rpm	об/мин
+kPa	кПа
+Pa-rad	Па·рад
+Pa	Па
+Hz	Гц
+km	км
+Alt: 	Высота: 
+ (unguided)	 (неуправляемая)
+ (optimize)	 (оптимизация)
+Module disabling does not kill throttle	Отключение модуля не сбрасывает тягу
+Delays: 	Задержки: 
+pre: 	до: 
+post: 	после: 
+
+# --- Custom Info Window / Stage Stats ---
+N/A	Н/Д
+Engine	Двигатель
+10m	10 м
+m/s	м/с
+
+# --- RCS Balancer ---
+RCS Manual Pid	Ручной PID RCS
+working	работает
+idle	простаивает
+
+# --- Maneuver Planner ---
+Insertion burn to a celestial with an SOI is not supported by this maneuver.  A Transfer-to-Moon maneuver needs to be written to properly support this case.	Манёвр выхода на орбиту небесного тела со сферой влияния не поддерживается этим типом манёвра. Для корректной поддержки этого случая нужно реализовать отдельный манёвр «Перелёт к спутнику».
+None	Нет
+
+# --- Экспериментальные контроллеры ориентации (KOS/LQR отладочная панель) ---
+MaxStoppingTime	Максимальное время остановки
+phiVector	Вектор φ
+MOI	Момент инерции
