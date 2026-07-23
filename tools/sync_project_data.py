@@ -46,8 +46,8 @@ def load_and_validate() -> dict:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     errors: list[str] = []
 
-    if data.get("schemaVersion") != 2:
-        errors.append("schemaVersion должен быть 2")
+    if data.get("schemaVersion") != 3:
+        errors.append("schemaVersion должен быть 3")
 
     release = data.get("release", {})
     version = release.get("version", "")
@@ -117,6 +117,72 @@ def load_and_validate() -> dict:
                     errors.append(f"{mod_name}.{stage_name}.{field} вне диапазона")
 
     site = data.get("site", {})
+    content = site.get("content", {})
+    for section_name in ("hero", "about", "mods", "roadmap", "nuances", "team", "footer"):
+        if not isinstance(content.get(section_name), dict) or not content.get(section_name):
+            errors.append(f"site.content.{section_name} должен быть непустым объектом")
+
+    installation = site.get("installation", {})
+    install_paths = installation.get("paths", [])
+    install_by_id = {
+        path.get("id"): path for path in install_paths if isinstance(path, dict)
+    }
+    if set(install_by_id) != {"full", "translation"}:
+        errors.append("site.installation.paths должен содержать full и translation")
+    for path_id, path in install_by_id.items():
+        for field in (
+            "title",
+            "badge",
+            "icon",
+            "description",
+            "requirements",
+            "commands",
+            "result",
+        ):
+            if not path.get(field):
+                errors.append(f"site.installation.paths.{path_id}.{field} обязателен")
+        if len(path.get("commands", [])) != 2:
+            errors.append(
+                f"site.installation.paths.{path_id}.commands должен содержать Unix и Windows"
+            )
+        for command in path.get("commands", []):
+            if not command.get("platform") or not command.get("code"):
+                errors.append(
+                    f"site.installation.paths.{path_id}.commands содержит неполную команду"
+                )
+
+    contributors = site.get("contributors", [])
+    contributor_ids: list[str] = []
+    for person in contributors:
+        if not isinstance(person, dict):
+            errors.append("site.contributors должен состоять из объектов")
+            continue
+        contributor_ids.append(person.get("id", ""))
+        for field in ("id", "github", "name", "roles", "bio"):
+            if not person.get(field):
+                errors.append(
+                    f"site.contributors.{person.get('id', '?')}.{field} обязателен"
+                )
+        if not re.fullmatch(
+            r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?",
+            person.get("github", ""),
+        ):
+            errors.append(
+                f"site.contributors.{person.get('id', '?')}.github не похож на GitHub-логин"
+            )
+    if len(contributor_ids) != len(set(contributor_ids)):
+        errors.append("site.contributors содержит повторяющиеся id")
+    known_contributors = set(contributor_ids)
+    defaults = site.get("modDefaults", {})
+    unknown_defaults = sorted(
+        set(defaults.get("contributors", [])) - known_contributors
+    )
+    if unknown_defaults:
+        errors.append(
+            "site.modDefaults.contributors содержит неизвестные id: "
+            + ", ".join(unknown_defaults)
+        )
+
     catalog = site.get("modCatalog", [])
     catalog_ids = [entry.get("id") for entry in catalog if isinstance(entry, dict)]
     if len(catalog) != inventory.get("kerbalRuMods"):
@@ -152,6 +218,19 @@ def load_and_validate() -> dict:
             errors.append(f"site.modCatalog.{entry.get('id', '?')}.tags должен быть непустым списком")
         if not str(entry.get("source", "")).startswith("https://"):
             errors.append(f"site.modCatalog.{entry.get('id', '?')}.source должен быть HTTPS-ссылкой")
+        unknown_people = sorted(
+            set(entry.get("contributors", [])) - known_contributors
+        )
+        if unknown_people:
+            errors.append(
+                f"site.modCatalog.{entry.get('id', '?')}.contributors содержит неизвестные id: "
+                + ", ".join(unknown_people)
+            )
+        for screenshot in entry.get("screenshots", []):
+            if not isinstance(screenshot, dict) or not screenshot.get("src"):
+                errors.append(
+                    f"site.modCatalog.{entry.get('id', '?')}.screenshots содержит неполную запись"
+                )
 
     groups = site.get("inventoryGroups", [])
     groups_by_id = {
@@ -160,11 +239,11 @@ def load_and_validate() -> dict:
     expected_group_counts = {
         "upstream": inventory.get("upstreamRussianMods", 0)
         + inventory.get("stockRussian", 0),
-        "candidates": inventory.get("translationCandidates", 0),
+        "untranslated": inventory.get("translationCandidates", 0),
         "service": inventory.get("serviceComponents", 0),
     }
     if set(groups_by_id) != set(expected_group_counts):
-        errors.append("site.inventoryGroups должен содержать upstream, candidates и service")
+        errors.append("site.inventoryGroups должен содержать upstream, untranslated и service")
     inventory_names: list[str] = []
     for group_id, expected_count in expected_group_counts.items():
         group = groups_by_id.get(group_id, {})
@@ -177,6 +256,14 @@ def load_and_validate() -> dict:
             if not isinstance(entry, dict) or not entry.get("name") or not entry.get("note"):
                 errors.append(f"site.inventoryGroups.{group_id} содержит неполную запись")
                 continue
+            unknown_people = sorted(
+                set(entry.get("contributors", [])) - known_contributors
+            )
+            if unknown_people:
+                errors.append(
+                    f"site.inventoryGroups.{group_id}.{entry.get('name')}.contributors содержит неизвестные id: "
+                    + ", ".join(unknown_people)
+                )
             inventory_names.append(entry["name"])
     if len(inventory_names) != len(set(inventory_names)):
         errors.append("site.inventoryGroups содержит повторяющиеся компоненты")
@@ -196,6 +283,59 @@ def load_and_validate() -> dict:
     if ui.get("modsCovered", 0) < len(ui.get("modsNotInstalledInThisBuild", [])):
         errors.append("uiTranslation.modsCovered меньше числа отсутствующих модов")
 
+    performance = site.get("performance", {})
+    for field in (
+        "eyebrow",
+        "title",
+        "intro",
+        "privacy",
+        "methodTitle",
+        "actionLabel",
+        "metrics",
+        "devices",
+    ):
+        if not performance.get(field):
+            errors.append(f"site.performance.{field} обязателен")
+    device_ids: list[str] = []
+    for device in performance.get("devices", []):
+        if not isinstance(device, dict):
+            errors.append("site.performance.devices должен состоять из объектов")
+            continue
+        device_ids.append(device.get("id", ""))
+        for field in (
+            "id",
+            "name",
+            "hardware",
+            "platform",
+            "status",
+            "statusLabel",
+            "notes",
+        ):
+            if not device.get(field):
+                errors.append(
+                    f"site.performance.devices.{device.get('id', '?')}.{field} обязателен"
+                )
+        if device.get("status") not in {"awaiting", "measured"}:
+            errors.append(
+                f"site.performance.devices.{device.get('id', '?')}.status должен быть awaiting или measured"
+            )
+        if device.get("status") == "measured":
+            for field in (
+                "buildVersion",
+                "resolution",
+                "preset",
+                "averageFps",
+                "onePercentLowFps",
+                "peakRamGb",
+                "loadTimeSeconds",
+            ):
+                if device.get(field) is None:
+                    errors.append(
+                        f"site.performance.devices.{device.get('id', '?')}.{field} обязателен для measured"
+                    )
+    if len(device_ids) != len(set(device_ids)):
+        errors.append("site.performance.devices содержит повторяющиеся id")
+
     required_links = {
         "repository",
         "releases",
@@ -204,6 +344,7 @@ def load_and_validate() -> dict:
         "uiTranslation",
         "roadmap",
         "maintaining",
+        "performanceReport",
     }
     missing_links = sorted(required_links - set(data.get("links", {})))
     if missing_links:

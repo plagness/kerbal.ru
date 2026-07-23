@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "updatedAt": "2026-07-23",
   "release": {
     "version": "v26.4",
@@ -271,6 +271,178 @@
     }
   },
   "site": {
+    "content": {
+      "hero": {
+        "title": "KERBAL",
+        "domain": ".RU",
+        "lead": "Реалистичная сборка Kerbal Space Program на русском. Настоящая Солнечная система, честная орбитальная механика и историческая карьера.",
+        "accent": "Переведены интерфейс и детали.",
+        "primaryAction": "Скачать русификатор",
+        "secondaryAction": "Как установить"
+      },
+      "about": {
+        "eyebrow": "00 / ОБЗОР",
+        "title": "Что это",
+        "paragraphs": [
+          "RO / RSS / RP-1 — флагманская реалистичная сборка KSP1: настоящая Солнечная система в реальном масштабе, близкие к жизни топливо, двигатели и историческая карьера.",
+          "kerbal.ru — открытый русификатор поверх сборки. Он не меняет игру для англоязычных пользователей и включается только при выборе русского языка."
+        ]
+      },
+      "mods": {
+        "eyebrow": "02 / КАТАЛОГ",
+        "title": "Все компоненты сборки",
+        "intro": "Одно пространство для всей установленной сборки: перевод kerbal.ru, русский от авторов, пока не локализованные моды и технические зависимости. Открой мод, чтобы увидеть назначение, покрытие, материалы и участников."
+      },
+      "roadmap": {
+        "eyebrow": "04 / ПЛАНЫ",
+        "title": "Что улучшаем",
+        "items": [
+          "Повышаем реальное покрытие названий, описаний и производителей по игровому кэшу.",
+          "Дополняем карточки всех компонентов: описаниями, ссылками, скриншотами и ответственными за перевод.",
+          "Проверяем перевод интерфейса модов в живой сборке и поддерживаем единый глоссарий."
+        ]
+      },
+      "nuances": {
+        "eyebrow": "05 / НЮАНСЫ",
+        "title": "Что важно знать",
+        "items": [
+          "Процент состава с русским языком и глубина перевода отдельных полей — разные метрики; сайт показывает обе.",
+          "Текст уже созданных контрактов хранится в сохранении. После установки перевода русскими будут новые контракты.",
+          "Главная проверка — текст, реально загруженный в ModuleManager.ConfigCache, а не только наличие ключа в файле."
+        ]
+      },
+      "team": {
+        "eyebrow": "06 / OPEN SOURCE",
+        "title": "Команда проекта",
+        "intro": "Люди, чьи подтверждённые изменения уже есть в репозитории. Добавленный в JSON GitHub-логин автоматически получает актуальный аватар и ссылку на профиль."
+      },
+      "footer": {
+        "projectNote": "Независимый открытый фан-проект, не аффилированный с авторами Kerbal Space Program и модов.",
+        "credits": "Иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS"
+      }
+    },
+    "installation": {
+      "eyebrow": "01 / УСТАНОВКА",
+      "title": "Выбери один из двух путей",
+      "intro": "Оба установщика находят KSP, сохраняют резервные копии управляемых файлов и умеют обновлять уже установленный перевод.",
+      "paths": [
+        {
+          "id": "full",
+          "title": "Полная автоматика",
+          "badge": "С чистой KSP",
+          "icon": "i-rocket",
+          "description": "Для лицензионной KSP 1.12.5 без сборки. Установщик скачает официальный CKAN, поставит RP-1 Express Install, Graphics Low, RP-1 и затем русификатор.",
+          "requirements": [
+            "Установленная через Steam Kerbal Space Program 1.12.5",
+            "Mono на Linux, macOS и Steam Deck",
+            "Несколько гигабайт свободного места и стабильное соединение"
+          ],
+          "commands": [
+            {
+              "platform": "Linux · macOS · Steam Deck",
+              "icon": "i-terminal-2",
+              "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full"
+            },
+            {
+              "platform": "Windows PowerShell",
+              "icon": "i-brand-windows",
+              "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -Full"
+            }
+          ],
+          "result": "На выходе — готовая RO / RSS / RP-1 с русским интерфейсом и переводом поддерживаемых деталей."
+        },
+        {
+          "id": "translation",
+          "title": "Только перевод",
+          "badge": "Сборка уже есть",
+          "icon": "i-language",
+          "description": "Для существующей RO / RSS / RP-1. Моды и CKAN не затрагиваются: установщик обновит только файлы kerbal.ru и включит русский язык.",
+          "requirements": [
+            "Уже установленная сборка RO / RSS / RP-1",
+            "Закрытая игра на время обновления",
+            "Резервные копии пользовательских замен создаются автоматически"
+          ],
+          "commands": [
+            {
+              "platform": "Linux · macOS · Steam Deck",
+              "icon": "i-terminal-2",
+              "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+            },
+            {
+              "platform": "Windows PowerShell",
+              "icon": "i-brand-windows",
+              "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly"
+            }
+          ],
+          "result": "Существующая сборка остаётся на месте; меняются только файлы, которыми управляет kerbal.ru."
+        }
+      ],
+      "notes": [
+        "Без флага установщик сам найдёт сборку и предложит подходящий режим, но явная команда надёжнее для копирования и автоматизации.",
+        "Для конкретного релиза доступны --version v26.4 и -Version v26.4; для проверки без изменений — --check и -Check."
+      ]
+    },
+    "contributors": [
+      {
+        "id": "plagness",
+        "github": "plagness",
+        "name": "Valery Tenevoy",
+        "roles": ["Куратор проекта", "Локализация", "Разработка сайта"],
+        "bio": "Поддерживает русификатор, релизы, документацию и инфраструктуру kerbal.ru."
+      }
+    ],
+    "modDefaults": {
+      "contributors": ["plagness"],
+      "screenshots": []
+    },
+    "performance": {
+      "eyebrow": "03 / ПРОИЗВОДИТЕЛЬНОСТЬ",
+      "title": "Как сборка работает на железе",
+      "intro": "Собираем воспроизводимые замеры сообщества: одна версия сборки, одинаковый сценарий, прозрачные настройки. До появления результата карточка честно показывает, что замер ещё не проведён.",
+      "privacy": "Телеметрия только добровольная: сайт ничего не отправляет в фоне. Пользователь публикует результат через GitHub Issue и сам решает, прикладывать ли лог.",
+      "methodTitle": "Как собираем данные",
+      "actionLabel": "Добавить замер",
+      "metrics": [
+        "средний FPS и 1% low",
+        "пиковое использование RAM",
+        "время от запуска до главного меню",
+        "разрешение, пресет и версия сборки"
+      ],
+      "devices": [
+        {
+          "id": "macbook-m1-pro-16",
+          "name": "MacBook Pro",
+          "hardware": "Apple M1 Pro · 16 ГБ",
+          "platform": "macOS",
+          "status": "awaiting",
+          "statusLabel": "Замер ожидается",
+          "buildVersion": null,
+          "resolution": null,
+          "preset": null,
+          "averageFps": null,
+          "onePercentLowFps": null,
+          "peakRamGb": null,
+          "loadTimeSeconds": null,
+          "notes": "Стартовая машина проекта; точная конфигурация процессора и условия теста будут записаны вместе с первым замером."
+        },
+        {
+          "id": "steam-deck-oled",
+          "name": "Steam Deck OLED",
+          "hardware": "AMD APU · 16 ГБ",
+          "platform": "SteamOS",
+          "status": "awaiting",
+          "statusLabel": "Замер ожидается",
+          "buildVersion": null,
+          "resolution": "1280 × 800",
+          "preset": "Graphics Low",
+          "averageFps": null,
+          "onePercentLowFps": null,
+          "peakRamGb": null,
+          "loadTimeSeconds": null,
+          "notes": "Целевая портативная конфигурация. Первый тест должен фиксировать TDP, частоту экрана и способ запуска CKAN/KSP."
+        }
+      ]
+    },
     "modCatalog": [
       {
         "id": "AJE",
@@ -503,12 +675,12 @@
         ]
       },
       {
-        "id": "candidates",
-        "title": "Кандидаты на перевод",
-        "subtitle": "есть детали или интерфейс",
+        "id": "untranslated",
+        "title": "Пока без русского блока",
+        "subtitle": "локализация ещё не добавлена",
         "icon": "i-alert-triangle",
         "entryIcon": "i-chevron-right",
-        "kind": "candidate",
+        "kind": "untranslated",
         "entries": [
           {"name": "RealAntennas", "note": "128 деталей и UI связи"},
           {"name": "TestFlight", "note": "Надёжность и сообщения об отказах"},
@@ -576,6 +748,7 @@
     "discussions": "https://github.com/plagness/kerbal.ru/discussions",
     "uiTranslation": "https://github.com/plagness/kerbal.ru/blob/main/docs/UI-TRANSLATION.md",
     "roadmap": "https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md",
-    "maintaining": "https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md"
+    "maintaining": "https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md",
+    "performanceReport": "https://github.com/plagness/kerbal.ru/issues/new?template=performance.yml"
   }
 }

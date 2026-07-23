@@ -8,12 +8,46 @@
 - Переводы на русский **уже готовы** в этом репозитории (`plagness/kerbal.ru`, 20 модов). Не переводи заново — используй готовое.
 - Ставится всё через **CKAN**. Русификатор — поверх, копированием `GameData`.
 
-## Быстрый путь (то, что нужно пользователю в 95% случаев)
+## Два быстрых пути
 
-Проще всего одной командой — `install.sh`/`install.ps1` из этого репозитория делают шаги 2-4 сами:
-`curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full` (Linux/Mac/Deck) или
-`irm https://kerbal.ru/install.ps1 | iex` с `-Full` (Windows). Внутри они вызывают ровно ту же
-проверенную команду CKAN, что и в шаге 3 ниже, headless-режимом, без диалогов.
+Перед запуском уточни, нужна ли пользователю вся сборка или только перевод. Используй
+явный режим: так команда одинаково работает в обычном терминале и в автоматизации.
+
+### 1. Полная автоматика — с чистой KSP
+
+`install.sh` / `install.ps1` скачает официальный CKAN, поставит
+`RP-1-ExpressInstall`, `RP-1-ExpressInstall-Graphics-Low`, `RP-1`, а затем
+русификатор:
+
+```bash
+# Linux / macOS / Steam Deck
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full
+```
+
+```powershell
+# Windows PowerShell
+& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -Full
+```
+
+### 2. Только перевод — RO / RSS / RP-1 уже установлена
+
+Этот режим не устанавливает моды и не запускает CKAN; он делегирует работу
+проверенному установщику `install-ru.*`:
+
+```bash
+# Linux / macOS / Steam Deck
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only
+```
+
+```powershell
+# Windows PowerShell
+& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly
+```
+
+Без флага установщик сам определит наличие сборки и, если терминал интерактивный,
+задаст вопрос. Для агента предпочтительнее явный режим. Перед запуском всё равно
+проверь лицензионную KSP 1.12.5, свободное место и наличие Mono на
+Linux/macOS/Steam Deck.
 
 Вручную, по шагам:
 

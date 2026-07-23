@@ -1,0 +1,96 @@
+name: Замер производительности
+description: Добавить воспроизводимый результат для раздела «Производительность»
+title: "[Performance]: "
+labels:
+  - website
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за замер. Сайт не собирает телеметрию автоматически: здесь публикуются только данные, которые вы решили отправить сами.
+        Перед тестом закройте фоновые тяжёлые приложения и проведите один и тот же сценарий: загрузка в главное меню, редактор с типовой ракетой, затем первые 60 секунд полёта.
+  - type: input
+    id: version
+    attributes:
+      label: Версия kerbal.ru
+      placeholder: v26.4
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Устройство, CPU / SoC и GPU
+      placeholder: Steam Deck OLED · AMD APU
+    validations:
+      required: true
+  - type: input
+    id: memory
+    attributes:
+      label: Оперативная память
+      placeholder: 16 ГБ
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: ОС и версия
+      placeholder: SteamOS 3.x
+    validations:
+      required: true
+  - type: input
+    id: display
+    attributes:
+      label: Разрешение, герцовка и лимит TDP
+      placeholder: 1280×800 · 60 Гц · 15 Вт
+    validations:
+      required: true
+  - type: dropdown
+    id: preset
+    attributes:
+      label: Графический профиль сборки
+      options:
+        - Graphics Low
+        - Graphics High
+        - Свой профиль
+    validations:
+      required: true
+  - type: input
+    id: fps
+    attributes:
+      label: Средний FPS / 1% low
+      placeholder: 42 / 28 FPS
+    validations:
+      required: true
+  - type: input
+    id: ram
+    attributes:
+      label: Пиковое использование RAM
+      placeholder: 11,4 ГБ
+    validations:
+      required: true
+  - type: input
+    id: load
+    attributes:
+      label: Время до главного меню
+      placeholder: 7 мин 18 с
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Сценарий и примечания
+      description: Укажите сейв/ракету, длительность замера, фоновые приложения и нестандартные настройки.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Скриншоты, графики или лог
+      description: Необязательно. Перед публикацией проверьте, что в файлах нет личных путей и других чувствительных данных.
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Согласие
+      options:
+        - label: Разрешаю добавить этот замер и указанное имя GitHub в публичный JSON сайта.
+          required: true

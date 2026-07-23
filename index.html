@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>kerbal.ru — русская локализация RO / RSS / RP-1 для Kerbal Space Program</title>
 <meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
+<meta name="theme-color" content="#07110d">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -148,6 +150,24 @@
   .badge{font-family:var(--sans);font-size:.58rem;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
   .badge.full{background:rgba(166,223,94,.13);color:var(--green);border:1px solid rgba(166,223,94,.4);}
   .badge.patch{background:rgba(255,157,47,.13);color:var(--orange);border:1px solid rgba(255,157,47,.4);}
+  .install-intro{max-width:690px;margin:8px 0 0;color:var(--txt-dim)}
+  .install-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+  .install-path{position:relative;min-width:0;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(166,232,110,.045),rgba(255,255,255,.008));padding:22px;overflow:hidden}
+  .install-path:first-child{border-color:rgba(166,232,110,.24)}
+  .install-path-head{display:grid;grid-template-columns:46px minmax(0,1fr);gap:13px;align-items:center}
+  .install-path-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;border:1px solid var(--line-cyan);background:rgba(166,232,110,.07);color:var(--green);font-size:1.35rem}
+  .install-path h3{margin:0;color:#fff;font-size:1.04rem}
+  .install-path-badge{display:block;margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.7px;text-transform:uppercase;color:var(--orange)}
+  .install-path-description{min-height:7.7em;margin:15px 0;color:var(--txt-dim);font-size:.86rem;line-height:1.62}
+  .install-requirements{margin:0 0 16px;padding:0;list-style:none}
+  .install-requirements li{position:relative;padding-left:17px;margin:7px 0;color:#c8d2cc;font-size:.77rem;line-height:1.45}
+  .install-requirements li::before{content:'';position:absolute;left:0;top:.58em;width:6px;height:6px;border:1px solid var(--green);border-radius:50%}
+  .install-command-label{display:flex;align-items:center;gap:7px;margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.5px;text-transform:uppercase;color:var(--txt-faint)}
+  .install-path .code{margin:6px 0}.install-path .code pre{font-size:.68rem;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+  .install-result{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);color:var(--green);font-size:.77rem;line-height:1.5}
+  .install-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+  .install-note{display:flex;gap:9px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.012);color:var(--txt-dim);font-size:.77rem}
+  .install-note .ic{margin-top:3px;color:var(--orange)}
   .mods-card{padding:0;overflow:hidden}
   .mods-intro{padding:26px 31px 22px;border-bottom:1px solid var(--line)}
   .mods-intro p{max-width:690px;margin:0 0 13px;color:var(--txt-dim)}
@@ -213,29 +233,51 @@
   .mod-tag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.5px;text-transform:uppercase;color:var(--txt-faint);border:1px solid var(--line);border-radius:5px;padding:4px 7px;background:rgba(255,255,255,.018)}
   .mod-source{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:650;text-decoration:none;color:var(--orange)}
   .mod-source:hover{color:var(--gold)}
-  .inventory{border-top:1px solid var(--line)}
-  .inventory-head{padding:24px 31px 17px;background:rgba(255,255,255,.012)}
-  .inventory-head h3{margin:0 0 6px;color:#fff;font-size:1.02rem}
-  .inventory-head p{margin:0;color:var(--txt-dim);font-size:.84rem}
-  .inventory-group{border-top:1px solid var(--line)}
-  .inventory-group>summary{list-style:none;cursor:pointer;padding:18px 25px;display:grid;grid-template-columns:38px minmax(0,1fr) auto 18px;gap:13px;align-items:center;transition:background .2s}
-  .inventory-group>summary::-webkit-details-marker{display:none}
-  .inventory-group>summary:hover{background:rgba(166,232,110,.035)}
-  .inventory-group[open]>summary{background:rgba(166,232,110,.025)}
-  .inventory-group[open]>summary .inventory-chevron{transform:rotate(90deg);color:var(--green)}
-  .inventory-group-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--green);background:rgba(166,232,110,.04);font-size:1.1rem}
-  .inventory-group-title{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;color:#fff;font-weight:720}
-  .inventory-group-title small{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.7px;color:var(--txt-faint);text-transform:uppercase;font-weight:500}
-  .inventory-count{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);border:1px solid var(--line);border-radius:7px;padding:5px 8px}
-  .inventory-chevron{color:var(--txt-faint);transition:transform .25s,color .2s}
-  .inventory-body{padding:0 24px 23px}
-  .inventory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  .inventory-entry{min-width:0;display:grid;grid-template-columns:26px minmax(0,1fr);gap:9px;align-items:center;padding:9px 10px;border:1px solid rgba(130,201,170,.1);border-radius:8px;background:rgba(255,255,255,.012)}
-  .inventory-entry>.ic{color:var(--green);font-size:.98rem}
-  .inventory-entry.is-candidate>.ic{color:var(--orange)}
-  .inventory-entry.is-service>.ic{color:var(--txt-faint)}
-  .inventory-entry b{display:block;overflow:hidden;text-overflow:ellipsis;color:#dbe6e0;font-size:.78rem;white-space:nowrap}
-  .inventory-entry small{display:block;margin-top:1px;color:var(--txt-faint);font-family:'JetBrains Mono',monospace;font-size:.49rem;letter-spacing:.35px;text-transform:uppercase;line-height:1.35}
+  .catalog-tools{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.012)}
+  .catalog-search{position:relative}.catalog-search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--txt-faint)}
+  .catalog-search input{width:100%;height:42px;padding:0 14px 0 38px;border:1px solid var(--line);border-radius:10px;background:rgba(3,8,6,.72);color:#fff;font:inherit;font-size:.8rem;outline:none}
+  .catalog-search input:focus{border-color:var(--line-cyan);box-shadow:0 0 0 3px rgba(166,232,110,.06)}
+  .catalog-filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .catalog-filter{border:1px solid var(--line);border-radius:9px;background:transparent;color:var(--txt-dim);font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;cursor:pointer}
+  .catalog-filter:hover,.catalog-filter.is-active{border-color:var(--line-cyan);background:rgba(166,232,110,.07);color:var(--green)}
+  .catalog-label{display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .catalog-empty{padding:28px;text-align:center;color:var(--txt-dim);font-size:.84rem}
+  .mod-percent.is-upstream{color:#b9e8ff;border-color:rgba(155,218,255,.25);background:rgba(155,218,255,.04)}
+  .mod-percent.is-untranslated{color:var(--orange);border-color:rgba(255,157,47,.28);background:rgba(255,157,47,.035)}
+  .mod-media{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.7fr);gap:12px;margin-top:17px}
+  .mod-screenshot{position:relative;min-height:150px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(145deg,rgba(166,232,110,.035),rgba(255,255,255,.008))}
+  .mod-screenshot img{width:100%;height:100%;min-height:150px;display:block;object-fit:cover}
+  .mod-screenshot figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;background:linear-gradient(transparent,rgba(3,8,6,.88));color:#fff;font-size:.68rem}
+  .mod-screenshot-placeholder{height:100%;min-height:150px;display:grid;place-items:center;text-align:center;padding:18px;color:var(--txt-faint);font-family:'JetBrains Mono',monospace;font-size:.61rem;letter-spacing:.45px;text-transform:uppercase}
+  .mod-screenshot-placeholder .ic{display:block;margin:0 auto 8px;font-size:1.75rem;color:var(--green)}
+  .mod-people{border:1px solid var(--line);border-radius:12px;padding:14px;background:rgba(255,255,255,.012)}
+  .mod-people-label{display:block;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.65px;text-transform:uppercase;color:var(--txt-faint)}
+  .person-mini{display:flex;align-items:center;gap:9px;color:#fff;text-decoration:none;font-size:.73rem}
+  .person-mini+.person-mini{margin-top:8px}
+  .person-mini img{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-cyan);background:var(--bg-1)}
+  .person-mini span{min-width:0}.person-mini b{display:block;overflow:hidden;text-overflow:ellipsis}.person-mini small{display:block;color:var(--txt-faint);font-size:.58rem}
+  .mod-person-empty{color:var(--txt-faint);font-size:.69rem;line-height:1.45}
+  .performance-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+  .device-card{border:1px solid var(--line);border-radius:15px;padding:20px;background:var(--panel)}
+  .device-head{display:grid;grid-template-columns:43px minmax(0,1fr) auto;gap:11px;align-items:center}
+  .device-icon{width:43px;height:43px;border-radius:12px;display:grid;place-items:center;background:rgba(166,232,110,.055);border:1px solid var(--line);color:var(--green);font-size:1.2rem}
+  .device-title b{display:block;color:#fff}.device-title small{display:block;color:var(--txt-dim);font-size:.7rem}
+  .device-status{font-family:'JetBrains Mono',monospace;font-size:.52rem;text-transform:uppercase;letter-spacing:.45px;color:var(--orange);border:1px solid rgba(255,157,47,.25);border-radius:999px;padding:5px 7px}
+  .device-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:16px}
+  .device-metric{padding:10px;border:1px solid rgba(183,214,190,.09);border-radius:9px;background:rgba(255,255,255,.012)}
+  .device-metric b{display:block;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.85rem}
+  .device-metric small{color:var(--txt-faint);font-size:.58rem;text-transform:uppercase;letter-spacing:.35px}
+  .device-notes{margin:13px 0 0;color:var(--txt-dim);font-size:.72rem}
+  .performance-method{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.65fr);gap:18px;align-items:start;margin-top:14px}
+  .performance-method h3{margin:0 0 8px;color:#fff;font-size:.94rem}.performance-method p{margin:0;color:var(--txt-dim);font-size:.82rem}
+  .performance-metrics{margin:0;padding-left:18px;color:#c8d2cc;font-size:.78rem}
+  .performance-metrics li{margin:5px 0}
+  .performance-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:17px}
+  .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+  .team-card{display:flex;gap:13px;align-items:center;min-width:0;border:1px solid var(--line);border-radius:15px;padding:15px;background:var(--panel);color:#fff;text-decoration:none;transition:transform .18s,border-color .18s}
+  .team-card:hover{transform:translateY(-2px);border-color:var(--line-cyan);color:#fff}
+  .team-card img{width:58px;height:58px;border-radius:50%;border:2px solid rgba(166,232,110,.34);background:var(--bg-1)}
+  .team-card-copy{min-width:0}.team-card-copy b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.team-card-copy span{display:block;margin-top:2px;color:var(--txt-dim);font-size:.7rem;line-height:1.45}.team-card-copy small{display:block;margin-top:5px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.54rem}
 
   ul.plain{padding-left:0;list-style:none;margin:0}
   ul.plain li{position:relative;padding-left:26px;margin-bottom:12px}
@@ -262,12 +304,12 @@
   }
   @media(max-width:560px){
     .card{padding:22px 18px}.mods-card{padding:0}.mods-intro{padding:22px 18px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}
-    .coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.ui-translation{grid-template-columns:42px minmax(0,1fr);padding:14px;gap:12px}.ui-translation-icon{width:42px;height:42px}.ui-translation-stats{grid-column:1/-1;grid-template-columns:repeat(2,1fr);width:100%}.inventory-head{padding:21px 18px 15px}.inventory-group>summary{padding:15px 14px;grid-template-columns:34px minmax(0,1fr) auto 16px;gap:9px}.inventory-group-icon{width:34px;height:34px}.inventory-body{padding:0 13px 17px}.inventory-grid{grid-template-columns:1fr}.catalog-label{padding:14px}
+    .install-paths,.install-notes,.performance-grid,.performance-method,.team-grid{grid-template-columns:1fr}.install-path{padding:18px}.install-path-description{min-height:0}.catalog-tools{grid-template-columns:1fr;padding:13px}.catalog-filters{justify-content:flex-start}.coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.ui-translation{grid-template-columns:42px minmax(0,1fr);padding:14px;gap:12px}.ui-translation-icon{width:42px;height:42px}.ui-translation-stats{grid-column:1/-1;grid-template-columns:repeat(2,1fr);width:100%}.catalog-label{padding:14px}
     .project-meta{justify-content:flex-start}
     .mod-summary{grid-template-columns:42px minmax(0,1fr) auto 17px;gap:10px;padding:15px 14px}
     .mod-icon{width:42px;height:42px;border-radius:12px;font-size:1.25rem}
     .mod-title{font-size:.9rem}.mod-kicker{font-size:.52rem}.mod-teaser{font-size:.76rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
-    .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}
+    .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}.mod-media{grid-template-columns:1fr}.device-head{grid-template-columns:43px minmax(0,1fr)}.device-status{grid-column:2}.device-metrics{grid-template-columns:1fr 1fr}
   }
 </style>
 </head>
@@ -315,6 +357,10 @@
 <symbol id="i-arrows-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M14 10l6 -6M8 20h-4v-4M4 20l6 -6M16 20h4v-4M14 14l6 6M8 4h-4v4M4 4l6 6"/></symbol>
 <symbol id="i-parachute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a10 10 0 1 0 -20 0"/><path d="M22 12c0 -1.66 -1.46 -3 -3.25 -3c-1.8 0 -3.25 1.34 -3.25 3c0 -1.66 -1.57 -3 -3.5 -3s-3.5 1.34 -3.5 3c0 -1.66 -1.46 -3 -3.25 -3c-1.8 0 -3.25 1.34 -3.25 3"/><path d="M2 12l10 10l-3.5 -10M15.5 12l-3.5 10l10 -10"/></symbol>
 <symbol id="i-building-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21v-12l5 4v-4l5 4h4M19 21v-8l-1.436 -9.574a.5 .5 0 0 0 -.495 -.426h-1.145a.5 .5 0 0 0 -.494 .418l-1.43 8.582M9 17h1M14 17h1"/></symbol>
+<symbol id="i-terminal-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l3 3l-3 3"/><path d="M13 15h3"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></symbol>
+<symbol id="i-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"/><path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"/><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a4 4 0 1 0 0 -8a4 4 0 0 0 0 8"/><path d="M17 11a4 4 0 1 0 0 -8"/><path d="M3 21v-2a6 6 0 0 1 12 0v2"/><path d="M15 13a6 6 0 0 1 6 6v2"/></symbol>
 </svg>
 
 <div class="sky"></div>
@@ -325,11 +371,11 @@
 
   <!-- HERO -->
   <header id="mission-start" class="hero" data-mission-start>
-    <div class="hero-title"><h1>KERBAL</h1><span class="domain-mark" aria-label="точка ру">.RU</span></div>
-    <p class="lead">Реалистичная сборка Kerbal Space Program на русском. Настоящая Солнечная система, честная орбитальная механика, историческая карьера — <b>с переводом интерфейса и деталей</b>.</p>
+    <div class="hero-title"><h1 data-content="hero.title">KERBAL</h1><span class="domain-mark" data-content="hero.domain" aria-label="точка ру">.RU</span></div>
+    <p class="lead"><span data-content="hero.lead">Реалистичная сборка Kerbal Space Program на русском.</span> <b data-content="hero.accent">Переведены интерфейс и детали.</b></p>
     <div class="cta">
-      <a class="btn btn-primary" data-release-download href="https://github.com/plagness/kerbal.ru/archive/refs/tags/v26.1.zip"><svg class="ic"><use href="#i-download"/></svg>Скачать русификатор</a>
-      <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg>Инструкция</a>
+      <a class="btn btn-primary" data-release-download href="https://github.com/plagness/kerbal.ru/archive/refs/tags/v26.1.zip"><svg class="ic"><use href="#i-download"/></svg><span data-content="hero.primaryAction">Скачать русификатор</span></a>
+      <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg><span data-content="hero.secondaryAction">Как установить</span></a>
     </div>
     <div class="project-meta">
       <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
@@ -339,132 +385,24 @@
 
   <!-- ABOUT -->
   <section class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">00 / ОБЗОР</span><h2>Что это</h2><span class="rule"></span></div>
-    <div class="card">
-      <p><strong>RO / RSS / RP-1</strong> — флагманская реалистичная сборка KSP1. Она заменяет игрушечную кербальскую систему на настоящую Солнечную (Земля в реальном масштабе), приближает физику, топливо и двигатели к жизни и добавляет историческую карьеру. Признанный сообществом «тот самый» реалистичный режим.</p>
-      <p style="margin-bottom:0"><strong>kerbal.ru</strong> — русификатор поверх этой сборки. Не отдельный мод: он добавляет русский язык в <span data-inventory-supported>20</span> ключевых модов и ставится копированием одной папки. Для англоязычных игроков ничего не меняется — перевод включается только при выборе русского языка.</p>
-    </div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num" data-content="about.eyebrow">00 / ОБЗОР</span><h2 data-content="about.title">Что это</h2><span class="rule"></span></div>
+    <div class="card" data-content-list="about.paragraphs"></div>
   </section>
 
-  <!-- STEP 1 -->
+  <!-- INSTALLATION -->
   <section id="install" class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / СБОРКА</span><h2>Шаг 1 · Ставим CKAN</h2><span class="rule"></span></div>
-    <div class="card">
-      <p>Сборка ставится через <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a> — менеджер модов, который сам подтянет все зависимости. Сначала установи через Steam саму <strong>Kerbal Space Program</strong> (версия <span data-game-version>1.12.5</span>), затем CKAN — по вкладке своей ОС:</p>
-      <div class="tabs" data-group="os" role="tablist" aria-label="Операционная система">
-        <button class="tab active" type="button" role="tab" aria-selected="true" data-tab="win"><svg class="ic"><use href="#i-brand-windows"/></svg>Windows</button>
-        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="mac"><svg class="ic"><use href="#i-brand-apple"/></svg>macOS</button>
-        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="lin"><svg class="ic"><use href="#i-brand-debian"/></svg>Linux</button>
-        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="deck"><svg class="ic"><use href="#i-brand-steam"/></svg>Steam Deck</button>
-      </div>
-
-      <div class="panel active" data-panel="win">
-        <ol class="steps">
-          <li>Убедись, что установлен <b>.NET Framework 4.8</b> — в Windows 10 и 11 он есть по умолчанию.</li>
-          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a> и положи в любую папку (не внутрь игры).</li>
-          <li>Запусти <code class="inline">ckan.exe</code> двойным кликом — откроется графический интерфейс.</li>
-          <li>При первом запуске укажи путь к игре — CKAN обычно находит Steam-копию сам.</li>
-        </ol>
-      </div>
-
-      <div class="panel" data-panel="mac">
-        <ol class="steps">
-          <li>Скачай <b>CKAN.dmg</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов CKAN</a>.</li>
-          <li>Открой образ, перетащи <code class="inline">CKAN.app</code> в любую папку и запусти двойным кликом.</li>
-          <li>На современных macOS (10.15+) CKAN открывается как <b>текстовый интерфейс в Терминале</b> — Apple убрала поддержку 32-битного GUI. Разреши доступ к Терминалу, если система спросит.</li>
-          <li>Укажи путь к игре и переходи к шагу 2.</li>
-        </ol>
-        <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Проще:</b> собери сборку на ПК с Windows и просто скопируй папку игры на Mac — тогда возня с консолью не нужна.</span></div>
-      </div>
-
-      <div class="panel" data-panel="lin">
-        <ol class="steps">
-          <li>Установи Mono (движок для запуска CKAN):
-            <div class="code"><button class="copy">COPY</button><pre># Debian / Ubuntu
-sudo apt install mono-complete
-
-# Fedora
-sudo dnf install mono-complete
-
-# Arch
-sudo pacman -S mono</pre></div>
-          </li>
-          <li>Скачай <b>ckan.exe</b> со <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">страницы релизов</a> (либо ставь <code class="inline">.deb</code>/<code class="inline">.rpm</code> оттуда же).</li>
-          <li>Запусти графический интерфейс:
-            <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe</pre></div>
-          </li>
-          <li>Укажи путь к игре — обычно <code class="inline">~/.local/share/Steam/steamapps/common/Kerbal Space Program</code>.</li>
-        </ol>
-      </div>
-
-      <div class="panel" data-panel="deck">
-        <p style="margin-top:16px">У SteamOS файловая система «только для чтения», поэтому чистый путь — контейнер Debian через <b>distrobox</b> (он уже есть на Deck). Всё делается в <b>режиме рабочего стола</b>, в приложении Konsole.</p>
-        <ol class="steps">
-          <li>Создай контейнер и войди в него:
-            <div class="code"><button class="copy">COPY</button><pre>distrobox create -n ckanbox -i debian:12 -Y
-distrobox enter ckanbox</pre></div>
-          </li>
-          <li>Поставь Mono и CKAN внутри контейнера:
-            <div class="code"><button class="copy">COPY</button><pre>sudo apt update && sudo apt install -y mono-complete
-curl -L -o ckan.exe https://github.com/KSP-CKAN/CKAN/releases/latest/download/ckan.exe</pre></div>
-          </li>
-          <li>Подключи игру (домашняя папка видна из контейнера напрямую):
-            <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe instance add --headless "KSP" \
-"$HOME/.local/share/Steam/steamapps/common/Kerbal Space Program"
-mono ckan.exe instance default KSP
-mono ckan.exe update</pre></div>
-          </li>
-          <li>Дальше — команда установки из шага 2 (в том же контейнере).</li>
-        </ol>
-        <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Проще:</b> если есть ПК — собери сборку там и скопируй папку <code class="inline">Kerbal Space Program</code> на Deck целиком. Контейнер тогда не нужен.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STEP 2 -->
-  <section class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-engine"/></svg></span><span class="sec-num">02 / МОДЫ</span><h2>Шаг 2 · Ставим RO / RSS / RP-1</h2><span class="rule"></span></div>
-    <div class="card">
-      <p>В CKAN найди и отметь <strong>RP-1-ExpressInstall</strong> — официальный мета-пак, который подтянет Realism Overhaul, Real Solar System, RP-1 и все зависимости. Через GUI — галочки и Apply. Через терминал (Linux / Steam Deck) — одной командой:</p>
-      <div class="code"><button class="copy">COPY</button><pre>mono ckan.exe install --headless --no-recommends \
-  RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1</pre></div>
-      <div class="note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span><b>Graphics-Low</b> выбран сознательно: низкое разрешение текстур экономит память и лучше идёт на слабом железе и Steam Deck. Первый запуск игры будет долгим — Module Manager собирает конфиги десятков модов.</span></div>
-    </div>
-  </section>
-
-  <!-- STEP 3 -->
-  <section class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-language"/></svg></span><span class="sec-num">03 / РУСИФИКАТОР</span><h2>Шаг 3 · Ставим русский</h2><span class="rule"></span></div>
-    <div class="card">
-      <p style="margin-top:0"><b>Автоматически — одной командой.</b> Скрипт сам найдёт установку игры, скачает переводы и включит русский язык:</p>
-      <div class="code"><button class="copy">COPY</button><pre># Linux · macOS · Steam Deck
-curl -fsSL https://kerbal.ru/install-ru.sh | bash</pre></div>
-      <div class="code"><button class="copy">COPY</button><pre># Windows (PowerShell)
-irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
-      <p style="margin-bottom:0"><b>Или вручную</b> — в три шага:</p>
-      <ol class="steps">
-        <li><b>Скачай русификатор</b> — <a href="https://github.com/plagness/kerbal.ru/archive/refs/heads/main.zip">ZIP-архив</a> — и распакуй.</li>
-        <li><b>Скопируй содержимое папки <code class="inline">GameData</code></b> из архива в <code class="inline">GameData</code> своей игры. Файлы лягут в нужные подпапки сами. Где находится игра:
-          <table class="pathtable">
-            <tr><td><svg class="ic"><use href="#i-brand-windows"/></svg>Windows</td><td>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData</td></tr>
-            <tr><td><svg class="ic"><use href="#i-brand-apple"/></svg>macOS</td><td>~/Library/Application Support/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
-            <tr><td><svg class="ic"><use href="#i-brand-debian"/></svg>Linux</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
-            <tr><td><svg class="ic"><use href="#i-brand-steam"/></svg>Deck</td><td>~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData</td></tr>
-          </table>
-        </li>
-        <li><b>Включи русский язык.</b> В игре: настройки → язык → Русский. Или вручную в <code class="inline">settings.cfg</code> (рядом с папкой GameData):
-          <div class="code"><button class="copy">COPY</button><pre>LANGUAGE = ru</pre></div>
-        </li>
-        <li>Запусти игру. Перевод включится для интерфейса модов, карьеры и поддержанных деталей; фактическое покрытие и статус проверки показаны ниже.</li>
-      </ol>
-    </div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num" data-install-eyebrow>01 / УСТАНОВКА</span><h2 data-install-title>Выбери один из двух путей</h2><span class="rule"></span></div>
+    <p class="install-intro" data-install-intro>Полная установка сборки или только перевод поверх готовой RO / RSS / RP-1.</p>
+    <div class="install-paths" data-install-paths aria-live="polite"></div>
+    <div class="install-notes" data-install-notes></div>
   </section>
 
   <!-- MODS -->
   <section id="mission-end" class="reveal" data-mission-end>
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num">04 / <span data-inventory-components>83</span> КОМПОНЕНТА</span><h2>Моды сборки</h2><span class="rule"></span></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num" data-content="mods.eyebrow">02 / КАТАЛОГ</span><h2 data-content="mods.title">Все компоненты сборки</h2><span class="rule"></span></div>
     <div class="card mods-card">
       <div class="mods-intro">
+        <p data-content="mods.intro">Единый каталог всей установленной сборки.</p>
         <div class="coverage-overview">
           <div class="coverage-total" data-composition-label aria-label="46 процентов компонентов сборки имеют русский язык">
             <b data-composition-percent>46%</b>
@@ -473,7 +411,7 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
           </div>
           <div class="coverage-copy">
             <span class="coverage-mode" data-coverage-mode>структурно проверенная проекция</span>
-            <p><strong>Полный состав перепроверен по установленной сборке.</strong> В <code class="inline">GameData</code> <span data-inventory-mod-folders>82</span> мода и стоковая KSP: <span data-inventory-supported>20</span> переводит kerbal.ru, ещё <span data-inventory-upstream>17</span> модов и сама игра уже содержат русский. Остальные <span data-inventory-untranslated>45</span> — кандидаты или служебные компоненты.</p>
+            <p><strong>Полный состав перепроверен по установленной сборке.</strong> В <code class="inline">GameData</code> <span data-inventory-mod-folders>82</span> папки модов и стоковая KSP. Каталог ниже объединяет все <span data-inventory-components>83</span> компонента без отдельного списка «на потом».</p>
             <p><span data-composition-percent>46%</span> — охват состава по наличию русского блока, а не глубина каждой строки. Для наших <span data-inventory-supported>20</span> модов ниже показан аудит <code class="inline">ModuleManager.ConfigCache</code>; проекция явно помечена, пока новый кэш не подтверждён.</p>
           </div>
         </div>
@@ -505,50 +443,67 @@ irm https://kerbal.ru/install-ru.ps1 | iex</pre></div>
         </div>
       </div>
 
-      <div class="catalog-label"><b data-inventory-supported>20</b> модов переводит kerbal.ru · нажми на строку для подробностей</div>
-      <div class="mod-list" data-mod-list aria-live="polite"></div>
-
-      <div class="inventory" data-full-inventory>
-        <div class="inventory-head">
-          <h3>Полный состав · <span data-inventory-components>83</span> компонента</h3>
-          <p>Ниже — остальные <span data-inventory-other>63</span> позиции из реально установленной <code class="inline">GameData</code>. Вместе с <span data-inventory-supported>20</span> модами kerbal.ru выше это полный список текущей сборки.</p>
+      <div class="catalog-tools">
+        <label class="catalog-search"><svg class="ic"><use href="#i-search"/></svg><input type="search" data-mod-search placeholder="Найти мод или компонент" autocomplete="off" aria-label="Найти мод или компонент"></label>
+        <div class="catalog-filters" role="group" aria-label="Фильтр каталога">
+          <button class="catalog-filter is-active" type="button" data-mod-filter="all">Все</button>
+          <button class="catalog-filter" type="button" data-mod-filter="kerbalru">kerbal.ru</button>
+          <button class="catalog-filter" type="button" data-mod-filter="upstream">RU авторов</button>
+          <button class="catalog-filter" type="button" data-mod-filter="untranslated">Без RU</button>
+          <button class="catalog-filter" type="button" data-mod-filter="service">Сервис</button>
         </div>
-
-        <div data-inventory-groups aria-live="polite"></div>
       </div>
+      <div class="catalog-label"><span><b data-catalog-visible>83</b> из <span data-inventory-components>83</span></span><span>нажми на строку для подробностей</span></div>
+      <div class="mod-list" data-mod-list aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCE -->
+  <section class="reveal" id="performance">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-gauge"/></svg></span><span class="sec-num" data-performance-eyebrow>03 / ПРОИЗВОДИТЕЛЬНОСТЬ</span><h2 data-performance-title>Как сборка работает на железе</h2><span class="rule"></span></div>
+    <p class="install-intro" data-performance-intro>Собираем воспроизводимые замеры сообщества.</p>
+    <div class="performance-grid" data-performance-devices></div>
+    <div class="card performance-method">
+      <div>
+        <h3 data-performance-method-title>Как собираем данные</h3>
+        <p data-performance-privacy>Только добровольные результаты через GitHub Issue — без фоновой телеметрии.</p>
+        <div class="performance-actions">
+          <a class="btn btn-ghost" data-project-link="performanceReport" href="https://github.com/plagness/kerbal.ru/issues/new?template=performance.yml"><svg class="ic"><use href="#i-chart-line"/></svg><span data-performance-action-label>Добавить замер</span></a>
+        </div>
+      </div>
+      <ul class="performance-metrics" data-performance-metrics></ul>
     </div>
   </section>
 
   <!-- ROADMAP -->
   <section class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-map-2"/></svg></span><span class="sec-num">05 / ПЛАНЫ</span><h2>Roadmap</h2><span class="rule"></span></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-map-2"/></svg></span><span class="sec-num" data-content="roadmap.eyebrow">04 / ПЛАНЫ</span><h2 data-content="roadmap.title">Что улучшаем</h2><span class="rule"></span></div>
     <div class="card">
-      <ul class="plain">
-        <li><svg class="ic"><use href="#i-circle-check"/></svg><b style="color:var(--green)">Готово:</b> переводы для <span data-inventory-supported>20</span> модов, установщики, сайт и проверяемый аудит через <code class="inline">ModuleManager.ConfigCache</code>.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Приоритет №1:</b> поднять покрытие названий выше текущих <span data-coverage-field="title">54%</span> и подтвердить проекцию новым игровым кэшем.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg><b>Дальше:</b> <span data-inventory-candidates>17</span> реальных кандидатов из полного состава, единый глоссарий терминов, установка через CKAN (netkan), поток контрибуций. Ещё <span data-inventory-service>28</span> служебных компонентов перевода не требуют.</li>
-      </ul>
+      <ul class="plain" data-content-list="roadmap.items" data-list-icon="i-chevron-right"></ul>
       <p style="margin-bottom:0"><a data-project-link="roadmap" href="https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md">Полный roadmap →</a> · <a data-project-link="maintaining" href="https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md">как помочь с переводом →</a></p>
     </div>
   </section>
 
   <!-- LIMITS -->
   <section id="nuances" class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-alert-triangle"/></svg></span><span class="sec-num">06 / НЮАНСЫ</span><h2>Что важно знать</h2><span class="rule"></span></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-alert-triangle"/></svg></span><span class="sec-num" data-content="nuances.eyebrow">05 / НЮАНСЫ</span><h2 data-content="nuances.title">Что важно знать</h2><span class="rule"></span></div>
     <div class="card">
-      <ul class="plain">
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Русский блок есть у <span data-inventory-with-russian>38</span> из <span data-inventory-components>83</span> компонентов сборки: <span data-inventory-supported>20</span> поддерживает kerbal.ru, ещё <span data-inventory-upstream>17</span> модов и стоковая KSP поставляют его сами. Это охват состава, а не гарантия 100% строк.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Контракты, созданные <em>до</em> установки перевода в уже начатом сохранении, останутся на английском: их текст «запекается» в момент создания. Новые контракты будут на русском.</li>
-        <li><svg class="ic"><use href="#i-chevron-right"/></svg>Проверка по совпадению ключей и исходных файлов недостаточна. Золотой тест — текст, который реально загрузился в <code class="inline">ModuleManager.ConfigCache</code>; именно его проценты показаны выше.</li>
-      </ul>
+      <ul class="plain" data-content-list="nuances.items" data-list-icon="i-chevron-right"></ul>
     </div>
+  </section>
+
+  <!-- CONTRIBUTORS -->
+  <section class="reveal" id="team">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-users"/></svg></span><span class="sec-num" data-content="team.eyebrow">06 / OPEN SOURCE</span><h2 data-content="team.title">Команда проекта</h2><span class="rule"></span></div>
+    <p class="install-intro" data-content="team.intro">Люди, чьи подтверждённые изменения уже есть в репозитории.</p>
+    <div class="team-grid" data-contributors></div>
   </section>
 
   <footer id="footer" class="reveal">
     <a class="gh" data-project-link="repository" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru · <span data-project-version>v26.1</span></a><br>
-    Независимый фан-проект, не аффилирован с авторами оригинальных модов.<br>
+    <span data-content="footer.projectNote">Независимый открытый фан-проект.</span><br>
     Исходники сборки: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a><br>
-    <span class="mono" style="opacity:.55;display:inline-block;margin-top:10px">иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS</span>
+    <span class="mono" data-content="footer.credits" style="opacity:.55;display:inline-block;margin-top:10px">Иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS</span>
   </footer>
 
 </div>
@@ -569,10 +524,77 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   function escapeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(char){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]})}
   function safeIcon(value){return/^i-[a-z0-9-]+$/i.test(value||'')?value:'i-packages'}
   function slug(value){return String(value||'mod').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
-  function renderModCatalog(data,active){
-    var list=document.querySelector('[data-mod-list]'),catalog=data.site&&data.site.modCatalog;if(!list||!Array.isArray(catalog))return;
-    list.innerHTML=catalog.map(function(entry){
-      var mod=data.mods[entry.id],id='mod-'+slug(entry.id),badgeClass='mod-percent',badgeText='',badgeAria='',coverageStyle='',live='';
+  function valueAt(object,path){
+    return String(path||'').split('.').reduce(function(value,key){return value&&value[key]},object)
+  }
+  function renderContent(content){
+    document.querySelectorAll('[data-content]').forEach(function(node){
+      var value=valueAt(content,node.getAttribute('data-content'));
+      if(value!=null)node.textContent=value;
+    });
+    document.querySelectorAll('[data-content-list]').forEach(function(node){
+      var items=valueAt(content,node.getAttribute('data-content-list'));
+      if(!Array.isArray(items))return;
+      if(node.matches('ul,ol')){
+        var icon=safeIcon(node.getAttribute('data-list-icon'));
+        node.innerHTML=items.map(function(item){return'<li><svg class="ic"><use href="#'+icon+'"/></svg>'+escapeHtml(item)+'</li>'}).join('');
+      }else{
+        node.innerHTML=items.map(function(item){return'<p>'+escapeHtml(item)+'</p>'}).join('');
+      }
+    });
+  }
+  function renderInstallation(site){
+    var installation=site.installation||{},paths=document.querySelector('[data-install-paths]'),notes=document.querySelector('[data-install-notes]');
+    all('[data-install-eyebrow]',installation.eyebrow||'01 / УСТАНОВКА');
+    all('[data-install-title]',installation.title||'Выбери один из двух путей');
+    all('[data-install-intro]',installation.intro||'');
+    if(paths)paths.innerHTML=(installation.paths||[]).map(function(path){
+      var requirements=(path.requirements||[]).map(function(item){return'<li>'+escapeHtml(item)+'</li>'}).join('');
+      var commands=(path.commands||[]).map(function(command){
+        return'<div class="install-command-label"><svg class="ic"><use href="#'+safeIcon(command.icon)+'"/></svg>'+escapeHtml(command.platform)+'</div><div class="code"><button class="copy" type="button">COPY</button><pre>'+escapeHtml(command.code)+'</pre></div>';
+      }).join('');
+      return'<article class="install-path" data-install-mode="'+escapeHtml(path.id)+'"><div class="install-path-head"><span class="install-path-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><div><h3>'+escapeHtml(path.title)+'</h3><span class="install-path-badge">'+escapeHtml(path.badge)+'</span></div></div><p class="install-path-description">'+escapeHtml(path.description)+'</p><ul class="install-requirements">'+requirements+'</ul>'+commands+'<p class="install-result">'+escapeHtml(path.result)+'</p></article>';
+    }).join('');
+    if(notes)notes.innerHTML=(installation.notes||[]).map(function(note){return'<div class="install-note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span>'+escapeHtml(note)+'</span></div>'}).join('');
+  }
+  function peopleById(site){
+    var result={};(site.contributors||[]).forEach(function(person){result[person.id]=person});return result;
+  }
+  function peopleMarkup(ids,people){
+    var known=(ids||[]).map(function(id){return people[id]}).filter(Boolean);
+    if(!known.length)return'<span class="mod-person-empty">Участник перевода пока не указан в JSON.</span>';
+    return known.map(function(person){
+      var login=escapeHtml(person.github),profile='https://github.com/'+login,roles=(person.roles||[]).join(' · ');
+      return'<a class="person-mini" href="'+profile+'"><img src="https://github.com/'+login+'.png?size=96" alt="" loading="lazy"><span><b>'+escapeHtml(person.name||person.github)+'</b><small>'+escapeHtml(roles)+'</small></span></a>';
+    }).join('');
+  }
+  function screenshotMarkup(screenshots){
+    var screenshot=Array.isArray(screenshots)&&screenshots.length?screenshots[0]:null;
+    if(!screenshot)return'<div class="mod-screenshot"><div class="mod-screenshot-placeholder"><span><svg class="ic"><use href="#i-photo"/></svg>Место для скриншота<br>добавь путь в project.json</span></div></div>';
+    return'<figure class="mod-screenshot"><img src="'+escapeHtml(screenshot.src)+'" alt="'+escapeHtml(screenshot.alt||'Скриншот мода')+'" loading="lazy">'+(screenshot.caption?'<figcaption>'+escapeHtml(screenshot.caption)+'</figcaption>':'')+'</figure>';
+  }
+  function normalizeCatalog(data){
+    var site=data.site||{},defaults=site.modDefaults||{},catalog=(site.modCatalog||[]).map(function(entry){
+      return Object.assign({group:'kerbalru',contributors:defaults.contributors||[],screenshots:defaults.screenshots||[]},entry);
+    });
+    (site.inventoryGroups||[]).forEach(function(group){
+      (group.entries||[]).forEach(function(entry,index){
+        var description=entry.description;
+        if(!description&&group.id==='upstream')description='Компонент уже поставляется с русской локализацией от автора. '+entry.note+'.';
+        if(!description&&group.id==='untranslated')description='В текущей инвентаризации у компонента пока нет отдельного русского блока. '+entry.note+'.';
+        if(!description&&group.id==='service')description='Техническая зависимость сборки: отдельный перевод пользовательского интерфейса не требуется. '+entry.note+'.';
+        catalog.push({
+          id:group.id+'-'+index+'-'+slug(entry.name),name:entry.name,kicker:group.title,teaser:entry.note,
+          icon:entry.icon||group.entryIcon,description:description||entry.note,tags:entry.tags||[group.title],
+          source:entry.source||'',screenshots:entry.screenshots||[],contributors:entry.contributors||[],group:group.id
+        });
+      });
+    });
+    return catalog;
+  }
+  function modMarkup(entry,data,active,people){
+    var mod=data.mods[entry.id],id='mod-'+slug(entry.id),badgeClass='mod-percent',badgeText='',badgeAria='',coverageStyle='',live='';
+    if(entry.group==='kerbalru'){
       if(!mod||mod.audit==='not-applicable'||mod.audit==='indeterminate'){
         var indeterminate=mod&&mod.audit==='indeterminate';badgeClass+=' is-na';badgeText='Н/Д <small>'+(indeterminate?'AUDIT':'UI')+'</small>';badgeAria=indeterminate?'PART-аудит не определяет покрытие конфигураций':'Аудит деталей неприменим';
       }else{
@@ -580,34 +602,77 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
         badgeText=titlePercent+' <small>RU</small>';badgeAria='На русском '+preciseTitle+' названий деталей';coverageStyle=' style="--coverage:'+titlePercent+'"';
         live='<p class="mod-coverage-live"><b>'+escapeHtml(active.label)+'</b> · '+mod.parts+' '+partsWord(mod.parts)+' · названия '+counts.title+'/'+mod.parts+' ('+preciseTitle+') · описания '+counts.description+'/'+mod.parts+' ('+preciseDescription+') · производители '+counts.manufacturer+'/'+mod.parts+' ('+preciseManufacturer+')</p>';
       }
-      var tags=(entry.tags||[]).map(function(tag){return'<span class="mod-tag">'+escapeHtml(tag)+'</span>'}).join('');
-      return'<article class="mod-item" data-mod="'+escapeHtml(entry.id)+'"><button id="'+id+'-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="'+id+'"><span class="mod-icon"><svg class="ic"><use href="#'+safeIcon(entry.icon)+'"/></svg></span><span class="mod-heading"><span class="mod-title-row"><span class="mod-title">'+escapeHtml(entry.name)+'</span><span class="mod-kicker">'+escapeHtml(entry.kicker)+'</span></span><span class="mod-teaser">'+escapeHtml(entry.teaser)+'</span></span><span class="'+badgeClass+'"'+coverageStyle+' aria-label="'+escapeHtml(badgeAria)+'"><span>'+badgeText+'</span></span><svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg></button><div id="'+id+'" class="mod-details" role="region" aria-labelledby="'+id+'-trigger" aria-hidden="true" inert><div class="mod-details-inner"><div class="mod-copy"><p>'+escapeHtml(entry.description)+'</p>'+live+'<div class="mod-foot"><div class="mod-tags">'+tags+'</div><a class="mod-source" href="'+escapeHtml(entry.source)+'"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a></div></div></div></div></article>';
+    }else if(entry.group==='upstream'){
+      badgeClass+=' is-upstream';badgeText='RU <small>АВТОР</small>';badgeAria='Русский язык поставляется автором';
+    }else if(entry.group==='untranslated'){
+      badgeClass+=' is-untranslated';badgeText='— <small>RU</small>';badgeAria='Русский блок пока не добавлен';
+    }else{
+      badgeClass+=' is-na';badgeText='Н/Д <small>СЕРВИС</small>';badgeAria='Перевод не требуется';
+    }
+    var tags=(entry.tags||[]).map(function(tag){return'<span class="mod-tag">'+escapeHtml(tag)+'</span>'}).join('');
+    var source=entry.source?'<a class="mod-source" href="'+escapeHtml(entry.source)+'"><svg class="ic"><use href="#i-brand-github"/></svg>Официальный репозиторий</a>':'';
+    var media='<div class="mod-media">'+screenshotMarkup(entry.screenshots)+'<div class="mod-people"><span class="mod-people-label">Участники перевода</span>'+peopleMarkup(entry.contributors,people)+'</div></div>';
+    return'<article class="mod-item" data-mod="'+escapeHtml(entry.id)+'" data-catalog-group="'+escapeHtml(entry.group)+'"><button id="'+id+'-trigger" class="mod-summary" type="button" aria-expanded="false" aria-controls="'+id+'"><span class="mod-icon"><svg class="ic"><use href="#'+safeIcon(entry.icon)+'"/></svg></span><span class="mod-heading"><span class="mod-title-row"><span class="mod-title">'+escapeHtml(entry.name)+'</span><span class="mod-kicker">'+escapeHtml(entry.kicker)+'</span></span><span class="mod-teaser">'+escapeHtml(entry.teaser)+'</span></span><span class="'+badgeClass+'"'+coverageStyle+' aria-label="'+escapeHtml(badgeAria)+'"><span>'+badgeText+'</span></span><svg class="ic mod-chevron"><use href="#i-chevron-right"/></svg></button><div id="'+id+'" class="mod-details" role="region" aria-labelledby="'+id+'-trigger" aria-hidden="true" inert><div class="mod-details-inner"><div class="mod-copy"><p>'+escapeHtml(entry.description)+'</p>'+live+media+'<div class="mod-foot"><div class="mod-tags">'+tags+'</div>'+source+'</div></div></div></div></article>';
+  }
+  function renderModCatalog(data,active){
+    var list=document.querySelector('[data-mod-list]'),input=document.querySelector('[data-mod-search]'),buttons=document.querySelectorAll('[data-mod-filter]');
+    if(!list)return;
+    var catalog=normalizeCatalog(data),people=peopleById(data.site||{}),filter='all',query='';
+    function draw(){
+      var visible=catalog.filter(function(entry){
+        var matchesGroup=filter==='all'||entry.group===filter;
+        var haystack=(entry.name+' '+entry.kicker+' '+entry.teaser+' '+entry.description).toLocaleLowerCase('ru-RU');
+        return matchesGroup&&haystack.indexOf(query)!==-1;
+      });
+      all('[data-catalog-visible]',visible.length);
+      list.innerHTML=visible.length?visible.map(function(entry){return modMarkup(entry,data,active,people)}).join(''):'<div class="catalog-empty">Ничего не найдено. Сбрось фильтр или измени запрос.</div>';
+    }
+    if(input)input.addEventListener('input',function(){query=input.value.trim().toLocaleLowerCase('ru-RU');draw()});
+    buttons.forEach(function(button){button.addEventListener('click',function(){
+      filter=button.getAttribute('data-mod-filter');buttons.forEach(function(item){item.classList.toggle('is-active',item===button)});draw();
+    })});
+    draw();
+  }
+  function renderPerformance(site){
+    var performance=site.performance||{},target=document.querySelector('[data-performance-devices]');
+    all('[data-performance-eyebrow]',performance.eyebrow||'03 / ПРОИЗВОДИТЕЛЬНОСТЬ');
+    all('[data-performance-title]',performance.title||'Как сборка работает на железе');
+    all('[data-performance-intro]',performance.intro||'');
+    all('[data-performance-privacy]',performance.privacy||'');
+    all('[data-performance-method-title]',performance.methodTitle||'Как собираем данные');
+    all('[data-performance-action-label]',performance.actionLabel||'Добавить замер');
+    var metrics=document.querySelector('[data-performance-metrics]');
+    if(metrics)metrics.innerHTML=(performance.metrics||[]).map(function(item){return'<li>'+escapeHtml(item)+'</li>'}).join('');
+    function measurement(value,suffix){return value==null?'—':escapeHtml(value)+(suffix||'')}
+    if(target)target.innerHTML=(performance.devices||[]).map(function(device){
+      return'<article class="device-card"><div class="device-head"><span class="device-icon"><svg class="ic"><use href="#i-cpu"/></svg></span><span class="device-title"><b>'+escapeHtml(device.name)+'</b><small>'+escapeHtml(device.hardware)+' · '+escapeHtml(device.platform)+'</small></span><span class="device-status">'+escapeHtml(device.statusLabel)+'</span></div><div class="device-metrics"><span class="device-metric"><b>'+measurement(device.averageFps,' FPS')+'</b><small>средний FPS</small></span><span class="device-metric"><b>'+measurement(device.onePercentLowFps,' FPS')+'</b><small>1% low</small></span><span class="device-metric"><b>'+measurement(device.peakRamGb,' ГБ')+'</b><small>пик RAM</small></span><span class="device-metric"><b>'+measurement(device.loadTimeSeconds,' с')+'</b><small>загрузка</small></span></div><p class="device-notes">'+escapeHtml(device.resolution||'Разрешение не указано')+' · '+escapeHtml(device.preset||'Пресет не указан')+' · '+escapeHtml(device.buildVersion||'Версия замера не указана')+'<br>'+escapeHtml(device.notes)+'</p></article>';
     }).join('');
   }
-  function renderInventory(data){
-    var target=document.querySelector('[data-inventory-groups]'),groups=data.site&&data.site.inventoryGroups;if(!target||!Array.isArray(groups))return;
-    target.innerHTML=groups.map(function(group){
-      var itemClass=group.kind==='candidate'?' is-candidate':group.kind==='service'?' is-service':'';
-      var entries=(group.entries||[]).map(function(entry){return'<div class="inventory-entry'+itemClass+'"><svg class="ic"><use href="#'+safeIcon(group.entryIcon)+'"/></svg><span><b>'+escapeHtml(entry.name)+'</b><small>'+escapeHtml(entry.note)+'</small></span></div>'}).join('');
-      return'<details class="inventory-group"><summary><span class="inventory-group-icon"><svg class="ic"><use href="#'+safeIcon(group.icon)+'"/></svg></span><span class="inventory-group-title">'+escapeHtml(group.title)+' <small>'+escapeHtml(group.subtitle)+'</small></span><span class="inventory-count">'+(group.entries||[]).length+'</span><svg class="ic inventory-chevron"><use href="#i-chevron-right"/></svg></summary><div class="inventory-body"><div class="inventory-grid">'+entries+'</div></div></details>';
+  function renderContributors(site){
+    var target=document.querySelector('[data-contributors]');if(!target)return;
+    target.innerHTML=(site.contributors||[]).map(function(person){
+      var login=escapeHtml(person.github),profile='https://github.com/'+login;
+      return'<a class="team-card" href="'+profile+'"><img src="https://github.com/'+login+'.png?size=160" alt="" loading="lazy"><span class="team-card-copy"><b>'+escapeHtml(person.name||person.github)+'</b><span>'+escapeHtml(person.bio||'Участник kerbal.ru')+'</span><small>@'+login+' · '+escapeHtml((person.roles||[]).join(' · '))+'</small></span></a>';
     }).join('');
   }
   function applyProjectData(data){
     var inventory=data.inventory,coverage=data.coverage,active=coverage[coverage.active],release=data.release,ui=data.uiTranslation||{},links=data.links||{};
     var composition=percent(inventory.withRussian,inventory.components,false),untranslated=inventory.translationCandidates+inventory.serviceComponents;
+    renderContent((data.site&&data.site.content)||{});
+    renderInstallation(data.site||{});
     all('[data-project-version]',release.version);all('[data-project-updated]',displayDate(data.updatedAt));all('[data-release-channel]',release.channel);all('[data-game-version]',data.game.version);
     document.querySelectorAll('[data-project-updated]').forEach(function(node){node.setAttribute('datetime',data.updatedAt)});
     document.querySelectorAll('[data-release-link]').forEach(function(link){link.href=release.url});
     document.querySelectorAll('[data-release-download]').forEach(function(link){link.href=links.repository+'/archive/refs/tags/'+release.version+'.zip'});
     document.querySelectorAll('[data-project-link]').forEach(function(link){var key=link.getAttribute('data-project-link');if(links[key])link.href=links[key]});
-    all('[data-inventory-components]',inventory.components);all('[data-inventory-with-russian]',inventory.withRussian);all('[data-inventory-supported]',inventory.kerbalRuMods);all('[data-inventory-upstream]',inventory.upstreamRussianMods);all('[data-inventory-upstream-total]',inventory.upstreamRussianMods+inventory.stockRussian);all('[data-inventory-candidates]',inventory.translationCandidates);all('[data-inventory-service]',inventory.serviceComponents);all('[data-inventory-untranslated]',untranslated);all('[data-inventory-mod-folders]',inventory.components-inventory.stockRussian);all('[data-inventory-other]',inventory.components-inventory.kerbalRuMods);
+    all('[data-inventory-components]',inventory.components);all('[data-inventory-with-russian]',inventory.withRussian);all('[data-inventory-supported]',inventory.kerbalRuMods);all('[data-inventory-upstream]',inventory.upstreamRussianMods);all('[data-inventory-upstream-total]',inventory.upstreamRussianMods+inventory.stockRussian);all('[data-inventory-service]',inventory.serviceComponents);all('[data-inventory-untranslated]',untranslated);all('[data-inventory-mod-folders]',inventory.components-inventory.stockRussian);all('[data-inventory-other]',inventory.components-inventory.kerbalRuMods);
     all('[data-composition-percent]',composition);all('[data-coverage-parts]',active.parts);all('[data-coverage-mode]',active.label);
     document.querySelectorAll('[data-composition-label]').forEach(function(node){node.setAttribute('aria-label',composition+' компонентов сборки имеют русский язык')});
     ['title','description','manufacturer'].forEach(function(field){all('[data-coverage-field="'+field+'"]',percent(active.fields[field].translated,active.parts,false))});
     var summary=document.querySelector('[data-coverage-summary]');if(summary)summary.setAttribute('aria-label',active.label+': '+active.parts+' деталей в '+inventory.kerbalRuMods+' модах kerbal.ru');
     all('[data-ui-status]',ui.statusLabel);all('[data-ui-label]',ui.label);all('[data-ui-summary]',ui.summary);all('[data-ui-mods]',ui.modsCovered);all('[data-ui-lines]',spaced(ui.linesTranslated));all('[data-ui-keys]',spaced(ui.uniqueKeys));all('[data-ui-fixes]',ui.confirmedBugsFixedBeforeRelease);
     var uiBlock=document.querySelector('[data-ui-translation]');if(uiBlock)uiBlock.hidden=!ui.modsCovered;
-    renderModCatalog(data,active);renderInventory(data);
+    renderModCatalog(data,active);renderPerformance(data.site||{});renderContributors(data.site||{});
     window.__kerbalProjectData=data;
     document.documentElement.dataset.projectData='loaded';
     document.dispatchEvent(new CustomEvent('kerbalprojectdata',{detail:data}));
@@ -615,7 +680,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   fetch('data/project.json',{cache:'no-cache'}).then(function(response){if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}).then(applyProjectData).catch(function(error){
     document.documentElement.dataset.projectData='fallback';
     var message='<div class="data-load-error" role="status"><b>Данные проекта временно недоступны</b>Обнови страницу: каталог и проценты загружаются из <code class="inline">data/project.json</code>.</div>';
-    var modTarget=document.querySelector('[data-mod-list]'),inventoryTarget=document.querySelector('[data-inventory-groups]');if(modTarget)modTarget.innerHTML=message;if(inventoryTarget)inventoryTarget.innerHTML=message;
+    ['[data-install-paths]','[data-mod-list]','[data-performance-devices]','[data-contributors]'].forEach(function(selector){var target=document.querySelector(selector);if(target)target.innerHTML=message});
     console.warn('project data fallback:',error.message)
   });
 })();
@@ -639,11 +704,11 @@ if(modList)modList.addEventListener('click',function(event){
   });
   if(willOpen){item.classList.add('is-open');button.setAttribute('aria-expanded','true');panel.setAttribute('aria-hidden','false');panel.removeAttribute('inert')}
 });
-document.querySelectorAll('.code .copy').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var t=btn.parentElement.querySelector('pre').innerText;
-    navigator.clipboard.writeText(t).then(function(){var o=btn.textContent;btn.textContent='OK';btn.classList.add('done');setTimeout(function(){btn.textContent=o;btn.classList.remove('done')},1300);});
-  });
+document.addEventListener('click',function(event){
+  var btn=event.target.closest('.code .copy');if(!btn)return;
+  var pre=btn.parentElement.querySelector('pre'),text=pre?pre.innerText:'';
+  function done(){var original=btn.textContent;btn.textContent='OK';btn.classList.add('done');setTimeout(function(){btn.textContent=original;btn.classList.remove('done')},1300)}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done);
 });
 (function(){
   var els=document.querySelectorAll('.reveal');
@@ -973,7 +1038,7 @@ document.querySelectorAll('.code .copy').forEach(function(btn){
   window.advanceTime=function(ms){var remaining=clamp(Number(ms)||0,0,1200);while(remaining>0){var step=Math.min(1000/60,remaining);simulationTime+=step;updateScene(simulationTime,step);remaining-=step}return Promise.resolve()};
   function roundedVector(vector){return{x:+vector.x.toFixed(3),y:+vector.y.toFixed(3),z:+vector.z.toFixed(3)}}
   function preciseVector(vector){return{x:+vector.x.toFixed(6),y:+vector.y.toFixed(6),z:+vector.z.toFixed(6)}}
-  window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0,projectData=window.__kerbalProjectData;asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',project:{dataState:document.documentElement.dataset.projectData||'loading',version:projectData&&projectData.release.version,catalogMods:projectData&&projectData.site.modCatalog.length,uiTranslationMods:projectData&&projectData.uiTranslation.modsCovered},mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
+  window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0,projectData=window.__kerbalProjectData;asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',project:{dataState:document.documentElement.dataset.projectData||'loading',version:projectData&&projectData.release.version,catalogComponents:projectData&&projectData.inventory.components,installationPaths:projectData&&projectData.site.installation.paths.length,performanceDevices:projectData&&projectData.site.performance.devices.length,contributors:projectData&&projectData.site.contributors.length,uiTranslationMods:projectData&&projectData.uiTranslation.modsCovered},mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
   if(location.hostname==='127.0.0.1'||location.hostname==='localhost')window.__kerbalSpaceQA={asteroidDepths:function(){return asteroids.map(function(asteroid,index){return{index:index,x:asteroid.position.x,y:asteroid.position.y,z:asteroid.position.z,speed:asteroid.userData.velocity.length(),orbitRadius:asteroid.position.distanceTo(asteroidOrbitFocus)}})},impactStage:function(index){index=index||0;detachRocketStage(index);var stage=nasaStages[index],asteroid=asteroids[0];if(!stage||!stage.userData.detached||!asteroid)return false;stage.userData.age=240;stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);asteroid.position.copy(stageWorldCenter).add(new THREE.Vector3(stage.userData.collisionRadius+asteroid.userData.radius-.012,0,0));asteroid.userData.velocity.copy(stage.userData.velocity).add(new THREE.Vector3(-.00028,0,0));scene.updateMatrixWorld(true);return true}};
   requestAnimationFrame(loop);
 
