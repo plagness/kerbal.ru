@@ -230,6 +230,8 @@ def load_and_validate() -> dict:
             errors.append(f"site.modCatalog.{entry.get('id', '?')}.tags должен быть непустым списком")
         if not str(entry.get("source", "")).startswith("https://"):
             errors.append(f"site.modCatalog.{entry.get('id', '?')}.source должен быть HTTPS-ссылкой")
+        if "featured" in entry and not isinstance(entry["featured"], bool):
+            errors.append(f"site.modCatalog.{entry.get('id', '?')}.featured должен быть bool")
         unknown_people = sorted(
             set(entry.get("contributors", [])) - known_contributors
         )
@@ -268,6 +270,10 @@ def load_and_validate() -> dict:
             if not isinstance(entry, dict) or not entry.get("name") or not entry.get("note"):
                 errors.append(f"site.inventoryGroups.{group_id} содержит неполную запись")
                 continue
+            if "featured" in entry and not isinstance(entry["featured"], bool):
+                errors.append(
+                    f"site.inventoryGroups.{group_id}.{entry.get('name')}.featured должен быть bool"
+                )
             unknown_people = sorted(
                 set(entry.get("contributors", [])) - known_contributors
             )
@@ -279,6 +285,14 @@ def load_and_validate() -> dict:
             inventory_names.append(entry["name"])
     if len(inventory_names) != len(set(inventory_names)):
         errors.append("site.inventoryGroups содержит повторяющиеся компоненты")
+    featured_count = sum(bool(entry.get("featured")) for entry in catalog) + sum(
+        bool(entry.get("featured"))
+        for group in groups
+        for entry in group.get("entries", [])
+        if isinstance(entry, dict)
+    )
+    if not featured_count:
+        errors.append("в JSON не отмечены основные компоненты featured")
 
     ui = data.get("uiTranslation", {})
     for field in (
@@ -294,6 +308,38 @@ def load_and_validate() -> dict:
             errors.append(f"uiTranslation.{field} обязателен")
     if ui.get("modsCovered", 0) < len(ui.get("modsNotInstalledInThisBuild", [])):
         errors.append("uiTranslation.modsCovered меньше числа отсутствующих модов")
+    ui_inventory_additions = ui.get("inventoryAdditions", [])
+    if not isinstance(ui_inventory_additions, list) or not ui_inventory_additions:
+        errors.append("uiTranslation.inventoryAdditions должен быть непустым списком")
+    else:
+        if len(ui_inventory_additions) != len(set(ui_inventory_additions)):
+            errors.append("uiTranslation.inventoryAdditions содержит повторы")
+        known_inventory_names = set(inventory_names)
+        unknown_ui_inventory = sorted(set(ui_inventory_additions) - known_inventory_names)
+        if unknown_ui_inventory:
+            errors.append(
+                "uiTranslation.inventoryAdditions содержит неизвестные компоненты: "
+                + ", ".join(unknown_ui_inventory)
+            )
+        already_russian_names = {
+            entry.get("name") for entry in catalog if isinstance(entry, dict)
+        } | {
+            entry.get("name")
+            for entry in groups_by_id.get("upstream", {}).get("entries", [])
+            if isinstance(entry, dict)
+        }
+        duplicated_ui_inventory = sorted(
+            set(ui_inventory_additions) & already_russian_names
+        )
+        if duplicated_ui_inventory:
+            errors.append(
+                "uiTranslation.inventoryAdditions повторно считает уже русские компоненты: "
+                + ", ".join(duplicated_ui_inventory)
+            )
+        if inventory.get("withRussian", 0) + len(ui_inventory_additions) > inventory.get(
+            "components", 0
+        ):
+            errors.append("русский охват с UI-переводом превышает размер инвентаря")
 
     performance = site.get("performance", {})
     for field in (

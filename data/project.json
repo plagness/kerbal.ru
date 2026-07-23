@@ -99,6 +99,24 @@
     "modsCovered": 29,
     "linesTranslated": 2517,
     "uniqueKeys": 2410,
+    "inventoryAdditions": [
+      "Waterfall",
+      "AtmosphereAutopilot",
+      "Scatterer",
+      "RealAntennas",
+      "Skopos",
+      "RCSBuildAid",
+      "TexturesUnlimited",
+      "TestFlight",
+      "Firespitter",
+      "DistantObject",
+      "PlanetShine",
+      "TextureReplacer",
+      "EngineGroupController",
+      "EnvironmentalVisualEnhancements",
+      "FShangarExtender",
+      "KSCSwitcher"
+    ],
     "perMod": {
       "KerbalEngineer": 451,
       "MechJeb2": 267,
@@ -483,6 +501,7 @@
         "teaser": "Реалистичная работа реактивных двигателей",
         "icon": "i-propeller",
         "description": "Advanced Jet Engine заменяет упрощённую модель турбореактивных двигателей расчётами на базе NASA EngineSim и JSBSim. Тяга, расход и устойчивость теперь зависят от высоты, скорости, числа Маха и работы воздухозаборников — самолёты приходится проектировать как настоящие.",
+        "featured": true,
         "tags": ["FULL", "Физика", "Авиация"],
         "source": "https://github.com/KSP-RO/AJE"
       },
@@ -513,6 +532,7 @@
         "teaser": "Исторические капсулы в одном наборе",
         "icon": "i-capsule",
         "description": "Собирает лучшие модели реальных пилотируемых кораблей и приводит их к стандартам Realism Overhaul. Вместо множества тяжёлых паков игрок получает единый каталог Mercury, Gemini, Apollo и других капсул с корректными размерами и конфигурациями.",
+        "featured": true,
         "tags": ["FULL", "Детали", "История"],
         "source": "https://github.com/KSP-RO/ROCapsules"
       },
@@ -573,6 +593,7 @@
         "teaser": "Реальные размеры, массы, топливо и характеристики",
         "icon": "i-atom",
         "description": "Центральный слой конфигураций, который переводит детали KSP и совместимых модов на реальные параметры. Его патчи меняют детали других паков, поэтому аудит собственных PART-узлов не даёт честного процента — здесь показатель отмечен как «Н/Д».",
+        "featured": true,
         "tags": ["FULL", "Физика", "Конфигурации"],
         "source": "https://github.com/KSP-RO/RealismOverhaul"
       },
@@ -613,6 +634,7 @@
         "teaser": "Модульные баки, переходники и межступени",
         "icon": "i-cylinder",
         "description": "Использует переработанную систему SSTU для создания гибких баков Realism Overhaul. Диаметр, длина, форма, текстура и оснащение настраиваются в редакторе.",
+        "featured": true,
         "tags": ["PATCH", "Баки", "Модульность"],
         "source": "https://github.com/KSP-RO/ROTanks"
       },
@@ -623,6 +645,7 @@
         "teaser": "Единый каталог исторических ракетных двигателей",
         "icon": "i-engine",
         "description": "Собирает наиболее точные модели реальных ракетных двигателей и связывает их с конфигурациями Realism Overhaul. Часть английских названий — намеренно оставленные реальные обозначения двигателей.",
+        "featured": true,
         "tags": ["PATCH", "Детали", "История"],
         "source": "https://github.com/KSP-RO/ROEngines"
       },
@@ -643,6 +666,7 @@
         "teaser": "Обтекатели, автоматически подогнанные под груз",
         "icon": "i-cone",
         "description": "Строит створки обтекателя вокруг любого полезного груза и позволяет менять диаметр, длину, профиль, текстуру и логику отделения.",
+        "featured": true,
         "tags": ["PATCH", "Обтекатели"],
         "source": "https://github.com/KSP-RO/ProceduralFairings"
       },
@@ -653,6 +677,7 @@
         "teaser": "Детали произвольной формы и размера",
         "icon": "i-arrows-maximize",
         "description": "Позволяет создавать цилиндры, усечённые конусы и bezier-формы с нужными размерами и текстурами. Перевод этого небольшого набора требует отдельной проверки после применения патчей RealFuels.",
+        "featured": true,
         "tags": ["PATCH", "RealFuels", "Процедурные детали"],
         "source": "https://github.com/KSP-RO/ProceduralParts"
       },
@@ -663,6 +688,7 @@
         "teaser": "Полная реалистичная система парашютов",
         "icon": "i-parachute",
         "description": "Заменяет штатный модуль парашютов системой с реалистичным раскрытием, расчётом материалов и расширенной настройкой в редакторе.",
+        "featured": true,
         "tags": ["PATCH", "Парашюты", "Аэродинамика"],
         "source": "https://github.com/ChrisViral/RealChute"
       },
@@ -690,19 +716,19 @@
           {"name": "B9 Procedural Wings", "note": "RU от автора · крылья"},
           {"name": "CommunityResourcePack", "note": "RU от автора · ресурсы"},
           {"name": "ConformalDecals", "note": "RU от автора · декали"},
-          {"name": "Ferram Aerospace Research", "note": "RU от автора · FAR"},
+          {"name": "Ferram Aerospace Research", "note": "RU от автора · FAR", "featured": true},
           {"name": "KSPCommunityFixes", "note": "RU от автора · исправления"},
           {"name": "PatchManager", "note": "RU от автора · управление патчами"},
-          {"name": "Kerbalism", "note": "RU от автора · жизнеобеспечение"},
+          {"name": "Kerbalism", "note": "RU от автора · жизнеобеспечение", "featured": true},
           {"name": "Kerbalism-Config", "note": "RU от автора · конфигурации"},
           {"name": "Kopernicus", "note": "RU от автора · планетные системы"},
-          {"name": "MechJeb2", "note": "RU от автора · автопилот"},
-          {"name": "RP-1", "note": "RU от автора · карьера"},
+          {"name": "MechJeb2", "note": "RU от автора · автопилот", "featured": true},
+          {"name": "RP-1", "note": "RU от автора · карьера", "featured": true},
           {"name": "RSSDateTimeFormatter", "note": "RU от автора · даты RSS"},
           {"name": "ReStock", "note": "RU от автора · модели деталей"},
           {"name": "ReStock+", "note": "RU от автора · дополнительные детали"},
-          {"name": "RealFuels", "note": "RU от автора · топливо"},
-          {"name": "Real Solar System", "note": "RU от автора · Солнечная система"},
+          {"name": "RealFuels", "note": "RU от автора · топливо", "featured": true},
+          {"name": "Real Solar System", "note": "RU от автора · Солнечная система", "featured": true},
           {"name": "Kerbal Space Program", "note": "Стоковая KSP · папка Squad"}
         ]
       },
@@ -714,8 +740,8 @@
         "entryIcon": "i-chevron-right",
         "kind": "untranslated",
         "entries": [
-          {"name": "RealAntennas", "note": "128 деталей и UI связи"},
-          {"name": "TestFlight", "note": "Надёжность и сообщения об отказах"},
+          {"name": "RealAntennas", "note": "128 деталей и UI связи", "featured": true},
+          {"name": "TestFlight", "note": "Надёжность и сообщения об отказах", "featured": true},
           {"name": "Skopos", "note": "Наземные станции связи RP-1"},
           {"name": "DistantObject", "note": "Настройки далёких объектов"},
           {"name": "CommunityCategoryKit", "note": "Категории деталей в VAB"},

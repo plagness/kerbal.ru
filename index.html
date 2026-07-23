@@ -153,13 +153,15 @@
   .install-intro{max-width:690px;margin:8px 0 0;color:var(--txt-dim)}
   .install-paths{margin-top:20px}
   .install-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  .install-choice{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr) 22px;gap:14px;align-items:center;width:100%;min-height:92px;padding:17px 18px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(166,232,110,.035),rgba(255,255,255,.008));color:inherit;text-align:left;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
-  .install-choice:hover{transform:translateY(-2px);border-color:var(--line-cyan);background:rgba(166,232,110,.055)}
+  .install-choice{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center;width:100%;min-height:92px;padding:17px 18px;border:1px solid rgba(166,232,110,.28);border-radius:15px;background:linear-gradient(145deg,rgba(166,232,110,.085),rgba(255,255,255,.014));box-shadow:0 16px 42px -34px var(--green-glow),inset 0 1px rgba(255,255,255,.025);color:inherit;text-align:left;cursor:pointer;transition:border-color .2s,background .2s,transform .2s,box-shadow .2s}
+  .install-choice:hover{transform:translateY(-2px);border-color:rgba(166,232,110,.68);background:rgba(166,232,110,.11);box-shadow:0 20px 48px -28px var(--green-glow)}
   .install-choice:focus-visible{outline:2px solid var(--green);outline-offset:3px}
   .install-choice.is-selected{border-color:rgba(166,232,110,.52);background:rgba(166,232,110,.09);box-shadow:0 18px 48px -34px var(--green-glow)}
   .install-choice-icon{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--line-cyan);border-radius:13px;background:rgba(166,232,110,.07);color:var(--green);font-size:1.35rem}
   .install-choice-copy b{display:block;color:#fff;font-size:1rem}.install-choice-copy small{display:block;margin-top:3px;color:var(--orange);font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.7px;text-transform:uppercase}
-  .install-choice .install-choice-arrow{color:var(--txt-faint);transition:transform .24s,color .2s}.install-choice.is-selected .install-choice-arrow{transform:rotate(90deg);color:var(--green)}
+  .install-choice-action{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid rgba(166,232,110,.5);border-radius:8px;background:var(--green);color:#0a140b;font-family:'JetBrains Mono',monospace;font-size:.53rem;font-weight:750;letter-spacing:.55px;text-transform:uppercase;transition:filter .2s,transform .2s}
+  .install-choice-action .ic{font-size:.9rem;transition:transform .2s}.install-choice:hover .install-choice-action{filter:brightness(1.08)}.install-choice:hover .install-choice-action .ic{transform:translateX(2px)}
+  .install-choice.is-selected .install-choice-action{background:rgba(166,232,110,.08);color:var(--green)}
   .install-result-panel{margin-top:14px}
   .install-empty{display:flex;align-items:center;justify-content:center;gap:10px;min-height:78px;padding:18px;border:1px dashed var(--line);border-radius:14px;color:var(--txt-dim);font-size:.82rem;text-align:center}
   .install-empty .ic{color:var(--green);font-size:1.2rem}
@@ -222,9 +224,9 @@
   .mod-item:hover .mod-icon,.mod-item.is-open .mod-icon{border-color:var(--line-cyan);color:#d3ffac;transform:translateY(-1px)}
   .mod-heading{min-width:0}
   .mod-title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .mod-title{font-size:.98rem;font-weight:750;color:#fff;letter-spacing:.05px}
-  .mod-kicker{font-family:'JetBrains Mono',monospace;font-size:.57rem;line-height:1.2;letter-spacing:.75px;color:var(--orange);text-transform:uppercase}
-  .mod-teaser{display:block;margin-top:2px;color:var(--txt-dim);font-size:.83rem;line-height:1.5}
+  .mod-title{font-size:1.07rem;font-weight:750;color:#fff;letter-spacing:.05px}
+  .mod-kicker{font-family:'JetBrains Mono',monospace;font-size:.61rem;line-height:1.2;letter-spacing:.75px;color:var(--orange);text-transform:uppercase}
+  .mod-teaser{display:block;margin-top:2px;color:var(--txt-dim);font-size:.9rem;line-height:1.5}
   .mod-percent{--coverage:100%;position:relative;min-width:62px;overflow:hidden;border:1px solid rgba(166,223,94,.32);border-radius:7px;padding:6px 8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.2px;text-align:center;background:rgba(166,223,94,.035)}
   .mod-percent::before{content:'';position:absolute;inset:0 auto 0 0;width:var(--coverage);background:rgba(166,223,94,.09)}
   .mod-percent span{position:relative}
@@ -255,6 +257,7 @@
   .catalog-label{display:flex;justify-content:space-between;gap:12px;align-items:center}
   .catalog-empty{padding:28px;text-align:center;color:var(--txt-dim);font-size:.84rem}
   .mod-percent.is-upstream{color:#b9e8ff;border-color:rgba(155,218,255,.25);background:rgba(155,218,255,.04)}
+  .mod-percent.is-ui{color:#9de1ff;border-color:rgba(96,201,255,.3);background:rgba(96,201,255,.055)}
   .mod-percent.is-untranslated{color:var(--orange);border-color:rgba(255,157,47,.28);background:rgba(255,157,47,.035)}
   .mod-media{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.7fr);gap:12px;margin-top:17px}
   .mod-screenshot{position:relative;min-height:150px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(145deg,rgba(166,232,110,.035),rgba(255,255,255,.008))}
@@ -311,6 +314,7 @@
     .hero::before{display:none}
     .lead{margin-left:auto;margin-right:auto}
     .cta{justify-content:center}
+    .install-choices{grid-template-columns:1fr}
   }
   @media(max-width:560px){
     .card{padding:22px 18px}.mods-card{padding:0}.mods-intro{padding:22px 18px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}
@@ -318,7 +322,7 @@
     .project-meta{justify-content:flex-start}
     .mod-summary{grid-template-columns:42px minmax(0,1fr) auto 17px;gap:10px;padding:15px 14px}
     .mod-icon{width:42px;height:42px;border-radius:12px;font-size:1.25rem}
-    .mod-title{font-size:.9rem}.mod-kicker{font-size:.52rem}.mod-teaser{font-size:.76rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
+    .mod-title{font-size:.96rem}.mod-kicker{font-size:.55rem}.mod-teaser{font-size:.82rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
     .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}.mod-media{grid-template-columns:1fr}.device-head{grid-template-columns:43px minmax(0,1fr)}.device-status{grid-column:2}.device-metrics{grid-template-columns:1fr 1fr}
   }
 </style>
@@ -422,7 +426,7 @@
           <div class="coverage-copy">
             <span class="coverage-mode" data-coverage-mode>структурно проверенная проекция</span>
             <p><strong>Полный состав перепроверен по установленной сборке.</strong> В <code class="inline">GameData</code> <span data-inventory-mod-folders>82</span> папки модов и стоковая KSP. Каталог ниже объединяет все <span data-inventory-components>83</span> компонента без отдельного списка «на потом».</p>
-            <p><span data-composition-percent>46%</span> — охват состава по наличию русского блока, а не глубина каждой строки. Для наших <span data-inventory-supported>20</span> модов ниже показан аудит <code class="inline">ModuleManager.ConfigCache</code>; проекция явно помечена, пока новый кэш не подтверждён.</p>
+            <p><span data-composition-percent>46%</span> — доля компонентов, где уже есть русский блок или перевод интерфейса kerbal.ru, а не глубина каждой строки. Для наших <span data-inventory-supported>20</span> модов ниже показан аудит <code class="inline">ModuleManager.ConfigCache</code>; проекция явно помечена, пока новый кэш не подтверждён.</p>
           </div>
         </div>
         <div class="coverage-summary" data-coverage-summary aria-label="Покрытие перевода среди 1023 деталей в 20 модах kerbal.ru">
@@ -456,11 +460,12 @@
       <div class="catalog-tools">
         <label class="catalog-search"><svg class="ic"><use href="#i-search"/></svg><input type="search" data-mod-search placeholder="Найти мод или компонент" autocomplete="off" aria-label="Найти мод или компонент"></label>
         <div class="catalog-filters" role="group" aria-label="Фильтр каталога">
-          <button class="catalog-filter is-active" type="button" data-mod-filter="all">Все</button>
-          <button class="catalog-filter" type="button" data-mod-filter="kerbalru">kerbal.ru</button>
-          <button class="catalog-filter" type="button" data-mod-filter="upstream">RU авторов</button>
-          <button class="catalog-filter" type="button" data-mod-filter="untranslated">Без RU</button>
-          <button class="catalog-filter" type="button" data-mod-filter="service">Сервис</button>
+          <button class="catalog-filter is-active" type="button" data-mod-filter="featured" aria-pressed="true">Основные</button>
+          <button class="catalog-filter" type="button" data-mod-filter="all" aria-pressed="false">Все</button>
+          <button class="catalog-filter" type="button" data-mod-filter="kerbalru" aria-pressed="false">kerbal.ru</button>
+          <button class="catalog-filter" type="button" data-mod-filter="upstream" aria-pressed="false">RU авторов</button>
+          <button class="catalog-filter" type="button" data-mod-filter="untranslated" aria-pressed="false">Без RU</button>
+          <button class="catalog-filter" type="button" data-mod-filter="service" aria-pressed="false">Сервис</button>
         </div>
       </div>
       <div class="catalog-label"><span><b data-catalog-visible>83</b> из <span data-inventory-components>83</span></span><span>нажми на строку для подробностей</span></div>
@@ -561,13 +566,13 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     }
     if(paths){
       var choices=(installation.paths||[]).map(function(path){
-        return'<button class="install-choice" type="button" role="tab" aria-selected="false" aria-controls="install-selected-path" data-install-choice="'+escapeHtml(path.id)+'"><span class="install-choice-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><span class="install-choice-copy"><b>'+escapeHtml(path.title)+'</b><small>'+escapeHtml(path.badge)+'</small></span><svg class="ic install-choice-arrow"><use href="#i-chevron-right"/></svg></button>';
+        return'<button class="install-choice" type="button" role="tab" aria-selected="false" aria-controls="install-selected-path" data-install-choice="'+escapeHtml(path.id)+'"><span class="install-choice-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><span class="install-choice-copy"><b>'+escapeHtml(path.title)+'</b><small>'+escapeHtml(path.badge)+'</small></span><span class="install-choice-action"><span class="install-choice-action-label">Выбрать</span><svg class="ic"><use href="#i-chevron-right"/></svg></span></button>';
       }).join('');
       paths.innerHTML='<div class="install-choices" role="tablist" aria-label="Вариант установки">'+choices+'</div><div id="install-selected-path" class="install-result-panel" role="tabpanel" aria-live="polite"><div class="install-empty"><svg class="ic"><use href="#i-chevron-right"/></svg>Выбери вариант — здесь появится готовая инструкция</div></div>';
       paths.addEventListener('click',function(event){
         var button=event.target.closest('[data-install-choice]');if(!button||!paths.contains(button))return;
         var selectedId=button.getAttribute('data-install-choice'),selected=(installation.paths||[]).find(function(path){return path.id===selectedId}),result=paths.querySelector('.install-result-panel');
-        paths.querySelectorAll('[data-install-choice]').forEach(function(choice){var active=choice===button;choice.classList.toggle('is-selected',active);choice.setAttribute('aria-selected',active?'true':'false')});
+        paths.querySelectorAll('[data-install-choice]').forEach(function(choice){var active=choice===button;choice.classList.toggle('is-selected',active);choice.setAttribute('aria-selected',active?'true':'false');var label=choice.querySelector('.install-choice-action-label');if(label)label.textContent=active?'Открыто':'Выбрать'});
         if(selected&&result)result.innerHTML=pathMarkup(selected);
       });
     }
@@ -590,8 +595,8 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     return'<figure class="mod-screenshot"><img src="'+escapeHtml(screenshot.src)+'" alt="'+escapeHtml(screenshot.alt||'Скриншот мода')+'" loading="lazy">'+(screenshot.caption?'<figcaption>'+escapeHtml(screenshot.caption)+'</figcaption>':'')+'</figure>';
   }
   function normalizeCatalog(data){
-    var site=data.site||{},defaults=site.modDefaults||{},catalog=(site.modCatalog||[]).map(function(entry){
-      return Object.assign({group:'kerbalru',contributors:defaults.contributors||[],screenshots:defaults.screenshots||[]},entry);
+    var site=data.site||{},defaults=site.modDefaults||{},uiAdditions=(data.uiTranslation&&data.uiTranslation.inventoryAdditions)||[],catalog=(site.modCatalog||[]).map(function(entry){
+      return Object.assign({group:'kerbalru',contributors:defaults.contributors||[],screenshots:defaults.screenshots||[],uiTranslated:uiAdditions.indexOf(entry.name)!==-1},entry);
     });
     (site.inventoryGroups||[]).forEach(function(group){
       (group.entries||[]).forEach(function(entry,index){
@@ -602,7 +607,8 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
         catalog.push({
           id:group.id+'-'+index+'-'+slug(entry.name),name:entry.name,kicker:group.title,teaser:entry.note,
           icon:entry.icon||group.entryIcon,description:description||entry.note,tags:entry.tags||[group.title],
-          source:entry.source||'',screenshots:entry.screenshots||[],contributors:entry.contributors||[],group:group.id
+          source:entry.source||'',screenshots:entry.screenshots||[],contributors:entry.contributors||[],group:group.id,
+          featured:!!entry.featured,uiTranslated:uiAdditions.indexOf(entry.name)!==-1
         });
       });
     });
@@ -610,7 +616,9 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   }
   function modMarkup(entry,data,active,people){
     var mod=data.mods[entry.id],id='mod-'+slug(entry.id),badgeClass='mod-percent',badgeText='',badgeAria='',coverageStyle='',live='';
-    if(entry.group==='kerbalru'){
+    if(entry.uiTranslated&&entry.group!=='kerbalru'){
+      badgeClass+=' is-ui';badgeText='UI <small>RU</small>';badgeAria='Интерфейс переведён kerbal.ru';
+    }else if(entry.group==='kerbalru'){
       if(!mod||mod.audit==='not-applicable'||mod.audit==='indeterminate'){
         var indeterminate=mod&&mod.audit==='indeterminate';badgeClass+=' is-na';badgeText='Н/Д <small>'+(indeterminate?'AUDIT':'UI')+'</small>';badgeAria=indeterminate?'PART-аудит не определяет покрытие конфигураций':'Аудит деталей неприменим';
       }else{
@@ -633,10 +641,14 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   function renderModCatalog(data,active){
     var list=document.querySelector('[data-mod-list]'),input=document.querySelector('[data-mod-search]'),buttons=document.querySelectorAll('[data-mod-filter]');
     if(!list)return;
-    var catalog=normalizeCatalog(data),people=peopleById(data.site||{}),filter='all',query='';
+    var catalog=normalizeCatalog(data),people=peopleById(data.site||{}),filter='featured',query='';
     function draw(){
       var visible=catalog.filter(function(entry){
-        var matchesGroup=filter==='all'||entry.group===filter;
+        var matchesGroup=filter==='all';
+        if(filter==='featured')matchesGroup=!!entry.featured;
+        else if(filter==='kerbalru')matchesGroup=entry.group==='kerbalru'||entry.uiTranslated;
+        else if(filter==='untranslated')matchesGroup=entry.group==='untranslated'&&!entry.uiTranslated;
+        else if(filter!=='all')matchesGroup=entry.group===filter;
         var haystack=(entry.name+' '+entry.kicker+' '+entry.teaser+' '+entry.description).toLocaleLowerCase('ru-RU');
         return matchesGroup&&haystack.indexOf(query)!==-1;
       });
@@ -645,7 +657,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     }
     if(input)input.addEventListener('input',function(){query=input.value.trim().toLocaleLowerCase('ru-RU');draw()});
     buttons.forEach(function(button){button.addEventListener('click',function(){
-      filter=button.getAttribute('data-mod-filter');buttons.forEach(function(item){item.classList.toggle('is-active',item===button)});draw();
+      filter=button.getAttribute('data-mod-filter');buttons.forEach(function(item){var active=item===button;item.classList.toggle('is-active',active);item.setAttribute('aria-pressed',active?'true':'false')});draw();
     })});
     draw();
   }
@@ -674,7 +686,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
   }
   function applyProjectData(data){
     var inventory=data.inventory,coverage=data.coverage,active=coverage[coverage.active],release=data.release,ui=data.uiTranslation||{},links=data.links||{};
-    var composition=percent(inventory.withRussian,inventory.components,false),untranslated=inventory.translationCandidates+inventory.serviceComponents;
+    var uiInventoryAdditions=Array.isArray(ui.inventoryAdditions)?ui.inventoryAdditions.length:0,compositionCount=Math.min(inventory.components,inventory.withRussian+uiInventoryAdditions),composition=percent(compositionCount,inventory.components,false),untranslated=inventory.translationCandidates+inventory.serviceComponents;
     renderContent((data.site&&data.site.content)||{});
     renderInstallation(data.site||{});
     all('[data-project-version]',release.version);all('[data-project-updated]',displayDate(data.updatedAt));all('[data-release-channel]',release.channel);all('[data-game-version]',data.game.version);
@@ -682,7 +694,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     document.querySelectorAll('[data-release-link]').forEach(function(link){link.href=release.url});
     document.querySelectorAll('[data-release-download]').forEach(function(link){link.href=links.repository+'/archive/refs/tags/'+release.version+'.zip'});
     document.querySelectorAll('[data-project-link]').forEach(function(link){var key=link.getAttribute('data-project-link');if(links[key])link.href=links[key]});
-    all('[data-inventory-components]',inventory.components);all('[data-inventory-with-russian]',inventory.withRussian);all('[data-inventory-supported]',inventory.kerbalRuMods);all('[data-inventory-upstream]',inventory.upstreamRussianMods);all('[data-inventory-upstream-total]',inventory.upstreamRussianMods+inventory.stockRussian);all('[data-inventory-service]',inventory.serviceComponents);all('[data-inventory-untranslated]',untranslated);all('[data-inventory-mod-folders]',inventory.components-inventory.stockRussian);all('[data-inventory-other]',inventory.components-inventory.kerbalRuMods);
+    all('[data-inventory-components]',inventory.components);all('[data-inventory-with-russian]',compositionCount);all('[data-inventory-supported]',inventory.kerbalRuMods);all('[data-inventory-upstream]',inventory.upstreamRussianMods);all('[data-inventory-upstream-total]',inventory.upstreamRussianMods+inventory.stockRussian);all('[data-inventory-service]',inventory.serviceComponents);all('[data-inventory-untranslated]',untranslated);all('[data-inventory-mod-folders]',inventory.components-inventory.stockRussian);all('[data-inventory-other]',inventory.components-inventory.kerbalRuMods);
     all('[data-composition-percent]',composition);all('[data-coverage-parts]',active.parts);all('[data-coverage-mode]',active.label);
     document.querySelectorAll('[data-composition-label]').forEach(function(node){node.setAttribute('aria-label',composition+' компонентов сборки имеют русский язык')});
     ['title','description','manufacturer'].forEach(function(field){all('[data-coverage-field="'+field+'"]',percent(active.fields[field].translated,active.parts,false))});
@@ -1056,6 +1068,8 @@ document.addEventListener('click',function(event){
   function roundedVector(vector){return{x:+vector.x.toFixed(3),y:+vector.y.toFixed(3),z:+vector.z.toFixed(3)}}
   function preciseVector(vector){return{x:+vector.x.toFixed(6),y:+vector.y.toFixed(6),z:+vector.z.toFixed(6)}}
   window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0,projectData=window.__kerbalProjectData,selectedInstall=document.querySelector('[data-install-choice].is-selected'),installPanel=document.querySelector('#install-selected-path [data-install-mode]');asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',project:{dataState:document.documentElement.dataset.projectData||'loading',version:projectData&&projectData.release.version,catalogComponents:projectData&&projectData.inventory.components,installationPaths:projectData&&projectData.site.installation.paths.length,performanceDevices:projectData&&projectData.site.performance.devices.length,contributors:projectData&&projectData.site.contributors.length,uiTranslationMods:projectData&&projectData.uiTranslation.modsCovered},interface:{installation:{selected:selectedInstall&&selectedInstall.getAttribute('data-install-choice')||null,instructionVisible:!!installPanel,copyButtons:installPanel?installPanel.querySelectorAll('.copy').length:0}},mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
+  var renderSceneToText=window.render_game_to_text;
+  window.render_game_to_text=function(){var state=JSON.parse(renderSceneToText()),activeCatalogFilter=document.querySelector('[data-mod-filter].is-active'),visibleCatalog=document.querySelector('[data-catalog-visible]');state.interface.catalog={filter:activeCatalogFilter&&activeCatalogFilter.getAttribute('data-mod-filter')||null,visible:visibleCatalog?Number(visibleCatalog.textContent):0,total:window.__kerbalProjectData&&window.__kerbalProjectData.inventory.components||0};return JSON.stringify(state,null,2)};
   if(location.hostname==='127.0.0.1'||location.hostname==='localhost')window.__kerbalSpaceQA={asteroidDepths:function(){return asteroids.map(function(asteroid,index){return{index:index,x:asteroid.position.x,y:asteroid.position.y,z:asteroid.position.z,speed:asteroid.userData.velocity.length(),orbitRadius:asteroid.position.distanceTo(asteroidOrbitFocus)}})},impactStage:function(index){index=index||0;detachRocketStage(index);var stage=nasaStages[index],asteroid=asteroids[0];if(!stage||!stage.userData.detached||!asteroid)return false;stage.userData.age=240;stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);asteroid.position.copy(stageWorldCenter).add(new THREE.Vector3(stage.userData.collisionRadius+asteroid.userData.radius-.012,0,0));asteroid.userData.velocity.copy(stage.userData.velocity).add(new THREE.Vector3(-.00028,0,0));scene.updateMatrixWorld(true);return true}};
   requestAnimationFrame(loop);
 
