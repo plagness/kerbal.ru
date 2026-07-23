@@ -10,6 +10,13 @@
 
 ## Быстрый путь (то, что нужно пользователю в 95% случаев)
 
+Проще всего одной командой — `install.sh`/`install.ps1` из этого репозитория делают шаги 2-4 сами:
+`curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full` (Linux/Mac/Deck) или
+`irm https://kerbal.ru/install.ps1 | iex` с `-Full` (Windows). Внутри они вызывают ровно ту же
+проверенную команду CKAN, что и в шаге 3 ниже, headless-режимом, без диалогов.
+
+Вручную, по шагам:
+
 1. Убедись, что стоит **лицензионная KSP 1.12.5** (Steam). Пиратку/репак не качай и не предлагай.
 2. Поставь CKAN под ОС пользователя (см. ниже).
 3. `ckan install --headless --no-recommends RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1`

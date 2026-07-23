@@ -105,7 +105,8 @@ grep -A15 'name = <РеальноеИмяДетали>$' "GameData/ModuleManager
 ## 7. Где что лежит
 
 - `GameData/` — готовые файлы локализации (структура повторяет GameData игры).
-- `install-ru.sh` / `install-ru.ps1` — установщики.
+- `install-ru.sh` / `install-ru.ps1` — установщики только русификатора (поверх уже поставленной сборки).
+- `install.sh` / `install.ps1` — установщик «всё в одном»: `--full`/`-Full` ставит сборку `RP-1-ExpressInstall` через headless CKAN и русификатор, `--ru-only`/`-RuOnly` делегирует в `install-ru.*`. Не хранит и не вендорит CKAN — только скачивает официальный релиз KSP-CKAN/CKAN.
 - `data/project.json` — единый источник версии, состава сборки, общих и помодовых метрик покрытия; сайт читает его напрямую.
 - `VERSION` — сгенерированная версия следующего стабильного релиза без префикса `v`; вручную не редактировать.
 - `tools/sync_project_data.py` — проверяет JSON и обновляет README, `VERSION`, `CITATION.cff`.

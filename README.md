@@ -40,21 +40,37 @@ RO/RSS/RP-1 превращает KSP в серьёзный симулятор р
 
 ## Установка
 
-Сначала установи лицензионную **Kerbal Space Program 1.12.5** и сборку `RP-1-ExpressInstall` через [CKAN](https://github.com/KSP-CKAN/CKAN/releases/latest).
+Нужна только лицензионная **Kerbal Space Program 1.12.5** в Steam — сборку модов и русификатор ставит один установщик, двумя путями на выбор.
 
 ### Linux · macOS · Steam Deck
 
 ```bash
-curl -fsSL https://kerbal.ru/install-ru.sh | bash
+curl -fsSL https://kerbal.ru/install.sh | bash
 ```
 
 ### Windows · PowerShell
 
 ```powershell
+irm https://kerbal.ru/install.ps1 | iex
+```
+
+Если сборки RO/RSS/RP-1 в `GameData` ещё нет, установщик спросит (или прими флагом):
+
+- **`--full` / `-Full`** — сам поставит сборку `RP-1-ExpressInstall` через официальный [CKAN](https://github.com/KSP-CKAN/CKAN) headless-режимом (без диалогов) и сразу русификатор;
+- **`--ru-only` / `-RuOnly`** — только русификатор, если моды уже стоят (или будут поставлены отдельно самим CKAN GUI).
+
+Если сборка уже обнаружена в `GameData` — установщик сам выберет только русификатор, ничего не спрашивая. Мы не храним и не распространяем чужие моды или сам CKAN — только вызываем официальный релиз headless-флагом.
+
+Для тех, кто уже поставил моды сам и хочет только русификатор, есть отдельная более простая команда — `install-ru.sh`/`install-ru.ps1`, без шага CKAN:
+
+```bash
+curl -fsSL https://kerbal.ru/install-ru.sh | bash
+```
+```powershell
 irm https://kerbal.ru/install-ru.ps1 | iex
 ```
 
-Установщик найдёт KSP, скачает последний стабильный релиз, сделает резервную копию заменяемых файлов, скопирует локализацию и включит русский язык. Скрипты открыты: перед запуском их можно [прочитать для Unix](install-ru.sh) или [для Windows](install-ru.ps1). Ручной способ и инструкции по каждой ОС — в [быстром старте](docs/QUICKSTART.md).
+Установщик найдёт KSP, скачает последний стабильный релиз, сделает резервную копию заменяемых файлов, скопирует локализацию и включит русский язык. Все скрипты открыты: [install.sh](install.sh) / [install.ps1](install.ps1) / [install-ru.sh](install-ru.sh) / [install-ru.ps1](install-ru.ps1). Ручной способ и инструкции по каждой ОС — в [быстром старте](docs/QUICKSTART.md).
 
 ## Как обновляться
 
