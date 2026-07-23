@@ -42,6 +42,18 @@ def spaced(value: int) -> str:
     return f"{value:,}".replace(",", " ")
 
 
+def plural_ru(value: int, one: str, few: str, many: str) -> str:
+    n = abs(value) % 100
+    if 11 <= n <= 14:
+        return many
+    n10 = n % 10
+    if n10 == 1:
+        return one
+    if 2 <= n10 <= 4:
+        return few
+    return many
+
+
 def load_and_validate() -> dict:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     errors: list[str] = []
@@ -376,7 +388,8 @@ def generated_readme_block(data: dict) -> str:
             "|---|---:|---|",
             f'| Версия русификатора | **[{release["version"]}]({release["url"]})** | `data/project.json` |',
             f'| Поддерживаемые нами моды | **{inventory["kerbalRuMods"]}** | Собственные `ru.cfg` и MM-патчи |',
-            f'| Интерфейс модов | **{ui["modsCovered"]} словаря · {spaced(ui["linesTranslated"])} строк** | {ui["statusLabel"]} |',
+            f'| Интерфейс модов | **{ui["modsCovered"]} {plural_ru(ui["modsCovered"], "словарь", "словаря", "словарей")} · '
+            f'{spaced(ui["linesTranslated"])} {plural_ru(ui["linesTranslated"], "строка", "строки", "строк")}** | {ui["statusLabel"]} |',
             f'| Состав с русским блоком | **{inventory["withRussian"]} / {inventory["components"]} · {ru_percent(composition)}** | Полная инвентаризация `GameData` |',
             f'| Проверено деталей | **{spaced(active["parts"])}** | `ModuleManager.ConfigCache` |',
             f'| Названия деталей | **{ru_percent(title["percent"])} · {title["translated"]}/{active["parts"]}** | {active["label"]} |',

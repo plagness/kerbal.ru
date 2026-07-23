@@ -1,0 +1,101 @@
+# Firespitter — UI strings extracted from Firespitter.dll. Legacy resource/mesh/texture-switching
+# mod; the switching functionality itself (FSfuelSwitch, FSmodularTank, FSmeshSwitch, FStextureSwitch,
+# FStextureSwitch2, FSActionGroupSwitch, FSmonitorScript/FSmonitorInterface, etc.) has ZERO custom
+# IMGUI code — confirmed by full monodis IL disassembly (62826 lines) resolved against the installed
+# game's UnityEngine.CoreModule/IMGUIModule/Assembly-CSharp — it is driven entirely by stock KSP
+# [KSPField]/[KSPEvent] guiName (right-click part-action-window text), which this Harmony framework
+# cannot intercept (different rendering path, native to KSP core). All translatable text below comes
+# from a handful of small popup windows built on the mod's own mini GUI framework
+# (FSGUIPopup/PopupElement/PopupButton/HelpPopup, all plain UnityEngine.GUI.Label/Button/Window with
+# an explicit Rect — this mod predates GUILayout adoption) plus one standalone editor guide label and
+# one debug-only test window. Each literal string below was traced through the IL to its exact
+# GUI.Label/Button/Window(Rect,...) or GUIContent(string) call site.
+#
+# Windows/popups covered:
+#  - FSmoveCraftAtLaunch: "save craft position" popup (Name/Save/Cancel/Save Position)
+#  - FStrimAdjustment: per-axis trim popup (Use/Add/Del/Show on Launch?/Pitch default axis title)
+#  - FSwheel: wheel & suspension settings popup
+#  - FSwingBase: "Wing setup help" popup window title (body text excluded, see below)
+#  - FSpartDirectionGuide: in-editor "This way forward" calibration label
+#  - FSinfoPopup: edit-mode chrome (Show on start/Edit) — the actual per-part message body
+#    (textHeading/textBody1-11) is excluded, see below
+#  - FSengineSounds: debug-only sound-test window (OK), gated behind a useDebug/showVolumeDebug flag
+#  - FSVTOLrotator: VTOL steering config popup (window titles, mode toggles, preset buttons)
+#
+# Skipped by design (verified via IL, not guessed):
+#  - PartModule.GetInfo() tooltip text (FSliftSurface/FSwingBase) — built with StringBuilder.Append/
+#    string.Concat interleaving literal labels ("Pitch: ", "Roll: ", "Yaw: ", "Flap: ", "Area: ",
+#    "Aerodynamic surface\nName: ") with live float values; the runtime string handed to any UI
+#    control is always the whole composed multi-line blob, so the individual literals can never
+#    equal a dictionary key.
+#  - FSwingBase.defaultHelpText (the long "Each wing has three control axis..." wing-help body) —
+#    reaches GUIContent(string) as a single static literal, so it IS a real match technically, but it
+#    contains embedded literal newlines (\n) and rich-text <color> tags; the loader reads this file
+#    with File.ReadAllLines before it ever looks for the tab delimiter, so a multi-line value cannot
+#    be represented as one dictionary line. Left untranslated by design, same as other mods' long
+#    embedded-newline bodies.
+#  - FSinfoPopup.textHeading/textBody1-11 — KSPField(isPersistant) strings authored per part in that
+#    part's own .cfg (a free-form "welcome message" shown once at flight start), not fixed mod UI text.
+#  - FSGUIPopup.moduleName / FStrimAdjustment's "FSmoveCraftAtLaunch"/"FSwheel"/"FStrimAdjustment"/
+#    "FSVTOLrotator" literals — internal PartModuleList.Contains(string) lookup keys, never displayed.
+#  - Any string reaching string.Concat/StringBuilder before the GUI call ("Use hotkey (" + key + ")",
+#    "Hiding this window in " + n, "Use Preset " + n, "Preset " + n, "r: " + angle, "engine volume: "
+#    + value, "exists: " + doesExist) — the composed runtime value never equals the literal alone.
+#  - Single-character glyphs ("+", "-", "X", "Y", "N", "C", ">") used as tiny icon-style buttons —
+#    skipped project-wide as too ambiguous/collision-prone for a flat shared dictionary (no other mod
+#    dictionary in this project carries a bare 1-character key either).
+#  - PopupButton's isGUIToggle constructor overload (string toggleTitle, float32 width) draws via
+#    GUI.Toggle(Rect, bool, string, GUIStyle) — the 4-arg overload, which the Harmony patch does not
+#    cover (only the 3-arg GUI.Toggle(Rect,bool,string) is patched). Moot for this DLL version: that
+#    constructor overload is never actually instantiated anywhere (dead code, confirmed by grep over
+#    the full IL) — every real PopupButton in this build sets isGUIToggle=false and draws through the
+#    patched GUI.Button(Rect,string,GUIStyle) instead. Left noted here in case a future Firespitter
+#    build starts using it.
+#  - FSGUIPopup.optionEnabledString/optionDisabledString ("On"/"Off" defaults) — fields are set in
+#    every constructor but never read back anywhere in the assembly (dead fields).
+Name	Имя
+Save	Сохранить
+Cancel	Отмена
+Save Position	Сохранить позицию
+Use	Применить
+Add	Добавить
+Del	Удалить
+Show on Launch?	Показывать при старте?
+Pitch	Тангаж
+Wheel settings	Настройки колеса
+Suspension Settings:	Настройки подвески:
+Radius	Радиус
+Distance	Дистанция
+Spring	Пружина
+Damper	Демпфер
+Target pos	Целевая поз.
+Update	Обновить
+Wing setup help	Справка по настройке крыла
+This way forward	Направление вперёд
+Show on start	Показывать при старте
+Edit	Изменить
+OK	ОК
+VTOL steering	Управление VTOL
+VTOL presets	Пресеты VTOL
+Use roll steering	Управление креном
+Use yaw steering	Управление рысканием
+Use pitch steering	Управление тангажом
+Pitch type	Тип тангажа
+Throttle	Газ
+Rotation	Вращение
+Front	Перед
+Rear	Зад
+Mode	Режим
+Off	Выкл
+Single	Один
+Double	Два
+Custom	Свой
+Next	Далее
+Reset	Сброс
+Step size	Шаг
+Max negative rot.,	Макс. отриц. поворот,
+--- VTOL steering ---	--- Управление VTOL ---
+Presets set to 0 are excluded.	Пресеты со значением 0 не используются.
+Settings are per engine!	Настройки для каждого двигателя отдельно!
+Yes	Да
+No	Нет

@@ -1,0 +1,53 @@
+# B9PartSwitch — намеренно ПУСТОЙ файл (0 строк перевода). Причина, проверено полным
+# IL-дизассемблированием (monodis, с резолвом зависимостей: Assembly-CSharp.dll +
+# UnityEngine.*Module.dll из установленной игры через MONO_PATH — без них monodis не грузит
+# сигнатуры и падает на "Could not load file or assembly").
+#
+# Полный грep по дизассемблированному B9PartSwitch.il дал НОЛЬ совпадений на все точки
+# перехвата нашего Harmony-патча: GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги,
+# все 4 конструктора GUIContent(string,...), UnityEngine.UI.Text.text (сеттер),
+# UnityEngine.UI.Dropdown.OptionData.text. Мод их просто не вызывает — ни разу, нигде.
+#
+# Куда на самом деле уходит текст интерфейса (3 канала, ни один не патчится нашим
+# фреймворком):
+#
+# 1) Диалоги (Fatal Error / Locked Subtypes / Serious Warning / подтверждение сброса
+#    ресурсов / проверка установки мода) построены через KSP MultiOptionDialog +
+#    DialogGUILabel/DialogGUIButton (в т.ч. через удобный оверлоад
+#    PopupDialog.SpawnPopupDialog(Vector2,Vector2,string,string,string,string,...),
+#    который сам заворачивает строку сообщения в MultiOptionDialog внутри Assembly-CSharp).
+#    IL-трассировка DialogGUILabel::Create → DialogGUIBase::SetUpTextObject(TMPro.TextMeshProUGUI,
+#    string, ...) подтверждает: текст рендерится через TMPro.TextMeshProUGUI, а не через
+#    UnityEngine.UI.Text — наш патч ловит только Text.text, TMP_Text.text не перехватывается
+#    нигде в KerbalRuUiTranslator.cs. Строки вроде "Quit", "B9PartSwitch - Fatal Error",
+#    "Incorrect B9PartSwitch Installation", "B9PartSwitch - Locked Subtypes",
+#    "B9PartSwitch - Serious Warning" реально существуют в DLL, но физически не могут
+#    попасть в наш словарь-перехватчик этим путём.
+#
+# 2) Окно выбора подтипа в VAB/SPH (B9PartSwitch.UI.UIPartActionSubtypeSelector) —
+#    поля switcherDescriptionText/subtypeTitleText типизированы напрямую как
+#    TMPro.TextMeshProUGUI (не UnityEngine.UI.Text) — тот же непатчиваемый канал.
+#
+# 3) Всё содержательное (заголовок модуля, "Объём", описания вида/конфигурации, подписи
+#    диалога выбора подтипа, аббревиатуры типов баков ЖТ/ЖТ+Ок/Монотопливо/Батарея,
+#    "Макс. температура" и т.д.) идёт через штатный KSP Localizer по ключам
+#    #LOC_B9PartSwitch_* — это НЕ хардкод, ключи резолвятся до того, как текст доходит
+#    до любого рендер-вызова. У мода уже есть полный русский перевод этих ключей в
+#    самой поставке: GameData/B9PartSwitch/Localization/ru.cfg (перевод Sooll3, сверено
+#    построчно с en-us.cfg — набор ключей идентичен). Дублировать их здесь бессмысленно
+#    и рискованно (см. рассуждение в KerbalChangelog.txt/PatchManager.txt — тот же
+#    паттерн: Localizer резолвит строку в ru ДО того, как она попадёт в GUI-вызов,
+#    Harmony-словарь её просто не увидит на английском для сравнения).
+#
+# Остальные строки-кандидаты в IL — Debug.Log-диагностика ("[Part {0}] {1}",
+# "[WARNING]...", "[FatalExceptionHandler]..." и т.п.), сообщения исключений
+# (ArgumentException/ConfigNode-парсинг), имена ConfigNode-ключей (RESOURCE, MODULE,
+# moduleID, dryMass...), имена шейдерных свойств (_MainTex, _BumpMap, _Color), служебные
+# имена трансформов/GameObject для Transform.Find() (Tooltip_TitleAndText, Text, Title,
+# Label_Variants) и строки с плейсхолдерами формата ("<b>{0} {1}</b>", "{0}: {1}" и т.д.,
+# идут через string.Format/string.Concat — точного совпадения по построению никогда не
+# будет). Ни один из этих случаев не подходит под критерий п.2 методологии
+# (docs/UI-TRANSLATION.md) — точная неизменная строка на входе патчащейся функции.
+#
+# Итог: добавлять в этот файл нечего. 0 строк — осознанный результат проверки, а не
+# пропуск исследования.

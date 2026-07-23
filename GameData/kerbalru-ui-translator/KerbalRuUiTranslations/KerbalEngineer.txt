@@ -1,0 +1,466 @@
+# KerbalEngineer -- словарь UI-строк, извлечённых напрямую из скомпилированного
+# KerbalEngineer.dll (jrbudda/KerbalEngineer 1.1.9.5, https://github.com/jrbudda/KerbalEngineer).
+# Строки НЕ покрытые встроенной локализацией мода (та часть -- title/description/manufacturer
+# деталей -- уже переведена штатным GameData/KerbalEngineer/Localization/ru.cfg).
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (см. tools/ui-translator).
+
+# --- Категории параметров (вкладки в редакторе секций) ---
+Body	Тело
+Miscellaneous	Разное
+Orbital	Орбита
+Rendezvous	Сближение
+Surface	Поверхность
+Thermal	Нагрев
+Vessel	Аппарат
+
+# --- Названия параметров (readout Name, показываются в окне телеметрии) ---
+Acceleration	Ускорение
+Altitude (Sea Level)	Высота (над морем)
+Altitude (Terrain)	Высота (над рельефом)
+Angle to Equ. AN	Угол до эк. ВУ
+Angle to Equ. DN	Угол до эк. НУ
+Angle to Prograde	Угол до прогр.
+Angle to Rel. AN	Угол до отн. ВУ
+Angle to Rel. DN	Угол до отн. НУ
+Angle to Retrograde	Угол до ретрогр.
+Angle-of-Attack	Угол атаки
+Angle-of-Displacement	Угол отклонения
+Angle-of-Sideslip	Угол скольжения
+Apoapsis Height	Высота апоцентра
+Arg. Of Periapsis	Аргумент перицентра
+Atmos. Efficiency	Атм. эффективность
+Atmos. Pressure	Атм. давление
+Bearing to Target	Пеленг на цель
+Bearing to Waypoint	Пеленг на точку
+Biome	Биом
+Body Mass	Масса тела
+Body Orbital Period	Период обращения тела
+Body Radius	Радиус тела
+Body Rotation Period	Период вращения тела
+Clear Separator	Прозрачный разделитель
+Convection Flux	Конвективный поток
+Coolest Part	Самая холодная деталь
+Coolest Skin Temperature	Мин. темп. обшивки
+Coolest Temperature	Мин. температура
+Critical Part	Критическая деталь
+Critical Skin Temperature	Крит. темп. обшивки
+Critical Temperature	Крит. температура
+Critical Thermal Percentage	Крит. процент нагрева
+Crosshair	Перекрестие
+Current Body Name	Название тела
+DeltaV (Current/Total)	Delta-V (тек./всего)
+DeltaV Current	Delta-V текущей ступени
+DeltaV Staged	Delta-V по ступеням
+DeltaV Total	Delta-V всего
+Distance	Дистанция
+Distance (Surface)	Дистанция (поверхность)
+Distance to Waypoint (Surface)	Дистанция до точки (поверхность)
+Dynamic Pressure	Динамическое давление
+Eccentric Anomaly	Эксцентрич. аномалия
+Eccentricity	Эксцентриситет
+Electric Charge	Заряд батареи
+G-Force	Перегрузка
+GUI Size Adjustor	Регулятор размера интерфейса
+Glideslope	Глиссада
+Gravity	Гравитация
+Has Atmosphere	Есть атмосфера
+Has Oxygen	Есть кислород
+Heading	Курс
+Heading Rate	Скорость поворота курса
+High Atmosphere Alt.	Выс. верх. атмосферы
+High Space Alt.	Выс. дальнего космоса
+Horizontal Acceleration	Горизонт. ускорение
+Horizontal Speed	Горизонт. скорость
+Hottest Part	Самая горячая деталь
+Hottest Skin Temperature	Макс. темп. обшивки
+Hottest Temperature	Макс. температура
+Impact Altitude	Высота падения
+Impact Biome	Биом падения
+Impact Latitude	Широта падения
+Impact Longitude	Долгота падения
+Impact Marker	Маркер падения
+Impact Time	Время до падения
+Inclination	Наклонение
+Intake Air (D/S)	Возд. заборники (потр/дост)
+Intake Air (Demand)	Возд. заборники (потребность)
+Intake Air (Supply)	Возд. заборники (доступно)
+Intake Air (Usage)	Возд. заборники (расход)
+Internal Flux	Внутренний поток
+LF:Ox Ratio	Соотношение ЖТ:Ок
+Latitude	Широта
+Log Simulation	Лог симуляции
+Longitude	Долгота
+Longitude of AN	Долгота ВУ
+Longitude of Pe	Долгота перицентра
+Low Space Alt.	Выс. ближнего космоса
+Mach Number	Число Маха
+Manoeuvre Node Angle to Prograde	Угол узла манёвра до прогр.
+Manoeuvre Node Angle to Retrograde	Угол узла манёвра до ретр.
+Manoeuvre Node Burn Time	Время манёвра
+Manoeuvre Node DeltaV (Normal)	Delta-V манёвра (норм.)
+Manoeuvre Node DeltaV (Prograde)	Delta-V манёвра (прогр.)
+Manoeuvre Node DeltaV (Radial)	Delta-V манёвра (радиал.)
+Manoeuvre Node DeltaV (Total)	Delta-V манёвра (всего)
+Manoeuvre Node Half Burn Time	Полувремя манёвра
+Mass	Масса
+Mean Anomaly	Средняя аномалия
+Mean Anomaly at Epoc	Средняя аномалия в эпоху
+Min. Safe Alt.	Мин. безоп. высота
+Minimum Simulation Delay	Мин. задержка симуляции
+Name	Имя
+Orbital Period	Период обращения
+Orbital Speed	Орбитальная скорость
+Part Count	Число деталей
+Periapsis Height	Высота перицентра
+Phase Angle	Фазовый угол
+Pitch	Тангаж
+Pitch Rate	Скорость тангажа
+Post-burn Apoapsis	Апоцентр после манёвра
+Post-burn Eccentricity	Эксцентриситет после манёвра
+Post-burn Inclination	Наклонение после манёвра
+Post-burn Periapsis	Перицентр после манёвра
+Post-burn Period	Период после манёвра
+Post-burn Rel. Inclination	Отн. наклонение после манёвра
+RCS DeltaV	Delta-V РСУ
+RCS Isp	Уд. импульс РСУ
+RCS TWR	Тяговооруж. РСУ
+RCS Thrust	Тяга РСУ
+Radiation Flux	Поток излучения
+Rel. Speed at Approach	Отн. скорость сближения
+Relative Inclination	Отн. наклонение
+Relative Orbital Speed	Отн. орбит. скорость
+Relative Velocity	Отн. скорость
+Roll	Крен
+Roll Rate	Скорость крена
+SOI Alt.	Высота сферы действия
+Semi-major Axis	Большая полуось
+Semi-minor Axis	Малая полуось
+Separation at Approach	Расстояние сближения
+Separator	Разделитель
+Situation	Ситуация
+Slope	Уклон
+Specific Impulse	Удельный импульс
+Speed at Apoapsis	Скорость в апоцентре
+Speed at Periapsis	Скорость в перицентре
+Suicide Burn Alt.	Выс. торм. манёвра
+Suicide Burn Countdown	До торможения
+Suicide Burn Dist.	Дист. до торможения
+Suicide Burn Length	Длит. торможения
+Suicide Burn dV	Delta-V торможения
+Surface Escape Velocity	Вторая косм. скорость
+Surface Gravity	Гравитация поверхности
+Surface Thrust to Weight Ratio	Тяговооруж. у поверхности
+Synchronous Alt.	Высота синхр. орбиты
+System Time	Системное время
+Target Latitude	Широта цели
+Target Longitude	Долгота цели
+Target Selector	Выбор цели
+Terminal Velocity	Предельная скорость
+Throttle	Газ
+Thrust	Тяга
+Thrust offset angle	Угол смещения тяги
+Thrust to Weight Ratio	Тяговооружённость
+Thrust torque	Момент тяги
+Time til Approach	Время до сближения
+Time til Transfer	Время до перехода
+Time to Apoapsis	Время до апоцентра
+Time to Atmosphere	Время до атмосферы
+Time to Equ. AN	Время до эк. ВУ
+Time to Equ. DN	Время до эк. НУ
+Time to Manoeuvre Burn	Время до манёвра
+Time to Manoeuvre Node	Время до узла манёвра
+Time to Periapsis	Время до перицентра
+Time to Rel. AN	Время до отн. ВУ
+Time to Rel. DN	Время до отн. НУ
+Transfer Angle	Угол перехода
+Trip Total DeltaV (Normal)	Delta-V всего пути (норм.)
+True Anomaly	Истинная аномалия
+Vectored Thrust	Вект. тяга
+Vertical Acceleration	Верт. ускорение
+Vertical Speed	Верт. скорость
+
+# --- Краткие названия параметров (readout ShortName, режим "Use short name") ---
+Alt (S)	Выс(М)
+Alt (T)	Выс(Р)
+AoA	УА
+AoD	УО
+AoS	УС
+Ap	Ап
+Atmo Eff	Атм.Эфф
+Bio	Био
+Crit Part	Крит.деталь
+Crit Therm	Крит.Темп
+Decel in	До торм.
+Elec	Заряд
+Glide	Глисс
+HAccel	ГУск
+HSpeed	ГСкор
+Hdg	Крс
+LF:Ox	ЖТ:Ок
+Mach	Мах
+Pe	Пе
+Sim Delay	Зад.Сим
+Sit	Сит
+TtAp	ВдАп
+TtPe	ВдПе
+VAccel	ВУск
+VSpeed	ВСкор
+
+# --- Справочные описания параметров (readout HelpString, окно подсказки "?") ---
+A tool to allow easy browsing, searching and selection of targets.	Инструмент для удобного просмотра, поиска и выбора целей.
+Altitude at which the Vessel will impact.	Высота, на которой аппарат столкнётся с поверхностью.
+Angular Distance from the Node to crossing the Orbit of the central body on it's prograde side.	Угловое расстояние от узла манёвра до пересечения орбиты центрального тела с прогрейдной стороны.
+Angular Distance from the Node to crossing the Orbit of the central body on it's retrograde side.	Угловое расстояние от узла манёвра до пересечения орбиты центрального тела с ретроградной стороны.
+Angular Distance from the vessel to crossing the Equator of the central body, going north of it.	Угловое расстояние от аппарата до пересечения экватора центрального тела, идущего на север.
+Angular Distance from the vessel to crossing the Equator of the central body, going south of it.	Угловое расстояние от аппарата до пересечения экватора центрального тела, идущего на юг.
+Angular Distance from the vessel to crossing the Orbit of the central body on it's retrograde side.	Угловое расстояние от аппарата до пересечения орбиты центрального тела с ретроградной стороны.
+Angular Distance from the vessel to crossing the orbit of the target object, going north of it.	Угловое расстояние от аппарата до пересечения орбиты цели, к северу от неё.
+Angular Distance from the vessel to crossing the orbit of the target object, going south of it.	Угловое расстояние от аппарата до пересечения орбиты цели, к югу от неё.
+Angular distance of the vessel relative to the target object.	Угловое расстояние аппарата относительно цели.
+Bearing to the target on the surface	Пеленг на цель по поверхности
+Bearing to the waypoint along the surface	Пеленг на точку маршрута по поверхности
+Biome the Vessel will impact in.	Биом, в который попадёт аппарат при падении.
+Closest point of the vessel's orbit after the burn.	Ближайшая точка орбиты аппарата после манёвра.
+Controls the minimum delay between processing vessel simulations required for certain readouts. Does not affect the game's "Max Physics Delta-Time per Frame" option.	Управляет минимальной задержкой между расчётами симуляции аппарата для некоторых параметров. Не влияет на игровую настройку "Max Physics Delta-Time per Frame".
+Creates a cross that can be used as a placeable crosshair.	Создаёт крест, который можно использовать как перекрестие.
+Creates a line to help seperate subsections in a module.	Создаёт линию для разделения подсекций в модуле.
+Creates a space to help seperate subsections in a module.	Создаёт пустое пространство для разделения подсекций в модуле.
+Current and maximum electric charge in the vessel.	Текущий и максимальный заряд батареи аппарата.
+Current distance between the vessel and the target object.	Текущее расстояние между аппаратом и целью.
+Displays the Amount of Intake Air required.	Показывает требуемое количество забортного воздуха.
+Displays the Ratio between required and available Intake Air.	Показывает соотношение требуемого и доступного забортного воздуха.
+Displays the available Intake Air.	Показывает доступный забортный воздух.
+Displays the consumption of Intake Air.	Показывает расход забортного воздуха.
+Displays the current atmospheric pressure.	Показывает текущее атмосферное давление.
+Displays the current dynamic pressure on the vessel	Показывает текущее динамическое давление на аппарат
+Displays the name of the current vessel.	Показывает название текущего аппарата.
+Displays the total Mass of the Vessel.	Показывает полную массу аппарата.
+Distance to the target at closest approach.	Расстояние до цели в момент максимального сближения.
+Farthest point of the vessel's orbit after the burn.	Самая дальняя точка орбиты аппарата после манёвра.
+Great-circle distance from the current vessel to the target on the surface	Расстояние по большому кругу от аппарата до цели по поверхности
+Great-circle distance from the current vessel to the waypoint on the surface	Расстояние по большому кругу от аппарата до точки маршрута по поверхности
+Half of the burn's total duration.	Половина полной длительности манёвра.
+Highest external Temperature on the Vessel.	Наивысшая внешняя температура аппарата.
+Highest external Temperature on the part of the Vessel that is structually most critical.	Наивысшая внешняя температура наиболее критичной по прочности детали аппарата.
+Highest internal Temperature on the Vessel.	Наивысшая внутренняя температура аппарата.
+Internal Temperature on the part of the Vessel that is structually most critical.	Внутренняя температура наиболее критичной по прочности детали аппарата.
+Latitude of the impact position.	Широта точки падения.
+Longditude of the impact position.	Долгота точки падения.
+Lowest external Temperature on the Vessel.	Наименьшая внешняя температура аппарата.
+Lowest internal Temperature on the Vessel.	Наименьшая внутренняя температура аппарата.
+Normal component of the total change in velocity.	Нормальная составляющая полного изменения скорости.
+Prograde/Retrograde component of the total change in velocity.	Прогрейдная/ретроградная составляющая полного изменения скорости.
+Radial component of the total change in velocity.	Радиальная составляющая полного изменения скорости.
+Ratio of Liquid Fuel to Oxidizer in the vessel. More than 100% means you have more LF than oxidizer for standard rocket engines, so you have extra for LF-only engines. The number in parentheses is how much excess LF you have.	Соотношение жидкого топлива и окислителя в аппарате. Больше 100% значит, что топлива больше, чем окислителя (для обычных ракетных двигателей) — то есть есть запас для двигателей, работающих только на ЖТ. Число в скобках — величина этого избытка.
+Shows a button that allows you to make the next run of the simulation code dump extra debugging output.	Показывает кнопку, включающую подробный отладочный вывод при следующем расчёте симуляции.
+Shows a control that will allow you to adjust the GUI size.	Показывает регулятор размера интерфейса.
+Shows a control that will allow you to adjust whether the vessel simulation should account for vectored thrust.	Показывает переключатель учёта векторной тяги в симуляции аппарата.
+Shows how high a temperature the critical Part is enduring relative to it's maximal temperature.	Показывает, насколько высока температура критичной детали относительно её максимально допустимой.
+Shows the DeltaV of a suicide burn.	Показывает Delta-V тормозного манёвра.
+Shows the System Date/Time in ISO 8601 format	Показывает системные дату и время в формате ISO 8601
+Shows the System Time in 12 hour format (AM/PM)	Показывает системное время в 12-часовом формате (ДП/ПП)
+Shows the System Time in 24 hour format	Показывает системное время в 24-часовом формате
+Shows the TWR for the RCS system at the current gravity	Показывает тяговооружённость РСУ при текущей гравитации
+Shows the amount of time it will take the target object to complete a full orbit.	Показывает время полного оборота цели по орбите.
+Shows the amount of time it will take to complete a full orbit.	Показывает время полного оборота по орбите.
+Shows the average Specific Impulse of all engines in the current stage.	Показывает средний удельный импульс всех двигателей текущей ступени.
+Shows the average specific impulse of the RCS System.	Показывает средний удельный импульс РСУ.
+Shows the biome which the vessel is currently flying over.	Показывает биом, над которым сейчас находится аппарат.
+Shows the current Heading.	Показывает текущий курс.
+Shows the current Pitch angle.	Показывает текущий угол тангажа.
+Shows the current Pitch speed.	Показывает текущую скорость тангажа.
+Shows the current Roll angle.	Показывает текущий угол крена.
+Shows the current Roll speed.	Показывает текущую скорость крена.
+Shows the current and maximum acceleration of the craft.	Показывает текущее и максимальное ускорение аппарата.
+Shows the current and maximum thrust the vessel can put out.	Показывает текущую и максимальную тягу, которую может развить аппарат.
+Shows the current change in Heading.	Показывает текущую скорость изменения курса.
+Shows the current g-force and maximum g-force experienced.	Показывает текущую и максимальную перегрузку.
+Shows the current possible DeltaV from RCS	Показывает доступное Delta-V от РСУ
+Shows the current requested throttle %. 	Показывает текущий запрошенный уровень тяги в %. 
+Shows the difference in orbital speed between your vessel and the target object at the next closest approach.	Показывает разницу орбитальных скоростей аппарата и цели в момент следующего максимального сближения.
+Shows the difference in orbital speed between your vessel and the target object.	Показывает разницу орбитальных скоростей аппарата и цели.
+Shows the distance from the centre of an orbit to the farthest edge.	Показывает расстояние от центра орбиты до самой дальней её точки.
+Shows the distance from the centre of an orbit to the nearest edge.	Показывает расстояние от центра орбиты до самой ближней её точки.
+Shows the distance from the centre of the target's orbit to the farthest edge.	Показывает расстояние от центра орбиты цели до самой дальней её точки.
+Shows the distance from the centre of the target's orbit to the nearest edge.	Показывает расстояние от центра орбиты цели до самой ближней её точки.
+Shows the distance to the point at which to start a suicide burn.	Показывает расстояние до точки начала тормозного манёвра.
+Shows the duration of the suicide burn.	Показывает длительность тормозного манёвра.
+Shows the maximum thrust from RCS thrusters	Показывает максимальную тягу двигателей РСУ
+Shows the name of the current body.	Показывает название текущего тела.
+Shows the orbital speed of the vessel when at apoapsis, the highest point of the orbit.	Показывает орбитальную скорость аппарата в апоцентре — высшей точке орбиты.
+Shows the orbital speed of the vessel when at periapsis, the lowest point of the orbit.	Показывает орбитальную скорость аппарата в перицентре — низшей точке орбиты.
+Shows the relative inclination between your vessel and the target object.	Показывает относительное наклонение орбит аппарата и цели.
+Shows the relative velocity between your vessel and the target object.	Показывает относительную скорость аппарата и цели.
+Shows the sea level altitude when to start a suicide burn.	Показывает высоту над уровнем моря для начала тормозного манёвра.
+Shows the slope of the terrain below your vessel.	Показывает уклон рельефа под аппаратом.
+Shows the target vessel's latitude position around the celestial body. Latitude is the angle from the equator to poles.	Показывает широту цели относительно небесного тела. Широта — угол от экватора до полюсов.
+Shows the target vessel's longitude around a celestial body. Longitude is the angle from the bodies prime meridian.	Показывает долготу цели относительно небесного тела. Долгота — угол от нулевого меридиана тела.
+Shows the target's altitude above sea level.	Показывает высоту цели над уровнем моря.
+Shows the targets's apoapsis height relative to sea level. (Apoapsis is the highest point of an orbit.)	Показывает высоту апоцентра цели относительно уровня моря. (Апоцентр — высшая точка орбиты.)
+Shows the targets's periapsis height relative to sea level. (Periapsis is the lowest point of an orbit.)	Показывает высоту перицентра цели относительно уровня моря. (Перицентр — низшая точка орбиты.)
+Shows the time until the target reaches apoapsis, the highest point of the orbit.	Показывает время до достижения целью апоцентра — высшей точки орбиты.
+Shows the time until the target reaches periapsis, the lowest point of the orbit.	Показывает время до достижения целью перицентра — низшей точки орбиты.
+Shows the time until the vessel corsses the Equator, going north of it.	Показывает время до пересечения аппаратом экватора при движении на север.
+Shows the time until the vessel corsses the Equator, going south of it.	Показывает время до пересечения аппаратом экватора при движении на юг.
+Shows the time until the vessel enters or leaves the atmosphere.	Показывает время до входа аппарата в атмосферу или выхода из неё.
+Shows the time until the vessel reaches apoapsis, the highest point of the orbit.	Показывает время до достижения аппаратом апоцентра — высшей точки орбиты.
+Shows the time until the vessel reaches periapsis, the lowest point of the orbit.	Показывает время до достижения аппаратом перицентра — низшей точки орбиты.
+Shows the total number of Parts the current and next stage.	Показывает общее число деталей в текущей и следующей ступени.
+Shows the velocity where the efforts of thrust and drag are equalled out.	Показывает скорость, при которой тяга уравновешивается сопротивлением воздуха.
+Shows the vessel's actual and total thrust to weight ratio.	Показывает фактическую и полную тяговооружённость аппарата.
+Shows the vessel's altitude above sea level.	Показывает высоту аппарата над уровнем моря.
+Shows the vessel's altitude above the terrain and water's surface, or altitude above underwater terrain whilst splashed down.	Показывает высоту аппарата над рельефом и поверхностью воды, либо над рельефом дна при посадке на воду.
+Shows the vessel's apoapsis height relative to sea level. (Apoapsis is the highest point of an orbit.)	Показывает высоту апоцентра аппарата относительно уровня моря. (Апоцентр — высшая точка орбиты.)
+Shows the vessel's current scientific situation. (Landed, Splashed, Flying Low/High, In Space Low/High)	Показывает текущую научную ситуацию аппарата. (Посадка, приводнение, полёт на малой/большой высоте, космос низкий/высокий)
+Shows the vessel's current stage delta velocity and total.	Показывает Delta-V текущей ступени и суммарное Delta-V.
+Shows the vessel's current stage delta velocity.	Показывает Delta-V текущей ступени.
+Shows the vessel's delta velocity for each stage.	Показывает Delta-V для каждой ступени.
+Shows the vessel's horizontal acceleration across a celestial body's surface.	Показывает горизонтальное ускорение аппарата относительно поверхности тела.
+Shows the vessel's horizontal speed across a celestial body's surface.	Показывает горизонтальную скорость аппарата относительно поверхности тела.
+Shows the vessel's latitude position around the celestial body. Latitude is the angle from the equator to poles.	Показывает широту аппарата относительно небесного тела. Широта — угол от экватора до полюсов.
+Shows the vessel's longitude around a celestial body. Longitude is the angle from the bodies prime meridian.	Показывает долготу аппарата относительно небесного тела. Долгота — угол от нулевого меридиана тела.
+Shows the vessel's longitude of periapsis.	Показывает долготу перицентра аппарата.
+Shows the vessel's longitude of the ascending node.	Показывает долготу восходящего узла аппарата.
+Shows the vessel's mach number.	Показывает число Маха аппарата.
+Shows the vessel's orbital eccentricity.	Показывает эксцентриситет орбиты аппарата.
+Shows the vessel's orbital inclination relative to the Equator.	Показывает наклонение орбиты аппарата относительно экватора.
+Shows the vessel's orbital speed.	Показывает орбитальную скорость аппарата.
+Shows the vessel's periapsis height relative to sea level. (Periapsis is the lowest point of an orbit.)	Показывает высоту перицентра аппарата относительно уровня моря. (Перицентр — низшая точка орбиты.)
+Shows the vessel's surface thrust to weight ratio.	Показывает тяговооружённость аппарата у поверхности.
+Shows the vessel's total delta velocity.	Показывает суммарное Delta-V аппарата.
+Shows the vessel's vertical acceleration up and down.	Показывает вертикальное ускорение аппарата вверх и вниз.
+Shows the vessel's vertical speed up and down.	Показывает вертикальную скорость аппарата вверх и вниз.
+Shows time until the vessel impacts the central object.	Показывает время до падения аппарата на центральное тело.
+Shows whether the current body has an atmosphere.	Показывает, есть ли у текущего тела атмосфера.
+Shows whether the current body has an oxygen rich atmosphere.	Показывает, богата ли атмосфера текущего тела кислородом.
+Shows you vessel's efficiency as a ratio of the current velocity and terminal velocity.  Less than 100% means that you are losing efficiency due to gravity and greater than 100% is due to drag.	Показывает эффективность полёта аппарата как отношение текущей скорости к предельной. Меньше 100% — потери из-за гравитации, больше 100% — из-за сопротивления воздуха.
+Shows your estimated impact position on the surface and the map.	Показывает расчётную точку падения на поверхности и на карте.
+The altitude of the SOI edge.	Высота границы сферы действия.
+The altitude where lower space begins.	Высота, с которой начинается ближний космос.
+The altitude where the orbital period equals the body's rotation period.	Высота, на которой период обращения равен периоду вращения тела.
+The altitude where the upper atmosphere begins.	Высота, с которой начинается верхняя атмосфера.
+The altitude where upper space begins.	Высота, с которой начинается дальний космос.
+The angle between velocity and the vessel's fuselage, along the vessel's horizontal axis. Aircraft should keep this at 0, rolling to turn instead.	Угол между вектором скорости и фюзеляжем аппарата по горизонтальной оси. У самолётов должен быть близок к 0 — для поворота используйте крен.
+The angle between velocity and the vessel's fuselage, along the vessel's vertical axis. Lift begins to decrease at 30 degrees, but you should generally keep it below 10, and below 5 in most situations.	Угол между вектором скорости и фюзеляжем аппарата по вертикальной оси. Подъёмная сила начинает падать от 30 градусов, но обычно его стоит держать ниже 10, а в большинстве случаев — ниже 5.
+The angle between velocity and the vessel's fuselage.	Угол между вектором скорости и фюзеляжем аппарата.
+The burn's total duration.	Полная длительность манёвра.
+The current gravity experienced by the vessel.	Текущая гравитация, действующая на аппарат.
+The eccentricity of the vessel's orbit after the burn.	Эксцентриситет орбиты аппарата после манёвра.
+The inclination of the vessel's orbit after the burn.	Наклонение орбиты аппарата после манёвра.
+The inclination of the vessel's orbit relative to the target after the burn.	Наклонение орбиты аппарата относительно цели после манёвра.
+The mass of the body.	Масса тела.
+The minimum safe altitude for orbiting.	Минимальная безопасная высота для орбиты.
+The part of the vessel that is enduring the highest temperature.	Деталь аппарата с наивысшей температурой.
+The part of the vessel that is enduring the lowest temperature.	Деталь аппарата с наименьшей температурой.
+The period of the vessel's orbit after the burn.	Период орбиты аппарата после манёвра.
+The phase angle for starting a Hohmann transfer.	Фазовый угол для начала гоманновского перехода.
+The radius of the body at sea level.	Радиус тела на уровне моря.
+The surface gravity of the body.	Гравитация тела у поверхности.
+The time to complete one orbit about the body's parent.	Время одного оборота вокруг родительского тела.
+The time to complete one revolution about the body's axis.	Время одного оборота тела вокруг своей оси.
+The time until the phase angle equals the transfer angle.	Время до совпадения фазового угла с углом перехода.
+The velocity needed to escape the SOI, starting from sea level.	Скорость, необходимая для выхода из сферы действия, от уровня моря.
+The vertical angle between velocity and the horizon.	Вертикальный угол между вектором скорости и горизонтом.
+This part is structually most critical. If it endures too high temperature there is a high chance for major structual failure!	Эта деталь наиболее критична по прочности. При слишком высокой температуре велика вероятность серьёзного разрушения конструкции!
+Thrust angle offset due to vessel asymmetries and gimballing	Отклонение угла тяги из-за асимметрии аппарата и качания двигателей
+Thrust torque due to vessel asymmetries and gimballing	Момент тяги из-за асимметрии аппарата и качания двигателей
+Time until suicide burn should start.	Время до начала тормозного манёвра.
+Time until the Manoeuvre should be started.	Время до начала манёвра.
+Time until the next closest approach to the target.	Время до следующего максимального сближения с целью.
+Time until the vessel crosses the target's orbit, going north.	Время до пересечения аппаратом орбиты цели при движении на север.
+Time until the vessel crosses the target's orbit, going south.	Время до пересечения аппаратом орбиты цели при движении на юг.
+Time until the vessel reaches the position of the Manoeuvre Node.	Время до достижения аппаратом узла манёвра.
+Total DeltaV of all maneuver nodes.	Суммарное Delta-V всех узлов манёвра.
+Total change in velocity during the burn.	Полное изменение скорости за манёвр.
+
+# --- Общий интерфейс (окна, кнопки, настройки, привязки клавиш) ---
+Sorry, no help information has been provided for this readout module.	К сожалению, для этого параметра справка не предусмотрена.
+<b>SAVE PRESET</b>	<b>СОХРАНИТЬ ПРЕСЕТ</b>
+AVAILABLE	ДОСТУПНО
+Accept	Принять
+BURN	ГОРЕНИЕ
+Bases	Базы
+Build Engineer Overlay:	Оверлей Build Engineer:
+Build Overlay	Оверлей сборки
+CLOSE	ЗАКРЫТЬ
+CLOSE EDITOR	ЗАКРЫТЬ РЕДАКТОР
+COST	СТОИМОСТЬ
+Cancel	Отмена
+Celestial Bodies	Небесные тела
+Character limit	Ограничение символов
+Clear	Очистить
+Close	Закрыть
+Compact mode collapses to the:	Компактный режим сворачивается к:
+DELETE SECTION	УДАЛИТЬ СЕКЦИЮ
+DONE	ГОТОВО
+Debris	Мусор
+Decimal places	Знаков после запятой
+Drag the section to reposition, right-click-drag to resize, Alt+MMB to edit	Перетащите секцию для перемещения, ПКМ+перетаскивание — для изменения размера, Alt+СКМ — для редактирования
+EDIT KEY BINDINGS	НАСТРОИТЬ КЛАВИШИ
+EVAs	ВКД
+Editor Show/Hide	Редактор: Показать/Скрыть
+Flags	Флаги
+Flight Engineer Career Limitations:	Ограничения карьеры Flight Engineer:
+Flight Engineer Toolbar Icon:	Значок Flight Engineer на панели:
+Flight Engineer activation mode:	Режим активации Flight Engineer:
+Flight Show/Hide	Полёт: Показать/Скрыть
+Focus Target	Фокус на цель
+Focus Vessel	Фокус на аппарат
+Go Back to Target Selection	Назад к выбору цели
+Go Back to Type Selection	Назад к выбору типа
+HUD Group 1 Show/Hide	HUD группа 1: Показать/Скрыть
+HUD Group 2 Show/Hide	HUD группа 2: Показать/Скрыть
+HUD Group 3 Show/Hide	HUD группа 3: Показать/Скрыть
+HUD Group 4 Show/Hide	HUD группа 4: Показать/Скрыть
+HUD background	Фон HUD
+Hide	Скрыть
+Hide name	Скрыть название
+INSTALL	УСТАНОВИТЬ
+INSTALLED	УСТАНОВЛЕНО
+ISP	УИ
+Informational Displays	Информационные дисплеи
+KERBAL ENGINEER REDUX 1.1.9.5p - CONTROL CENTRE	KERBAL ENGINEER REDUX 1.1.9.5p - ПУЛЬТ УПРАВЛЕНИЯ
+Kerbal Engineer Redux - Key Bindings	Kerbal Engineer Redux — Настройка клавиш
+Key Bindings:	Настройка клавиш:
+Landers	Посадочные модули
+Local Bodies	Локальные тела
+Log Simulation: 	Лог симуляции: 
+Look at Target	Смотреть на цель
+MASS	МАССА
+NEW CUSTOM SECTION	НОВАЯ СЕКЦИЯ
+No readouts are installed.	Нет установленных параметров.
+No targets found!	Цели не найдены!
+PARTS	ДЕТАЛИ
+Part Info Show/Hide	Инфо о детали: Показать/Скрыть
+Part Information (Hover Tooltips)	Информация о детали (подсказки при наведении)
+Planes	Самолёты
+Press the desired key to change it.	Нажмите нужную клавишу, чтобы изменить привязку.
+Probes	Зонды
+RCS BURN TIME	ВРЕМЯ РАБОТЫ РСУ
+RCS DELTA-V (MAX)	DELTA-V РСУ (МАКС)
+RCS ISP	УИ РСУ
+RCS THRUST	ТЯГА РСУ
+RCS TWR (MAX)	ТЯГОВООРУЖ. РСУ (МАКС)
+REMOVE	УДАЛИТЬ
+RESET	СБРОС
+RESOURCES	РЕСУРСЫ
+Relays	Ретрансляторы
+Remote Bodies	Удалённые тела
+Rovers	Роверы
+SEARCH:	ПОИСК:
+Search Results	Результаты поиска
+Select Key Bind	Выбор привязки клавиши
+Ships	Корабли
+Simulate using residual predictions:	Учитывать остатки топлива в расчёте:
+Simulate using vectored thrust values:	Учитывать вектор тяги в расчёте:
+Stack	Стек
+Stations	Станции
+Switch to Target	Переключиться на цель
+THRUST	ТЯГА
+TORQUE	МОМЕНТ
+TWR (MAX)	ТЯГОВООРУЖ. (МАКС)
+Text color	Цвет текста
+Use short name	Использовать краткое имя
+VESSEL	АППАРАТ
+Vectored Thrust: 	Векторная тяга: 
+Verbose Simulation Log:	Подробный лог симуляции:

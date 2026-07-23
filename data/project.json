@@ -96,15 +96,14 @@
     "summary": "Harmony-патч переводит окна, кнопки, переключатели и подсказки модов поверх их исходного интерфейса. Словари обновляются без пересборки DLL.",
     "addedAt": "2026-07-23",
     "method": "Harmony-патч GameData/kerbalru-ui-translator, перехват GUI.Label/Button/Box/Toggle/Window, GUILayout-аналоги, GUIContent, UnityEngine.UI.Text, Dropdown",
-    "modsCovered": 24,
-    "linesTranslated": 1926,
-    "uniqueKeys": 1867,
+    "modsCovered": 29,
+    "linesTranslated": 2517,
+    "uniqueKeys": 2410,
     "confirmedBugsFixedBeforeRelease": 42,
     "lowRiskNotesForLiveReview": 53,
     "modsNotInstalledInThisBuild": [
       "KerbalEngineer",
       "Trajectories",
-      "Kerbalism",
       "EditorExtensionsRedux"
     ],
     "docs": "docs/UI-TRANSLATION.md"

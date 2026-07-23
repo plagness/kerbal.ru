@@ -1,0 +1,52 @@
+# Kerbalism — residual hardcoded UI strings from Kerbalism112.kbin (renamed .dll, confirmed
+# Mono/.NET assembly via file(1); loaded by KerbalismBootstrap.dll for multi-KSP-version support).
+# Full monodis IL disassembly (197922 lines) against resolved dependencies (Assembly-CSharp,
+# UnityEngine modules, 0Harmony) from the local KSP install.
+#
+# Kerbalism already ships its own upstream Russian localization (Localization/ru.cfg, 1004 #LOC
+# keys) covering the vast majority of its windows (Habitat, Radiation, Science, Planner, Monitor,
+# Comfort, Reliability, ...) via a KERBALISM.Local static-field system populated from #LOC keys at
+# startup. Confirmed by IL trace: essentially every Panel::AddSection/AddContent/AddHeader/Title
+# call site sources its label/desc/tooltip strings from `ldsfld string KERBALISM.Local::*` fields,
+# not from literals in this DLL — correctly out of scope for this file.
+#
+# Two further findings, important for future passes on this mod:
+#  1) Kerbalism's primary custom UI widgets (KERBALISM.KsmGui.KsmGuiText, wrapping
+#     TMPro.TextMeshProUGUI — 55+ TextMeshProUGUI / 32 TMP_Text references in the IL) are NOT
+#     reachable by this Harmony translator at all: KerbalRuUiTranslator.cs only patches legacy
+#     IMGUI (GUI/GUILayout) calls, the 4 string-first GUIContent constructor overloads, and
+#     UnityEngine.UI.Text/Dropdown.OptionData — none of which TMPro.TMP_Text or KsmGuiText.set_Text
+#     go through. This is a tooling gap, not a content gap; whole KsmGui-based windows are
+#     currently untranslatable by this framework regardless of dictionary content.
+#  2) Of the legacy-IMGUI code Kerbalism does still use (Panel/Window/Message/Planner/Monitor
+#     classes), every icon-with-tooltip call (Panel::AddRightIcon, Panel::SetLeftIcon, and the
+#     Header/Entry left/right icon rendering in Panel::Render) constructs its GUIContent via the
+#     `GUIContent(Texture image, string tooltip)` overload — the one 2-arg (Texture,string)
+#     constructor KerbalRuUiTranslator.cs does NOT patch (it only patches the string-first
+#     (string,Texture) overload, a different constructor). Icon tooltips are therefore also
+#     unreachable by this translator today, independent of dictionary content — confirmed by IL
+#     trace on "open experiment window"/"open experiment info" (Device/DeviceIcon.tooltip) and the
+#     dozens of Panel/Icon.tooltip call sites in Panel::Render. Fixing either (1) or (2) is a
+#     KerbalRuUiTranslator.cs change (new Harmony patch targets), out of scope for this dictionary.
+#
+# After excluding Local-sourced strings, KsmGui/TMPro text, unpatched-overload icon tooltips,
+# Debug/Lib::Log-only diagnostics, ConfigNode/reflection/asset-path keys, and every literal that
+# only reaches a sink after string.Concat/BuildString/StringBuilder/ParamString.Format concatenation
+# (breaks exact-match by construction — e.g. "KERBALISM DEV BUILD ", "solar panel (nominal)",
+# "solar panel (estimated)", "N/A" is the sole survivor of one such branch — already covered by
+# MechJeb2.txt, not duplicated here), only 3 literals were confirmed to reach a patched sink
+# unmodified:
+#  - "Not enough sample storage available" / "There is no more useful data here": passed as the
+#    sole argument to KERBALISM.Message::Post(string), which stores it verbatim into a
+#    Message/Entry.msg field rendered via the patched GUI.Label(Rect, string) in Message::On_gui —
+#    but only when the player has Kerbalism's "use stock message system" preference OFF
+#    (PreferencesMessages.stockMessages == false); when that preference is ON, Message.Post routes
+#    through stock ScreenMessages.PostScreenMessage instead, which this translator does not patch.
+#    Translates correctly whenever the custom message window is in use; harmlessly inert otherwise.
+#  - "Comms connection too weak": literal branch return of ProtoSentinelDevice::get_Status()
+#    (background/unloaded-vessel Sentinel status), flows unmodified through
+#    Panel::AddContent -> Panel/Entry.value -> GUIContent(string,string) in Panel::Render — a
+#    patched constructor overload.
+Not enough sample storage available	Недостаточно места для образцов
+There is no more useful data here	Здесь больше нет полезных данных
+Comms connection too weak	Слишком слабый сигнал связи

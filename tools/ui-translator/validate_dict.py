@@ -11,7 +11,14 @@ TDIR = ROOT / "GameData" / "kerbalru-ui-translator" / "KerbalRuUiTranslations"
 # in MechJeb2 (Custom Info Window editor / Rover Waypoint window), but a part-geometry direction
 # in ProceduralParts. A flat global dictionary can't disambiguate by caller, so one of the two
 # wins at runtime (whichever file loads last) - accepted trade-off, see docs/UI-TRANSLATION.md.
-KNOWN_CROSS_MOD_AMBIGUITIES = {"Bottom", "Top"}
+# "Separator" is KerbalEngineer's cosmetic layout-divider readout (a UI spacer line in the section
+# editor) vs ProceduralParts' actual stage-separator part component -- unrelated concepts sharing
+# one English word, can't be reconciled with a single translation.
+# "Mach" is KerbalEngineer's deliberately terse ShortName abbreviation for the "Mach Number"
+# readout (space-constrained "Use short name" display mode) vs Waterfall's full spelled-out
+# "Mach" effect-parameter label ("Число Маха") -- shortening Waterfall's or expanding
+# KerbalEngineer's would defeat the purpose of one or the other.
+KNOWN_CROSS_MOD_AMBIGUITIES = {"Bottom", "Top", "Separator", "Mach"}
 
 def main():
     errors = []

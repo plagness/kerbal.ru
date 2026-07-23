@@ -1,0 +1,20 @@
+# EditorExtensionsRedux -- словарь UI-строк, извлечённых напрямую из скомпилированного
+# EditorExtensionsRedux.dll (релиз 1.12.0-3.4.7, github.com/linuxgurugamer/EditorExtensionsRedux).
+# Мод с версии 3.4.7 сам добавил полноценную локализацию (#LOC_EEX_1..164, см.
+# GameData/EditorExtensionsRedux/Localization/{en-us,ru}.cfg в этом репозитории) -- почти весь
+# GUILayout-текст уже проходит через Localizer.Format и не подменяется этим Harmony-словарём
+# (к моменту вызова GUILayout.Label/Button/Toggle строка уже переведена штатной системой мода).
+# Ниже -- только строки, подтверждённые полным дизассемблированием (monodis) как buквально
+# нелокализованные литералы, которые доходят до перехватываемых sink-функций БЕЗ обёртки
+# Localizer.Format и без string.Concat/string.Format (что убило бы точное совпадение).
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+# --- PartInfoWindow (отладочное окно "Инфо позиции детали", уже частично на #LOC_EEX_*) ---
+# Резервные ветки null-проверок, которые автор мода перевёл в соседних методах (ср. #LOC_EEX_70
+# "children null" -> "потомки null"), но пропустил в PartInfoWindow.AttachNodeLabels/SrfAttaches.
+nodes null	узлы null
+nodeTransform null	трансформ узла null
+
+# --- SettingsWindow: чекбокс, не переведённый автором (соседний #LOC_EEX_121 "Toggle No Offset
+# Limit:" переведён как "Без лимита смещения:" -- используем тот же устоявшийся термин) ---
+No Offset Limit enabled	Без лимита смещения

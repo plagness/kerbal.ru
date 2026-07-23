@@ -1,0 +1,62 @@
+# ContractConfigurator -- словарь UI-строк, извлечённых напрямую из скомпилированного
+# ContractConfigurator.dll (IL полностью дизассемблирован monodis, каждая строка проверена
+# до GUILayout.Label/Button/Toggle/Window или GUIContent(string,...)). Это только UI-хром
+# движка (окна редактора катсцен, отладочное окно, окно исключений) -- текст самих контрактов
+# (описания миссий, требования) идёт через #cc.*-ключи локализации мода (уже переведены в
+# ru.cfg этого же мода, см. docs/MAINTAINING.md) и здесь не дублируется.
+# KerKonConConExt.dll и CC_RemoteTech.dll проверены отдельно -- весь их текст тоже идёт через
+# #cc.*/Localizer, прямых литералов в GUI не найдено, добавлять нечего.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (см. tools/ui-translator).
+
+# --- Редактор катсцен (CutSceneConfigurator) ---
+Delete Cut Scene Action	Удалить действие катсцены
+Cameras	Камеры
+Actors	Актёры
+Actions	Действия
+If checked, moves to the next action before waiting for this one to complete.	При включении -- переход к следующему действию без ожидания завершения текущего.
+New	Новый
+Up	Вверх
+Down	Вниз
+Delete	Удалить
+Yes	Да
+No	Нет
+Name	Имя
+
+# --- Отладочное окно (DebugWindow) ---
+Reloading contracts...	Перезагрузка контрактов...
+Reload Contracts	Перезагрузить контракты
+Force Contract Generation	Принудительная генерация контрактов
+Legend:	Легенда:
+Met Requirement	Требование выполнено
+Unmet Requirement / Warnings	Требование не выполнено / предупреждения
+Disabled Item	Отключённый элемент
+Debug Log	Журнал отладки
+Contract Balancing	Баланс контрактов
+Location	Местоположение
+Latitude	Широта
+Longitude	Долгота
+Height	Высота над рельефом
+Altitude	Высота
+PQS City	Город PQS
+PQS Offset	Смещение PQS
+Contract Type	Тип контракта
+Body	Тело
+<color=#8bed8b>Rewards</color>	<color=#8bed8b>Награда</color>
+<color=#eded8b>Adv</color>	<color=#eded8b>Аванс</color>
+<color=#ed0b0b>Failure</color>	<color=#ed0b0b>Провал</color>
+<color=#8bed8b>Funds</color>	<color=#8bed8b>Финансы</color>
+<color=#8bed8b>Sci</color>	<color=#8bed8b>Науч</color>
+<color=#8bed8b>Rep</color>	<color=#8bed8b>Реп</color>
+<color=#eded8b>Funds</color>	<color=#eded8b>Финансы</color>
+<color=#ed0b0b>Funds</color>	<color=#ed0b0b>Финансы</color>
+<color=#ed0b0b>Rep</color>	<color=#ed0b0b>Реп</color>
+
+# --- Окно ошибки (ExceptionLogWindow) ---
+An unexpected exception occurred!  Please copy the error message below, and either post it on the Contract Configurator thread on the KSP forums, or raise an issue on our GitHub tracker.	Произошло непредвиденное исключение! Скопируйте сообщение об ошибке ниже и опубликуйте его в теме Contract Configurator на форуме KSP либо создайте issue в нашем трекере на GitHub.
+OK	ОК
+Ignore Exception	Игнорировать исключение
+
+# --- Редактор камеры катсцены (CutSceneCamera / FixedCamera) ---
+Enter the altitude above the terrain.	Введите высоту над рельефом.
+Set Position to Current	Использовать текущее положение
+Jump to Camera Position	Перейти к позиции камеры
