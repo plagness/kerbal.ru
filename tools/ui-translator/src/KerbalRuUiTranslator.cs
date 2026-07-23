@@ -137,6 +137,16 @@ namespace KerbalRuUiTranslator
         }
     }
 
+    // GUIContent(Texture image, string tooltip) - texture-first overload (icon tooltips, e.g.
+    // Kerbalism Panel::AddRightIcon/SetLeftIcon). Distinct from ctor3 above (string, Texture),
+    // which translates .text; here the only string parameter is the tooltip.
+    [HarmonyPatch(typeof(GUIContent))]
+    [HarmonyPatch(MethodType.Constructor, new[] { typeof(Texture), typeof(string) })]
+    class Patch_GUIContent_ctor5
+    {
+        static void Prefix(ref string tooltip) { tooltip = Loader.Translate(tooltip); }
+    }
+
     [HarmonyPatch(typeof(GUI), nameof(GUI.Label), new[] { typeof(Rect), typeof(string) })]
     class Patch_GUI_Label_s
     {
@@ -167,8 +177,22 @@ namespace KerbalRuUiTranslator
         static void Prefix(ref string text) { text = Loader.Translate(text); }
     }
 
+    [HarmonyPatch(typeof(GUI), nameof(GUI.Box), new[] { typeof(Rect), typeof(string), typeof(GUIStyle) })]
+    class Patch_GUI_Box_s_style
+    {
+        static void Prefix(ref string text) { text = Loader.Translate(text); }
+    }
+
     [HarmonyPatch(typeof(GUI), nameof(GUI.Toggle), new[] { typeof(Rect), typeof(bool), typeof(string) })]
     class Patch_GUI_Toggle_s
+    {
+        static void Prefix(ref string text) { text = Loader.Translate(text); }
+    }
+
+    // GUI.Toggle(Rect, bool, string, GUIStyle) - style overload used by KerbalEngineer's
+    // checkboxes exclusively; the 3-arg version above never matches its call sites.
+    [HarmonyPatch(typeof(GUI), nameof(GUI.Toggle), new[] { typeof(Rect), typeof(bool), typeof(string), typeof(GUIStyle) })]
+    class Patch_GUI_Toggle_s_style
     {
         static void Prefix(ref string text) { text = Loader.Translate(text); }
     }
@@ -203,10 +227,47 @@ namespace KerbalRuUiTranslator
         static void Prefix(ref string text) { text = Loader.Translate(text); }
     }
 
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.Box), new[] { typeof(string), typeof(GUIStyle), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_Box_s_style
+    {
+        static void Prefix(ref string text) { text = Loader.Translate(text); }
+    }
+
     [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.Toggle), new[] { typeof(bool), typeof(string), typeof(GUILayoutOption[]) })]
     class Patch_GUILayout_Toggle_s
     {
         static void Prefix(ref string text) { text = Loader.Translate(text); }
+    }
+
+    // GUILayout.Toggle(bool, string, GUIStyle, GUILayoutOption[]) - style overload, same
+    // KerbalEngineer situation as GUI.Toggle above.
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.Toggle), new[] { typeof(bool), typeof(string), typeof(GUIStyle), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_Toggle_s_style
+    {
+        static void Prefix(ref string text) { text = Loader.Translate(text); }
+    }
+
+    // GUILayout.Toolbar(int, string[], GUILayoutOption[]) (+ GUIStyle overload) - multi-tab
+    // widgets, e.g. EditorExtensionsRedux PartInfoWindow tabs ("Part"/"strut"/"srfAttach"/
+    // "attachNodes"/"camera"). Takes an array of labels, not a single string - translate in place.
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.Toolbar), new[] { typeof(int), typeof(string[]), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_Toolbar_s
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
+    }
+
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.Toolbar), new[] { typeof(int), typeof(string[]), typeof(GUIStyle), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_Toolbar_s_style
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
     }
 
     // Window titles - the single most important entry point (every mod window has one).
@@ -252,6 +313,29 @@ namespace KerbalRuUiTranslator
     // Dropdown option labels (e.g. tank/config selectors built with UnityEngine.UI.Dropdown).
     [HarmonyPatch(typeof(UnityEngine.UI.Dropdown.OptionData), "text", MethodType.Setter)]
     class Patch_UGUI_DropdownOption_set_text
+    {
+        static void Prefix(ref string value) { value = Loader.Translate(value); }
+    }
+
+    // ---------------- TMPro (TextMeshProUGUI / TMP_Text - modern Unity text rendering) ----------------
+    //
+    // Covers stock PopupDialog/DialogGUILabel/MultiOptionDialog (KSP itself builds these with
+    // TMPro), KerbalRenamer, B9PartSwitch, AJE, and the KsmGui-based Kerbalism windows.
+    //
+    // Resolution path (checked empirically, not assumed): TMPro.TMP_Text and
+    // TMPro.TextMeshProUGUI are NOT a separate TextMeshPro package/assembly in this KSP 1.x
+    // build - `monodis --typedef Assembly-CSharp.dll` shows both types typedef'd directly
+    // inside Assembly-CSharp.dll itself (KSP embeds TextMeshPro source rather than referencing
+    // Unity's TextMeshPro package). Assembly-CSharp.dll is already a build.sh -r: reference, so
+    // a plain "typeof(TMPro.TMP_Text)" resolves with zero new references and zero reflection -
+    // confirmed by a standalone mcs compile + Harmony.PatchAll smoke test before wiring this in.
+    // (A separate Unity.TextMeshPro.dll exists under GameData/ConformalDecals/Plugins - that is
+    // ConformalDecals' own bundled copy for its own use and is unrelated to Assembly-CSharp's
+    // built-in TMPro types; it is not referenced here and must not be confused with them.)
+    // Patching the base class TMP_Text also covers TextMeshProUGUI (TextMeshProUGUI : TMP_Text,
+    // confirmed via reflection: typeof(TextMeshProUGUI).IsSubclassOf(typeof(TMP_Text)) == true).
+    [HarmonyPatch(typeof(TMPro.TMP_Text), "text", MethodType.Setter)]
+    class Patch_TMP_Text_set_text
     {
         static void Prefix(ref string value) { value = Loader.Translate(value); }
     }
