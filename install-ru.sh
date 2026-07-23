@@ -71,7 +71,10 @@ fi
 say "Установка KSP: $KSP_PATH"
 
 CURRENT_VERSION="не установлена"
-[ -f "$KSP_PATH/.kerbalru-version" ] && CURRENT_VERSION="$(head -n1 "$KSP_PATH/.kerbalru-version" | tr -d '\r\n')"
+if [ -f "$KSP_PATH/.kerbalru-version" ]; then
+  FILE_VERSION="$(head -n1 "$KSP_PATH/.kerbalru-version" | tr -d '\r\n')"
+  [ -n "$FILE_VERSION" ] && CURRENT_VERSION="$FILE_VERSION"
+fi
 
 # Выбрать источник и версию.
 if [ -n "$REQUESTED_VERSION" ]; then
@@ -108,14 +111,67 @@ fi
 
 say "Установлено: $CURRENT_VERSION"
 say "Доступно: $REMOTE_VERSION ($CHANNEL)"
+
+# Определить: первая установка, обновление, откат или просто смена версии/канала.
+version_numeric_parts() {
+  [[ "$1" =~ ^([0-9]{2})\.([0-9]+)$ ]] && printf '%s %s\n' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"
+}
+ACTION="install"
+if [ "$CURRENT_VERSION" = "$REMOTE_VERSION" ]; then
+  ACTION="same"
+elif [ "$CHANNEL" = "main" ]; then
+  ACTION="main"
+elif [ "$CURRENT_VERSION" = "не установлена" ]; then
+  ACTION="install"
+else
+  CUR_Y="" CUR_N="" REM_Y="" REM_N=""
+  read -r CUR_Y CUR_N < <(version_numeric_parts "$CURRENT_VERSION") || true
+  read -r REM_Y REM_N < <(version_numeric_parts "$REMOTE_VERSION") || true
+  if [ -n "$CUR_Y" ] && [ -n "$REM_Y" ]; then
+    if [ "$REM_Y" -gt "$CUR_Y" ] || { [ "$REM_Y" -eq "$CUR_Y" ] && [ "$REM_N" -gt "$CUR_N" ]; }; then
+      ACTION="update"
+    else
+      ACTION="rollback"
+    fi
+  else
+    ACTION="switch"
+  fi
+fi
+
 if [ "$CHECK_ONLY" = true ]; then
-  [ "$CURRENT_VERSION" = "$REMOTE_VERSION" ] && ok "Установлена актуальная версия." || say "Доступно обновление. Запусти установщик без --check."
+  case "$ACTION" in
+    same)     ok "Установлена актуальная версия." ;;
+    install)  say "Русификатор не установлен. Будет установлена версия $REMOTE_VERSION — запусти установщик без --check." ;;
+    update)   say "Найдена версия $CURRENT_VERSION. Доступно обновление до $REMOTE_VERSION — запусти установщик без --check." ;;
+    rollback) say "Найдена версия $CURRENT_VERSION (новее запрошенной). Запусти установщик без --check, чтобы откатиться до $REMOTE_VERSION." ;;
+    main)
+      if [ "$CURRENT_VERSION" = "не установлена" ]; then
+        say "Русификатор не установлен. Запусти установщик без --check, чтобы установить тестовый канал main ($REMOTE_VERSION)."
+      else
+        say "Найдена версия $CURRENT_VERSION. Запусти установщик без --check, чтобы переключиться на тестовый канал main ($REMOTE_VERSION)."
+      fi ;;
+    switch)   say "Найдена версия $CURRENT_VERSION. Запусти установщик без --check, чтобы поставить $REMOTE_VERSION." ;;
+  esac
   exit 0
 fi
-if [ "$CURRENT_VERSION" = "$REMOTE_VERSION" ] && [ "$FORCE" = false ]; then
+if [ "$ACTION" = "same" ] && [ "$FORCE" = false ]; then
   ok "Уже установлена актуальная версия. Для переустановки добавь --force."
   exit 0
 fi
+
+case "$ACTION" in
+  install)  say "Русификатор ещё не установлен — будет выполнена установка версии $REMOTE_VERSION." ;;
+  update)   say "Найдена версия $CURRENT_VERSION — будет выполнено обновление до $REMOTE_VERSION." ;;
+  rollback) say "Найдена версия $CURRENT_VERSION — будет выполнен откат до $REMOTE_VERSION." ;;
+  main)
+    if [ "$CURRENT_VERSION" = "не установлена" ]; then
+      say "Русификатор не установлен — устанавливаю тестовый канал main ($REMOTE_VERSION)."
+    else
+      say "Найдена версия $CURRENT_VERSION — переключаюсь на тестовый канал main ($REMOTE_VERSION)."
+    fi ;;
+  switch)   say "Найдена версия $CURRENT_VERSION — устанавливаю $REMOTE_VERSION." ;;
+  same)     say "Установлена версия $CURRENT_VERSION — переустанавливаю по --force." ;;
+esac
 
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "$WORK_DIR"' EXIT

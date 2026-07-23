@@ -38,7 +38,11 @@ if (-not $KspPath -or -not (Test-Path (Join-Path $KspPath "GameData"))) {
 Say "Установка KSP: $KspPath"
 
 $versionFile = Join-Path $KspPath ".kerbalru-version"
-$currentVersion = if (Test-Path $versionFile) { (Get-Content $versionFile -First 1).Trim() } else { "не установлена" }
+$currentVersion = "не установлена"
+if (Test-Path $versionFile) {
+  $firstLine = Get-Content $versionFile -First 1
+  if ($firstLine) { $currentVersion = $firstLine.Trim() }
+}
 
 # Выбрать источник и версию.
 if ($Version) {
@@ -66,14 +70,62 @@ if ($Version) {
 
 Say "Установлено: $currentVersion"
 Say "Доступно: $remoteVersion ($Channel)"
+
+# Определить: первая установка, обновление, откат или просто смена версии/канала.
+function Get-VersionParts([string]$v) {
+  if ($v -match '^(\d{2})\.(\d+)$') { return @([int]$Matches[1], [int]$Matches[2]) }
+  return $null
+}
+$action = "install"
+if ($currentVersion -eq $remoteVersion) {
+  $action = "same"
+} elseif ($Channel -eq "main") {
+  $action = "main"
+} elseif ($currentVersion -eq "не установлена") {
+  $action = "install"
+} else {
+  $curParts = Get-VersionParts $currentVersion
+  $remParts = Get-VersionParts $remoteVersion
+  if ($curParts -and $remParts) {
+    if (($remParts[0] -gt $curParts[0]) -or ($remParts[0] -eq $curParts[0] -and $remParts[1] -gt $curParts[1])) {
+      $action = "update"
+    } else {
+      $action = "rollback"
+    }
+  } else {
+    $action = "switch"
+  }
+}
+
 if ($Check) {
-  if ($currentVersion -eq $remoteVersion) { Done "Установлена актуальная версия." }
-  else { Say "Доступно обновление. Запусти установщик без -Check." }
+  switch ($action) {
+    "same"     { Done "Установлена актуальная версия." }
+    "install"  { Say "Русификатор не установлен. Будет установлена версия $remoteVersion — запусти установщик без -Check." }
+    "update"   { Say "Найдена версия $currentVersion. Доступно обновление до $remoteVersion — запусти установщик без -Check." }
+    "rollback" { Say "Найдена версия $currentVersion (новее запрошенной). Запусти установщик без -Check, чтобы откатиться до $remoteVersion." }
+    "main"     {
+      if ($currentVersion -eq "не установлена") { Say "Русификатор не установлен. Запусти установщик без -Check, чтобы установить тестовый канал main ($remoteVersion)." }
+      else { Say "Найдена версия $currentVersion. Запусти установщик без -Check, чтобы переключиться на тестовый канал main ($remoteVersion)." }
+    }
+    "switch"   { Say "Найдена версия $currentVersion. Запусти установщик без -Check, чтобы поставить $remoteVersion." }
+  }
   exit 0
 }
-if ($currentVersion -eq $remoteVersion -and -not $Force) {
+if ($action -eq "same" -and -not $Force) {
   Done "Уже установлена актуальная версия. Для переустановки добавь -Force."
   exit 0
+}
+
+switch ($action) {
+  "install"  { Say "Русификатор ещё не установлен — будет выполнена установка версии $remoteVersion." }
+  "update"   { Say "Найдена версия $currentVersion — будет выполнено обновление до $remoteVersion." }
+  "rollback" { Say "Найдена версия $currentVersion — будет выполнен откат до $remoteVersion." }
+  "main"     {
+    if ($currentVersion -eq "не установлена") { Say "Русификатор не установлен — устанавливаю тестовый канал main ($remoteVersion)." }
+    else { Say "Найдена версия $currentVersion — переключаюсь на тестовый канал main ($remoteVersion)." }
+  }
+  "switch"   { Say "Найдена версия $currentVersion — устанавливаю $remoteVersion." }
+  "same"     { Say "Установлена версия $currentVersion — переустанавливаю по -Force." }
 }
 
 $workDir = Join-Path $env:TEMP ("kerbalru_" + [guid]::NewGuid())
