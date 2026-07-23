@@ -172,12 +172,35 @@
   .install-path-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;border:1px solid var(--line-cyan);background:rgba(166,232,110,.07);color:var(--green);font-size:1.35rem}
   .install-path h3{margin:0;color:#fff;font-size:1.04rem}
   .install-path-badge{display:block;margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.7px;text-transform:uppercase;color:var(--orange)}
-  .install-path-description{min-height:7.7em;margin:15px 0;color:var(--txt-dim);font-size:.86rem;line-height:1.62}
+  .install-path-description{margin:15px 0;color:var(--txt-dim);font-size:.86rem;line-height:1.62}
   .install-requirements{margin:0 0 16px;padding:0;list-style:none}
   .install-requirements li{position:relative;padding-left:17px;margin:7px 0;color:#c8d2cc;font-size:.77rem;line-height:1.45}
   .install-requirements li::before{content:'';position:absolute;left:0;top:.58em;width:6px;height:6px;border:1px solid var(--green);border-radius:50%}
   .install-command-label{display:flex;align-items:center;gap:7px;margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.5px;text-transform:uppercase;color:var(--txt-faint)}
   .install-path .code{margin:6px 0}.install-path .code pre{font-size:.68rem;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+  .install-subtitle{display:flex;align-items:center;gap:10px;margin:22px 0 11px;color:#fff;font-size:.84rem;font-weight:700}
+  .install-subtitle::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,var(--line),transparent)}
+  .install-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none;counter-reset:install-flow}
+  .install-flow li{position:relative;min-height:105px;padding:13px 12px 12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.012)}
+  .install-flow li::before{counter-increment:install-flow;content:counter(install-flow);display:grid;place-items:center;width:25px;height:25px;margin-bottom:10px;border:1px solid rgba(166,232,110,.42);border-radius:7px;background:rgba(166,232,110,.08);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700}
+  .install-flow b{display:block;color:#fff;font-size:.72rem;line-height:1.35}.install-flow span{display:block;margin-top:4px;color:var(--txt-dim);font-size:.65rem;line-height:1.42}
+  .install-platforms{margin-top:23px;padding-top:2px}
+  .install-platform-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .install-platform-tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:43px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.012);color:var(--txt-dim);font-size:.72rem;font-weight:650;cursor:pointer;transition:border-color .18s,background .18s,color .18s}
+  .install-platform-tab:hover{border-color:var(--line-cyan);color:#fff}.install-platform-tab.is-active{border-color:rgba(166,232,110,.52);background:rgba(166,232,110,.09);color:var(--green);box-shadow:0 12px 32px -27px var(--green-glow)}
+  .install-platform-tab:focus-visible{outline:2px solid var(--green);outline-offset:2px}.install-platform-tab .ic{font-size:1rem}
+  .install-platform-panel{margin-top:10px;padding:17px;border:1px solid var(--line);border-radius:13px;background:rgba(3,9,8,.38);animation:install-reveal .24s ease}
+  .install-platform-lead{margin:0 0 15px;color:#c7d2cc;font-size:.78rem;line-height:1.55}
+  .install-guide-steps{counter-reset:install-step;margin:0;padding:0;list-style:none}
+  .install-guide-steps>li{position:relative;min-height:38px;padding:0 0 17px 42px;color:var(--txt-dim);font-size:.76rem;line-height:1.52}
+  .install-guide-steps>li:last-child{padding-bottom:0}.install-guide-steps>li::before{counter-increment:install-step;content:counter(install-step);position:absolute;left:0;top:0;display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line-cyan);border-radius:8px;background:rgba(166,232,110,.06);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700}
+  .install-guide-steps>li:not(:last-child)::after{content:'';position:absolute;left:14px;top:30px;bottom:1px;width:1px;background:linear-gradient(var(--line-cyan),transparent)}
+  .install-guide-steps b{display:block;margin-bottom:2px;color:#fff;font-size:.79rem}.install-guide-steps p{margin:0}
+  .install-guide-steps .code{margin:9px 0 0}.install-guide-link{display:inline-flex;align-items:center;gap:5px;margin-top:7px;color:var(--orange);font-size:.72rem}.install-guide-link .ic{font-size:.85rem}
+  .install-platform-note{display:flex;gap:9px;margin:14px 0 0;padding:10px 12px;border-left:2px solid var(--orange);border-radius:0 9px 9px 0;background:rgba(255,169,77,.055);color:var(--txt-dim);font-size:.72rem;line-height:1.5}.install-platform-note .ic{flex:0 0 auto;margin-top:2px;color:var(--orange)}
+  .install-manual{margin-top:16px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.012);overflow:hidden}
+  .install-manual summary{display:flex;align-items:center;gap:9px;padding:13px 14px;color:#dce7e0;font-size:.76rem;font-weight:650;cursor:pointer;list-style:none}.install-manual summary::-webkit-details-marker{display:none}.install-manual summary .ic{color:var(--orange);transition:transform .18s}.install-manual[open] summary .ic{transform:rotate(90deg)}
+  .install-manual-body{padding:0 14px 14px;border-top:1px solid var(--line)}.install-manual-body>p{margin:13px 0;color:var(--txt-dim);font-size:.74rem;line-height:1.55}
   .install-result{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);color:var(--green);font-size:.77rem;line-height:1.5}
   .install-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
   .install-note{display:flex;gap:9px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.012);color:var(--txt-dim);font-size:.77rem}
@@ -318,7 +341,7 @@
   }
   @media(max-width:560px){
     .card{padding:22px 18px}.mods-card{padding:0}.mods-intro{padding:22px 18px 18px}.sec-head{gap:9px}.sec-ico{display:none}.sec-num{font-size:.58rem}
-    .install-choices,.install-notes,.performance-grid,.performance-method{grid-template-columns:1fr}.install-choice{min-height:80px}.install-path{padding:18px}.install-path-description{min-height:0}.catalog-tools{grid-template-columns:1fr;padding:13px}.catalog-filters{justify-content:flex-start}.coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.ui-translation{grid-template-columns:42px minmax(0,1fr);padding:14px;gap:12px}.ui-translation-icon{width:42px;height:42px}.ui-translation-stats{grid-column:1/-1;grid-template-columns:repeat(2,1fr);width:100%}.catalog-label{padding:14px}
+    .install-choices,.install-notes,.performance-grid,.performance-method{grid-template-columns:1fr}.install-choice{min-height:80px}.install-path{padding:18px}.install-flow{grid-template-columns:1fr 1fr}.install-flow li:last-child{grid-column:1/-1}.install-platform-tabs{grid-template-columns:1fr 1fr}.install-platform-panel{padding:14px}.catalog-tools{grid-template-columns:1fr;padding:13px}.catalog-filters{justify-content:flex-start}.coverage-overview{grid-template-columns:1fr;gap:13px}.coverage-total{align-items:center;text-align:center}.coverage-total b{font-size:4.7rem}.coverage-total span,.coverage-total small{margin-left:0}.ui-translation{grid-template-columns:42px minmax(0,1fr);padding:14px;gap:12px}.ui-translation-icon{width:42px;height:42px}.ui-translation-stats{grid-column:1/-1;grid-template-columns:repeat(2,1fr);width:100%}.catalog-label{padding:14px}
     .project-meta{justify-content:flex-start}
     .mod-summary{grid-template-columns:42px minmax(0,1fr) auto 17px;gap:10px;padding:15px 14px}
     .mod-icon{width:42px;height:42px;border-radius:12px;font-size:1.25rem}
@@ -552,31 +575,70 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
       }
     });
   }
-  function renderInstallation(site){
-    var installation=site.installation||{},paths=document.querySelector('[data-install-paths]'),notes=document.querySelector('[data-install-notes]');
+  function renderInstallation(data){
+    var site=data.site||{},release=data.release||{},links=data.links||{},installation=site.installation||{},paths=document.querySelector('[data-install-paths]'),notes=document.querySelector('[data-install-notes]');
+    var releaseDownloadUrl=(links.repository||'https://github.com/plagness/kerbal.ru')+'/archive/refs/tags/'+escapeHtml(release.version||'')+'.zip';
     all('[data-install-eyebrow]',installation.eyebrow||'01 / УСТАНОВКА');
     all('[data-install-title]',installation.title||'Выбери один из двух путей');
     all('[data-install-intro]',installation.intro||'');
-    function pathMarkup(path){
+    function codeMarkup(code){
+      return code?'<div class="code"><button class="copy" type="button">COPY</button><pre>'+escapeHtml(code)+'</pre></div>':'';
+    }
+    function guideStepsMarkup(steps){
+      return'<ol class="install-guide-steps">'+(steps||[]).map(function(step){
+        var links=(step.links||[]).map(function(link){
+          var releaseDownload=link.releaseDownload===true;
+          return'<a class="install-guide-link"'+(releaseDownload?' data-release-download':'')+' href="'+(releaseDownload?releaseDownloadUrl:escapeHtml(link.url))+'"><svg class="ic"><use href="#i-chevron-right"/></svg>'+escapeHtml(link.label)+'</a>';
+        }).join('');
+        return'<li><b>'+escapeHtml(step.title)+'</b>'+(step.text?'<p>'+escapeHtml(step.text)+'</p>':'')+codeMarkup(step.code)+links+'</li>';
+      }).join('')+'</ol>';
+    }
+    function platformMarkup(platform){
+      var manual=platform.manual||{},manualMarkup='';
+      if(manual.title){
+        manualMarkup='<details class="install-manual"><summary><svg class="ic"><use href="#i-chevron-right"/></svg>'+escapeHtml(manual.title)+'</summary><div class="install-manual-body">'+(manual.intro?'<p>'+escapeHtml(manual.intro)+'</p>':'')+guideStepsMarkup(manual.steps||[])+'</div></details>';
+      }
+      return'<div class="install-platform-panel" id="install-platform-panel" role="tabpanel"><p class="install-platform-lead">'+escapeHtml(platform.lead||'')+'</p>'+guideStepsMarkup(platform.steps||[])+(platform.note?'<div class="install-platform-note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span>'+escapeHtml(platform.note)+'</span></div>':'')+manualMarkup+'</div>';
+    }
+    function pathMarkup(path,platformId){
       var requirements=(path.requirements||[]).map(function(item){return'<li>'+escapeHtml(item)+'</li>'}).join('');
       var commands=(path.commands||[]).map(function(command){
         return'<div class="install-command-label"><svg class="ic"><use href="#'+safeIcon(command.icon)+'"/></svg>'+escapeHtml(command.platform)+'</div><div class="code"><button class="copy" type="button">COPY</button><pre>'+escapeHtml(command.code)+'</pre></div>';
       }).join('');
-      return'<article class="install-path" data-install-mode="'+escapeHtml(path.id)+'"><div class="install-path-head"><span class="install-path-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><div><h3>'+escapeHtml(path.title)+'</h3><span class="install-path-badge">'+escapeHtml(path.badge)+'</span></div></div><p class="install-path-description">'+escapeHtml(path.description)+'</p><ul class="install-requirements">'+requirements+'</ul>'+commands+'<p class="install-result">'+escapeHtml(path.result)+'</p></article>';
+      var flow=(path.flow||[]).length?'<div class="install-subtitle">'+escapeHtml(path.flowTitle||'Как пройдёт установка')+'</div><ol class="install-flow">'+path.flow.map(function(item){return'<li><b>'+escapeHtml(item.title)+'</b><span>'+escapeHtml(item.text)+'</span></li>'}).join('')+'</ol>':'';
+      var platforms=path.platforms||[],activePlatform=platforms.find(function(platform){return platform.id===platformId})||platforms[0],platformSection='';
+      if(activePlatform){
+        var platformTabs=platforms.map(function(platform){
+          var active=platform===activePlatform;
+          return'<button class="install-platform-tab'+(active?' is-active':'')+'" type="button" role="tab" aria-selected="'+(active?'true':'false')+'" aria-controls="install-platform-panel" data-install-platform="'+escapeHtml(platform.id)+'"><svg class="ic"><use href="#'+safeIcon(platform.icon)+'"/></svg>'+escapeHtml(platform.label)+'</button>';
+        }).join('');
+        platformSection='<div class="install-platforms"><div class="install-subtitle">'+escapeHtml(path.platformTitle||'Инструкция для твоей платформы')+'</div><div class="install-platform-tabs" role="tablist" aria-label="Платформа">'+platformTabs+'</div>'+platformMarkup(activePlatform)+'</div>';
+      }
+      var fallback=!platforms.length?'<ul class="install-requirements">'+requirements+'</ul>'+commands:'';
+      return'<article class="install-path" data-install-mode="'+escapeHtml(path.id)+'"><div class="install-path-head"><span class="install-path-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><div><h3>'+escapeHtml(path.title)+'</h3><span class="install-path-badge">'+escapeHtml(path.badge)+'</span></div></div><p class="install-path-description">'+escapeHtml(path.description)+'</p>'+flow+platformSection+fallback+'<p class="install-result">'+escapeHtml(path.result)+'</p></article>';
     }
     if(paths){
+      var activePlatforms={};
       var choices=(installation.paths||[]).map(function(path){
         return'<button class="install-choice" type="button" role="tab" aria-selected="false" aria-controls="install-selected-path" data-install-choice="'+escapeHtml(path.id)+'"><span class="install-choice-icon"><svg class="ic"><use href="#'+safeIcon(path.icon)+'"/></svg></span><span class="install-choice-copy"><b>'+escapeHtml(path.title)+'</b><small>'+escapeHtml(path.badge)+'</small></span><span class="install-choice-action"><span class="install-choice-action-label">Выбрать</span><svg class="ic"><use href="#i-chevron-right"/></svg></span></button>';
       }).join('');
       paths.innerHTML='<div class="install-choices" role="tablist" aria-label="Вариант установки">'+choices+'</div><div id="install-selected-path" class="install-result-panel" role="tabpanel" aria-live="polite"><div class="install-empty"><svg class="ic"><use href="#i-chevron-right"/></svg>Выбери вариант — здесь появится готовая инструкция</div></div>';
       paths.addEventListener('click',function(event){
-        var button=event.target.closest('[data-install-choice]');if(!button||!paths.contains(button))return;
-        var selectedId=button.getAttribute('data-install-choice'),selected=(installation.paths||[]).find(function(path){return path.id===selectedId}),result=paths.querySelector('.install-result-panel');
-        paths.querySelectorAll('[data-install-choice]').forEach(function(choice){var active=choice===button;choice.classList.toggle('is-selected',active);choice.setAttribute('aria-selected',active?'true':'false');var label=choice.querySelector('.install-choice-action-label');if(label)label.textContent=active?'Открыто':'Выбрать'});
-        if(selected&&result)result.innerHTML=pathMarkup(selected);
+        var result=paths.querySelector('.install-result-panel'),choiceButton=event.target.closest('[data-install-choice]');
+        if(choiceButton&&paths.contains(choiceButton)){
+          var selectedId=choiceButton.getAttribute('data-install-choice'),selected=(installation.paths||[]).find(function(path){return path.id===selectedId});
+          paths.querySelectorAll('[data-install-choice]').forEach(function(choice){var active=choice===choiceButton;choice.classList.toggle('is-selected',active);choice.setAttribute('aria-selected',active?'true':'false');var label=choice.querySelector('.install-choice-action-label');if(label)label.textContent=active?'Открыто':'Выбрать'});
+          if(selected&&result)result.innerHTML=pathMarkup(selected,activePlatforms[selectedId]);
+          return;
+        }
+        var platformButton=event.target.closest('[data-install-platform]');
+        if(platformButton&&paths.contains(platformButton)){
+          var activeChoice=paths.querySelector('[data-install-choice].is-selected'),activeId=activeChoice&&activeChoice.getAttribute('data-install-choice'),activePath=(installation.paths||[]).find(function(path){return path.id===activeId});
+          if(activePath&&result){activePlatforms[activeId]=platformButton.getAttribute('data-install-platform');result.innerHTML=pathMarkup(activePath,activePlatforms[activeId])}
+        }
       });
     }
-    if(notes)notes.innerHTML=(installation.notes||[]).map(function(note){return'<div class="install-note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span>'+escapeHtml(note)+'</span></div>'}).join('');
+    if(notes)notes.innerHTML=(installation.notes||[]).map(function(note){return'<div class="install-note"><svg class="ic"><use href="#i-alert-triangle"/></svg><span>'+escapeHtml(String(note).replace(/\{version\}/g,release.version||''))+'</span></div>'}).join('');
   }
   function peopleById(site){
     var result={};(site.contributors||[]).forEach(function(person){result[person.id]=person});return result;
@@ -688,7 +750,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     var inventory=data.inventory,coverage=data.coverage,active=coverage[coverage.active],release=data.release,ui=data.uiTranslation||{},links=data.links||{};
     var uiInventoryAdditions=Array.isArray(ui.inventoryAdditions)?ui.inventoryAdditions.length:0,compositionCount=Math.min(inventory.components,inventory.withRussian+uiInventoryAdditions),composition=percent(compositionCount,inventory.components,false),untranslated=inventory.translationCandidates+inventory.serviceComponents;
     renderContent((data.site&&data.site.content)||{});
-    renderInstallation(data.site||{});
+    renderInstallation(data);
     all('[data-project-version]',release.version);all('[data-project-updated]',displayDate(data.updatedAt));all('[data-release-channel]',release.channel);all('[data-game-version]',data.game.version);
     document.querySelectorAll('[data-project-updated]').forEach(function(node){node.setAttribute('datetime',data.updatedAt)});
     document.querySelectorAll('[data-release-link]').forEach(function(link){link.href=release.url});
@@ -736,8 +798,21 @@ if(modList)modList.addEventListener('click',function(event){
 document.addEventListener('click',function(event){
   var btn=event.target.closest('.code .copy');if(!btn)return;
   var pre=btn.parentElement.querySelector('pre'),text=pre?pre.innerText:'';
-  function done(){var original=btn.textContent;btn.textContent='OK';btn.classList.add('done');setTimeout(function(){btn.textContent=original;btn.classList.remove('done')},1300)}
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done);
+  var settled=false,timer;
+  function feedback(label){var original=btn.textContent;btn.textContent=label;btn.classList.add('done');setTimeout(function(){btn.textContent=original;btn.classList.remove('done')},1600)}
+  function done(){if(settled)return;settled=true;clearTimeout(timer);feedback('OK')}
+  function fallback(){
+    if(settled)return;settled=true;clearTimeout(timer);
+    var input=document.createElement('textarea');input.value=text;input.setAttribute('readonly','');input.style.cssText='position:fixed;inset:auto auto 0 0;opacity:0;pointer-events:none';
+    document.body.appendChild(input);input.select();
+    var copied=false;try{copied=document.execCommand('copy')}catch(error){}
+    input.remove();
+    if(copied){feedback('OK');return}
+    if(pre&&window.getSelection){var selection=window.getSelection(),range=document.createRange();range.selectNodeContents(pre);selection.removeAllRanges();selection.addRange(range)}
+    feedback('CTRL+C');
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){timer=setTimeout(fallback,650);navigator.clipboard.writeText(text).then(done).catch(fallback)}
+  else fallback();
 });
 (function(){
   var els=document.querySelectorAll('.reveal');
@@ -1069,7 +1144,7 @@ document.addEventListener('click',function(event){
   function preciseVector(vector){return{x:+vector.x.toFixed(6),y:+vector.y.toFixed(6),z:+vector.z.toFixed(6)}}
   window.render_game_to_text=function(){scene.updateMatrixWorld(true);rocket.getWorldPosition(rocketWorld);var approaching=0,receding=0,projectData=window.__kerbalProjectData,selectedInstall=document.querySelector('[data-install-choice].is-selected'),installPanel=document.querySelector('#install-selected-path [data-install-mode]');asteroids.forEach(function(asteroid){if(asteroid.userData.velocity.z>0)approaching++;else if(asteroid.userData.velocity.z<0)receding++});var nearestAsteroids=asteroids.slice().sort(function(a,b){return a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position)}).slice(0,8).map(function(asteroid){return{position:roundedVector(asteroid.position),velocity:preciseVector(asteroid.userData.velocity),radius:+asteroid.userData.radius.toFixed(3),orbitRadius:+asteroid.position.distanceTo(asteroidOrbitFocus).toFixed(3),eccentricity:+asteroid.userData.eccentricity.toFixed(3)}});var stages=detachedStages.map(function(stage){stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);return{index:stage.userData.stageIndex,state:stage.userData.destroyed?'destroyed':'detached',position:roundedVector(stageWorldCenter),speed:+stage.userData.velocity.length().toFixed(6),collision:stage.userData.destroyedBy||null}});return JSON.stringify({coordinateSystem:'world units; origin at scene center; +x right, +y up, +z toward camera',project:{dataState:document.documentElement.dataset.projectData||'loading',version:projectData&&projectData.release.version,catalogComponents:projectData&&projectData.inventory.components,installationPaths:projectData&&projectData.site.installation.paths.length,performanceDevices:projectData&&projectData.site.performance.devices.length,contributors:projectData&&projectData.site.contributors.length,uiTranslationMods:projectData&&projectData.uiTranslation.modsCovered},interface:{installation:{selected:selectedInstall&&selectedInstall.getAttribute('data-install-choice')||null,instructionVisible:!!installPanel,copyButtons:installPanel?installPanel.querySelectorAll('.copy').length:0}},mission:{cameraProgress:+pageSmooth.toFixed(3),flightProgress:+flightProgress.toFixed(3),rocketLanded:rocketLanded,rocketPosition:roundedVector(rocketWorld)},earth:{state:earthExploded?'exploded':'intact'},asteroids:{model:'newtonian heliocentric orbits with local celestial gravity and elastic collisions',active:asteroids.length,timeScale:+asteroidPhysicsTimeScale.toFixed(2),gravityFocus:roundedVector(asteroidOrbitFocus),approaching:approaching,receding:receding,collisions:asteroidCollisionCount,nearest:nearestAsteroids},stages:{detached:stages.length,destroyed:stageImpactCount,activeBursts:stageImpactBursts.length,items:stages,lastImpact:lastStageImpact},audio:{policy:'sound only on direct Earth click'}},null,2)};
   var renderSceneToText=window.render_game_to_text;
-  window.render_game_to_text=function(){var state=JSON.parse(renderSceneToText()),activeCatalogFilter=document.querySelector('[data-mod-filter].is-active'),visibleCatalog=document.querySelector('[data-catalog-visible]');state.interface.catalog={filter:activeCatalogFilter&&activeCatalogFilter.getAttribute('data-mod-filter')||null,visible:visibleCatalog?Number(visibleCatalog.textContent):0,total:window.__kerbalProjectData&&window.__kerbalProjectData.inventory.components||0};return JSON.stringify(state,null,2)};
+  window.render_game_to_text=function(){var state=JSON.parse(renderSceneToText()),activeCatalogFilter=document.querySelector('[data-mod-filter].is-active'),visibleCatalog=document.querySelector('[data-catalog-visible]'),activeInstallPlatform=document.querySelector('[data-install-platform].is-active'),installPanel=document.querySelector('#install-selected-path [data-install-mode]');state.interface.catalog={filter:activeCatalogFilter&&activeCatalogFilter.getAttribute('data-mod-filter')||null,visible:visibleCatalog?Number(visibleCatalog.textContent):0,total:window.__kerbalProjectData&&window.__kerbalProjectData.inventory.components||0};state.interface.installation.platform=activeInstallPlatform&&activeInstallPlatform.getAttribute('data-install-platform')||null;state.interface.installation.steps=installPanel?installPanel.querySelectorAll('.install-guide-steps>li').length:0;state.interface.installation.manualOpen=!!(installPanel&&installPanel.querySelector('.install-manual[open]'));return JSON.stringify(state,null,2)};
   if(location.hostname==='127.0.0.1'||location.hostname==='localhost')window.__kerbalSpaceQA={asteroidDepths:function(){return asteroids.map(function(asteroid,index){return{index:index,x:asteroid.position.x,y:asteroid.position.y,z:asteroid.position.z,speed:asteroid.userData.velocity.length(),orbitRadius:asteroid.position.distanceTo(asteroidOrbitFocus)}})},impactStage:function(index){index=index||0;detachRocketStage(index);var stage=nasaStages[index],asteroid=asteroids[0];if(!stage||!stage.userData.detached||!asteroid)return false;stage.userData.age=240;stage.updateMatrixWorld(true);stageWorldCenter.copy(stage.userData.localCenter).applyMatrix4(stage.matrixWorld);asteroid.position.copy(stageWorldCenter).add(new THREE.Vector3(stage.userData.collisionRadius+asteroid.userData.radius-.012,0,0));asteroid.userData.velocity.copy(stage.userData.velocity).add(new THREE.Vector3(-.00028,0,0));scene.updateMatrixWorld(true);return true}};
   requestAnimationFrame(loop);
 

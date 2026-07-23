@@ -147,21 +147,89 @@ def load_and_validate() -> dict:
             "badge",
             "icon",
             "description",
-            "requirements",
-            "commands",
+            "flow",
+            "platforms",
             "result",
         ):
             if not path.get(field):
                 errors.append(f"site.installation.paths.{path_id}.{field} обязателен")
-        if len(path.get("commands", [])) != 2:
+        flow = path.get("flow", [])
+        if len(flow) < 4:
             errors.append(
-                f"site.installation.paths.{path_id}.commands должен содержать Unix и Windows"
+                f"site.installation.paths.{path_id}.flow должен подробно описывать маршрут"
             )
-        for command in path.get("commands", []):
-            if not command.get("platform") or not command.get("code"):
+        for item in flow:
+            if not isinstance(item, dict) or not item.get("title") or not item.get("text"):
                 errors.append(
-                    f"site.installation.paths.{path_id}.commands содержит неполную команду"
+                    f"site.installation.paths.{path_id}.flow содержит неполный шаг"
                 )
+        platforms = path.get("platforms", [])
+        platforms_by_id = {
+            platform.get("id"): platform
+            for platform in platforms
+            if isinstance(platform, dict)
+        }
+        if set(platforms_by_id) != {"windows", "macos", "linux", "deck"}:
+            errors.append(
+                f"site.installation.paths.{path_id}.platforms должен содержать windows, macos, linux и deck"
+            )
+        all_step_code: list[str] = []
+        for platform_id, platform in platforms_by_id.items():
+            for field in ("label", "icon", "lead", "steps"):
+                if not platform.get(field):
+                    errors.append(
+                        f"site.installation.paths.{path_id}.platforms.{platform_id}.{field} обязателен"
+                    )
+            if len(platform.get("steps", [])) < 3:
+                errors.append(
+                    f"site.installation.paths.{path_id}.platforms.{platform_id}.steps слишком короткий"
+                )
+            step_groups = [
+                (
+                    f"site.installation.paths.{path_id}.platforms.{platform_id}.steps",
+                    platform.get("steps", []),
+                )
+            ]
+            manual = platform.get("manual", {})
+            if manual:
+                if not manual.get("title") or not manual.get("steps"):
+                    errors.append(
+                        f"site.installation.paths.{path_id}.platforms.{platform_id}.manual неполный"
+                    )
+                step_groups.append(
+                    (
+                        f"site.installation.paths.{path_id}.platforms.{platform_id}.manual.steps",
+                        manual.get("steps", []),
+                    )
+                )
+            for step_path, steps in step_groups:
+                for step in steps:
+                    if not isinstance(step, dict) or not step.get("title"):
+                        errors.append(f"{step_path} содержит шаг без title")
+                        continue
+                    if not any(step.get(field) for field in ("text", "code", "links")):
+                        errors.append(f"{step_path}.{step.get('title')} не содержит действия")
+                    if step.get("code"):
+                        all_step_code.append(step["code"])
+                    for link in step.get("links", []):
+                        if (
+                            not isinstance(link, dict)
+                            or not link.get("label")
+                            or not (link.get("url") or link.get("releaseDownload") is True)
+                        ):
+                            errors.append(
+                                f"{step_path}.{step.get('title')}.links содержит неполную ссылку"
+                            )
+        expected_unix = "--full" if path_id == "full" else "--ru-only"
+        expected_windows = "-Full" if path_id == "full" else "-RuOnly"
+        if not any(expected_unix in code for code in all_step_code):
+            errors.append(
+                f"site.installation.paths.{path_id} не содержит Unix-команду {expected_unix}"
+            )
+        if not any(expected_windows in code for code in all_step_code):
+            errors.append(
+                f"site.installation.paths.{path_id} не содержит Windows-команду {expected_windows}"
+            )
 
     contributors = site.get("contributors", [])
     contributor_ids: list[str] = []

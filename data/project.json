@@ -382,21 +382,255 @@
           "badge": "С чистой KSP",
           "icon": "i-rocket",
           "description": "Для лицензионной KSP 1.12.5 без сборки. Установщик скачает официальный CKAN, поставит RP-1 Express Install, Graphics Low, RP-1 и затем русификатор.",
-          "requirements": [
-            "Установленная через Steam Kerbal Space Program 1.12.5",
-            "Mono на Linux, macOS и Steam Deck",
-            "Несколько гигабайт свободного места и стабильное соединение"
-          ],
-          "commands": [
+          "flowTitle": "Что именно произойдёт",
+          "flow": [
             {
-              "platform": "Linux · macOS · Steam Deck",
-              "icon": "i-terminal-2",
-              "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full"
+              "title": "Чистая KSP",
+              "text": "Лицензионная версия 1.12.5 устанавливается через Steam."
             },
             {
-              "platform": "Windows PowerShell",
+              "title": "Поиск игры",
+              "text": "Скрипт находит папку KSP и проверяет GameData."
+            },
+            {
+              "title": "Официальный CKAN",
+              "text": "Свежий клиент скачивается из релизов KSP-CKAN."
+            },
+            {
+              "title": "Сборка RP-1",
+              "text": "CKAN ставит Express Install, Graphics Low, RP-1 и зависимости."
+            },
+            {
+              "title": "Русский язык",
+              "text": "kerbal.ru ставится последним и включает LANGUAGE = ru."
+            }
+          ],
+          "platformTitle": "Выбери свою платформу",
+          "platforms": [
+            {
+              "id": "windows",
+              "label": "Windows",
               "icon": "i-brand-windows",
-              "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -Full"
+              "lead": "Самый прямой вариант: PowerShell скачает CKAN во временную папку, установит сборку и затем удалит временные файлы.",
+              "steps": [
+                {
+                  "title": "Установи чистую KSP 1.12.5",
+                  "text": "В Steam установи Kerbal Space Program, один раз запусти игру до главного меню и закрой её."
+                },
+                {
+                  "title": "Открой PowerShell",
+                  "text": "Открой меню «Пуск», набери PowerShell или Terminal и запусти обычное окно — права администратора не нужны."
+                },
+                {
+                  "title": "Запусти полную установку",
+                  "text": "Вставь команду целиком и нажми Enter.",
+                  "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -Full"
+                },
+                {
+                  "title": "Дождись сообщения «Готово»",
+                  "text": "CKAN скачает несколько гигабайт. Не закрывай окно и не запускай KSP до завершения."
+                }
+              ],
+              "note": "Если Steam установлен не в стандартную папку и игра не найдена, передай путь первым аргументом установщика.",
+              "manual": {
+                "title": "Поставить сборку вручную через CKAN",
+                "intro": "Этот путь повторяет старую инструкцию и подходит, если хочешь видеть каждый пакет перед установкой.",
+                "steps": [
+                  {
+                    "title": "Скачай CKAN",
+                    "text": "Возьми актуальный ckan-windows.exe на официальной странице релизов и запусти его.",
+                    "links": [
+                      {
+                        "label": "Официальные релизы CKAN",
+                        "url": "https://github.com/KSP-CKAN/CKAN/releases/latest"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Добавь чистую KSP",
+                    "text": "При первом запуске выбери Steam-копию Kerbal Space Program 1.12.5 как игровой инстанс."
+                  },
+                  {
+                    "title": "Поставь RP-1 Express Install",
+                    "text": "Найди RP-1-ExpressInstall, нажми Apply, выбери карьеру RP-1 и графический пакет Graphics Low."
+                  },
+                  {
+                    "title": "Добавь русский язык",
+                    "text": "После завершения CKAN запусти только русификатор.",
+                    "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "macos",
+              "label": "macOS",
+              "icon": "i-brand-apple",
+              "lead": "Автоматический режим использует официальный ckan.exe через Mono. Для Apple Silicon и Intel порядок одинаковый.",
+              "steps": [
+                {
+                  "title": "Установи KSP через Steam",
+                  "text": "Нужна чистая Kerbal Space Program 1.12.5. Один раз запусти её до меню и закрой."
+                },
+                {
+                  "title": "Поставь Mono",
+                  "text": "Если Homebrew уже установлен, выполни команду ниже. Mono нужен только для автоматического шага CKAN.",
+                  "code": "brew install mono",
+                  "links": [
+                    {
+                      "label": "Установить Homebrew",
+                      "url": "https://brew.sh/"
+                    }
+                  ]
+                },
+                {
+                  "title": "Запусти полную установку",
+                  "text": "Открой Terminal, вставь команду и нажми Return.",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full"
+                },
+                {
+                  "title": "Дождись завершения CKAN",
+                  "text": "Первичная загрузка занимает время и несколько гигабайт. В конце установщик добавит перевод."
+                }
+              ],
+              "note": "Если macOS блокирует CKAN при ручной установке, разреши запуск CKAN.app в «Конфиденциальность и безопасность».",
+              "manual": {
+                "title": "Поставить сборку вручную через CKAN.app",
+                "intro": "Официальный графический клиент позволяет контролировать состав сборки без командной строки CKAN.",
+                "steps": [
+                  {
+                    "title": "Скачай CKAN.dmg",
+                    "text": "Открой образ, перенеси CKAN.app в Applications или другую удобную папку.",
+                    "links": [
+                      {
+                        "label": "Официальные релизы CKAN",
+                        "url": "https://github.com/KSP-CKAN/CKAN/releases/latest"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Добавь папку KSP",
+                    "text": "Выбери Steam-копию Kerbal Space Program 1.12.5 при первом запуске CKAN."
+                  },
+                  {
+                    "title": "Поставь Express Install",
+                    "text": "Найди RP-1-ExpressInstall, выбери RP-1 и Graphics Low, затем подтверди Apply."
+                  },
+                  {
+                    "title": "Добавь перевод",
+                    "text": "После CKAN выполни команду только русификатора.",
+                    "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "linux",
+              "label": "Linux",
+              "icon": "i-brand-debian",
+              "lead": "Скрипт использует ckan.exe через Mono и сам находит стандартные Steam-папки KSP.",
+              "steps": [
+                {
+                  "title": "Установи KSP через Steam",
+                  "text": "Поставь чистую Kerbal Space Program 1.12.5, один раз открой её и закрой."
+                },
+                {
+                  "title": "Установи Mono",
+                  "text": "Выполни подходящую для своего дистрибутива команду.",
+                  "code": "# Debian / Ubuntu\nsudo apt install mono-complete\n\n# Fedora\nsudo dnf install mono-complete\n\n# Arch\nsudo pacman -S mono"
+                },
+                {
+                  "title": "Запусти полную установку",
+                  "text": "Команда скачает официальный CKAN и передаст ему проверенный набор пакетов.",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full"
+                },
+                {
+                  "title": "Дождись завершения",
+                  "text": "Не запускай игру, пока CKAN и kerbal.ru не закончат работу."
+                }
+              ],
+              "manual": {
+                "title": "Поставить сборку вручную через CKAN",
+                "intro": "Для GUI установи официальный пакет CKAN своего дистрибутива: deb, rpm или AUR.",
+                "steps": [
+                  {
+                    "title": "Установи CKAN",
+                    "text": "Возьми deb/rpm из официального релиза или пакет CKAN из AUR.",
+                    "links": [
+                      {
+                        "label": "Официальные релизы CKAN",
+                        "url": "https://github.com/KSP-CKAN/CKAN/releases/latest"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Укажи Steam-копию KSP",
+                    "text": "Обычно игра находится в ~/.local/share/Steam/steamapps/common/Kerbal Space Program."
+                  },
+                  {
+                    "title": "Поставь Express Install",
+                    "text": "В CKAN выбери RP-1-ExpressInstall, карьеру RP-1 и Graphics Low, затем Apply."
+                  },
+                  {
+                    "title": "Добавь перевод",
+                    "text": "После установки модов выполни только русский этап.",
+                    "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "deck",
+              "label": "Steam Deck",
+              "icon": "i-brand-steam",
+              "lead": "Для полной автоматической установки CKAN запускается внутри Debian-контейнера Distrobox. Сам перевод затем работает без контейнера.",
+              "steps": [
+                {
+                  "title": "Перейди в Desktop Mode",
+                  "text": "Установи KSP через Steam, запусти один раз и закрой. Открой Konsole."
+                },
+                {
+                  "title": "Создай контейнер CKAN",
+                  "text": "Команды создадут Debian-контейнер и войдут в него.",
+                  "code": "distrobox create -n ckanbox -i debian:12 -Y\ndistrobox enter ckanbox"
+                },
+                {
+                  "title": "Поставь Mono внутри контейнера",
+                  "text": "Домашняя папка Deck будет видна контейнеру автоматически.",
+                  "code": "sudo apt update && sudo apt install -y mono-complete curl"
+                },
+                {
+                  "title": "Запусти полную установку",
+                  "text": "Выполни команду в том же окне Distrobox и дождись завершения.",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full"
+                }
+              ],
+              "note": "Если KSP лежит на SD-карте и не находится автоматически, укажи полный путь к папке игры первым аргументом.",
+              "manual": {
+                "title": "Поставить CKAN вручную на Steam Deck",
+                "intro": "У CKAN есть отдельная актуальная инструкция для Deck через Desktop Mode и Lutris.",
+                "steps": [
+                  {
+                    "title": "Открой официальную инструкцию CKAN",
+                    "text": "Она объясняет установку Lutris, запуск CKAN и подключение папки KSP.",
+                    "links": [
+                      {
+                        "label": "CKAN на Steam Deck",
+                        "url": "https://github.com/KSP-CKAN/CKAN/wiki/Installing-CKAN-on-Steam-Deck"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Поставь Express Install",
+                    "text": "В CKAN выбери RP-1-ExpressInstall, карьеру RP-1 и Graphics Low."
+                  },
+                  {
+                    "title": "Добавь русский без контейнера",
+                    "text": "Вернись в обычный Konsole и запусти только русификатор.",
+                    "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                  }
+                ]
+              }
             }
           ],
           "result": "На выходе — готовая RO / RSS / RP-1 с русским интерфейсом и переводом поддерживаемых деталей."
@@ -407,21 +641,221 @@
           "badge": "Сборка уже есть",
           "icon": "i-language",
           "description": "Для существующей RO / RSS / RP-1. Моды и CKAN не затрагиваются: установщик обновит только файлы kerbal.ru и включит русский язык.",
-          "requirements": [
-            "Уже установленная сборка RO / RSS / RP-1",
-            "Закрытая игра на время обновления",
-            "Резервные копии пользовательских замен создаются автоматически"
-          ],
-          "commands": [
+          "flowTitle": "Что делает русификатор",
+          "flow": [
             {
-              "platform": "Linux · macOS · Steam Deck",
-              "icon": "i-terminal-2",
-              "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+              "title": "Находит KSP",
+              "text": "Проверяет стандартные Steam-папки и GameData."
             },
             {
-              "platform": "Windows PowerShell",
+              "title": "Проверяет версию",
+              "text": "Берёт последний стабильный релиз kerbal.ru."
+            },
+            {
+              "title": "Создаёт backup",
+              "text": "Сохраняет заменяемые пользовательские файлы."
+            },
+            {
+              "title": "Копирует перевод",
+              "text": "Меняет только файлы, которыми управляет kerbal.ru."
+            },
+            {
+              "title": "Включает русский",
+              "text": "Записывает LANGUAGE = ru в settings.cfg."
+            }
+          ],
+          "platformTitle": "Выбери свою платформу",
+          "platforms": [
+            {
+              "id": "windows",
+              "label": "Windows",
               "icon": "i-brand-windows",
-              "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly"
+              "lead": "Сборка уже должна быть установлена через CKAN. Скрипт не обновляет и не удаляет моды.",
+              "steps": [
+                {
+                  "title": "Полностью закрой KSP и CKAN",
+                  "text": "Так файлы локализации и settings.cfg не будут заняты."
+                },
+                {
+                  "title": "Открой PowerShell",
+                  "text": "Обычного окна достаточно, права администратора не нужны."
+                },
+                {
+                  "title": "Установи или обнови перевод",
+                  "text": "Эту же команду можно повторять после каждого нового релиза.",
+                  "code": "& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly"
+                },
+                {
+                  "title": "Запусти игру",
+                  "text": "В настройках должен быть выбран русский язык; первый запуск после обновления модов может быть долгим."
+                }
+              ],
+              "manual": {
+                "title": "Установить перевод вручную из ZIP",
+                "intro": "Ручной путь не записывает версию и manifest, поэтому автоматическое обновление и откат будут недоступны.",
+                "steps": [
+                  {
+                    "title": "Скачай архив kerbal.ru",
+                    "text": "Распакуй архив последнего релиза в отдельную папку.",
+                    "links": [
+                      {
+                        "label": "Скачать текущий релиз",
+                        "releaseDownload": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Скопируй GameData",
+                    "text": "Содержимое GameData из архива перенеси в C:\\Program Files (x86)\\Steam\\steamapps\\common\\Kerbal Space Program\\GameData."
+                  },
+                  {
+                    "title": "Включи русский",
+                    "text": "В настройках игры выбери «Русский» или измени settings.cfg.",
+                    "code": "LANGUAGE = ru"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "macos",
+              "label": "macOS",
+              "icon": "i-brand-apple",
+              "lead": "Для установки только перевода Mono и CKAN не нужны — достаточно стандартного Terminal.",
+              "steps": [
+                {
+                  "title": "Закрой KSP и CKAN",
+                  "text": "Сохранения и папки сторонних модов не затрагиваются."
+                },
+                {
+                  "title": "Открой Terminal",
+                  "text": "Приложение находится в Applications → Utilities."
+                },
+                {
+                  "title": "Установи или обнови перевод",
+                  "text": "Скрипт сам найдёт Steam-копию игры.",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                },
+                {
+                  "title": "Запусти KSP",
+                  "text": "Проверь русский язык в настройках игры."
+                }
+              ],
+              "manual": {
+                "title": "Установить перевод вручную из ZIP",
+                "intro": "Используй этот путь только если не хочешь запускать скрипт.",
+                "steps": [
+                  {
+                    "title": "Скачай и распакуй релиз",
+                    "links": [
+                      {
+                        "label": "Скачать текущий релиз",
+                        "releaseDownload": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Скопируй GameData",
+                    "text": "Перенеси содержимое GameData в ~/Library/Application Support/Steam/steamapps/common/Kerbal Space Program/GameData."
+                  },
+                  {
+                    "title": "Включи русский",
+                    "text": "Выбери русский в настройках или отредактируй settings.cfg.",
+                    "code": "LANGUAGE = ru"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "linux",
+              "label": "Linux",
+              "icon": "i-brand-debian",
+              "lead": "Для режима «только перевод» Mono не требуется: работает обычный bash и curl.",
+              "steps": [
+                {
+                  "title": "Закрой KSP и CKAN",
+                  "text": "Не обновляй моды одновременно с установкой перевода."
+                },
+                {
+                  "title": "Открой терминал",
+                  "text": "Скрипт проверит стандартные библиотеки Steam."
+                },
+                {
+                  "title": "Установи или обнови перевод",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                },
+                {
+                  "title": "Запусти игру",
+                  "text": "После крупного обновления сборки Module Manager может долго пересобирать кэш."
+                }
+              ],
+              "manual": {
+                "title": "Установить перевод вручную из ZIP",
+                "intro": "Ручная установка подходит для разового теста, но не поддерживает автоматический откат.",
+                "steps": [
+                  {
+                    "title": "Скачай и распакуй релиз",
+                    "links": [
+                      {
+                        "label": "Скачать текущий релиз",
+                        "releaseDownload": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Скопируй GameData",
+                    "text": "Перенеси содержимое GameData в ~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData."
+                  },
+                  {
+                    "title": "Включи русский",
+                    "code": "LANGUAGE = ru"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "deck",
+              "label": "Steam Deck",
+              "icon": "i-brand-steam",
+              "lead": "Если RO/RSS/RP-1 уже стоит, перевод устанавливается прямо из Konsole — Distrobox и Mono не нужны.",
+              "steps": [
+                {
+                  "title": "Перейди в Desktop Mode",
+                  "text": "Полностью закрой KSP и открой Konsole."
+                },
+                {
+                  "title": "Запусти установщик",
+                  "text": "Он проверит внутренний накопитель и подключённые Steam-библиотеки.",
+                  "code": "curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only"
+                },
+                {
+                  "title": "Вернись в Gaming Mode",
+                  "text": "Запусти KSP и проверь русский язык в настройках."
+                }
+              ],
+              "note": "Если игра стоит на SD-карте и путь не найден, передай полный путь к папке Kerbal Space Program первым аргументом.",
+              "manual": {
+                "title": "Установить перевод вручную из ZIP",
+                "intro": "В Desktop Mode путь на внутреннем накопителе совпадает с Linux.",
+                "steps": [
+                  {
+                    "title": "Скачай и распакуй релиз",
+                    "links": [
+                      {
+                        "label": "Скачать текущий релиз",
+                        "releaseDownload": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Скопируй GameData",
+                    "text": "Перенеси содержимое GameData в ~/.local/share/Steam/steamapps/common/Kerbal Space Program/GameData."
+                  },
+                  {
+                    "title": "Включи русский",
+                    "code": "LANGUAGE = ru"
+                  }
+                ]
+              }
             }
           ],
           "result": "Существующая сборка остаётся на месте; меняются только файлы, которыми управляет kerbal.ru."
@@ -429,7 +863,7 @@
       ],
       "notes": [
         "Без флага установщик сам найдёт сборку и предложит подходящий режим, но явная команда надёжнее для копирования и автоматизации.",
-        "Для конкретного релиза доступны --version v26.4 и -Version v26.4; для проверки без изменений — --check и -Check."
+        "Для конкретного релиза доступны --version {version} и -Version {version}; для проверки без изменений — --check и -Check."
       ]
     },
     "contributors": [
