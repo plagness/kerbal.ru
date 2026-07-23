@@ -239,3 +239,12 @@ Velocity Mode	Режим скорости
 
 # --- Floating-origin toggle (particle system editor) ---
 World/Floating Origin Simulation	Симуляция плавающего начала координат
+
+# --- Re-sweep additions (now reachable via extended framework: GUILayout.Button / GUILayout.Label
+#     plain + GUIStyle overloads). Confirm-delete dialog buttons, add-popup confirm button, effect-
+#     widget draw toggle caption, and the Custom (Pull) controller member help note. ---
+Yes	Да
+No	Нет
+Add	Добавить
+Drawn	Отрисовка
+Specified member should be parameterless method, property or field on tye module type specified above, returning numeric value	Указанный элемент должен быть методом без параметров, свойством или полем указанного выше типа модуля, возвращающим числовое значение

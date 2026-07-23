@@ -172,3 +172,24 @@ Light rays strength	Сила лучей света
 Performance settings	Настройки производительности
 Current fourierGridSize (change from KSC menu): 	Текущий fourierGridSize (изменяется из меню КЦК):
 Current mesh resolution (change from KSC menu): 	Текущее разрешение сетки (изменяется из меню КЦК):
+
+# --- Ре-свип (расширенный 31-перехватный фреймворк): GUIfloat / ModularGUI / камера ---
+# GUIfloat-метки точки конфигурации (ConfigPointGUI.GUIfloat -> GUILayout.Label)
+Sky Exposure	Экспозиция неба
+Scattering Exposure (scaled+local)	Экспозиция рассеяния (масштаб+локально)
+Extinction Tint (scaled+local)	Оттенок затухания (масштаб+локально)
+2d Cloud Color Multiplier*	Множитель цвета 2D-облаков*
+2d Cloud Scattering Multiplier*	Множитель рассеяния 2D-облаков*
+# Модули ModularGUI физической модели океана (GUIModuleVector2/Vector3 -> GUILayout.Label)
+Ocean Upwelling Color	Цвет толщи океана
+Ocean Underwater Color	Подводный цвет океана
+Caustics layer 1 scale	Масштаб слоя 1 каустики
+caustics layer 1 speed	Скорость слоя 1 каустики
+Caustics Layer 2 scale	Масштаб слоя 2 каустики
+caustics Layer 2 speed	Скорость слоя 2 каустики
+# Прочие метки полётного/KSC-окна (GUILayout.Label; строка камеры = префикс[Активно/Неактивно]+режим, конкатенация до Label -> перечислены обе комбинации)
+Inactive in tracking station and VAB/SPH	Неактивно в центре слежения и VAB/SPH
+[Active] Unified camera mode (1.9+ Directx11):	[Активно] Единый режим камеры (1.9+ DirectX11):
+[Inactive] Unified camera mode (1.9+ Directx11):	[Неактивно] Единый режим камеры (1.9+ DirectX11):
+[Active] Dual camera mode (1.8, 1.9 and 1.10 Opengl):	[Активно] Двухкамерный режим (1.8, 1.9 и 1.10 OpenGL):
+[Inactive] Dual camera mode (1.8, 1.9 and 1.10 Opengl):	[Неактивно] Двухкамерный режим (1.8, 1.9 и 1.10 OpenGL):

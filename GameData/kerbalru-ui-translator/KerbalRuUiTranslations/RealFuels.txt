@@ -89,3 +89,44 @@ Double the volume of all unlocked resources, capped at available space.	Удво
 # it and corrupt the entry), so this can never actually match — kept only as a best-effort
 # single-line fallback in case the same sentence is ever reused unprefixed elsewhere.
 Fill all unlocked resources proportionally to capacity. Locked resources are untouched. Reserve space is respected.	Заполнить все разблокированные ресурсы пропорционально вместимости. Заблокированные ресурсы не затрагиваются. Резервное пространство учитывается.
+
+# === RE-SWEEP (2026-07-23): strings now reachable via the expanded 31-hook framework ===
+
+# --- Engine-config GUI column-visibility menu (EngineConfigGUI.DrawColumnMenu): each column
+#     name is drawn with GUI.Label(Rect, string, GUIStyle) — the GUIStyle overload that only
+#     became hooked in this re-sweep. The cramped header ROW (DrawHeaderCell) instead sets
+#     GUIContent.set_text and calls GUI.Label(Rect, GUIContent, GUIStyle) (neither hooked), so
+#     its abbreviations Gim/Igns/Ullg/PFed stay English; only the readable full names in this
+#     menu are translatable. Name/Thrust/ISP/Mass/Gimbal/Cost/Actions are already translated
+#     globally by other mods' files (flat dict, same meaning), Min%/Pres-Fed/Ign%/Max-DU are
+#     above, and 0-DU is digit+unit only (would be a no-op) — so only these six are added. ---
+Ignitions	Запуски
+Ullage	Осадка
+Rated	Ном.
+Tested	Тест.
+Survival	Выжив.
+Tech	Тех.
+
+# --- Engine-config GUI toolbar toggle buttons (EngineConfigGUI.EngineManagerGUI), each drawn
+#     with GUILayout.Button(string, GUIStyle, GUILayoutOption[]) — the identical call already
+#     proven working by the translated Show Sim / Show Chart pair above. View-mode, chart-type
+#     and burn-time-format switches. ---
+Compact	Компакт.
+Full	Полный
+Sec	Сек
+m:ss	м:сс
+Heatmap	Тепл.карта
+Line	Линия
+
+# --- Engine-config GUI action-column button (EngineConfigGUI.DrawActionCell): the label is
+#     built through the hooked GUIContent(string) ctor, then shown via GUI.Button. Switch-to /
+#     currently-active config, and the RP-1 credit-unlock states. ---
+Switch	Сменить
+Active	Активна
+Owned	Куплено
+Free	Бесплатно
+
+# --- Fuel-tank window (RealFuels.Tanks.RealFuelsWindow) proportional-fill button, drawn with
+#     GUI.Button(Rect, string, GUIStyle). RESET/CLOSE next to it are already translated globally
+#     (KerbalEngineer: СБРОС / ЗАКРЫТЬ). ---
+FILL	ЗАПОЛНИТЬ

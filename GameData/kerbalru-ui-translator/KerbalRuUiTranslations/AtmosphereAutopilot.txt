@@ -191,3 +191,32 @@ CRUISECTRL	КРУИЗ-КОНТРОЛЬ
 MOUSEDIR	МЫШЬ
 picking waypoint	выбор путевой точки
 keep direction	сохранять направление
+
+# === RE-SWEEP (2026-07): strings newly reachable via the expanded 31-hook framework ===
+# GUIStyle overloads of GUILayout.Toggle/Button/Label (patched) + UnityEngine.UI.Text.text
+# setter + AutoGuiAttr reflection fields. Verified in IL: each reaches a patched sink
+# unmodified (no Concat/Format/ToString/ConfigNode in the path).
+
+# --- Cruise Flight controller: compact toggle/button labels (GUIStyle overloads) ---
+Tgt	Цель
+Wpt	Точка
+V/S	Верт. скорость
+FPA	Угол траектории
+
+# --- Autopilot module manager: per-module show-window toggle ---
+GUI	Окно
+
+# --- Speed/thrust controller: 'OFF' state (Toggle label + AtmosphereAutopilot.UI.dll set_text)
+# unit abbreviations ms/kts/M/ias/kias kept Latin per rule 4 (чистые обозначения единиц) ---
+OFF	ВЫКЛ.
+
+# --- Craft settings / trainer diagnostics: styled labels ---
+profiles	профили
+linmodel:	лин. модель:
+
+# --- AutoGuiAttr reflection field labels (rendered bare via GUILayout, no colon) ---
+# 'AoA' aligned to KerbalEngineer.txt's identical 'УА' (same meaning, flat dict must agree)
+AoA	УА
+MOI	Момент инерции
+Kp_v	Kp (скор.)
+linear	линейный

@@ -1,0 +1,107 @@
+# BahaSP (GameData/BahaSP/Plugins: BDAnimationModules.dll, RNModules.dll) -- UI translation
+# dictionary for kerbalru-ui-translator. Format: English<TAB>Russian, exact-string match only
+# (see docs/MAINTAINING.md and tools/ui-translator/src/KerbalRuUiTranslator.cs). Comment lines
+# start with '#'; every other non-empty line is one live "en<TAB>ru" pair.
+#
+# Method: full IL disassembly (monodis; deps via MONO_PATH over Managed + all GameData plugins)
+# of BOTH DLLs. TWO string sources were mined, not just one:
+#  (1) ldstr literals traced through the call graph to a patched entry point;
+#  (2) part-action-window (PAW) guiName DEFAULTS carried in [KSPField/KSPEvent/KSPAction]
+#      attribute blobs -- these are UTF-8 in the #Blob heap, invisible to a UTF-16/ldstr scan,
+#      and were extracted by parsing the `0E 07 "guiName" <len> <value>` named-arg encoding.
+# KSP renders a non-'#' guiName verbatim via TMPro.TMP_Text.set_text -> Patch_TMP_Text_set_text.
+# Neither DLL has ANY get_guiName read, so no code compares a (now-translated) label to a
+# literal -- translation cannot break toggle/label logic. A part.cfg that overrides a given
+# guiName simply passes through unmatched (harmless).
+#
+# ---------------- RNModules.dll (curved solar panel, landing engine, descent mode) ----------------
+# (Earlier this DLL was going to be reported as "no UI text" -- it has ZERO GUI/GUILayout/TMPro
+#  draw calls and ZERO set_guiName in code -- but it DOES ship 11 attribute guiName defaults.)
+Deploy Panel	Раскрыть панель
+Retract Panel	Сложить панель
+Toggle Panel	Переключить панель
+Deploy Panels	Раскрыть панели
+Retract Panels	Сложить панели
+Toggle Panels	Переключить панели
+Energy Flow	Поток энергии
+Sun Exposure	Освещённость Солнцем
+Temperature	Температура
+Auto-Ignition Altitude	Высота автозапуска
+Burnt State	Обгоревший вид
+Toggle Burnt State	Переключить обгар
+Descent Mode Active?	Режим спуска активен?
+Toggle Descent Mode	Переключить режим спуска
+#
+# ---------------- BDAnimationModules.dll ----------------
+# Deploy/retract event + action guiName defaults (BDFSanimateGeneric, via set_guiName on ldstr):
+Deploy	Выдвинуть
+Retract	Втянуть
+# UI_Toggle field "startDeployed" guiName default (startDeployedString, ldstr):
+Start Deployed?	Выдвинут на старте?
+# Texture-switch (BDFStextureSwitch2) next/prev event + status field guiName defaults:
+Next Texture	Следующая текстура
+Previous Texture	Предыдущая текстура
+Current Texture	Текущая текстура
+# Part-variant switch (BDFSmeshSwitch) next/prev event guiName defaults:
+Next part variant	Следующий вариант
+Prev part variant	Предыдущий вариант
+Current Variant	Текущий вариант
+# toggleAction guiName set when the referenced animation is missing (BDFSanimateGeneric, ldstr):
+Toggle (Disabled)	Переключить (недоступно)
+# BDFSGUIPopup on/off option strings, drawn as PopupButton text via GUI.Button/GUI.Toggle (ldstr):
+On	Вкл
+Off	Выкл
+# Landing gear / wheel (FSBDwheel) PAW events + UI_FloatRange fields (attribute guiNames):
+Lower Gear	Опустить шасси
+Raise Gear	Поднять шасси
+Raise Lower Gear	Поднять/опустить шасси
+Auto-Align Wheel	Автовыравнивание колеса
+Brakes On	Тормоза вкл.
+Brakes Off	Тормоза выкл.
+Brake Torque	Момент торможения
+Wheel Angle	Угол колеса
+Wheel Height	Высота колеса
+Leg Angle	Угол опоры
+Max Steering Angle	Макс. угол поворота
+Steering	Поворот
+Spring	Пружина
+Damper	Демпфер
+# Wheel motor controls (attribute guiNames):
+Enable Motor	Включить мотор
+Disable Motor	Выключить мотор
+Toggle Motor	Переключить мотор
+Motor Enabled	Мотор включён
+Reverse Motor	Реверс мотора
+Enable Reverse Motor	Включить реверс
+Disable Reverse Motor	Выключить реверс
+# Gimbal / VTOL / animation / light / misc PAW controls (attribute guiNames):
+Toggle Gimbal	Переключить кардан
+Gimbal Active	Кардан активен
+VTOL Mode	Режим ВВП
+Flip Side	Сменить сторону
+Toggle Animation	Переключить анимацию
+Toggle Adjustment	Переключить настройку
+Toggle Light	Переключить свет
+Toggle	Переключить
+Activate	Активировать
+Deactivate	Деактивировать
+Repaint	Перекрасить
+Scale	Масштаб
+Enabled	Включено
+# Action-group actions (KSPAction guiNames, "(d)" hint kept verbatim):
+adjust suspension (d)	регулировка подвески (d)
+decrease friction (d)	уменьшить трение (d)
+increase friction (d)	увеличить трение (d)
+#
+# NB (cross-file same-value duplicates, allowed by validate): "Deploy"/"Retract" also in
+# ROLib.txt, "Off"/"Damper"/"Spring" in Firespitter.txt (and "Spring" in KSPWheel.txt),
+# "Enabled" in ProceduralParts/RealAntennas/Waterfall, "Scale" in ConformalDecals/Waterfall,
+# "Toggle" in Scatterer/TexturesUnlimited -- all kept here with the identical RU value, per the
+# project convention that each mod file lists every string it shows.
+#
+# Deliberately NOT translated (checked): "Debug: Log Objects" (developer debug event);
+# the PopupElement fields titleText/inputText/buttonText/windowTitle (runtime data, not
+# literals); SurfaceWalker "Groundhit: "/"Wheel susp dist: " + BDFSdebugMessages lines
+# (Concat'd with live values, debug output); StartGUIName/EndGUIName default "null";
+# animName/StateNames/transform names ("wheelCollider","aimRotate",...) are ConfigNode/
+# transform lookups; the ScreenMessages.PostScreenMessage arg is a runtime message.

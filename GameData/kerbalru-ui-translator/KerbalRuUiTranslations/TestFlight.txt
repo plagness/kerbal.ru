@@ -68,6 +68,33 @@ Enable Debugging	Включить отладку
 TestFlight Enabled	TestFlight включён
 Parts always have Maximum Data	У деталей всегда максимум данных
 
+# --- Part Action Window (PAW) — [KSPField guiName] / [KSPEvent guiName] ---
+# Re-sweep: reachable via the extended framework's TMPro/guiName interception (absent in the
+# first pass). All are literal-English guiName values in the KSPField/KSPEvent attribute blobs
+# (verified by decoding the .custom attr bytes in TestFlight.dll / TestFlightCore.dll), not
+# #autoLOC tags, so they display verbatim. Group headers "TestFlight"/"TestFlightDebug" are the
+# mod brand and are intentionally left untranslated. "Rated Burn Time"/"Rated Cumulative Burn
+# Time" (also code-set via set_guiName) already appear above and are not duplicated here.
+Rated Continuous Burn Time	Расчётное непрерывное время работы
+Total Run Time	Общее время работы
+Current Run Time	Текущее время работы
+Mean Time Between Failures	Среднее время между отказами
+Flight Data	Полётные данные
+Current Reliability	Текущая надёжность
+Reliability at Max Data	Надёжность при максимуме данных
+Ignition Chance	Шанс запуска
+Current Ignition Chance	Текущий шанс запуска
+Max Ignition Chance	Макс. шанс запуска
+Ignition Penalty for Q	Штраф запуска за динамическое давление
+Restart Ignition Penalty	Штраф запуска при перезапуске
+Time Since Shutdown	Время после выключения
+Thrust Modifier	Модификатор тяги
+Thrust Ratio	Отношение тяги
+Engine Module	Модуль двигателя
+Last Restart	Последний перезапуск
+Force Failure	Вызвать отказ
+R&D Window	Окно НИОКР
+
 # --- R&D / engineering teams window ---
 R&D	НИОКР
 Research & Development	Исследования и разработки

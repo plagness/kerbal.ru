@@ -96,3 +96,10 @@ After {0:s}	После {0:s}
 Before {0:s}	До {0:s}
 Wait until {0:s}	Дождитесь {0:s}
 Complete before {0:s}	Завершите до {0:s}
+# --- re-sweep 2026-07-23: Unicode-literal strings reachable via direct GUILayout/GUI hooks
+# (arrow/ellipsis/Greek forms that the earlier ASCII-approximation keys never byte-matched)
+Inspect…	Осмотреть…
+→ Limited by capacity: available in isolation:	→ Ограничено пропускной способностью: доступно отдельно:
+→ Limited by capacity: available in simplex:	→ Ограничено пропускной способностью: доступно в симплексе:
+Σκοπός Telecom network overview	Σκοπός — обзор телеком-сети
+Please wait for the Σκοπός Telecom network to initialize...	Пожалуйста, подождите, пока инициализируется телеком-сеть Σκοπός...

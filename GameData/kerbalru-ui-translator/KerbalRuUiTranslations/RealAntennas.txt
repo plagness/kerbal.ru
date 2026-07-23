@@ -149,3 +149,24 @@ RealAntennas: CommNet Disabled in Difficulty Settings	RealAntennas: CommNet от
 RealAntennas: CommNet enabled, requires scene change to take effect	RealAntennas: CommNet включён, для применения нужна смена сцены
 RealAntennas Antenna Condition upgrader	Обновление состояния антенн RealAntennas
 Update crafts to use new condition enum	Обновляет аппараты для использования нового перечисления состояний
+# --- Ре-свип 2026-07-23 (расширенный 31-перехватный фреймворк) ---
+# PAW-поле включения антенны (KSPField guiName -> TMPro)
+Antenna	Антенна
+# Окно наведения антенны (AntennaTargetGUI): подписи полей ввода координат (GUILayout.Label)
+Lat	Шир
+Lon	Долг
+Alt	Выс
+Azimuth	Азимут
+Elevation	Угол места
+Deflection	Отклонение
+# Режимы наведения (TargetingMode из RealAntennasCommNetParams.cfg): text= -> GUILayout.Label
+Select a vessel to target:	Выберите целевой аппарат:
+Select a body to target:	Выберите целевое тело:
+Select an azimuth and elevation:	Выберите азимут и угол места:
+Select a deflection and elevation:	Выберите отклонение и угол места:
+# Режимы наведения: hint= (подсказка режима) -> GUILayout.Label
+Align to the specified vessel	Навести на указанный аппарат
+Align to the center of the specified celestial body	Навести на центр указанного небесного тела
+Align to a fixed position on the specified celestial body	Навести на фиксированную точку указанного тела
+Point at a fixed orientation relative to the current position on the parent celestial body	Навести в фиксированном направлении относительно текущей точки на родительском теле
+Point at a fixed orientation relative to the current orbit	Навести в фиксированном направлении относительно текущей орбиты

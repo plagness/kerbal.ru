@@ -21,3 +21,6 @@ Cancel	Отмена
 Assign Group ID	Назначить ID группы
 Clear Group ID	Очистить ID группы
 Engine Group ID is 	ID группы двигателей: 
+# Значение по умолчанию KSPField EngineGroupIdStr (guiName "Engine Group ID is "),
+# показывается в PAW редактора рядом с названием поля.
+not set	не задано

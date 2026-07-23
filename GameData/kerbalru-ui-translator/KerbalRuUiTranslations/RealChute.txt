@@ -99,7 +99,7 @@ Engineer minimum level to repack:	Минимальный уровень инже
 
 # --- Part right-click context menu (KSPEvent) ---
 Toggle info	Показать/скрыть информацию
-Deploy chute	Раскрыть парашют
+Deploy Chute	Раскрыть парашют
 Cut main chute	Отстрелить основной парашют
 Cut chute	Отстрелить парашют
 Arm parachute	Взвести парашют
@@ -204,3 +204,15 @@ Filter by Function	Фильтр по функции
 Parachute	Парашют
 Filter by Module	Фильтр по модулю
 Procedural Chute	Процедурный парашют
+
+# --- Re-sweep additions (reachable only via the extended hook set) ---
+# "pressure": bare GUILayout.Toggle(bool, string, GUIStyle) label in the editor's
+#   predeployment-mode selector (the paired "altitude" toggle is already translated
+#   globally by MechJeb2.txt "altitude<TAB>высота"; this pressure half was the only
+#   untranslated one). Reachable only through the new GUIStyle Toggle overload hook,
+#   which did not exist in pass 1. Verified single occurrence in the DLL.
+pressure	давление
+# "Parachute material": title string passed to ClickThruBlocker.GUILayoutWindow ->
+#   GUILayout.Window (same window-title path as "RealChute Parachute Editor "); this is
+#   the material-picker window opened from "Change material".
+Parachute material	Материал парашюта

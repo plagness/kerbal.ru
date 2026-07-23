@@ -76,13 +76,19 @@ Unguided Stages: 	Неуправляемые ступени:
 Coast Stage: 	Ступень пассивного участка: 
 
 # --- Источники крутящего момента (Vessel Info) ---
+# Строка "RCS" в этой таблице (VesselState::TorqueCompare, ldstr "RCS" -> GUILayout.Label)
+# намеренно НЕ переводится: RCS всюду остаётся латиницей ("RCS Balancer" -> "Балансировщик RCS",
+# "RCS Burn" -> "Манёвр на RCS"), поэтому запись была бы тождественным no-op.
+# "IntakeAir" удалён как мёртвый ключ: единственное вхождение в DLL -- аргумент
+# PartResourceLibrary.GetDefinition("IntakeAir") (имя ресурса), в перехватываемые GUI/TMP-функции
+# не попадает, отрисовкой не является. Прежний перевод "Воздухозаборники" был и мёртвым, и
+# семантически неверным (ресурс = забортный воздух, а не деталь).
 Torque sources	Источники момента
 Others (FAR)	Другие (FAR)
 ReactionWheel	Маховики
 ControlSurface	Аэродинамические поверхности
 Gimbal	Гимбал
 Diff Throttle	Дифференциальная тяга
-IntakeAir	Воздухозаборники
 
 # --- Настройка ориентации / PID-тюнинг (Attitude Adjustment) ---
 Maximum Stopping Time	Максимальное время остановки
@@ -308,3 +314,25 @@ None	Нет
 MaxStoppingTime	Максимальное время остановки
 phiVector	Вектор φ
 MOI	Момент инерции
+
+# --- Третий проход (2026-07-23): строки, достижимые через GuiUtils-хелперы
+# (SimpleLabel/ToggledTextBox — все параметры-строки уходят в GUILayout.Label/Button/Toggle
+# без склейки, проверено по IL) и через стоковый PopupDialog(title) -> TMP. Каждая строка
+# сверена с байткодом: доходит до перехватываемой функции неизменной. ---
+
+# --- Attitude Adjustment: выбор экспериментального контроллера (тумблеры рядом с #MechJeb_AttitudeAdjust_checkbox4) ---
+BetterController	Улучшенный контроллер
+LQRController	LQR-контроллер
+
+# --- Attitude Adjustment: подпись осей в векторном readout (пара к латинскому "X/Y/Z",
+# который оставляем как есть — оси универсальны; "R/P/Y" = Roll/Pitch/Yaw -> инициалы по-русски) ---
+R/P/Y	К/Т/Р
+
+# --- Компактные подписи полей / единицы ---
+pa	Па
+% Hi	% выс.
+dhms	дчмс
+
+# --- Всплывающие окна (PopupDialog.SpawnPopupDialog -> заголовок через TMP) ---
+Incompatible Mods Detected	Обнаружены несовместимые моды
+Outdated Firespitter version detected	Обнаружена устаревшая версия Firespitter

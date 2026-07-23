@@ -100,3 +100,10 @@ none	нет
 # Fragments concatenated into a label (leading space kept intentionally)
  no force module	 нет силового модуля
  s	 с
+
+# In-flight PAW readouts on the DragAverage part module ([KSPField]/[KSPEvent] guiName,
+# guiActive=true → TMPro; not ldstr, so missed in the first pass). "CdS" (drag-area
+# symbol Cd·S) is kept as-is like Delta-V; only the descriptive "Avg" prefix and the
+# clear-button phrase are Russified.
+AvgCdS	Ср. CdS
+Clear average	Сбросить среднее

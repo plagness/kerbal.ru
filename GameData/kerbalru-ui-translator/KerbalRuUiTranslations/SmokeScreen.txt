@@ -1,0 +1,44 @@
+# SmokeScreen (GameData/SmokeScreen/SmokeScreen.dll) -- UI translation dictionary for
+# kerbalru-ui-translator. Format: English<TAB>Russian, exact-string match only.
+#
+# SCOPE NOTE: SmokeScreen's only hardcoded UI is a DEVELOPER / effect-author DEBUG surface,
+# not a gameplay panel: (1) SmokeScreen.SmokeScreenUI -- a global window titled "SmokeScreen",
+# toggled by MODIFIER_KEY + F1; (2) ModelMultiShurikenPersistFX.OnGUI -- a per-effect tuning
+# window shown when that effect's showUI flag is set. Full IL disassembly confirms every draw
+# call is legacy GUILayout.{Window,Button,Toggle,Label,TextField,TextArea}. Only the
+# clean, natural-language ACTION controls are translated below (they DO reach patched calls);
+# code-identifier and dynamic labels are left English on purpose (see bottom).
+#
+# ModelMultiShurikenPersistFX per-effect window (GUILayout.Button / GUILayout.Toggle):
+Manual Inputs	Ручной ввод
+Single Emit Timer	Разовый выброс
+Clear Particles	Очистить частицы
+Open Config Editor	Открыть редактор
+Import	Импорт
+Rebuild	Пересборка
+Apply	Применить
+#
+# SmokeScreenUI global (MOD+F1) window (GUILayout.Toggle):
+Globally disable Collide	Глоб. отключить столкновения
+Globally disable Physical	Глоб. отключить физику
+Share manual input values across effects	Общий ручной ввод для эффектов
+#
+# NB: "Rebuild" (= RealAntennas.txt) and "Apply" (= many files) reuse the identical existing
+# RU value -- same-value cross-file duplicates are allowed by validate.
+#
+# Deliberately NOT translated (checked, reason each):
+# - "Active" (per-effect toggle): one generic word; existing "Active"->"Активна" in RealFuels
+#   is a feminine "config is active" that mis-reads here, and a different value would be a
+#   cross-file conflict -- left English rather than force a bad reuse.
+# - "Globally force emitOnUpdate", "Globally force decluster", "maximumActiveParticles",
+#   "Open ModelMultiShurikenPersistFX UI :": each embeds a SmokeScreen code/config identifier
+#   (emitOnUpdate / decluster / maximumActiveParticles / the class name) that the user edits
+#   verbatim -- translating around the identifier would only confuse.
+# - "Active particles: {0}" is string.Format'd with a live count (never an exact key).
+# - "SmokeScreen" window title is the mod's brand name -- left as-is.
+# - The two GUILayout.TextField's hold live editable config text, not fixed labels.
+# - Attribute guiName defaults were also mined from the #Blob heap: they are the manual-input
+#   curve-editor fields of the effect system ("X","Y","Z","offset","speed","speedX/Y/Z","Show",
+#   "Timer","Random","Size","Height","SoftOff","With","Num P") plus generic "Toggle"/"Enabled"/
+#   "Disabled"/"Editor"/"Launch Effects" -- single letters and effect-config internals on a
+#   debug surface, left English on purpose (same scope call as the rest of this file).

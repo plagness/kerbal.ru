@@ -1,0 +1,74 @@
+# SolverEngines (SolverEngines.dll) -- UI translation dictionary for kerbalru-ui-translator.
+# Format: English<TAB>Russian, exact-string match only (see docs/MAINTAINING.md and
+# tools/ui-translator/src/KerbalRuUiTranslator.cs). Comment lines start with '#'; every other
+# non-empty line is one live "en<TAB>ru" pair (this file interleaves both, RLS-style).
+#
+# The mod was previously assumed to have no real UI ("toolbar=4, probably false strings").
+# Full IL disassembly (monodis; deps resolved via MONO_PATH over Managed + every GameData
+# plugin) DISPROVES that: SolverEngines.EnginesGUI.EnginesFlightGUI is a live
+# [KSPAddon(Startup.Flight, false)] that adds a stock ApplicationLauncher button
+# (SolverEngines/Icons/EnginesIconStock) and draws three real GUILayout.Window's in flight.
+# Each string below was traced through the IL call graph to a patched entry point.
+#
+# --- Window titles -> GUILayout.Window(...,string,...) unchanged ---
+Engines GUI	Двигатели
+Engines Flight GUI Settings	Настройки двигателей
+Engines GUI Units Settings	Единицы измерения
+#
+# --- Top toggle buttons -> GUILayout.Toggle(bool,string,GUIStyle,opts) ---
+Settings	Настройки
+Units	Единицы
+#
+# --- Flight-window readout labels ---
+# GUIUtil.FlightWindowField(string label,string value) draws the label via
+# GUILayout.Box(string,GUIStyle,opts) unchanged; the value arg is a live formatted number and
+# is NOT translated. Verified by disassembling FlightWindowField itself.
+Ambient Temperature	Температура среды
+Ambient Pressure	Давление среды
+Recovery Temperature	Температура восстановления
+Recovery Pressure	Давление восстановления
+Inlet	Воздухозаборник
+Inlet Pressure Ratio	Отношение давлений ВЗ
+Thrust	Тяга
+Thrust / Drag	Тяга / сопротивление
+Specific Impulse	Удельный импульс
+#
+# --- Engine-module PAW fields (KSPField guiName attribute defaults on the SolverEngines engine
+# module, shown when you right-click an engine in flight). Extracted from the #Blob attribute
+# heap (0E 07 "guiName" <len> <value>), not visible as ldstr; no get_guiName read anywhere, so
+# translating them cannot break any comparison. ---
+Current Throttle	Текущий газ
+Mass Flow	Массовый расход
+Eng. Internal Temp	Внутр. темп. двиг.
+Overall TPR	Общий TPR
+#
+# --- Settings-window checkboxes ---
+# GUIUtil.SettingsWindowToggle(string label,out bool,bool) -> GUILayout.Toggle(bool,string,
+# GUIStyle,opts) with the label unchanged. "Show" is dropped in RU to match the flight-window
+# field names (shorter, fits the box; the checkbox sits next to the same wording).
+Show Ambient Temperature	Температура среды
+Show Ambient Pressure	Давление среды
+Show Recovery Temperature	Температура восстановления
+Show Recovery Pressure	Давление восстановления
+Show Inlet Percentage	Процент заборника
+Show Total Pressure Recovery	Восстановление давления
+Show Thrust	Тяга
+Show Thrust to Weight Ratio	Тяговооружённость
+Show Thrust / Drag	Тяга / сопротивление
+Show Isp	Удельный импульс
+Show TSFC	Удельный расход
+#
+# --- Deliberately NOT translated (checked, reason each) ---
+# - "TPR","TWR","TSFC" flight-window abbreviations + unit symbols "Pa","kPa","atm","K","C",
+#   "N","kN","m/s","km/s","s","s/m","s^-1","kg/kgf-h","g/kN-s","kg/kN-s": the abbreviations are
+#   universal engineering shorthand; the unit symbols render via GUILayout.SelectionGrid(...),
+#   which is NOT a patched entry point (only Toolbar is), so they cannot be substituted anyway.
+# - "F2","G3","N4","F3","F1","D2","P2": ToString numeric format specifiers, not text.
+# - "<UnitTypeName> Units:" row header is string.Concat'd at runtime (get_UnitTypeName()+
+#   " Units:") before GUILayout.Box, so no exact key can match.
+# - "Engines GUI" also feeds the Blizzy-toolbar button Text/ToolTip via reflection on the
+#   (usually absent) Toolbar plugin -- not a patched call; the stock-toolbar title above is
+#   what actually shows.
+# - Everything else is Debug.Log text, ConfigNode keys (engineID, showThrust,
+#   flightWindowPos, ...), reflection member names (Toolbar.*, Text, Visible, OnClick, ...)
+#   or string.Format templates with live values -- none reach a patched render call.
