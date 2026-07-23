@@ -1,0 +1,51 @@
+# ROUtils (ROUtils.dll, v1.1.1.0, KSP-RO group 2025) -- словарь UI-строк для
+# kerbalru-ui-translator. Формат: Английский<TAB>Русский, только точное совпадение
+# (см. docs/MAINTAINING.md и tools/ui-translator/src/KerbalRuUiTranslator.cs).
+#
+# РЕЗУЛЬТАТ: переводить НЕЧЕГО -- 0 строк. Это не пропуск, а вывод после полной
+# дизассемблировки. ROUtils -- чисто служебная библиотека Realism Overhaul (кэш,
+# синглтоны, кривые Эрмита, drag-cube, ConfigNode-сериализация, персистентные
+# коллекции/словари/списки, утилиты дат/математики/SI-единиц). Собственного игрового
+# UI-текста, доходящего до перехватываемых Harmony-функций, в ней нет.
+#
+# Метод: monodis (зависимости через MONO_PATH на KSP.app/.../Data/Managed) всей DLL,
+# 20381 строк IL, + скан UTF-16LE литералов (163 уникальных). Каждый ldstr прослежен
+# по IL до потребителя. Проверены ВСЕ 31 точка перехвата фреймворка.
+#
+# Полный список UI-приёмников в DLL:
+#   - GUIContent, GUILayout.*, GUI.Label/Button/Box/Toggle/Window, GUIStyle-перегрузки,
+#     TMP_Text.set_text, UnityEngine.UI.Text.set_text, Dropdown.OptionData,
+#     DialogGUILabel/Toggle/Button, PopupDialog-спавн, ScreenMessage,
+#     KSPField/KSPEvent/KSPAction guiName  --  ВСЕ дают 0 попаданий,
+#   КРОМЕ ровно одного вызова:
+#   - DTUtils.GetColonFormattedTimeWithTooltip -> new GUIContent(text, tooltip).
+#     И text, и tooltip строятся динамически через string.Concat из результата
+#     GetColonFormattedTime(...) (время вида "12:34" / "1y, 2d, 03:45") и рантайм-
+#     параметра identifier. Ни одного статичного англ. литерала на входе -> точное
+#     совпадение ключом словаря невозможно в принципе. Не переводится.
+#   Классов-PartModule (с [KSPField]/[KSPEvent] guiName) в сборке нет вовсе.
+#
+# Почему остальные англо-похожие литералы НЕ вошли (сознательно):
+#   - "tons"/"grams"/"t"/"g" (ResourceUnits) -- метки единиц, выбираются по флагу
+#     Kerbalism UseSIUnits и склеиваются с числом в string.Format("{0:0.0} {1}{2}") +
+#     KSP.Localization.Localizer.Format(#autoLOC_244197/244201/...). Динамика с числом,
+#     да ещё через стоковый Localizer KSP -- побайтово ключом не совпадёт.
+#   - "#autoLOC_*", "#KERBALISM_*", "<<1>>" -- теги стоковой/модовой Localization,
+#     их разворачивает свой Localizer игры/Kerbalism, не наш фреймворк.
+#   - "Est: ", "(infinity)", "NaN", "+Inf", "-Inf", "{0}y, ", "{0}d, ", ":{0:D2}",
+#     "{0}{1}{2:D2}:{3:D2}{4}" -- фрагменты форматирования времени/чисел (динамика).
+#   - "Invalid FloatCurve key : \"", "[DragCubeTool] ...", "SingletonHost Awake ...",
+#     "Exception awaking {0}: {1}" и пр. -- сообщения Debug.Log / исключений, не UI.
+#   - "version", "ITEM", "item", "ROUtilsSettings", "doNotCompressData", "Keys",
+#     "Values", "VALUE", "KEY", "name", "keyIndex", "hasKeyNode", "serialized",
+#     "ship", "RESOURCE_DEFINITION" -- ключи ConfigNode сохранений (менять нельзя:
+#     сломает загрузку/совместимость сейвов).
+#   - "KSPWheelBase", "TestFlightCore", "TestLite", "FerramAerospaceResearch", "RP-0",
+#     "ksp_plugin_adapter", "Instance", "SettingsEnabled" -- имена типов/полей для
+#     reflection-интеропа с другими модами, не текст.
+#   - Регэкспы ("(?<y>[0-9]+)y|..."), сообщения ICollection/масштабирования массивов
+#     из mscorlib, метаданные сборки (ROUtils.dll, Copyright, VS_VERSION_INFO ...).
+#
+# Итог: файл-заглушка с документацией разбора, чтобы ROUtils не пересканировали заново.
+# Если в будущих версиях мод обзаведётся собственным окном/PAW-параметрами -- строки
+# дописывать сюда в конец в формате Английский<TAB>Русский.

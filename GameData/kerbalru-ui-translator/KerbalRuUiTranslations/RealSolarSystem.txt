@@ -1,0 +1,37 @@
+# RealSolarSystem — русская локализация UI (RealSolarSystem.dll).
+# Формат: Английский<TAB>Русский. Извлечено дизассемблированием IL (monodis, зависимости
+# Kopernicus/0Harmony через MONO_PATH) + скан UTF-16LE. Проверен каждый ldstr по факту.
+#
+# ВАЖНО: игрового UI-текста в самом DLL почти нет. Реальные названия тел, биомы и площадки
+# идут не через хардкод, а через конфиги (Kopernicus/#LOC-ключи в RealSolarSystem/Localization,
+# LaunchSites.cfg, ScienceDefs.cfg) — они подставляются как есть и переводятся отдельно.
+# Единственный игроку-видимый UI в коде — два всплывающих окна проверки установки
+# (RSSInstallationCheck): MultiOptionDialog → PopupDialog, рендер через TMPro (патчится).
+#
+# Переведено только то, что БЕЗ изменений доходит до перехватываемой функции:
+#   - заголовки диалогов (title-аргумент MultiOptionDialog → TMP set_text);
+#   - подписи кнопок (DialogGUIButton → TMP set_text).
+#
+# НАМЕРЕННО НЕ ПЕРЕВЕДЕНО (проверено по IL):
+#   - Тела сообщений обоих диалогов ("The texture pack ... missing ...", "The currently
+#     installed version of Kopernicus ({0}) ...") — многострочные (реальные \n внутри) и/или
+#     идут через string.Format. Парсер словаря построчный (File.ReadAllLines, split по TAB) —
+#     ключ с переносом строки физически невозможен, а Format-строка с {0}/{1} никогда не
+#     совпадёт точно. Оба фактора → точное совпадение недостижимо.
+#   - Внутренние имена диалогов "RSSInstallCheck"/"RSSKopInstallCheck" (name-аргумент, не видны).
+#   - Скрытое dev-окно RealSolarSystemEditor (OnGUI, id 69105, включается хоткеем-модификатором,
+#     только LoadedSceneIsFlight): редактор ближних/дальних плоскостей камер и живая настройка
+#     PQSMod. Его подписи — либо конкатенация с числом ("Camera: "+имя, "Apply to "+имя), либо
+#     сырые имена параметров шума/PQS ("octaves: ", "persistance: ", "deformity: ", "slopeScale: ",
+#     "depthOffset: " и т.п.) и полей камеры ("Depth", "Far Clip", "Near Clip"). Инструмент
+#     модостроителя, не игрока; имена параметров должны совпадать с ключами конфигов и доками
+#     Kopernicus — перевод навредил бы. Пропущено целиком.
+#   - Ключи ConfigNode (REALSOLARSYSTEM, overrideCommNetParams, timeWarpRates, ClipPlanes,
+#     cam00FarClip, holdThreshold, RSSRUNWAYFIX, ...) — узлы сохранения/настроек, не UI.
+#   - Debug.Log-строки с префиксами [RealSolarSystem]/[OD]/[Kopernicus]/[RSS-VGPE] — лог, не UI.
+#   - Пути/имена файлов и URL (RSS-Textures, EarthColor.dds, BUILTIN/, github.com/...).
+
+Missing RSS Texture Pack	Отсутствует набор текстур RSS
+Download	Скачать
+Incompatible Kopernicus version found	Обнаружена несовместимая версия Kopernicus
+Understood	Понятно

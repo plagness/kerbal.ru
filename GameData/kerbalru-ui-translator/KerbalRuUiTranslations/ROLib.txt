@@ -1,0 +1,126 @@
+# ROLib — библиотека процедурных деталей Realism Overhaul (ROTanks/ROEngines/ROSolar).
+# Именно её UI игрок видит при настройке процедурных баков, солнечных панелей и
+# разделителей: окна выбора диаметра/модели, параметры детали в PAW (правая кнопка),
+# страница настроек «RO Mods» в опциях сложности.
+#
+# МЕТОД: полное IL-дизассемблирование monodis (MONO_PATH резолвил Assembly-CSharp +
+# TexturesUnlimited + ROUtils; без последних двух monodis рвётся на 40% дампа).
+# Каждая строка-кандидат проверена по IL: доходит ли ДО одной из патчируемых точек
+# без конкатенации. Разобраны 179 custom-attribute блобов (ECMA-335 §II.23.3) для
+# извлечения guiName/groupDisplayName/CustomParameterUI-заголовков.
+#
+# Подтверждённые пути до патчируемых сников (все проверены по IL Assembly-CSharp):
+# - IMGUI-окна ROLib: GUILayout.Label/Button/Toggle, GUI.Box/Button (DimensionWindow,
+#   ModelSelectionGUI, AbstractWindow) — прямые ldstr-литералы.
+# - PAW-подписи полей: [KSPField guiName] → UIPartActionFloatEdit.fieldName /
+#   UIPartActionToggle / UIPartActionLabel → TMP_Text.set_text(guiName) БЕЗ изменений;
+#   [KSPField UI_FloatRange] → UIPartActionFieldFloatRange → UnityEngine.UI.Text.set_text.
+# - PAW-кнопки: [KSPEvent guiName] → UIPartActionButton → TMP_Text.set_text.
+# - Заголовки групп PAW: groupDisplayName → UIPartActionGroup → TMP_Text.set_text.
+# - ScreenMessages.PostScreenMessage(msg) → ScreenMessage.message → CreateTextInstance →
+#   ScreenMessagesText.SetText → TMP_Text.set_text БЕЗ изменений (проверено: PostMessage
+#   хранит literal через ScreenMessage.ctor(string,...) дословно).
+# - Настройки RO Mods: CustomParameterUI(title) → DialogGUIToggle; get_Title →
+#   DialogGUIBox(title); get_Section → секц.заголовок; toolTip → DialogGUIBase.tooltipText
+#   → TooltipController_Text.textString → Tooltip_Text.label.set_text. Всё через TMPro.
+# - Динамическая перекраска guiName Tech Level: три варианта (обычный/жёлтый/оранжевый)
+#   ставятся через BaseField.set_guiName по уровню разблокировки — переведены все три с
+#   сохранением тегов <color>.
+#
+# ПРОПУЩЕНО (проверено по IL — конкатенация/динамика/не UI, точное совпадение невозможно):
+# - Метки конверсии единиц в окне диаметра ("= X ft = Y in") — string.Concat с числами.
+# - Заголовок ModelWindow = Concat("ROTanks ", <тип>, " Selection") — динамический.
+# - Кнопки-стрелки навигации "<<"/"<"/">"/">>", крестик закрытия "×" — символы.
+# - "Delete " + имя пресета, kvp.Key + " current", nodeName + ": Enabled/Disabled",
+#   "Single Use Only" (Concat), "Currently configured model name: " (лог) — конкатенация.
+# - Единицы guiUnits (m, s, x, kW, m^2, t) — универсальные символы, не переводятся.
+# - "Toggle" (дефолт toggleLabel) — не доходит до set_guiName + конфликт с TexturesUnlimited/
+#   Scatterer (другой смысл). Сотни строк Debug.Log / ConfigNode-ключей / имён шейдеров.
+# - ROLModInterop TMP_Text.set_text = KSPUtil.LocalizeNumber(value,"F1") — число, не литерал.
+#
+# Термины сверены с ProceduralParts.txt и MechJeb2.txt (Length/Mass/Diameter/Retract —
+# идентичный перевод; глобальный словарь мержит ключи между модами).
+
+# --- PAW: процедурный бак ModuleROTank (основной интерфейс детали) ---
+Length	Длина
+Total Length	Общая длина
+Largest Diameter	Наибольший диаметр
+V.ScaleAdj	Верт. масштаб
+Nose V.Scale	Верт. масштаб носа
+Mount V.Scale	Верт. масштаб крепления
+Nose Rot.	Поворот носа
+Mount Rot.	Поворот крепления
+Variant	Вариант
+Nose	Носовой обтекатель
+Core	Основа
+Mount	Крепление
+Nose Tex	Текстура носа
+Core Tex	Текстура основы
+Mount Tex	Текстура крепления
+Open Diameter Selection	Открыть выбор диаметра
+Select Nose	Выбрать носовой обтекатель
+Select Mount	Выбрать крепление
+Reset Model to Original	Сбросить модель к исходной
+
+# --- PAW: процедурная солнечная панель ModuleROSolar ---
+Design	Конструкция
+Panel Length	Длина панели
+Panel Width	Ширина панели
+Panel Scale	Масштаб панели
+Tech Level	Уровень технологий
+<color=yellow>Tech Level</color>	<color=yellow>Уровень технологий</color>
+<color=orange>Tech Level</color>	<color=orange>Уровень технологий</color>
+Charge Rate (1AU)	Мощность (1 а.е.)
+Area	Площадь
+Mass	Масса
+Cost	Стоимость
+Tracking	Слежение
+Debug Suncatching	Отладка захвата Солнца
+
+# --- PAW: процедурный разделитель ModuleRODecoupler ---
+Remaining Time	Оставшееся время
+Auto Decouple	Автоотделение
+Decoupler Delay	Задержка отделения
+Toggle Auto Decouple	Вкл/выкл автоотделение
+
+# --- PAW: прочие события (флаг-декаль, узлы крепления) ---
+Toggle Flag Visibility	Показать/скрыть флаг
+Toggle Node	Переключить узел
+
+# --- Заголовки групп в PAW (groupDisplayName) ---
+RO-Solar	RO-Солнечные панели
+RO-Decoupler	RO-Разделитель
+
+# --- Метки анимации по умолчанию (deployLabel/retractLabel) ---
+Deploy	Выдвинуть
+Retract	Втянуть
+
+# --- Окно выбора диаметра (ROTanks Diameter Selection) ---
+ROTanks Diameter Selection	ROTanks: выбор диаметра
+Diameter:	Диаметр:
+Unit:	Единицы:
+Apply diameter	Применить диаметр
+Create preset...	Создать пресет...
+Name:	Название:
+Save preset	Сохранить пресет
+Delete presets...	Удалить пресеты...
+Show preset names only	Только названия пресетов
+Currently applied	Применено сейчас
+Cannot parse entered diameter.	Не удалось разобрать введённый диаметр.
+The entered diameter is too small, please enter a new value.	Введённый диаметр слишком мал, введите другое значение.
+Cannot create preset; diameter is too small.	Нельзя создать пресет: диаметр слишком мал.
+Preset Saved. You can overwrite it by creating a new preset with the same name.	Пресет сохранён. Его можно перезаписать, создав новый пресет с тем же названием.
+
+# --- Окно выбора модели (ROTanks Model Selection); вкладки Nose/Core/Mount выше ---
+ROTanks Model Selection	ROTanks: выбор модели
+Diameter: 	Диаметр:
+
+# --- Страница настроек «RO Mods» (опции сложности) ---
+RO Mods Options	Параметры RO Mods
+RO Mods Settings	Настройки RO Mods
+Persistent Recolor Selections	Сохранять выбор перекраски
+Flag Decal Enabled	Флаг-декаль включён
+ROTanks Keyboard Shortcuts	Горячие клавиши ROTanks
+If true, custom recolor selections will persist across texture set changes.	Если включено, пользовательский выбор перекраски сохраняется при смене набора текстур.
+If selected, the Flag Decal will default to enabled on models where it is present.	Если выбрано, флаг-декаль по умолчанию включён на моделях, где он присутствует.
+When enabled, N toggles the diameter selector window and J toggles the recolor window when hovering over an ROTank.	Когда включено, N открывает окно выбора диаметра, а J — окно перекраски при наведении на ROTank.

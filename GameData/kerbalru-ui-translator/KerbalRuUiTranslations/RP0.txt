@@ -1,0 +1,337 @@
+# RP0 -- словарь UI-строк, извлечённых напрямую из скомпилированного RP0.dll
+# (KSP-RO/RP-0 -- ядро карьеры RP-1: авионика, оснастка (tooling), программы, интеграция/сборка (KCT),
+# экипаж и тренировки, доверие (Confidence), лидеры Административного здания, апгрейды).
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (см. tools/ui-translator).
+#
+# Извлечение: полная дизассемблировка monodis (MONO_PATH со всеми зависимостями RP-1: ROUtils,
+# ContractConfigurator, ClickThroughBlocker и др. -- без них monodis обрывается на ROUtils) + разбор
+# IL по каждому ldstr с симуляцией стека: строка попадает в словарь ТОЛЬКО если БЕЗ изменений доходит
+# до одной из патчащихся функций -- GUILayout/GUI Label/Button/Box/Toggle/Toolbar/Window, GUIContent,
+# UnityEngine.UI.Text.set_text, или до TMPro.TMP_Text.set_text через стоковые PopupDialog.SpawnPopupDialog
+# / MultiOptionDialog / DialogGUILabel/Button/Toggle. Аргументная позиция проверена: у SpawnPopupDialog
+# перехватываются title/message/button, но НЕ внутреннее имя диалога (arg2) и НЕ titleExtra (arg9).
+# Параметры детали в PAW (guiName у [KSPField]/[KSPEvent]) -- из custom-attribute блобов, рендерятся
+# через UIPartActionLabel -> TMPro (Range Safety, Disable Avionics, Contr. Mass и т.п.).
+#
+# СОЗНАТЕЛЬНО НЕ вошли (не пропуск, проверено по IL):
+# - Строки через Localizer.Format / GetStringByTag и теги #rp0_* / #autoLOC_* -- резолвятся в англ.
+#   текст из штатной локализации RP-1 (.cfg), литерал-тег до рендера не доходит; переводятся отдельно
+#   на уровне cfg-локализации мода, не здесь. Текст контрактов (#cc.*) уже в kerbalru-quests-fix.cfg.
+# - Аргументы string.Format/Concat/StringBuilder (динамика с числами/именами/датами -- {0}, тоннаж,
+#   имена аппаратов) -- точное побайтовое совпадение невозможно.
+# - Внутренние имена диалогов/локов/ключей ConfigNode, имена методов-событий, Debug.Log.
+# - Одиночные символы/стрелки (X, v, ^, +, -, <<, >>) и одноимённые единицы (m, t) -- риск ложных
+#   глобальных совпадений; многосимвольные единицы (km, m/s, kJ) включены.
+# - 3 строки с реальным переводом строки (\n) -- загрузчик читает файл построчно (ReadAllLines) и не
+#   разэкранирует \n, поэтому многострочный ключ технически непредставим: "No vessels in storage!\n...",
+#   "No tech nodes are being researched!\n...", "Save as\nNew Preset" -- оставлены как есть.
+# - CC_RP0.dll (логика контрактов, весь текст через #cc.*-ключи) и RP0InstallChecker.dll (единственное
+#   сообщение собирается динамически) -- UI-литералов под перевод не дали (0 строк).
+#
+# Глоссарий карьеры RP-1: Avionics=Авионика, Tooling=Оснастка, Program=Программа, Confidence=Доверие,
+# Integration=Интеграция, Rollout=Вывоз, Crew=Экипаж, Astronaut=Космонавт, Training=Тренировка,
+# Proficiency=Квалификация, Upkeep=Содержание, Subsidy=Субсидия, Launch Complex=Стартовый комплекс (СК),
+# KSC=Космический центр (КЦ), Funds=Средства. VAB/SPH -- как в стоке (не переводятся).
+     Work rate:	     Скорость работы:
+ BP/s:	 BP/с:
+ Enable Part Failures (TestFlight or TestLite)	 Включить отказы деталей (TestFlight или TestLite)
+ Funding:	 Финансирование:
+ Nominal Deadline:	 Номинальный срок:
+ Randomize Filling	 Случайное заполнение
+ Show in Career Games	 Показывать в карьерных играх
+ Show in Sandbox Games	 Показывать в песочнице
+ Show in Science Games	 Показывать в научных играх
+ Start in orbit	 Старт на орбите
+ Total	 Итого
+'Bypass Entry Purchase' difficulty setting was automatically changed to false because RP-1 doesn't work correctly in this state.	Настройка сложности «Bypass Entry Purchase» была автоматически изменена на выкл., так как RP-1 работает некорректно в этом состоянии.
+'Part Upgrades' difficulty setting was automatically changed to enabled because RP-1 doesn't work correctly in this state.	Настройка сложности «Part Upgrades» была автоматически включена, так как RP-1 работает некорректно в этом состоянии.
+(site reconstructing)	(объект перестраивается)
+(unknown)	(неизвестно)
+<b><color=red>SFS load failed</color></b>	<b><color=red>Сбой загрузки SFS</color></b>
+<b>RP-1 encountered an error while trying to load the state of the programs.<br>Things will be seriously broken!</b>	<b>RP-1 столкнулась с ошибкой при загрузке состояния программ.<br>Всё будет серьёзно сломано!</b>
+<color=red>RP-1 Patching Error</color>	<color=red>Ошибка патчинга RP-1</color>
+<sprite="CurrencySpriteAsset" name="Funds" tint=1> per Month	<sprite="CurrencySpriteAsset" name="Funds" tint=1> в месяц
+Accept	Принять
+Accepted: 	Принято: 
+Acknowledged	Принято
+Activate Windows	Активация Windows
+Active Programs (per 	Активные программы (за 
+Add	Добавить
+Add LC Support For:	Добавить поддержку СК для:
+Add to Plans	Добавить в планы
+Add To Plans	Добавить в планы
+Airlaunch	Воздушный старт
+All pads are in use by other vessels	Все площадки заняты другими аппаратами
+All progress will be lost after leaving the flight scene.	Весь прогресс будет потерян после выхода из сцены полёта.
+Altitude from SL: 	Высота над ур. моря: 
+Amount	Количество
+An error occurred while trying to apply custom scenario parameters. The state of the game in now in an invalid state and continuing is not recommended.	Произошла ошибка при попытке применить пользовательские параметры сценария. Игра теперь в некорректном состоянии, продолжать не рекомендуется.
+Applicants:	Кандидаты:
+Argument of Periapsis (degrees): 	Аргумент перицентра (градусы): 
+Assigned:	Назначено:
+Astronaut base cost	Базовая стоимость космонавта
+Astronaut costs (per 	Расходы на космонавтов (за 
+Astronaut operational cost	Эксплуатационная стоимость космонавта
+Astronaut training cost	Стоимость тренировки космонавта
+Astronauts	Космонавты
+Auto Alarms	Автобудильники
+Autoclean KSC Debris	Автоочистка мусора КЦ
+Available Vessels	Доступные аппараты
+Avg. Subsidy	Ср. субсидия
+Avionics are sufficient	Авионики достаточно
+Azimuth from Space Center: 	Азимут от косм. центра: 
+Balance	Баланс
+Budget (per 	Бюджет (за 
+Build	Построить
+Build Times	Времена постройки
+Can't Modify	Нельзя изменить
+Cancel	Отмена
+Cancel Edits	Отменить правки
+Cannot Add a Plan Without a Valid Name	Нельзя добавить план без корректного имени
+Cannot Launch!	Нельзя запустить!
+Cannot Roll out!	Нельзя вывезти!
+Cannot switch editor!	Нельзя переключить редактор!
+Choose a vessel	Выберите аппарат
+Choose Scenario preset:	Выберите пресет сценария:
+Choose starting KSC:	Выберите стартовый КЦ:
+Choose the avionics type:	Выберите тип авионики:
+Choose the tech level:	Выберите уровень технологий:
+Clean Contracts	Очистить контракты
+Clear	Очистить
+Clear All	Очистить всё
+Clear Resources	Очистить ресурсы
+Close	Закрыть
+Closest Existing LC:	Ближайший существующий СК:
+Combined	Совмещённо
+Commonality:	Общность:
+Complete	Завершить
+Completed	Завершено
+Completed: 	Завершено: 
+Completes	Завершение
+Completes:	Завершается:
+Construction	Строительство
+Construction Cost (per 	Стоимость строительства (за 
+Constructions	Стройки
+Contr. Mass	Упр. масса
+Controllable mass: 	Управляемая масса: 
+Cost/day:	Стоимость/день:
+Cost:	Стоимость:
+Courage:	Смелость:
+Crew Retirement	Выход экипажа на пенсию
+Crew Updates	Изменения экипажа
+Current save already appears to be a simulation. Starting a simulation inside a simulation isn't allowed.	Текущее сохранение уже является симуляцией. Запуск симуляции внутри симуляции не допускается.
+Debug Logging	Отладочный лог
+Deep Space Avionics	Авионика дальнего космоса
+Delay (s): 	Задержка (с): 
+Delete Preset	Удалить пресет
+Difficulty settings changed	Настройки сложности изменены
+Disable Avionics	Отключить авионику
+Distance from Space Center: 	Расстояние от косм. центра: 
+Don't show again	Больше не показывать
+Downgrade Limit for max tng:	Предел понижения макс. тоннажа:
+Duplicate	Дублировать
+EC amount: 	Кол-во эл. заряда: 
+Edit	Изменить
+Edit Keeps Buildorder	Правка сохраняет порядок сборки
+Either there are no parts, or cost analysis is still running.	Либо нет деталей, либо анализ стоимости ещё выполняется.
+Empty	Пусто
+Engineer Cap:	Лимит инженеров:
+Engineers	Инженеры
+Engineers:	Инженеры:
+Error Loading RP-1 Data	Ошибка загрузки данных RP-1
+Error!	Ошибка!
+ERROR! An error occurred while loading RP-1 data. Things will be seriously broken! Please report this error to RP-1 GitHub and attach the log file. The game will be UNPLAYABLE in this state!	ОШИБКА! Произошла ошибка при загрузке данных RP-1. Всё будет серьёзно сломано! Пожалуйста, сообщите об этой ошибке на GitHub RP-1 и приложите файл лога. В этом состоянии игра будет НЕИГРАБЕЛЬНА!
+Error: the game thinks you've landed while you're actually flying. Revert to launch and try again.	Ошибка: игра считает, что вы приземлились, хотя на самом деле вы в полёте. Вернитесь к запуску и попробуйте снова.
+Est. construction time:	Ориент. время строительства:
+Est. Yearly Upkeep:	Ориент. годовое содержание:
+Export to file	Экспорт в файл
+Export to web	Экспорт в сеть
+Facilities	Здания
+Facilities costs (per 	Расходы на здания (за 
+Features	Возможности
+Fill All	Заправить всё
+Fill Tanks	Заправить баки
+Fill Tanks & Launch	Заправить баки и запустить
+Follow the steps below to get set up.	Следуйте шагам ниже для настройки.
+Funds paid out: 	Выплачено средств: 
+General Settings	Общие настройки
+Go to Administration	В Административное здание
+Go to Mission Control	В Центр управления полётами
+Go to Staffing	К подбору персонала
+Go to Tracking Station	На станцию слежения
+Go to VAB	В VAB
+Grand Total	Общий итог
+Height limit:	Предел высоты:
+Hide Merge Selection	Скрыть выбор слияния
+Human Rated:	Пилотируемый:
+Human-Rated	Пилотируемый
+Initial Retirement Date	Начальная дата выхода на пенсию
+Initial Retirement Dates	Начальные даты выхода на пенсию
+Insufficient avionics!	Недостаточно авионики!
+Integrate	Интегрировать
+Integration	Интеграция
+Integration at	Интеграция на
+Integration Teams	Команды интеграции
+Integration Teams Cost (per 	Стоимость команд интеграции (за 
+Invalid Integration Rate	Некорректный темп интеграции
+kJ	кДж
+km	км
+KSC Upgrade Times	Времена улучшения КЦ
+Launch	Запуск
+Launch azimuth: 	Азимут запуска: 
+Length limit:	Предел длины:
+m/s	м/с
+Max	Макс
+Max Engineers:	Макс. инженеров:
+Max Timewarp	Макс. ускорение времени
+Maximum tonnage:	Максимальный тоннаж:
+Mean Anomaly (radians): 	Средняя аномалия (радианы): 
+Merge Built Vessel	Слить готовый аппарат
+Minimum tonnage:	Минимальный тоннаж:
+Mod Enabled	Мод включён
+Modify	Изменить
+Modify Cost:	Стоимость изменения:
+Move to Top	Наверх
+Name	Имя
+Name:	Название:
+Net (after subsidy)	Чистыми (после субсидии)
+New Limits	Новые пределы
+Newspaper Title: (18 characters max)	Заголовок газеты: (макс. 18 символов)
+Next:	Далее:
+No	Нет
+No Active Projects	Нет активных проектов
+No constructions under way at this space center.	В этом косм. центре нет текущих строек.
+No current research	Нет текущих исследований
+No operational launch complex can accommodate this vessel. Modify or build a compatible launch complex.	Ни один действующий стартовый комплекс не подходит для этого аппарата. Измените или постройте совместимый стартовый комплекс.
+No Suitable Launch Complex!	Нет подходящего стартового комплекса!
+No trained crew found for this vessel. Check proficiency and mission training status of your astronauts.	Не найдено обученного экипажа для этого аппарата. Проверьте квалификацию и статус тренировки миссии у ваших космонавтов.
+No vessel available	Нет доступного аппарата
+No vessel currently detected.	Аппарат не обнаружен.
+No vessels in plans.	Нет аппаратов в планах.
+No vessels in storage!	Нет аппаратов на складе!
+No vessels integrating or in storage. Go to the VAB or SPH to start building.	Нет аппаратов в интеграции или на складе. Перейдите в VAB или SPH, чтобы начать постройку.
+No vessels integrating!	Нет аппаратов в интеграции!
+Nominal duration: 	Номинальная длительность: 
+Not enough volume to apply parameters. Increase the part size manually until it has sufficient volume.	Недостаточно объёма для применения параметров. Увеличьте размер детали вручную до достаточного объёма.
+NOTE: Affects all saves!	ВНИМАНИЕ: Влияет на все сохранения!
+Objectives: 	Задачи: 
+OK	ОК
+Orbit Altitude (km): 	Высота орбиты (км): 
+Orbit Apoapsis (km): 	Апоцентр орбиты (км): 
+Orbit Periapsis (km): 	Перицентр орбиты (км): 
+Origin body: 	Исходное тело: 
+Outdated ROLibrary version	Устаревшая версия ROLibrary
+Override Launch Button	Переопределить кнопку запуска
+Part Name	Название детали
+Part tooling is disabled	Оснастка детали отключена
+Periapsis altitude (km): 	Высота перицентра (км): 
+Permanently disabled	Отключено навсегда
+Permanently dismantle this pad	Навсегда разобрать площадку
+Plans	Планы
+Preset author(s):	Автор(ы) пресета:
+Preset description:	Описание пресета:
+Preset name:	Имя пресета:
+Preset short name:	Краткое имя пресета:
+Presets	Пресеты
+Program Budget	Бюджет программы
+Progress:	Прогресс:
+Range Safety	Аварийный подрыв
+Range Safety: Destruction initiated	Аварийный подрыв: инициирован
+Rate: 	Темп: 
+Reassign free engineers on complete	Переназначать свободных инженеров по завершении
+Reconditioning	Восстановление
+Recover Active Vessel To Warehouse	Вернуть активный аппарат на склад
+Recover Flight and Proceed	Завершить полёт и продолжить
+Remaining cost of all constructions:	Остаток стоимости всех строек:
+Remaining Cost:	Остаток стоимости:
+Remove	Удалить
+Rename	Переименовать
+Research	Исследования
+Research Teams	Исследовательские команды
+Researchers	Исследователи
+Researchers:	Исследователи:
+Resource	Ресурс
+Restart Simulation	Перезапустить симуляцию
+Retires NET	Пенсия не ранее
+Revert to Editor	Вернуться в редактор
+Roll Back	Откатить
+Rollback	Откат
+Rollout/Airlaunch Prep	Подготовка вывоза/возд. старта
+ROTanks does not currently support automatic resizing to correct dimensions. Increase the part size manually until it has sufficient volume.	ROTanks сейчас не поддерживает автоматическое изменение размеров до нужных значений. Увеличьте размер детали вручную до достаточного объёма.
+RP-1 encountered an exception patching via Harmony. This usually means there's an install problem, please use the Install Guide to create a fresh RP-1 Express Install. If the error persists, create an issue on the RP-1 GitHub repository.	RP-1 столкнулась с исключением при патчинге через Harmony. Обычно это означает проблему установки; воспользуйтесь руководством по установке и сделайте свежую установку RP-1 Express. Если ошибка сохраняется, создайте issue в репозитории RP-1 на GitHub.
+RP-1 has detected an outdated version of ROLibrary. The probe core part will be broken unless ROLib is updated to the latest release.	RP-1 обнаружила устаревшую версию ROLibrary. Деталь ядра зонда будет сломана, пока ROLib не обновлён до последней версии.
+Rush	Ускорить
+Salary and Facilities:	Зарплаты и здания:
+Save	Сохранить
+Save Edits	Сохранить правки
+Scenario Selector	Выбор сценария
+Scenario start failed	Не удалось запустить сценарий
+Scrap	Утилизировать
+Select	Выбрать
+Select LaunchSite	Выбрать стартовую площадку
+Server URL:	URL сервера:
+Show all possible trainings	Показать все возможные тренировки
+Show sim watermark	Показывать водяной знак симуляции
+Show/Hide Management	Показать/скрыть управление
+Show/Hide Resources	Показать/скрыть ресурсы
+Shutdown Avionics	Выключить авионику
+Simulate	Симулировать
+Simulate airlaunch	Симулировать возд. старт
+Simulation	Симуляция
+Simulation error	Ошибка симуляции
+Simulation Error	Ошибка симуляции
+Size Limits:	Пределы размеров:
+Size limits:	Пределы размеров:
+Sort:	Сортировка:
+Start Training	Начать тренировку
+Storage	Хранение
+Stupidity:	Глупость:
+Supports:	Поддерживает:
+Switching between VAB and SPH is not allowed while editing a vessel.	Переключение между VAB и SPH запрещено во время редактирования аппарата.
+Target body: 	Целевое тело: 
+Tech for this part is still being researched	Технология для этой детали ещё исследуется
+Tech Unlock Times	Времена открытия технологий
+The Hangar is not operational. Wait for it to finish renovating before integrating this vessel.	Ангар не работает. Дождитесь окончания его перестройки перед интеграцией этого аппарата.
+There was an error while recovering the ship. Sometimes reloading the scene and trying again works. Sometimes a vessel just can't be recovered this way and you must use the stock recover system.	Произошла ошибка при возврате корабля. Иногда помогает перезагрузка сцены и повторная попытка. Иногда аппарат просто нельзя вернуть этим способом, и нужно использовать штатную систему возврата.
+These provide you with funds over time, and allow you to select relevant contracts in Mission Control. Go to the Admin Building to select them. Note that if you're selecting a crewed program like X-Planes, you'll need to hire some nauts!	Они обеспечивают вас средствами со временем и позволяют выбирать соответствующие контракты в Центре управления. Перейдите в Административное здание, чтобы выбрать их. Учтите: если вы выбираете пилотируемую программу вроде X-Planes, нужно нанять космонавтов!
+This is a simulation.	Это симуляция.
+Token:	Токен:
+Tonnage limits:	Пределы тоннажа:
+Tool All	Оснастить всё
+Tooled	Оснащено
+Tooling cost	Стоимость оснастки
+Tooling Types	Типы оснастки
+Total	Итого
+Total Engineers:	Всего инженеров:
+Total funds: 	Всего средств: 
+Total Researchers:	Всего исследователей:
+Training	Тренировка
+Unassigned:	Не назначено:
+Understood	Понятно
+Unlock Credit	Кредит на открытие
+Untooled	Без оснастки
+Untooled Parts:	Детали без оснастки:
+Upgrade Limit for max tng:	Предел улучшения макс. тоннажа:
+Upkeep	Содержание
+Use Dates Not +Days	Использовать даты, а не +дни
+Use last screenshot instead of auto screenshot for Newspaper	Использовать последний скриншот вместо авто для газеты
+Use Message System	Использовать систему сообщений
+Use this area to change the name of the Newspaper Title.	Здесь можно изменить заголовок газеты.
+Use this area to set how the automatic newspaper images are created. Not selected will take an automatic screenshot.	Здесь настраивается создание автоматических изображений газеты. Если не выбрано — будет сделан автоскриншот.
+Use this tab to set the required payload amount for contracts.	На этой вкладке задаётся требуемое количество полезной нагрузки для контрактов.
+Velocity: 	Скорость: 
+Vessel landed	Аппарат приземлился
+Vessel:	Аппарат:
+Waiting for PreReq	Ожидание предусловия
+Warning: A preset with that short name already exists!	Внимание: пресет с таким кратким именем уже существует!
+Warp	Перемотка
+Width limit:	Предел ширины:
+With a contract accepted, now it's time to create and integrate a vessel to complete it. If it's a rocket, you'll need a launch complex to launch it. Go to the VAB and make your rocket, then click New in the Integration Info window. The LC properties will be set to support that vessel. Once you have LCs built you can also modify them the same way.	Контракт принят — теперь пора создать и интегрировать аппарат для его выполнения. Если это ракета, для запуска понадобится стартовый комплекс. Перейдите в VAB, соберите ракету, затем нажмите «New» в окне сведений об интеграции. Свойства СК будут настроены под этот аппарат. Когда СК построены, их можно так же изменять.
+With a Program selected, you now have access to the Contracts associated with that Program. Programs have some number of optional and some number of required contracts. Optional contracts aren't necessary to complete the program, but award Confidence.	После выбора Программы вам доступны Контракты, связанные с этой программой. У программ есть некоторое число необязательных и обязательных контрактов. Необязательные контракты не нужны для завершения программы, но дают Доверие.
+Work rate:	Скорость работы:
+Wrong Launch Complex!	Неверный стартовый комплекс!
+Year	Год
+Yearly Upkeep:	Годовое содержание:
+Yes	Да
+You must finish reconditioning at least one pad before you can roll out to it!	Нужно завершить восстановление хотя бы одной площадки, прежде чем вывозить на неё!
+You must repair the launchpad before you can roll out to it!	Нужно отремонтировать стартовую площадку, прежде чем вывозить на неё!

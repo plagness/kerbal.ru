@@ -1,0 +1,55 @@
+# Kopernicus -- словарь UI-строк, извлечённых напрямую из скомпилированного Kopernicus.dll
+# (Kopernicus-Planetary-System-Modifier / KopernicusExpansion; загрузчик системы планет,
+# обеспечивающий RSS). Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть
+# (см. tools/ui-translator/src/KerbalRuUiTranslator.cs). Сравнение Ordinal, без раскрытия escape.
+#
+# Извлечение: полная дизассемблировка monodis (MONO_PATH = KSP Managed + все GameData-плагины,
+# иначе падает на 0Harmony/Assembly-CSharp) + разбор IL по каждому реальному UI-стоку. У мода
+# НЕТ legacy IMGUI и НЕТ GUIContent -- вся UI идёт через TMPro: stock PopupDialog/MultiOptionDialog/
+# DialogGUIButton, собственный Kopernicus.UI.UIBuilder (CreateText/CreateButton/CreateTitleBar ->
+# TMP_Text.set_text) и ScreenMessages (ScreenMessagesText.SetText -> set_text). Каждая строка
+# прослежена по IL до set_text БЕЗ конкатенации/форматирования.
+#
+# Локализация Kopernicus: часть строк идёт через KSP Localizer.Format("#Kopernicus_..."); их
+# англ. значения взяты из GameData/Kopernicus/Localization/en-us.cfg (игра работает на английском,
+# поэтому в TMPro попадает именно английский текст). Русские значения сверены с официальным
+# ru.cfg того же мода для единообразия (Kopernicus/Localization/ru.cfg).
+#
+# СОЗНАТЕЛЬНО НЕ переведено (не пропуск, проверено по IL):
+# - Двухстрочные диалоги (реальный '\n' в строке): Injector.DisplayWarning ("Kopernicus was not
+#   able to load...") и версии-предупреждение ("Kopernicus will not work...\nPlease don't try...").
+#   Загрузчик словаря не раскрывает escape и читает по строкам, поэтому ключ с переносом невозможен
+#   без правки KerbalRuUiTranslator.cs. Заголовок "Warning" и кнопка "OK" этих диалогов -- ниже.
+# - PAW солнечной панели KopernicusSolarPanel (panelStatus/energy/exposure/wear и статусы
+#   Retracted/Extending/Broken/...): рендер идёт через BaseField.GuiString = guiName + ": " +
+#   значение (единый TMP-стринг с динамикой) -- точное совпадение невозможно. guiName -- loc-тег.
+# - Событие ManualTracking (кнопка PAW): guiName собирается конкатенацией с именем небесного тела.
+# - Occluded by <<1>>, [Auto] :, Tracked Star <тело> -- плейсхолдер/конкатенация с именем тела.
+# - "Generating terrain data: "/"Calculating color data: " (с ": ") и "Operation completed in: N ms"
+#   -- уходят в Debug.Log/конкатенацию с числом, это НЕ экранные строки (экранные -- без ": ").
+# - Имена тел, пути текстур в окне Missing Textures, ConfigNode-ключи, лог-строки.
+#
+# Диалог CompatibilityChecker ("Incompatible Mods Detected"): переведён только статичный заголовок;
+# тело собирается string.Concat из списка модов (динамика) -- не переводимо.
+Warning	Предупреждение
+OK	ОК
+You have changed the Terrain Detail setting.  Do note that can slightly change terrain altitudes, potentially affecting landed vessels!  Revert this setting back if unsure.	Вы изменили настройку детализации рельефа.  Учтите, что это может немного изменить высоты рельефа и повлиять на приземлившиеся аппараты!  Верните её обратно, если не уверены.
+Kopernicus is in beta on this version of KSP...  Bugs may be present!	Kopernicus находится в стадии бета-тестирования на этой версии KSP...  Возможны ошибки!
+Incompatible Mods Detected	Обнаружены несовместимые моды
+Poof!	Пуф!
+DANGER	ОПАСНОСТЬ
+UhOh!	Ой-ой!
+Kopernicus - Missing Textures	Kopernicus — отсутствующие текстуры
+Some planet textures have failed to load. Often this means that a planet pack has broken configs, but it may also mean that you have installed it wrong. The planets listed below will likely be broken in some way. Depending on the textures involved this could be minor or the planets could be completely broken. Load your existing saves at your own risk.	Не удалось загрузить некоторые текстуры планет. Часто это означает, что в планетном паке повреждены конфиги, но может также означать, что вы установили его неправильно. Перечисленные ниже тела, скорее всего, будут в той или иной степени повреждены. В зависимости от затронутых текстур последствия могут быть незначительными, либо планеты могут оказаться полностью сломаны. Загружайте существующие сохранения на свой страх и риск.
+<no body>	<нет тела>
+Close	Закрыть
+Select Tracked Star	Выберите отслеживаемую звезду
+Select the star you want to track with this solar panel.	Выберите звезду, которую вы хотите отслеживать с помощью этой солнечной панели.
+Automatic	Автоматически
+Generating terrain data	Генерация данных рельефа
+Terrain quality set improperly!.	Качество рельефа задано неверно!
+Calculating height difference	Расчёт перепада высот
+Calculating color data	Расчёт данных цвета
+Exporting planet maps: Color	Экспорт карт планеты: цвет
+Exporting planet maps: Height	Экспорт карт планеты: высота
+Exporting planet maps: Normal	Экспорт карт планеты: нормали
