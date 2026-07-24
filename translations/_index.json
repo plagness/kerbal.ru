@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 107,
+    "mods": 108,
     "keyedMods": 43,
-    "uiMods": 35,
-    "keys": 14274
+    "uiMods": 38,
+    "keys": 14518
   },
   "mods": [
     {
@@ -363,8 +363,8 @@
       "id": "kOS",
       "mod": "kOS (Kerbal Operating System)",
       "folder": "kOS",
-      "method": "mm-title",
-      "keys": 5,
+      "method": "ui-dict",
+      "keys": 49,
       "status": "draft"
     },
     {
@@ -763,8 +763,8 @@
       "id": "Strategia",
       "mod": "Strategia",
       "folder": "Strategia",
-      "method": "mm-title",
-      "keys": 21,
+      "method": "ui-dict",
+      "keys": 116,
       "status": "draft"
     },
     {
@@ -822,6 +822,14 @@
       "method": "keyed",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "TransferWindowPlanner",
+      "mod": "Transfer Window Planner",
+      "folder": "TriggerTech/TransferWindowPlanner",
+      "method": "ui-dict",
+      "keys": 105,
+      "status": "draft"
     },
     {
       "id": "UniversalStorage2",

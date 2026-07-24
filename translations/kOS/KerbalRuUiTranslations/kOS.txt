@@ -1,0 +1,79 @@
+# kOS (Kerbal Operating System) — ui-СЛОВАРЬ. Только UI-обёртка вокруг ЯЗЫКА kOS.
+# DLL: GameData/kOS/Plugins/kOS.dll. Метод: прямой разбор #US-хипа (PE-метаданные) +
+# сверка с перехватываемыми поверхностями движка (IMGUI GUIContent/GUILayout,
+# uGUI Text, TMPro TMP_Text). НЕ ТРОГАЕМ язык: команды, ключевые слова, суффиксы,
+# ALL-CAPS-переменные (AVAILABLETHRUST, CURRENTVOLUME…), описания суффиксов,
+# ошибки парсера/рантайма, вывод команд.
+#
+# Что переведено:
+#  1. Part-action-меню и группы действий kOSProcessor (активация, питание,
+#     открыть/закрыть терминал, подавление автопилота).
+#  2. Тултипы кнопки на панели инструментов (открыть/закрыть окно терминала).
+#  3. Панель управления kOS и окно выбора шрифта (IMGUI-подписи/кнопки).
+#  4. Настройки в «Difficulty Options → kOS» (telnet-порт/адрес, начальные
+#     размеры/яркость/шрифт терминала). Код-токены Terminal:CHARHEIGHT/WIDTH/HEIGHT
+#     оставлены как есть.
+#  5. Диалоги telnet (PopupDialog): заголовки, вопросы да/нет, кнопки.
+#  6. Кнопки/подписи диалогов миграции boot-файлов и настроек.
+#
+# Пропущено НАМЕРЕННО (движок не сматчит или это не UI):
+#  - Многострочные тела диалогов (реальные \n в строке DLL — построчный формат
+#    словаря их не покрывает: движок матчит raw-строку без де-эскейпа).
+#  - Строки с плейсхолдерами {0}/{1} (в UI приходят уже после String.Format —
+#    литеральный ключ с {0} не совпадёт: статус telnet-сервера, счётчики клиентов,
+#    предупреждения о выбранном IP).
+#  - Текст telnet-терминала/приветственного меню и CPU-выбора: идёт в сокет/буфер
+#    терминала, минуя перехватываемые UI-поверхности → перевод не сработает.
+#  - Описания суффиксов kOS (документация API, в игре не отображаются).
+#  - Имена шрифтов (Consolas/Monaco/Courier…) — собственные имена, латиница.
+#
+# Формат: Английский<TAB>Русский. Ключи — байт-в-байт из #US-хипа.
+Activate this processor	Активировать этот процессор
+Deactivate this processor	Деактивировать этот процессор
+Toggle Power	Питание вкл/выкл
+Emergency Suppress	Аварийное подавление
+Open Window by event	Открыть окно (по событию)
+Close Window by event	Закрыть окно (по событию)
+Open Terminal from ActionGroup	Открыть терминал (группа действий)
+Close Terminal from ActionGroup	Закрыть терминал (группа действий)
+Toggle Terminal from ActionGroup	Терминал вкл/выкл (группа действий)
+Toggle Power from ActionGroup	Питание вкл/выкл (группа действий)
+Start Suppress Autopilot from ActionGroup	Включить подавление автопилота (группа действий)
+Stop Suppress Autopilot from ActionGroup	Выключить подавление автопилота (группа действий)
+Toggle Suppress Autopilot from ActionGroup	Подавление автопилота вкл/выкл (группа действий)
+Suppress all kOS autopiloting for emergency manual control	Подавить всё автопилотирование kOS для аварийного ручного управления
+Click to open terminal window.	Нажмите, чтобы открыть окно терминала.
+Click to close terminal window.	Нажмите, чтобы закрыть окно терминала.
+Reverse Screen	Инверсия экрана
+Visual Beep	Визуальный сигнал
+Choose Font	Выбрать шрифт
+Font Name	Название шрифта
+(Only fonts detected as monospaced are shown.)	(Показаны только моноширинные шрифты.)
+To access other settings, see the kOS section in KSP's difficulty settings.	Остальные настройки — в разделе kOS настроек сложности KSP.
+Telnet server disabled.	Сервер telnet отключён.
+Enable Telnet server	Включить сервер telnet
+Telnet port number (must restart telnet to take effect)	Номер порта telnet (для применения перезапустите telnet)
+Telnet IP address string (must restart telnet to take effect)	Строка IP-адреса telnet (для применения перезапустите telnet)
+Initial Terminal:CHARHEIGHT when a terminal is first opened	Начальный Terminal:CHARHEIGHT при первом открытии терминала
+Font Name for terminal window	Название шрифта для окна терминала
+Initial brightness setting for new terminals	Начальная яркость для новых терминалов
+Initial Terminal:WIDTH when a terminal is first opened	Начальный Terminal:WIDTH при первом открытии терминала
+Initial Terminal:HEIGHT when a terminal is first opened	Начальный Terminal:HEIGHT при первом открытии терминала
+kOS Telnet Opt-In Permisssion	kOS telnet: согласие на включение
+kOS Telnet Non-Loopback Permisssion	kOS telnet: разрешение на не-loopback адрес
+kOS Telnet "Simulate in Background" notice.	kOS telnet: уведомление о «Simulate in Background».
+Do you wish to enable the telnet server?	Включить сервер telnet?
+Do you really want to use a non-loopback address?	Действительно использовать не-loopback адрес?
+No (address will revert to loopback)	Нет (адрес вернётся к loopback)
+Okay	Хорошо
+Yes, Do it!	Да, сделать!
+No, I'll do it myself	Нет, я сделаю сам
+Backup my scripts first	Сначала сделать резервную копию скриптов
+Yes, and strip "boot" prefixes	Да, и убрать префиксы «boot»
+Yes, but don't rename	Да, но не переименовывать
+No, I'll handle it myself	Нет, я разберусь сам
+Copy the scripts, don't move them	Копировать скрипты, не перемещать
+Yes: migrate settings	Да: перенести настройки
+No: start with new default settings	Нет: начать с настроек по умолчанию
+All settings except telnet settings are now stored in the game's save file. Settings stored here will be ignored.	Все настройки, кроме telnet, теперь хранятся в файле сохранения игры. Настройки здесь будут проигнорированы.
+Changes to these settings are saved and globally affect all saved games.	Изменения этих настроек сохраняются и глобально влияют на все сохранённые игры.

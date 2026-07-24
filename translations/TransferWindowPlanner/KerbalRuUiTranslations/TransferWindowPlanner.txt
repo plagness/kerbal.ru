@@ -1,0 +1,110 @@
+# TransferWindowPlanner — UI-словарь (RU)
+# Мод: Transfer Window Planner (TriggerTech). Метод: ui-dict (точное совпадение строки интерфейса).
+# Источник строк: monodis --userstrings TransferWindowPlanner.dll → фильтр до реальных UI-подписей.
+# Формат: Английский<TAB>Русский. Ведущие/хвостовые пробелы и двоеточия сохранены точно.
+# Δ (U+0394) и ° (U+00B0) — как в оригинале.
+Transfer Window Planner	Планировщик окон перелёта
+ to prograde	 по движению
+ to retrograde	 против движения
+to prograde	по движению
+to retrograde	против движения
+Year:	Год:
+Day:	День:
+Y:	Г:
+M:	М:
+D:	Д:
+Toggle Calendar	Календарь
+Settings...	Настройки…
+Updated Version Available - Settings...	Доступно обновление — Настройки…
+Minimize	Свернуть
+Expand	Развернуть
+No Selected Transfer to be able to display info	Перелёт не выбран — нечего показывать
+Go back to restored mode and plot a transfer first	Сначала вернитесь в обычный режим и постройте перелёт
+Origin:	Отправление:
+Destination:	Назначение:
+Departure:	Отбытие:
+Travel Time:	Время в пути:
+Ejection Δv:	Отлётный Δv:
+Insertion Δv:	Δv выхода на орбиту:
+Total Δv:	Суммарный Δv:
+Selected Transfer Details	Детали выбранного перелёта
+Phase Angle:	Фазовый угол:
+    Ejection Heading:	    Курс отлёта:
+Copy Departure UT	Копировать UT отбытия
+  Add KAC Alarm	  Добавить будильник KAC
+  Copy Details	  Копировать данные
+  Copy Transfer Details	  Копировать данные перелёта
+Arrival:	Прибытие:
+Ejection Angle:	Угол отлёта:
+Ejection Inclination:	Наклонение отлёта:
+Ejection Normal Δv:	Δv отлёта по нормали:
+Insertion Inclination:	Наклонение выхода на орбиту:
+Ejection Prograde Δv:	Δv отлёта по движению:
+Toggle Details...	Переключить детали…
+Travel Days	Дни в пути
+Departure Date	Дата отбытия
+Δv (m/s)	Δv (м/с)
+Instructions:	Инструкции:
+Select the celestial body you will be departing from.	Выберите небесное тело, от которого вы отправляетесь.
+Enter the altitude of your parking orbit around that body. This is assumed to be a circular, equatorial orbit.	Укажите высоту опорной орбиты вокруг этого тела. Предполагается круговая экваториальная орбита.
+Select the celestial body you wish to travel to.	Выберите небесное тело, к которому хотите лететь.
+Enter the altitude of the orbit you wish to establish around your destination body. You can enter 0 if you intend to perform a fly-by or aerobraking maneuver.	Укажите высоту орбиты, которую хотите занять у тела назначения. Введите 0, если планируете пролёт или аэродинамическое торможение.
+Enter the earliest departure date to include in the plot. Generally this should be your current game time, which you can find in the tracking station in the game.	Укажите самую раннюю дату отбытия для расчёта. Обычно это текущее игровое время — его можно посмотреть на станции слежения.
+Click the "Plot it!" button. After a few seconds a plot will appear showing how much Δv is required to reach your destination for different departure dates and times of flight. Click on any point on this plot to see full details of the selected transfer.	Нажмите кнопку «Построить!». Через несколько секунд появится график с количеством Δv, необходимым для достижения цели при разных датах отбытия и времени в пути. Щёлкните по любой точке графика, чтобы увидеть полные детали выбранного перелёта.
+Enter Parameters	Ввод параметров
+Initial Orbit:	Начальная орбита:
+Final Orbit:	Конечная орбита:
+Earliest Departure:	Самое раннее отбытие:
+Latest Departure:	Самое позднее отбытие:
+Time of Flight:	Время в пути:
+km	км
+No Insertion Burn (eg. fly-by)	Без выхода на орбиту (напр. пролёт)
+to	до
+days	дн.
+Reset	Сброс
+Plot It!	Построить!
+Show Phase Angles	Показать фазовые углы
+Show Ejection Angles	Показать углы отлёта
+No Date Recorded	Дата не записана
+Unknown - check again later	Неизвестно — проверьте позже
+Settings Section	Раздел настроек
+Styling:	Оформление:
+Button:	Кнопка:
+Not Installed. Click for Toolbar Info	Не установлено. Нажмите для информации о панели
+Click to open your browser and find out more about the Common Toolbar	Открыть в браузере сведения об общей панели инструментов
+Click Through Protection	Защита от сквозных кликов
+Prevent in Space Center	Блокировать в Центре управления
+Prevent in Editors	Блокировать в редакторах
+Prevent in Flight	Блокировать в полёте
+Prevent in Tracking Station	Блокировать на станции слежения
+Kerbal Alarm Clock Options	Настройки Kerbal Alarm Clock
+Not Installed. Click for Alarm Clock Info	Не установлено. Нажмите для информации о будильнике
+Click to open your browser and find out more about the Kerbal Alarm Clock	Открыть в браузере сведения о Kerbal Alarm Clock
+You need a newer version of KAC	Требуется более новая версия KAC
+Click to open your browser and download a newer Kerbal Alarm Clock	Открыть в браузере загрузку новой версии Kerbal Alarm Clock
+KAC is not loaded in this scene, so we can't configure	KAC не загружен в этой сцене, поэтому настройка недоступна
+the integration options	параметры интеграции
+You can access these in scenes where KAC is visible	Они доступны в сценах, где отображается KAC
+Go on... Move along... Nothing to see...	Проходите… не на что смотреть…
+Action:	Действие:
+Margin	Запас
+(hours)	(часы)
+General Settings	Общие настройки
+Calendar:	Календарь:
+Show Calendar Toggle in Main Window	Показывать переключатель календаря в главном окне
+Earth Settings	Настройки Земли
+Earth Epoch:	Эпоха Земли:
+Reset Earth Epoch	Сбросить эпоху Земли
+Version Check	Проверка версии
+Check Version Daily	Проверять версию ежедневно
+Check Version Now	Проверить версию сейчас
+Last Check Attempt:	Последняя попытка проверки:
+Current Version:	Текущая версия:
+Last Version from Web:	Последняя версия из сети:
+Updated Version Available - Click Here	Доступно обновление — нажмите здесь
+Documentation and Links:	Документация и ссылки:
+GitHub Page:	Страница GitHub:
+Forum Page:	Страница форума:
+Click Here	Нажмите здесь
+Prev	Пред.
+Next	Далее

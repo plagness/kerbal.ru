@@ -1,0 +1,156 @@
+# Strategia -- словарь UI-строк, извлечённых напрямую из Strategia.dll
+# (monodis --userstrings + разбор #US-кучи в UTF-16LE, v1.8.0).
+# Здесь ТОЛЬКО UI-хром интерфейса стратегий в здании Администрации: заголовки разделов
+# описания стратегии (Эффекты/Задачи/Требования/Аванс/Награды/Штрафы), шаблоны текстов
+# эффектов и требований, названия зданий космодрома, типы контрактов, уведомления и кнопки.
+# Названия и описания самих стратегий берутся из Strategia/Strategies/*.cfg -- они переведены
+# отдельно (см. docs/MAINTAINING.md) и здесь НЕ дублируются.
+# Отброшены: имена классов/полей/конфиг-ключи, отладочные Strategia:-логи, чистые
+# format/color/<sprite>-обёртки валют, номера версий, одиночные символы, а также
+# грамматически связанные mid-sentence-фрагменты глаголов достижений (Must/have/reached/
+# orbited/landed... ), которые нельзя корректно перевести по кусочкам -> оставлены как есть.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (движок ui-translator).
+
+# --- Счётчик активных стратегий (здание Администрации) ---
+Active Strategies: 	Активные стратегии: 
+Max: 	Макс.: 
+ [Max: 	 [Макс.: 
+* Max Active Strategies: {0}	* Макс. активных стратегий: {0}
+<color=#a8ff04>* Max Active Strategies: {0}</color>	<color=#a8ff04>* Макс. активных стратегий: {0}</color>
+
+# --- Заголовки разделов описания стратегии ---
+<b><color=#EDED8B>Setup Cost:</color></b> 	<b><color=#EDED8B>Стоимость активации:</color></b> 
+<b><color=#feb200>Effects:</color></b>	<b><color=#feb200>Эффекты:</color></b>
+<b><color=#feb200>Objectives:</color></b>	<b><color=#feb200>Задачи:</color></b>
+<b><color=#feb200>Requirements:</color></b>	<b><color=#feb200>Требования:</color></b>
+<b><color=#8BED8B>Advances: </color></b>	<b><color=#8BED8B>Аванс: </color></b>
+<b><color=#8BED8B>Rewards: </color></b>	<b><color=#8BED8B>Награды: </color></b>
+<b><color=#ED0B0B>Penalties: </color></b>	<b><color=#ED0B0B>Штрафы: </color></b>
+
+# --- Требования: улучшение зданий ---
+<i><color=#8BED8B>Can 	<i><color=#8BED8B>Можно 
+upgrade	улучшить
+downgrade	понизить
+ must be at least level 	 должно быть не ниже уровня 
+Current level: 	Текущий уровень: 
+
+# --- Здания космодрома (в требованиях по уровню) ---
+Administration Facility	Административный корпус
+Astronaut Complex	Центр подготовки астронавтов
+Launch Pad	Стартовый стол
+Mission Control	Центр управления полётами
+Research and Development	Отдел исследований и разработок
+Runway	Полоса
+Spaceplane Hangar	Ангар космопланов
+Tracking Station	Станция слежения
+Vehicle Assembly Building	Здание вертикальной сборки
+
+# --- Требования: средства/наука/репутация ---
+At least 	Не менее 
+ funds	 средств
+ (Current funds: 	 (сейчас средств: 
+ science	 науки
+ (Current science: 	 (сейчас науки: 
+ reputation	 репутации
+ (Current reputation: 	 (сейчас репутации: 
+
+# --- Требования: лимит активных стратегий ---
+The Administration Building cannot support more than 	Административный корпус не поддерживает более 
+ active strategies at this level.	 активных стратегий на этом уровне.
+
+# --- Требования: технологии / стратегии / корабли ---
+Must not have researched all technology	Исследованы не все технологии
+All technology is researched	Все технологии исследованы
+ per unresearched technology).	 за каждую неисследованную технологию).
+ is active	 активна
+ cannot be active	 не может быть активна
+No vessels are en route to 	Нет кораблей на пути к 
+ when 	 когда 
+ is present.	 присутствует.
+
+# --- Эффекты: контракты, наука, стоимость запуска ---
+Increases likelihood of receiving contracts for 	Повышает вероятность получения контрактов для 
+and	и
+ and 	 и 
+ for 	 для 
+ contracts	 контрактов
+bodies	тел
+celestial bodies	небесных тел
+biomes	биомов
+Cost to launch crewed vessels increased by 	Стоимость запуска пилотируемых кораблей увеличена на 
+on facility upgrades	на улучшения зданий
+ per experience point gained by astronauts (awarded on recovery).	 за очко опыта, полученное астронавтами (начисляется при возвращении).
+ funds when science transmitted/recovered from new 	 средств при передаче или возврате науки из новых 
+Science from new 	Наука из новых 
+ on strategy activation.	 при активации стратегии.
+Sets reputation loss on contract decline to 	Устанавливает потерю репутации при отклонении контракта на 
+Removes reputation loss on contract decline.	Убирает потерю репутации при отклонении контракта.
+Rewards from strategy '	Награды от стратегии '
+Randomly modifies 	Случайно изменяет 
+ by between 	 в пределах 
+
+# --- Эффекты: улучшение характеристик корабля ---
+Engine ISP	Удельный импульс двигателя
+Parachute effectiveness	Эффективность парашютов
+Strut strength	Прочность стоек
+Reaction wheel torque	Момент маховиков
+ increased by 	 увеличен на 
+ is on board.	 находится на борту.
+
+# --- Эффекты: опыт и подготовка экипажа ---
+All 	Все 
+astronauts	астронавты
+ perform as if they had 	 действуют так, будто имеют на 
+ more level	 уровень выше
+ of experience, up to a maximum of 5.	 опыта, максимум до 5.
+Special training	Особая подготовка
+Hired 	Нанятые 
+ start at level 	 начинают с уровня 
+Kerbals returning from the surface of other bodies get bonus experience	Кербалы, возвращающиеся с поверхности других тел, получают бонусный опыт
+Media star from	Медиазвезда с
+
+# --- Эффекты: периодические награды и штрафы ---
+A penalty of 	Штраф в размере 
+ funds will be applied if cancelled before the objective is completed.	 средств будет наложен при отмене до выполнения цели.
+ reputation will be applied if cancelled before the objective is completed.	 репутации будет наложен при отмене до выполнения цели.
+ science will be applied if cancelled before the objective is completed.	 науки будет наложен при отмене до выполнения цели.
+Costs 	Стоит 
+ Funds every 	 средств каждые 
+Gives 	Даёт 
+ Reputation (to a maximum of 	 репутации (максимум до 
+) every 	) каждые 
+Reputation given is lost when the strategy is deactivated	Полученная репутация теряется при деактивации стратегии
+ (currently would lose 	 (сейчас потеряли бы 
+ Reputation)	 репутации)
+ bonus to KSC Science.	 бонус к науке в Космическом центре.
+ bonus to 	 бонус к 
+ Science.	 науке.
+ funds when reaching orbit with a vessel with a mass of at least 	 средств за выход на орбиту с кораблём массой не менее 
+ tons.	 тонн.
+ reputation when reaching orbit with a vessel with a mass of at least 	 репутации за выход на орбиту с кораблём массой не менее 
+ science when reaching orbit with a vessel with a mass of at least 	 науки за выход на орбиту с кораблём массой не менее 
+
+# --- Типы контрактов (в описаниях эффектов) ---
+Asteroid Resource Mining	Добыча ресурсов с астероидов
+Science Collection	Сбор науки
+Exploration	Исследование
+Grand Tour	Гранд-тур
+Part Testing	Испытание деталей
+Flag Planting	Установка флага
+Asset Recovery	Возврат объектов
+World First	Мировой рекорд
+
+# --- Отмена стратегии / нехватка ресурсов ---
+Failed to complete strategy '	Не удалось выполнить стратегию '
+Not enough funds to pay cancellation penalty (	Недостаточно средств для оплаты штрафа за отмену (
+Not enough science to pay cancellation penalty (	Недостаточно науки для оплаты штрафа за отмену (
+ required).	 требуется).
+Insufficient reputation (needs 	Недостаточно репутации (нужно 
+, has 	, есть 
+
+# --- Уведомления и кнопки ---
+<b>New strategies available:</b>	<b>Доступны новые стратегии:</b>
+<b>Strategies no longer available:</b>	<b>Стратегии больше недоступны:</b>
+Strategy Availability Changed	Доступность стратегий изменилась
+Strategia requires Custom Barn Kit to function properly.  Strategia is currently disabled, and will automatically re-enable itself when Custom Barn Kit is installed.	Для корректной работы Strategia требуется Custom Barn Kit.  Сейчас Strategia отключена и включится автоматически после установки Custom Barn Kit.
+Okay	Хорошо

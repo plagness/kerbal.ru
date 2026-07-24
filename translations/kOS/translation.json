@@ -1,1 +1,7 @@
-{"mod":"kOS (Kerbal Operating System)","folder":"kOS","method":"mm-title","keys":5,"status":"draft"}
+{
+  "mod": "kOS (Kerbal Operating System)",
+  "folder": "kOS",
+  "method": "ui-dict",
+  "keys": 49,
+  "status": "draft"
+}

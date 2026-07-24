@@ -1,1 +1,7 @@
-{"mod":"Strategia","folder":"Strategia","method":"mm-title","keys":21,"status":"draft"}
+{
+  "mod": "Strategia",
+  "folder": "Strategia",
+  "method": "ui-dict",
+  "keys": 116,
+  "status": "draft"
+}
