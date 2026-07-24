@@ -66,7 +66,9 @@
       "ContractConfigurator-FieldResearch",
       "TransferWindowPlanner",
       "StageRecovery",
-      "JX2Antenna"
+      "JX2Antenna",
+      "BeamedPowerPlugin",
+      "ExtraPlanetaryLaunchpads"
     ],
     "optional": [
       "kRPC",
