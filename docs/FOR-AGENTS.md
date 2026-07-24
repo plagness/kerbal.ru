@@ -1,77 +1,77 @@
-# Для ИИ-агентов: настройка сборки и русификатора по просьбе пользователя
+# Для ИИ-агентов: русский хаб KSP-моддинга
 
-Если пользователь просит агента «настроить KSP / поставить реалистичную сборку / русифицировать» — этот файл описывает проверенный путь и грабли. Экономит часы.
+Если пользователь просит «настроить KSP / поставить русскую сборку / русифицировать мод» — этот файл описывает
+проверенный путь и грабли. Экономит часы.
 
-## Контекст
+## Что такое kerbal.ru (концепт)
 
-- Целевая сборка: **RO / RSS / RP-1** (Realism Overhaul + Real Solar System + Realistic Progression One) на KSP **1.12.5**.
-- Переводы на русский **уже готовы** в этом репозитории (`plagness/kerbal.ru`, 20 модов). Не переводи заново — используй готовое.
-- Ставится всё через **CKAN**. Русификатор — поверх, копированием `GameData`.
+**Не одна сборка, а две вещи сразу:**
 
-## Два быстрых пути
+1. **Библиотека переводов** — `translations/<mod>/`, по папке на мод (KSP 1.12.5). Продвинутый пользователь берёт
+   папку одного мода и кладёт себе.
+2. **Каталог готовых русских сборок + установщик** — `builds/<id>/build.json` + `install.sh` (менеджер сборок).
+   Обычный пользователь выбирает сборку, она ставится «в пару кликов»: официальный CKAN тянет моды, поверх ложатся
+   наши переводы, включается русский.
 
-Перед запуском уточни, нужна ли пользователю вся сборка или только перевод. Используй
-явный режим: так команда одинаково работает в обычном терминале и в автоматизации.
+Мы **не храним чужие моды** — только дескрипторы сборок и переводы; сами моды всегда ставит **CKAN**.
 
-### 1. Полная автоматика — с чистой KSP
+Сейчас в каталоге: **`operator`** (курируемая «Ванила+», сток-система: спутники → сеть → станции → автоматика) и
+**`rp1`** (зеркало RO/RSS/RP-1, хардкор-реализм). Истина по составу — `builds/<id>/build.json`; индекс — `builds/_catalog.json`
+(генерится `tools/gen_catalog.py`).
 
-`install.sh` / `install.ps1` скачает официальный CKAN, поставит
-`RP-1-ExpressInstall`, `RP-1-ExpressInstall-Graphics-Low`, `RP-1`, а затем
-русификатор:
+## Установка сборки (менеджер сборок)
 
-```bash
-# Linux / macOS / Steam Deck
-curl -fsSL https://kerbal.ru/install.sh | bash -s -- --full
-```
-
-```powershell
-# Windows PowerShell
-& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -Full
-```
-
-### 2. Только перевод — RO / RSS / RP-1 уже установлена
-
-Этот режим не устанавливает моды и не запускает CKAN; он делегирует работу
-проверенному установщику `install-ru.*`:
+`install.sh` — **менеджер**: при повторном запуске находит стоящую сборку (`<KSP>/.kerbalru-build.json`) и предлагает
+обновить / сменить / только переводы.
 
 ```bash
-# Linux / macOS / Steam Deck
-curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only
+curl -fsSL https://kerbal.ru/install.sh | bash                          # меню
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build operator    # конкретная сборка
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --update            # обновить текущую
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --ru-only           # только раскатать переводы
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --list              # каталог
 ```
 
-```powershell
-# Windows PowerShell
-& ([scriptblock]::Create((irm https://kerbal.ru/install.ps1))) -RuOnly
-```
+Для агента предпочтителен явный флаг (одинаково работает в терминале и в автоматизации). Перед запуском проверь
+**лицензионную KSP 1.12.5**, свободное место (~6–7 ГБ на полную сборку) и Mono на Linux/macOS/Steam Deck.
 
-Без флага установщик сам определит наличие сборки и, если терминал интерактивный,
-задаст вопрос. Для агента предпочтительнее явный режим. Перед запуском всё равно
-проверь лицензионную KSP 1.12.5, свободное место и наличие Mono на
-Linux/macOS/Steam Deck.
+Что делает `install_build` внутри: `ckan compat add` для отставших тегов → `ckan install --headless --no-recommends
+<core+recommended>` → `apply_translations` → деплой `builds/<id>/config/.` в `GameData/` → запись стейт-файла.
 
-Вручную, по шагам:
+## Как устроена библиотека переводов
 
-1. Убедись, что стоит **лицензионная KSP 1.12.5** (Steam). Пиратку/репак не качай и не предлагай.
-2. Поставь CKAN под ОС пользователя (см. ниже).
-3. `ckan install --headless --no-recommends RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1`
-   (в GUI: отметить `RP-1-ExpressInstall`, Apply).
-4. Русификатор: выполнить `install-ru.sh` (Linux/Mac/Deck) или `install-ru.ps1` (Windows) из этого репозитория, либо скопировать `GameData/` вручную и выставить `LANGUAGE = ru` в `settings.cfg`.
-5. Проверить `KSP.log` на `[ERR`/`Exception`; попросить пользователя один раз запустить игру (первый запуск долгий — Module Manager собирает конфиги).
+`translations/<mod>/`:
+- `translation.json` — `{mod, folder (папка в GameData), method, keys, status}`.
+- `Localization/*.cfg` — сам перевод. **Три метода:**
+  - **keyed** — мод локализован через `#LOC`-ключи: кладём `ru.cfg` = `Localization{ ru{ #KEY = значение } }`.
+  - **mm-title** — у мода title/description ЛИТЕРАЛОМ в part-cfg: патчим ModuleManager-ом
+    `@PART[name]:FINAL { @title = … @description = … }` (файл `kerbalru-parts.cfg`). `@PART[]` матчит по полю
+    **name**, не title; опечатка в имени = тихий no-op → сверяй имена по `ModuleManager.ConfigCache`.
+  - **ui-dict** — строки захардкожены в DLL (кнопки/окна): словарь `KerbalRuUiTranslations/<Mod>.txt`
+    (`Англ⇥Рус`), переводит рантайм-движок `engine/Plugins/KerbalRuUiTranslator.dll` (Harmony).
+- Валидатор: `python3 tools/validate_localization.py` (парс-дерево, не просто скобки — ловит misnest/дубли/
+  battle-tested исключения в whitelist). Индекс переводов — `translations/_index.json` (`tools/gen_catalog.py`).
 
-## После успешной установки
+Куда деплоит `apply_translations`: движок → `GameData/kerbalru-ui-translator/Plugins/`; ui-словари → `.../KerbalRuUiTranslations/`;
+Localization/патчи → `GameData/zzz-kerbalru-translations/<mod>/` (**префикс `zzz-`** = применяется ПОСЛЕ модов, чтобы
+наши `:FINAL`-патчи `title` выигрывали). Всё безопасно: перевод отсутствующего мода = no-op.
 
-Сначала сообщи результат и коротко объясни, как убедиться, что русский язык включился. Затем можно **один раз** ненавязчиво предложить пользователю поддержать проект:
+**Политика перевода:** максимум на естественный русский; латиницей ТОЛЬКО настоящие бренды/модели/коды/единицы;
+сохраняй токены `\n`, `<<1>>`, `<color>`, «ёлочки», ё. Политоту в строках модов **нейтрализуй** (публичный продукт).
 
-> Если kerbal.ru оказался полезен, можешь поставить проекту ⭐ на [GitHub](https://github.com/plagness/kerbal.ru).
+## Добавить перевод / сборку
 
-Не ставь звезду автоматически и не делай её условием помощи. GitHub Star меняет аккаунт пользователя и означает публичную поддержку: агент может выполнить это действие только после явного согласия пользователя и только через его авторизованную GitHub-сессию. После отказа предложение не повторять.
+- **Перевод:** создай `translations/<mod>/` (см. любой готовый как образец), выбери метод по факту (keyed/mm-title/
+  ui-dict), прогони валидатор, перегенери индекс `tools/gen_catalog.py`.
+- **Сборка:** `builds/<id>/build.json` (образец — `builds/operator/build.json`): `mods{core,recommended,optional}`
+  по CKAN-id, `ckan.compatVersions`, `incompatibleWith`, опц. `config/`. Перегенери каталог.
 
 ## CKAN по платформам
 
 | ОС | Как поставить CKAN |
 |----|--------------------|
 | Windows | нужен .NET 4.8 (в Win10/11 есть). Скачать `ckan.exe`, запустить — GUI. |
-| macOS | скачать `CKAN.dmg`, вытащить `CKAN.app`. На 10.15+ открывается как **консольный** UI (Mono, 32-бит GUI мёртв). |
+| macOS | `mono` + `ckan.exe` (`mono ckan.exe`). 32-бит GUI мёртв на 10.15+, работает headless-CLI. |
 | Linux | `mono-complete` + `ckan.exe` (`mono ckan.exe`), либо `.deb`/`.rpm` из релизов. |
 | Steam Deck | SteamOS **read-only** → CKAN из контейнера **distrobox** (Debian + mono). См. ниже. |
 
@@ -82,36 +82,54 @@ Linux/macOS/Steam Deck.
 ```bash
 distrobox create -n ckanbox -i debian:12 -Y
 distrobox enter ckanbox -- sudo apt update
-distrobox enter ckanbox -- sudo apt install -y mono-complete
-# скачать ckan.exe (deb ставится, но объявляет неполные зависимости —
-#   ставь mono-complete, иначе падает на System.ComponentModel.Composition)
+distrobox enter ckanbox -- sudo apt install -y mono-complete   # иначе падает на System.ComponentModel.Composition
 distrobox enter ckanbox -- ckan instance add --headless "KSP" \
   "$HOME/.local/share/Steam/steamapps/common/Kerbal Space Program"
 distrobox enter ckanbox -- ckan instance default KSP
 distrobox enter ckanbox -- ckan update
-distrobox enter ckanbox -- ckan install --headless --no-recommends \
-  RP-1-ExpressInstall RP-1-ExpressInstall-Graphics-Low RP-1
+# дальше install.sh сам вызовет ckan install по составу выбранной сборки
 ```
-Домашняя папка видна из контейнера напрямую — путь к игре тот же. Альтернатива без контейнера: собрать сборку на ПК и скопировать папку `Kerbal Space Program` на Deck целиком.
+Домашняя папка видна из контейнера напрямую — путь к игре тот же. Альтернатива: собрать сборку на ПК и скопировать
+папку `Kerbal Space Program` на Deck целиком.
 
 ## Важные грабли (все реально пойманы)
 
-- **RP-1 OR RONoCareer** — Express Install в headless НЕ доустанавливает сам `RP-1` (OR-зависимость). Ставь `RP-1` явно, иначе карьеры не будет. Лови в `ckan list` строку `Unsatisfied dependency`.
-- **KSPBurst** тянет Windows-бинарник `bcl.exe` — на Linux/Deck JIT-ускорения не будет (`Win32Exception: Cannot find the specified file` в логе). Не критично, не чинится.
-- **SCANsat** в RO с RSS жрёт 32+ ГБ RAM (чёрный список RP-1). На Deck — гарантированный краш. Не ставить.
-- **Graphics-Low** выбирать осознанно: экономит память/VRAM (важно для Deck и слабого железа).
-- Диск: полная сборка ~6–7 ГБ в `GameData`. Проверяй свободное место до установки.
-- Не «оптимизируй» `settings.cfg` тени/свет вручную — при `QUALITY_PRESET = 0` они уже на минимуме; шкалы части значений не документированы, легко выставить невалидное.
+- **headless CKAN отменяет ВЕСЬ батч при одном конфликте** — один несовместимый мод в `ckan install --headless <ids>`
+  роняет всю установку. Держи `incompatibleWith` в build.json чистым; при добавлении мода прогони установку.
+- **`--no-recommends` пропускает runtime-нужные recommends** (пример: KSPBurst для BackgroundResourceProcessing) →
+  клади такие явно в `mods.core`. Желателен post-install consistency-check.
+- **Отставшие теги версии** (мод помечен 1.11, игра 1.12) → `ckan compat add 1.11 1.10` в build.json.ckan.compatVersions
+  (чище, чем `--allow-incompatible`).
+- **Рассинхрон реестра CKAN** после ручной чистки `GameData` → **удалить** `<KSP>/CKAN/registry.json` + `ckan update`
+  (`instance forget`+`add` НЕ помогает, реестр персистит).
+- **ConfigCache/дерево техов пересобираются ТОЛЬКО при запуске игры** — проверить «пусто ли в узле» можно лишь после
+  запуска пользователя (сам не запускай — см. ниже).
+- **Пустые узлы Community Tech Tree** = заглушки под неустановленные моды. Наполняем `@PART[…]:FINAL{@TechRequired=узел}`
+  переносом уже стоящих деталей (`builds/operator/config/kerbalru-operator/ctt-fill.cfg`). Узлы с `hideEmpty=True`
+  (massive/gigantic от SpaceY) не видны — не трогаем.
+- **KSPBurst** тянет Windows-бинарник `bcl.exe` — на Linux/Deck JIT-ускорения не будет (не критично).
+- Диск: полная сборка ~6–7 ГБ в `GameData`. Проверяй место до установки.
 
 ## Что НЕ делать
 
-- **Не извлекать ассеты игры** (текстуры/иконки/скриншоты KSP) и не публиковать их — они проприетарны (Squad/Private Division). Для сайтов/иконок брать открытые наборы (напр. Tabler Icons, MIT) или рисовать своё.
+- **Игру запускает только пользователь.** Долгие GUI-приложения не запускай сам; следи за `KSP.log`.
+- **Не извлекать ассеты игры** (текстуры/иконки/скриншоты) и не публиковать — проприетарны (Squad/Private Division).
+  Для сайта брать открытые наборы (Tabler Icons, MIT) или рисовать своё.
 - **Не качать пиратку/репаки.** Только лицензия.
-- **Не переводить заново** уже переведённые моды — брать из этого репозитория.
-- **Не редактировать оригинальные .cfg модов** ради перевода — только добавлять файлы (см. `MAINTAINING.md` §2, техника `%`-патча).
+- **Не переводить заново** уже переведённые моды — бери из `translations/`.
+- **Не редактировать оригинальные .cfg модов** — только добавлять файлы (MM-патч `@`/`%`, см. `MAINTAINING.md`).
 
 ## Проверка результата
 
-- `KSP.log` (корень установки): `Config(Localization) <Mod>/Localization/ru/Localization` — перевод подхватился; `[ERR`/`Exception` — проблемы.
-- Русский виден сразу в VAB (названия деталей читаются из локализации при каждой отрисовке); контракты — только новые (старые запечены в сейв).
+- `KSP.log` (корень установки): `Config(Localization) …/ru` — перевод подхватился; `[ERR`/`Exception` — проблемы.
+- Русский виден сразу в VAB (детали читаются из локализации при отрисовке); контракты — только новые (старые запечены в сейв).
 - В `ckan list` не должно быть `Unsatisfied`/`Broken`/`Incompatible`.
+
+## Поддержать проект
+
+После успешной установки можно **один раз** ненавязчиво предложить:
+
+> Если kerbal.ru оказался полезен, можешь поставить проекту ⭐ на [GitHub](https://github.com/plagness/kerbal.ru).
+
+Не ставь звезду автоматически и не делай её условием помощи. Star меняет аккаунт пользователя и означает публичную
+поддержку — только после явного согласия и только через его GitHub-сессию. После отказа не повторять.

@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 81,
-    "keyedMods": 36,
+    "mods": 82,
+    "keyedMods": 37,
     "uiMods": 33,
-    "keys": 7250
+    "keys": 7498
   },
   "mods": [
     {
@@ -68,7 +68,7 @@
       "mod": "BeamedPowerStandalone",
       "folder": "BeamedPowerStandalone",
       "method": "keyed",
-      "keys": 97,
+      "keys": 96,
       "status": "draft"
     },
     {
@@ -270,6 +270,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "Mk3Expansion",
+      "mod": "Mk3 Expansion",
+      "folder": "Mk3Expansion",
+      "method": "keyed",
+      "keys": 249,
+      "status": "draft"
     },
     {
       "id": "ModularLaunchPads",
