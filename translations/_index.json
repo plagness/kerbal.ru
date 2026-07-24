@@ -706,7 +706,7 @@
     {
       "id": "Snacks",
       "mod": "Snacks (Snacks! Continued life support)",
-      "folder": "Snacks",
+      "folder": "WildBlueIndustries/Snacks",
       "method": "ui-dict",
       "keys": 41,
       "status": "draft"
