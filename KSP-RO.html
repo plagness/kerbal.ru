@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kerbal.ru — русские сборки Kerbal Space Program + библиотека переводов</title>
+<title>RO / RSS / RP-1 — сборка kerbal.ru</title>
 <meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -348,19 +348,6 @@
     .mod-title{font-size:.96rem}.mod-kicker{font-size:.55rem}.mod-teaser{font-size:.82rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
     .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}.mod-media{grid-template-columns:1fr}.device-head{grid-template-columns:43px minmax(0,1fr)}.device-status{grid-column:2}.device-metrics{grid-template-columns:1fr 1fr}
   }
-
-  /* build catalog cards */
-  .build-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:20px}
-  .build-card{display:block;background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:26px 28px;transition:transform .2s,border-color .2s,box-shadow .2s;text-decoration:none}
-  .build-card:hover{transform:translateY(-4px);border-color:var(--line-cyan);box-shadow:0 30px 60px -40px var(--green-glow)}
-  .build-card .bc-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .build-card h3{font-family:var(--display);font-weight:700;font-size:1.45rem;color:#fff;margin:0;letter-spacing:-.02em}
-  .build-card .tag{color:var(--txt-dim);font-size:.95rem;margin:12px 0 0}
-  .build-card .bstats{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.5px}
-  .build-card .bstats b{color:var(--green)}
-  .build-card .go{margin-top:18px;color:var(--green);font-weight:600;font-size:.82rem}
-  .bc-badge{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.8px;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line-cyan);color:var(--cyan);white-space:nowrap}
-  .bc-badge.mirror{border-color:var(--line-hot);color:var(--orange)}
 </style>
 </head>
 <body>
@@ -418,14 +405,15 @@
 <div class="impact-flash" aria-hidden="true"></div>
 
 <div class="wrap">
+<a href="/" style="display:inline-flex;align-items:center;gap:7px;color:var(--txt-dim);text-decoration:none;font-weight:600;font-size:.8rem;margin:20px 0 -14px">← Все сборки kerbal.ru</a>
 
   <!-- HERO -->
   <header id="mission-start" class="hero" data-mission-start>
     <div class="hero-title"><h1 data-content="hero.title">KERBAL</h1><span class="domain-mark" data-content="hero.domain" aria-label="точка ру">.RU</span></div>
-    <p class="lead">Русский <b>хаб KSP-моддинга</b>: каталог готовых сборок, что ставятся в пару команд через CKAN, и библиотека переводов модов по отдельности.</p>
+    <p class="lead"><span data-content="hero.lead">Реалистичная сборка Kerbal Space Program на русском.</span> <b data-content="hero.accent">Переведены интерфейс и детали.</b></p>
     <div class="cta">
-      <a class="btn btn-primary" href="#builds"><svg class="ic"><use href="#i-packages"/></svg><span>Выбрать сборку</span></a>
-      <a class="btn btn-ghost" href="#library"><svg class="ic"><use href="#i-world"/></svg><span>Библиотека переводов</span></a>
+      <a class="btn btn-primary" data-release-download href="https://github.com/plagness/kerbal.ru/archive/refs/tags/v26.1.zip"><svg class="ic"><use href="#i-download"/></svg><span data-content="hero.primaryAction">Скачать русификатор</span></a>
+      <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg><span data-content="hero.secondaryAction">Как установить</span></a>
     </div>
     <div class="project-meta">
       <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
@@ -433,50 +421,121 @@
     </div>
   </header>
 
-  <!-- CATALOG -->
-  <section class="reveal" id="builds">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / КАТАЛОГ</span><h2>Готовые русские сборки</h2><span class="rule"></span></div>
-    <div class="build-grid">
-      <a class="build-card" href="/Operator">
-        <div class="bc-top"><h3>Оператор</h3><span class="bc-badge">курируемая</span></div>
-        <p class="tag">Спутники → сеть покрытия → орбитальные станции → автоматика (kOS). «Ванила+» на стоковой системе, долгая игра.</p>
-        <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>сток</b></span><span>модов&nbsp;<b>60</b></span><span>сложность&nbsp;<b>4/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
-      </a>
-      <a class="build-card" href="/KSP-RO">
-        <div class="bc-top"><h3>RO / RSS / RP-1</h3><span class="bc-badge mirror">зеркало</span></div>
-        <p class="tag">Реальная Солнечная система, реальная физика, историческая карьера с 1951 года. Вершина реализма и хардкора.</p>
-        <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>RSS</b></span><span>реализм</span><span>сложность&nbsp;<b>5/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
-      </a>
+  <!-- ABOUT -->
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num" data-content="about.eyebrow">00 / ОБЗОР</span><h2 data-content="about.title">Что это</h2><span class="rule"></span></div>
+    <div class="card" data-content-list="about.paragraphs"></div>
+  </section>
+
+  <!-- INSTALLATION -->
+  <section id="install" class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num" data-install-eyebrow>01 / УСТАНОВКА</span><h2 data-install-title>Выбери один из двух путей</h2><span class="rule"></span></div>
+    <p class="install-intro" data-install-intro>Полная установка сборки или только перевод поверх готовой RO / RSS / RP-1.</p>
+    <div class="install-paths" data-install-paths aria-live="polite"></div>
+    <div class="install-notes" data-install-notes></div>
+  </section>
+
+  <!-- MODS -->
+  <section id="mission-end" class="reveal" data-mission-end>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num" data-content="mods.eyebrow">02 / КАТАЛОГ</span><h2 data-content="mods.title">Все компоненты сборки</h2><span class="rule"></span></div>
+    <div class="card mods-card">
+      <div class="mods-intro">
+        <p data-content="mods.intro">Единый каталог всей установленной сборки.</p>
+        <div class="coverage-overview">
+          <div class="coverage-total" data-composition-label aria-label="46 процентов компонентов сборки имеют русский язык">
+            <b data-composition-percent>46%</b>
+            <span>ПЕРЕВЕДЕНО</span>
+            <small><span data-inventory-with-russian>38</span> из <span data-inventory-components>83</span> компонентов<br>имеют русский язык</small>
+          </div>
+          <div class="coverage-copy">
+            <span class="coverage-mode" data-coverage-mode>структурно проверенная проекция</span>
+            <p><strong>Полный состав перепроверен по установленной сборке.</strong> В <code class="inline">GameData</code> <span data-inventory-mod-folders>82</span> папки модов и стоковая KSP. Каталог ниже объединяет все <span data-inventory-components>83</span> компонента без отдельного списка «на потом».</p>
+            <p><span data-composition-percent>46%</span> — доля компонентов, где уже есть русский блок или перевод интерфейса kerbal.ru, а не глубина каждой строки. Для наших <span data-inventory-supported>20</span> модов ниже показан аудит <code class="inline">ModuleManager.ConfigCache</code>; проекция явно помечена, пока новый кэш не подтверждён.</p>
+          </div>
+        </div>
+        <div class="coverage-summary" data-coverage-summary aria-label="Покрытие перевода среди 1023 деталей в 20 модах kerbal.ru">
+          <span class="coverage-stat"><b data-coverage-field="title">54%</b> названия</span>
+          <span class="coverage-stat"><b data-coverage-field="description">71%</b> описания</span>
+          <span class="coverage-stat"><b data-coverage-field="manufacturer">6%</b> производители</span>
+          <span class="coverage-stat"><b data-coverage-parts>1023</b> детали проверены</span>
+        </div>
+        <section class="ui-translation" data-ui-translation hidden aria-labelledby="ui-translation-title">
+          <span class="ui-translation-icon"><svg class="ic"><use href="#i-layout-grid"/></svg></span>
+          <div class="ui-translation-copy">
+            <span class="ui-translation-state" data-ui-status>ожидает проверки</span>
+            <h3 id="ui-translation-title"><span data-ui-label>Русификация интерфейса модов</span></h3>
+            <p data-ui-summary>Окна, кнопки и подсказки переводятся через Harmony-патч.</p>
+            <a data-project-link="uiTranslation" href="https://github.com/plagness/kerbal.ru/blob/main/docs/UI-TRANSLATION.md"><svg class="ic"><use href="#i-chevron-right"/></svg>Как это работает и что проверено</a>
+          </div>
+          <div class="ui-translation-stats" aria-label="Статистика перевода интерфейса">
+            <span class="ui-stat"><b data-ui-mods>24</b>мода</span>
+            <span class="ui-stat"><b data-ui-lines>1926</b>строк</span>
+            <span class="ui-stat"><b data-ui-keys>1867</b>ключей</span>
+            <span class="ui-stat"><b data-ui-fixes>42</b>исправления</span>
+          </div>
+        </section>
+        <div class="legend">
+          <span><span class="badge full">FULL</span> перевод в файлах мода</span>
+          <span><span class="badge patch">PATCH</span> патч поверх оригинала</span>
+          <a data-project-link="coverage" href="https://github.com/plagness/kerbal.ru/blob/main/docs/COVERAGE.md">Методика и исходные цифры →</a>
+        </div>
+      </div>
+
+      <div class="catalog-tools">
+        <label class="catalog-search"><svg class="ic"><use href="#i-search"/></svg><input type="search" data-mod-search placeholder="Найти мод или компонент" autocomplete="off" aria-label="Найти мод или компонент"></label>
+        <div class="catalog-filters" role="group" aria-label="Фильтр каталога">
+          <button class="catalog-filter is-active" type="button" data-mod-filter="featured" aria-pressed="true">Основные</button>
+          <button class="catalog-filter" type="button" data-mod-filter="all" aria-pressed="false">Все</button>
+          <button class="catalog-filter" type="button" data-mod-filter="kerbalru" aria-pressed="false">kerbal.ru</button>
+          <button class="catalog-filter" type="button" data-mod-filter="upstream" aria-pressed="false">RU авторов</button>
+          <button class="catalog-filter" type="button" data-mod-filter="untranslated" aria-pressed="false">Без RU</button>
+          <button class="catalog-filter" type="button" data-mod-filter="service" aria-pressed="false">Сервис</button>
+        </div>
+      </div>
+      <div class="catalog-label"><span><b data-catalog-visible>83</b> из <span data-inventory-components>83</span></span><span>нажми на строку для подробностей</span></div>
+      <div class="mod-list" data-mod-list aria-live="polite"></div>
     </div>
   </section>
 
-  <!-- LIBRARY -->
-  <section class="reveal" id="library">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">02 / ПЕРЕВОДЫ</span><h2>Библиотека переводов модов</h2><span class="rule"></span></div>
+  <!-- PERFORMANCE -->
+  <section class="reveal" id="performance">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-gauge"/></svg></span><span class="sec-num" data-performance-eyebrow>03 / ПРОИЗВОДИТЕЛЬНОСТЬ</span><h2 data-performance-title>Как сборка работает на железе</h2><span class="rule"></span></div>
+    <p class="install-intro" data-performance-intro>Собираем воспроизводимые замеры сообщества.</p>
+    <div class="performance-grid" data-performance-devices></div>
+    <div class="card performance-method">
+      <div>
+        <h3 data-performance-method-title>Как собираем данные</h3>
+        <p data-performance-privacy>Только добровольные результаты через GitHub Issue — без фоновой телеметрии.</p>
+        <div class="performance-actions">
+          <a class="btn btn-ghost" data-project-link="performanceReport" href="https://github.com/plagness/kerbal.ru/issues/new?template=performance.yml"><svg class="ic"><use href="#i-chart-line"/></svg><span data-performance-action-label>Добавить замер</span></a>
+        </div>
+      </div>
+      <ul class="performance-metrics" data-performance-metrics></ul>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-map-2"/></svg></span><span class="sec-num" data-content="roadmap.eyebrow">04 / ПЛАНЫ</span><h2 data-content="roadmap.title">Что улучшаем</h2><span class="rule"></span></div>
     <div class="card">
-      <p>Переводы лежат <strong>по папке на мод</strong> — можно взять русификацию одного мода и положить себе в <code class="inline">GameData</code>. Три метода: <strong>keyed</strong> (#LOC-ключи), <strong>mm-title</strong> (MM-патч заголовков деталей) и <strong>ui-dict</strong> (словарь + Harmony-движок для текста, зашитого в DLL).</p>
-      <p style="margin-bottom:0"><a href="https://github.com/plagness/kerbal.ru/tree/main/translations">Все переводы на GitHub →</a> · применяются автоматически под установленную сборку.</p>
+      <ul class="plain" data-content-list="roadmap.items" data-list-icon="i-chevron-right"></ul>
+      <p style="margin-bottom:0"><a data-project-link="roadmap" href="https://github.com/plagness/kerbal.ru/blob/main/docs/ROADMAP.md">Полный roadmap →</a> · <a data-project-link="maintaining" href="https://github.com/plagness/kerbal.ru/blob/main/docs/MAINTAINING.md">как помочь с переводом →</a></p>
     </div>
   </section>
 
-  <!-- QUICKSTART -->
-  <section class="reveal" id="install">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-book-2"/></svg></span><span class="sec-num">03 / СТАРТ</span><h2>Быстрый старт</h2><span class="rule"></span></div>
+  <!-- LIMITS -->
+  <section id="nuances" class="reveal">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-alert-triangle"/></svg></span><span class="sec-num" data-content="nuances.eyebrow">05 / НЮАНСЫ</span><h2 data-content="nuances.title">Что важно знать</h2><span class="rule"></span></div>
     <div class="card">
-      <p>Нужна лицензионная <strong>KSP 1.12.5</strong> и <a href="https://www.mono-project.com/">Mono</a> (на Steam Deck — в distrobox). Установщик — менеджер сборок: одна команда и выбор из меню.</p>
-      <div class="code"><pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--cyan);overflow-x:auto"><span style="color:var(--txt-faint)"># выбрать сборку из меню</span>
-curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
-      <p style="margin-bottom:0;color:var(--txt-dim);font-size:.9rem">Ассеты игры не извлекаются. Чужие моды не хранятся — их ставит официальный <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a>.</p>
+      <ul class="plain" data-content-list="nuances.items" data-list-icon="i-chevron-right"></ul>
     </div>
   </section>
 
-    <footer id="footer" class="reveal">
+  <footer id="footer" class="reveal">
     <div class="team-orbit" data-contributors aria-label="Команда проекта"></div>
     <a class="gh" data-project-link="repository" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru · <span data-project-version>v26.1</span></a><br>
     <span data-content="footer.projectNote">Независимый открытый фан-проект.</span><br>
-    Каталог сборок и переводы — на <a href="https://github.com/plagness/kerbal.ru">GitHub</a>; чужие моды ставит официальный <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a>.<br>
+    Исходники сборки: <a href="https://github.com/KSP-RO/RP-1-ExpressInstall">RP-1 Express Install</a> · <a href="https://github.com/KSP-RO/RP-1">RP-1</a> · <a href="https://github.com/KSP-RO/RealismOverhaul">Realism Overhaul</a><br>
     <span class="mono" data-content="footer.credits" style="opacity:.55;display:inline-block;margin-top:10px">Иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS</span>
   </footer>
 

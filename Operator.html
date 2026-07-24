@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kerbal.ru — русские сборки Kerbal Space Program + библиотека переводов</title>
+<title>Оператор — сборка kerbal.ru</title>
 <meta name="description" content="Русификатор и инструкция по установке реалистичной сборки Kerbal Space Program (Realism Overhaul, Real Solar System, RP-1) для Windows, macOS, Linux и Steam Deck.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -348,19 +348,8 @@
     .mod-title{font-size:.96rem}.mod-kicker{font-size:.55rem}.mod-teaser{font-size:.82rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
     .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}.mod-media{grid-template-columns:1fr}.device-head{grid-template-columns:43px minmax(0,1fr)}.device-status{grid-column:2}.device-metrics{grid-template-columns:1fr 1fr}
   }
-
-  /* build catalog cards */
-  .build-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:20px}
-  .build-card{display:block;background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:26px 28px;transition:transform .2s,border-color .2s,box-shadow .2s;text-decoration:none}
-  .build-card:hover{transform:translateY(-4px);border-color:var(--line-cyan);box-shadow:0 30px 60px -40px var(--green-glow)}
-  .build-card .bc-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .build-card h3{font-family:var(--display);font-weight:700;font-size:1.45rem;color:#fff;margin:0;letter-spacing:-.02em}
-  .build-card .tag{color:var(--txt-dim);font-size:.95rem;margin:12px 0 0}
-  .build-card .bstats{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.5px}
-  .build-card .bstats b{color:var(--green)}
-  .build-card .go{margin-top:18px;color:var(--green);font-weight:600;font-size:.82rem}
-  .bc-badge{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.8px;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line-cyan);color:var(--cyan);white-space:nowrap}
-  .bc-badge.mirror{border-color:var(--line-hot);color:var(--orange)}
+  .mod{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--txt-dim);background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin:0 6px 6px 0}
+  .modh{font-family:var(--sans);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--cyan);margin:18px 0 10px}
 </style>
 </head>
 <body>
@@ -418,14 +407,15 @@
 <div class="impact-flash" aria-hidden="true"></div>
 
 <div class="wrap">
+<a href="/" style="display:inline-flex;align-items:center;gap:7px;color:var(--txt-dim);text-decoration:none;font-weight:600;font-size:.8rem;margin:20px 0 -14px">← Все сборки kerbal.ru</a>
 
   <!-- HERO -->
   <header id="mission-start" class="hero" data-mission-start>
-    <div class="hero-title"><h1 data-content="hero.title">KERBAL</h1><span class="domain-mark" data-content="hero.domain" aria-label="точка ру">.RU</span></div>
-    <p class="lead">Русский <b>хаб KSP-моддинга</b>: каталог готовых сборок, что ставятся в пару команд через CKAN, и библиотека переводов модов по отдельности.</p>
+    <div class="hero-title"><h1>Оператор</h1></div>
+    <p class="lead">«Ванила+» на стоковой системе для долгой игры: <b>спутники → сеть покрытия → орбитальные станции → автоматика на kOS.</b> Ты — оператор космопрограммы.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="#builds"><svg class="ic"><use href="#i-packages"/></svg><span>Выбрать сборку</span></a>
-      <a class="btn btn-ghost" href="#library"><svg class="ic"><use href="#i-world"/></svg><span>Библиотека переводов</span></a>
+      <a class="btn btn-primary" href="#install"><svg class="ic"><use href="#i-packages"/></svg><span>Как установить</span></a>
+      <a class="btn btn-ghost" href="/KSP-RO"><svg class="ic"><use href="#i-world"/></svg><span>Другая сборка: RO/RSS/RP-1</span></a>
     </div>
     <div class="project-meta">
       <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
@@ -433,42 +423,33 @@
     </div>
   </header>
 
-  <!-- CATALOG -->
-  <section class="reveal" id="builds">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / КАТАЛОГ</span><h2>Готовые русские сборки</h2><span class="rule"></span></div>
-    <div class="build-grid">
-      <a class="build-card" href="/Operator">
-        <div class="bc-top"><h3>Оператор</h3><span class="bc-badge">курируемая</span></div>
-        <p class="tag">Спутники → сеть покрытия → орбитальные станции → автоматика (kOS). «Ванила+» на стоковой системе, долгая игра.</p>
-        <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>сток</b></span><span>модов&nbsp;<b>60</b></span><span>сложность&nbsp;<b>4/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
-      </a>
-      <a class="build-card" href="/KSP-RO">
-        <div class="bc-top"><h3>RO / RSS / RP-1</h3><span class="bc-badge mirror">зеркало</span></div>
-        <p class="tag">Реальная Солнечная система, реальная физика, историческая карьера с 1951 года. Вершина реализма и хардкора.</p>
-        <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>RSS</b></span><span>реализм</span><span>сложность&nbsp;<b>5/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- LIBRARY -->
-  <section class="reveal" id="library">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">02 / ПЕРЕВОДЫ</span><h2>Библиотека переводов модов</h2><span class="rule"></span></div>
-    <div class="card">
-      <p>Переводы лежат <strong>по папке на мод</strong> — можно взять русификацию одного мода и положить себе в <code class="inline">GameData</code>. Три метода: <strong>keyed</strong> (#LOC-ключи), <strong>mm-title</strong> (MM-патч заголовков деталей) и <strong>ui-dict</strong> (словарь + Harmony-движок для текста, зашитого в DLL).</p>
-      <p style="margin-bottom:0"><a href="https://github.com/plagness/kerbal.ru/tree/main/translations">Все переводы на GitHub →</a> · применяются автоматически под установленную сборку.</p>
-    </div>
-  </section>
-
-  <!-- QUICKSTART -->
   <section class="reveal" id="install">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-book-2"/></svg></span><span class="sec-num">03 / СТАРТ</span><h2>Быстрый старт</h2><span class="rule"></span></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / УСТАНОВКА</span><h2>Поставить сборку</h2><span class="rule"></span></div>
     <div class="card">
-      <p>Нужна лицензионная <strong>KSP 1.12.5</strong> и <a href="https://www.mono-project.com/">Mono</a> (на Steam Deck — в distrobox). Установщик — менеджер сборок: одна команда и выбор из меню.</p>
-      <div class="code"><pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--cyan);overflow-x:auto"><span style="color:var(--txt-faint)"># выбрать сборку из меню</span>
+      <p>Установщик — <strong>менеджер сборок</strong>: официальный CKAN тянет моды, поверх ложатся русские переводы, включается русский. Повторный запуск находит стоящую сборку и предлагает обновить / сменить / только переводы. Нужен <a href="https://www.mono-project.com/">Mono</a> (на Steam Deck — в distrobox).</p>
+      <div class="code"><pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--cyan);overflow-x:auto"><span style="color:var(--txt-faint)"># поставить «Оператор»</span>
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build operator
+
+<span style="color:var(--txt-faint)"># обновить · сменить · только переводы · меню</span>
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --update
 curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
-      <p style="margin-bottom:0;color:var(--txt-dim);font-size:.9rem">Ассеты игры не извлекаются. Чужие моды не хранятся — их ставит официальный <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a>.</p>
+    </div>
+  </section>
+
+  <section class="reveal" id="gameplay">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">02 / ГЕЙМПЛЕЙ</span><h2>Долгая игра оператора</h2><span class="rule"></span></div>
+    <div class="card">
+      <p>Стоковая Кербол-система, без реального масштаба и хардкора RP-1. Смысл — не разовый полёт, а <strong>программа</strong>: сеть спутников связи (CommNet Constellation), покрытие поверхности, орбитальные станции и базы (Station Science, SSPX, KPBS), а затем переход от ручного пилотирования к <strong>автоматике через код</strong> — kOS/kRPC планируют операции. Расширенные контракты и наука дают поток целей на десятки полётов.</p>
+    </div>
+  </section>
+
+  <section class="reveal" id="mods">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-circle-check"/></svg></span><span class="sec-num">03 / СОСТАВ</span><h2>Моды сборки (60)</h2><span class="rule"></span></div>
+    <div class="card">
+      <div class="modh">Ядро · 21</div><span class="mod">ReStock</span><span class="mod">ReStockPlus</span><span class="mod">NearFutureLaunchVehicles</span><span class="mod">NearFutureSpacecraft</span><span class="mod">NearFutureSolar</span><span class="mod">NearFutureElectrical</span><span class="mod">KSPBurst</span><span class="mod">CommunityTechTree</span><span class="mod">ContractConfigurator</span><span class="mod">ContractConfigurator-Constellations</span><span class="mod">CommNetConstellation</span><span class="mod">AntennaHelper</span><span class="mod">MechJeb2</span><span class="mod">SCANsat</span><span class="mod">Snacks</span><span class="mod">KerbalJointReinforcementContinued</span><span class="mod">NearFutureExploration</span><span class="mod">NearFutureConstruction</span><span class="mod">Coatl-Aerospace-Redux</span><span class="mod">xScienceContinued</span><span class="mod">ScienceRelay</span>
+      <div class="modh">Рекомендованные · 36</div><span class="mod">StationPartsExpansionRedux</span><span class="mod">kOS</span><span class="mod">RoutineMissionManager</span><span class="mod">BackgroundResourceProcessing</span><span class="mod">KerbalAlarmClock</span><span class="mod">HaystackReContinued</span><span class="mod">OuterPlanetsMod</span><span class="mod">KAS</span><span class="mod">Strategia</span><span class="mod">NearFuturePropulsion</span><span class="mod">KerbalAtomics</span><span class="mod">FarFutureTechnologies</span><span class="mod">CryoEngines</span><span class="mod">CryoTanks</span><span class="mod">HeatControl</span><span class="mod">NearFutureAeronautics</span><span class="mod">AirplanePlus</span><span class="mod">KerbalAircraftExpansion</span><span class="mod">Mk2Expansion</span><span class="mod">Mk3Expansion</span><span class="mod">SpaceY-Lifters</span><span class="mod">SpaceY-Expanded</span><span class="mod">DMagicOrbitalScience</span><span class="mod">StationScienceContinued</span><span class="mod">UniversalStorage2</span><span class="mod">Knes</span><span class="mod">KerbalPlanetaryBaseSystems</span><span class="mod">StockalikeMiningExtension</span><span class="mod">ContractConfigurator-KerbinSpaceStation</span><span class="mod">ContractConfigurator-CleverSats</span><span class="mod">ContractConfigurator-FieldResearch</span><span class="mod">TransferWindowPlanner</span><span class="mod">StageRecovery</span><span class="mod">JX2Antenna</span><span class="mod">BeamedPowerPlugin</span><span class="mod">ExtraPlanetaryLaunchpads</span>
+      <div class="modh">Опциональные · 3</div><span class="mod">kRPC</span><span class="mod">kOS.MechJeb2.Addon</span><span class="mod">KerbalKonstructs</span>
+      <p style="margin:20px 0 0;color:var(--txt-dim);font-size:.9rem">Переводы применяются автоматически под установленные моды. Все — в <a href="/#library">библиотеке</a>.</p>
     </div>
   </section>
 
@@ -476,7 +457,7 @@ curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
     <div class="team-orbit" data-contributors aria-label="Команда проекта"></div>
     <a class="gh" data-project-link="repository" href="https://github.com/plagness/kerbal.ru"><svg class="ic"><use href="#i-brand-github"/></svg>plagness/kerbal.ru · <span data-project-version>v26.1</span></a><br>
     <span data-content="footer.projectNote">Независимый открытый фан-проект.</span><br>
-    Каталог сборок и переводы — на <a href="https://github.com/plagness/kerbal.ru">GitHub</a>; чужие моды ставит официальный <a href="https://github.com/KSP-CKAN/CKAN">CKAN</a>.<br>
+    Сборка «Оператор» · дескриптор и переводы на <a href="https://github.com/plagness/kerbal.ru">GitHub</a>.<br>
     <span class="mono" data-content="footer.credits" style="opacity:.55;display:inline-block;margin-top:10px">Иконки — Tabler Icons (MIT) · карты и Saturn V — NASA / JPL / USGS</span>
   </footer>
 
