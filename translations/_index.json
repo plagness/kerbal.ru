@@ -4,7 +4,7 @@
     "mods": 107,
     "keyedMods": 43,
     "uiMods": 35,
-    "keys": 10853
+    "keys": 14274
   },
   "mods": [
     {
@@ -91,8 +91,8 @@
       "id": "CoatlAerospace",
       "mod": "Coatl Aerospace (ProbesPlus)",
       "folder": "CoatlAerospace",
-      "method": "mm-title",
-      "keys": 144,
+      "method": "mm-title+mm-science",
+      "keys": 1384,
       "status": "draft"
     },
     {
@@ -171,8 +171,8 @@
       "id": "DMagicOrbitalScience",
       "mod": "DMagic Orbital Science",
       "folder": "DMagicOrbitalScience",
-      "method": "mm-title",
-      "keys": 44,
+      "method": "mm-title+mm-science",
+      "keys": 2225,
       "status": "draft"
     },
     {

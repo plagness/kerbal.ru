@@ -1,1 +1,7 @@
-{"mod":"Coatl Aerospace (ProbesPlus)","folder":"CoatlAerospace","method":"mm-title","keys":144,"status":"draft"}
+{
+  "mod": "Coatl Aerospace (ProbesPlus)",
+  "folder": "CoatlAerospace",
+  "method": "mm-title+mm-science",
+  "keys": 1384,
+  "status": "draft"
+}

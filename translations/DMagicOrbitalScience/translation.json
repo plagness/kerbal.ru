@@ -1,1 +1,7 @@
-{"mod":"DMagic Orbital Science","folder":"DMagicOrbitalScience","method":"mm-title","keys":44,"status":"draft"}
+{
+  "mod": "DMagic Orbital Science",
+  "folder": "DMagicOrbitalScience",
+  "method": "mm-title+mm-science",
+  "keys": 2225,
+  "status": "draft"
+}
