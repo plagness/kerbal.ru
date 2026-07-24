@@ -1,18 +1,18 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-07-24",
+  "updatedAt": "2026-07-25",
   "_concept": {
     "note": "kerbal.ru — русский ХАБ KSP-моддинга, а не русификатор одной сборки. Секции inventory/coverage/mods/uiTranslation ниже — legacy RP-1-инвентаризация по старой раскладке GameData, оставлены для текущего сайта. Истина по новому концепту: библиотека переводов — translations/_index.json (107 модов, ~10853 ключей); каталог сборок — builds/_catalog.json (сборки operator, rp1).",
     "library": "translations/_index.json",
     "catalog": "builds/_catalog.json"
   },
   "release": {
-    "version": "v26.10",
+    "version": "v26.11",
     "year": 2026,
-    "sequence": 10,
-    "date": "2026-07-24",
+    "sequence": 11,
+    "date": "2026-07-25",
     "channel": "stable",
-    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.10"
+    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.11"
   },
   "game": {
     "name": "Kerbal Space Program",
