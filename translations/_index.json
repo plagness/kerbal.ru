@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 85,
-    "keyedMods": 37,
+    "mods": 105,
+    "keyedMods": 43,
     "uiMods": 33,
-    "keys": 7847
+    "keys": 10558
   },
   "mods": [
     {
@@ -56,6 +56,14 @@
       "status": "migrated"
     },
     {
+      "id": "BackgroundResourceProcessing",
+      "mod": "BackgroundResourceProcessing",
+      "folder": "BackgroundResourceProcessing",
+      "method": "keyed",
+      "keys": 39,
+      "status": "draft"
+    },
+    {
       "id": "BackgroundThrust",
       "mod": "BackgroundThrust",
       "folder": "BackgroundThrust",
@@ -96,6 +104,14 @@
       "status": "draft"
     },
     {
+      "id": "CommunityResourcePack",
+      "mod": "CommunityResourcePack",
+      "folder": "CommunityResourcePack",
+      "method": "keyed",
+      "keys": 240,
+      "status": "draft"
+    },
+    {
       "id": "CommunityTechTree",
       "mod": "CommunityTechTree",
       "folder": "CommunityTechTree",
@@ -120,6 +136,30 @@
       "status": "migrated"
     },
     {
+      "id": "ContractPacks",
+      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation)",
+      "folder": "ContractPacks",
+      "method": "mm-contract",
+      "keys": 91,
+      "status": "draft"
+    },
+    {
+      "id": "CryoEngines",
+      "mod": "CryoEngines",
+      "folder": "CryoEngines",
+      "method": "keyed-supplement",
+      "keys": 9,
+      "status": "draft"
+    },
+    {
+      "id": "CryoTanks",
+      "mod": "CryoTanks",
+      "folder": "CryoTanks",
+      "method": "keyed-supplement",
+      "keys": 2,
+      "status": "draft"
+    },
+    {
       "id": "DistantObject",
       "mod": "DistantObject",
       "folder": "DistantObject",
@@ -133,6 +173,14 @@
       "folder": "DMagicOrbitalScience",
       "method": "mm-title",
       "keys": 44,
+      "status": "draft"
+    },
+    {
+      "id": "DynamicBatteryStorage",
+      "mod": "DynamicBatteryStorage",
+      "folder": "DynamicBatteryStorage",
+      "method": "keyed-supplement",
+      "keys": 57,
       "status": "draft"
     },
     {
@@ -168,6 +216,14 @@
       "status": "draft"
     },
     {
+      "id": "FarFutureTechnologies",
+      "mod": "Far Future Technologies",
+      "folder": "FarFutureTechnologies",
+      "method": "keyed-supplement",
+      "keys": 117,
+      "status": "draft"
+    },
+    {
       "id": "FerramAerospaceResearch",
       "mod": "FerramAerospaceResearch",
       "folder": "FerramAerospaceResearch",
@@ -192,11 +248,35 @@
       "status": "migrated"
     },
     {
+      "id": "HeatControl",
+      "mod": "HeatControl",
+      "folder": "HeatControl",
+      "method": "keyed-supplement",
+      "keys": 29,
+      "status": "draft"
+    },
+    {
+      "id": "JX2Antenna",
+      "mod": "JX2Antenna",
+      "folder": "JX2Antenna",
+      "method": "mm-title",
+      "keys": 3,
+      "status": "draft"
+    },
+    {
       "id": "KAS",
       "mod": "KAS — Kerbal Attachment System",
       "folder": "KAS",
       "method": "keyed",
       "keys": 225,
+      "status": "draft"
+    },
+    {
+      "id": "KAX",
+      "mod": "KAX",
+      "folder": "KAX",
+      "method": "mm-title",
+      "keys": 16,
       "status": "draft"
     },
     {
@@ -256,12 +336,28 @@
       "status": "migrated"
     },
     {
+      "id": "Knes",
+      "mod": "Knes",
+      "folder": "Knes",
+      "method": "keyed",
+      "keys": 1059,
+      "status": "draft"
+    },
+    {
       "id": "Kopernicus",
       "mod": "Kopernicus",
       "folder": "Kopernicus",
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "kOS",
+      "mod": "kOS (Kerbal Operating System)",
+      "folder": "kOS",
+      "method": "mm-title",
+      "keys": 5,
+      "status": "draft"
     },
     {
       "id": "KSCSwitcher",
@@ -294,6 +390,22 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "MiningExpansion",
+      "mod": "Stockalike Mining Extension",
+      "folder": "MiningExpansion",
+      "method": "keyed",
+      "keys": 131,
+      "status": "draft"
+    },
+    {
+      "id": "Mk2Expansion",
+      "mod": "Mk2Expansion",
+      "folder": "Mk2Expansion",
+      "method": "keyed-supplement",
+      "keys": 30,
+      "status": "draft"
     },
     {
       "id": "Mk3Expansion",
@@ -584,12 +696,28 @@
       "status": "migrated"
     },
     {
+      "id": "SpaceDust",
+      "mod": "SpaceDust",
+      "folder": "SpaceDust",
+      "method": "keyed-supplement",
+      "keys": 10,
+      "status": "draft"
+    },
+    {
       "id": "SpaceTuxLibrary",
       "mod": "SpaceTuxLibrary",
       "folder": "SpaceTuxLibrary",
       "method": "keyed",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "SpaceY",
+      "mod": "SpaceY",
+      "folder": "SpaceY",
+      "method": "keyed",
+      "keys": 331,
+      "status": "draft"
     },
     {
       "id": "StageRecovery",
@@ -600,11 +728,27 @@
       "status": "draft"
     },
     {
+      "id": "StationPartsExpansionRedux",
+      "mod": "StationPartsExpansionRedux",
+      "folder": "StationPartsExpansionRedux",
+      "method": "keyed-supplement",
+      "keys": 124,
+      "status": "draft"
+    },
+    {
       "id": "StationScience",
       "mod": "Station Science",
       "folder": "StationScience",
       "method": "keyed",
       "keys": 186,
+      "status": "draft"
+    },
+    {
+      "id": "Strategia",
+      "mod": "Strategia",
+      "folder": "Strategia",
+      "method": "mm-title",
+      "keys": 21,
       "status": "draft"
     },
     {
@@ -664,6 +808,14 @@
       "status": "migrated"
     },
     {
+      "id": "UniversalStorage2",
+      "mod": "Universal Storage 2",
+      "folder": "UniversalStorage2",
+      "method": "keyed",
+      "keys": 390,
+      "status": "draft"
+    },
+    {
       "id": "VenStockRevamp",
       "mod": "VenStockRevamp",
       "folder": "VenStockRevamp",
@@ -678,6 +830,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "WildBlueIndustries",
+      "mod": "WildBlueIndustries",
+      "folder": "WildBlueIndustries",
+      "method": "mm-title",
+      "keys": 7,
+      "status": "draft"
     },
     {
       "id": "xScience",
