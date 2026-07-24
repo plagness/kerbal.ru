@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Если kerbal.ru помог вашему проекту или публикации, укажите репозиторий и использованную версию."
 title: "kerbal.ru: русская локализация RO / RSS / RP-1"
 type: software
-version: 26.6
+version: 26.7
 date-released: 2026-07-24
 authors:
   - family-names: Tenevoy
