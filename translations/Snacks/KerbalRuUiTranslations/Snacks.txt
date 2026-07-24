@@ -1,0 +1,88 @@
+# Snacks (Snacks! Continued — жизнеобеспечение, WildBlueIndustries/Snacks) — UI-словарь,
+# извлечён из скомпилированного SnacksUtils.dll (единственный *.dll в Plugin/;
+# также лежат .pdb/.mdb — символы, не код). Метод: прямой разбор #US-хипа
+# (PE-метаданные, ECMA-335 compressed-length UTF-16LE), НЕ monodis --userstrings
+# напрямую: monodis дробит длинные UTF-16-строки на bytearray-куски и склеивает
+# соседние записи хипа, из-за чего оконный текст («Snack Time!», «Stop simulators…»)
+# читается фрагментами. Прямой парсер вернул 434 цельные строки байт-в-байт.
+#
+# KerbalRuUiTranslator.cs: Harmony-перехват отрисовки текста (GUI/GUILayout,
+# GUIContent, UnityEngine.UI.Text, TMPro TMP_Text). Матч — ТОЧНАЯ строка целиком
+# (Ordinal), промах = строка идёт как есть (no-op). Каждый ключ ниже сверен на
+# байт-в-байт присутствие в #US-хипе.
+#
+# Что переведено (только СТАТИЧНЫЕ цельные строки, отображаемые целиком):
+#  - Окно «Vessel Status» / Stresstimator: заголовок, кнопки (Rerun Simulator,
+#    Show/Available Crew, Open/Close Stresstimator, Stop simulators…), сообщения
+#    об отсутствии экипажа/аппаратов, подсказки Exempt Kerbals, длинный help-текст.
+#  - Инфо-панель детали в редакторе (GetInfo): Inputs/Outputs, Note, Resource Options.
+#  - Статусы преобразователя/переработчика в PAW (A-OK, Running, Vessel must be in
+#    water, Requires…) и статусы состояния (Stressed Out, On Strike).
+#  - Итоги производства (Critical Success/Failure, Production yield…, Duration:…).
+#  - Тултип «Drag to resize the window», guiName «Max Recycling».
+#
+# Пропущено НАМЕРЕННО (движок не сматчит цельную строку — останется как есть):
+#  - Строки с токенами формата: {0:n2}, <<percent>>/<<amount>>/<<KerbalName>>,
+#    #autoLOC_* (сток-ключи) — в UI приходят после String.Format/подстановки.
+#  - Строки-ФРАГМЕНТЫ, склеиваемые в рантайме с именами/числами: «<color=white>Crew: »,
+#    « - Status: », «Needs more », «Progress: », письма «Subject: …»/«From: » и т.п.
+#    Собранный целиком лейбл содержит динамику → точного совпадения нет.
+#  - Сообщения о смерти/обмороке от нехватки снеков: постятся как «<имя> has died…»
+#    → цельная строка включает имя кербонавта, ключ без имени не совпадёт.
+#  - Многострочные (реальные \n/\r\n) — построчный формат словаря их не хранит.
+#  - Обобщённые «Fail»/«Success»/«Snacks»/«Soil»/«None»/«N/A» — имена ресурсов/значения
+#    (идут через локализацию ресурсов) либо слишком общие (высокий риск ложного матча).
+#  - guiName деталей и заголовки настроек сложности лежат в custom-attributes/#Blob,
+#    а не в #US — этим дампом не покрываются (нужен отдельный проход по атрибутам).
+#
+# Формат: Английский<TAB>Русский. Разделитель — первый TAB. # — комментарий.
+# Ведущие/хвостовые пробелы и пунктуация ключей сохранены байт-в-байт.
+
+# --- Окно Vessel Status / Stresstimator ---
+Vessel Status	Состояние аппарата
+Rerun Simulator	Перезапустить симулятор
+Show Crew View	Показать экипаж
+Show Available Crew	Показать доступный экипаж
+Open Stresstimator	Открыть Stresstimator
+Close Stresstimator	Закрыть Stresstimator
+Stop simulators (Estimates will be unavailable)	Остановить симуляторы (оценки станут недоступны)
+<color=yellow><b>Vessel has no crewed parts to simulate.</b></color>	<color=yellow><b>На аппарате нет обитаемых деталей для симуляции.</b></color>
+<color=yellow><b>Vessel needs crew to run simulation.</b></color>	<color=yellow><b>Для симуляции аппарату нужен экипаж.</b></color>
+<color=white><b>Simulation in progress, please wait...</b></color>	<color=white><b>Идёт симуляция, подождите…</b></color>
+<color=orange>Assumes converters are active; be sure to turn them on.</color>	<color=orange>Предполагается, что преобразователи включены; не забудьте их включить.</color>
+<color=white><b>Exempt Kerbals:</b> separate names by semicolon, first name only</color>	<color=white><b>Освобождённые кербонавты:</b> имена через точку с запятой, только имя</color>
+<color=yellow>These kerbals won't consume Snacks and won't suffer penalties from a lack of Snacks.</color>	<color=yellow>Эти кербонавты не потребляют снеки и не получают штрафов из-за их нехватки.</color>
+<color=white>No crewed vessels found on or around any world or in solar orbit.</color>	<color=white>Пилотируемых аппаратов не найдено: ни на планетах, ни у них, ни на солнечной орбите.</color>
+<color=white>Your kerbals might get Stressed Out if you transfer them to a docked vessel and then undock. Will that happen? Click on the habitable parts of the docked vessel to find out. Parts highlighted in blue will count towards the estimate.</color>	<color=white>Ваши кербонавты могут стать измотанными, если перевести их на пристыкованный аппарат, а затем расстыковаться. Случится ли это? Нажмите на обитаемые детали пристыкованного аппарата, чтобы узнать. Детали, подсвеченные синим, учитываются в оценке.</color>
+Snack Time!	Время снеков!
+New resource added!	Добавлен новый ресурс!
+Drag to resize the window.	Потяните, чтобы изменить размер окна.
+
+# --- Статусы кербонавтов и преобразователей ---
+Stressed Out	Измотан
+On Strike	Бастует
+A-OK	В норме
+Running	Работает
+Vessel must be in water	Аппарат должен быть в воде
+Requires oxygenated atmosphere	Требуется кислородная атмосфера
+Requires home connection	Требуется связь с домашним миром
+
+# --- Итоги производства / преобразователь ---
+Critical Success	Критический успех
+Critical Failure	Критический провал
+Production completed.	Производство завершено.
+Production yield lost!	Продукция потеряна!
+Production yield higher than expected.	Продукции больше, чем ожидалось.
+Production yield lower than expected.	Продукции меньше, чем ожидалось.
+<color=white>Duration: Unavailable</color>	<color=white>Длительность: недоступно</color>
+<color=white>Duration: Indefinite</color>	<color=white>Длительность: бессрочно</color>
+<color=white>Duration: Calculating...</color>	<color=white>Длительность: расчёт…</color>
+
+# --- Инфо-панель детали (редактор) / PAW ---
+<color=#7FFF00><b>Inputs</b></color>	<color=#7FFF00><b>Вход</b></color>
+<color=#7FFF00><b>Outputs</b></color>	<color=#7FFF00><b>Выход</b></color>
+<b>Note: </b> Production rates vary depending upon game settings. Consult the Part Action Window for details.	<b>Примечание: </b> Скорость производства зависит от настроек игры. Подробности смотрите в окне действий детали.
+<b>Resource Options</b>	<b>Варианты ресурсов</b>
+Supports multiple resource configurations	Поддерживает несколько конфигураций ресурсов
+Max Recycling	Макс. переработка
+This is based on a kerbal with no experience. Experienced kerbals can last longer.	Оценка для кербонавта без опыта. Опытные кербонавты продержатся дольше.

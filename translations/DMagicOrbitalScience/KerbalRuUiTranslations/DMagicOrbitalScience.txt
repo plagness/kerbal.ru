@@ -1,0 +1,82 @@
+# DMagicOrbitalScience -- словарь UI-строк, извлечённых из скомпилированного DMagic.dll
+# (DMagic/DMagicOrbitalScience 1.4.3, https://github.com/DMagic1/Orbital-Science).
+# UI мода ЗАШИТ В КОД (хардкод английских литералов), НЕ через Localizer/#LOC:
+#   monodis показал ссылки на KSP.Localization/Localizer, но 0 токенов #LOC/#autoLOC в куче
+#   строк -- сами подписи окон/кнопок/part-меню/контрактов -- обычные English-литералы.
+#   Перехватываются Harmony-патчами tools/ui-translator (GUI/GUILayout, UnityEngine.UI.Text,
+#   TMPro). Часть научных данных (титулы/описания экспериментов, детали) переведена отдельно
+#   через ModuleManager-.cfg (translations/DMagicOrbitalScience/Localization/, метод mm-*).
+# Извлечение: monodis --userstrings DMagic.dll + прямой разбор кучи #US (UTF-16LE, обе
+#   выравнивания байт), отбор только статичных player-facing строк.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (no-op).
+#
+# СОЗНАТЕЛЬНО НЕ ВКЛЮЧЕНО (не пропуск, а решение):
+# - Строки с рантайм-токенами ({0}, {0:P0}, @, <<1>>, N0/F1-форматы, регэкспы) -- собираются
+#   на лету, точного совпадения не дадут.
+# - Лог/диагностика ([DM]/[DMOS] ..., "Something Went Wrong", "Failed To Load ...",
+#   "Could not find ...", "Stupid ...", "Door Invoked") -- не UI игрока.
+# - Титулы-экспериментов как строки-КОНСТАНТЫ поиска ("Anomaly Scan", "Magnetometer Scan",
+#   "Radio Plasma Wave Scan", "Recon Scan", "SIGINT Scan") -- отображаемые титулы уже
+#   локализованы через науку-.cfg; эти литералы в DLL служат для сопоставления в контрактах,
+#   их подмена рискует тихо сломать выдачу/учёт контрактов.
+# - Имена аномалий / классы астероида / стороны света ("North", "Class A" и т.п.) -- в UI
+#   попадают только как {n}-подстановка внутри динамических строк, самостоятельно не рисуются.
+# - Тело диалога удаления данных ("Removing the experiment data will render this module
+#   inoperable.\n\nRestoring functionality will require a Scientist.") -- содержит буквальные
+#   переносы строки \n\n, невыразимо в построчном TAB-формате; пропущено намеренно.
+#
+# Политика: максимум по-русски; латиницей бренды (DMagic) и коды; «ёлочки», ё.
+
+Deploy	Выдвинуть
+Retract	Втянуть
+Toggle	Переключить
+Activate	Активировать
+Deactivate	Деактивировать
+Hammer Test	Тест молота
+Jettison	Сбросить
+Fix Dish	Починить антенну
+Enable Science Transmission	Включить передачу науки
+Disable Science Transmission	Выключить передачу науки
+Remove Data	Удалить данные
+Cancel	Отмена
+Warning!	Внимание!
+Deployed	Выдвинуто
+Deactivated	Деактивировано
+Searching...	Поиск…
+Receiver Located	Приёмник обнаружен
+Receiver In Range	Приёмник в зоне действия
+Experiment Ready	Эксперимент готов
+No Power	Нет энергии
+Collected	Собрано
+Experiment Value	Ценность эксперимента
+No receivers detected within scanning range	В зоне сканирования не обнаружено приёмников
+No valid targets within scanning range	В зоне сканирования нет подходящих целей
+No more data can be stored	Больше данных сохранить нельзя
+No more samples can be collected	Больше образцов собрать нельзя
+The drill cannot impact the surface from this distance	Бур не достаёт до поверхности с такого расстояния
+This instrument is broken; the experiment can't be conducted	Прибор сломан; эксперимент невозможен
+No anomalous signals detected.	Аномальных сигналов не обнаружено.
+Results From Anomalous Signal Recovered	Данные аномального сигнала получены
+Anomalous signal too weak, try again when closer	Аномальный сигнал слишком слаб, попробуйте подойти ближе
+Data Not Collected From Correctly Sized Asteroid	Данные не собраны с астероида подходящего класса
+The Anomalous Signal Scanner can only be used from very close range; deploy and use the scanner to give an indication of range and direction to target	Сканер аномальных сигналов работает только с очень близкого расстояния; выдвиньте и включите его, чтобы определить дальность и направление до цели
+No Comms Devices on this vessel. Cannot Transmit Data.	На аппарате нет устройств связи. Передать данные нельзя.
+No usable, in-range Comms Devices on this vessel. Cannot Transmit Data.	На аппарате нет пригодных устройств связи в зоне действия. Передать данные нельзя.
+Seismic Hammer can't find an asteroid to impact...	Сейсмический молот не находит астероид для удара…
+Seismic Hammer can't impact the surface from here...	Сейсмический молот не может ударить по поверхности отсюда…
+No Asteroid Detected In The Scanning Area...	В зоне сканирования астероид не обнаружен…
+No Asteroid Detected Between The Transmitting And Receiving Instruments...	Между передающим и принимающим приборами астероид не обнаружен…
+Asteroid Science Results Collected	Научные данные с астероида собраны
+Experiment is no longer functional; must be reset at a science lab or returned to Kerbin	Прибор больше не работает; сбросьте его в научной лаборатории или верните на Кербин
+<b><color=orange>A transfer is already in progress.</color></b>	<b><color=orange>Передача уже выполняется.</color></b>
+<b><color=orange>A Kerbal with the Repair Skill is required to fix this instrument.</color></b>	<b><color=orange>Для ремонта прибора нужен кербал с навыком ремонта.</color></b>
+Return or transmit data from the following experiments:	Верните или передайте данные следующих экспериментов:
+The following experiments must be returned or transmitted with some science value; if no science value is remaining the results must be returned home.	Следующие эксперименты нужно вернуть или передать с ненулевой научной ценностью; если ценности не осталось, результаты нужно доставить домой.
+The following experiments can be conducted at any time during the contract.	Следующие эксперименты можно провести в любой момент действия контракта.
+An on-screen message will indicate successful collection of asteroid data from the following experiments; return or transmit the results to complete each objective.	Экранное сообщение подтвердит успешный сбор данных с астероида по следующим экспериментам; верните или передайте результаты, чтобы выполнить каждую задачу.
+An on-screen message will indicate successful collection of data while near to, or above, the target; return or transmit the results to complete each objective.	Экранное сообщение подтвердит успешный сбор данных вблизи или над целью; верните или передайте результаты, чтобы выполнить каждую задачу.
+Vessels do not need to remain active throughout the period specified.	Аппаратам не обязательно оставаться активными весь указанный период.
+This area has already been studied, try investigating another region to complete the contract	Этот район уже изучен; чтобы выполнить контракт, исследуйте другую область
+Not enough science remaining; this experiment may need to be returned to Kerbin for credit	Осталось слишком мало науки; возможно, этот эксперимент придётся вернуть на Кербин для зачёта
+Only DMagic brand science parts can be used for this contract. Data must be collected while near to, or grappled to an asteroid of the specified class.	Для этого контракта подходят только научные детали DMagic. Данные нужно собирать рядом с астероидом указанного класса или зацепившись за него.
+Only vessels in orbit around the target planet are tracked.	Отслеживаются только аппараты на орбите целевой планеты.

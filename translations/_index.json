@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 108,
+    "mods": 109,
     "keyedMods": 43,
-    "uiMods": 38,
-    "keys": 14518
+    "uiMods": 39,
+    "keys": 14559
   },
   "mods": [
     {
@@ -139,7 +139,7 @@
       "id": "ContractPacks",
       "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation)",
       "folder": "ContractPacks",
-      "method": "mm-contract",
+      "method": "mm-contract+ui-dict",
       "keys": 91,
       "status": "draft"
     },
@@ -171,7 +171,7 @@
       "id": "DMagicOrbitalScience",
       "mod": "DMagic Orbital Science",
       "folder": "DMagicOrbitalScience",
-      "method": "mm-title+mm-science",
+      "method": "mm-title+mm-science+ui-dict",
       "keys": 2225,
       "status": "draft"
     },
@@ -702,6 +702,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "Snacks",
+      "mod": "Snacks (Snacks! Continued life support)",
+      "folder": "Snacks",
+      "method": "ui-dict",
+      "keys": 41,
+      "status": "draft"
     },
     {
       "id": "SolverEngines",

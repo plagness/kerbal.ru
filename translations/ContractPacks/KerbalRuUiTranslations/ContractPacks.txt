@@ -1,0 +1,359 @@
+# ContractPacks — UI-словарь СТАТИЧНЫХ отображаемых строк контрактов.
+# Источник: .cfg-файлы паков CleverSat / Constellations / FieldResearch / KerbinSpaceStation
+#   (GameData/ContractPacks/**), НЕ DLL. Извлечены значения полей title / description / notes /
+#   synopsis / completedMessage / genericTitle / genericDescription у самих CONTRACT_TYPE и у
+#   вложенных PARAMETER / REQUIREMENT (их title = цели в чек-листе контракта, что видит игрок),
+#   плюс статичные строки DATA-пулов descs (descN, которые description = @/descs.Random()
+#   показывает как есть).
+#
+# Движок (KerbalRuUiTranslator) матчит ТОЧНУЮ строку целиком (Ordinal), первый TAB — разделитель,
+#   промах = строка идёт как есть (no-op). Поэтому ключи здесь — байт-в-байт значения из .cfg
+#   (включая опечатки оригинала: varity, telescopee, planets's, procesing, goverment, THe, двойные
+#   пробелы, «to to») — их править НЕЛЬЗЯ, иначе совпадения не будет.
+#
+# Взято ТОЛЬКО статичное. Намеренно НЕ включено (собирается в рантайме, точного совпадения не будет):
+#   - Строки с токенами @ / <<..>> / {..} / % (ссылки, форматирование).
+#   - 6 CC-выражений (кавычки + конкатенация/вызовы функций): title/description с "..."+HomeWorld()+"...",
+#     'Kerbostationary orbit around HomeWorld() is possible', quoted "Target body must be a planet...".
+#   - 5 многострочных значений (буквальный \n или TAB внутри) — не влезают в TAB-разделённый формат:
+#     два больших description KSO-ретранслятора, notes про антенны, description KPS-прототипа, notes
+#     станции с TAB ("...support 4 Kerbals.<TAB>This can be done...").
+#   - Служебные заглушки: Dummy / Dummy part (Marker/dummy.cfg), cleanup (hidden=!DEBUG параметр).
+#
+# Термины: satellite=спутник, relay=ретранслятор (спутник-ретранслятор), orbit=орбита,
+#   solar panel=солнечная панель, power generator=генератор энергии, antenna=антенна,
+#   eccentricity=эксцентриситет, circularize=скруглить орбиту, optional=опционально, launch=запуск,
+#   vessel=аппарат, body=небесное тело, kerbal=кербал, station-keeping=удержание позиции,
+#   EVA=открытый космос (EVA). Латиницей: KSC, KSO/LKO/MKO, KPS, SENTINEL, RTG, TACLS, HiRes,
+#   коды деталей (TH-NKR, D-ZZY, WT-SIT, F-RRY, MPL-LG-2, PPD-10) и названия модов/агентств-брендов
+#   (CommTech, ComTech, Frontier Link, Duna One, Kerbstar, Station Parts Expansion, Tokamak
+#   Industries, HabTech2, Tantares, Planetary Base Inc). «Ёлочки», ё.
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+Work on a Satellite Constellation	Работа над спутниковой группировкой
+One of our satellites is lonely. Move it into a constellation.	Один из наших спутников заскучал в одиночестве. Переместите его в группировку.
+Well, that should hold them for a while. Until they ask us to move the thing again of course.	Ну, на какое-то время их это устроит. Пока они, конечно, снова не попросят подвинуть эту штуку.
+Must have a satellite that falls within pre-defined orbital parameters	Нужен спутник, попадающий в заданные орбитальные параметры
+Must have a satellite that is close enough to form a constellation.	Нужен спутник достаточно близко, чтобы образовать группировку.
+Double check that the target still meets the requirements.	Ещё раз проверьте, что цель по-прежнему удовлетворяет требованиям.
+Move a Satellite Constellation	Переместить спутниковую группировку
+One of our constellations has been deployed to the wrong location. We need to move it.	Одна из наших группировок развёрнута не в том месте. Нужно её переместить.
+Well, that should hold them for a while. Until they ask us to move them again of course.	Ну, на какое-то время их это устроит. Пока они, конечно, снова не попросят их подвинуть.
+Must have a satellite within pre-defined orbital parameters	Нужен спутник в пределах заданных орбитальных параметров
+Target must be in a constellation.	Цель должна находиться в группировке.
+The RNG must like you.	ГСЧ должен быть к вам благосклонен.
+Put a new Satellite in orbit.	Вывести новый спутник на орбиту.
+Someone is willing to pay us big bucks to launch a satellite into orbit for them. Sure we could be exploring the galaxy, but hey, at least the canteen won't run out of snacks!	Кто-то готов отвалить нам кучу денег за запуск их спутника на орбиту. Конечно, мы могли бы исследовать галактику, но зато, эй, в столовой хотя бы не закончатся закуски!
+Launch a satellite into the specified orbit.	Запустить спутник на указанную орбиту.
+Well, that should hold them for a while. Until they ask us to move the thing of course.	Ну, на какое-то время их это устроит. Пока они, конечно, не попросят подвинуть эту штуку.
+Must have reached orbit.	Нужно достигнуть орбиты.
+Investigate a malfunctioning satellite	Обследовать неисправный спутник
+One of our satellites has stopped responding to our pings. You'd better send an engineer to check it out.	Один из наших спутников перестал отвечать на пинги. Пошлите-ка инженера, чтобы разобраться.
+Well at least that's over. For now.	Ну, по крайней мере, с этим покончено. Пока что.
+Must have a satellite deployed.	Нужен развёрнутый спутник.
+Probe Investigation	Обследование зонда
+Must not have an active Rogue AI	Не должно быть активного взбунтовавшегося ИИ
+Move a Satellite	Переместить спутник
+The agency have asked us to move a satellite into a new orbit. So, let's get on that.	Агентство попросило нас перевести спутник на новую орбиту. Что ж, займёмся этим.
+Must have a satellite deployed within pre-defined orbital parameters.	Нужен спутник, развёрнутый в пределах заданных орбитальных параметров.
+Destroy a rogue satellite	Уничтожить взбунтовавшийся спутник
+One of our satellites has gone rogue. We need to terminate it.	Один из наших спутников взбунтовался. Его нужно ликвидировать.
+Destroy the rogue satellite.	Уничтожить взбунтовавшийся спутник.
+Crisis averted. Good job.	Кризис предотвращён. Отличная работа.
+One of your satellites must have gone rogue.	Один из ваших спутников должен был взбунтоваться.
+We send probes where noone else will.	Мы отправляем зонды туда, куда не сунется больше никто.
+CommTech	CommTech
+A global powerhouse in media and telecommunication. Seamlessly connects kerbals through various means, ranging from broadcasting networks to mobile services.	Мировой гигант медиа и телекоммуникаций. Легко связывает кербалов самыми разными способами — от вещательных сетей до мобильной связи.
+Frontier Link	Frontier Link
+Multinational cooperative focused on expanding kerbalkind's radio coverage throughout the Kerbol system.	Международный кооператив, нацеленный на расширение радиопокрытия кербальства по всей системе Кербол.
+KPS	KPS
+Kerbstar Kerbal Positioning System - a navigation satellite system project.	Kerbstar Kerbal Positioning System — проект навигационной спутниковой системы.
+Kerbal Society for Science	Кербальское научное общество
+A no profit science agency.	Некоммерческое научное агентство.
+Place a kerbostationary relay above the KSC	Разместить кербостационарный ретранслятор над KSC
+Place a relay satellite in kerbostationary orbit above the KSC	Разместить спутник-ретранслятор на кербостационарной орбите над KSC
+The relay is in position and working!	Ретранслятор на позиции и работает!
+The homeworld is good ol' Kerbin	Родной мир — старый добрый Кербин
+Have solar panels onboard	Иметь на борту солнечные панели
+Place a kerbostationary relay	Разместить кербостационарный ретранслятор
+Place a kerbostationary relay (non-stock Kerbin)	Разместить кербостационарный ретранслятор (не стоковый Кербин)
+Place a relay satellite in kerbostationary orbit	Разместить спутник-ретранслятор на кербостационарной орбите
+The homeworld isn't the stock Kerbin	Родной мир — не стоковый Кербин
+Place two more relays in kerbostationary orbit	Разместить ещё два ретранслятора на кербостационарной орбите
+The relay above the KSC is great but it can't reach the other side of Kerbin. We need two more satellites to form an equilateral triangle, this should give us a 360 degrees coverage.	Ретранслятор над KSC — это здорово, но он не достаёт до другой стороны Кербина. Нужно ещё два спутника, чтобы образовать равносторонний треугольник — это должно дать нам покрытие на 360 градусов.
+Form an equilateral triangle of relays in kerbostationary orbit	Образовать равносторонний треугольник ретрансляторов на кербостационарной орбите
+The relays are in position and working!	Ретрансляторы на позиции и работают!
+The original relay is still in a valid orbit	Исходный ретранслятор всё ещё на допустимой орбите
+Place another relay satellite in the same orbit as the first one (with sufficient separation).	Разместить ещё один спутник-ретранслятор на той же орбите, что и первый (с достаточным разнесением).
+You might have to move the existing relays to create enough space for this one	Возможно, придётся подвинуть существующие ретрансляторы, чтобы освободить место для этого
+Establish a LKO relay	Установить LKO-ретранслятор
+Is not eligible for the KSO relay contract	Не подходит для контракта на KSO-ретранслятор
+Establish a moon relay	Установить ретранслятор у луны
+Place a relay satellite in orbit around the body	Разместить спутник-ретранслятор на орбите вокруг небесного тела
+The target body has to be a reached before moon	Целевое небесное тело должно быть ранее достигнутой луной
+You are free to pick any sufficiently high circular orbit	Вы можете выбрать любую достаточно высокую круговую орбиту
+Have a power generator onboard	Иметь на борту генератор энергии
+1 or more solar panels	1 или более солнечных панелей
+1 or more generators	1 или более генераторов
+1 or more curved solar panels	1 или более изогнутых солнечных панелей
+1 or more fission reactors	1 или более реакторов деления
+1 or more radioisotope generators	1 или более радиоизотопных генераторов
+Launch a new vessel (optional)	Запустить новый аппарат (опционально)
+Circularize with eccentricity less than 0.00005 (optional)	Скруглить орбиту с эксцентриситетом менее 0.00005 (опционально)
+Improve moon's communication coverage	Улучшить покрытие связи у луны
+Form an equilateral triangle of relays in moon's orbit	Образовать равносторонний треугольник ретрансляторов на орбите луны
+There're already multiple relays in the body's SOI (don't make player wait)	В сфере влияния небесного тела уже несколько ретрансляторов (не заставлять игрока ждать)
+Establish relay at moon's Lagrange point	Установить ретранслятор в точке Лагранжа луны
+Place a relay satellite at moon Lagrange point	Разместить спутник-ретранслятор в точке Лагранжа луны
+Replace aging kerbostationary relays	Заменить устаревающие кербостационарные ретрансляторы
+The kerbostationary relays have served us well, but we're going to need stronger antennas if we want to explore our solar system further.	Кербостационарные ретрансляторы служили нам верой и правдой, но нам понадобятся более мощные антенны, если мы хотим исследовать нашу солнечную систему дальше.
+Replace the old relays with new, stronger ones.	Заменить старые ретрансляторы новыми, более мощными.
+Get rid of the old relays	Избавиться от старых ретрансляторов
+Replace aging relay around body	Заменить устаревающий ретранслятор вокруг небесного тела
+Deorbit the old relay and put a new, stronger one in its place.	Свести с орбиты старый ретранслятор и поставить на его место новый, более мощный.
+The target body has to be an orbited before body	Целевое небесное тело должно быть ранее облетённым небесным телом
+The relay has to have an antenna not strong enough to reach a surface-based pod-integrated antenna	У ретранслятора должна быть антенна, недостаточно мощная, чтобы дотянуться до наземной антенны, встроенной в капсулу
+Contract Parameter Complete	Параметр контракта выполнен
+Launch a new relay and put it in the same coordinates as the old one	Запустить новый ретранслятор и вывести его в те же координаты, что и старый
+Establish a planet relay	Установить планетарный ретранслятор
+The target body has to be a reached planet in the same solar system, that is not a gas giant	Целевое небесное тело должно быть достигнутой планетой в той же солнечной системе, не являющейся газовым гигантом
+Improve planet's communication coverage	Улучшить покрытие связи у планеты
+Form an equilateral triangle of relays in planet's orbit	Образовать равносторонний треугольник ретрансляторов на орбите планеты
+Establish planet polar relays	Установить полярные ретрансляторы планеты
+Place two relay satellites in polar orbit around the body	Разместить два спутника-ретранслятора на полярной орбите вокруг небесного тела
+The target body has to be a reached gas planet in the same solar system with 3+ moons	Целевое небесное тело должно быть достигнутой газовой планетой в той же солнечной системе с 3+ лунами
+Add two more satellites in the same orbit as target vessel	Добавить ещё два спутника на ту же орбиту, что и целевой аппарат
+Form an equilateral triangle of satellites	Образовать равносторонний треугольник спутников
+The satellites are in position and working!	Спутники на позиции и работают!
+The target vessel is a satellite launched through contract	Целевой аппарат — спутник, запущенный по контракту
+The target vessel is still in a valid orbit	Целевой аппарат всё ещё на допустимой орбите
+The satellite is in position and working!	Спутник на позиции и работает!
+Random chance	Случайный шанс
+Must have some experiment parts unlocked	Нужно разблокировать какие-нибудь детали-эксперименты
+Launch a satellite into kerbosynchronous orbit	Запустить спутник на кербосинхронную орбиту
+We found a prospecting client who is willing to pay an exorbitant amount of money for launching their satellite into orbit. An "orbitant" amount would be more suiting for a space program, but we didn't argue.	Мы нашли перспективного клиента, готового заплатить непомерную сумму за запуск его спутника на орбиту. Для космической программы больше подошла бы сумма «орбитомерная», но мы спорить не стали.
+The Kerbalkind calls for more TV channels and ComTech will answer! They need our help to launch a new satellite though.	Кербальство требует больше телеканалов, и ComTech ответит на зов! Правда, для запуска нового спутника им нужна наша помощь.
+The telescope is in position and working!	Телескоп на позиции и работает!
+Start the telescope and transmit the results	Запустить телескоп и передать результаты
+The Secret Serv... I mean a private company has reached out to us to help them launch a spy satellite... I mean a satellite to spy bids... to track their migrations. Yes. They don't want you looking into the specs too much, because... no reason.	Секретная служ... в смысле, частная компания обратилась к нам за помощью в запуске спутника-шпиона... в смысле, спутника, чтобы следить за пти... отслеживать их миграции. Да. Они не хотят, чтобы вы слишком вникали в характеристики, потому что... без причины.
+We found a prospecting client who is willing to pay an exorbitant amount of money for launching their satellite into orbit. An "orbitant" amount would be more suiting for the space program, but we didn't argue.	Мы нашли перспективного клиента, готового заплатить непомерную сумму за запуск его спутника на орбиту. Для космической программы больше подошла бы сумма «орбитомерная», но мы спорить не стали.
+Place SENTINEL Infrared Telescope at planets's Lagrange point	Разместить инфракрасный телескоп SENTINEL в точке Лагранжа планеты
+Place a vessel with a SENTINEL telescopee at planets Lagrange point	Разместить аппарат с телескопом SENTINEL в точке Лагранжа планеты
+SENTINEL is in position and working!	SENTINEL на позиции и работает!
+Prototype navigation satellite system	Прототип навигационной спутниковой системы
+Place a prototype navigation satellite in a MKO	Разместить прототип навигационного спутника на MKO
+Finish the Block I of KPS satellites	Завершить Блок I спутников KPS
+Add three more KPS satellites to the first plane	Добавить ещё три спутника KPS в первую орбитальную плоскость
+Block I is complete!	Блок I завершён!
+We secured funds for another phase of the construction. Launch six more satellites and place them on the next orbital plane.	Мы добыли средства на очередной этап строительства. Запустите ещё шесть спутников и разместите их в следующей орбитальной плоскости.
+Populate another orbital plane with KPS satellites	Заполнить ещё одну орбитальную плоскость спутниками KPS
+One more plane and the construction of the KPS will be complete!	Ещё одна плоскость — и строительство KPS будет завершено!
+The KPS is complete! Now we can blame technology when we get lost.	KPS готова! Теперь, заблудившись, можно винить технику.
+Begin construction of the KPS	Начать строительство KPS
+The prototype is working flawlessly, time to add more satellites to test the trilateration. With satellites in the same plane we won't get much accuracy, but it should be enough to test the principle.	Прототип работает безупречно — пора добавить ещё спутников, чтобы протестировать трилатерацию. Со спутниками в одной плоскости большой точности не выйдет, но для проверки принципа этого хватит.
+Add two more KPS satellites	Добавить ещё два спутника KPS
+Trilateration is working!	Трилатерация работает!
+Positions verified successfully	Позиции успешно проверены
+It's been more than a year since we last verified the positions of the satellites in kolynia orbit. It is normal for a satellite to drift from its target position over time, we ask you to bring the relays back within margins. If a vessel is already in a correct position, you don't have to do anything other that focusing it.	Прошло больше года с тех пор, как мы в последний раз проверяли положение спутников на орбите «колыния». Спутнику свойственно со временем смещаться от целевой позиции, поэтому мы просим вас вернуть ретрансляторы в допустимые пределы. Если аппарат уже в правильном положении, вам достаточно просто переключиться на него.
+Fix kolynia satellites orbits if necessary	При необходимости поправить орбиты спутников «колыния»
+Kerbostationary relays station-keeping	Удержание позиции кербостационарных ретрансляторов
+It's been more than a year since we last verified position of the KSO relays. It is normal for a satellite to drift from its target position over time, we ask you to bring the relays back within margins. If a vessel is already in a correct position, you don't have to do anything other that focusing it.	Прошло больше года с тех пор, как мы в последний раз проверяли положение KSO-ретрансляторов. Спутнику свойственно со временем смещаться от целевой позиции, поэтому мы просим вас вернуть ретрансляторы в допустимые пределы. Если аппарат уже в правильном положении, вам достаточно просто переключиться на него.
+Fix KSO relays orbits if necessary	При необходимости поправить орбиты KSO-ретрансляторов
+Moon's Lagrange point relays station-keeping	Удержание позиции ретрансляторов в точке Лагранжа луны
+Fix bodys Lagrange relays orbits if necessary	При необходимости поправить орбиты ретрансляторов в точках Лагранжа небесного тела
+Moon relays station-keeping	Удержание позиции ретрансляторов луны
+Fix bodys relays orbits if necessary	При необходимости поправить орбиты ретрансляторов небесного тела
+Planet polar relays station-keeping	Удержание позиции полярных ретрансляторов планеты
+Planet relays station-keeping	Удержание позиции ретрансляторов планеты
+Planets's Lagrange point SENTINEL station-keeping	Удержание позиции SENTINEL в точке Лагранжа планеты
+Fix bodys Lagrange point SENTINEL Telescope orbit if necessary	При необходимости поправить орбиту телескопа SENTINEL в точке Лагранжа небесного тела
+Sentinel completed at least 3 orbits since the time it has been established	Sentinel совершил не менее 3 витков с момента установки
+Sentinel completed at least 3 orbits since the last station-keeping	Sentinel совершил не менее 3 витков с последнего удержания позиции
+Perform a study of a specific biome	Провести исследование конкретного биома
+Perform a varity of experiments in different situations in one biome.	Провести разнообразные эксперименты в разных ситуациях в одном биоме.
+Must have a valid biome to study	Нужен подходящий биом для исследования
+Climate study	Изучение климата
+Perform a climate study of a planet or moon.	Провести изучение климата планеты или луны.
+Great work, I'm sure we'll be able to make this data fit our narrative!	Отличная работа — уверен, мы сумеем подогнать эти данные под нашу версию!
+Must have valid experiments to run	Нужны подходящие эксперименты для проведения
+Perform experiment at various locations	Провести эксперимент в разных местах
+Perform an experiment in various situations.	Провести эксперимент в разных ситуациях.
+Must have a valid experiment to perform	Нужен подходящий эксперимент для проведения
+Geological study	Геологическое исследование
+Perform a geological study of a planet or moon.	Провести геологическое исследование планеты или луны.
+Great work, I hope Linus remembered to submit the grant paperwork!	Отличная работа — надеюсь, Линус не забыл подать документы на грант!
+Gather rare science results	Собрать редкие научные результаты
+Run experiments while landed on the ocean, or on the water in a desert.  THe right locations are out there!	Проводите эксперименты, приземлившись на океан или на воду в пустыне. Нужные места где-то там!
+This is some great data that we've accumulated!	Вот это отличные данные мы накопили!
+Must have a valid experiment to run in a rare situation	Нужен подходящий эксперимент для проведения в редкой ситуации
+Perform experiments around KSC	Провести эксперименты в окрестностях KSC
+There are lots of opportunities to do science around the Kerbal Space Center.  Wernher needs us to run a few tests at different locations as a control test of our experiments.	В окрестностях Космического центра Кербал полно возможностей заниматься наукой. Вернеру нужно, чтобы мы провели несколько тестов в разных местах в качестве контрольной проверки наших экспериментов.
+Run the required tests around the Kerbal Space Center and recover the data.	Провести требуемые тесты в окрестностях Космического центра Кербал и вернуть данные.
+Everything is looking good with these experiments, time to get them into space!	С этими экспериментами всё выглядит хорошо — пора отправлять их в космос!
+Must have valid experiments to run at KSC.	Нужны подходящие эксперименты для проведения на KSC.
+Help a scientist perform experiments	Помочь учёному провести эксперименты
+Help a renowned scientist perform experiments at a specific location.	Помочь именитому учёному провести эксперименты в конкретном месте.
+Wernher is very pleased, he wouldn't have been able to attend the Rocketologist's gala if something had gone wrong!	Вернер очень доволен — он не смог бы попасть на гала-вечер ракетологов, если бы что-то пошло не так!
+Perform the experiments at the waypoint	Провести эксперименты в путевой точке
+Must have done a flyby of at least one moon	Нужно совершить пролёт хотя бы одной луны
+Perform repeated experiments	Провести повторяющиеся эксперименты
+Repeat the same experiment again and again!	Повторяйте один и тот же эксперимент снова и снова!
+Great, let's hope that completes our knowledge of the topic.	Отлично, будем надеяться, это завершит наши познания в теме.
+Must have a subject with experimental data still to be collected	Нужен объект исследования, по которому ещё предстоит собрать экспериментальные данные
+Field Research Team	Группа полевых исследований
+The field research team are a part of the research and development department, and thus report up to Wernher von Kerman.	Группа полевых исследований входит в отдел исследований и разработок и потому подчиняется Вернеру фон Керману.
+Add a TH-NKR Research Lab to a Station	Добавить на станцию исследовательскую лабораторию TH-NKR
+Now that we know we can survive in space for a few days, we should do some science up there! Add a TH-NKR Research Lab to the station.	Теперь, когда мы знаем, что можем продержаться в космосе несколько дней, стоит заняться там наукой! Добавьте на станцию исследовательскую лабораторию TH-NKR.
+Well done! Now we can continue advancing Kerbal-kind!	Отличная работа! Теперь можно продолжать двигать кербальство вперёд!
+Must have a station without a TH-NKR Research Lab	Нужна станция без исследовательской лаборатории TH-NKR
+Add a D-ZZY Cyclotron to a Station	Добавить на станцию циклотрон D-ZZY
+Wernher von Kerman accidentally discovered Kuarqs hiding in his clothes drier. Now he wants you to launch a giant spinning thingymajig to the station to see if we can make more of them!	Вернер фон Керман случайно обнаружил кварки, прятавшиеся в его сушилке для белья. Теперь он хочет, чтобы вы запустили на станцию гигантскую вертящуюся штуковину и проверили, можно ли наделать их побольше!
+Well done!	Отличная работа!
+Must have a station with a TH-NKR Research Lab and with less than 2 D-ZZY Cyclotrons	Нужна станция с исследовательской лабораторией TH-NKR и менее чем 2 циклотронами D-ZZY
+Add a WT-SIT Spectrometron to a Station	Добавить на станцию спектрометрон WT-SIT
+We're sick of losing precious science over transmission. Add a Spectrometron to the station to reduce our science transmission losses.	Нам надоело терять драгоценную науку при передаче. Добавьте на станцию спектрометрон, чтобы снизить потери науки при передаче.
+Must have a station with a TH-NKR Research Lab and without a WT-SIT Spectrometron	Нужна станция с исследовательской лабораторией TH-NKR и без спектрометрона WT-SIT
+Add a F-RRY Zoology Bay to a Station	Добавить на станцию зоологический отсек F-RRY
+Space stations are no place for animals. Let's fix that.	Космические станции — не место для животных. Давайте это исправим.
+Must have a station with a TH-NKR Research Lab and without a F-RRY Zoology Bay	Нужна станция с исследовательской лабораторией TH-NKR и без зоологического отсека F-RRY
+Remember to bring Kibbal!	Не забудьте захватить корм!
+Add a Laboratory to the Station	Добавить на станцию лабораторию
+Now that we know we can survive in space for a few days, we should try to do more science up there.	Теперь, когда мы знаем, что можем продержаться в космосе несколько дней, стоит попробовать заняться там наукой посерьёзнее.
+How are we gonna do science without a lab, huh?	И как мы будем заниматься наукой без лаборатории, а?
+Must have a station without a Laboratory.	Нужна станция без лаборатории.
+Add a Mobile Processing Lab MPL-LG-2 to the Station	Добавить на станцию мобильную лабораторию обработки MPL-LG-2
+Must have a station without a Mobile Processing Lab MPL-LG-2.	Нужна станция без мобильной лаборатории обработки MPL-LG-2.
+Launch a New Space Station	Запустить новую космическую станцию
+We'd like you to deploy a new space station.	Мы хотим, чтобы вы развернули новую космическую станцию.
+Station Complete!	Станция достроена!
+Must have orbited a Celestial Body, but not have any stations deployed.	Нужно облетать небесное тело, но не иметь развёрнутых станций.
+Support 4 Kerbals	Вмещать 4 кербалов
+Have one of the following power generators	Иметь один из следующих генераторов энергии
+Include a station core and a habitat	Включить ядро станции и жилой модуль
+Include a station core from Station Parts Expansion	Включить ядро станции из Station Parts Expansion
+Include one of the following habitat modules	Включить один из следующих жилых модулей
+A PPD-10 Hitchhiker Storage Container	Складской контейнер PPD-10 Hitchhiker
+A habitat module from Station Parts Expansion	Жилой модуль из Station Parts Expansion
+A habitat module from Tokamak Industries	Жилой модуль от Tokamak Industries
+Include a stock cupola (optional)	Включить стоковый купол (опционально)
+Include a cupola from Station Parts Expansion (optional)	Включить купол из Station Parts Expansion (опционально)
+Include a cupola from HabTech2 (optional)	Включить купол из HabTech2 (опционально)
+Include a cupola from Planetary Base Inc (optional)	Включить купол из Planetary Base Inc (опционально)
+Include a cupola from Tokamak Industries(optional)	Включить купол от Tokamak Industries (опционально)
+Include a cupola from Tantares (optional)	Включить купол из Tantares (опционально)
+Have Supplies on board your vessel	Иметь на борту вашего аппарата запас Supplies
+Include a Mobile Processing Lab MPL-LG-2	Включить мобильную лабораторию обработки MPL-LG-2
+Include a TH-NKR Research Lab	Включить исследовательскую лабораторию TH-NKR
+Include a Science Laboratory	Включить научную лабораторию
+Target body must not be the Sun	Целевое небесное тело не должно быть Солнцем
+Duna One	Duna One
+Duna One are committed to deploying and maintaining Space Stations and Bases on all worlds in the Kerbol system.	Duna One привержена развёртыванию и обслуживанию космических станций и баз на всех мирах системы Кербол.
+Space Station Crew Rotation	Ротация экипажа космической станции
+Rotate the crew of a Space Station.	Провести ротацию экипажа космической станции.
+Mission Complete! The returned crew members are going for a pint. Care to join?	Миссия выполнена! Вернувшиеся члены экипажа идут пропустить по кружке. Не желаете присоединиться?
+Must have a station with crew on board	Нужна станция с экипажем на борту
+Send up a new Crew.	Отправить наверх новый экипаж.
+Have at least one Engineer on board	Иметь на борту хотя бы одного инженера
+Rotate the crew and return home	Сменить экипаж и вернуться домой
+The station must be in orbit	Станция должна быть на орбите
+The RNG must like you	ГСЧ должен быть к вам благосклонен
+Station Evacuation	Эвакуация станции
+We're picking up some worrying readings on one of our stations. To be on the safe side, we think you had better evacuate! (quickly)	Мы фиксируем тревожные показания на одной из наших станций. На всякий случай считаем, что вам лучше эвакуироваться! (быстро)
+Phew, it was a false alarm. Still, well done for saving everybody.	Фух, это была ложная тревога. И всё же — молодцы, что спасли всех.
+Must have a crewed station in orbit	Нужна пилотируемая станция на орбите
+Crew Capacity Upgrade	Увеличение вместимости экипажа
+Space stations can be cramped places to live. Add a little extra crew capacity.	Космические станции бывают тесным жильём. Добавьте немного дополнительной вместимости для экипажа.
+Must have a station with less than 4 empty seats	Нужна станция, где менее 4 свободных мест
+Launch a new Habitation Module. It should support at least 4 Kerbals	Запустить новый жилой модуль. Он должен вмещать не менее 4 кербалов
+Life Support Supply Run	Рейс снабжения жизнеобеспечения
+Apparently letting our Kerbonauts starve will generate bad publicity, run some supplies up to a station.	Судя по всему, если дать нашим кербонавтам голодать, это плохо скажется на репутации — доставьте на станцию припасы.
+This contract doesn't care how much Life Support you take... but bear in mind it may be a long time before it comes up again.	Этому контракту без разницы, сколько жизнеобеспечения вы возьмёте... но учтите, что он может снова появиться очень нескоро.
+Mmm freeze dried bacon *drools*	Ммм, сублимированный бекон *слюнки текут*
+Must have a station with crew	Нужна станция с экипажем
+Have food on board your vessel	Иметь на борту вашего аппарата запас Food
+Have LifeSupport on board your vessel	Иметь на борту вашего аппарата запас LifeSupport
+Have Snacks on board your vessel	Иметь на борту вашего аппарата запас Snacks
+Medical Emergency on a Base or Station	Неотложная медицинская ситуация на базе или станции
+One of your Kerbals is feeling sick and needs to be brought home.	Один из ваших кербалов приболел, и его нужно доставить домой.
+Bases should have some crew.	На базах должен быть какой-то экипаж.
+Finding a sick Kerbal.	Найти заболевшего кербала.
+Send a Payload Specialist to a Station	Отправить специалиста по полезной нагрузке на станцию
+A part is broken on a space station, send the designer to fix it.	На космической станции сломалась деталь — отправьте конструктора, чтобы починить её.
+Must have a space station with crew in orbit	Нужна космическая станция с экипажем на орбите
+Repair a Faulty Power Module	Отремонтировать неисправный энергомодуль
+Telemetry indicates that a power module  is malfunctioning, send an engineer to repair it.	Телеметрия показывает, что энергомодуль барахлит — отправьте инженера, чтобы отремонтировать его.
+Send an Engineer on EVA to repair the faulty power module.	Отправить инженера в открытый космос (EVA), чтобы отремонтировать неисправный энергомодуль.
+Telemetry seems to be all ok. The faulty module is repaired!	Телеметрия вроде бы в норме. Неисправный модуль отремонтирован!
+The station should be in orbit	Станция должна быть на орбите
+Replace a faulty Power Module	Заменить неисправный энергомодуль
+Telemetry indicates that a power module is about to fail, go and replace it.	Телеметрия показывает, что энергомодуль вот-вот откажет — летите и замените его.
+The new module is in place. Good job!	Новый модуль на месте. Отличная работа!
+Station must be in orbit	Станция должна быть на орбите
+Return an Evacuated Crew to a Space Station	Вернуть эвакуированный экипаж на космическую станцию
+The emergency seems to be over and conditions down here don't look fantastic. You'd better get them off the surface ASAP.	Похоже, чрезвычайная ситуация позади, а условия здесь, внизу, так себе. Вам лучше как можно скорее забрать их с поверхности.
+Thanks for the lift!	Спасибо, что подбросили!
+Escape Pod used to evacuate station must exist	Спасательная капсула, использованная для эвакуации станции, должна существовать
+Must have a station in orbit of the Celestial Body the escape pod is landed on. This station must have enough crew capacity to receive the crew.	Нужна станция на орбите небесного тела, на которое приземлилась спасательная капсула. У этой станции должно быть достаточно мест, чтобы принять экипаж.
+Perform Science Experiments on a Space Station	Провести научные эксперименты на космической станции
+Wernher von Kerman has figured out how to get a lot more science out of a completed experiment. Unfortunately, it's going to cost us a lot to retrofit the part and we're going to need a lot more power to run it.	Вернер фон Керман придумал, как выжать из завершённого эксперимента куда больше науки. К сожалению, переоснащение детали обойдётся нам недёшево, и для её работы понадобится намного больше энергии.
+We now have a better understanding of something we know nothing about!	Теперь мы лучше понимаем то, о чём не имеем ни малейшего понятия!
+Must have a station with crew.	Нужна станция с экипажем.
+Return a Surface Sample to a Space Station	Вернуть образец грунта на космическую станцию
+Our research department wants to know what the effects of space will be on something besides a Kerbal.	Наш исследовательский отдел хочет узнать, как космос влияет на что-нибудь, кроме кербала.
+Your Station must be capable of procesing the sample. (either using the Mobile Processing Lab, or Station Science Spectrometron)	Ваша станция должна быть способна обработать образец. (используя либо мобильную лабораторию обработки, либо Station Science Spectrometron)
+Celestial Body must have a biome with more than 20 science remaining.	У небесного тела должен быть биом, где осталось более 20 единиц науки.
+Must not have returned a Surface Sample from that Biome.	Не должно быть возвращённого образца грунта из этого биома.
+Station should not be deployed around the homeworld	Станция не должна быть развёрнута вокруг родного мира
+Base Communication Issues	Проблемы со связью на базе
+We've lost contact with a base, send an engineer to check it out.	Мы потеряли связь с базой — отправьте инженера, чтобы разобраться.
+Must have a crewed base	Нужна база с экипажем
+Build an Offworld Base	Построить базу на другом мире
+Our engineers were thinking on a way to have kerbals on other worlds and let them stay there long term.	Наши инженеры думали над тем, как поселить кербалов на других мирах и позволить им оставаться там надолго.
+Must have a scout rover deployed	Нужен развёрнутый разведывательный ровер
+1 or more RTGs	1 или более RTG
+1 or more Fuel Cells	1 или более топливных элементов
+1 or more Fuel Cell Arrays	1 или более батарей топливных элементов
+Must not be constructing another base	Не должно строиться другой базы
+Base must not be on the homeworld	База не должна быть на родном мире
+Base Crew Rotation	Ротация экипажа базы
+Bring a couple of Kerbals home from a base.	Доставить пару кербалов с базы домой.
+Must have a base with at least two crew members	Нужна база с как минимум двумя членами экипажа
+Add Extra Crew Capacity to a Base	Добавить базе дополнительную вместимость экипажа
+Kerbals are complaining about being too cramped in a small can so some extra space will be good for our kerbonauts.	Кербалы жалуются на тесноту в маленькой консервной банке, так что немного дополнительного места пойдёт нашим кербонавтам на пользу.
+Must have a base with less than 4 empty seats	Нужна база, где менее 4 свободных мест
+Crew a Base or Station	Укомплектовать экипажем базу или станцию
+Our engineers are happy to to have finished work, but they think that some Kerbals on board would be good.	Наши инженеры рады, что закончили работу, но считают, что несколько кербалов на борту были бы кстати.
+Must have an uncrewed base or station with seats to fill	Нужна беспилотная база или станция со свободными местами
+Supply Run	Грузовой рейс
+Our Kerbonauts are starving so we need you to take some supplies down.	Наши кербонавты голодают, поэтому нужно, чтобы вы доставили вниз припасы.
+The Base are requesting food but is too expensive so bring them no too much.	База запрашивает еду, но это слишком дорого, так что везите им не слишком много.
+Finally our kerbals are eating something.	Наконец-то наши кербалы что-то едят.
+Scout for a Suitable Location to Build a Base	Разведать подходящее место для постройки базы
+Scans have proven inconclusive. We'd like you to scout for a suitable place on the surface.	Сканирование не дало однозначного результата. Мы хотим, чтобы вы разведали подходящее место на поверхности.
+This is the spot!	Вот это место!
+Scanning must be complete on a body with a surface.	Сканирование небесного тела с поверхностью должно быть завершено.
+Find a suitable site to build our base on.	Найти подходящую площадку для нашей базы.
+Once you find the site for your base, change the vessel type to Rover.	Найдя площадку для базы, смените тип аппарата на «Ровер».
+Must be no bases on the body	На небесном теле не должно быть баз
+Must not have a scout vehicle deployed on the body	На небесном теле не должно быть развёрнутого разведывательного аппарата
+Scan for a Suitable Location for a New Base	Просканировать подходящее место для новой базы
+Perform an orbital scan, to find a good location for a base.	Провести орбитальное сканирование, чтобы найти хорошее место для базы.
+We want you to look for a location for a new Base.	Мы хотим, чтобы вы подыскали место для новой базы.
+We'll analyze the data and let you know when we've found a suitable spot.	Мы проанализируем данные и сообщим вам, когда найдём подходящее место.
+Must have orbited an unscanned body, with a surface	Нужно облетать несканированное небесное тело с поверхностью
+Must have orbited a body with a surface that hasn't had a HiRes scan performed	Нужно облетать небесное тело с поверхностью, для которого не проводилось сканирование HiRes
+Target body must not be the homeworld	Целевое небесное тело не должно быть родным миром
+Add a Science Lab to a Base	Добавить базе научную лабораторию
+Our scientists think that maybe our base can provide some scientific value so this is where you come in.	Наши учёные думают, что база, возможно, может принести какую-то научную пользу, и тут в дело вступаете вы.
+Finally our scientist are investigating something.	Наконец-то наши учёные что-то исследуют.
+Must have a base with no science lab	Нужна база без научной лаборатории
+Have a Science Lab	Иметь научную лабораторию
+This requires a new vessel	Для этого нужен новый аппарат
+Base Life Support Expansion	Расширение жизнеобеспечения базы
+We don't want to be relying on resupply ships. Make the base self-sufficient.	Мы не хотим зависеть от кораблей снабжения. Сделайте базу самодостаточной.
+Finally our Kerbals aren't complaining.	Наконец-то наши кербалы не жалуются.
+This requires a new Vessel	Для этого нужен новый аппарат
+Have at least 2 TACLS resource converters	Иметь не менее 2 преобразователей ресурсов TACLS
+Have at least one life support recycler, cultivator, or agroponics unit	Иметь хотя бы один переработчик жизнеобеспечения, культиватор или агропонический модуль
+Have at least one Snack Processor or Soil Recycler	Иметь хотя бы один Snack Processor или Soil Recycler

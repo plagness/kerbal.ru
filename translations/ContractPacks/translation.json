@@ -1,7 +1,8 @@
 {
   "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation)",
   "folder": "ContractPacks",
-  "method": "mm-contract",
+  "method": "mm-contract+ui-dict",
   "keys": 91,
+  "uiDictKeys": 326,
   "status": "draft"
 }

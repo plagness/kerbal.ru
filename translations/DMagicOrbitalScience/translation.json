@@ -1,7 +1,8 @@
 {
   "mod": "DMagic Orbital Science",
   "folder": "DMagicOrbitalScience",
-  "method": "mm-title+mm-science",
+  "method": "mm-title+mm-science+ui-dict",
   "keys": 2225,
+  "uiKeys": 53,
   "status": "draft"
 }
