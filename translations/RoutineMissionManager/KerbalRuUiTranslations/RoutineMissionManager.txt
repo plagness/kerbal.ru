@@ -1,0 +1,233 @@
+# RoutineMissionManager (мод «Routine Mission Manager») — словарь UI-строк,
+# извлечённых напрямую из скомпилированного CommercialOfferings.dll (monodis --userstrings).
+# UI зашит в код, а не в Localizer, поэтому переводится через ui-translator (точное совпадение строки).
+# Папка GameData: RoutineMissionManager. Формат: Английский<TAB>Русский. Несовпадение = строка как есть.
+# Ведущие/хвостовые пробелы и двоеточия сохранены точно. Многострочные строки с реальным \n
+# (2 сообщения об ошибке установки) невозможно задать ключом в построчном файле — они опущены.
+Docking Port	Стыковочный узел
+Thank you for implementing the Routine Mission Manager. This application allows you, as a space program administrators, to track certain flights in a manner which allows you to order similar missions in the future, without requiring your continues hands-on guidance and oversight of these missions. As such, the routine mission manager will save time executing the routine missions which will allow you to focus more time on pushing the borders of space exploration. 	Благодарим за внедрение Менеджера рутинных миссий. Это приложение позволяет вам как администратору космической программы отслеживать определённые полёты так, чтобы в будущем заказывать похожие миссии без постоянного ручного управления и надзора за ними. Тем самым менеджер рутинных миссий экономит время на выполнении рутинных миссий, позволяя уделять больше внимания расширению границ освоения космоса. 
+What type of flights can tracked? What are the variations of the subsequent orders of these mission? What are the details and conditions which define these operations? Is there a manual which explains any of this?	Какие типы полётов можно отслеживать? Какие варианты последующих заказов этих миссий доступны? Какие детали и условия определяют эти операции? Есть ли руководство, объясняющее всё это?
+You are reading it now. 	Вы читаете его прямо сейчас. 
+Overview	Обзор
+The routine mission manager usage can be subdivided in three domains: tracking, ordering and location management. 	Использование менеджера рутинных миссий делится на три области: отслеживание, заказ и управление локациями. 
+Tracking involves flying a new type of mission while the routine mission manager tracks the mission. 	Отслеживание — это выполнение нового типа миссии, пока менеджер рутинных миссий её отслеживает. 
+Ordering refers to the ordering of additionals missions through the routine mission manager. These ordered missions are based on the missions which have been tracked by the routine mission manager. Mission ordered through the routine mission manager will be executed without your direct involvement. 	Заказ — это оформление дополнительных миссий через менеджер рутинных миссий. Заказанные миссии основаны на миссиях, ранее отслеженных менеджером. Миссии, заказанные через менеджер, выполняются без вашего прямого участия. 
+Location Management comprises the registering of locations. These locations serve as starting points and destination for mission ordered through the routine mission manager. 	Управление локациями — это регистрация локаций. Эти локации служат точками старта и назначения для миссий, заказанных через менеджер рутинных миссий. 
+To allow a mission to be ordered through the routine mission mananger the mission needs to be executed once while being tracked. 	Чтобы миссию можно было заказать через менеджер рутинных миссий, её нужно один раз выполнить под отслеживанием. 
+In its simplest form it is only required to start the tracking and fly the mission. However to allow more variation on future ordered missions it is preferable to consider the original flight a model flight in which the vessels is rated instead. There might yet other mission structures which could not be flown at all without the use of the routine mission manager. An example might be a launch in which some stage of the vessel returns to land and be recovered while another part continues an ascent to dock with a vessel in orbit. Since such a mission could require you to be at two places at the same time, you would not be able to fly such a mission in a conventionally manner. The routine mission manager will however allow you to complete different stages of the flight seperatly, and will subsequently allow you to order the entire mission through the routine mission manager. In such a case the original mission should be considered a simulation. 	В простейшем виде достаточно начать отслеживание и выполнить миссию. Однако, чтобы будущие заказанные миссии допускали больше вариаций, исходный полёт лучше считать эталонным, в котором аттестуется само судно. Существуют и другие структуры миссий, которые вообще нельзя выполнить без менеджера рутинных миссий. Например, запуск, при котором одна ступень судна возвращается для посадки и спасения, а другая часть продолжает подъём для стыковки с судном на орбите. Поскольку такая миссия потребовала бы вашего присутствия в двух местах одновременно, обычным образом выполнить её не получится. Тем не менее менеджер рутинных миссий позволит выполнить разные этапы полёта по отдельности, а затем заказать всю миссию целиком. В таком случае исходную миссию следует считать симуляцией. 
+No matter whether you are simply tracking a flight you expect will need repeating again in the future, flying a model flight or flying the original mission as a simulation, the original flight should always be executed as clean and efficient as possible. 	Независимо от того, просто ли вы отслеживаете полёт, который планируете повторять в будущем, выполняете эталонный полёт или проходите исходную миссию как симуляцию, исходный полёт всегда следует выполнять максимально чисто и эффективно. 
+Mission Architecture	Архитектура миссий
+The following mission architectures are supported by the routine mission manager: 	Менеджер рутинных миссий поддерживает следующие архитектуры миссий: 
+<b>Launch</b> 	<b>Запуск</b> 
+A mission which start with a launch or takeof from the home planet and ends with an docking arrival at an orbiting vessel around a celestial body for which the routine mission manager is enabled. In addition this mission may contain one or more landings on the home planet of recovarable stages. 	Миссия, которая начинается с запуска или взлёта с родной планеты и заканчивается стыковочным прибытием к судну на орбите вокруг небесного тела, для которого включён менеджер рутинных миссий. Кроме того, такая миссия может включать одну или несколько посадок спасаемых ступеней на родную планету. 
+<B>Departure</B> 	<B>Отбытие</B> 
+A mission which starts with a departure from an orbiting vessel around a celestial body for which the routine mission manager is enabled and ends with one or more landings on the home planet. 	Миссия, которая начинается с отбытия от судна на орбите вокруг небесного тела, для которого включён менеджер рутинных миссий, и заканчивается одной или несколькими посадками на родную планету. 
+Start Tracking	Начать отслеживание
+To track a flight you are required to manually start the tracking of the flight. Missions can start as a launch from the launchpad, takeof from the runway or a depature from a larger orbiting vessel. 	Чтобы отслеживать полёт, нужно вручную начать его отслеживание. Миссии могут начинаться как запуск со стартового стола, взлёт со взлётной полосы или отбытие от более крупного судна на орбите. 
+To fly a model flight consider using minimal crew, minimal proppelant and, if applicable, maximum cargo. 	Для эталонного полёта используйте минимальный экипаж, минимум топлива и, если применимо, максимум груза. 
+The crew on the orignal mission will be considered the minimal crew for any ordered mission based on the tracked mission. You will be able to increase the crew up to the maximum crew capacity in ordered missions. 	Экипаж исходной миссии будет считаться минимальным для любой заказанной миссии на её основе. В заказанных миссиях вы сможете увеличивать экипаж вплоть до максимальной вместимости. 
+The proppellant on board at the start of the mission will be considered the minimal resource requirement for any future ordered mission. 	Топливо на борту в начале миссии будет считаться минимальным требованием по ресурсам для любой будущей заказанной миссии. 
+The cargo, which refers to non proppellant resources on board of the vessel, should be as high as possible to allow future missions to carry cargo up to the same mass as the original mission. 	Груз — то есть нетопливные ресурсы на борту судна — должен быть как можно больше, чтобы будущие миссии могли нести груз до той же массы, что и исходная миссия. 
+How tracking is started differs slightly on where the mission starts. 	Способ запуска отслеживания немного зависит от того, где начинается миссия. 
+Start Tracking from Launch and Takeof	Начало отслеживания при запуске и взлёте
+To start tracking at the launchpad or runway: 	Чтобы начать отслеживание на стартовом столе или взлётной полосе: 
+-Open the main routine mission manager window using the 'RMM' toolbar button.	-Откройте главное окно менеджера рутинных миссий кнопкой «RMM» на панели инструментов.
+-Select the 'Start Tracking' option. 	-Выберите пункт «Начать отслеживание». 
+A window will open.	Откроется окно.
+-Enter a name for the mission and press the 'Start Tracking' button.	-Введите название миссии и нажмите кнопку «Начать отслеживание».
+Start Tracking from Departure	Начало отслеживания при отбытии
+To start tracking from a departures from a larger vessel in orbit: 	Чтобы начать отслеживание отбытия от более крупного судна на орбите: 
+Every docking port on the vessel will momentarily get a 'Start Tracking' in the part menu. (This option can take a few seconds to become visible.)	У каждого стыковочного узла судна ненадолго появится пункт «Начать отслеживание» в меню детали. (Этот пункт может появиться через несколько секунд.)
+-On the docking port of the departing vessel select the 'Start Tracking' option from the part menu. Note: this should be the docking port which will be part of the departing vessel.	-На стыковочном узле отбывающего судна выберите пункт «Начать отслеживание» в меню детали. Примечание: это должен быть тот узел, который войдёт в состав отбывающего судна.
+Tracking the Flight	Отслеживание полёта
+After tracking is started no actions are required while the mission is underway. A 'Tracking' window will appear listing all nearby vessels being tracked by the routine mission manager. In the tracking window pressing the '>' button will open a window which will show detailed information of the mission. Pressing the 'abort' button will stop the tracking for the respective vessel. 	После начала отслеживания никаких действий во время миссии не требуется. Появится окно «Отслеживание» со списком всех ближайших судов, отслеживаемых менеджером рутинных миссий. В этом окне нажатие кнопки «>» откроет окно с подробной информацией о миссии. Нажатие кнопки «прервать» остановит отслеживание соответствующего судна. 
+Tracking will also be ended automatically when crew is added after the start or the vessel docks with non mission vessels, except of course when the docking can be part of a mission arrival. 	Отслеживание также прекратится автоматически, если после старта добавлен экипаж или судно стыкуется с судами вне миссии, кроме случаев, когда стыковка может быть частью прибытия миссии. 
+Tracking will persist over saves. 	Отслеживание сохраняется между сохранениями игры. 
+Tracking an Arrival	Отслеживание прибытия
+An arrival will be tracked when the vessel docks with another vessel. 	Прибытие отслеживается, когда судно стыкуется с другим судном. 
+The other vessel needs to be in orbit around a celestial body for which the routine mission manager is enabled. 	Другое судно должно находиться на орбите вокруг небесного тела, для которого включён менеджер рутинных миссий. 
+Tracking a Landing	Отслеживание посадки
+A landing will be tracked automatically when the vessel lands on the home planet. 	Посадка отслеживается автоматически, когда судно приземляется на родную планету. 
+The vessel is required to remain on the ground and come to a complete stop for some duration before a landing is tracked. 	Прежде чем посадка будет засчитана, судно должно оставаться на земле и полностью остановиться на некоторое время. 
+Ordering a mission	Заказ миссии
+To order a mission the mission first needs to be tracked. In addition the location which serves as the starting point or destination of the mission needs to be registered. Both are covered elsewhere in this manual. 	Чтобы заказать миссию, её сначала нужно отследить. Кроме того, нужно зарегистрировать локацию, служащую точкой старта или назначения миссии. Оба процесса описаны в других разделах этого руководства. 
+To order a launch to or a departure from an orbiting vessel: 	Чтобы заказать запуск к судну на орбите или отбытие от него: 
+-Switch to the vessel.	-Переключитесь на судно.
+-Select the 'Order Launch' or 'Order Departure' option. 	-Выберите пункт «Заказать запуск» или «Заказать отбытие». 
+A overview window will open listing the available missions from and to this location. For departure missions an identical departing vessel needs to be docked to the orbiting vessel, for it to be listed. 	Откроется обзорное окно со списком доступных миссий от и к этой локации. Чтобы миссия отбытия появилась в списке, к судну на орбите должно быть пристыковано идентичное отбывающее судно. 
+-Press the '>' to open a detail window of the mission. 	-Нажмите «>», чтобы открыть окно с деталями миссии. 
+-For launch mission the destination docking port will need to be set and for manned missions it will also possible to change the crew count and set a preferred crew for the mission. 	-Для миссии запуска нужно задать целевой стыковочный узел, а для пилотируемых миссий можно также изменить численность экипажа и задать предпочтительный экипаж миссии. 
+-Review the mission details. 	-Проверьте детали миссии. 
+-Press the 'Order' button. 	-Нажмите кнопку «Заказать». 
+The mission will now be ordered.	Теперь миссия будет заказана.
+All ordered missions can be seen when pressing the 'Ordered Missions' option in the main routine manager window. Here missions can also be cancelled. 	Все заказанные миссии можно увидеть, нажав пункт «Заказанные миссии» в главном окне менеджера. Здесь миссии также можно отменить. 
+Locations	Локации
+To set the docking port on wich an ordered mission should arrive the docking port should first be named and registered within the routine mission manager. 	Чтобы задать стыковочный узел, к которому должна прибыть заказанная миссия, узел сначала нужно назвать и зарегистрировать в менеджере рутинных миссий. 
+To register a docking port: 	Чтобы зарегистрировать стыковочный узел: 
+-Select the 'Register Docking Ports' option. 	-Выберите пункт «Зарегистрировать стыковочные узлы». 
+Every docking port on the vessel will momentarily get a 'Register Docking Port' in the part menu. (This option can take a few seconds to become visible.)	У каждого стыковочного узла судна ненадолго появится пункт «Зарегистрировать стыковочный узел» в меню детали. (Этот пункт может появиться через несколько секунд.)
+Select the 'Register Docking Port' in the part menu of the docking port you want to register. 	Выберите пункт «Зарегистрировать стыковочный узел» в меню детали того узла, который хотите зарегистрировать. 
+A window will open.  the 'Register Docking Port' in the part menu of the docking port you want to register. 	Откроется окно.  «Зарегистрировать стыковочный узел» в меню детали того узла, который хотите зарегистрировать. 
+Enter a name or code for the docking port and press the 'Register' button. 	Введите название или код стыковочного узла и нажмите кнопку «Зарегистрировать». 
+The docking port will now be registered. 	Теперь стыковочный узел будет зарегистрирован. 
+Routine Mission Manager    	Менеджер рутинных миссий    
+Tracked Missions	Отслеживаемые миссии
+Ordering	Заказ
+Order Launch	Заказать запуск
+Order Departure	Заказать отбытие
+Ordered Missions	Заказанные миссии
+Register Docking Ports	Зарегистрировать стыковочные узлы
+Preferred:	Предпочтительно:
+Roster:	Состав:
+Set	Установить
+Order	Заказать
+Mission Name	Название миссии
+Departure Mission	Миссия отбытия
+Order:	Заказ:
+Mission:	Миссия:
+System:	Система:
+Return Fee:	Плата за возврат:
+Cargo Fee:	Плата за груз:
+Duration:	Длительность:
+ETD:	Отбытие:
+Minimal crew required:	Минимально требуется экипажа:
+Crew capacity:	Вместимость экипажа:
+Crew:	Экипаж:
+Current crew:	Текущий экипаж:
+Resources:	Ресурсы:
+Resource	Ресурс
+Required	Требуется
+Current	Текущее
+Cargo mass:	Масса груза:
+Current cargo mass:	Текущая масса груза:
+Docking Port:	Стыковочный узел:
+Order Return	Заказать возврат
+Cancel Return	Отменить возврат
+Departure Missions	Миссии отбытия
+Launch Mission	Миссия запуска
+Price:	Цена:
+ETA:	Прибытие:
+Maximum crew capacity:	Макс. вместимость экипажа:
+Planned crew:	Планируемый экипаж:
+set	установить
+set preferred crew	установить предпочтительный экипаж
+set docking port	установить стыковочный узел
+Cancel Launch	Отменить запуск
+Launch Missions	Миссии запуска
+Mission Name:	Название миссии:
+Vessel:	Аппарат:
+Minimum Crew:	Минимальный экипаж:
+Minimum Resources:	Минимальные ресурсы:
+Amount	Количество
+Trackings	Отслеживания
+Type	Тип
+Name	Имя
+Valid	Корректно
+Invalid	Некорректно
+End Current Vessel Tracking	Прекратить отслеживание текущего судна
+INFO	ИНФО
+Type:	Тип:
+Name:	Название:
+LAUNCH	ЗАПУСК
+Time:	Время:
+Body:	Тело:
+Value:	Значение:
+Parts:	Детали:
+DEPARTURE	ОТБЫТИЕ
+no parts tracked	детали не отслеживаются
+Propellant 	Топливо 
+LANDING	ПОСАДКА
+ARRIVAL	ПРИБЫТИЕ
+Delete Tracking	Удалить отслеживание
+n/a	н/д
+Incorrect RoutineMissionManager Installation	Некорректная установка RoutineMissionManager
+Our scientist have discovered docking ports are in fact very round in nature. This new-found knowledge explains why ships can dock in so many different ways to a docking port. In practice ships have been seen to dock straight, canted slightly to the left, a full quarter to the right and even almost upside down with a two degree counterclockwise offset.	Наши учёные открыли, что стыковочные узлы по своей природе на самом деле очень круглые. Это новое знание объясняет, почему корабли могут стыковаться к узлу столькими разными способами. На практике корабли стыковались прямо, с небольшим наклоном влево, на четверть оборота вправо и даже почти вверх ногами со смещением на два градуса против часовой стрелки.
+Based on these observations some theoretical scientist have argued there could be infinite many ways to connect two docking ports.	На основе этих наблюдений некоторые учёные-теоретики заявили, что существует бесконечно много способов соединить два стыковочных узла.
+But all this metaphysical nonsense aside, docking is already super hard on our Kerbonauts. They can't be expected to align two docking ports together and also control the relative rotation of the approach. That's like totally doing two things at the same time!	Но, если отбросить всю эту метафизическую чепуху, стыковка и так даётся нашим кербонавтам крайне тяжело. Нельзя же требовать, чтобы они одновременно и совмещали два стыковочных узла, и контролировали взаимный поворот при сближении. Это же прямо два дела разом!
+So when you order a mission to be executed unsupervised through the Routine Mission Manager, you should make sure every possible rotation between the current target docking port and the mission vessel does not lead to a collision between parts of the station and the approaching vessel. If you can not make sure of this you should not order this mission in combination with this docking port.	Поэтому, заказывая миссию для автономного выполнения через Менеджер рутинных миссий, убедитесь, что при любом возможном повороте между текущим целевым стыковочным узлом и судном миссии не произойдёт столкновения деталей станции и приближающегося судна. Если вы не можете этого гарантировать, не заказывайте эту миссию с этим стыковочным узлом.
+I understand and acknowledge	Понимаю и принимаю
+New science breakthrough!	Новый научный прорыв!
+Register Docking Port	Зарегистрировать стыковочный узел
+Docking Port Code:	Код стыковочного узла:
+Register	Зарегистрировать
+Active Tracking	Активное отслеживание
+soon(TM)	скоро™
+come back later	зайдите позже
+maybe later	может, позже
+no launch tracked	запуск не отслеживается
+no potential landings data	нет данных о возможных посадках
+no arrival tracked	прибытие не отслеживается
+not all crew returned	не весь экипаж вернулся
+invalid arrival mission	недействительная миссия прибытия
+location not allowed	локация не разрешена
+not enough crew	недостаточно экипажа
+too many crew	слишком много экипажа
+no docking port selected	стыковочный узел не выбран
+vessel not in orbit	судно не на орбите
+vessel not at 	судно не у 
+vessel orbit too high	орбита судна слишком высока
+no window is open	нет открытых окон
+no mission selected	миссия не выбрана
+order not allowed	заказ не разрешён
+insufficient funds	недостаточно средств
+Planned Crew	Планируемый экипаж
+no departure tracked	отбытие не отслеживается
+no landing tracked	посадка не отслеживается
+invalid mission departure mission	недействительная миссия отбытия
+vessel not allowed	судно не разрешено
+no docked vessel on docking port	на стыковочном узле нет пристыкованного судна
+insufficient 	недостаточно 
+too much cargomass	слишком большая масса груза
+no docked structure detected on docking port	на стыковочном узле не обнаружена пристыкованная конструкция
+docked structure unequal to tracked structure	пристыкованная конструкция не совпадает с отслеживаемой
+no tracking module on vessel	на судне нет модуля отслеживания
+no other asset in vicinity	поблизости нет других объектов
+not enough crew was available for mission	для миссии не хватило экипажа
+not rated for this orbit	не сертифицировано для этой орбиты
+vessel in unknown configuration for return	судно в неизвестной конфигурации для возврата
+not enough crew for return	недостаточно экипажа для возврата
+not rated for safe crew return	не сертифицировано для безопасного возврата экипажа
+not enough resources for return	недостаточно ресурсов для возврата
+Current:	Текущее:
+Underway	В процессе
+Cancel	Отмена
+Repeat	Повтор
+Repeat Delay:	Задержка повтора:
+days	дн.
+Docking Stage 2	Стадия стыковки 2
+Docking Stage 3	Стадия стыковки 3
+Save vessel	Сохранить судно
+Close	Закрыть
+Docking Port 	Стыковочный узел 
+Company:	Компания:
+Vehicle:	Носитель:
+Launch System:	Система запуска:
+Arrival in:	Прибытие через:
+Unmanned	Без экипажа
+No return mission	Нет миссии возврата
+No safe return mission	Нет безопасной миссии возврата
+Required return resources: 	Требуемые ресурсы для возврата: 
+Return cargo mass: 	Масса возвращаемого груза: 
+Delete	Удалить
+Procure	Приобрести
+Confirm	Подтвердить
+already a mission underway	миссия уже выполняется
+Crew	Экипаж
+Docking Port Code	Код стыковочного узла
+Launch	Запуск
+Departure	Отбытие
+landing confirmation 	подтверждение посадки 
+vessel has joined with non mission vessel	судно состыковалось с судном вне миссии
+crew has been added to vessel	на судно добавлен экипаж
+mission tracking-LAUNCH	отслеживание миссии — ЗАПУСК
+mission tracking-DEPARTURE	отслеживание миссии — ОТБЫТИЕ
+mission tracking-ARRIVAL	отслеживание миссии — ПРИБЫТИЕ
+mission tracking-LANDING	отслеживание миссии — ПОСАДКА
+mission tracking-REENTRY	отслеживание миссии — ВХОД В АТМОСФЕРУ
+mission tracking-RETURN	отслеживание миссии — ВОЗВРАТ
+mission tracking ended	отслеживание миссии завершено
+stop tracking	прекратить отслеживание
+Start Mission	Начать миссию
+Start Return Mission	Начать миссию возврата
+Mission Part	Часть миссии
+Mission Tracking	Отслеживание миссии

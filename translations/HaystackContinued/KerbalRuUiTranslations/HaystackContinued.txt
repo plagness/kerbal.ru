@@ -1,0 +1,96 @@
+# HaystackContinued (Haystack ReContinued, https://github.com/aederdebais/HaystackContinued)
+# — словарь UI-строк с ХАРДКОД-текстом: подписи зашиты в HaystackReContinued.dll (не в Localizer),
+# извлечены `monodis --userstrings HaystackReContinued.dll`.
+# Окно переключения/поиска аппаратов Haystack: список аппаратов, фильтры типов,
+# сортировка, окно информации об аппарате и о небесном теле, стыковочные узлы.
+#
+# Движок kerbalru-ui-translator патчит GUI/GUILayout/GUIContent/TMP set_text и делает ТОЧНОЕ
+# ordinal-совпадение всей строки (Dict.TryGetValue). Поэтому включены только строки, попадающие
+# в виджет ЦЕЛИКОМ как отдельный литерал: подписи полей с завершающим ": " (рендерятся отдельными
+# GUILayout.Label в горизонтальных группах), тултипы кнопок, заголовки окон/секций, статусы, кнопки.
+#
+# Опечатки английских оригиналов сохранены В КЛЮЧАХ намеренно (иначе не совпадёт):
+#   "Vessel Infomation", "Orbial information:", "Atmopshere Ends: ".
+# Ведущие/хвостовые ПРОБЕЛЫ и двоеточия подписей полей сохранены точно.
+#
+# Отброшено как не-UI (~171 непустая строка): имена классов/методов/событий
+# (DeployedScienceController, RequestVessel, IRFetchVesselList, NavyFish.ModuleDockingNodeNamed),
+# ключи конфига (window_positions, bottom_buttons, type_visibility), пути/файлы
+# (settings.cfg, GameData/HaystackContinued, *.png-иконки, {0}/toolbar_icon), #autoLOC-ключи,
+# hex-цвет #f4eac0, SI-префиксы (k/M/G/m/n/km/kg/N...), format-обрывки ({0} {1}, {0}kPa ({1}atm),
+# 00.{0}, N0/F2/0.###E+0), лог-строки (Exception caught..., Deleting old settings file.,
+# "vessel type: "+" is invalid.", HiddenVessles#Save: exception:), односимвольные латинские
+# коды-кнопки (X/R/T/NB — глобальный словарь → коллизии), бренд-строки без перевода
+# ("Haystack ReContinued {0}"), а также рантайм-конкатенированные сообщения, которые целиком
+# в виджет не попадают: "Cannot switch to "+"a vessel"/"an object"+" we do not own.",
+# длинные тела диалога установки (собираются с динамическим списком путей),
+# суффиксы списка ". Currently active"/". Loaded" (склеиваются в "{0}. {1}{2}").
+
+Incorrect Haystack ReContinued Installation	Неправильная установка Haystack ReContinued
+OK	ОК
+Cancel	Отмена
+Search:	Поиск:
+No matched vessels found	Подходящих аппаратов не найдено
+No match found	Совпадений не найдено
+Bodies	Тела
+Docking Ports	Стыковочные узлы
+Deployed Science Controller	Развёрнутый научный контроллер
+Deployed Science Part	Развёрнутая научная деталь
+Deployed Ground Part	Развёрнутая наземная деталь
+Dropped Part	Сброшенная деталь
+Space Object	Космический объект
+Group by orbiting body	Группировать по небесному телу
+Manage hidden vessels	Управление скрытыми аппаратами
+Nearby vessels only	Только аппараты поблизости
+Ascending sort order	Сортировка по возрастанию
+Descending sort order	Сортировка по убыванию
+Hide vessel	Скрыть аппарат
+Show vessel	Показать аппарат
+Show Docking Ports	Показать стыковочные узлы
+Rename vessel	Переименовать аппарат
+Terminate vessel	Уничтожить аппарат
+Docked	Пристыкован
+The vessel is out of range: cannot list docking ports	Аппарат вне зоны действия: невозможно показать стыковочные узлы
+This vessel does not have any docking ports	У этого аппарата нет стыковочных узлов
+Vessel Infomation	Информация об аппарате
+Nothing is selected	Ничего не выбрано
+Parts: 	Деталей: 
+Status:	Статус:
+MET: 	Время миссии: 
+Maneuver Node in: 	Манёвр через: 
+Maneuver Node @: 	Манёвр в: 
+Orbial information:	Орбитальная информация:
+SOI: 	Сфера влияния: 
+Apoapsis: 	Апоцентр: 
+Periapsis: 	Перицентр: 
+Time to AP: 	Время до Ап: 
+Time to PE: 	Время до Пе: 
+Orbital Period: 	Орбитальный период: 
+Inclination: 	Наклонение: 
+SOI Change Time: 	Время смены сферы влияния: 
+SOI Change Date: 	Дата смены сферы влияния: 
+Crew ({0} / {1}):	Экипаж ({0} / {1}):
+Resources:	Ресурсы:
+Science Information:	Научная информация:
+Physical Information:	Физическая информация:
+Atmospheric Information:	Информация об атмосфере:
+Satellites:	Спутники:
+Space High Alt: 	Граница высокого космоса: 
+Flying High Alt: 	Граница высокого полёта: 
+Atmopshere Ends: 	Конец атмосферы: 
+Oxygen?: 	Кислород?: 
+No	Нет
+Yes	Да
+Atm. ASL: 	Атм. давл. у пов.: 
+Surface Temp: 	Темп. поверхности: 
+Radius: 	Радиус: 
+Mass: 	Масса: 
+GM: 	Грав. параметр: 
+Surface Gravity: 	Гравитация у пов.: 
+Escape Velocity: 	Вторая косм. скорость: 
+Std Orbit Velocity: 	Ст. орбит. скорость: 
+Rotational Period: 	Период вращения: 
+Tidally Locked: 	Приливной захват: 
+SOI Size: 	Размер сферы влияния: 
+Terminate	Уничтожить
+n/a	н/д
