@@ -1,1 +1,7 @@
-{"mod":"KAX","folder":"KAX","method":"mm-title","keys":16,"status":"draft"}
+{
+  "mod": "KAX",
+  "folder": "KAX",
+  "method": "mm-title+keyed",
+  "keys": 17,
+  "status": "draft"
+}
