@@ -187,6 +187,18 @@ LANGUAGE = ru
   ok "Русский язык + переводы под установленные моды ($tc мод(ов))."
 }
 
+disable_burst_on_mac(){ # KSPBurst-компилятор (Unity Burst) не компилируется на macOS/Apple Silicon и
+  # спамит исключениями (BackgroundResourceProcessing) → просадка FPS, глюки. Убираем компилятор,
+  # плагины оставляем → BRP переходит на managed-код без ошибок. См. память burst-mac-incompat.
+  [ "$(uname -s)" = "Darwin" ] || return 0
+  [ -d "$KSP_PATH/GameData/000_KSPBurst" ] || return 0
+  local hit=0 f
+  for f in "$KSP_PATH/GameData/000_KSPBurst/"com.unity.burst@*.zip; do [ -f "$f" ] && { rm -f "$f"; hit=1; }; done
+  for f in "$KSP_PATH/PluginData/"KSPBurst@*; do [ -e "$f" ] && { rm -rf "$f"; hit=1; }; done
+  [ "$hit" = 1 ] && ok "macOS: Burst-компилятор KSPBurst отключён (несовместим с Apple Silicon; BRP → managed-код, −~1.2 ГБ)."
+  return 0
+}
+
 write_state(){ # write_state <build-id>
   local bid="$1" ts; ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   # porcelain: "<статус> <id> <версия>" → берём id (2-е поле)
@@ -220,6 +232,7 @@ install_build(){ # install_build <build-id> ; предполагает уже ч
   say "Ставлю сборку «$(bj "$bid" "d['name']")» через CKAN (несколько ГБ, надолго)…"
   say "  моды: $ids"
   run_ckan install --headless $rflag --gamedir "$KSP_PATH" $ids
+  disable_burst_on_mac
   apply_translations
   # конфиг сборки (напр. мягкий пресет KCT) → GameData, структура config/ зеркалит GameData/
   if [ -d "$BUILDS_DIR/$bid/config" ]; then

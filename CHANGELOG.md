@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+## [26.9] — 2026-07-24
+
+Фикс совместимости с macOS / Apple Silicon.
+
+### Установщик: отключение Unity Burst на macOS
+- **Проблема (Mac M1):** `KSPBurst` (Unity Burst) не компилируется на Apple Silicon, а
+  `BackgroundResourceProcessing` вызывает Burst каждый кадр → `InvalidOperationException: Burst failed to compile`
+  спамился **100 000+ раз за сессию** → просадка FPS, дёрганье физики, визуальные глюки аппаратов.
+- **Фикс:** `install.sh` получил `disable_burst_on_mac()` — на macOS после установки удаляет Burst-компилятор
+  (`com.unity.burst@*.zip` + распакованный `PluginData/KSPBurst@*`), оставляя плагины KSPBurst. BRP переходит
+  на обычный managed-код без ошибок. Бонус: −~1.2 ГБ на диске. Вызывается на `--build` / `--update` / из меню.
+  Проверено в игре: 107 507 → **0** Burst-исключений, ноль exception в логе.
+
 ## [26.8] — 2026-07-24
 
 Релиз мультистраничного сайта-каталога + добор перевода интерфейсов и науки.
