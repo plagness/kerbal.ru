@@ -1,0 +1,25 @@
+{
+  "id": "rp1",
+  "name": "RO/RSS/RP-1 (Realistic Progression)",
+  "status": "mirror",
+  "tagline": "Реальная Солнечная система, реальная физика, историческая карьера с 1951 г. Хардкор-реализм.",
+  "kspVersion": "1.12.5",
+  "system": "rss",
+  "difficulty": 5,
+  "incompatibleWith": ["operator"],
+  "mods": {
+    "core": [
+      "RP-1-ExpressInstall",
+      "RP-1-ExpressInstall-Graphics-Low",
+      "RP-1"
+    ],
+    "recommended": [],
+    "optional": []
+  },
+  "ckan": {
+    "compatVersions": [],
+    "noRecommends": true,
+    "allowIncompatible": []
+  },
+  "language": "ru"
+}

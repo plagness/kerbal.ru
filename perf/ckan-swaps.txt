@@ -1,0 +1,92 @@
+# ckan-swaps.txt — kerbal.ru performance profile, КАНАЛ A (CKAN-свапы)
+# ДАННЫЕ, не код. install.sh парсит этот файл и скармливает команды headless-CKAN.
+# Мы НЕ храним чужие моды — только вызываем CKAN (философия FOR-AGENTS.md).
+#
+# ── ФОРМАТ ────────────────────────────────────────────────────────────────────
+#   Секции:  [common] [mac] [deck] [generic] [trim]
+#   install.sh применяет:  [common] + [<профиль>]        (trim — только с доп. opt-in флагом)
+#   Строки-действия:
+#     remove <id>                 →  ckan remove  --headless <id>
+#     install <id>                →  ckan install --headless <id>
+#     install-incompatible <id>   →  ckan install --headless --allow-incompatible <id>
+#     drop-padheap <path>         →  копировать perf/heappadder/padheap.cfg в <path> (не CKAN)
+#   '#' — комментарий. Пустые строки игнорируются.
+#
+# ── ПОРЯДОК ПРИМЕНЕНИЯ (важно для кэша ModuleManager, см. PERFORMANCE.md §4/§6.4)
+#   Канал A целиком — ДО русификатора. Внутри профиля: сначала remove текстур,
+#   потом install текстур (провайдер-свап), потом мод анти-фриза, потом drop-padheap.
+#
+# ── СТАТУС ВЕРИФИКАЦИИ (живой CKAN-реестр, KSP 1.12.5.3190, инстанс mac-ksp, 2026-07-24)
+#   Реестр обновлён `ckan update` (2267 модулей). Проверено `ckan list` (что стоит)
+#   и registry JSON (совместимость/provides). Пометки [OK]/[FLAG] у каждого id.
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+[common]
+# --- Анти-фриз (кросс-платформенно). По умолчанию — HeapPadder (авто-пэддинг). ---
+#
+# [FLAG] HeapPadder в CKAN помечен НЕсовместимым с 1.12.5 (ksp_version_max = 1.7 —
+#   ЗАСТОЙ метаданных linuxgurugamer, не реальная поломка). Мод — чистый C#,
+#   без нативных бинарников, без верс′онно-зависимого API KSP (просто растит
+#   Mono-heap), поэтому на 1.12.5 РАБОТАЕТ. Ставится через --allow-incompatible.
+#   Источник auto-pad подтверждён: HeapPadder.cs → [KSPAddon(Startup.Instantly)],
+#   Start() вызывает padHeap.Pad() — БЕЗ хоткея. Зависимостей нет.
+#   >>> ОПЕРАТОРУ: сверить/принять флаг --allow-incompatible перед прошивкой. <<<
+install-incompatible HeapPadder
+drop-padheap GameData/HeapPadder/PluginData/padheap.cfg
+#
+# АЛЬТЕРНАТИВА (если оператор не хочет --allow-incompatible): MemGraph —
+#   [OK] совместим (v1:1.2.0.1, ksp_min 1.12.0). НО пэддинг у него по ХОТКЕЮ
+#   (Mod+End) → для автоустановки хуже (не сработает без игрока). Тот же
+#   padheap.cfg, но путь другой. Если переключаешься на MemGraph — закомментируй
+#   две строки HeapPadder выше и раскомментируй две ниже:
+# install MemGraph
+# drop-padheap GameData/MemGraph/PluginData/MemGraph/padheap.cfg
+
+
+[mac]
+# --- RSS-текстуры 8K → 4K (Mac M1 Pro 16 ГБ, docs/PERFORMANCE.md §2.3). ---
+# −~0.8 ГБ на диске / −~1.2 ГБ RAM-VRAM, на экране почти без разницы (TEXTURE_QUALITY
+# и так даунсемплит до ~2K). Оба пакета provide виртуальный RSSTextures → свап чистый.
+# Порядок remove→install обязателен (RealSolarSystem зависит от виртуального RSSTextures).
+remove  RSSTextures8192      # [OK] установлен сейчас: RSSTextures8192 v18.6.1
+install RSSTextures4096      # [OK] v18.6.1, ksp_min 1.8, provides RSSTextures
+
+
+[deck]
+# --- RSS-текстуры 8K → 2K (Steam Deck, docs/PERFORMANCE.md §2.3, §5.2). ---
+# КРИТИЧНО: обходит баг DXVK GTT-overspill #5140 (8K RSS → 150 FPS падают до 15).
+# 2K — самый безопасный вариант для 15 Вт APU без выделенной VRAM.
+remove  RSSTextures8192      # [OK] установлен сейчас: RSSTextures8192 v18.6.1
+install RSSTextures2048      # [OK] v18.6.1, ksp_min 1.8, provides RSSTextures
+
+
+[generic]
+# --- RSS-текстуры 8K → 2K (неизвестный Linux/Win десктоп). ---
+# КОНСЕРВАТИВНЫЙ выбор (решение оператора: при неуверенности — низко, "точно не хуже").
+# Неизвестны VRAM/ОЗУ → берём самый безопасный 2K. На заведомо мощной машине оператор
+# может поднять до RSSTextures4096 (заменить строку install ниже).
+remove  RSSTextures8192      # [OK] установлен сейчас: RSSTextures8192 v18.6.1
+install RSSTextures2048      # [OK] v18.6.1, ksp_min 1.8, provides RSSTextures
+# install RSSTextures4096    # ← альтернатива для явно мощного десктопа
+
+
+[trim]
+# --- ПУСТО НАМЕРЕННО. НИЧЕГО не снимать через CKAN. ---
+#
+# ⛔ ИСПРАВЛЕНО 2026-07-24: прежняя версия советовала `remove SXTContinued` и
+#   `remove VenStockRevamp-*` как «не ядро RP-1». Это БЫЛО ОШИБКОЙ И ОПАСНО.
+#   Проверка по живому registry.json (installed_modules[*].depends) показала:
+#     RP-1 (v4.5) ЖЁСТКО depends → SXTContinued, VenStockRevamp-NewParts(→-Core),
+#                                   ContractConfigurator, CustomBarnKit, Skopos …
+#     RP-1-ExpressInstall (v2.0)  → ReStock, ReStockPlus, ROEngines/Tanks/Capsules,
+#                                   ConformalDecals, ModularLaunchPads, B9PartSwitch …
+#   Весь CKAN-набор — плотное ЗАМЫКАНИЕ зависимостей RP-1. Множество «установлен, но
+#   ни от кого не зависит» — ПУСТО. `ckan remove` любого из них → RP-1 помечается
+#   Broken/incomplete, при следующем `ckan consistency` CKAN предложит снести RP-1.
+#   Единственный безопасный CKAN-«trim» — это текстур-свап выше ([mac]/[deck]/[generic]).
+#
+# 👉 «Ужать контент» (мусорные детали в редакторе) делается НЕ снятием модов, а нашим
+#   опциональным конфиг-модом kerbalru-lite (флаг --lite): он ПРЯЧЕТ лишние детали
+#   через `@category = none` и/или родной флаг RO `NoNonRO`, ничего не удаляя из CKAN.
+#   Обратимо, устойчиво к обновлениям RP-1, чужих модов не трогает. См. lite/README.md.
