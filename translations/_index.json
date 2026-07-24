@@ -1,12 +1,20 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 82,
+    "mods": 85,
     "keyedMods": 37,
     "uiMods": 33,
-    "keys": 7498
+    "keys": 7847
   },
   "mods": [
+    {
+      "id": "AirplanePlus",
+      "mod": "AirplanePlus",
+      "folder": "AirplanePlus",
+      "method": "mm-title",
+      "keys": 161,
+      "status": "draft"
+    },
     {
       "id": "AJE",
       "mod": "AJE",
@@ -72,6 +80,14 @@
       "status": "draft"
     },
     {
+      "id": "CoatlAerospace",
+      "mod": "Coatl Aerospace (ProbesPlus)",
+      "folder": "CoatlAerospace",
+      "method": "mm-title",
+      "keys": 144,
+      "status": "draft"
+    },
+    {
       "id": "CommNetConstellation",
       "mod": "CommNetConstellation",
       "folder": "CommNetConstellation",
@@ -110,6 +126,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "DMagicOrbitalScience",
+      "mod": "DMagic Orbital Science",
+      "folder": "DMagicOrbitalScience",
+      "method": "mm-title",
+      "keys": 44,
+      "status": "draft"
     },
     {
       "id": "EditorExtensionsRedux",
