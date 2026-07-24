@@ -1,0 +1,201 @@
+# _common-ui -- общий словарь МЕТОК PAW (меню правого клика по деталям, KSP stock + моды).
+# Игрок видит эти кнопки/подписи постоянно, в каждом полёте. Это НЕ один мод, а сквозной
+# набор player-facing действий (Open/Close/Deploy/Retract/Toggle/Collect/Run/Review/Take/Log...),
+# отрисовываемых через IMGUI/UGUI/TMPro -- перехватываются Harmony-патчами tools/ui-translator.
+# folder="*" (не привязан к одному моду), деплоится всегда.
+#
+# Формат: Английский<TAB>Русский. Строки с # -- комментарии. Несовпадение = строка идёт как есть
+# (no-op). Ключ матчится ПОБАЙТНО (Ordinal), включая кавычки: "Power On"/"Power Off" -- ключ и
+# перевод намеренно сохраняют ASCII-кавычки (так метка отрисована в игре).
+#
+# ЕДИНАЯ ТЕРМИНОЛОГИЯ (канон для всего проекта, унифицирует разнобой per-mod файлов):
+#   Deploy -> Развернуть, Retract -> Свернуть, Extend -> Выдвинуть, Toggle X -> Переключить X.
+#   (Ранее bare Deploy/Retract в BahaSP/ROLib/DMagic/MechJeb2 были Выдвинуть/Втянуть --
+#   приведены к этому канону, чтобы одна и та же кнопка звучала одинаково во всех модах.)
+# АББРЕВИАТУРЫ: код прибора без общепринятого русского эквивалента остаётся латиницей
+#   (GRS, RPWS, LUV, ELIX); имеющие устоявшуюся русскую форму -- переводятся (RTG->РИТЭГ, RW->маховик).
+#   Gravioli -- игровой термин KSP, транслитерируется (гравиоли).
+
+"Power Off"	"Питание выкл."
+"Power On"	"Питание вкл."
+Analyze Dust Particles	Анализ частиц пыли
+Arm Hammer	Взвести молот
+Arm Pod	Взвести капсулу
+Close	Закрыть
+Close Compartment	Закрыть отсек
+Close Containment Pod	Закрыть капсулу
+Close Doors	Закрыть створки
+Close Goo Bay	Закрыть отсек слизи
+Close Lid	Закрыть крышку
+Close Materials Bay	Закрыть отсек материалов
+Close Shutter	Закрыть заслонку
+Collect Anomalous Data	Собрать аномальные данные
+Collect Bathymetry Data	Собрать данные батиметрии
+Collect Core Sample	Собрать образец керна
+Collect Data	Собрать данные
+Collect Dust Sample	Собрать образец пыли
+Collect Hydrogen Data	Собрать данные о водороде
+Collect Laser Data	Собрать данные лазера
+Collect Pictures	Собрать снимки
+Collect Radiation Data	Собрать данные радиации
+Collect Radio Data	Собрать радиоданные
+Collect Recon Data	Собрать данные разведки
+Collect Seismic Data	Собрать сейсмические данные
+Collect Soil Moisture Data	Собрать данные влажности грунта
+Collect Solar Particles	Собрать солнечные частицы
+Collect Stereo Recon Data	Собрать данные стереоразведки
+Collect X-Ray Data	Собрать рентгеновские данные
+Crew Report	Отчёт экипажа
+Delete Atmospheric Data	Удалить данные атмосферы
+Delete Data	Удалить данные
+Delete Gravity Data	Удалить данные гравитации
+Delete Pictures	Удалить снимки
+Delete Pressure Data	Удалить данные давления
+Delete Seismic Data	Удалить сейсмические данные
+Delete Temperature Data	Удалить данные температуры
+Deploy	Развернуть
+Deploy Accelerometer	Развернуть акселерометр
+Deploy Array	Развернуть панель
+Deploy Boom	Развернуть штангу
+Deploy Camera	Развернуть камеру
+Deploy Camera Assembly	Развернуть блок камеры
+Deploy Collectors	Развернуть коллекторы
+Deploy Dish	Развернуть тарелку
+Deploy GRS	Развернуть GRS
+Deploy Gravioli	Развернуть детектор гравиоли
+Deploy Imager	Развернуть построитель изображений
+Deploy LUV	Развернуть LUV
+Deploy Landing Legs	Развернуть посадочные опоры
+Deploy Magnetometer	Развернуть магнитометр
+Deploy Platform	Развернуть платформу
+Deploy RPWS	Развернуть RPWS
+Deploy RPWS Antennas	Развернуть антенны RPWS
+Deploy Recon	Развернуть разведмодуль
+Deploy Scanners	Развернуть сканеры
+Deploy Solar Particle Collectors	Развернуть коллекторы солнечных частиц
+Disarm Hammer	Снять взвод молота
+Disarm Pod	Снять взвод капсулы
+Discard Anomalous Data	Отбросить аномальные данные
+Discard Crew Report	Отбросить отчёт экипажа
+Discard Data	Отбросить данные
+Discard Gamma Ray Data	Отбросить данные гамма-излучения
+Discard Hydrogen Data	Отбросить данные о водороде
+Discard Images	Отбросить снимки
+Discard Impact Data	Отбросить данные удара
+Discard Laser Data	Отбросить данные лазера
+Discard Magnetometer Data	Отбросить данные магнитометра
+Discard Observations	Отбросить наблюдения
+Discard Radiation Data	Отбросить данные радиации
+Discard X-Ray Data	Отбросить рентгеновские данные
+Download Data	Скачать данные
+Droop Nose	Опустить нос
+Dump Sample Data	Сбросить данные образцов
+Dump Samples	Сбросить образцы
+Examine Dust Data	Изучить данные о пыли
+Extend	Выдвинуть
+Forward Thrust	Прямая тяга
+Image Landing Site	Съёмка места посадки
+Inspect the arm	Осмотреть манипулятор
+Lights Off	Выключить огни
+Lights On	Включить огни
+Log Atmospheric Data	Записать данные атмосферы
+Log Gamma Ray Data	Записать данные гамма-излучения
+Log Gravity Data	Записать данные гравитации
+Log Imaging Data	Записать данные съёмки
+Log Impact Data	Записать данные удара
+Log Irradiance Scan	Записать скан облучённости
+Log Magnetometer Data	Записать данные магнитометра
+Log Pressure Data	Записать данные давления
+Log Radio Plasma Wave Data	Записать данные радиоплазменных волн
+Log Seismic Data	Записать сейсмические данные
+Log Temperature	Записать температуру
+Log Visual Observations	Записать визуальные наблюдения
+Measure Electrostatic Charge	Измерить электростатический заряд
+Measure Radiation Levels	Измерить уровень радиации
+Observe Materials Bay	Осмотреть отсек материалов
+Observe Mystery Goo	Осмотреть загадочную слизь
+Open	Открыть
+Open Compartment	Открыть отсек
+Open Containment Pod	Открыть капсулу
+Open Doors	Открыть створки
+Open Goo Bay	Открыть отсек слизи
+Open Lid	Открыть крышку
+Open Materials Bay	Открыть отсек материалов
+Open Shutter	Открыть заслонку
+Reset Barometer	Сбросить барометр
+Reset Data	Сбросить данные
+Reset Goo Canister	Сбросить контейнер слизи
+Reset Materials Bay	Сбросить отсек материалов
+Reset Seismic Data	Сбросить сейсмические данные
+Retract	Свернуть
+Retract Accelerometer	Свернуть акселерометр
+Retract Array	Свернуть панель
+Retract Boom	Свернуть штангу
+Retract Camera	Свернуть камеру
+Retract Camera Assembly	Свернуть блок камеры
+Retract Collectors	Свернуть коллекторы
+Retract Dish	Свернуть тарелку
+Retract GRS	Свернуть GRS
+Retract Gravioli	Свернуть детектор гравиоли
+Retract Imager	Свернуть построитель изображений
+Retract LUV	Свернуть LUV
+Retract Landing Legs	Свернуть посадочные опоры
+Retract Magnetometer	Свернуть магнитометр
+Retract Platform	Свернуть платформу
+Retract RPWS	Свернуть RPWS
+Retract RPWS Antennas	Свернуть антенны RPWS
+Retract Recon	Свернуть разведмодуль
+Retract Scanners	Свернуть сканеры
+Retract Solar Particle Collectors	Свернуть коллекторы солнечных частиц
+Retrieve Dust Sample	Извлечь образец пыли
+Retrieve Impact Data	Извлечь данные удара
+Retrieve Samples	Извлечь образцы
+Reverse Thrust	Реверс тяги
+Review Data	Просмотреть данные
+Review ELIX results	Просмотреть результаты ELIX
+Review Findings	Просмотреть результаты
+Review Report	Просмотреть отчёт
+Review Site Survey	Просмотреть обследование местности
+Review Stored Data	Просмотреть сохранённые данные
+Run Atmosphere Analysis	Провести анализ атмосферы
+Run Magnetometer Science	Провести магнитометрию
+Run Site Survey	Провести обследование местности
+Run Solar Wind science	Провести измерения солнечного ветра
+Scoop Surface Material	Взять образец грунта
+Systems Check	Проверка систем
+Take Atmospheric Data	Снять данные атмосферы
+Take Data	Снять данные
+Take Goo Data	Снять данные слизи
+Take Gravity Data	Снять данные гравитации
+Take Infrared Image	Сделать инфракрасный снимок
+Take Materials Data	Снять данные материалов
+Take Orbital Image	Сделать орбитальный снимок
+Take Orbital Pictures	Сделать орбитальные снимки
+Take Pressure Data	Снять данные давления
+Take Seismic Data	Снять сейсмические данные
+Take Telescope Image	Сделать снимок телескопом
+Take Temperature Data	Снять данные температуры
+Take Ultraviolet Image	Сделать ультрафиолетовый снимок
+Test Camera Cover (end)	Тест крышки камеры (конец)
+Test Camera Cover (start)	Тест крышки камеры (начало)
+Test Camera Cover (toggle)	Тест крышки камеры (переключить)
+Toggle Antenna	Переключить антенну
+Toggle Bay Doors	Переключить створки отсека
+Toggle Boom	Переключить штангу
+Toggle Camera Assembly	Переключить блок камеры
+Toggle Compartment	Переключить отсек
+Toggle Dockingport	Переключить стыковочный узел
+Toggle Doors	Переключить створки
+Toggle Extension	Переключить выдвижение
+Toggle Landing Legs	Переключить посадочные опоры
+Toggle Lights	Переключить огни
+Toggle Nose Droop	Переключить наклон носа
+Toggle Platform	Переключить платформу
+Toggle RTG Boom	Переключить штангу РИТЭГ
+Toggle RW	Переключить маховик
+Toggle Ramp	Переключить рампу
+Toggle Reverse Thrust	Переключить реверс тяги
+Toggle Sensor	Переключить датчик
+Toggle Shutters	Переключить заслонки
+Toggle Thrust Reverser	Переключить реверсор тяги
+Undroop Nose	Поднять нос

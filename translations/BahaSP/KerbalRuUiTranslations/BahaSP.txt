@@ -34,8 +34,8 @@ Toggle Descent Mode	Переключить режим спуска
 #
 # ---------------- BDAnimationModules.dll ----------------
 # Deploy/retract event + action guiName defaults (BDFSanimateGeneric, via set_guiName on ldstr):
-Deploy	Выдвинуть
-Retract	Втянуть
+Deploy	Развернуть
+Retract	Свернуть
 # UI_Toggle field "startDeployed" guiName default (startDeployedString, ldstr):
 Start Deployed?	Выдвинут на старте?
 # Texture-switch (BDFStextureSwitch2) next/prev event + status field guiName defaults:

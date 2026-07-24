@@ -54,6 +54,18 @@
   Снят из `build.json.recommended` + удалён пресет (коммит 2bcc12a). Мод снять `ckan uninstall KerbalConstructionTime`
   когда игра закрыта (вотчер на PID ждёт закрытия); save-safe (нет деталей). Перевод оставлен в библиотеке.
 
+## Глубокий аудит (2026-07-25) — найдено + план
+Копнул глубже прошлых проходов (аудит ConfigCache по полям, которые раньше не смотрел):
+- 🎯 **PAW-метки (183 уникальных англ)** — меню правого клика по деталям (Open/Close/Toggle/Run Experiment/
+  Review Data/Collect/Reset...). Поля `guiName`/`startEventGUIName`/`experimentActionName`/`resetActionName`/
+  `collectActionName` и т.п. были ~50% англ. Игрок видит ПОСТОЯННО. → ui-dict общий (183 метки), деплой через
+  новый `folder="*"` в apply_translations (общий словарь, не привязан к 1 моду). **Батч запущен.**
+- Кастомные категории редактора (SystemHeat/HeatControl VABOrganizer + SpaceY «Massive Rocketry» и др.) → MM-патч.
+- B9 SUBTYPE-титулы (переключение баков/мешей в PAW) → ui-dict.
+- Полнота наших keyed-переводов — сверка ru.cfg vs en-us, добор пробелов (OPM/SystemHeat/NearFuture/...).
+- displayName 83 англ — в осн. CRP-ресурсы (латиницей по политике); отсеять реальные.
+После этого захода видимый текст сборки ~99% (PAW был последним крупным незамеченным пластом).
+
 ## Разведка непереведённого (2026-07-24)
 - 🎯 **~2638 англ. строк результатов экспериментов (ScienceDefs, литерал не #LOC)** — крупнейший пробел:
   DMagic 1681 (патчит стоковые seismicScan/gravityScan + свои 17 эксп.), Coatl 941 (GroundOps+зонды), US2 16.

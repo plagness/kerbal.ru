@@ -92,8 +92,8 @@ RO-Solar	RO-Солнечные панели
 RO-Decoupler	RO-Разделитель
 
 # --- Метки анимации по умолчанию (deployLabel/retractLabel) ---
-Deploy	Выдвинуть
-Retract	Втянуть
+Deploy	Развернуть
+Retract	Свернуть
 
 # --- Окно выбора диаметра (ROTanks Diameter Selection) ---
 ROTanks Diameter Selection	ROTanks: выбор диаметра

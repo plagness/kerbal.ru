@@ -171,7 +171,8 @@ LANGUAGE = ru
     for tdir in "$lib"/*/; do
       [ -f "${tdir}translation.json" ] || continue
       local folder; folder="$(python3 -c "import json,sys;print(json.load(open(sys.argv[1])).get('folder',''))" "${tdir}translation.json" 2>/dev/null || echo "")"
-      [ -n "$folder" ] && [ -d "$KSP_PATH/GameData/$folder" ] || continue
+      # folder="*" — общий словарь (напр. PAW-метки), деплоится всегда; иначе — только под установленный мод
+      [ "$folder" = "*" ] || { [ -n "$folder" ] && [ -d "$KSP_PATH/GameData/$folder" ]; } || continue
       local tid; tid="$(basename "$tdir")"
       if ls "${tdir}Localization/"*.cfg >/dev/null 2>&1; then
         mkdir -p "$KSP_PATH/GameData/zzz-kerbalru-translations/$tid"

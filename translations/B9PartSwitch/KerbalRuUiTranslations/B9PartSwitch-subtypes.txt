@@ -1,0 +1,78 @@
+# B9PartSwitch — ТИТУЛЫ ПОДТИПОВ и подписи переключателей (PAW), второй добор.
+#
+# Движок KerbalRuUiTranslator патчит TMPro.TMP_Text.text(setter). UIPartActionSubtypeSelector
+# вызывает set_text и для subtypeTitleText (титул подтипа), и для switcherDescriptionText
+# (подпись переключателя) — см. разбор в B9PartSwitch.txt.
+#
+# ВАЖНО: ловятся ТОЛЬКО ЛИТЕРАЛЬНЫЕ англ. значения. Если в конфиге SUBTYPE.title /
+# switcherDescription стоит #LOC-ключ — его резолвит штатный Localizer ДО рендера (и он уже
+# по-русски из ru.cfg мода / нашей библиотеки), наш словарь его не увидит. Здесь собраны только
+# те строки, что заданы в конфигах как чистый английский (без #LOC): в основном CoatlAerospace
+# (ProbesPlus), плюс SSPX «LF/Ox» (апстрим сам пометил //add localization) и NFA «Structural».
+# У подтипа без поля title отображается его name — учтено (Gold/Thermal/Structural).
+#
+# Бренды/модели/коды латиницей: Coatl, Vorona, РИТЭГ(=RTG), RCS.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть.
+
+# --- Титулы подтипов (SUBTYPE.title / name-fallback) ---
+Silver Foil	Серебристая фольга
+Gold Foil	Золотая фольга
+Coatl Foil	Фольга Coatl
+Silver	Серебристый
+Gold	Золотой
+Grey	Серый
+Carbon Fiber	Углеволокно
+Thermal	Нагрев
+Straight Mount	Прямое крепление
+Vorona Mount	Крепление Vorona
+Dish Base	Основание тарелки
+Foil Truss	Ферма с фольгой
+Truss	Ферма
+No Truss	Без фермы
+Top Ring	Верхнее кольцо
+No Top Ring	Без верхнего кольца
+Angled, Orange	Наклонная, оранжевая
+Angled, Yellow	Наклонная, жёлтая
+Long, Orange	Длинная, оранжевая
+Long, Yellow	Длинная, жёлтая
+Short, Orange	Короткая, оранжевая
+Short, Yellow	Короткая, жёлтая
+Covered	С кожухом
+No Cover	Без кожуха
+Shields	Экраны
+No Shields	Без экранов
+Tanks	Баки
+No Tanks	Без баков
+LFO Loadout	Заправка ЖТ/О
+MonoProp Loadout	Заправка монотопливом
+LF/Ox	ЖТ/Ок
+Structural	Конструкция
+
+# --- Подписи переключателей (switcherDescription / …Plural) ---
+Insulation Type	Тип изоляции
+Insulation Options	Варианты изоляции
+Cover	Кожух
+Cover Options	Варианты кожуха
+Foil Cover	Фольговый кожух
+Foil Cover Options	Варианты фольгового кожуха
+Mag Foil	Магнитная фольга
+Mag Foil Options	Варианты магнитной фольги
+Mount	Крепление
+Mount Type	Тип крепления
+Mount Types	Типы креплений
+Mount & Color Options	Крепление и цвет
+Base	База
+Base Types	Типы оснований
+Propellant	Топливо
+Resource Types	Типы ресурсов
+Resource Options	Варианты ресурсов
+Tank Options	Варианты баков
+Tank Type	Тип топлива
+RTG Shields	Экраны РИТЭГ
+RTG Shield Options	Варианты экранов РИТЭГ
+Top Ring Options	Варианты верхнего кольца
+Truss Options	Варианты фермы
+Variant	Вариант
+Part Variant	Вариант детали
+Wing Variant	Вариант крыла
+Engine Type	Тип двигателя

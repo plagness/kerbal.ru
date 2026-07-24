@@ -33,7 +33,7 @@ Settings	Настройки
 
 # --- Кнопки / действия ---
 Extend	Выдвинуть
-Retract	Втянуть
+Retract	Свернуть
 RCS Burn	Манёвр на RCS
 Kill Rotation	Погасить вращение
 Abort Adding	Отменить добавление

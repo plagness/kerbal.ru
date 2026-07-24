@@ -1,12 +1,20 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 109,
+    "mods": 111,
     "keyedMods": 43,
-    "uiMods": 39,
-    "keys": 14559
+    "uiMods": 40,
+    "keys": 14746
   },
   "mods": [
+    {
+      "id": "_common-ui",
+      "mod": "Общие PAW-метки",
+      "folder": "*",
+      "method": "ui-dict",
+      "keys": 183,
+      "status": "draft"
+    },
     {
       "id": "AirplanePlus",
       "mod": "AirplanePlus",
@@ -101,6 +109,14 @@
       "folder": "CommNetConstellation",
       "method": "keyed",
       "keys": 124,
+      "status": "draft"
+    },
+    {
+      "id": "CommunityCategoryKit",
+      "mod": "Community Category Kit (CCK)",
+      "folder": "CommunityCategoryKit",
+      "method": "mm-category",
+      "keys": 4,
       "status": "draft"
     },
     {
@@ -880,5 +896,5 @@
       "status": "draft"
     }
   ],
-  "generatedAt": "2026-07-24"
+  "generatedAt": "2026-07-25"
 }
