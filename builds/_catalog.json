@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "builds": [
+    {
+      "id": "operator",
+      "name": "Оператор",
+      "status": "curated",
+      "tagline": "Спутники → сеть покрытия → станции → автоматика. Оператор космопрограммы.",
+      "kspVersion": "1.12.5",
+      "system": "stock",
+      "difficulty": 4,
+      "language": "ru",
+      "incompatibleWith": [
+        "rp1"
+      ],
+      "mods": {
+        "core": 21,
+        "recommended": 37,
+        "optional": 3,
+        "total": 61
+      }
+    },
+    {
+      "id": "rp1",
+      "name": "RO/RSS/RP-1 (Realistic Progression)",
+      "status": "mirror",
+      "tagline": "Реальная Солнечная система, реальная физика, историческая карьера с 1951 г. Хардкор-реализм.",
+      "kspVersion": "1.12.5",
+      "system": "rss",
+      "difficulty": 5,
+      "language": "ru",
+      "incompatibleWith": [
+        "operator"
+      ],
+      "mods": {
+        "core": 3,
+        "recommended": 0,
+        "optional": 0,
+        "total": 3
+      }
+    }
+  ],
+  "generatedAt": "2026-07-24"
+}

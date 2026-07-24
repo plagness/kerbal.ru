@@ -46,7 +46,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-GAMEDATA = ROOT / "GameData"
+# Библиотека переводов живёт по папке на мод в translations/<mod>/Localization/*.cfg
+# (можно переопределить путём первым позиционным аргументом).
+GAMEDATA = ROOT / "translations"
 
 KEY_LINE = re.compile(r'^\s*(#[A-Za-z0-9_.\-]+)\s*=\s*(.*?)\s*$')
 BARE_WORD = re.compile(r'^\s*([A-Za-z0-9_.\-]+)\s*$')
@@ -59,10 +61,24 @@ PLACEHOLDER = re.compile(r'<<\d+>>|\{[0-9]+\}|%[sd]|\\n')
 # reading the mod's own en-us.cfg -- not our bug to "fix", since our rule is
 # to mirror the upstream key set exactly). Format: "RelativeFileFromGameData:#key".
 KNOWN_UPSTREAM_DUPLICATE_KEYS = {
-    "GameData/ContractConfigurator/Localization/ru.cfg:#cc.req.Any",  # upstream en-us.cfg
+    "translations/ContractConfigurator/Localization/ru.cfg:#cc.req.Any",  # upstream en-us.cfg
     # has this same key defined twice (lines 357-358) with different meanings;
     # last-defined-wins in both files, so ours correctly mirrors the effective
     # (second) value. See docs/MAINTAINING.md section 6.
+    #
+    # Nertea's NearFutureLaunchVehicles/Localization/en-us.cfg declares each of
+    # these three keys twice itself (verified in the installed mod); we mirror
+    # the upstream key set 1:1, so the duplication is intentional, not our bug.
+    "translations/NearFutureLaunchVehicles/Localization/ru.cfg:#LOC_NFLaunchVehicles_switcher_skeletal_title",
+    "translations/NearFutureLaunchVehicles/Localization/ru.cfg:#LOC_NFLaunchVehicles_engine_switcher_mount_title",
+    "translations/NearFutureLaunchVehicles/Localization/ru.cfg:#LOC_NFLaunchVehicles_service-bay-5-1_tags",
+    # SCANsat's own en-us/Helptips.cfg defines settingsHelpWindowTooltips twice
+    # with different text ("map window buttons" vs "surface be in daylight");
+    # last-wins upstream, ours mirrors both.
+    "translations/SCANsat/Localization/ru.cfg:#autoLOC_SCANsat_settingsHelpWindowTooltips",
+    # StationScience's english.cfg defines this stock-namespace kuarq flavour
+    # key twice with different text; we mirror it verbatim.
+    "translations/StationScience/Localization/ru.cfg:#autoLOC_prograde_MunSrfLanded",
 }
 
 

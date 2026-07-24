@@ -1,0 +1,660 @@
+{
+  "schema": 1,
+  "totals": {
+    "mods": 81,
+    "keyedMods": 36,
+    "uiMods": 33,
+    "keys": 7250
+  },
+  "mods": [
+    {
+      "id": "AJE",
+      "mod": "AJE",
+      "folder": "AJE",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "AntennaHelper",
+      "mod": "AntennaHelper",
+      "folder": "AntennaHelper",
+      "method": "keyed",
+      "keys": 73,
+      "status": "draft"
+    },
+    {
+      "id": "AtmosphereAutopilot",
+      "mod": "AtmosphereAutopilot",
+      "folder": "AtmosphereAutopilot",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "B9_Aerospace_ProceduralWings",
+      "mod": "B9_Aerospace_ProceduralWings",
+      "folder": "B9_Aerospace_ProceduralWings",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "B9PartSwitch",
+      "mod": "B9PartSwitch",
+      "folder": "B9PartSwitch",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "BackgroundThrust",
+      "mod": "BackgroundThrust",
+      "folder": "BackgroundThrust",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "BahaSP",
+      "mod": "BahaSP",
+      "folder": "BahaSP",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "BeamedPowerStandalone",
+      "mod": "BeamedPowerStandalone",
+      "folder": "BeamedPowerStandalone",
+      "method": "keyed",
+      "keys": 97,
+      "status": "draft"
+    },
+    {
+      "id": "CommNetConstellation",
+      "mod": "CommNetConstellation",
+      "folder": "CommNetConstellation",
+      "method": "keyed",
+      "keys": 124,
+      "status": "draft"
+    },
+    {
+      "id": "CommunityTechTree",
+      "mod": "CommunityTechTree",
+      "folder": "CommunityTechTree",
+      "method": "keyed",
+      "keys": 164,
+      "status": "draft"
+    },
+    {
+      "id": "ConformalDecals",
+      "mod": "ConformalDecals",
+      "folder": "ConformalDecals",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ContractConfigurator",
+      "mod": "ContractConfigurator",
+      "folder": "ContractConfigurator",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "DistantObject",
+      "mod": "DistantObject",
+      "folder": "DistantObject",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "EditorExtensionsRedux",
+      "mod": "EditorExtensionsRedux",
+      "folder": "EditorExtensionsRedux",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "EngineGroupController",
+      "mod": "EngineGroupController",
+      "folder": "EngineGroupController",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "EnvironmentalVisualEnhancements",
+      "mod": "EnvironmentalVisualEnhancements",
+      "folder": "EnvironmentalVisualEnhancements",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ExtraplanetaryLaunchpads",
+      "mod": "Extraplanetary Launchpads",
+      "folder": "ExtraplanetaryLaunchpads",
+      "method": "keyed",
+      "keys": 194,
+      "status": "draft"
+    },
+    {
+      "id": "FerramAerospaceResearch",
+      "mod": "FerramAerospaceResearch",
+      "folder": "FerramAerospaceResearch",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "Firespitter",
+      "mod": "Firespitter",
+      "folder": "Firespitter",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "FShangarExtender",
+      "mod": "FShangarExtender",
+      "folder": "FShangarExtender",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KAS",
+      "mod": "KAS — Kerbal Attachment System",
+      "folder": "KAS",
+      "method": "keyed",
+      "keys": 225,
+      "status": "draft"
+    },
+    {
+      "id": "KerbalAlarmClock",
+      "mod": "Kerbal Alarm Clock (Updated)",
+      "folder": "TriggerTech",
+      "method": "keyed",
+      "keys": 550,
+      "status": "draft"
+    },
+    {
+      "id": "KerbalChangelog",
+      "mod": "KerbalChangelog",
+      "folder": "KerbalChangelog",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KerbalConstructionTime",
+      "mod": "Kerbal Construction Time",
+      "folder": "KerbalConstructionTime",
+      "method": "keyed",
+      "keys": 303,
+      "status": "draft"
+    },
+    {
+      "id": "KerbalEngineer",
+      "mod": "KerbalEngineer",
+      "folder": "KerbalEngineer",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "Kerbalism",
+      "mod": "Kerbalism",
+      "folder": "Kerbalism",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KerbalJointReinforcement",
+      "mod": "KerbalJointReinforcement",
+      "folder": "KerbalJointReinforcement",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KerbalRenamer",
+      "mod": "KerbalRenamer",
+      "folder": "KerbalRenamer",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "Kopernicus",
+      "mod": "Kopernicus",
+      "folder": "Kopernicus",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KSCSwitcher",
+      "mod": "KSCSwitcher",
+      "folder": "KSCSwitcher",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KSPCommunityFixes",
+      "mod": "KSPCommunityFixes",
+      "folder": "KSPCommunityFixes",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "KSPWheel",
+      "mod": "KSPWheel",
+      "folder": "KSPWheel",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "MechJeb2",
+      "mod": "MechJeb2",
+      "folder": "MechJeb2",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ModularLaunchPads",
+      "mod": "ModularLaunchPads",
+      "folder": "ModularLaunchPads",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "NearFutureAeronautics",
+      "mod": "Near Future Aeronautics",
+      "folder": "NearFutureAeronautics",
+      "method": "keyed",
+      "keys": 119,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureConstruction",
+      "mod": "Near Future Construction",
+      "folder": "NearFutureConstruction",
+      "method": "keyed",
+      "keys": 292,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureElectrical",
+      "mod": "NearFutureElectrical",
+      "folder": "NearFutureElectrical",
+      "method": "keyed",
+      "keys": 240,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureExploration",
+      "mod": "NearFutureExploration",
+      "folder": "NearFutureExploration",
+      "method": "keyed",
+      "keys": 302,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureLaunchVehicles",
+      "mod": "Near Future Launch Vehicles",
+      "folder": "NearFutureLaunchVehicles",
+      "method": "keyed",
+      "keys": 536,
+      "status": "draft"
+    },
+    {
+      "id": "NearFuturePropulsion",
+      "mod": "Near Future Propulsion",
+      "folder": "NearFuturePropulsion",
+      "method": "keyed",
+      "keys": 216,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureSolar",
+      "mod": "Near Future Solar",
+      "folder": "NearFutureSolar",
+      "method": "keyed",
+      "keys": 136,
+      "status": "draft"
+    },
+    {
+      "id": "NearFutureSpacecraft",
+      "mod": "Near Future Spacecraft",
+      "folder": "NearFutureSpacecraft",
+      "method": "keyed",
+      "keys": 155,
+      "status": "draft"
+    },
+    {
+      "id": "OPM",
+      "mod": "Outer Planets Mod (OPM)",
+      "folder": "OPM",
+      "method": "keyed",
+      "keys": 2302,
+      "status": "draft"
+    },
+    {
+      "id": "PatchManager",
+      "mod": "PatchManager",
+      "folder": "PatchManager",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "PlanetShine",
+      "mod": "PlanetShine",
+      "folder": "PlanetShine",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ProceduralFairings",
+      "mod": "ProceduralFairings",
+      "folder": "ProceduralFairings",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ProceduralParts",
+      "mod": "ProceduralParts",
+      "folder": "ProceduralParts",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RCSBuildAid",
+      "mod": "RCSBuildAid",
+      "folder": "RCSBuildAid",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RealAntennas",
+      "mod": "RealAntennas",
+      "folder": "RealAntennas",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RealChute",
+      "mod": "RealChute",
+      "folder": "RealChute",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RealFuels",
+      "mod": "RealFuels",
+      "folder": "RealFuels",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RealismOverhaul",
+      "mod": "RealismOverhaul",
+      "folder": "RealismOverhaul",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RealSolarSystem",
+      "mod": "RealSolarSystem",
+      "folder": "RealSolarSystem",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RetractableLiftingSurface",
+      "mod": "RetractableLiftingSurface",
+      "folder": "RetractableLiftingSurface",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROCapsules",
+      "mod": "ROCapsules",
+      "folder": "ROCapsules",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROEngines",
+      "mod": "ROEngines",
+      "folder": "ROEngines",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROHeatshields",
+      "mod": "ROHeatshields",
+      "folder": "ROHeatshields",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROLib",
+      "mod": "ROLib",
+      "folder": "ROLib",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROSolar",
+      "mod": "ROSolar",
+      "folder": "ROSolar",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROTanks",
+      "mod": "ROTanks",
+      "folder": "ROTanks",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ROUtils",
+      "mod": "ROUtils",
+      "folder": "ROUtils",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "RP-1",
+      "mod": "RP-1",
+      "folder": "RP-1",
+      "method": "keyed+ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "SCANsat",
+      "mod": "SCANsat",
+      "folder": "SCANsat",
+      "method": "keyed",
+      "keys": 321,
+      "status": "draft"
+    },
+    {
+      "id": "Scatterer",
+      "mod": "Scatterer",
+      "folder": "Scatterer",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ScienceRelay",
+      "mod": "ScienceRelay",
+      "folder": "ScienceRelay",
+      "method": "keyed",
+      "keys": 12,
+      "status": "draft"
+    },
+    {
+      "id": "Skopos",
+      "mod": "Skopos",
+      "folder": "Skopos",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "SmokeScreen",
+      "mod": "SmokeScreen",
+      "folder": "SmokeScreen",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "SolverEngines",
+      "mod": "SolverEngines",
+      "folder": "SolverEngines",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "SpaceTuxLibrary",
+      "mod": "SpaceTuxLibrary",
+      "folder": "SpaceTuxLibrary",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "StageRecovery",
+      "mod": "StageRecovery",
+      "folder": "StageRecovery",
+      "method": "keyed",
+      "keys": 124,
+      "status": "draft"
+    },
+    {
+      "id": "StationScience",
+      "mod": "Station Science",
+      "folder": "StationScience",
+      "method": "keyed",
+      "keys": 186,
+      "status": "draft"
+    },
+    {
+      "id": "SXT",
+      "mod": "SXT",
+      "folder": "SXT",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "SystemHeat",
+      "mod": "SystemHeat",
+      "folder": "SystemHeat",
+      "method": "keyed",
+      "keys": 291,
+      "status": "draft"
+    },
+    {
+      "id": "TestFlight",
+      "mod": "TestFlight",
+      "folder": "TestFlight",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "TextureReplacer",
+      "mod": "TextureReplacer",
+      "folder": "TextureReplacer",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "TexturesUnlimited",
+      "mod": "TexturesUnlimited",
+      "folder": "TexturesUnlimited",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "ToolbarControl",
+      "mod": "ToolbarControl",
+      "folder": "ToolbarControl",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "Trajectories",
+      "mod": "Trajectories",
+      "folder": "Trajectories",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "VenStockRevamp",
+      "mod": "VenStockRevamp",
+      "folder": "VenStockRevamp",
+      "method": "keyed",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "Waterfall",
+      "mod": "Waterfall",
+      "folder": "Waterfall",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
+      "id": "xScience",
+      "mod": "[x] Science!",
+      "folder": "[x]_Science!",
+      "method": "keyed",
+      "keys": 288,
+      "status": "draft"
+    }
+  ],
+  "generatedAt": "2026-07-24"
+}
