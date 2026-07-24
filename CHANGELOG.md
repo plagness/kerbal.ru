@@ -6,6 +6,18 @@
 
 Изменения, которые уже находятся в `main`, но ещё не вошли в стабильный релиз.
 
+### Сменён концепт: русский хаб KSP-моддинга
+
+- Проект больше не «русификатор одной сборки RO/RSS/RP-1», а **хаб**: библиотека переводов модов
+  (`translations/<mod>/`, индекс `translations/_index.json` — 107 модов, ~10 853 ключей) + каталог
+  готовых русских сборок (`builds/`, индекс `builds/_catalog.json`).
+- **Установщик `install.sh` стал менеджером сборок**: `--build <id>` (поставить/сменить),
+  `--update` (обновить текущую), `--ru-only` (только переводы), `--list`, `--yes`. Определяет
+  установленную сборку по `<KSP>/.kerbalru-build.json`. Отдельные `install-ru.sh` /
+  `install-ru.ps1` и флаги `--full`/`-Full`, `-RuOnly` убраны; Windows `install.ps1` — планируется.
+- Каталог сборок: флагман **«Оператор»** (id `operator`, Ванила+ на стоке) и **RO/RSS/RP-1**
+  (id `rp1`) — теперь одна из сборок каталога, а не весь проект.
+
 ## [26.5] — 2026-07-23
 
 Релиз доводки: подтверждение живым запуском, снятие пробела TMPro в интерфейсном переводе,
@@ -162,7 +174,8 @@
 - часть ROEngines намеренно сохраняет реальные латинские обозначения двигателей;
 - 17 модов с пользовательским текстом ещё не имеют русского блока.
 
-[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v26.4...HEAD
+[Unreleased]: https://github.com/plagness/kerbal.ru/compare/v26.5...HEAD
+[26.5]: https://github.com/plagness/kerbal.ru/releases/tag/v26.5
 [26.4]: https://github.com/plagness/kerbal.ru/releases/tag/v26.4
 [26.3]: https://github.com/plagness/kerbal.ru/releases/tag/v26.3
 [26.2]: https://github.com/plagness/kerbal.ru/releases/tag/v26.2

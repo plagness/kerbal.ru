@@ -4,7 +4,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TDIR = ROOT / "GameData" / "kerbalru-ui-translator" / "KerbalRuUiTranslations"
+# Источник — библиотека переводов по папке на мод (было GameData-деплой-путь).
+TXT_GLOB = "translations/*/KerbalRuUiTranslations/*.txt"
+
+
+def _txt_files():
+    return sorted(ROOT.glob(TXT_GLOB))
 
 # Same English key genuinely means something different in these mods' UIs (confirmed by manual
 # review, not an accidental collision): "Bottom"/"Top" are reorder-to-end/reorder-to-top buttons
@@ -25,7 +30,7 @@ def main():
     warnings = []
     total_entries = 0
     all_keys = {}
-    for f in sorted(TDIR.glob("*.txt")):
+    for f in _txt_files():
         seen = set()
         count = 0
         try:
@@ -65,7 +70,7 @@ def main():
         total_entries += count
         print(f"{f.name}: {count} entries")
 
-    print(f"\nTotal files: {len(list(TDIR.glob('*.txt')))}, total entries: {total_entries}, unique keys: {len(all_keys)}")
+    print(f"\nTotal files: {len(_txt_files())}, total entries: {total_entries}, unique keys: {len(all_keys)}")
     if warnings:
         print(f"\n{len(warnings)} known accepted ambiguit{'y' if len(warnings) == 1 else 'ies'} (not blocking):")
         for w in warnings:

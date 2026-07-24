@@ -9,6 +9,11 @@ The JSON is the source of truth. The website reads it at runtime; this script
 keeps GitHub-rendered files and the release VERSION marker in lockstep.
 """
 
+# NOTE (2026-07-24, концепт-хаб): README переписан и БОЛЬШЕ НЕ содержит генерируемого
+# блока <!-- project-data:start/end -->, поэтому README-таргет СНЯТ из expected_files().
+# Живые генерируемые таргеты — VERSION и CITATION.cff (release.version/date из data/project.json).
+# generated_readme_block()/replace_block() оставлены как dead-code на случай возврата блока в README.
+
 from __future__ import annotations
 
 import argparse
@@ -528,7 +533,8 @@ def replace_block(text: str, replacement: str) -> str:
 
 
 def expected_files(data: dict) -> dict[Path, str]:
-    readme = replace_block(README_PATH.read_text(encoding="utf-8"), generated_readme_block(data))
+    # README-таргет снят (2026-07-24, концепт-хаб): переписанный README больше не содержит
+    # блока <!-- project-data:start/end -->. Живые генерируемые таргеты — VERSION и CITATION.
     version = data["release"]["version"].removeprefix("v") + "\n"
     citation = CITATION_PATH.read_text(encoding="utf-8")
     citation = re.sub(r"(?m)^version: .*?$", f"version: {version.strip()}", citation, count=1)
@@ -538,7 +544,7 @@ def expected_files(data: dict) -> dict[Path, str]:
         citation,
         count=1,
     )
-    return {README_PATH: readme, VERSION_PATH: version, CITATION_PATH: citation}
+    return {VERSION_PATH: version, CITATION_PATH: citation}
 
 
 def main() -> int:

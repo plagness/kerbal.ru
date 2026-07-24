@@ -6,7 +6,7 @@
 
 ## 1. Как KSP находит локализацию
 
-KSP грузит **все** файлы с блоком `Localization { <lang> { #key = value } }` из любой папки внутри `GameData` (обычно кладут в `GameData/<Mod>/Localization/ru.cfg`). Язык выбирается в игре или в `settings.cfg` строкой `LANGUAGE = ru` (тег именно `ru`, не `ru-ru`). Строки подтягиваются по ключам `#key` в реальном времени при отрисовке UI/деталей.
+KSP грузит **все** файлы с блоком `Localization { <lang> { #key = value } }` из любой папки внутри `GameData`. В нашей библиотеке перевод мода лежит в `translations/<mod>/Localization/ru.cfg`, а `install.sh` раскладывает его в `GameData` под реально установленные моды. Язык выбирается в игре или в `settings.cfg` строкой `LANGUAGE = ru` (тег именно `ru`, не `ru-ru`). Строки подтягиваются по ключам `#key` в реальном времени при отрисовке UI/деталей.
 
 Из-за этого перевод — это **только добавление файлов**, оригиналы модов трогать не нужно.
 
@@ -60,7 +60,7 @@ KSP грузит **все** файлы с блоком `Localization { <lang> { 
 2. Определи тип (есть ли `Localization/en-us.cfg`).
 3. Извлеки строки/детали. **Парсер деталей должен понимать MM-операторы** в заголовке узла: `PART`, `+PART[base]:FIRST` (клон), `@PART[base]` — деталь считается реальной, если она задаёт `name` или `@name`. Учитывай, что поля бывают на разных уровнях вложенности — брать только прямые `title/description/manufacturer/tags` самой детали, не из вложенных `MODULE`.
 4. Переведи по правилам §3.
-5. Собери файл(ы) по §2 и положи в `GameData/<Mod>/Localization/`.
+5. Собери файл(ы) по §2 и положи в `translations/<mod>/Localization/`.
 6. **Проверь** (§5) и протестируй запуском игры.
 
 ## 5. Проверка перед публикацией (не верь переводчику на слово)
@@ -104,13 +104,15 @@ grep -A15 'name = <РеальноеИмяДетали>$' "GameData/ModuleManager
 
 ## 7. Где что лежит
 
-- `GameData/` — готовые файлы локализации (структура повторяет GameData игры).
-- `install-ru.sh` / `install-ru.ps1` — установщики только русификатора (поверх уже поставленной сборки).
-- `install.sh` / `install.ps1` — установщик «всё в одном»: `--full`/`-Full` ставит сборку `RP-1-ExpressInstall` через headless CKAN и русификатор, `--ru-only`/`-RuOnly` делегирует в `install-ru.*`. Не хранит и не вендорит CKAN — только скачивает официальный релиз KSP-CKAN/CKAN.
-- `data/project.json` — единый источник версии, состава сборки, общих и помодовых метрик покрытия; сайт читает его напрямую.
+- `translations/<mod>/` — библиотека переводов, **по папке на мод**: `translation.json` (метаданные `mod`/`folder`/`method`/`status`), `Localization/*.cfg` (keyed-ключи `ru.cfg` и/или MM-патчи `RuLocPatch.cfg`), `KerbalRuUiTranslations/<Mod>.txt` (ui-словарь). Индекс библиотеки — `translations/_index.json` (генерируется `tools/gen_catalog.py`).
+- `engine/Plugins/KerbalRuUiTranslator.dll` — общий движок русификации интерфейса (Harmony); исходник — `tools/ui-translator/src/`, пересборка — `tools/ui-translator/build.sh`.
+- `builds/<id>/` — каталог готовых сборок: `build.json` (что ставить: `mods.core/recommended/optional` + `ckan`-опции), `README.md`, опц. `config/` (зеркалит `GameData/`). Индекс — `builds/_catalog.json`.
+- `install.sh` — менеджер сборок (Linux/macOS/Steam Deck): `--build <id>` / `--update` / `--ru-only` / `--list` / `--yes`. Детектит стоящую сборку по `<KSP>/.kerbalru-build.json`, ставит моды официальным headless CKAN (CKAN не хранит и не вендорит — качает официальный релиз KSP-CKAN/CKAN), кладёт движок и переводы под установленные моды. Windows `install.ps1` — планируется.
+- `data/project.json` — источник версии (`release`) и данных сайта (`site.*`), сайт читает его напрямую. Секции `inventory`/`coverage`/`mods`/`uiTranslation` — legacy RP-1-инвентаризации; истина по библиотеке — `translations/_index.json`, по каталогу — `builds/_catalog.json`.
 - `VERSION` — сгенерированная версия следующего стабильного релиза без префикса `v`; вручную не редактировать.
-- `tools/sync_project_data.py` — проверяет JSON и обновляет README, `VERSION`, `CITATION.cff`.
+- `tools/sync_project_data.py` — проверяет `project.json` и синхронизирует `VERSION` и `CITATION.cff` (генерируемый блок из README убран — README-таргет неактивен).
 - `tools/bump_release.py` — создаёт следующий номер формата `vYY.N` и запускает синхронизацию.
+- `tools/validate_localization.py` — парсер дерева `{}`-блоков по всей библиотеке `translations/`: ловит ключи не в том блоке, дубликаты, рассинхрон en-us/ru, зависшие ссылки на ключи и коллизии ключей между модами; ведёт whitelist намеренных upstream-дублей.
 - `.github/workflows/release.yml` — проверяет совпадение тега с `VERSION` и создаёт GitHub Release.
 - `index.html` + `vendor/three.min.js` — сайт (GitHub Pages). Three.js вендорнут локально (без CDN).
 - `CNAME` — привязка домена kerbal.ru.
@@ -189,7 +191,7 @@ python3 tools/sync_project_data.py --write
 python3 tools/sync_project_data.py --check
 ```
 
-Первая команда синхронизирует README, `VERSION` и `CITATION.cff`; вторая проверит проценты, полноту каталога, число элементов в группах и обязательные поля. Если JSON корректен, GitHub Pages подхватит значения без правки `index.html`.
+Первая команда синхронизирует `VERSION` и `CITATION.cff`; вторая проверит проценты, полноту каталога, число элементов в группах и обязательные поля. Если JSON корректен, GitHub Pages подхватит значения без правки `index.html`.
 
 ## 8. Релиз и обновление
 
@@ -203,11 +205,11 @@ python3 tools/sync_project_data.py --check
 
 1. если есть свежий игровой кэш, выполнить `python3 tools/audit_ru_coverage.py --write-project-data`, затем `python3 tools/sync_project_data.py --write`;
 2. выполнить `python3 tools/bump_release.py` (например, `v26.1` → `v26.2`) и добавить запись в `CHANGELOG.md` (секция `[Unreleased]` → новая версия);
-3. проверить чистую установку и обновление поверх предыдущего релиза на обеих реализациях установщика;
+3. проверить чистую установку и обновление поверх предыдущего релиза через `install.sh`;
 4. влить релизный PR в `main`;
 5. создать и отправить тег `v$(cat VERSION)` — workflow выпустит GitHub Release;
 6. **обязательно написать содержательное описание релиза** (`gh release edit vX.Y --notes "..."`, разделы «В релизе» / «Текущие показатели» / «Дальше», по образцу v26.1/v26.2) — workflow сам вызывает `--generate-notes`, это ТОЛЬКО список коммитов, не описание для пользователя; без этого шага релиз выглядит пустым;
-7. проверить `--check` / `-Check` и обычное обновление через публичный `kerbal.ru`.
+7. проверить `install.sh --list` и обычное обновление (`--update` / `--ru-only`) через публичный `kerbal.ru`.
 
 Никогда не переиспользуй и не передвигай опубликованный тег. Любое исправление уже выпущенного релиза получает следующий номер текущего года. Полная пользовательская инструкция — в [UPDATING.md](UPDATING.md).
 

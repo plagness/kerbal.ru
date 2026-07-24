@@ -56,8 +56,8 @@ python3 -m http.server 4173
 ## Проверки перед PR
 
 ```bash
-# синтаксис Unix-установщика
-bash -n install-ru.sh
+# синтаксис Unix-установщика (менеджера сборок)
+bash -n install.sh
 
 # Python-инструмент
 python3 -c "import ast,pathlib; ast.parse(pathlib.Path('tools/audit_ru_coverage.py').read_text())"
@@ -68,7 +68,7 @@ git diff --check
 
 Для перевода дополнительно прогони `python3 tools/validate_localization.py` — он строит настоящее дерево `{}`-блоков (не просто считает скобки), ловит ключи, случайно оказавшиеся не в том блоке, дубликаты, рассинхрон en-us/ru и «зависшие» ссылки на несуществующие ключи. Плюс живой `ModuleManager.ConfigCache` после реального запуска игры — структурная проверка не гарантирует, что текст резолвится (см. [MAINTAINING.md, раздел 6](docs/MAINTAINING.md#6-грабли-реально-пойманные-важно)). Автоматические проверки также запустятся в GitHub Actions на каждый PR.
 
-Для правки словарей русификации интерфейса модов (`GameData/kerbalru-ui-translator/KerbalRuUiTranslations/*.txt`) прогони `python3 tools/ui-translator/validate_dict.py` — проверяет формат, дубликаты ключей и конфликты перевода одного и того же английского текста между модами. Подробности техники и известные ограничения — [docs/UI-TRANSLATION.md](docs/UI-TRANSLATION.md).
+Для правки словарей русификации интерфейса модов (`translations/<mod>/KerbalRuUiTranslations/<Mod>.txt`) прогони `python3 tools/ui-translator/validate_dict.py` — проверяет формат, дубликаты ключей и конфликты перевода одного и того же английского текста между модами. Подробности техники и известные ограничения — [docs/UI-TRANSLATION.md](docs/UI-TRANSLATION.md).
 
 ## Pull request
 

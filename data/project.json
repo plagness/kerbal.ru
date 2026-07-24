@@ -1,6 +1,11 @@
 {
   "schemaVersion": 3,
   "updatedAt": "2026-07-23",
+  "_concept": {
+    "note": "kerbal.ru — русский ХАБ KSP-моддинга, а не русификатор одной сборки. Секции inventory/coverage/mods/uiTranslation ниже — legacy RP-1-инвентаризация по старой раскладке GameData, оставлены для текущего сайта. Истина по новому концепту: библиотека переводов — translations/_index.json (107 модов, ~10853 ключей); каталог сборок — builds/_catalog.json (сборки operator, rp1).",
+    "library": "translations/_index.json",
+    "catalog": "builds/_catalog.json"
+  },
   "release": {
     "version": "v26.5",
     "year": 2026,
@@ -15,6 +20,7 @@
     "profile": "RO / RSS / RP-1"
   },
   "inventory": {
+    "note": "Legacy RP-1-инвентаризация тестовой сборки. Истина по библиотеке — translations/_index.json (107 модов, ~10853 ключей); каталог сборок — builds/_catalog.json.",
     "components": 83,
     "withRussian": 38,
     "kerbalRuMods": 20,
@@ -24,6 +30,7 @@
     "serviceComponents": 28
   },
   "coverage": {
+    "note": "Legacy: покрытие по деталям сборки rp1 (RO/RSS/RP-1), замер по её ModuleManager.ConfigCache. Не описывает всю библиотеку переводов — см. translations/_index.json.",
     "active": "verified",
     "verified": {
       "label": "Подтверждено игровым кэшем",
@@ -90,6 +97,7 @@
     }
   },
   "uiTranslation": {
+    "note": "Legacy-срез по сборке rp1. Истина по ui-словарям — translations/_index.json (method=ui-dict) + translations/<mod>/KerbalRuUiTranslations/.",
     "label": "Русификация интерфейса модов",
     "status": "pending-live-verification",
     "statusLabel": "Ожидает первого живого запуска",
