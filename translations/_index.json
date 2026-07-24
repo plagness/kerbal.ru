@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 105,
+    "mods": 107,
     "keyedMods": 43,
-    "uiMods": 33,
-    "keys": 10558
+    "uiMods": 35,
+    "keys": 10853
   },
   "mods": [
     {
@@ -246,6 +246,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "HaystackContinued",
+      "mod": "HaystackContinued",
+      "folder": "HaystackContinued",
+      "method": "ui-dict",
+      "keys": 68,
+      "status": "draft"
     },
     {
       "id": "HeatControl",
@@ -638,6 +646,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "RoutineMissionManager",
+      "mod": "Routine Mission Manager",
+      "folder": "RoutineMissionManager",
+      "method": "ui-dict",
+      "keys": 227,
+      "status": "draft"
     },
     {
       "id": "RP-1",
