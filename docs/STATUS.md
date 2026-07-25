@@ -54,6 +54,19 @@
   Снят из `build.json.recommended` + удалён пресет (коммит 2bcc12a). Мод снять `ckan uninstall KerbalConstructionTime`
   когда игра закрыта (вотчер на PID ждёт закрытия); save-safe (нет деталей). Перевод оставлен в библиотеке.
 
+## Финальный аудит (2026-07-25, заход 2) — последние пласты
+Проверил всё, что осталось за кадром прошлых проходов:
+- ✅ **Описания агентств** (4): Coatl Aerospace, Kerbal Standard, Knes — литералы; KAX — через `#loc_KAX_agent_description`
+  (у мода нет своей RU-локализации). Mk2/KPBS/SpaceY/EPL/CC/MiningExp — покрыты (upstream или наши).
+- ✅ **PARTUPGRADE** (11) — апгрейды деталей в R&D (Coatl ×10 + телескоп ResearchBodies). Раньше не трогали.
+- ✅ **Узлы дерева техов** (3) — massiveRocketry/massiveStructure/giganticStructure (единственные не из CTT).
+- ⚪ **displayName-остаток (83)** — это #LOC-ключи и ресурсы CRP (латиницей по политике). НЕ пробел, вопрос закрыт.
+- ⚪ **Настройки сложности модов** — идут через `#LOC`, покрыты.
+- 🔴→✅ **Хардкод-UI**: EPL 63 (осн. окна оказались на своём префиксе `#EL_UI_`, хардкод — PAW/статусы/тултипы),
+  Kerbal Alarm Clock, «смешанные остатки» (US2/KAS/StationScience/SystemHeat/SpaceDust/DBS/CommNet).
+- **Техника:** подписи PAW из `[KSPField]`/`[KSPEvent]` лежат в **blob-хипе** DLL, а не в #US — их не видно ни в
+  ConfigCache, ни через `monodis --userstrings`; нужен разбор атрибутов (сделано для EPL).
+
 ## Глубокий аудит (2026-07-25) — найдено + план
 Копнул глубже прошлых проходов (аудит ConfigCache по полям, которые раньше не смотрел):
 - 🎯 **PAW-метки (183 уникальных англ)** — меню правого клика по деталям (Open/Close/Toggle/Run Experiment/

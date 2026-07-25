@@ -1,0 +1,140 @@
+# Extraplanetary Launchpads (внепланетные верфи, taniwha/Extraplanetary-Launchpads) — UI-словарь.
+# Источник: GameData/ExtraplanetaryLaunchpads/Plugins/Launchpad.dll (единственный *.dll мода).
+# Дата: 2026-07-25.
+#
+# Как извлекалось. monodis --userstrings дробит 8 длинных UTF-16-строк на bytearray-куски,
+# поэтому #US-хип разобран напрямую (PE → CLI-заголовок → BSJB → поток #US, ECMA-335
+# compressed-length + UTF-16LE) — 848 цельных строк. Отдельно вся сборка дизассемблирована
+# ikdasm (monodis падает с assertion на полном дизассемблировании этого DLL), и каждый ldstr
+# сопоставлен с тем, КУДА строка уходит: UIText::Text, BaseEvent::set_guiName,
+# BaseConverter::status, IButton::set_ToolTip, PopupDialog, GetInfo/GetModuleTitle.
+# Подписи PAW (guiName) в #US-хипе НЕ лежат — они в blob-хипе как аргументы кастом-атрибутов
+# [KSPField]/[KSPEvent]; их blob'ы декодированы отдельно (24 guiName, 15 уникальных).
+#
+# ВАЖНО про охват: основные окна мода (Диспетчер сборки, Диспетчер ресурсов, выбор корабля,
+# площадки, передача ресурсов, настройки) НЕ зашиты в код — они идут через Localizer по
+# 63 ключам #EL_UI_* (класс ELLocalization), и уже переведены keyed-файлом
+# Localization/ru.cfg этого же репозитория. Здесь только то, что мимо Localizer.
+# Терминология сверена с ru.cfg: workshop→верфь, pad→площадка, vessel→аппарат,
+# recycler→переработчик, survey→разметка, «н/д» как #EL_UI_NotAvailable.
+#
+# Что вошло:
+#  - GetModuleTitle() — заголовки модулей в инфо-панели детали и в шапке PAW (8);
+#  - GetInfo() — только те ветки, что возвращают строку ЦЕЛИКОМ, без переносов (6);
+#  - guiName из [KSPField]/[KSPEvent] — подписи полей и кнопок PAW (15);
+#  - guiName, назначаемые в рантайме кнопкам колышка разметки (Direction/Bound/Origin);
+#  - значения PAW-статуса: BaseConverter::status, ELRecycler::status и имена состояний
+#    KFSM (ELRecycler.status = sm.CurrentState — проверено по IL, строка 51311);
+#  - тултипы кнопок панели Blizzy (IButton::set_ToolTip, 3) и категория деталей «EL Items»;
+#  - диалог CompatibilityChecker.
+#
+# Что отброшено и почему (см. также отчёт по задаче):
+#  - строки с реальным \n: все «<color=#bada55>Inputs:/Outputs:/Requirements:</color>»,
+#    «Recycler:\n» — построчный TAB-формат их не хранит, не сматчатся;
+#  - обрывки конкатенации/String.Format: « at 50% efficiency», «{0:0.000000}/sec»,
+#    «Recycling Rate: {0:G2}t/s», «Productivity Factor: {0:G2}», «<имя> was mulched»;
+#  - «Filter by Module», «Filter by Function», «Unresearchable», «Unresearcheable» —
+#    это String.op_Equality-сравнения (поиск стоковой категории), а не отрисовка;
+#  - имена GameObject'ов у KodeUI (Add<UIText>(ref, "TitleText"/"ItemText"/"Label"/…)) —
+#    не текст, а имена объектов сцены;
+#  - плейсхолдеры конструктора («resource», «500», «1000», «----», «12:00») — их сразу
+#    затирает реальное значение;
+#  - «EL constructed part» / «Unnamed part» — идут в UIInputField::set_text, то есть в ДАННЫЕ
+#    поля ввода: патч подменяет только отрисовку (TMP_Text.text), а TMP_InputField.text
+#    вернёт английское — имя детали сохранилось бы не тем, что показано. Намеренно не берём;
+#  - «Range» (guiName станции разметки) — в репозитории уже занят Waterfall.txt со значением
+#    «Диапазон», что для радиуса действия станции неверно; выравнивать под неверное не стали,
+#    строку опустили (на игру не влияет: словарь плоский и глобальный);
+#  - «+X»/«-X»/«+Y»/«-Y»/«+Z»/«-Z», «D»/«B»/« O» — коды осей и однобуквенные метки таблички;
+#  - имена ресурсов (Metal, MetalOre, RocketParts, ScrapMetal), ConfigNode-ключи, пути,
+#    #LOC/#EL_UI/#autoLOC-ключи, лог-строки «[EL …]», имена типов/методов/полей.
+#
+# Выравнено под уже существующий перевод в репозитории (канон — то, что раньше):
+#   Rename=Переименовать (RP0), Direction=Направление (RCSBuildAid), Inactive=Неактивно
+#   (B9_Aerospace_ProceduralWings), Active=Активна (RealFuels), Off=Выкл (BahaSP/Firespitter),
+#   n/a=н/д (HaystackContinued/RoutineMissionManager), OK=ОК (10 словарей),
+#   Incompatible Mods Detected=Обнаружены несовместимые моды (Kopernicus/MechJeb2/…).
+#
+# Единственные строки НЕ из #US/blob-хипа байт-в-байт — 12 описаний навыка строителя внизу
+# файла. ELConstructionSkill.GetDescription() возвращает Concat(«He»|«She», skills[уровень]),
+# где skills — 6 литералов с ведущим пробелом; отдельно ни «He», ни « can work in …» не
+# отрисовываются, отрисовывается склейка. Приведены все 12 детерминированных склеек.
+# Заголовки модулей в инфо-панели детали и шапке PAW (GetModuleTitle)
+EL Converter	Преобразователь EL
+EL Disposable Pad	Одноразовая площадка EL
+EL Launchpad	Стартовая площадка EL
+EL Recycler	Переработчик EL
+EL Survey Stake	Колышек разметки EL
+EL Survey Station	Станция разметки EL
+EL Target	Цель EL
+EL Workshop	Верфь EL
+
+# Инфо-панель детали в редакторе (GetInfo — ветки, возвращающие строку целиком)
+Launchpad	Стартовая площадка
+DisposablePad	Одноразовая площадка
+Survey Stake	Колышек разметки
+Survey Station	Станция разметки
+Targetable	Может быть целью
+broken configuration	неверная конфигурация
+
+# Подписи полей и кнопок PAW — guiName из [KSPField]/[KSPEvent] (blob-хип)
+Pad name	Название площадки
+Rename	Переименовать
+Rename Stake	Переименовать колышек
+Show UI	Показать окно
+Hide UI	Скрыть окно
+Control From Here	Управлять отсюда
+Release Clamp	Отпустить захват
+Furnace Temp	Температура печи
+State	Состояние
+Activate Recycler	Включить переработчик
+Deactivate Recycler	Выключить переработчик
+Set as Target	Назначить целью
+Unset Target	Снять цель
+Productivity	Производительность
+Vessel Productivity	Производительность аппарата
+
+# Кнопки PAW колышка разметки (guiName назначается в рантайме)
+Direction	Направление
+Bound	Граница
+Origin	Начало координат
+
+# Значения статуса в PAW (BaseConverter::status, ELRecycler::status, состояния KFSM)
+Operating	Работает
+stalled	остановлен
+no ground contact	нет контакта с грунтом
+insufficient abundance	недостаточная концентрация
+n/a	н/д
+Active	Активна
+Inactive	Неактивно
+Off	Выкл
+Idle	Простой
+Captured Idle	Захвачено, простой
+Processing Part	Переработка детали
+Transferring Resources	Передача ресурсов
+FSM not started	Автомат не запущен
+
+# Тултипы кнопок панели Blizzy и категория деталей в редакторе
+EL Build Window	Окно сборки EL
+EL Settings Window	Окно настроек EL
+EL Build Resources Display	Панель ресурсов сборки EL
+EL Items	Детали EL
+
+# Диалог проверки совместимости (CompatibilityChecker)
+Incompatible Mods Detected	Обнаружены несовместимые моды
+OK	ОК
+
+# Описания навыка строителя в комплексе астронавтов (ELConstructionSkill.GetDescription:
+# Concat(«He»|«She», skills[уровень]) — склейка двух литералов, значение детерминировано)
+He can work in a fully equipped workshop.	Он может работать на полностью оснащённой верфи.
+She can work in a fully equipped workshop.	Она может работать на полностью оснащённой верфи.
+He can work in any workshop.	Он может работать на любой верфи.
+She can work in any workshop.	Она может работать на любой верфи.
+He is always productive in a fully equipped workshop.	Он всегда продуктивен на полностью оснащённой верфи.
+She is always productive in a fully equipped workshop.	Она всегда продуктивна на полностью оснащённой верфи.
+He is always productive in any workshop.	Он всегда продуктивен на любой верфи.
+She is always productive in any workshop.	Она всегда продуктивна на любой верфи.
+He enables skilled workers in any workshop.	Он позволяет квалифицированным работникам трудиться на любой верфи.
+She enables skilled workers in any workshop.	Она позволяет квалифицированным работникам трудиться на любой верфи.
+He enables unskilled workers in a fully equipped workshop.	Он позволяет неквалифицированным работникам трудиться на полностью оснащённой верфи.
+She enables unskilled workers in a fully equipped workshop.	Она позволяет неквалифицированным работникам трудиться на полностью оснащённой верфи.

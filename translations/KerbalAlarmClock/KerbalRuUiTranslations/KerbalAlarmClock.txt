@@ -1,0 +1,133 @@
+# Kerbal Alarm Clock (Updated) -- UI-словарь (RU) для kerbalru-ui-translator.
+# Мод: KerbalAlarmClock.dll (linuxgurugamer, папка GameData/TriggerTech/KerbalAlarmClock/Plugins).
+# Формат: Английский<TAB>Русский. Матч ПОБАЙТНЫЙ (Ordinal) по ВСЕЙ строке; промах = no-op.
+#
+# ВНИМАНИЕ, ГЛАВНОЕ ПРО ЭТОТ МОД: KAC УЖЕ локализован нативно через KSP Localizer.
+# Исходная гипотеза «DLL хардкодит интерфейс, 0 #LOC-токенов» -- ОШИБОЧНА. Она возникает,
+# если читать `monodis --userstrings` глазами: monodis печатает часть #US-хипа как
+# `bytearray (...)`-блоки (длинные UTF-16-строки), и все #LOC-токены прячутся именно там.
+# Прямой разбор #US-хипа по ECMA-335 (compressed-length + UTF-16LE) даёт: 1033 записи,
+# из них 498 -- токены вида `#LOC_KAC_<N>`. Наш keyed-перевод (../Localization/ru.cfg,
+# 550 ключей) покрывает практически весь интерфейс: список будильников, окна добавления/
+# редактирования, все панели настроек, сообщения о срабатывании.
+#
+# Поэтому этот файл -- НЕ основной перевод мода, а маленький «догон» по тем строкам,
+# которые автор забыл вынести в Localization и оставил литералами в C#.
+#
+# МЕТОДИКА (не выборка -- сплошной проход):
+# 1. Полная IL-дизассемблия: `MONO_PATH=<все GameData+KSP Managed DLL> monodis KerbalAlarmClock.dll`
+#    (58 825 строк IL, 0 нерезолвленных ссылок -- без MONO_PATH monodis падает на
+#    Assembly-CSharp/ToolbarControl и выдаёт обрубок).
+# 2. Все 1628 ldstr-сайтов (1027 уникальных строк) размечены по методу-владельцу.
+# 3. Для каждого не-#LOC литерала прослежено, доходит ли он ДОСЛОВНО до одной из точек,
+#    патчимых движком (GUI/GUILayout Label/Button/Box/Toggle/Window/Toolbar, 5 ctor-ов
+#    GUIContent, GUI.tooltip, UnityEngine.UI.Text/Dropdown.OptionData, TMPro.TMP_Text),
+#    напрямую либо через собственные обёртки KAC (DrawCheckbox -> new GUIContent(string),
+#    DrawAlarmActionChoice4/DrawTextField -> GUILayout.Label), либо через
+#    PopupDialog.SpawnPopupDialog / ToolbarControl.AddToAllToolbars(toolTip).
+#    Литерал, попадающий по дороге в string.Concat/Format/Join, отбракован: движок увидит
+#    склейку, а не ключ.
+# Квалифицировались 13 строк -- они ниже.
+
+# --- окно списка будильников / иконка на панели ---
+Kerbal Alarm Clock Updated	Kerbal Alarm Clock (обновлённый)
+Click to Toggle	Нажмите, чтобы переключить
+Warp Next	Перемотать к следующему
+Click to stop sound.	Нажмите, чтобы остановить звук.
+Delete On Close	Удалить при закрытии
+
+# --- окна добавления/редактирования будильника: блок «действие при срабатывании» ---
+# «На срабатывание:» намеренно = «При срабатывании:», как #LOC_KAC_421 в ru.cfg
+# (та же подпись, часть строк keyed, часть -- хардкод; в игре должны читаться одинаково).
+On Alarm:	При срабатывании:
+Action:	Действие:
+Play Alarm Sound	Проигрывать звук будильника
+Delete Alarm when Done	Удалить будильник после срабатывания
+
+# --- настройки KAC ---
+# «Предел:» -- поле под заголовком #LOC_KAC_408 «Предел перемотки» (макс. множитель перемотки).
+Limit:	Предел:
+Quick Action:	Быстрое действие:
+
+# --- диалог неверной установки (PopupDialog, виден только при кривой установке) ---
+Incorrect KerbalAlarmClock Installation	Неверная установка KerbalAlarmClock
+OK	ОК
+
+# ============================================================================
+# ЧТО ОТБРОШЕНО И ПОЧЕМУ (сплошной разбор, не «остальное неинтересно»)
+#
+# 1. 498 токенов `#LOC_KAC_<N>` -- уже переведены в ../Localization/ru.cfg. Не дублируем.
+#
+# 2. ~120 имён файлов ресурсов (KACResources.loadGUIAssets): img_listicon*.png,
+#    img_button*.png, KACIcon*/KACIconBig-*.png, cur_Resize*.png, tex_Box*.png, *.wav,
+#    /data_TransferModelData.csv -- пути, не текст.
+#
+# 3. Лог/отладка (KACWorker.LogFormatted / Debug.Log): «Attempting to Grab KER Types...»,
+#    «Loading Textures», «Triggering Alarm - », «Scene Change from '{0}' to '{1}'»,
+#    «BaseLoadDone. Alarms Count (Should be 0):{0}», «Backing up saves», «Skipping version
+#    check», «FillWindow: GUILayout not ready yet», «TimeWarp.fetch.current_rate_index: »,
+#    «btnToolbarControl is null», «tmpAlarm is null» и т.п. -- ни одна не доходит до
+#    отрисовки. Сюда же Startup.Start: «TitleNotAvailable», «VersionNotAvailable»,
+#    «] Version », «n/a», «[» -- склеиваются и уходят в Debug.Log.
+#
+# 4. Идентификаторы/ключи, а не подписи: имена типов и полей для рефлексии
+#    («KerbalAlarmClock.KACAlarm», «APIInstance», «currentNodeBurnDuration», «totalDeltaV»,
+#    «VOID.VOID_Data»), имена ConfigNode-узлов и полей сейва («AlarmTimeUT»,
+#    «AlarmMarginSecs», «XferOriginBodyName», «RepeatAlarmPeriodUT», «TypeOfAlarm», «Notes»,
+#    «Name», «ID», «Remaining»), ID кнопок тулбара («btnKACIcon», «kacBtn»), имена сцен
+#    («KACSpaceCenter», «KACTrackingStation», «KACEditor»), имя диалога («test»),
+#    lock-имена («KACControlLock», «KACJumpToShip»), пути («PluginData/settings.cfg»,
+#    «TriggerTech/KerbalAlarmClock/Plugins», «{0}GameData/TriggerTech»).
+#
+# 5. Format-строки и маски: «Page {0}/{1}», «Close ({0} », «Maneuver Alarm ({0})»,
+#    «Science Lab {0} (Science: {1:0}, Data: {2:0})», «Target {0} (m):», «Atmosphere: {0}»,
+#    «Min/Max Target Science: {0}», «{0:#.0}km», «{0:0.00}({1:0.00})», «{0:yyyy-MM-dd}»,
+#    «ddMMyyyy-HHmmss», «Year y, Da\y d - H\h, m\m, s\s», «d MMM yyyy, HH:mm:ss», «hh:mm:ss»;
+#    регулярки «[^\d\.]+», «\d+», «([a-zA-z])\1{0,}», «(?<=\|LATESTVERSION\|).+(?=...)».
+#
+# 6. Строки с реальными \r\n внутри: «Time to pay attention to\r\n    »,
+#    «\r\nNearing Celestial Transfer:», « - Nearing SOI Change\r\n», оба длинных текста
+#    диалога неверной установки («KerbalAlarmClock has been installed incorrectly...\n\n
+#    Incorrect path(s):\n») -- плюс они ещё и склеиваются со списком реальных путей, т.е.
+#    точного матча не бывает в принципе.
+#
+# 7. Одиночные символы/цифры: «X», «*», «+», «:», «|», «/», «>>», «0», «0.00», «d», « ».
+#
+# 8. URL: https://linuxgurugamer.github.io/KerbalAlarmClock/, .../KerbalAlarmClock/,
+#    forum.kerbalspaceprogram.com/topic/22809-kerbal-alarm-clock/, .../84005-transfer-window-planner/.
+#
+# 9. ОТДЕЛЬНО -- английские ОБРЫВКИ, которые видны в игре, но переводу этим словарём
+#    не поддаются, потому что до отрисовки склеиваются (движок увидит склейку целиком):
+#    * Названия типов будильника в заголовке окна добавления (WindowLayout_CommonFields3):
+#      «Raw Time», «Maneuver Node», «SOI Change», «Transfer Window», «Apoapsis»,
+#      «Periapsis», «Ascending Node», «Descending Node», «Launch Ascent»,
+#      «Closest Approach», «Target Distance», «Crew», «Earth Time», «Contract»,
+#      «Science Lab» -- в IL: <тип> + " " + Localizer.Format("#LOC_KAC_79").
+#    * «Closest» / «Target Distance» (поле strAlarmEventName, задаётся в AddTypeChanged)
+#      в заголовках панелей Closest Approach / Target Distance: <имя> + #LOC_KAC_216.
+#    * Суффиксы подсказок в списке (FillWindow): « (Pause Action)», « (Warp Kill Action)»,
+#      « and » -- дописываются к тултипу, собранному из #LOC_KAC_45..50.
+#    * « Maneuver», « SOI Change», « Apopasis» (опечатка автора), « Periapsis»,
+#      « Ascending», « Descending» (QuickAdd*) -- дописываются к имени аппарата и уходят
+#      в ИМЯ будильника, т.е. в сейв, а не в отрисовку.
+#    * «(m: » (FillAlarmWindow) -- склейка с форматированным временем запаса.
+#    * «to prograde» / «to retrograde» (AngleRenderEject) -- аргументы string.Format,
+#      а не самостоятельные подписи. Сами ключи уже есть в TransferWindowPlanner.txt
+#      («по движению»/«против движения») -- словарь общий, дубль тут бессмысленен.
+#    Лечится это не словарём, а правкой ../Localization/ru.cfg (см. заметку ниже) либо
+#    апстримом мода.
+#
+# ЗАМЕТКА ДЛЯ keyed-слоя: KSP режет пробелы по краям значений .cfg
+# (ConfigNode.CustomEqualSplit делает Trim() и слева, и справа от '='), поэтому
+# «#LOC_KAC_79 =  Alarm - Common Properties» и «#LOC_KAC_10 = Warp to » теряют свой
+# краевой пробел и склейка выходит «Warp toAp», «ClosestDetails...». Восстанавливается
+# escape-последовательностью «backslash + u0020» -- Localizer.unescapeStringToLingoona()
+# разбирает регулярку \\[uU]([0-9A-F]{4}) при загрузке словаря (проверено дизассемблией
+# Assembly-CSharp.dll). Это касается и en-us.cfg апстрима, т.е. баг
+# не наш; но в ru.cfg его можно закрыть.
+#
+# СОГЛАСОВАНО С ДРУГИМИ МОДАМИ (словарь глобальный, ключ один на всю сборку):
+#   OK -> ОК (канон: RetractableLiftingSurface, RP0, FShangarExtender, Firespitter,
+#             ContractConfigurator, HaystackContinued, ToolbarControl, Kopernicus,
+#             B9PartSwitch, EngineGroupController)
+#   Action: -> Действие: (канон: TransferWindowPlanner)

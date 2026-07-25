@@ -1,7 +1,8 @@
 {
   "mod": "Kerbal Alarm Clock (Updated)",
   "folder": "TriggerTech",
-  "method": "keyed",
+  "method": "keyed+ui-dict",
   "keys": 550,
+  "uiDictKeys": 13,
   "status": "draft"
 }
