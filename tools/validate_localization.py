@@ -292,6 +292,42 @@ def check_dangling_references(findings: list):
                               f"never defined in any en-us{{}}/ru{{}} block anywhere in GameData/"))
 
 
+def check_selector_spaces(findings: list) -> None:
+    """ModuleManager: пробел внутри [] в СЕЛЕКТОРЕ узла = патч молча пропускается.
+
+    MM требует заменить пробел на '?' (любой символ): @AGENT[Frontier?Link],
+    @SUBCATEGORY:HAS[#categoryName[Probe?Cores]]. Без этого в логе появляется
+    "Error - Skipping a patch subnode with unbalanced square brackets or a space",
+    патч НЕ применяется, а перевод тихо не виден в игре. Пойман трижды (контракты,
+    Strategia, категории редактора) — поэтому проверяется автоматически.
+
+    Проверяется только селекторная часть строки (до первой '{'); пробелы в
+    ЗНАЧЕНИЯХ (@title = Стартовые опоры) легальны и не трогаются.
+    """
+    for path in sorted(GAMEDATA.rglob("*.cfg")):
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        for lineno, raw in enumerate(text.split("\n"), start=1):
+            head = raw.split("{", 1)[0]
+            if not head.lstrip().startswith(("@", "!", "+", "$", "%", "-")):
+                continue
+            depth = 0
+            for ch in head:
+                if ch == "[":
+                    depth += 1
+                elif ch == "]":
+                    depth = max(0, depth - 1)
+                elif ch == " " and depth > 0:
+                    findings.append((
+                        "error", str(path.relative_to(ROOT)), lineno,
+                        f"пробел внутри [] в селекторе MM — патч будет пропущен, замени пробел на '?': "
+                        f"{head.strip()[:90]}",
+                    ))
+                    break
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true")
@@ -304,6 +340,7 @@ def main() -> int:
             continue  # patch files are checked via the dangling-reference pass instead
         check_file(path, all_keys_seen, findings)
     check_dangling_references(findings)
+    check_selector_spaces(findings)
 
     errors = [f for f in findings if f[0] == "error"]
     warnings = [f for f in findings if f[0] == "warning"]
