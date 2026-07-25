@@ -1,0 +1,99 @@
+# kerbalru-mixed-mods.txt — общий ui-словарь «смешанных остатков»
+#
+# Моды, у которых ОСНОВНАЯ локализация идёт через #LOC (переведена нашими keyed ru.cfg),
+# но часть подписей интерфейса захардкожена прямо в DLL и до Localizer не доходит.
+# Здесь ТОЛЬКО эти хардкод-строки; ключи локализации (#LOC_…/#autoLOC_…/#kasLOC_…) сюда не берутся.
+#
+# Источник: #US-хип и блобы кастомных атрибутов (KSPField/KSPEvent/KSPAction guiName,
+# LocalizableItem defaultTemplate) сборок модов, ревизия вручную по месту вызова в IL.
+# Формат: Английский<TAB>Русский. Движок матчит строку ЦЕЛИКОМ (ordinal), промах = строка как есть.
+# Ведущие/хвостовые пробелы, двоеточия и rich-text значимы — не править.
+#
+# Терминология сверена с translations/<мод>/Localization/ru.cfg:
+#   SystemHeat: loop = «петля», harvester = «добытчик», efficiency = «КПД»
+#   SpaceDust: scanner = «детектор», harvester = «сборщик»
+#   UniversalStorage2: bay = «отсек», deploy/retract отсеков = «открыть/закрыть»
+# Родовые слова (Deploy, Retract, Toggle, Active, Inactive, OK, N/A, None, Color Picker,
+# Current Variant, Dry mass) уже есть в других словарях репо — перевод взят ОТТУДА без изменений.
+
+# --- UniversalStorage2 — отсеки/клинья, PAW, окно проверки установки ---
+Deploy	Развернуть
+Retract	Свернуть
+Toggle	Переключить
+Deploy Samples	Выложить образцы
+Stow Samples	Убрать образцы
+Toggle Greebles	Переключить детализацию
+Deploy Keyboard	Выдвинуть клавиатуру
+Retract Keyboard	Убрать клавиатуру
+Direct Sunlight	Прямой солнечный свет
+, Underwater	, под водой
+Active	Активна
+Inactive	Неактивно
+Retracted	Сложено
+Unavailable	Недоступно
+Solar Cell Cost	Стоимость фотоэлементов
+Solar Cell Mass	Масса фотоэлементов
+Status	Состояние
+Locked	Заблокировано
+Moving...	Движение...
+Fixed	Зафиксировано
+Clamped	Ограничено
+Deploy Primary Bays	Открыть основные отсеки
+Retract Primary Bays	Закрыть основные отсеки
+Toggle Primary Bays	Переключить основные отсеки
+Lock Primary Bays	Заблокировать основные отсеки
+Unlock Primary Bays	Разблокировать основные отсеки
+Primary Bay Deploy Limit	Предел открытия основных отсеков
+Deploy Secondary Bays	Открыть вторичные отсеки
+Retract Secondary Bays	Закрыть вторичные отсеки
+Toggle Secondary Bays	Переключить вторичные отсеки
+Lock Secondary Bays	Заблокировать вторичные отсеки
+Unlock Secondary Bays	Разблокировать вторичные отсеки
+Secondary Bay Deploy Limit	Предел открытия вторичных отсеков
+Deploy All Bays	Открыть все отсеки
+Retract All Bays	Закрыть все отсеки
+Toggle All Bays	Переключить все отсеки
+Toggle All (Disabled)	Переключить все (отключено)
+Part Cost	Стоимость детали
+Part Mass	Масса детали
+Dry Cost	Сухая стоимость
+Dry cost	Сухая стоимость
+Dry Mass	Сухая масса
+Dry mass	Сухая масса
+Current Variant	Текущий вариант
+Incorrect Universal Storage 2 Installation	Universal Storage 2 установлен неправильно
+OK	ОК
+
+# --- SystemHeat — PAW тепловых петель, подсказка панели ---
+System Temp	Сист. температура
+System Flux	Системный поток
+Loop Temp	Темп. петли
+Loop Nom. Temp	Ном. темп. петли
+Loop Flux	Поток петли
+Harvester Efficiency	КПД добытчика
+Repair Reactor	Ремонт реактора
+Heat loop details	Подробности тепловой петли
+Offline	Отключён
+N/A	Н/Д
+None	Нет
+Albedo	Альбедо
+Emissivity	Излучательная способность
+
+# --- SpaceDust — статус детектора ---
+Cannot scan in this situation	Обследование в этих условиях невозможно
+
+# --- StationScience — статус эксперимента ---
+Inactive; on home planet	Неактивно: на родной планете
+
+# --- CommNetConstellation — окно выбора цвета, наземные станции ---
+Color Picker	Выбор цвета
+Build a ground station	Постройте наземную станцию
+Hex string must be in format RRGGBB	Hex-строка должна быть в формате RRGGBB
+Unable to parse hex string	Не удалось разобрать hex-строку
+
+# --- KAS — дефолт PAW-подписи KASModuleDart (когда деталь не задаёт свою) ---
+Detach dart	Отсоединить наконечник
+
+# --- DynamicBatteryStorage — хардкод-подписей не найдено ---
+# (весь UI мода идёт через #LOC и покрыт translations/DynamicBatteryStorage/Localization/ru.cfg;
+#  в DLL остались только логи, пути ассетов и обрывки формата времени — не подписи)

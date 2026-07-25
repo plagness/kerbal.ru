@@ -2,9 +2,9 @@
   "schema": 1,
   "totals": {
     "mods": 111,
-    "keyedMods": 43,
+    "keyedMods": 41,
     "uiMods": 40,
-    "keys": 14746
+    "keys": 14747
   },
   "mods": [
     {
@@ -227,7 +227,7 @@
       "id": "ExtraplanetaryLaunchpads",
       "mod": "Extraplanetary Launchpads",
       "folder": "ExtraplanetaryLaunchpads",
-      "method": "keyed",
+      "method": "keyed+ui-dict",
       "keys": 194,
       "status": "draft"
     },
@@ -299,15 +299,15 @@
       "id": "KAX",
       "mod": "KAX",
       "folder": "KAX",
-      "method": "mm-title",
-      "keys": 16,
+      "method": "mm-title+keyed",
+      "keys": 17,
       "status": "draft"
     },
     {
       "id": "KerbalAlarmClock",
       "mod": "Kerbal Alarm Clock (Updated)",
       "folder": "TriggerTech",
-      "method": "keyed",
+      "method": "keyed+ui-dict",
       "keys": 550,
       "status": "draft"
     },
