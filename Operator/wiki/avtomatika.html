@@ -13,8 +13,9 @@
 --line:rgba(183,214,190,.13);--line-cyan:rgba(166,232,110,.36);--txt:#edf4eb;--txt-dim:#98a49e;
 --txt-faint:#617068;--orange:#ff9d48;--gold:#f0c067;--cyan:#a6e86e;--green:#b9f47b;
 --green-glow:rgba(185,244,123,.28);--red:#ff6b6b;}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.7;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.7;-webkit-font-smoothing:antialiased;
+ overflow-wrap:break-word}
 .sky{position:fixed;inset:0;z-index:-3;background:
  radial-gradient(ellipse 80% 68% at 86% 10%,rgba(35,105,74,.20) 0%,transparent 62%),
  radial-gradient(ellipse 70% 55% at 12% 20%,rgba(64,116,129,.08) 0%,transparent 64%),
@@ -33,6 +34,7 @@ a{color:var(--orange);text-decoration:none}a:hover{color:var(--gold)}
 .top-links a{color:var(--txt-dim)}.top-links a:hover{color:#fff}
 /* каркас */
 .shell{max-width:1240px;margin:0 auto;padding:26px 22px 60px;display:grid;grid-template-columns:262px minmax(0,1fr);gap:34px;align-items:start}
+.shell>*{min-width:0}
 .side{position:sticky;top:74px;max-height:calc(100vh - 96px);overflow:auto;padding-right:4px}
 .side::-webkit-scrollbar{width:6px}.side::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 .search{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:9px;color:var(--txt);
@@ -98,7 +100,45 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4vw,2.5rem)
 .hub-cat a:hover{color:var(--green)}
 .hub-cat a small{display:block;color:var(--txt-faint);font-size:.79rem;line-height:1.45}
 footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:var(--txt-faint);font-size:.8rem}
-@media(max-width:900px){.shell{grid-template-columns:1fr;gap:20px}.side{position:static;max-height:none}}
+/* навигация-гармошка: на десктопе всегда развёрнута, на мобильном схлопывается */
+.side-box{border:0}
+.side-box>summary{display:none}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:18px;padding:18px 16px 48px}
+  .side{position:static;max-height:none;padding-right:0}
+  .side-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0 14px}
+  .side-box>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;
+    padding:13px 0;font-weight:700;font-size:.92rem;color:var(--txt)}
+  .side-box>summary::-webkit-details-marker{display:none}
+  .side-box>summary::after{content:'▾';color:var(--cyan);font-size:.9rem;transition:transform .18s}
+  .side-box[open]>summary::after{transform:rotate(180deg)}
+  .side-box[open]>summary{border-bottom:1px solid var(--line)}
+  .side-box>*:not(summary){margin-top:0}
+  .side-box[open]{padding-bottom:12px}
+  .search{margin:12px 0}
+  .side a{padding:9px 10px;font-size:.9rem}          /* палец, а не курсор */
+  .top-in{padding:11px 16px;gap:10px;flex-wrap:wrap}
+  .brand+span{display:none}
+  .top-links{gap:13px;font-size:.8rem}
+  .art{padding:20px 17px;border-radius:15px}
+  .art h2{font-size:1.12rem;margin:24px 0 9px}
+  .art h3{font-size:.97rem}
+  .art pre{padding:13px 14px;border-radius:9px}
+  .art pre code{font-size:.76rem;line-height:1.6}
+  .art table{font-size:.85rem}
+  .art th,.art td{padding:8px 10px}
+  .lede{font-size:.97rem;margin-bottom:18px;padding-bottom:15px}
+  .toc{padding:12px 15px;margin-bottom:18px}
+  .rel{grid-template-columns:1fr;gap:10px;margin-top:22px}
+  .hub-cats{grid-template-columns:1fr;gap:14px}
+  .hub-cat{padding:17px 18px}
+  .hub-cat a{padding:9px 0}
+}
+@media(max-width:420px){
+  .shell{padding:14px 11px 40px}
+  .art{padding:17px 13px}
+  .art pre code{font-size:.72rem}
+}
 </style></head>
 <body><div class="sky"></div><svg style="display:none" aria-hidden="true">
 <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 017-7 6 6 0 016 6 8 8 0 01-7 7l-2-2"/><path d="M13 11a1 1 0 100-2 1 1 0 000 2z"/><path d="M9 12H4l2-4"/><path d="M12 15v5l4-2"/></symbol>
@@ -116,7 +156,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
   <nav class="top-links"><a href="/Operator">Сборка</a><a href="/Operator/wiki/">Вики</a><a href="/">Каталог</a><a href="https://github.com/plagness/kerbal.ru">GitHub</a></nav>
 </div></header>
 <div class="shell">
-  <aside class="side"><input class="search" id="wsearch" type="search" placeholder="Поиск по вики…" autocomplete="off">
+  <aside class="side"><details class="side-box" open id="wnavbox"><summary>Все статьи вики</summary><input class="search" id="wsearch" type="search" placeholder="Поиск по вики…" autocomplete="off">
 <nav id="wnav">
 <div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-rocket"/></svg>Начало</div>
 <a class="wnav-item" href="start.html" data-title="с чего начать">С чего начать</a>
@@ -144,9 +184,11 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="kogda-avtomatizirovat.html" data-title="когда автоматизировать, а когда лететь руками">Когда автоматизировать, а когда лететь руками</a>
 <a class="wnav-item" href="kos-osnovy.html" data-title="kos: основы">kOS: основы</a>
 <a class="wnav-item" href="kos-recepty.html" data-title="kos: готовые рецепты">kOS: готовые рецепты</a>
+<a class="wnav-item" href="kos-otladka.html" data-title="kos: отладка и лимиты">kOS: отладка и лимиты</a>
 <a class="wnav-item is-on" href="avtomatika.html" data-title="автоматика полётов и рутина">Автоматика полётов и рутина</a>
 <a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
 <a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
+<a class="wnav-item" href="agenty.html" data-title="подключаем ии-агентов">Подключаем ИИ-агентов</a>
 <a class="wnav-item" href="neyronka.html" data-title="нейросеть как второй пилот">Нейросеть как второй пилот</a>
 <a class="wnav-item" href="telemetriya.html" data-title="телеметрия: разбирать полёт по числам">Телеметрия: разбирать полёт по числам</a>
 </div>
@@ -179,7 +221,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="resursy.html" data-title="ресурсы и цепочки переработки">Ресурсы и цепочки переработки</a>
 <a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
 </div>
-</nav></aside>
+</nav></details></aside>
   <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Автоматика</div><h1>Автоматика полётов и рутина</h1><p class="lede">MechJeb, будильники, Haystack, повторяющиеся рейсы и фоновый расчёт ресурсов — четыре слоя автоматизации сборки «Оператор».</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
 <ul>
 <li><a href="#1-mechjeb2">Слой 1. MechJeb2 — автопилот здесь и сейчас</a></li>
@@ -267,6 +309,11 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </div>
 <script>
 (function(){
+  // на узком экране список статей стартует свёрнутым — иначе он выталкивает текст вниз
+  var box=document.getElementById('wnavbox');
+  if(box && matchMedia('(max-width:900px)').matches) box.removeAttribute('open');
+})();
+(function(){
   var s=document.getElementById('wsearch'); if(!s) return;
   s.addEventListener('input',function(){
     var q=s.value.trim().toLowerCase();
@@ -277,6 +324,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
       var any=[].slice.call(c.querySelectorAll('.wnav-item')).some(function(a){return a.style.display!=='none'});
       c.style.display = any ? '' : 'none';
     });
+    var box=document.getElementById('wnavbox');            // начал искать — раскрыли список
+    if(q && box && !box.open) box.open=true;
   });
 })();
 </script>
