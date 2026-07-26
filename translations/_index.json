@@ -2,9 +2,9 @@
   "schema": 1,
   "totals": {
     "mods": 111,
-    "keyedMods": 41,
+    "keyedMods": 40,
     "uiMods": 40,
-    "keys": 14747
+    "keys": 14748
   },
   "mods": [
     {
@@ -779,8 +779,8 @@
       "id": "StationScience",
       "mod": "Station Science",
       "folder": "StationScience",
-      "method": "keyed",
-      "keys": 186,
+      "method": "keyed+mm-title",
+      "keys": 187,
       "status": "draft"
     },
     {
@@ -896,5 +896,5 @@
       "status": "draft"
     }
   ],
-  "generatedAt": "2026-07-25"
+  "generatedAt": "2026-07-26"
 }

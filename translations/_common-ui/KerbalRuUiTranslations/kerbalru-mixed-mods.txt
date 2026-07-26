@@ -97,3 +97,19 @@ Detach dart	Отсоединить наконечник
 # --- DynamicBatteryStorage — хардкод-подписей не найдено ---
 # (весь UI мода идёт через #LOC и покрыт translations/DynamicBatteryStorage/Localization/ru.cfg;
 #  в DLL остались только логи, пути ассетов и обрывки формата времени — не подписи)
+
+# --- Настройки сложности: Snacks (строки из custom-атрибутов DLL) ---
+Snacks per meal	Снеков за приём пищи
+Meals per day	Приёмов пищи в сутки
+Enable recycling	Включить переработку
+Recycler Efficiency %	КПД переработчика, %
+Fine per kerbal	Штраф за кербала
+Meals before fainting	Пропусков еды до обморока
+Skipped meals before death	Пропусков еды до гибели
+Enable random penalties	Включить случайные штрафы
+# --- Настройки сложности: Background Resource Processing ---
+Enable Orbit Shadows	Учитывать тень планеты
+Enable Day/Night Simulation	Моделировать смену дня и ночи
+Enable Burst-Accelerated Methods	Ускорение через Burst
+ Enable Burst-Accelerated Methods	 Ускорение через Burst
+Simulate Day/Night for landed vessels.	Моделировать смену дня и ночи для аппаратов на поверхности.

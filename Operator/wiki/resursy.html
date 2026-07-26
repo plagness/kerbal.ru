@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ресурсы и цепочки переработки — вики kerbal.ru</title>
+<meta name="description" content="Все ресурсные цепочки сборки — от стоковой руды до ракетных деталей, криогеники, ядерного топлива и снеков.">
+<meta name="theme-color" content="#07110d">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--sans:"Manrope",-apple-system,system-ui,"Segoe UI",sans-serif;--display:"Unbounded","Manrope",sans-serif;
+--mono:"JetBrains Mono",monospace;--bg-0:#030806;--bg-1:#07110d;--panel:rgba(10,20,16,.72);
+--line:rgba(183,214,190,.13);--line-cyan:rgba(166,232,110,.36);--txt:#edf4eb;--txt-dim:#98a49e;
+--txt-faint:#617068;--orange:#ff9d48;--gold:#f0c067;--cyan:#a6e86e;--green:#b9f47b;
+--green-glow:rgba(185,244,123,.28);--red:#ff6b6b;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.7;-webkit-font-smoothing:antialiased}
+.sky{position:fixed;inset:0;z-index:-3;background:
+ radial-gradient(ellipse 80% 68% at 86% 10%,rgba(35,105,74,.20) 0%,transparent 62%),
+ radial-gradient(ellipse 70% 55% at 12% 20%,rgba(64,116,129,.08) 0%,transparent 64%),
+ linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 58%,#050c09 100%);}
+.sky::before{content:'';position:absolute;inset:0;opacity:.45;background-image:
+ radial-gradient(circle,rgba(240,255,244,.7) 0 1px,transparent 1.3px),
+ radial-gradient(circle,rgba(185,244,123,.35) 0 1px,transparent 1.2px);
+ background-size:113px 113px,71px 71px;background-position:17px 31px,5px 67px;}
+a{color:var(--orange);text-decoration:none}a:hover{color:var(--gold)}
+/* шапка */
+.top{position:sticky;top:0;z-index:20;background:rgba(3,8,6,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1240px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--green);letter-spacing:-.03em}
+.brand+span{color:var(--txt-faint);font-family:var(--sans);font-weight:600;font-size:.8rem;margin-left:8px;letter-spacing:0}
+.top-links{display:flex;gap:16px;font-size:.82rem;font-weight:600}
+.top-links a{color:var(--txt-dim)}.top-links a:hover{color:#fff}
+/* каркас */
+.shell{max-width:1240px;margin:0 auto;padding:26px 22px 60px;display:grid;grid-template-columns:262px minmax(0,1fr);gap:34px;align-items:start}
+.side{position:sticky;top:74px;max-height:calc(100vh - 96px);overflow:auto;padding-right:4px}
+.side::-webkit-scrollbar{width:6px}.side::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.search{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:9px;color:var(--txt);
+ font-family:var(--sans);font-size:.84rem;padding:10px 12px;margin-bottom:16px}
+.search:focus{outline:none;border-color:var(--line-cyan)}
+.cat{margin-bottom:18px}
+.cat-h{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.9px;
+ text-transform:uppercase;color:var(--txt-faint);margin-bottom:7px}
+.cat-h .ic{width:1em;height:1em;color:var(--cyan);font-size:1.05rem}
+.side a{display:block;color:var(--txt-dim);font-size:.87rem;padding:5px 10px;border-radius:7px;border-left:2px solid transparent}
+.side a:hover{color:#fff;background:rgba(255,255,255,.03)}
+.side a.is-on{color:var(--green);background:rgba(166,232,110,.07);border-left-color:var(--green)}
+/* статья */
+.crumbs{font-size:.78rem;color:var(--txt-faint);margin-bottom:10px}
+.crumbs a{color:var(--txt-dim)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.12;margin:0 0 10px;letter-spacing:-.03em;
+ background:linear-gradient(145deg,#fff 10%,#e7f2e7 55%,var(--green) 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--txt-dim);font-size:1.02rem;margin:0 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.art{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:28px 32px;box-shadow:0 28px 70px -50px #000}
+.art h2{font-size:1.22rem;font-weight:750;color:#fff;margin:30px 0 10px;padding-top:6px}
+.art h2:first-child{margin-top:0}
+.art h3{font-size:1rem;font-weight:700;color:var(--cyan);margin:22px 0 8px}
+.art p{margin:0 0 14px}
+.art ul,.art ol{margin:0 0 14px;padding-left:22px}.art li{margin:5px 0}
+.art strong{color:#fff}
+.art code{font-family:var(--mono);font-size:.86em;background:rgba(255,255,255,.05);border:1px solid var(--line);
+ border-radius:5px;padding:1px 5px;color:var(--cyan)}
+.art pre{background:#030806;border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;margin:0 0 16px}
+.art pre code{background:none;border:none;padding:0;color:var(--cyan);font-size:.82rem;line-height:1.65}
+.art blockquote{margin:0 0 16px;padding:10px 16px;border-left:3px solid var(--line-cyan);background:rgba(166,232,110,.05);
+ border-radius:0 9px 9px 0;color:var(--txt-dim)}
+.art table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.9rem;display:block;overflow-x:auto}
+.art th{text-align:left;font-weight:700;color:var(--cyan);font-size:.76rem;text-transform:uppercase;letter-spacing:.5px;
+ padding:9px 12px;border-bottom:1px solid var(--line-cyan);white-space:nowrap}
+.art td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.art tr:hover td{background:rgba(255,255,255,.02)}
+.wikilink{color:var(--green);border-bottom:1px dotted rgba(185,244,123,.45)}
+.wikilink:hover{color:#dbffb0;border-bottom-style:solid}
+.wikilink.is-missing{color:var(--red);border-bottom-color:rgba(255,107,107,.4);cursor:help}
+/* оглавление */
+.toc{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 22px}
+.toc-h{font-family:var(--mono);font-size:.6rem;letter-spacing:.9px;text-transform:uppercase;color:var(--txt-faint);margin-bottom:6px}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:3px 0}
+.toc a{color:var(--txt-dim);font-size:.86rem}.toc a:hover{color:var(--green)}
+.toc ul ul{padding-left:14px}
+/* низ статьи */
+.rel{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.rel a{display:block;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:13px 16px;transition:.18s}
+.rel a:hover{border-color:var(--line-cyan);transform:translateY(-2px)}
+.rel b{display:block;color:#fff;font-size:.92rem;margin-bottom:3px}
+.rel span{color:var(--txt-dim);font-size:.8rem;line-height:1.45}
+.sec-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.9px;text-transform:uppercase;color:var(--txt-faint);margin:26px 0 4px}
+.backlinks{margin-top:20px;font-size:.85rem;color:var(--txt-dim)}
+.backlinks a{color:var(--txt-dim);border-bottom:1px dotted var(--line)}
+.backlinks a:hover{color:var(--green)}
+/* хаб */
+.hub-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:22px}
+.hub-cat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.hub-cat h3{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:1.02rem;font-weight:750;color:#fff;margin:0 0 12px}
+.hub-cat h3 .ic{width:1em;height:1em;color:var(--cyan);font-size:1.2rem}
+.hub-cat a{display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--txt)}
+.hub-cat a:first-of-type{border-top:none}
+.hub-cat a:hover{color:var(--green)}
+.hub-cat a small{display:block;color:var(--txt-faint);font-size:.79rem;line-height:1.45}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:var(--txt-faint);font-size:.8rem}
+@media(max-width:900px){.shell{grid-template-columns:1fr;gap:20px}.side{position:static;max-height:none}}
+</style></head>
+<body><div class="sky"></div><svg style="display:none" aria-hidden="true">
+<symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 017-7 6 6 0 016 6 8 8 0 01-7 7l-2-2"/><path d="M13 11a1 1 0 100-2 1 1 0 000 2z"/><path d="M9 12H4l2-4"/><path d="M12 15v5l4-2"/></symbol>
+<symbol id="i-satellite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.707 6.293l2.586-2.586a1 1 0 011.414 0l5.586 5.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0L3.707 7.707a1 1 0 010-1.414z"/><path d="M6 10l-3 3 3 3 3-3M10 6l3-3 3 3-3 3M12 16l4 4M16 12l4 4"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M3 10h2M3 14h2M19 10h2M19 14h2M10 3v2M14 3v2M10 19v2M14 19v2"/></symbol>
+<symbol id="i-atom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z" opacity=".25"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-45 12 12)"/></symbol>
+<symbol id="i-capsule" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l2 12H5L7 4z"/><path d="M5 16h14v4H5z"/><path d="M10 8h4"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 8H8l1-8z"/><path d="M8 11h8l2 5H6l2-5z"/><path d="M10 16v3M14 16v3M12 16v5"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M12 19h4a2 2 0 000-4H8a2 2 0 010-4h4"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M9 7h6M9 11h6"/></symbol>
+</svg>
+<header class="top"><div class="top-in">
+  <div><a class="brand" href="/">kerbal.ru</a><span>вики сборки «Оператор»</span></div>
+  <nav class="top-links"><a href="/Operator">Сборка</a><a href="/Operator/wiki/">Вики</a><a href="/">Каталог</a><a href="https://github.com/plagness/kerbal.ru">GitHub</a></nav>
+</div></header>
+<div class="shell">
+  <aside class="side"><input class="search" id="wsearch" type="search" placeholder="Поиск по вики…" autocomplete="off">
+<nav id="wnav">
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-rocket"/></svg>Начало</div>
+<a class="wnav-item" href="start.html" data-title="с чего начать">С чего начать</a>
+<a class="wnav-item" href="sborka.html" data-title="что такое «оператор»">Что такое «Оператор»</a>
+<a class="wnav-item" href="ustanovka.html" data-title="установка и обновление">Установка и обновление</a>
+<a class="wnav-item" href="nastroyki.html" data-title="настройки: сложность и моды">Настройки: сложность и моды</a>
+<a class="wnav-item" href="problemy.html" data-title="частые проблемы">Частые проблемы</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-target"/></svg>Практика</div>
+<a class="wnav-item" href="pervyy-sputnik.html" data-title="первый спутник: собираем и выводим">Первый спутник: собираем и выводим</a>
+<a class="wnav-item" href="missiya-mun.html" data-title="миссия на мун">Миссия на Мун</a>
+<a class="wnav-item" href="mezhplanetnye.html" data-title="межпланетные перелёты">Межпланетные перелёты</a>
+<a class="wnav-item" href="samolety.html" data-title="самолёты и ssto">Самолёты и SSTO</a>
+<a class="wnav-item" href="spasenie-stupeney.html" data-title="возврат ступеней и многоразовость">Возврат ступеней и многоразовость</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-satellite"/></svg>Связь и сеть</div>
+<a class="wnav-item" href="svyaz-osnovy.html" data-title="связь: как работает commnet">Связь: как работает CommNet</a>
+<a class="wnav-item" href="sozvezdiya.html" data-title="созвездия и покрытие">Созвездия и покрытие</a>
+<a class="wnav-item" href="antenny.html" data-title="антенны: выбор и дальность">Антенны: выбор и дальность</a>
+<a class="wnav-item" href="set-planet.html" data-title="сеть связи у других планет">Сеть связи у других планет</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-cpu"/></svg>Автоматика</div>
+<a class="wnav-item" href="kos-osnovy.html" data-title="kos: основы">kOS: основы</a>
+<a class="wnav-item" href="kos-recepty.html" data-title="kos: готовые рецепты">kOS: готовые рецепты</a>
+<a class="wnav-item" href="avtomatika.html" data-title="автоматика полётов и рутина">Автоматика полётов и рутина</a>
+<a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
+<a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-atom"/></svg>Наука</div>
+<a class="wnav-item" href="nauka-osnovy.html" data-title="наука: как собирать эффективно">Наука: как собирать эффективно</a>
+<a class="wnav-item" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
+<a class="wnav-item" href="pribory.html" data-title="научные приборы сборки">Научные приборы сборки</a>
+<a class="wnav-item" href="laboratorii.html" data-title="лаборатории и обработка науки">Лаборатории и обработка науки</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-capsule"/></svg>Станции и базы</div>
+<a class="wnav-item" href="stancii.html" data-title="орбитальные станции">Орбитальные станции</a>
+<a class="wnav-item" href="bazy.html" data-title="наземные базы и снабжение">Наземные базы и снабжение</a>
+<a class="wnav-item" href="zhizneobespechenie.html" data-title="жизнеобеспечение: snacks">Жизнеобеспечение: Snacks</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-engine"/></svg>Техника</div>
+<a class="wnav-item" href="energetika.html" data-title="энергетика и тепло">Энергетика и тепло</a>
+<a class="wnav-item" href="dvigateli.html" data-title="двигатели и топливо">Двигатели и топливо</a>
+<a class="wnav-item" href="konstruirovanie.html" data-title="конструирование аппаратов">Конструирование аппаратов</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-route"/></svg>Прогресс</div>
+<a class="wnav-item" href="kontrakty.html" data-title="контракты и стратегии">Контракты и стратегии</a>
+<a class="wnav-item" href="ekonomika.html" data-title="экономика программы">Экономика программы</a>
+<a class="wnav-item" href="dolgaya-igra.html" data-title="долгая игра: как вести программу">Долгая игра: как вести программу</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-book"/></svg>Справочник</div>
+<a class="wnav-item" href="mody-yadro.html" data-title="каталог модов: ядро сборки">Каталог модов: ядро сборки</a>
+<a class="wnav-item" href="mody-rasshirenie.html" data-title="каталог модов: расширения">Каталог модов: расширения</a>
+<a class="wnav-item" href="derevo-tehnologiy.html" data-title="дерево технологий">Дерево технологий</a>
+<a class="wnav-item" href="tela-sistemy.html" data-title="тела системы: кербол и opm">Тела системы: Кербол и OPM</a>
+<a class="wnav-item is-on" href="resursy.html" data-title="ресурсы и цепочки переработки">Ресурсы и цепочки переработки</a>
+<a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
+</div>
+</nav></aside>
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Справочник</div><h1>Ресурсы и цепочки переработки</h1><p class="lede">Все ресурсные цепочки сборки — от стоковой руды до ракетных деталей, криогеники, ядерного топлива и снеков.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+<ul>
+<li><a href="#ore">Стоковая цепочка: Ore</a></li>
+<li><a href="#stockalike-mining-extension">Stockalike Mining Extension</a></li>
+<li><a href="#_1">Криогеника</a></li>
+<li><a href="#extraplanetary-launchpads">Extraplanetary Launchpads</a></li>
+<li><a href="#snacks">Жизнеобеспечение: Snacks</a></li>
+<li><a href="#_2">Ядерное топливо и электротяга</a></li>
+<li><a href="#_3">Сводка</a></li>
+</ul>
+</div>
+</div><article class="art"><blockquote>
+<p><strong>Имена ресурсов мы не переводим.</strong> В игре они остаются латиницей: <code>Ore</code>, <code>LqdHydrogen</code>, <code>MetalOre</code>, <code>Snacks</code>. Так и в интерфейсе, и в этой статье. Общий словарь имён держит <strong>Community Resource Pack</strong> — он же гарантирует, что <code>XenonGas</code> из Near Future и <code>XenonGas</code> из Mining Extension это один и тот же ресурс, а не два разных.</p>
+</blockquote>
+<h2 id="ore">Стоковая цепочка: Ore</h2>
+<p>Основа всего. Бур достаёт <code>Ore</code> из грунта, Конвертотрон превращает её в топливо. Расходы на секунду при 100 % загрузки Конвертотрона-250:</p>
+<table>
+<thead>
+<tr>
+<th>Режим</th>
+<th>Вход</th>
+<th>Выход</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lf+Ox</td>
+<td>0,5 <code>Ore</code> + 30 ЭЧ</td>
+<td>0,45 <code>LiquidFuel</code> + 0,55 <code>Oxidizer</code></td>
+</tr>
+<tr>
+<td>Монотопливо</td>
+<td>0,5 <code>Ore</code> + 30 ЭЧ</td>
+<td>1,0 <code>MonoPropellant</code></td>
+</tr>
+<tr>
+<td>Только топливо</td>
+<td>0,45 <code>Ore</code> + 30 ЭЧ</td>
+<td>0,9 <code>LiquidFuel</code></td>
+</tr>
+<tr>
+<td>Только окислитель</td>
+<td>0,55 <code>Ore</code> + 30 ЭЧ</td>
+<td>1,1 <code>Oxidizer</code></td>
+</tr>
+</tbody>
+</table>
+<p>30 ЭЧ/с — это не мелочь: панелями такое не питается, нужен реактор или топливные элементы (<a class="wikilink" href="energetika.html" title="Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.">Энергетика и тепло</a>). Где вообще искать руду — <a class="wikilink" href="geologiya.html" title="Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.">Геология и биомы</a>.</p>
+<h2 id="stockalike-mining-extension">Stockalike Mining Extension</h2>
+<p>SMX не вводит новых ресурсов, а расширяет добычу по размерам и средам:</p>
+<ul>
+<li><strong>Буры</strong> всех калибров: «Trowel» (0,625 м), «Tremor» (1,25 м), «Terravore» (2,5 м), «Lithoquake» (3,75 м), встроенные «Prospector» и «Wildcat».</li>
+<li><strong>Океанические добытчики</strong> D4-MP и W-37 — качают из морей.</li>
+<li><strong>Криогенные атмосферные конденсаторы</strong> RS-1 и HD-RS7 — <code>Oxidizer</code> из кислородных атмосфер, <code>XenonGas</code> из любой, <code>LqdHydrogen</code> при установленном Cryo Tanks.</li>
+<li><strong>Конвертотроны</strong> Size 0…3 и Mk2/Mk3 добавляют режимы под моды: 2 <code>Ore</code> + 15 ЭЧ → 0,02 <code>ArgonGas</code>; 2 <code>Ore</code> + 15 ЭЧ → 0,01 <code>XenonGas</code>; 2,25 <code>Ore</code> → 0,15 <code>Lithium</code>; 2,25 <code>Ore</code> → 0,2 <code>LqdHydrogen</code>.</li>
+<li><strong>Масс-драйверы</strong> EMMD — тяга напрямую от отвала добычи, без переработки.</li>
+</ul>
+<h2 id="_1">Криогеника</h2>
+<p>Cryo Engines работают на <code>LqdHydrogen</code>, часть баков умеет <code>LqdMethane</code>. Cryo Tanks вешает на стоковые ISRU дополнительные режимы: 1 ед. <code>Ore</code> (10 кг) даёт <strong>141 ед.</strong> <code>LqdHydrogen</code> (0,07085 кг/ед) — по сохранению массы. Есть и парные режимы LH2+Ox и LCH4+Ox.</p>
+<p><strong>Выкипание.</strong> У бака в PAW поле <code>Испарение</code>. <code>LqdHydrogen</code> теряет <strong>0,05 % в час</strong>, <code>LqdMethane</code> — <strong>0,005 %</strong>. Активное охлаждение обнуляет потери, но стоит <strong>0,09 ЭЧ/с на 1000 единиц</strong> водорода (метан — 0,045). Криогенная ступень на парковочной орбите — это постоянная нагрузка на энергетику, а не «залил и забыл» (<a class="wikilink" href="dvigateli.html" title="Линейка тяги в сборке — от керосиновых носителей до плазмы: что, когда и какой ценой по энергии и теплу.">Двигатели и топливо</a>).</p>
+<h2 id="extraplanetary-launchpads">Extraplanetary Launchpads</h2>
+<p>Отдельная цепочка, никак не связанная с <code>Ore</code>:</p>
+<p><code>MetalOre → Metal → RocketParts → готовый аппарат</code></p>
+<ul>
+<li><code>MetalOre</code> добывается бурами EPL из грунта и из астероидов — у астероида шанс содержания 80 %, доля 50–75 %.</li>
+<li><strong>Плавильня</strong>: LFO-печь жжёт <code>LiquidFuel</code> + <code>Oxidizer</code>, электропечь работает на <code>MetalOre</code> + чуть-чуть <code>LiquidFuel</code> и ~5661 ЭЧ на единицу металла.</li>
+<li><strong>Верфь / станок</strong>: <code>Metal</code> → <code>RocketParts</code>, нужен экипаж-инженер (дрон медленнее, зато без людей).</li>
+<li><strong>Металлолом</strong>: разборка возвращает 9 <code>ScrapMetal</code> с потерей 1 из 10, переплавка <code>ScrapMetal</code> → <code>Metal</code> идёт почти даром (0,00044 ЭЧ на грамм).</li>
+</ul>
+<p>Практика — в <a class="wikilink" href="bazy.html" title="KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.">Наземные базы и снабжение</a>.</p>
+<h2 id="snacks">Жизнеобеспечение: Snacks</h2>
+<p>Один кербал съедает <strong>1 <code>Snacks</code> за цикл 7200 с</strong> и производит <strong>1 <code>Soil</code></strong>. Обитаемые модули получают запас автоматически. Замкнуть цикл <code>Soil → Snacks</code> умеют теплицы KPBS и гидропоника SSPX. Подробности штрафов — <a class="wikilink" href="zhizneobespechenie.html" title="Сколько снеков ест кербал, что бывает при нехватке в наших настройках, как считать запас на миссию и чем закрыть цикл.">Жизнеобеспечение: Snacks</a>.</p>
+<h2 id="_2">Ядерное топливо и электротяга</h2>
+<p>Реакторы Near Future Electrical жгут <code>EnrichedUranium</code> и копят <code>DepletedFuel</code> в том же объёме. Ядерный переработчик Whirlijig закрывает петлю тремя режимами:</p>
+<table>
+<thead>
+<tr>
+<th>Вход</th>
+<th>Выход</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0,1 <code>DepletedFuel</code> + 200 ЭЧ</td>
+<td>0,05 <code>EnrichedUranium</code></td>
+</tr>
+<tr>
+<td>0,01 <code>DepletedFuel</code> + 100 ЭЧ</td>
+<td>0,25 <code>XenonGas</code></td>
+</tr>
+<tr>
+<td>1,0 <code>Ore</code> + 200 ЭЧ</td>
+<td>0,001 <code>EnrichedUranium</code></td>
+</tr>
+</tbody>
+</table>
+<p>То есть уран добывается из обычной руды — очень медленно, зато на месте. Двигатели Near Future Propulsion едят <code>ArgonGas</code> (холловские), <code>XenonGas</code> (ионные) и <code>Lithium</code> (МПД). Стоковый Конвертотрон-250 с патчем NFP делает 18,7 <code>Lithium</code> из 1,0 <code>Ore</code> за 50 ЭЧ.</p>
+<p><strong>SpaceDust</strong> (приезжает вместе с Far Future) добавляет черпание из атмосфер и межпланетной среды: <code>LqdHydrogen</code>, <code>ArgonGas</code>, <code>XenonGas</code>, <code>LqdDeuterium</code>, <code>LqdHe3</code>, <code>Antimatter</code>. Заправка ионного буксира без посадки — это про него.</p>
+<h2 id="_3">Сводка</h2>
+<table>
+<thead>
+<tr>
+<th>Ресурс</th>
+<th>Где берётся</th>
+<th>Во что превращается</th>
+<th>Чем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ore</code></td>
+<td>грунт, астероиды, моря</td>
+<td>LF/Ox/Monoprop, LH2, LCH4, Lithium, Ar, Xe, уран</td>
+<td>буры + Конвертотрон / SMX</td>
+</tr>
+<tr>
+<td><code>LiquidFuel</code> <code>Oxidizer</code> <code>MonoPropellant</code></td>
+<td>ISRU из <code>Ore</code></td>
+<td>тяга</td>
+<td>стоковые двигатели</td>
+</tr>
+<tr>
+<td><code>LqdHydrogen</code></td>
+<td>ISRU, конденсатор, SpaceDust</td>
+<td>тяга (Cryo, ЯРД)</td>
+<td>выкипает 0,05 %/ч</td>
+</tr>
+<tr>
+<td><code>LqdMethane</code></td>
+<td>ISRU</td>
+<td>тяга</td>
+<td>выкипает 0,005 %/ч</td>
+</tr>
+<tr>
+<td><code>MetalOre</code></td>
+<td>грунт, астероиды</td>
+<td><code>Metal</code></td>
+<td>буры EPL, плавильня</td>
+</tr>
+<tr>
+<td><code>Metal</code> / <code>ScrapMetal</code></td>
+<td>плавильня, разборка</td>
+<td><code>RocketParts</code></td>
+<td>верфь, станок</td>
+</tr>
+<tr>
+<td><code>RocketParts</code></td>
+<td>верфь</td>
+<td>корпус аппарата</td>
+<td>стапель EPL</td>
+</tr>
+<tr>
+<td><code>Snacks</code> / <code>Soil</code></td>
+<td>старт, теплица</td>
+<td>еда / удобрение</td>
+<td>теплицы KPBS, SSPX</td>
+</tr>
+<tr>
+<td><code>EnrichedUranium</code> / <code>DepletedFuel</code></td>
+<td><code>Ore</code>, переработчик</td>
+<td>ЭЧ</td>
+<td>реакторы NFE</td>
+</tr>
+<tr>
+<td><code>ArgonGas</code> <code>XenonGas</code> <code>Lithium</code></td>
+<td>ISRU, конденсатор, SpaceDust</td>
+<td>тяга</td>
+<td>двигатели NFP</td>
+</tr>
+</tbody>
+</table></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="bazy.html"><b>Наземные базы и снабжение</b><span>KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.</span></a><a href="energetika.html"><b>Энергетика и тепло</b><span>Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.</span></a><a href="zhizneobespechenie.html"><b>Жизнеобеспечение: Snacks</b><span>Сколько снеков ест кербал, что бывает при нехватке в наших настройках, как считать запас на миссию и чем закрыть цикл.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="derevo-tehnologiy.html">Дерево технологий</a>, <a href="glossariy.html">Глоссарий</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a></div>
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
+      <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
+      присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
+  </main>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('wsearch'); if(!s) return;
+  s.addEventListener('input',function(){
+    var q=s.value.trim().toLowerCase();
+    document.querySelectorAll('#wnav .wnav-item').forEach(function(a){
+      a.style.display = !q || a.getAttribute('data-title').indexOf(q)>=0 ? '' : 'none';
+    });
+    document.querySelectorAll('#wnav [data-cat]').forEach(function(c){
+      var any=[].slice.call(c.querySelectorAll('.wnav-item')).some(function(a){return a.style.display!=='none'});
+      c.style.display = any ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body></html>

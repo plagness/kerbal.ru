@@ -27,10 +27,12 @@ OUT = ROOT / "Operator" / "wiki"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # порядок категорий в навигации
-CATEGORIES = ["Начало", "Связь и сеть", "Автоматика", "Наука", "Станции и базы", "Техника", "Прогресс"]
+CATEGORIES = ["Начало", "Практика", "Связь и сеть", "Автоматика", "Наука",
+              "Станции и базы", "Техника", "Прогресс", "Справочник"]
 CAT_ICON = {
     "Начало": "i-rocket", "Связь и сеть": "i-satellite", "Автоматика": "i-cpu",
     "Наука": "i-atom", "Станции и базы": "i-capsule", "Техника": "i-engine", "Прогресс": "i-route",
+    "Практика": "i-target", "Справочник": "i-book",
 }
 
 WIKILINK = re.compile(r"\[\[([a-z0-9\-]+)(?:\|([^\]]+))?\]\]")
@@ -193,6 +195,7 @@ ICONS = """<svg style="display:none" aria-hidden="true">
 <symbol id="i-capsule" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l2 12H5L7 4z"/><path d="M5 16h14v4H5z"/><path d="M10 8h4"/></symbol>
 <symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 8H8l1-8z"/><path d="M8 11h8l2 5H6l2-5z"/><path d="M10 16v3M14 16v3M12 16v5"/></symbol>
 <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M12 19h4a2 2 0 000-4H8a2 2 0 010-4h4"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
 <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M9 7h6M9 11h6"/></symbol>
 </svg>"""
 

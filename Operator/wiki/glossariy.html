@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Глоссарий — вики kerbal.ru</title>
+<meta name="description" content="Термины из вики и из игры — орбиты, тяга, связь, наука — короткими определениями со ссылками туда, где тема раскрыта.">
+<meta name="theme-color" content="#07110d">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--sans:"Manrope",-apple-system,system-ui,"Segoe UI",sans-serif;--display:"Unbounded","Manrope",sans-serif;
+--mono:"JetBrains Mono",monospace;--bg-0:#030806;--bg-1:#07110d;--panel:rgba(10,20,16,.72);
+--line:rgba(183,214,190,.13);--line-cyan:rgba(166,232,110,.36);--txt:#edf4eb;--txt-dim:#98a49e;
+--txt-faint:#617068;--orange:#ff9d48;--gold:#f0c067;--cyan:#a6e86e;--green:#b9f47b;
+--green-glow:rgba(185,244,123,.28);--red:#ff6b6b;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--txt);background:var(--bg-0);line-height:1.7;-webkit-font-smoothing:antialiased}
+.sky{position:fixed;inset:0;z-index:-3;background:
+ radial-gradient(ellipse 80% 68% at 86% 10%,rgba(35,105,74,.20) 0%,transparent 62%),
+ radial-gradient(ellipse 70% 55% at 12% 20%,rgba(64,116,129,.08) 0%,transparent 64%),
+ linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 58%,#050c09 100%);}
+.sky::before{content:'';position:absolute;inset:0;opacity:.45;background-image:
+ radial-gradient(circle,rgba(240,255,244,.7) 0 1px,transparent 1.3px),
+ radial-gradient(circle,rgba(185,244,123,.35) 0 1px,transparent 1.2px);
+ background-size:113px 113px,71px 71px;background-position:17px 31px,5px 67px;}
+a{color:var(--orange);text-decoration:none}a:hover{color:var(--gold)}
+/* шапка */
+.top{position:sticky;top:0;z-index:20;background:rgba(3,8,6,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1240px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--green);letter-spacing:-.03em}
+.brand+span{color:var(--txt-faint);font-family:var(--sans);font-weight:600;font-size:.8rem;margin-left:8px;letter-spacing:0}
+.top-links{display:flex;gap:16px;font-size:.82rem;font-weight:600}
+.top-links a{color:var(--txt-dim)}.top-links a:hover{color:#fff}
+/* каркас */
+.shell{max-width:1240px;margin:0 auto;padding:26px 22px 60px;display:grid;grid-template-columns:262px minmax(0,1fr);gap:34px;align-items:start}
+.side{position:sticky;top:74px;max-height:calc(100vh - 96px);overflow:auto;padding-right:4px}
+.side::-webkit-scrollbar{width:6px}.side::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.search{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:9px;color:var(--txt);
+ font-family:var(--sans);font-size:.84rem;padding:10px 12px;margin-bottom:16px}
+.search:focus{outline:none;border-color:var(--line-cyan)}
+.cat{margin-bottom:18px}
+.cat-h{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.9px;
+ text-transform:uppercase;color:var(--txt-faint);margin-bottom:7px}
+.cat-h .ic{width:1em;height:1em;color:var(--cyan);font-size:1.05rem}
+.side a{display:block;color:var(--txt-dim);font-size:.87rem;padding:5px 10px;border-radius:7px;border-left:2px solid transparent}
+.side a:hover{color:#fff;background:rgba(255,255,255,.03)}
+.side a.is-on{color:var(--green);background:rgba(166,232,110,.07);border-left-color:var(--green)}
+/* статья */
+.crumbs{font-size:.78rem;color:var(--txt-faint);margin-bottom:10px}
+.crumbs a{color:var(--txt-dim)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.12;margin:0 0 10px;letter-spacing:-.03em;
+ background:linear-gradient(145deg,#fff 10%,#e7f2e7 55%,var(--green) 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--txt-dim);font-size:1.02rem;margin:0 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.art{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:28px 32px;box-shadow:0 28px 70px -50px #000}
+.art h2{font-size:1.22rem;font-weight:750;color:#fff;margin:30px 0 10px;padding-top:6px}
+.art h2:first-child{margin-top:0}
+.art h3{font-size:1rem;font-weight:700;color:var(--cyan);margin:22px 0 8px}
+.art p{margin:0 0 14px}
+.art ul,.art ol{margin:0 0 14px;padding-left:22px}.art li{margin:5px 0}
+.art strong{color:#fff}
+.art code{font-family:var(--mono);font-size:.86em;background:rgba(255,255,255,.05);border:1px solid var(--line);
+ border-radius:5px;padding:1px 5px;color:var(--cyan)}
+.art pre{background:#030806;border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;margin:0 0 16px}
+.art pre code{background:none;border:none;padding:0;color:var(--cyan);font-size:.82rem;line-height:1.65}
+.art blockquote{margin:0 0 16px;padding:10px 16px;border-left:3px solid var(--line-cyan);background:rgba(166,232,110,.05);
+ border-radius:0 9px 9px 0;color:var(--txt-dim)}
+.art table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.9rem;display:block;overflow-x:auto}
+.art th{text-align:left;font-weight:700;color:var(--cyan);font-size:.76rem;text-transform:uppercase;letter-spacing:.5px;
+ padding:9px 12px;border-bottom:1px solid var(--line-cyan);white-space:nowrap}
+.art td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.art tr:hover td{background:rgba(255,255,255,.02)}
+.wikilink{color:var(--green);border-bottom:1px dotted rgba(185,244,123,.45)}
+.wikilink:hover{color:#dbffb0;border-bottom-style:solid}
+.wikilink.is-missing{color:var(--red);border-bottom-color:rgba(255,107,107,.4);cursor:help}
+/* оглавление */
+.toc{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 22px}
+.toc-h{font-family:var(--mono);font-size:.6rem;letter-spacing:.9px;text-transform:uppercase;color:var(--txt-faint);margin-bottom:6px}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:3px 0}
+.toc a{color:var(--txt-dim);font-size:.86rem}.toc a:hover{color:var(--green)}
+.toc ul ul{padding-left:14px}
+/* низ статьи */
+.rel{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.rel a{display:block;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:13px 16px;transition:.18s}
+.rel a:hover{border-color:var(--line-cyan);transform:translateY(-2px)}
+.rel b{display:block;color:#fff;font-size:.92rem;margin-bottom:3px}
+.rel span{color:var(--txt-dim);font-size:.8rem;line-height:1.45}
+.sec-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.9px;text-transform:uppercase;color:var(--txt-faint);margin:26px 0 4px}
+.backlinks{margin-top:20px;font-size:.85rem;color:var(--txt-dim)}
+.backlinks a{color:var(--txt-dim);border-bottom:1px dotted var(--line)}
+.backlinks a:hover{color:var(--green)}
+/* хаб */
+.hub-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:22px}
+.hub-cat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.hub-cat h3{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:1.02rem;font-weight:750;color:#fff;margin:0 0 12px}
+.hub-cat h3 .ic{width:1em;height:1em;color:var(--cyan);font-size:1.2rem}
+.hub-cat a{display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--txt)}
+.hub-cat a:first-of-type{border-top:none}
+.hub-cat a:hover{color:var(--green)}
+.hub-cat a small{display:block;color:var(--txt-faint);font-size:.79rem;line-height:1.45}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:var(--txt-faint);font-size:.8rem}
+@media(max-width:900px){.shell{grid-template-columns:1fr;gap:20px}.side{position:static;max-height:none}}
+</style></head>
+<body><div class="sky"></div><svg style="display:none" aria-hidden="true">
+<symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 017-7 6 6 0 016 6 8 8 0 01-7 7l-2-2"/><path d="M13 11a1 1 0 100-2 1 1 0 000 2z"/><path d="M9 12H4l2-4"/><path d="M12 15v5l4-2"/></symbol>
+<symbol id="i-satellite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.707 6.293l2.586-2.586a1 1 0 011.414 0l5.586 5.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0L3.707 7.707a1 1 0 010-1.414z"/><path d="M6 10l-3 3 3 3 3-3M10 6l3-3 3 3-3 3M12 16l4 4M16 12l4 4"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M3 10h2M3 14h2M19 10h2M19 14h2M10 3v2M14 3v2M10 19v2M14 19v2"/></symbol>
+<symbol id="i-atom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z" opacity=".25"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-45 12 12)"/></symbol>
+<symbol id="i-capsule" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l2 12H5L7 4z"/><path d="M5 16h14v4H5z"/><path d="M10 8h4"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 8H8l1-8z"/><path d="M8 11h8l2 5H6l2-5z"/><path d="M10 16v3M14 16v3M12 16v5"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M12 19h4a2 2 0 000-4H8a2 2 0 010-4h4"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M9 7h6M9 11h6"/></symbol>
+</svg>
+<header class="top"><div class="top-in">
+  <div><a class="brand" href="/">kerbal.ru</a><span>вики сборки «Оператор»</span></div>
+  <nav class="top-links"><a href="/Operator">Сборка</a><a href="/Operator/wiki/">Вики</a><a href="/">Каталог</a><a href="https://github.com/plagness/kerbal.ru">GitHub</a></nav>
+</div></header>
+<div class="shell">
+  <aside class="side"><input class="search" id="wsearch" type="search" placeholder="Поиск по вики…" autocomplete="off">
+<nav id="wnav">
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-rocket"/></svg>Начало</div>
+<a class="wnav-item" href="start.html" data-title="с чего начать">С чего начать</a>
+<a class="wnav-item" href="sborka.html" data-title="что такое «оператор»">Что такое «Оператор»</a>
+<a class="wnav-item" href="ustanovka.html" data-title="установка и обновление">Установка и обновление</a>
+<a class="wnav-item" href="nastroyki.html" data-title="настройки: сложность и моды">Настройки: сложность и моды</a>
+<a class="wnav-item" href="problemy.html" data-title="частые проблемы">Частые проблемы</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-target"/></svg>Практика</div>
+<a class="wnav-item" href="pervyy-sputnik.html" data-title="первый спутник: собираем и выводим">Первый спутник: собираем и выводим</a>
+<a class="wnav-item" href="missiya-mun.html" data-title="миссия на мун">Миссия на Мун</a>
+<a class="wnav-item" href="mezhplanetnye.html" data-title="межпланетные перелёты">Межпланетные перелёты</a>
+<a class="wnav-item" href="samolety.html" data-title="самолёты и ssto">Самолёты и SSTO</a>
+<a class="wnav-item" href="spasenie-stupeney.html" data-title="возврат ступеней и многоразовость">Возврат ступеней и многоразовость</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-satellite"/></svg>Связь и сеть</div>
+<a class="wnav-item" href="svyaz-osnovy.html" data-title="связь: как работает commnet">Связь: как работает CommNet</a>
+<a class="wnav-item" href="sozvezdiya.html" data-title="созвездия и покрытие">Созвездия и покрытие</a>
+<a class="wnav-item" href="antenny.html" data-title="антенны: выбор и дальность">Антенны: выбор и дальность</a>
+<a class="wnav-item" href="set-planet.html" data-title="сеть связи у других планет">Сеть связи у других планет</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-cpu"/></svg>Автоматика</div>
+<a class="wnav-item" href="kos-osnovy.html" data-title="kos: основы">kOS: основы</a>
+<a class="wnav-item" href="kos-recepty.html" data-title="kos: готовые рецепты">kOS: готовые рецепты</a>
+<a class="wnav-item" href="avtomatika.html" data-title="автоматика полётов и рутина">Автоматика полётов и рутина</a>
+<a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
+<a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-atom"/></svg>Наука</div>
+<a class="wnav-item" href="nauka-osnovy.html" data-title="наука: как собирать эффективно">Наука: как собирать эффективно</a>
+<a class="wnav-item" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
+<a class="wnav-item" href="pribory.html" data-title="научные приборы сборки">Научные приборы сборки</a>
+<a class="wnav-item" href="laboratorii.html" data-title="лаборатории и обработка науки">Лаборатории и обработка науки</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-capsule"/></svg>Станции и базы</div>
+<a class="wnav-item" href="stancii.html" data-title="орбитальные станции">Орбитальные станции</a>
+<a class="wnav-item" href="bazy.html" data-title="наземные базы и снабжение">Наземные базы и снабжение</a>
+<a class="wnav-item" href="zhizneobespechenie.html" data-title="жизнеобеспечение: snacks">Жизнеобеспечение: Snacks</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-engine"/></svg>Техника</div>
+<a class="wnav-item" href="energetika.html" data-title="энергетика и тепло">Энергетика и тепло</a>
+<a class="wnav-item" href="dvigateli.html" data-title="двигатели и топливо">Двигатели и топливо</a>
+<a class="wnav-item" href="konstruirovanie.html" data-title="конструирование аппаратов">Конструирование аппаратов</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-route"/></svg>Прогресс</div>
+<a class="wnav-item" href="kontrakty.html" data-title="контракты и стратегии">Контракты и стратегии</a>
+<a class="wnav-item" href="ekonomika.html" data-title="экономика программы">Экономика программы</a>
+<a class="wnav-item" href="dolgaya-igra.html" data-title="долгая игра: как вести программу">Долгая игра: как вести программу</a>
+</div>
+<div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-book"/></svg>Справочник</div>
+<a class="wnav-item" href="mody-yadro.html" data-title="каталог модов: ядро сборки">Каталог модов: ядро сборки</a>
+<a class="wnav-item" href="mody-rasshirenie.html" data-title="каталог модов: расширения">Каталог модов: расширения</a>
+<a class="wnav-item" href="derevo-tehnologiy.html" data-title="дерево технологий">Дерево технологий</a>
+<a class="wnav-item" href="tela-sistemy.html" data-title="тела системы: кербол и opm">Тела системы: Кербол и OPM</a>
+<a class="wnav-item" href="resursy.html" data-title="ресурсы и цепочки переработки">Ресурсы и цепочки переработки</a>
+<a class="wnav-item is-on" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
+</div>
+</nav></aside>
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Справочник</div><h1>Глоссарий</h1><p class="lede">Термины из вики и из игры — орбиты, тяга, связь, наука — короткими определениями со ссылками туда, где тема раскрыта.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+<ul>
+<li><a href="#_1">Орбиты</a></li>
+<li><a href="#_2">Двигатели</a></li>
+<li><a href="#_3">Связь</a></li>
+<li><a href="#_4">Наука</a></li>
+<li><a href="#_5">Прочее</a></li>
+</ul>
+</div>
+</div><article class="art"><p>Термины даны в том виде, в каком они встречаются в интерфейсе сборки и в остальных статьях. Где есть отдельная статья — стоит ссылка.</p>
+<h2 id="_1">Орбиты</h2>
+<p><strong>Апоцентр / перицентр</strong> — самая дальняя и самая близкая точки орбиты. В игре подписаны как Ап и Пе. У Кербина их часто зовут апокербий и перикербий, у Муна — апомунний и перимунний; смысл один.</p>
+<p><strong>Циркуляризация</strong> — превращение эллипса в круг: жжёшь в апоцентре, чтобы поднять перицентр (или наоборот). Стандартный второй манёвр любого запуска: подняли Ап до 100 км, докрутили в апоцентре — получили круговую орбиту.</p>
+<p><strong>Наклонение</strong> — угол между плоскостью орбиты и экватором тела. 0° — экваториальная орбита, 90° — полярная, больше 90° — ретроградная. Смена наклонения — самый дорогой манёвр в игре, закладывай его в план пуска, а не потом (<a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a>).</p>
+<p><strong>Узлы орбиты, восходящий и нисходящий</strong> — две точки, где орбита пересекает опорную плоскость (экватор тела или орбиту цели). Только в них имеет смысл менять наклонение и только там сходятся плоскости при сближении.</p>
+<p><strong>СОИ, сфера влияния</strong> — область, внутри которой игра считает притяжение только одного тела. Пересёк границу — траектория мгновенно пересчитывается на новое тело. У Кербина СОИ 84,2 Мм, у Муна — 2,43 Мм, у Джула — 2,46 Гм, у Нейдона из OPM — 4,42 Гм (<a class="wikilink" href="tela-sistemy.html" title="Все тела стоковой системы плюс Outer Planets Mod — расстояния, атмосферы, множители науки и что с каждого можно взять программе.">Тела системы: Кербол и OPM</a>).</p>
+<p><strong>Кеостационар</strong> — орбита с периодом, равным суткам Кербина (5 ч 59 м): высота <strong>2 863 334 м</strong> над поверхностью. Спутник висит над одной точкой экватора. База любой сети связи (<a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a>).</p>
+<p><strong>Фазовый угол</strong> — угловая разница между планетой отправления и планетой назначения в момент старта. Правильный фазовый угол — половина успеха межпланетного перелёта.</p>
+<p><strong>Окно перелёта</strong> — промежуток времени, когда фазовый угол подходящий и перелёт стоит минимума Δv. Между окнами к Дюне проходят сотни дней, к внешним планетам — годы. Считает Transfer Window Planner, напоминает Kerbal Alarm Clock (<a class="wikilink" href="mezhplanetnye.html" title="Как ловить окна Планировщиком перелётов, сколько Δv стоит дорога до Дюны, Джула и внешних планет OPM, когда аэроторможение экономит, а когда убивает.">Межпланетные перелёты</a>).</p>
+<p><strong>Гравиманёвр</strong> — использование гравитации попутного тела, чтобы изменить скорость и направление бесплатно. У Джула и Сарнуса с их спутниками получается особенно выгодно.</p>
+<p><strong>Аэродинамическое торможение</strong> — гашение скорости атмосферой вместо двигателя. Опускаешь перицентр в верхние слои и ждёшь несколько витков. Экономит сотни м/с у Дюны, Евы, Лейта и Текто; следи за перегревом.</p>
+<p><strong>Режим сближения</strong> — режим карты, где расстояния и скорости считаются относительно выбранной цели, а на орбитах появляются маркеры сближения. Без него стыковку не спланировать (<a class="wikilink" href="stancii.html" title="Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.">Орбитальные станции</a>).</p>
+<h2 id="_2">Двигатели</h2>
+<p><strong>Δv (характеристическая скорость)</strong> — суммарный запас изменения скорости аппарата, в м/с. Главная валюта планирования: на низкую орбиту Кербина нужно около 3400 м/с, на Мун и обратно — ещё примерно столько же. Считается по формуле Циолковского: Δv = Iуд · g₀ · ln(m₀/m₁), где g₀ = 9,81.</p>
+<p><strong>Iуд (удельный импульс)</strong> — эффективность двигателя в секундах. Чем выше, тем меньше топлива на ту же Δv. Керосин даёт 300–350 с, водород 400–460, ЯРД 800–900, ионники и МПД — тысячи (<a class="wikilink" href="dvigateli.html" title="Линейка тяги в сборке — от керосиновых носителей до плазмы: что, когда и какой ценой по энергии и теплу.">Двигатели и топливо</a>).</p>
+<p><strong>TWR (тяговооружённость)</strong> — отношение тяги к весу. Для взлёта с Кербина нужен TWR &gt; 1 (в идеале 1,3–1,6), для орбитального манёвра хватает 0,2, для ионного буксира — 0,01. Считай TWR относительно того тела, где ты сейчас.</p>
+<p><strong>Ступень / декаплер</strong> — ступень сбрасывается, когда её топливо кончилось; декаплер (или сепаратор) — деталь, которая физически разъединяет секции. Порядок срабатывания задаётся столбиком стадий в ангаре.</p>
+<h2 id="_3">Связь</h2>
+<p><strong>DSN (ЗСК, сеть дальней связи)</strong> — наземные антенны Кербина. Мощность зависит от уровня Центра слежения: 2 Гм / 50 Гм / 250 Гм. Дальность звена считается как корень из произведения мощностей двух концов (<a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>).</p>
+<p><strong>Ретранслятор</strong> — антенна типа RELAY: пропускает через себя чужой трафик. Антенна типа DIRECT умеет только «домой». Спутник созвездия обязан быть ретранслятором, иначе сеть не соберётся (<a class="wikilink" href="antenny.html" title="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">Антенны: выбор и дальность</a>).</p>
+<h2 id="_4">Наука</h2>
+<p><strong>Биом</strong> — участок поверхности или атмосферы с собственным именем: «Горы», «Полярный шестиугольник», «Кербин: ЦУП». Один и тот же эксперимент в разных биомах даёт разную науку — отсюда прыжки по поверхности вместо одной посадки.</p>
+<p><strong>Ситуация</strong> — состояние аппарата в момент эксперимента: на поверхности, на воде, в полёте низко/высоко, в космосе низко/высоко. Границы у каждого тела свои (у Кербина — 18 км и 250 км). Ситуация × биом × тело × эксперимент — и есть формула науки (<a class="wikilink" href="nauka-osnovy.html" title="Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.">Наука: как собирать эффективно</a>).</p>
+<h2 id="_5">Прочее</h2>
+<p><strong>ЭЧ (электрозаряд, <code>ElectricCharge</code>)</strong> — универсальная единица энергии. В модах линейки Near Future принято, что 1 ЭЧ ≈ 1 кДж, то есть 1 ЭЧ/с ≈ 1 кВт. В интерфейсе встречается и как EC (<a class="wikilink" href="energetika.html" title="Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.">Энергетика и тепло</a>).</p>
+<p><strong>Тепловая петля</strong> — виртуальный контур теплоносителя из SystemHeat. Всё, что назначено на одну петлю, обменивается теплом; петлю надо охлаждать радиаторами. Реакторы, ISRU и электродвижение без правильно набранной петли деградируют по мощности.</p>
+<p><strong>ISRU</strong> — производство ресурсов на месте: бур достаёт руду, конвертер делает из неё топливо. Смысл — перестать возить топливо с Кербина (<a class="wikilink" href="resursy.html" title="Все ресурсные цепочки сборки — от стоковой руды до ракетных деталей, криогеники, ядерного топлива и снеков.">Ресурсы и цепочки переработки</a>, <a class="wikilink" href="bazy.html" title="KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.">Наземные базы и снабжение</a>).</p>
+<p><strong>Стыковочный узел</strong> — деталь для соединения аппаратов на орбите или на грунте. Стыкуются только узлы одного размера; андрогинные соединяются друг с другом, «активный/пассивный» — только в паре. Порты ставь по осям симметрии, иначе центр масс уедет.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="start.html"><b>С чего начать</b><span>Первые часы в сборке «Оператор»: какие контракты брать, первый суборбитальный и орбитальный полёт, и куда не стоит лезть сразу.</span></a><a href="kos-osnovy.html"><b>kOS: основы</b><span>Бортовой компьютер kOS: как поставить процессор, открыть терминал, где лежат скрипты и из чего состоит первая программа.</span></a><a href="mezhplanetnye.html"><b>Межпланетные перелёты</b><span>Как ловить окна Планировщиком перелётов, сколько Δv стоит дорога до Дюны, Джула и внешних планет OPM, когда аэроторможение экономит, а когда убивает.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="nauka-osnovy.html">Наука: как собирать эффективно</a>, <a href="pervyy-sputnik.html">Первый спутник: собираем и выводим</a>, <a href="start.html">С чего начать</a></div>
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
+      <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
+      присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
+  </main>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('wsearch'); if(!s) return;
+  s.addEventListener('input',function(){
+    var q=s.value.trim().toLowerCase();
+    document.querySelectorAll('#wnav .wnav-item').forEach(function(a){
+      a.style.display = !q || a.getAttribute('data-title').indexOf(q)>=0 ? '' : 'none';
+    });
+    document.querySelectorAll('#wnav [data-cat]').forEach(function(c){
+      var any=[].slice.call(c.querySelectorAll('.wnav-item')).some(function(a){return a.style.display!=='none'});
+      c.style.display = any ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body></html>
