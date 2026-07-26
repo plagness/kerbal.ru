@@ -235,6 +235,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#x-science">[x] Science!</a></li>
 <li><a href="#science-relay">Science Relay</a></li>
 <li><a href="#_4">План первых этапов</a></li>
+<li><a href="#_5">Автоматический сбор: не передавать пустое</a></li>
 </ul>
 </div>
 </div><article class="art"><p>Наука в KSP считается по формуле «эксперимент × ситуация × тело × биом». Ты не «летишь за наукой» — ты закрываешь клетки таблицы. Задача сборки «Оператор» — закрывать их дешевле и меньшим числом пусков.</p>
@@ -289,7 +290,19 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><strong>Мун и Минмус.</strong> Пролёт → орбита → посадка. Минмус выгоднее: ×5 и почти бесплатная посадка. Одна экспедиция с прыжками по 3–4 биомам закрывает половину дерева.</li>
 </ol>
 <p>Дальше подключай <a class="wikilink" href="kontrakty.html" title="Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.">Контракты и стратегии</a> Field Research: они платят за науку, которую ты и так собираешь.</p>
-<p>Значения терминов — «ситуация», «биом», «множитель тела» — в <a class="wikilink" href="glossariy.html" title="Термины из вики и из игры — орбиты, тяга, связь, наука — короткими определениями со ссылками туда, где тема раскрыта.">Глоссарий</a>.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="pribory.html"><b>Научные приборы сборки</b><span>Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.</span></a><a href="geologiya.html"><b>Геология и биомы</b><span>Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.</span></a><a href="stancii.html"><b>Орбитальные станции</b><span>Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="geologiya.html">Геология и биомы</a>, <a href="glossariy.html">Глоссарий</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="missiya-mun.html">Миссия на Мун</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="pervyy-sputnik.html">Первый спутник: собираем и выводим</a>, <a href="sborka.html">Что такое «Оператор»</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="tela-sistemy.html">Тела системы: Кербол и OPM</a></div>
+<p>Значения терминов — «ситуация», «биом», «множитель тела» — в <a class="wikilink" href="glossariy.html" title="Термины из вики и из игры — орбиты, тяга, связь, наука — короткими определениями со ссылками туда, где тема раскрыта.">Глоссарий</a>.</p>
+<h2 id="_5">Автоматический сбор: не передавать пустое</h2>
+<p>Когда наукой занимается скрипт (<a class="wikilink" href="kos-biblioteka.html" title="Как разложить скрипты по файлам-блокам вместо одной простыни: подъём, узлы, наука, телеметрия отдельно, а файл миссии только собирает их и задаёт цифры цели. С готовой структурой и разбором подводных камней.">kOS: библиотека модулей</a>), появляется соблазн передавать
+всё подряд на каждом рубеже. Так делать не стоит: субъект, выбранный до предела,
+вернёт по радио ноль, а электричество на передачу спишется полностью.</p>
+<p>kOS отдаёт ценность заранее — у каждой записи данных есть суффикс <code>TRANSMITVALUE</code>.
+Проверка в одну строку экономит и заряд, и место в приборах:</p>
+<pre><code class="language-kos">LOCAL worth IS 0.
+FOR d IN m:DATA { SET worth TO worth + d:TRANSMITVALUE. }
+IF worth &gt;= 0.1 { m:TRANSMIT(). } ELSE { m:DUMP(). }
+</code></pre>
+<p>Сброс данных освобождает прибор под следующий рубеж — многоразовые эксперименты
+от этого не страдают.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="pribory.html"><b>Научные приборы сборки</b><span>Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.</span></a><a href="geologiya.html"><b>Геология и биомы</b><span>Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.</span></a><a href="stancii.html"><b>Орбитальные станции</b><span>Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="geologiya.html">Геология и биомы</a>, <a href="glossariy.html">Глоссарий</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="missiya-mun.html">Миссия на Мун</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="pervyy-sputnik.html">Первый спутник: собираем и выводим</a>, <a href="sborka.html">Что такое «Оператор»</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="tela-sistemy.html">Тела системы: Кербол и OPM</a></div>
     <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>

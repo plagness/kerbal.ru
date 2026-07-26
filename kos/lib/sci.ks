@@ -16,6 +16,11 @@ GLOBAL SCI_ANIM IS LIST("DMModuleScienceAnimateGeneric", "DMBasicScienceModule")
 GLOBAL SCI_ALLOW_ANIM IS FALSE.
 GLOBAL SCI_LAST IS "".
 GLOBAL SCI_SENT IS 0.
+GLOBAL SCI_DUMPED IS 0.
+// Ниже этого порога передавать бессмысленно: субъект уже выбран,
+// и радио вернёт крохи. Такие данные сбрасываем, чтобы прибор
+// освободился под следующий рубеж, а не занимал место мусором.
+GLOBAL SCI_MIN_VALUE IS 0.1.
 
 FUNCTION sciVacuum { RETURN SHIP:ALTITUDE > SHIP:BODY:ATM:HEIGHT. }
 
@@ -65,11 +70,30 @@ FUNCTION sciSweep {
   }
   WAIT 1.
   LOCAL sent IS 0.
+  LOCAL dumped IS 0.
+  LOCAL gained IS 0.
   FOR m IN sciModules() {
-    IF m:HASDATA { m:TRANSMIT(). SET sent TO sent + 1. WAIT 0.6. }
+    IF m:HASDATA {
+      // Смотрим, сколько реально вернёт передача. Ноль — значит субъект
+      // уже выбран до предела, и мы бы жгли электричество впустую.
+      LOCAL worth IS 0.
+      FOR d IN m:DATA { SET worth TO worth + d:TRANSMITVALUE. }
+      IF worth >= SCI_MIN_VALUE {
+        m:TRANSMIT().
+        SET sent TO sent + 1.
+        SET gained TO gained + worth.
+        WAIT 0.6.
+      } ELSE {
+        m:DUMP().                       // освобождаем прибор
+        SET dumped TO dumped + 1.
+        WAIT 0.2.
+      }
+    }
   }
   SET SCI_SENT TO SCI_SENT + sent.
-  PRINT "  наука [" + label + "]: снято " + ran + ", передано " + sent.
+  SET SCI_DUMPED TO SCI_DUMPED + dumped.
+  PRINT "  наука [" + label + "]: снято " + ran + ", передано " + sent
+        + " (+" + ROUND(gained,1) + ")" + (CHOOSE ", пусто " + dumped IF dumped > 0 ELSE "").
 }
 
 // Смена зоны — собираем. Передаём только в вакууме.
@@ -85,7 +109,12 @@ FUNCTION sciRetry {
   IF NOT sciVacuum() { RETURN 0. }
   LOCAL n IS 0.
   FOR m IN sciModules() {
-    IF m:HASDATA { m:TRANSMIT(). SET n TO n + 1. WAIT 0.6. }
+    IF m:HASDATA {
+      LOCAL worth IS 0.
+      FOR d IN m:DATA { SET worth TO worth + d:TRANSMITVALUE. }
+      IF worth >= SCI_MIN_VALUE { m:TRANSMIT(). SET n TO n + 1. WAIT 0.6. }
+      ELSE { m:DUMP(). WAIT 0.2. }
+    }
   }
   IF n > 0 { PRINT "  добор: передано " + n. }
   RETURN n.
