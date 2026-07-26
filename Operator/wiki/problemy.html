@@ -2,7 +2,7 @@
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Частые проблемы — вики kerbal.ru</title>
-<meta name="description" content="Симптом → причина → что делать: неуправляемый зонд, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.">
+<meta name="description" content="Симптом → причина → что делать: неуправляемый зонд, потеря связи и науки, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -222,13 +222,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
 </div>
 </nav></details></aside>
-  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Начало</div><h1>Частые проблемы</h1><p class="lede">Симптом → причина → что делать: неуправляемый зонд, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Начало</div><h1>Частые проблемы</h1><p class="lede">Симптом → причина → что делать: неуправляемый зонд, потеря связи и науки, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
 <ul>
 <li><a href="#_1">Зонд не управляется</a></li>
 <li><a href="#wasd-sas">Не идёт WASD, не ставится манёвр, не уходит наука — а SAS работает</a></li>
 <li><a href="#_2">Связи нет вообще нигде, даже прямо над ЦУПом</a></li>
 <li><a href="#fps-mac">Аппарат дёргается и «разлетается», FPS в пол (Mac)</a></li>
-<li><a href="#_3">Странный зацикленный звук на старте</a></li>
+<li><a href="#_3">Зацикленный звук: дрон или ровный «цикл» весь полёт</a></li>
 <li><a href="#_4">Первая загрузка длится вечность</a></li>
 <li><a href="#modulemanager">Ошибки ModuleManager при загрузке</a></li>
 <li><a href="#-">Кое-где английский текст</a></li>
@@ -266,10 +266,30 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </code></pre>
 <p>Ноль — всё в порядке. Сотни и тысячи — проблема твоя.</p>
 <p><strong>Что делать.</strong> Установщик на macOS чинит это сам. Если ставил вручную: удали <code>GameData/000_KSPBurst/com.unity.burst@*.zip</code> и <code>PluginData/KSPBurst@*</code>, а <code>000_KSPBurst/Plugins/</code> <strong>оставь</strong> — на них завязан BRP. Дополнительно выключи <code>Enable Burst-Accelerated Methods</code> в разделе Background Resource Processing.</p>
-<h2 id="_3">Странный зацикленный звук на старте</h2>
-<p><strong>Симптом.</strong> С момента запуска висит громкий «мини-ракетный» дрон, не связанный с двигателями.</p>
-<p><strong>Причина.</strong> RCS-детали Knes крутили ракетный клип <code>sound_rocket_mini</code> в режиме зацикливания. SAS постоянно подрабатывает движками ориентации — десяток блоков сливается в гул.</p>
-<p><strong>Что делать.</strong> В сборке уже есть фикс (<code>knes-rcs-sound-fix.cfg</code>): у шести RCS-деталей Knes убрано зацикленное аудио, выхлоп и звук маршевых двигателей не тронуты. Слышишь дрон — сборка старая, обнови её: <code>install.sh --update</code>, см. <a class="wikilink" href="ustanovka.html" title="Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.">Установка и обновление</a>.</p>
+<h2 id="_3">Зацикленный звук: дрон или ровный «цикл» весь полёт</h2>
+<p><strong>Симптом.</strong> Либо громкий «мини-ракетный» дрон с момента запуска, либо ровный повторяющийся цикл, у которого тон едет вверх-вниз. К маршевым двигателям отношения не имеет, на простых аппаратах не появляется.</p>
+<p><strong>Причина.</strong> Слабая деталь крутит <strong>закольцованный клип от настоящей ракеты</strong> (<code>sound_rocket_mini</code>). Дальше два варианта: либо таких деталей на ракете десяток и они сливаются в гул, либо высота тона привязана к тяге — автопилот на подъёме подруливает газом, и тон ходит туда-сюда. Пойманные детали:</p>
+<table>
+<thead>
+<tr>
+<th>Деталь</th>
+<th>Что было</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RCS-блоки Knes (6 шт.)</td>
+<td>зацикленный <code>sound_rocket_mini</code>; на ракете их до одиннадцати — сливались в дрон</td>
+</tr>
+<tr>
+<td>«Расширенный субспутник» US2</td>
+<td>микродвигатель на 2 кН с тем же клипом и высотой тона по тяге, плюс битая ссылка на несуществующий <code>sound_IonEngine</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Как проверить, что это оно.</strong> В <code>KSP.log</code> поищи строку <code>Cannot assign AudioClip</code> — она укажет на деталь с битым звуком. И сопоставь по времени: цикл начинается ровно тогда, когда активируется ступень с подозреваемой деталью, а не с началом полёта вообще.</p>
+<p><strong>Что делать.</strong> В сборке уже есть оба фикса (<code>knes-rcs-sound-fix.cfg</code>, <code>us2-wedge-sound-fix.cfg</code>): закольцованный звук у этих деталей убран, визуальный выхлоп и одноразовый щелчок запуска оставлены. Слышишь цикл — обнови сборку (<code>install.sh --update</code>, см. <a class="wikilink" href="ustanovka.html" title="Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.">Установка и обновление</a>) и <strong>перезапусти игру</strong>: ModuleManager читает конфиги только на старте.</p>
+<p>Нашёл ещё одну такую деталь — пришли название и кусок лога в issue, добавим в фикс.</p>
 <h2 id="_4">Первая загрузка длится вечность</h2>
 <p><strong>Симптом.</strong> Загрузочный экран висит несколько минут.</p>
 <p><strong>Причина.</strong> Module Manager собирает конфиги: в «Операторе» это около 7,5 тысяч патчей поверх восьми десятков модов.</p>
