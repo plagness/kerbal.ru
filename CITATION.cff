@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Если kerbal.ru помог вашему проекту или публикации, укажите репозиторий и использованную версию."
-title: "kerbal.ru: русская локализация RO / RSS / RP-1"
+title: "kerbal.ru: русский хаб KSP-моддинга — библиотека переводов модов и каталог сборок"
 type: software
 version: 26.17
 date-released: 2026-07-26
@@ -12,8 +12,9 @@ repository-code: "https://github.com/plagness/kerbal.ru"
 url: "https://kerbal.ru"
 keywords:
   - Kerbal Space Program
-  - Realism Overhaul
-  - Real Solar System
-  - RP-1
+  - mod translation
   - Russian localization
-  - translation
+  - modpack
+  - CKAN
+  - Realism Overhaul
+  - RP-1

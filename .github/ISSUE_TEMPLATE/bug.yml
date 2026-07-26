@@ -20,12 +20,23 @@ body:
         - Другое
     validations:
       required: true
+  - type: dropdown
+    id: build
+    attributes:
+      label: Какая сборка
+      options:
+        - Оператор (operator)
+        - RO / RSS / RP-1 (rp1)
+        - Только переводы, без сборки
+        - Не относится к сборке
+    validations:
+      required: true
   - type: input
     id: environment
     attributes:
       label: Окружение
-      description: ОС, версия KSP, версия kerbal.ru из .kerbalru-version и важные версии модов.
-      placeholder: Windows 11, KSP 1.12.5, kerbal.ru 26.1
+      description: ОС, версия KSP, версия kerbal.ru из .kerbalru-build.json и важные версии модов.
+      placeholder: Windows 11, KSP 1.12.5, kerbal.ru 26.17
     validations:
       required: true
   - type: textarea
@@ -56,7 +67,7 @@ body:
     attributes:
       label: Проверка перед отправкой
       options:
-        - label: Я использую лицензионную KSP 1.12.5 и типовую RO/RSS/RP-1 сборку.
+        - label: Я использую лицензионную KSP 1.12.5, а моды поставлены официальным CKAN.
           required: true
         - label: Я проверил существующие issues и документацию.
           required: true
