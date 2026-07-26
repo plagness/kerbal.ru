@@ -1,0 +1,30 @@
+{
+  "spec_version": "v1.6",
+  "identifier": "kerbalru-rp1",
+  "name": "kerbal.ru: RO/RSS/RP-1 (Realistic Progression)",
+  "abstract": "Реальная Солнечная система, реальная физика, историческая карьера с 1951 г. Хардкор-реализм.",
+  "author": [
+    "kerbal.ru"
+  ],
+  "version": "26.14",
+  "ksp_version": "1.12.5",
+  "license": "MIT",
+  "kind": "metapackage",
+  "release_status": "stable",
+  "resources": {
+    "homepage": "https://kerbal.ru/KSP-RO",
+    "repository": "https://github.com/plagness/kerbal.ru",
+    "bugtracker": "https://github.com/plagness/kerbal.ru/issues"
+  },
+  "depends": [
+    {
+      "name": "RP-1-ExpressInstall"
+    },
+    {
+      "name": "RP-1-ExpressInstall-Graphics-Low"
+    },
+    {
+      "name": "RP-1"
+    }
+  ]
+}

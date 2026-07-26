@@ -6,3 +6,5 @@ __pycache__/
 .idea/
 .vscode/
 *.log
+# сборочные артефакты: ZIP кладём в GitHub Release, .ckan — в репо (нужен сайту)
+dist/*.zip

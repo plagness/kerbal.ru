@@ -1,0 +1,203 @@
+{
+  "spec_version": "v1.6",
+  "identifier": "kerbalru-operator",
+  "name": "kerbal.ru: Оператор",
+  "abstract": "Спутники → сеть покрытия → станции → автоматика. Оператор космопрограммы.",
+  "author": [
+    "kerbal.ru"
+  ],
+  "version": "26.14",
+  "ksp_version": "1.12.5",
+  "license": "MIT",
+  "kind": "metapackage",
+  "release_status": "stable",
+  "resources": {
+    "homepage": "https://kerbal.ru/Operator",
+    "repository": "https://github.com/plagness/kerbal.ru",
+    "bugtracker": "https://github.com/plagness/kerbal.ru/issues"
+  },
+  "depends": [
+    {
+      "name": "ReStock"
+    },
+    {
+      "name": "ReStockPlus"
+    },
+    {
+      "name": "NearFutureLaunchVehicles"
+    },
+    {
+      "name": "NearFutureSpacecraft"
+    },
+    {
+      "name": "NearFutureSolar"
+    },
+    {
+      "name": "NearFutureElectrical"
+    },
+    {
+      "name": "KSPBurst"
+    },
+    {
+      "name": "CommunityTechTree"
+    },
+    {
+      "name": "ContractConfigurator"
+    },
+    {
+      "name": "ContractConfigurator-Constellations"
+    },
+    {
+      "name": "CommNetConstellation"
+    },
+    {
+      "name": "AntennaHelper"
+    },
+    {
+      "name": "MechJeb2"
+    },
+    {
+      "name": "SCANsat"
+    },
+    {
+      "name": "Snacks"
+    },
+    {
+      "name": "KerbalJointReinforcementContinued"
+    },
+    {
+      "name": "NearFutureExploration"
+    },
+    {
+      "name": "NearFutureConstruction"
+    },
+    {
+      "name": "Coatl-Aerospace-Redux"
+    },
+    {
+      "name": "xScienceContinued"
+    },
+    {
+      "name": "ScienceRelay"
+    },
+    {
+      "name": "StationPartsExpansionRedux"
+    },
+    {
+      "name": "kOS"
+    },
+    {
+      "name": "RoutineMissionManager"
+    },
+    {
+      "name": "BackgroundResourceProcessing"
+    },
+    {
+      "name": "KerbalAlarmClock"
+    },
+    {
+      "name": "HaystackReContinued"
+    },
+    {
+      "name": "OuterPlanetsMod"
+    },
+    {
+      "name": "KAS"
+    },
+    {
+      "name": "Strategia"
+    },
+    {
+      "name": "NearFuturePropulsion"
+    },
+    {
+      "name": "KerbalAtomics"
+    },
+    {
+      "name": "FarFutureTechnologies"
+    },
+    {
+      "name": "CryoEngines"
+    },
+    {
+      "name": "CryoTanks"
+    },
+    {
+      "name": "HeatControl"
+    },
+    {
+      "name": "NearFutureAeronautics"
+    },
+    {
+      "name": "AirplanePlus"
+    },
+    {
+      "name": "KerbalAircraftExpansion"
+    },
+    {
+      "name": "Mk2Expansion"
+    },
+    {
+      "name": "Mk3Expansion"
+    },
+    {
+      "name": "SpaceY-Lifters"
+    },
+    {
+      "name": "SpaceY-Expanded"
+    },
+    {
+      "name": "DMagicOrbitalScience"
+    },
+    {
+      "name": "StationScienceContinued"
+    },
+    {
+      "name": "UniversalStorage2"
+    },
+    {
+      "name": "Knes"
+    },
+    {
+      "name": "KerbalPlanetaryBaseSystems"
+    },
+    {
+      "name": "StockalikeMiningExtension"
+    },
+    {
+      "name": "ContractConfigurator-KerbinSpaceStation"
+    },
+    {
+      "name": "ContractConfigurator-CleverSats"
+    },
+    {
+      "name": "ContractConfigurator-FieldResearch"
+    },
+    {
+      "name": "TransferWindowPlanner"
+    },
+    {
+      "name": "StageRecovery"
+    },
+    {
+      "name": "JX2Antenna"
+    },
+    {
+      "name": "BeamedPowerPlugin"
+    },
+    {
+      "name": "ExtraPlanetaryLaunchpads"
+    }
+  ],
+  "suggests": [
+    {
+      "name": "kRPC"
+    },
+    {
+      "name": "kOS.MechJeb2.Addon"
+    },
+    {
+      "name": "KerbalKonstructs"
+    }
+  ]
+}
