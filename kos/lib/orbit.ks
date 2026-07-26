@@ -76,3 +76,14 @@ GLOBAL FUNCTION o_burn {
   SAS ON.                      // между этапами держим аппарат, а не бросаем
   WAIT 0.5.
 }
+
+// Узел: поднять апоцентр до targetAlt, прожиг В ЗАДАННЫЙ МОМЕНТ.
+// Точка прожига становится перицентром — так задаётся аргумент перицентра.
+// Радиус в момент ut берём текущий: на околокруговой парковке он не меняется.
+GLOBAL FUNCTION o_nodeRaiseApoAt {
+  PARAMETER targetAlt, ut.
+  LOCAL rad IS SHIP:ALTITUDE + o_br().
+  LOCAL at IS (rad + targetAlt + o_br()) / 2.
+  LOCAL dv IS o_vAt(rad, at) - o_vAt(rad, SHIP:ORBIT:SEMIMAJORAXIS).
+  RETURN NODE(ut, 0, 0, dv).
+}
