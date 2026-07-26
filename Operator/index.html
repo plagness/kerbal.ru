@@ -861,7 +861,7 @@ document.addEventListener('click',function(event){
   planetGroup.rotation.z=.24;
   scene.add(planetGroup);
 
-  var dayMap=imageTex('assets/textures/earth-blue-marble.jpg',true),cloudMap=imageTex('assets/textures/earth-clouds.jpg',false);
+  var dayMap=imageTex('/assets/textures/earth-blue-marble.jpg',true),cloudMap=imageTex('/assets/textures/earth-clouds.jpg',false);
   var earth=new THREE.Mesh(
     new THREE.SphereGeometry(1.78,56,56),
     new THREE.MeshStandardMaterial({map:dayMap,roughness:.78,metalness:.015})
@@ -883,7 +883,7 @@ document.addEventListener('click',function(event){
   // LRO color and elevation maps keep the Moon recognizable even at a small scale.
   var munOrbit=new THREE.Group();munOrbit.rotation.x=.75;munOrbit.rotation.z=-.28;planetGroup.add(munOrbit);
   munOrbit.add(orbitLine(3.45,0xa6b1aa,.1,1));
-  var moonMap=imageTex('assets/textures/moon-lroc.jpg',true),moonHeight=imageTex('assets/textures/moon-elevation.jpg',false);
+  var moonMap=imageTex('/assets/textures/moon-lroc.jpg',true),moonHeight=imageTex('/assets/textures/moon-elevation.jpg',false);
   var mun=new THREE.Mesh(new THREE.SphereGeometry(.27,32,32),new THREE.MeshStandardMaterial({map:moonMap,bumpMap:moonHeight,bumpScale:.018,roughness:1}));munOrbit.add(mun);
 
   // Fine orbital particles make the starting orbit feel alive.
@@ -895,15 +895,15 @@ document.addEventListener('click',function(event){
 
   // Mars waits below the first screen and rises into the lower-left corner near the end.
   var marsGroup=new THREE.Group(),marsBaseX=-3.45,marsBaseScale=1.78;
-  var marsMap=imageTex('assets/textures/mars-viking.jpg',true);
+  var marsMap=imageTex('/assets/textures/mars-viking.jpg',true);
   var mars=new THREE.Mesh(new THREE.SphereGeometry(1.58,56,56),new THREE.MeshStandardMaterial({map:marsMap,color:0xffd4b7,roughness:.95,metalness:0}));
   marsGroup.add(mars);marsGroup.position.set(marsBaseX,-5.1,-.55);marsGroup.rotation.z=-.16;scene.add(marsGroup);
   var marsOrbit=orbitLine(1.92,0xff9d48,.1,.82);marsOrbit.rotation.x=1.22;marsGroup.add(marsOrbit);
 
   var phobosOrbit=new THREE.Group();phobosOrbit.rotation.x=-1.03;phobosOrbit.rotation.z=.35;marsGroup.add(phobosOrbit);phobosOrbit.add(orbitLine(2.04,0xc2a38d,.1,.9));
-  var phobos=new THREE.Mesh(ruggedSphere(.15,28,20,.08),new THREE.MeshStandardMaterial({map:imageTex('assets/textures/phobos-viking.jpg',false),color:0xc3aa96,roughness:1}));phobos.scale.set(1.34,.9,1);phobosOrbit.add(phobos);
+  var phobos=new THREE.Mesh(ruggedSphere(.15,28,20,.08),new THREE.MeshStandardMaterial({map:imageTex('/assets/textures/phobos-viking.jpg',false),color:0xc3aa96,roughness:1}));phobos.scale.set(1.34,.9,1);phobosOrbit.add(phobos);
   var deimosOrbit=new THREE.Group();deimosOrbit.rotation.x=-.45;deimosOrbit.rotation.z=-.35;marsGroup.add(deimosOrbit);deimosOrbit.add(orbitLine(2.43,0xa99586,.065,.94));
-  var deimos=new THREE.Mesh(ruggedSphere(.095,24,16,.055),new THREE.MeshStandardMaterial({map:imageTex('assets/textures/deimos-viking.jpg',false),color:0xb6a89c,roughness:1}));deimos.scale.set(1.2,.93,1);deimosOrbit.add(deimos);
+  var deimos=new THREE.Mesh(ruggedSphere(.095,24,16,.055),new THREE.MeshStandardMaterial({map:imageTex('/assets/textures/deimos-viking.jpg',false),color:0xb6a89c,roughness:1}));deimos.scale.set(1.2,.93,1);deimosOrbit.add(deimos);
 
   // A compact KSP-like lander follows a scroll-controlled flight path from Earth to Mars.
   var rocket=new THREE.Group(),rocketShell=new THREE.MeshStandardMaterial({color:0xe8eee9,roughness:.46,metalness:.18}),rocketDark=new THREE.MeshStandardMaterial({color:0x202c2a,roughness:.68,metalness:.3}),rocketAccent=new THREE.MeshStandardMaterial({color:0xf18a36,roughness:.58});
@@ -929,7 +929,7 @@ document.addEventListener('click',function(event){
     var modelRoot=new THREE.Group();modelRoot.rotation.z=-Math.PI/2;modelRoot.scale.setScalar(.095);modelRoot.add(centered);rocket.add(modelRoot);
     fallbackRocketParts.forEach(function(part){part.visible=false});flame.visible=false;nasaRocketReady=true;
   }
-  if(THREE.GLTFLoader){new THREE.GLTFLoader().load('assets/models/saturn-v-nasa.glb',function(gltf){buildNasaRocket(gltf.scene)},undefined,function(){nasaRocketReady=false})}
+  if(THREE.GLTFLoader){new THREE.GLTFLoader().load('/assets/models/saturn-v-nasa.glb',function(gltf){buildNasaRocket(gltf.scene)},undefined,function(){nasaRocketReady=false})}
 
   function detachRocketStage(index){
     if(!nasaRocketReady||!nasaStages[index]||nasaStages[index].userData.detached)return;
