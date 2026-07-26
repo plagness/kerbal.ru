@@ -348,6 +348,15 @@
     .mod-title{font-size:.96rem}.mod-kicker{font-size:.55rem}.mod-teaser{font-size:.82rem;line-height:1.42}.mod-percent{min-width:51px;padding:5px 6px;font-size:.62rem}.mod-percent small{display:none}
     .mod-copy{padding:0 17px 21px 66px}.mod-copy p{font-size:.84rem}.mod-foot{align-items:flex-start;flex-direction:column;gap:11px}.mod-media{grid-template-columns:1fr}.device-head{grid-template-columns:43px minmax(0,1fr)}.device-status{grid-column:2}.device-metrics{grid-template-columns:1fr 1fr}
   }
+  .os-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 16px}
+  .os-tab{font-size:.78rem;font-weight:600;color:var(--txt-dim);background:transparent;border:1px solid var(--line);border-radius:9px;padding:10px 15px;cursor:pointer;transition:.18s}
+  .os-tab:hover{border-color:var(--line-cyan);color:var(--txt)}
+  .os-tab.is-on{background:rgba(166,232,110,.08);border-color:var(--line-cyan);color:var(--green)}
+  .os-pane{display:none}.os-pane.is-on{display:block;animation:fade .25s ease}
+  .dl{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.82rem;padding:12px 18px;border-radius:8px;background:var(--green);color:#0a140b;text-decoration:none;margin:4px 8px 4px 0;transition:transform .18s,filter .18s}
+  .dl:hover{transform:translateY(-2px);filter:brightness(1.05);color:#0a140b}
+  .dl.sec{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--txt)}
+  .dl.sec:hover{border-color:var(--line-cyan);color:#fff}
 </style>
 </head>
 <body>
@@ -429,10 +438,37 @@
 
   <!-- INSTALLATION -->
   <section id="install" class="reveal">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num" data-install-eyebrow>01 / УСТАНОВКА</span><h2 data-install-title>Выбери один из двух путей</h2><span class="rule"></span></div>
-    <p class="install-intro" data-install-intro>Полная установка сборки или только перевод поверх готовой RO / RSS / RP-1.</p>
-    <div class="install-paths" data-install-paths aria-live="polite"></div>
-    <div class="install-notes" data-install-notes></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / УСТАНОВКА</span><h2>Поставить сборку</h2><span class="rule"></span></div>
+    <div class="card">
+      <p style="margin-top:0">Нужна лицензионная <strong>KSP 1.12.5</strong>. Сначала моды через официальный <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">CKAN</a>, затем поверх — русификатор. Выбери свою систему:</p>
+
+      <div class="os-tabs">
+        <button class="os-tab is-on" data-os="win" type="button"><svg class="ic"><use href="#i-brand-windows"/></svg> Windows</button>
+        <button class="os-tab" data-os="nix" type="button"><svg class="ic"><use href="#i-brand-debian"/></svg> Linux / macOS / Steam Deck</button>
+      </div>
+
+      <div class="os-pane is-on" data-pane="win">
+        <p><b>Терминал не нужен.</b> Всё делается мышкой.</p>
+        <ol class="steps">
+          <li><b>Поставь CKAN.</b> Скачай <code class="inline">ckan.exe</code> из <a href="https://github.com/KSP-CKAN/CKAN/releases/latest">официальных релизов</a> и запусти. При первом старте укажи папку с игрой и нажми <b>Update</b>.</li>
+          <li><b>Поставь сборку одним файлом.</b> Скачай <a class="dl" href="https://kerbal.ru/dist/rp1.ckan" download><svg class="ic"><use href="#i-download"/></svg>rp1.ckan</a> — «модпак» с RP-1 Express Install. В CKAN: <b>File → Install from .ckan</b> (или перетащи файл в окно) → <b>Apply changes</b>. CKAN сам подтянет Realism Overhaul, Real Solar System, RP-1 и все зависимости — это несколько ГБ, наберись терпения.</li>
+          <li><b>Поставь русификатор.</b> Скачай архив <a class="dl sec" href="https://github.com/plagness/kerbal.ru/releases/latest" target="_blank" rel="noopener"><svg class="ic"><use href="#i-download"/></svg>kerbalru-translations…zip</a> (в разделе Assets последнего релиза) и распакуй в папку игры — там уже есть <code class="inline">GameData</code>, согласись на объединение.</li>
+          <li><b>Включи русский.</b> Игра → Settings → язык <b>Русский</b> → перезапусти. Первый запуск очень долгий: Module Manager собирает конфиги сотен модов.</li>
+        </ol>
+        <div class="install-note" style="margin-top:14px"><svg class="ic"><use href="#i-alert-triangle"/></svg><span>RP-1 — хардкор-реализм: реальный масштаб, реальное топливо, историческая карьера. Сборка тяжёлая (~6–7 ГБ в GameData). Если хочется «взял и полетел» — посмотри <a href="/Operator">«Оператор»</a>.</span></div>
+      </div>
+
+      <div class="os-pane" data-pane="nix">
+        <p>Установщик — <strong>менеджер сборок</strong>: CKAN тянет моды, поверх ложатся переводы, включается русский. Нужен <a href="https://www.mono-project.com/">Mono</a> (на Steam Deck — внутри distrobox).</p>
+        <div class="code"><pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--cyan);overflow-x:auto"><span style="color:var(--txt-faint)"># поставить RO/RSS/RP-1</span>
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build rp1
+
+<span style="color:var(--txt-faint)"># обновить · только переводы · меню</span>
+curl -fsSL https://kerbal.ru/install.sh | bash -s -- --update
+curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
+        <p style="margin-bottom:0;color:var(--txt-dim);font-size:.9rem">Смена сборки очистит GameData до стока — сейвы останутся, но могут не открыться в другой сборке.</p>
+      </div>
+    </div>
   </section>
 
   <!-- MODS -->
@@ -1156,6 +1192,18 @@ document.addEventListener('click',function(event){
   if('ResizeObserver'in window){pageBoundsObserver=new ResizeObserver(function(){updatePageBounds();syncScrollState()});pageBoundsObserver.observe(document.querySelector('.wrap'))}
   window.dispatchEvent(new Event('resize'));
 })();
+
+  // переключение табов ОС в разделе установки
+  document.querySelectorAll('.os-tab').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var os=btn.getAttribute('data-os');
+      document.querySelectorAll('.os-tab').forEach(function(b){b.classList.toggle('is-on',b===btn)});
+      document.querySelectorAll('.os-pane').forEach(function(p){p.classList.toggle('is-on',p.getAttribute('data-pane')===os)});
+    });
+  });
+  if(!/Win/i.test(navigator.platform||navigator.userAgent)){
+    var nb=document.querySelector('.os-tab[data-os="nix"]'); if(nb) nb.click();
+  }
 </script>
 </body>
 </html>

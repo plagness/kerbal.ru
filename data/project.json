@@ -7,12 +7,12 @@
     "catalog": "builds/_catalog.json"
   },
   "release": {
-    "version": "v26.14",
+    "version": "v26.15",
     "year": 2026,
-    "sequence": 14,
+    "sequence": 15,
     "date": "2026-07-26",
     "channel": "stable",
-    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.14"
+    "url": "https://github.com/plagness/kerbal.ru/releases/tag/v26.15"
   },
   "game": {
     "name": "Kerbal Space Program",
