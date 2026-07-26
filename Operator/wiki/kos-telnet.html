@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Геология и биомы — вики kerbal.ru</title>
-<meta name="description" content="Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.">
+<title>kOS по telnet: пульт снаружи игры — вики kerbal.ru</title>
+<meta name="description" content="Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -189,7 +189,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="kos-vyvod-orbita.html" data-title="скрипт вывода на орбиту: разбор ошибок">Скрипт вывода на орбиту: разбор ошибок</a>
 <a class="wnav-item" href="kos-interfeys.html" data-title="kos: интерфейс, графика и hud">kOS: интерфейс, графика и HUD</a>
 <a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
-<a class="wnav-item" href="kos-telnet.html" data-title="kos по telnet: пульт снаружи игры">kOS по telnet: пульт снаружи игры</a>
+<a class="wnav-item is-on" href="kos-telnet.html" data-title="kos по telnet: пульт снаружи игры">kOS по telnet: пульт снаружи игры</a>
 <a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
 <a class="wnav-item" href="agenty.html" data-title="подключаем ии-агентов">Подключаем ИИ-агентов</a>
 <a class="wnav-item" href="neyronka.html" data-title="нейросеть как второй пилот">Нейросеть как второй пилот</a>
@@ -197,7 +197,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </div>
 <div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-atom"/></svg>Наука</div>
 <a class="wnav-item" href="nauka-osnovy.html" data-title="наука: как собирать эффективно">Наука: как собирать эффективно</a>
-<a class="wnav-item is-on" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
+<a class="wnav-item" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
 <a class="wnav-item" href="pribory.html" data-title="научные приборы сборки">Научные приборы сборки</a>
 <a class="wnav-item" href="laboratorii.html" data-title="лаборатории и обработка науки">Лаборатории и обработка науки</a>
 </div>
@@ -226,89 +226,140 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
 </div>
 </nav></details></aside>
-  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Наука</div><h1>Геология и биомы</h1><p class="lede">Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Автоматика</div><h1>kOS по telnet: пульт снаружи игры</h1><p class="lede">Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
 <ul>
-<li><a href="#_1">Почему биом — главный множитель</a></li>
-<li><a href="#_2">Как узнать, где ты</a></li>
-<li><a href="#scansat">Биомные карты SCANsat</a></li>
-<li><a href="#_3">Рельеф и ресурсы</a></li>
-<li><a href="#field-research">Контракты Field Research</a></li>
-<li><a href="#_4">Планирование мультибиомной миссии</a></li>
+<li><a href="#_1">Как включить</a></li>
+<li><a href="#nc-telnet">Почему nc и telnet не работают</a><ul>
+<li><a href="#_2">Вторая ловушка: цикл переговоров</a></li>
+</ul>
+</li>
+<li><a href="#_3">Рабочий клиент</a></li>
+<li><a href="#_4">Что это даёт</a></li>
+<li><a href="#_5">Правила, купленные опытом</a></li>
 </ul>
 </div>
-</div><article class="art"><p>Биом — размеченный участок поверхности тела: «Нагорья», «Ударные кратеры», «Большие равнины», «Полюса». Разметка задаётся картинкой-маской в конфиге тела, у OPM это отдельные текстуры биомов для каждой луны.</p>
-<h2 id="_1">Почему биом — главный множитель</h2>
-<p>Наука считается на пару «ситуация + биом». Один и тот же гравиметр на Минмусе даёт полный результат в каждом из биомов. Множитель тела ты изменить не можешь, число экспериментов на борту ограничено массой — а биомов на Минмусе и Муне — больше десятка на каждом. Это единственный ресурс, который масштабируется бесплатно: сел рядом с границей двух биомов — получил двойной урожай за один спуск.</p>
-<p>Важно: в низком космосе биомы тоже работают, в высоком — как правило нет. Проверяй по <a class="wikilink" href="nauka-osnovy.html" title="Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.">Наука: как собирать эффективно</a> и списку в [x] Science!.</p>
-<h2 id="_2">Как узнать, где ты</h2>
+</div><article class="art"><p>У kOS есть встроенный <strong>telnet-сервер</strong>. Включаешь — и бортовой терминал становится доступен снаружи игры: из другого окна, из скрипта, из ассистента с доступом к терминалу.</p>
+<p>Это меняет весь рабочий цикл. Не «правка → альт-таб → перепечатать команду → прочитать скриншот», а прямой канал: отправил команду, получил ответ текстом.</p>
+<h2 id="_1">Как включить</h2>
+<p>Панель kOS → <strong>TELNET</strong>. Порт по умолчанию <strong>5410</strong>, адрес <strong>127.0.0.1</strong> (только этот компьютер). Внизу окна появится:</p>
+<pre><code>Telnet server listening on 127.0.0.1 port 5410. (no clients connected).
+</code></pre>
+<p>Менять адрес на сетевой имеет смысл только если знаешь, зачем: это открытый порт, дающий полное управление кораблём.</p>
+<h2 id="nc-telnet">Почему <code>nc</code> и <code>telnet</code> не работают</h2>
+<p>Первое, что видишь при попытке подключиться обычным <code>nc</code>:</p>
+<pre><code>{YOUR TELNET CLIENT WONT IMPLEMENT RFC1073 (Terminal dimensions). kOS CANNOT WORK WITH IT.}DIE
+{YOUR TELNET CLIENT WONT IMPLEMENT RFC1091 (Terminal type). kOS CANNOT WORK WITH IT.}DIE
+</code></pre>
+<p>kOS требует от клиента двух telnet-опций:</p>
 <ul>
-<li>Штатный индикатор: при наведении на кнопку эксперимента в подписи стоит биом.</li>
-<li>[x] Science! в окне «Здесь и сейчас» пишет текущую ситуацию и биом.</li>
-<li>SCANsat: приборная панель и большая карта показывают биом под курсором и под аппаратом, если биомная карта уже отсканирована.</li>
+<li><strong>RFC 1091 — тип терминала.</strong> На запрос <code>IAC SB TTYPE SEND</code> надо ответить именем, например <code>XTERM</code>.</li>
+<li><strong>RFC 1073 — размер окна (NAWS).</strong> Надо сообщить ширину и высоту.</li>
 </ul>
-<h2 id="scansat">Биомные карты SCANsat</h2>
-<p>Биом даёт <strong>мультиспектральный</strong> класс сканеров. Разница между ними — только в высотах и ширине полосы:</p>
+<p><code>nc</code> — «голая труба», он не умеет ни того, ни другого.</p>
+<h3 id="_2">Вторая ловушка: цикл переговоров</h3>
+<p>Даже реализовав обе опции, легко получить поток мусора вместо экрана. Сервер шлёт <code>IAC WILL ECHO</code>, клиент отвечает <code>IAC DO ECHO</code>, сервер отвечает снова — и так до бесконечности. Экран забивается служебными байтами, а нажатия тонут: меню отвечает «Garbled selection. Try again.»</p>
+<p>Правило из RFC 854: <strong>на повторное согласование уже согласованной опции отвечать нельзя.</strong> Нужно помнить состояние.</p>
+<h2 id="_3">Рабочий клиент</h2>
+<p>Полсотни строк на Python, без зависимостей. Реализует ровно необходимое.</p>
+<pre><code class="language-python">import re, socket, time
+
+HOST, PORT = &quot;127.0.0.1&quot;, 5410
+IAC, DONT, DO, WONT, WILL, SB, SE = 255, 254, 253, 252, 251, 250, 240
+ECHO, SGA, TTYPE, NAWS = 1, 3, 24, 31
+COLS, ROWS = 100, 44
+
+_AGREED = set()          # без этого сервер зациклит переговоры
+
+def negotiate(sock, data):
+    out, reply, i = bytearray(), bytearray(), 0
+    while i &lt; len(data):
+        if data[i] != IAC:
+            out.append(data[i]); i += 1; continue
+        cmd = data[i+1]
+        if cmd == SB:                                   # подпереговоры
+            end = data.find(bytes([IAC, SE]), i)
+            sub = data[i+2:end]
+            if sub and sub[0] == TTYPE and sub[1] == 1:  # просят тип
+                reply += bytes([IAC, SB, TTYPE, 0]) + b&quot;XTERM&quot; + bytes([IAC, SE])
+            i = end + 2; continue
+        opt = data[i+2]
+        if (cmd, opt) not in _AGREED:                   # отвечаем ОДИН раз
+            _AGREED.add((cmd, opt))
+            if cmd == DO and opt == TTYPE:
+                reply += bytes([IAC, WILL, TTYPE])
+            elif cmd == DO and opt == NAWS:
+                reply += bytes([IAC, WILL, NAWS])
+                reply += bytes([IAC, SB, NAWS, 0, COLS, 0, ROWS, IAC, SE])
+            elif cmd == DO:
+                reply += bytes([IAC, WILL if opt == SGA else WONT, opt])
+            elif cmd == WILL:
+                reply += bytes([IAC, DO if opt in (ECHO, SGA) else DONT, opt])
+        i += 3
+    if reply: sock.sendall(bytes(reply))
+    return bytes(out)
+
+def clean(t):
+    t = re.sub(r&quot;\x1b\[[0-9;?]*[A-Za-z]&quot;, &quot;&quot;, t)        # ANSI-коды
+    return re.sub(r&quot;[\x00-\x08\x0b\x0c\x0e-\x1f-]&quot;, &quot;&quot;, t)
+
+def drain(sock, seconds=2.0):
+    buf, t0 = b&quot;&quot;, time.time()
+    sock.settimeout(0.4)
+    while time.time() - t0 &lt; seconds:
+        try:
+            d = sock.recv(8192)
+            if not d: break
+            buf += negotiate(sock, d)
+        except socket.timeout:
+            continue
+    return clean(buf.decode(&quot;utf-8&quot;, errors=&quot;replace&quot;))
+
+s = socket.create_connection((HOST, PORT), timeout=6)
+drain(s, 3)                    # дать переговорам завершиться
+s.sendall(b&quot;1\n&quot;)              # выбрать первый процессор из меню
+print(drain(s, 2))
+s.sendall(b'PRINT SHIP:NAME.\n')
+print(drain(s, 3))
+</code></pre>
+<p>После подключения сервер показывает меню процессоров:</p>
+<pre><code>              Pick Open Telnets  Vessel Name (CPU tagname)
+               [1]  yes    0     Дальняк-1 (CX-4181())
+</code></pre>
+<p>Цифра и <code>\n</code> — и ты в терминале корабля.</p>
+<h2 id="_4">Что это даёт</h2>
 <table>
 <thead>
 <tr>
-<th>Сканер</th>
-<th>Рабочая высота</th>
-<th>Лучшая высота</th>
+<th>Без telnet</th>
+<th>С telnet</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Мультиспектральный датчик SCAN</td>
-<td>5–500 км</td>
-<td>250 км</td>
+<td>ошибку видно только на экране</td>
+<td>текст ошибки с номером строки приходит сразу</td>
 </tr>
 <tr>
-<td>Мультиспектральный сканер MS-1</td>
-<td>20–250 км</td>
-<td>70 км</td>
+<td>телеметрию пересказываешь словами</td>
+<td><code>PRINT SHIP:APOAPSIS.</code> и точное число</td>
 </tr>
 <tr>
-<td>Улучшенный мультиспектральный сканер MS-R</td>
-<td>70–400 км</td>
-<td>300 км</td>
+<td>проверка скрипта = запуск ракеты</td>
+<td>синтаксис проверяется на площадке за секунду</td>
 </tr>
 <tr>
-<td>Продвинутый мультиспектральный сканер MS-2A</td>
-<td>100–750 км</td>
-<td>500 км</td>
-</tr>
-<tr>
-<td>CA-TRIXIE — мультиспектральная камера (Coatl)</td>
-<td>5–500 км</td>
-<td>250 км</td>
+<td>правка → альт-таб → перепечатать</td>
+<td>правка файла и повторный <code>RUNPATH</code> из скрипта</td>
 </tr>
 </tbody>
 </table>
-<p>Эти же приборы отмечают на карте аномалии. Детально аномалию читает только SCAN «Бывал и видал»® — он работает ниже 2 км, то есть с ровера или на пролёте бреющим.</p>
-<p>Сканируй с <strong>полярной круговой</strong> орбиты на «лучшей» высоте: наклонение около 90°, тогда планета сама подставляет себя под полосу. Часов игрового времени уходит немного, ускорение времени SCANsat переживает нормально.</p>
-<h2 id="_3">Рельеф и ресурсы</h2>
-<ul>
-<li><strong>Высотометрия.</strong> Радарный высотомер SCAN и R-3B дают низкое разрешение, высотомер SCAN SAR и антенны SAR-X / SAR-C / SAR-L — высокое. Высокое нужно, чтобы искать ровные площадки под базу: см. <a class="wikilink" href="bazy.html" title="KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.">Наземные базы и снабжение</a>.</li>
-<li><strong>Уклон.</strong> Считается из высотометрии; красные склоны на карте — это опрокинутый посадочный модуль.</li>
-<li><strong>Ресурсы.</strong> Картограф ресурсов SCAN-R (20–250 км), SCAN-R2 (70–500 км), гиперспектральный SCAN-RX (100–750 км). ISRU-карта нужна до того, как ты выберешь место под добычу: разброс концентрации руды по биомам огромный, и садиться «примерно там» — значит возить топливо с собой.</li>
-</ul>
-<h2 id="field-research">Контракты Field Research</h2>
-<p>Пак «Полевые исследования» превращает биомную сетку в деньги:</p>
-<ul>
-<li><strong>Исследование биома &lt;биом&gt;</strong> — набрать науку в конкретном биоме;</li>
-<li><strong>Геологическое исследование</strong> и <strong>Климатическое исследование</strong> тела — серия экспериментов по разным точкам;</li>
-<li><strong>Помогите учёному провести эксперименты в &lt;биом&gt;</strong> — довезти учёного до маркера;</li>
-<li><strong>Соберите редкие научные результаты</strong> — редкие ситуации вроде «в полёте высоко над полюсом».</li>
-</ul>
-<p>Подробнее про приём и планирование — <a class="wikilink" href="kontrakty.html" title="Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.">Контракты и стратегии</a>.</p>
-<h2 id="_4">Планирование мультибиомной миссии</h2>
-<ol>
-<li>Сначала зонд-картограф: биомная карта + высотометрия высокого разрешения.</li>
-<li>По карте выбери «узел» — точку, где сходятся 3–4 биома, с уклоном под 5°.</li>
-<li>Считай ΔV на прыжки: на Минмусе перелёт между соседними биомами стоит 100–200 м/с, на Муне 300–500.</li>
-<li>Бери приборы с повторным запуском (список — <a class="wikilink" href="pribory.html" title="Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.">Научные приборы сборки</a>) и один комплект одноразовых на самый ценный биом.</li>
-<li>Науку между прыжками сливай на релейный спутник через Science Relay, чтобы не потерять её при жёсткой посадке.</li>
-</ol></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="nauka-osnovy.html"><b>Наука: как собирать эффективно</b><span>Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.</span></a><a href="pribory.html"><b>Научные приборы сборки</b><span>Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.</span></a><a href="kontrakty.html"><b>Контракты и стратегии</b><span>Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="bazy.html">Наземные базы и снабжение</a>, <a href="derevo-tehnologiy.html">Дерево технологий</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="missiya-mun.html">Миссия на Мун</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="pribory.html">Научные приборы сборки</a>, <a href="resursy.html">Ресурсы и цепочки переработки</a>, <a href="sborka.html">Что такое «Оператор»</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="sozvezdiya.html">Созвездия и покрытие</a></div>
+<p>Отдельно это ценно для работы с ИИ-агентом (<a class="wikilink" href="agenty.html" title="Как дать Claude Code, Codex, OpenCode или Grok доступ к папке игры: что они видят, готовый файл контекста, настройка по инструментам, правила безопасности и рабочие запросы.">Подключаем ИИ-агентов</a>): агент правит <code>.ks</code> в папке игры <strong>и тут же сам его прогоняет</strong>, читая вывод. Цикл «правка → прогон → разбор» сокращается с минут до секунд, и человеку не нужно быть посредником.</p>
+<p>Приём, который экономит больше всего: <strong>проверочный файл</strong>. Берём боевой скрипт, отрезаем исполняемую часть, оставляем объявления и функции — и запускаем на площадке. Разбор пройдёт весь файл целиком, но двигатели не тронет. Все опечатки и конфликты имён вылезут до пуска.</p>
+<h2 id="_5">Правила, купленные опытом</h2>
+<p><strong>Не печатай в терминал, пока работает программа.</strong> Ввод во время исполнения kOS воспринимает как прерывание — программа завершится с «Program aborted». Мы так уронили скрипт посреди выведения. Во время полёта — только слушать.</p>
+<p><strong>Виджеты через telnet не работают.</strong> Это ограничение самого kOS: GUI живёт в окне игры и требует мыши. Снаружи доступен только текстовый терминал — см. <a class="wikilink" href="kos-interfeys.html" title="Что kOS умеет рисовать: полноценные окна с кнопками и слайдерами, стрелки-векторы прямо в полётном виде, надписи на HUD, подсветка деталей и форматирование терминала.">kOS: интерфейс, графика и HUD</a>.</p>
+<p><strong>Порт даёт полное управление кораблём.</strong> На <code>127.0.0.1</code> это безопасно. Открывать наружу без нужды не стоит.</p>
+<p><strong>Кириллица в терминале работает</strong>, но kOS иногда шлёт символы из приватной зоны Юникода — их нужно вычищать при разборе вывода, иначе они склеивают строки.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="kos-otladka.html"><b>kOS: отладка и лимиты</b><span>Почему скрипт «висит», ест кадры и не слушается руля: лимит инструкций, WAIT в циклах, блокировки управления, ошибки парсера и рабочий процесс с внешним редактором.</span></a><a href="agenty.html"><b>Подключаем ИИ-агентов</b><span>Как дать Claude Code, Codex, OpenCode или Grok доступ к папке игры: что они видят, готовый файл контекста, настройка по инструментам, правила безопасности и рабочие запросы.</span></a><a href="kos-interfeys.html"><b>kOS: интерфейс, графика и HUD</b><span>Что kOS умеет рисовать: полноценные окна с кнопками и слайдерами, стрелки-векторы прямо в полётном виде, надписи на HUD, подсветка деталей и форматирование терминала.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="agenty.html">Подключаем ИИ-агентов</a>, <a href="kos-interfeys.html">kOS: интерфейс, графика и HUD</a>, <a href="kos-otladka.html">kOS: отладка и лимиты</a></div>
     <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>

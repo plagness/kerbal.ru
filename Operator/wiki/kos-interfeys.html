@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Геология и биомы — вики kerbal.ru</title>
-<meta name="description" content="Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.">
+<title>kOS: интерфейс, графика и HUD — вики kerbal.ru</title>
+<meta name="description" content="Что kOS умеет рисовать: полноценные окна с кнопками и слайдерами, стрелки-векторы прямо в полётном виде, надписи на HUD, подсветка деталей и форматирование терминала.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="kos-otladka.html" data-title="kos: отладка и лимиты">kOS: отладка и лимиты</a>
 <a class="wnav-item" href="avtomatika.html" data-title="автоматика полётов и рутина">Автоматика полётов и рутина</a>
 <a class="wnav-item" href="kos-vyvod-orbita.html" data-title="скрипт вывода на орбиту: разбор ошибок">Скрипт вывода на орбиту: разбор ошибок</a>
-<a class="wnav-item" href="kos-interfeys.html" data-title="kos: интерфейс, графика и hud">kOS: интерфейс, графика и HUD</a>
+<a class="wnav-item is-on" href="kos-interfeys.html" data-title="kos: интерфейс, графика и hud">kOS: интерфейс, графика и HUD</a>
 <a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
 <a class="wnav-item" href="kos-telnet.html" data-title="kos по telnet: пульт снаружи игры">kOS по telnet: пульт снаружи игры</a>
 <a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
@@ -197,7 +197,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </div>
 <div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-atom"/></svg>Наука</div>
 <a class="wnav-item" href="nauka-osnovy.html" data-title="наука: как собирать эффективно">Наука: как собирать эффективно</a>
-<a class="wnav-item is-on" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
+<a class="wnav-item" href="geologiya.html" data-title="геология и биомы">Геология и биомы</a>
 <a class="wnav-item" href="pribory.html" data-title="научные приборы сборки">Научные приборы сборки</a>
 <a class="wnav-item" href="laboratorii.html" data-title="лаборатории и обработка науки">Лаборатории и обработка науки</a>
 </div>
@@ -226,89 +226,181 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
 </div>
 </nav></details></aside>
-  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Наука</div><h1>Геология и биомы</h1><p class="lede">Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Автоматика</div><h1>kOS: интерфейс, графика и HUD</h1><p class="lede">Что kOS умеет рисовать: полноценные окна с кнопками и слайдерами, стрелки-векторы прямо в полётном виде, надписи на HUD, подсветка деталей и форматирование терминала.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
 <ul>
-<li><a href="#_1">Почему биом — главный множитель</a></li>
-<li><a href="#_2">Как узнать, где ты</a></li>
-<li><a href="#scansat">Биомные карты SCANsat</a></li>
-<li><a href="#_3">Рельеф и ресурсы</a></li>
-<li><a href="#field-research">Контракты Field Research</a></li>
-<li><a href="#_4">Планирование мультибиомной миссии</a></li>
+<li><a href="#_1">Окна и виджеты</a></li>
+<li><a href="#_2">Два способа читать нажатия</a></li>
+<li><a href="#_3">Стрелки в полётном виде</a></li>
+<li><a href="#hud">HUD и подсветка</a></li>
+<li><a href="#_4">Терминал</a></li>
+<li><a href="#_5">Важное ограничение</a></li>
+<li><a href="#_6">Что чего стоит</a></li>
 </ul>
 </div>
-</div><article class="art"><p>Биом — размеченный участок поверхности тела: «Нагорья», «Ударные кратеры», «Большие равнины», «Полюса». Разметка задаётся картинкой-маской в конфиге тела, у OPM это отдельные текстуры биомов для каждой луны.</p>
-<h2 id="_1">Почему биом — главный множитель</h2>
-<p>Наука считается на пару «ситуация + биом». Один и тот же гравиметр на Минмусе даёт полный результат в каждом из биомов. Множитель тела ты изменить не можешь, число экспериментов на борту ограничено массой — а биомов на Минмусе и Муне — больше десятка на каждом. Это единственный ресурс, который масштабируется бесплатно: сел рядом с границей двух биомов — получил двойной урожай за один спуск.</p>
-<p>Важно: в низком космосе биомы тоже работают, в высоком — как правило нет. Проверяй по <a class="wikilink" href="nauka-osnovy.html" title="Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.">Наука: как собирать эффективно</a> и списку в [x] Science!.</p>
-<h2 id="_2">Как узнать, где ты</h2>
-<ul>
-<li>Штатный индикатор: при наведении на кнопку эксперимента в подписи стоит биом.</li>
-<li>[x] Science! в окне «Здесь и сейчас» пишет текущую ситуацию и биом.</li>
-<li>SCANsat: приборная панель и большая карта показывают биом под курсором и под аппаратом, если биомная карта уже отсканирована.</li>
-</ul>
-<h2 id="scansat">Биомные карты SCANsat</h2>
-<p>Биом даёт <strong>мультиспектральный</strong> класс сканеров. Разница между ними — только в высотах и ширине полосы:</p>
+</div><article class="art"><p>kOS — не только текстовый терминал. Начиная с версии 1.1 в нём есть <strong>полноценная система виджетов</strong>: окна, кнопки, слайдеры, выпадающие меню. Плюс отдельно — рисование векторов в 3D, надписи на HUD и подсветка деталей.</p>
+<p>В сборке стоит <strong>kOS 1.6.0.1</strong>, всё описанное ниже доступно.</p>
+<h2 id="_1">Окна и виджеты</h2>
+<p>Окно создаётся функцией <code>GUI(ширина[, высота])</code> и само является контейнером — «коробкой», в которую добавляются виджеты.</p>
+<pre><code class="language-kos">SET win TO GUI(220).
+SET win:X TO 80.            // отрицательное значение — отсчёт от правого края
+SET win:Y TO 120.
+win:ADDLABEL(&quot;Дальняк-1 · пульт&quot;).
+
+SET bStart TO win:ADDBUTTON(&quot;Старт подъёма&quot;).
+SET chkRCS TO win:ADDCHECKBOX(&quot;РСУ&quot;, FALSE).
+SET sAlt TO win:ADDHSLIDER(80, 70, 250).   // начальное, мин, макс
+
+win:SHOW().
+</code></pre>
+<p>Полный набор того, что можно положить в коробку:</p>
 <table>
 <thead>
 <tr>
-<th>Сканер</th>
-<th>Рабочая высота</th>
-<th>Лучшая высота</th>
+<th>Метод</th>
+<th>Что создаёт</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Мультиспектральный датчик SCAN</td>
-<td>5–500 км</td>
-<td>250 км</td>
+<td><code>ADDLABEL(текст)</code></td>
+<td>надпись</td>
 </tr>
 <tr>
-<td>Мультиспектральный сканер MS-1</td>
-<td>20–250 км</td>
-<td>70 км</td>
+<td><code>ADDBUTTON(текст)</code></td>
+<td>кнопка, отжимается сама</td>
 </tr>
 <tr>
-<td>Улучшенный мультиспектральный сканер MS-R</td>
-<td>70–400 км</td>
-<td>300 км</td>
+<td><code>ADDCHECKBOX(текст, вкл)</code></td>
+<td>переключатель, залипает</td>
 </tr>
 <tr>
-<td>Продвинутый мультиспектральный сканер MS-2A</td>
-<td>100–750 км</td>
-<td>500 км</td>
+<td><code>ADDRADIOBUTTON(текст, вкл)</code></td>
+<td>группа, где включён только один</td>
 </tr>
 <tr>
-<td>CA-TRIXIE — мультиспектральная камера (Coatl)</td>
-<td>5–500 км</td>
-<td>250 км</td>
+<td><code>ADDTEXTFIELD(текст)</code></td>
+<td>редактируемое поле</td>
+</tr>
+<tr>
+<td><code>ADDPOPUPMENU</code></td>
+<td>выпадающее меню</td>
+</tr>
+<tr>
+<td><code>ADDHSLIDER(нач, мин, макс)</code></td>
+<td>горизонтальный слайдер</td>
+</tr>
+<tr>
+<td><code>ADDVSLIDER(нач, мин, макс)</code></td>
+<td>вертикальный слайдер</td>
+</tr>
+<tr>
+<td><code>ADDHLAYOUT</code> / <code>ADDVLAYOUT</code></td>
+<td>невидимая коробка для раскладки</td>
+</tr>
+<tr>
+<td><code>ADDHBOX</code> / <code>ADDVBOX</code></td>
+<td>видимая коробка с рамкой</td>
+</tr>
+<tr>
+<td><code>ADDSTACK</code></td>
+<td>стопка, показывается одна страница за раз</td>
+</tr>
+<tr>
+<td><code>ADDSCROLLBOX</code></td>
+<td>прокручиваемая область</td>
+</tr>
+<tr>
+<td><code>ADDSPACING(размер)</code></td>
+<td>пустое место, <code>-1</code> — резиновое</td>
 </tr>
 </tbody>
 </table>
-<p>Эти же приборы отмечают на карте аномалии. Детально аномалию читает только SCAN «Бывал и видал»® — он работает ниже 2 км, то есть с ровера или на пролёте бреющим.</p>
-<p>Сканируй с <strong>полярной круговой</strong> орбиты на «лучшей» высоте: наклонение около 90°, тогда планета сама подставляет себя под полосу. Часов игрового времени уходит немного, ускорение времени SCANsat переживает нормально.</p>
-<h2 id="_3">Рельеф и ресурсы</h2>
-<ul>
-<li><strong>Высотометрия.</strong> Радарный высотомер SCAN и R-3B дают низкое разрешение, высотомер SCAN SAR и антенны SAR-X / SAR-C / SAR-L — высокое. Высокое нужно, чтобы искать ровные площадки под базу: см. <a class="wikilink" href="bazy.html" title="KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.">Наземные базы и снабжение</a>.</li>
-<li><strong>Уклон.</strong> Считается из высотометрии; красные склоны на карте — это опрокинутый посадочный модуль.</li>
-<li><strong>Ресурсы.</strong> Картограф ресурсов SCAN-R (20–250 км), SCAN-R2 (70–500 км), гиперспектральный SCAN-RX (100–750 км). ISRU-карта нужна до того, как ты выберешь место под добычу: разброс концентрации руды по биомам огромный, и садиться «примерно там» — значит возить топливо с собой.</li>
-</ul>
-<h2 id="field-research">Контракты Field Research</h2>
-<p>Пак «Полевые исследования» превращает биомную сетку в деньги:</p>
-<ul>
-<li><strong>Исследование биома &lt;биом&gt;</strong> — набрать науку в конкретном биоме;</li>
-<li><strong>Геологическое исследование</strong> и <strong>Климатическое исследование</strong> тела — серия экспериментов по разным точкам;</li>
-<li><strong>Помогите учёному провести эксперименты в &lt;биом&gt;</strong> — довезти учёного до маркера;</li>
-<li><strong>Соберите редкие научные результаты</strong> — редкие ситуации вроде «в полёте высоко над полюсом».</li>
-</ul>
-<p>Подробнее про приём и планирование — <a class="wikilink" href="kontrakty.html" title="Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.">Контракты и стратегии</a>.</p>
-<h2 id="_4">Планирование мультибиомной миссии</h2>
-<ol>
-<li>Сначала зонд-картограф: биомная карта + высотометрия высокого разрешения.</li>
-<li>По карте выбери «узел» — точку, где сходятся 3–4 биома, с уклоном под 5°.</li>
-<li>Считай ΔV на прыжки: на Минмусе перелёт между соседними биомами стоит 100–200 м/с, на Муне 300–500.</li>
-<li>Бери приборы с повторным запуском (список — <a class="wikilink" href="pribory.html" title="Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.">Научные приборы сборки</a>) и один комплект одноразовых на самый ценный биом.</li>
-<li>Науку между прыжками сливай на релейный спутник через Science Relay, чтобы не потерять её при жёсткой посадке.</li>
-</ol></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="nauka-osnovy.html"><b>Наука: как собирать эффективно</b><span>Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.</span></a><a href="pribory.html"><b>Научные приборы сборки</b><span>Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.</span></a><a href="kontrakty.html"><b>Контракты и стратегии</b><span>Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="bazy.html">Наземные базы и снабжение</a>, <a href="derevo-tehnologiy.html">Дерево технологий</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="missiya-mun.html">Миссия на Мун</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="pribory.html">Научные приборы сборки</a>, <a href="resursy.html">Ресурсы и цепочки переработки</a>, <a href="sborka.html">Что такое «Оператор»</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="sozvezdiya.html">Созвездия и покрытие</a></div>
+<p>Свойства самого окна: <code>X</code>, <code>Y</code>, <code>DRAGGABLE</code> (можно ли таскать мышкой), <code>SKIN</code>, <code>TOOLTIP</code>, методы <code>SHOW</code> и <code>HIDE</code>. Убрать всё разом — <code>CLEARGUIS()</code>.</p>
+<h2 id="_2">Два способа читать нажатия</h2>
+<p><strong>Опрос.</strong> Проверяешь состояние в своём цикле. Работает у кнопок через <code>TAKEPRESS</code> — чтение возвращает «была ли нажата» и одновременно отпускает её:</p>
+<pre><code class="language-kos">UNTIL done {
+  IF bStart:TAKEPRESS { PRINT &quot;поехали&quot;. }
+  IF chkRCS:PRESSED { RCS ON. } ELSE { RCS OFF. }
+  WAIT 0.1.
+}
+</code></pre>
+<p><strong>Обратный вызов.</strong> Вешаешь функцию, kOS зовёт её сам:</p>
+<pre><code class="language-kos">FUNCTION onStart { PRINT &quot;кнопка нажата&quot;. }
+SET bStart:ONCLICK TO onStart@.
+SET chkRCS:ONTOGGLE TO { PARAMETER on. rcsAssist(on). }.
+</code></pre>
+<p>Символ <code>@</code> после имени — это ссылка на функцию, а не её вызов. У переключателей callback получает новое состояние параметром.</p>
+<h2 id="_3">Стрелки в полётном виде</h2>
+<p><code>VECDRAW</code> рисует настоящий вектор в 3D — прямо поверх корабля, с подписью:</p>
+<pre><code class="language-kos">SET arrow TO VECDRAW(
+    V(0,0,0),                    // начало, от центра масс
+    SHIP:VELOCITY:SURFACE,       // сам вектор
+    RGB(1,0,0),                  // цвет
+    &quot;скорость&quot;,                  // подпись
+    1.0,                         // масштаб
+    TRUE,                        // показывать
+    0.2,                         // толщина
+    TRUE,                        // со стрелкой на конце
+    TRUE).                       // «стирать» хвост
+
+SET arrow:VEC TO SHIP:VELOCITY:SURFACE.   // обновлять каждый тик
+SET arrow:SHOW TO FALSE.                  // спрятать
+</code></pre>
+<p>Это лучший инструмент отладки рулевых законов: рисуешь рядом вектор скорости и вектор команды — и <strong>видишь глазами</strong>, куда скрипт целится и насколько расходится с потоком. То, что мы полполёта вычисляли по логам, видно сразу.</p>
+<p>Сбросить все стрелки — <code>CLEARVECDRAWS()</code>.</p>
+<h2 id="hud">HUD и подсветка</h2>
+<pre><code class="language-kos">HUDTEXT(&quot;апоцентр набран&quot;, 5, 2, 24, GREEN, FALSE).
+</code></pre>
+<p>Аргументы: текст, сколько секунд висит, положение на экране, размер шрифта, цвет, «эхо в терминал».</p>
+<pre><code class="language-kos">SET hl TO HIGHLIGHT(SHIP:PARTSNAMED(&quot;kOSMachine1m&quot;)[0], GREEN).
+</code></pre>
+<p>Подсвечивает деталь цветом — удобно показывать, какой прибор сейчас работает.</p>
+<h2 id="_4">Терминал</h2>
+<p>Никуда не делся и остаётся самым дешёвым по ресурсам способом:</p>
+<pre><code class="language-kos">PRINT &quot;Ap: &quot; + ROUND(SHIP:APOAPSIS/1000,1) + &quot; км    &quot; AT (0,3).
+</code></pre>
+<p>Печать в фиксированную позицию не прокручивает экран. Хвост из пробелов обязателен — строка перезаписывается, а не стирается, и остатки прошлого длинного значения повиснут. Размер окна — <code>TERMINAL:WIDTH</code> и <code>TERMINAL:HEIGHT</code>.</p>
+<h2 id="_5">Важное ограничение</h2>
+<p><strong>Виджеты нельзя трогать через telnet.</strong> Это прямо сказано в документации kOS: GUI живёт в окне игры и требует мыши. Если управляешь кораблём снаружи (<a class="wikilink" href="kos-telnet.html" title="Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».">kOS по telnet: пульт снаружи игры</a>) — интерфейсом будет терминал, а не окна.</p>
+<p>Отсюда практический вывод: <strong>не делай GUI единственным способом управления скриптом</strong>. Параметры лучше держать переменными в начале файла, а окно — как удобную надстройку.</p>
+<h2 id="_6">Что чего стоит</h2>
+<table>
+<thead>
+<tr>
+<th>Средство</th>
+<th>Нагрузка</th>
+<th>Когда брать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PRINT AT</code></td>
+<td>копеечная</td>
+<td>всегда, база</td>
+</tr>
+<tr>
+<td><code>HUDTEXT</code></td>
+<td>копеечная</td>
+<td>разовые события: ступень, выход на орбиту</td>
+</tr>
+<tr>
+<td><code>VECDRAW</code></td>
+<td>небольшая</td>
+<td>отладка ориентации и рулевых законов</td>
+</tr>
+<tr>
+<td>GUI-виджеты</td>
+<td>заметная</td>
+<td>пульт для ручных операций, не для полёта</td>
+</tr>
+<tr>
+<td><code>HIGHLIGHT</code></td>
+<td>небольшая</td>
+<td>показать деталь</td>
+</tr>
+</tbody>
+</table>
+<p>Помни про лимит инструкций: <code>CONFIG:IPU</code> по умолчанию 200, и тяжёлый интерфейс отъедает такты у самого управления. Разбор — в <a class="wikilink" href="kos-otladka.html" title="Почему скрипт «висит», ест кадры и не слушается руля: лимит инструкций, WAIT в циклах, блокировки управления, ошибки парсера и рабочий процесс с внешним редактором.">kOS: отладка и лимиты</a>.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="kos-osnovy.html"><b>kOS: основы</b><span>Бортовой компьютер kOS: как поставить процессор, открыть терминал, где лежат скрипты и из чего состоит первая программа.</span></a><a href="kos-telnet.html"><b>kOS по telnet: пульт снаружи игры</b><span>Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».</span></a><a href="kos-otladka.html"><b>kOS: отладка и лимиты</b><span>Почему скрипт «висит», ест кадры и не слушается руля: лимит инструкций, WAIT в циклах, блокировки управления, ошибки парсера и рабочий процесс с внешним редактором.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="kos-telnet.html">kOS по telnet: пульт снаружи игры</a></div>
     <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>

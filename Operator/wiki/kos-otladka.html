@@ -186,7 +186,10 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="kos-recepty.html" data-title="kos: готовые рецепты">kOS: готовые рецепты</a>
 <a class="wnav-item is-on" href="kos-otladka.html" data-title="kos: отладка и лимиты">kOS: отладка и лимиты</a>
 <a class="wnav-item" href="avtomatika.html" data-title="автоматика полётов и рутина">Автоматика полётов и рутина</a>
+<a class="wnav-item" href="kos-vyvod-orbita.html" data-title="скрипт вывода на орбиту: разбор ошибок">Скрипт вывода на орбиту: разбор ошибок</a>
+<a class="wnav-item" href="kos-interfeys.html" data-title="kos: интерфейс, графика и hud">kOS: интерфейс, графика и HUD</a>
 <a class="wnav-item" href="kos-prodvinutoe.html" data-title="kos: продвинутое">kOS: продвинутое</a>
+<a class="wnav-item" href="kos-telnet.html" data-title="kos по telnet: пульт снаружи игры">kOS по telnet: пульт снаружи игры</a>
 <a class="wnav-item" href="krpc.html" data-title="krpc: управление извне">kRPC: управление извне</a>
 <a class="wnav-item" href="agenty.html" data-title="подключаем ии-агентов">Подключаем ИИ-агентов</a>
 <a class="wnav-item" href="neyronka.html" data-title="нейросеть как второй пилот">Нейросеть как второй пилот</a>
@@ -227,13 +230,18 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <ul>
 <li><a href="#wait">Скрипт «висит» — забыл WAIT</a></li>
 <li><a href="#_1">Лимит инструкций за кадр</a></li>
-<li><a href="#_2">Аппарат не слушается руля</a></li>
-<li><a href="#_3">Аппарат виляет и раскачивается</a></li>
-<li><a href="#_4">Ошибки парсера</a></li>
-<li><a href="#_5">Печать без мусора</a></li>
-<li><a href="#_6">Внешний редактор</a></li>
-<li><a href="#_7">Аварийный выход</a></li>
-<li><a href="#_8">Защита прямо в коде</a></li>
+<li><a href="#_2">Скрипт душит сам себя</a></li>
+<li><a href="#_3">Аппарат не слушается руля</a></li>
+<li><a href="#_4">Аппарат виляет и раскачивается</a></li>
+<li><a href="#_5">Ошибки парсера</a><ul>
+<li><a href="#_6">Однобуквенные имена — мина</a></li>
+<li><a href="#_7">Одна деталь — несколько модулей</a></li>
+</ul>
+</li>
+<li><a href="#_8">Печать без мусора</a></li>
+<li><a href="#_9">Внешний редактор</a></li>
+<li><a href="#_10">Аварийный выход</a></li>
+<li><a href="#_11">Защита прямо в коде</a></li>
 <li><a href="#-">Чек-лист перед первым прогоном</a></li>
 </ul>
 </div>
@@ -284,7 +292,19 @@ SET CONFIG:IPU TO 500.   // поднять из скрипта
 </tbody>
 </table>
 <p>Поднимать IPU можно, но помни: это <strong>отнимает кадры у игры</strong>. Просадка FPS во время работы скрипта — почти всегда следствие большого IPU или цикла без <code>WAIT</code>.</p>
-<h2 id="_2">Аппарат не слушается руля</h2>
+<h2 id="_2">Скрипт душит сам себя</h2>
+<p>Два эффекта, которые не выглядят как ошибка, но портят управление:</p>
+<p><strong>Тяжёлый <code>LOCK</code> при низком IPU.</strong> Если в <code>LOCK STEERING</code> стоит функция с векторной математикой, при штатных 200 инструкциях за кадр она не успевает пересчитаться каждый физический тик — руль отстаёт от аппарата. Поднимай на время манёвра:</p>
+<pre><code class="language-kos">SET IPU_SAVE TO CONFIG:IPU.
+SET CONFIG:IPU TO 800.
+// ... полёт ...
+SET CONFIG:IPU TO IPU_SAVE.
+</code></pre>
+<p><strong>Лог на каждом тике.</strong> Запись строки в файл каждый проход цикла — это тысячи операций ввода-вывода за полёт, и они отъедают у управления больше, чем сам расчёт. Ограничивай частоту:</p>
+<pre><code class="language-kos">IF TIME:SECONDS &lt; LOG_NEXT { RETURN. }
+SET LOG_NEXT TO TIME:SECONDS + 0.5.
+</code></pre>
+<h2 id="_3">Аппарат не слушается руля</h2>
 <p>Три причины, в порядке частоты:</p>
 <p><strong>1. <code>SET</code> вместо <code>LOCK</code>.</strong> <code>SET STEERING TO ...</code> зафиксирует одно вычисленное направление и забудет его обновлять. Руль и тяга — всегда через <code>LOCK</code>.</p>
 <p><strong>2. Скрипт закончился, а блокировка осталась.</strong> После завершения программы kOS снимает свои <code>LOCK</code>, и аппарат резко теряет заданный курс. Если хочешь оставить его стабилизированным — верни управление явно:</p>
@@ -294,14 +314,14 @@ SET SHIP:CONTROL:NEUTRALIZE TO TRUE.
 SAS ON.
 </code></pre>
 <p><strong>3. Нет связи.</strong> Беспилотник без канала до Кербина получает только частичное управление, и скрипт не сможет ни дать тягу, ни поставить манёвр — молча. Прежде чем чинить код, проверь связь: <a class="wikilink" href="diagnostika-svyazi.html" title="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">Диагностика связи</a>.</p>
-<h2 id="_3">Аппарат виляет и раскачивается</h2>
+<h2 id="_4">Аппарат виляет и раскачивается</h2>
 <p>Рулевой менеджер kOS настроен на «среднюю» ракету. Лёгкий зонд с мощными двигателями ориентации он перекручивает, тяжёлую ступень — не докручивает.</p>
 <pre><code class="language-kos">SET STEERINGMANAGER:MAXSTOPPINGTIME TO 2.   // мягче на лёгких аппаратах
 SET STEERINGMANAGER:ROLLCONTROLANGLERANGE TO 5.  // не гоняться за креном
 </code></pre>
 <p><code>MAXSTOPPINGTIME</code> — насколько заранее менеджер начинает тормозить вращение. Больше значение — плавнее и медленнее. Если аппарат «дрожит» вокруг цели, увеличь; если лениво доворачивает — уменьши.</p>
 <p>Отдельная классика: раскачка начинается <strong>после отделения ступени</strong>, когда масса упала втрое, а настройки остались прежними. Пересчитывай их на каждом этапе полёта.</p>
-<h2 id="_4">Ошибки парсера</h2>
+<h2 id="_5">Ошибки парсера</h2>
 <p>kOS показывает номер строки — с него и начинай. Что встречается чаще всего:</p>
 <table>
 <thead>
@@ -331,10 +351,28 @@ SET STEERINGMANAGER:ROLLCONTROLANGLERANGE TO 5.  // не гоняться за �
 <td><code>Tried to push infinity onto the stack</code></td>
 <td>деление на ноль в формуле — обычно нулевая тяга или нулевая масса</td>
 </tr>
+<tr>
+<td><code>Not allowed to SET a name that will clobber the BUILTIN_FUNCTION 'r'</code></td>
+<td>переменная затирает встроенную функцию</td>
+</tr>
 </tbody>
 </table>
 <p>Точка после каждой команды — не украшение, а разделитель. Больше половины «непонятных» ошибок это она.</p>
-<h2 id="_5">Печать без мусора</h2>
+<h3 id="_6">Однобуквенные имена — мина</h3>
+<p><code>R()</code>, <code>V()</code>, <code>Q()</code> — встроенные функции kOS: поворот, вектор, кватернион. Назвать так переменную или параметр нельзя, скрипт не запустится вовсе:</p>
+<pre><code class="language-kos">FUNCTION vCirc { PARAMETER r. ... }     // ✗ затирает R()
+FUNCTION vCirc { PARAMETER rad. ... }   // ✓
+</code></pre>
+<p>Проверять стоит заранее: <code>R</code>, <code>V</code>, <code>Q</code>, <code>NODE</code>, <code>LIST</code>, <code>PATH</code>, <code>MIN</code>, <code>MAX</code>, <code>ROUND</code>, <code>STAGE</code>, <code>THROTTLE</code>.</p>
+<h3 id="_7">Одна деталь — несколько модулей</h3>
+<p><code>PART:GETMODULE("имя")</code> возвращает <strong>первый</strong> подходящий модуль. Если в детали их два — например, магнитометр и датчик радиации в одной мачте, — второй потеряется молча. Перебирай по индексу:</p>
+<pre><code class="language-kos">LOCAL i IS 0.
+UNTIL i &gt;= p:MODULES:LENGTH {
+  IF p:MODULES[i] = &quot;ModuleScienceExperiment&quot; { LOCAL m IS p:GETMODULEBYINDEX(i). ... }
+  SET i TO i + 1.
+}
+</code></pre>
+<h2 id="_8">Печать без мусора</h2>
 <p>Обычный <code>PRINT</code> прокручивает терминал и через минуту превращает его в кашу. Печатай в фиксированные позиции:</p>
 <pre><code class="language-kos">PRINT &quot;Ap:  &quot; + ROUND(SHIP:APOAPSIS/1000,1) + &quot; км    &quot; AT (0,3).
 PRINT &quot;Pe:  &quot; + ROUND(SHIP:PERIAPSIS/1000,1) + &quot; км    &quot; AT (0,4).
@@ -342,7 +380,7 @@ PRINT &quot;Дв:  &quot; + ROUND(SHIP:AVAILABLETHRUST,1) + &quot; кН   &quot;
 </code></pre>
 <p>Хвост из пробелов обязателен: строка не стирается, а перезаписывается, и остатки длинного прошлого значения повиснут на экране.</p>
 <p>Для разбора <strong>после</strong> полёта печать бесполезна — терминал не сохраняется. Пиши в файл: <a class="wikilink" href="telemetriya.html" title="Как заставить kOS писать телеметрию в файл на диске, где этот файл лежит, что с ним делать после посадки и почему для архива нужна связь.">Телеметрия: разбирать полёт по числам</a>.</p>
-<h2 id="_6">Внешний редактор</h2>
+<h2 id="_9">Внешний редактор</h2>
 <p>Править <code>.ks</code> в игровом терминале — мучение. Архив (том <code>0:</code>) — это обычная папка:</p>
 <pre><code>&lt;KSP&gt;/Ships/Script/
 </code></pre>
@@ -355,8 +393,8 @@ PRINT &quot;Дв:  &quot; + ROUND(SHIP:AVAILABLETHRUST,1) + &quot; кН   &quot;
 <li>Не полетело — F9, правка, снова с шага 3.</li>
 </ol>
 <p>Стрелка вверх в терминале повторяет прошлую команду, так что шаг 3 — это два нажатия.</p>
-<p>Отдать эту петлю ассистенту, который сам правит файлы в этой папке, — см. <a class="wikilink" href="agenty.html" title="Как дать Claude Code, Codex, OpenCode или Grok доступ к папке игры: что они видят, готовый файл контекста, настройка по инструментам, правила безопасности и рабочие запросы.">Подключаем ИИ-агентов</a>.</p>
-<h2 id="_7">Аварийный выход</h2>
+<p>Отдать эту петлю ассистенту, который сам правит файлы в этой папке, — см. <a class="wikilink" href="agenty.html" title="Как дать Claude Code, Codex, OpenCode или Grok доступ к папке игры: что они видят, готовый файл контекста, настройка по инструментам, правила безопасности и рабочие запросы.">Подключаем ИИ-агентов</a>. А если включить telnet-сервер kOS, тот же ассистент сможет и запускать скрипт, и читать ошибки сам: <a class="wikilink" href="kos-telnet.html" title="Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».">kOS по telnet: пульт снаружи игры</a>.</p>
+<h2 id="_10">Аварийный выход</h2>
 <p>Три уровня, от мягкого к жёсткому:</p>
 <table>
 <thead>
@@ -385,7 +423,7 @@ PRINT &quot;Дв:  &quot; + ROUND(SHIP:AVAILABLETHRUST,1) + &quot; кН   &quot;
 </tbody>
 </table>
 <p>И правило, которое отменяет необходимость во всех трёх: <strong>быстрое сохранение перед каждым прогоном</strong>.</p>
-<h2 id="_8">Защита прямо в коде</h2>
+<h2 id="_11">Защита прямо в коде</h2>
 <p>Хорошая привычка — не полагаться на свою реакцию, а зашивать пороги в скрипт:</p>
 <pre><code class="language-kos">// глушим двигатель, если на подъёме пошли вниз
 WHEN SHIP:VERTICALSPEED &lt; -5 AND SHIP:ALTITUDE &lt; 70000 THEN {
@@ -409,7 +447,7 @@ UNTIL готово OR TIME:SECONDS &gt; deadline {
 <li>Порог аварийного прерывания есть.</li>
 <li>Быстрое сохранение сделано.</li>
 <li>Аппарат дешёвый.</li>
-</ol></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="kos-osnovy.html"><b>kOS: основы</b><span>Бортовой компьютер kOS: как поставить процессор, открыть терминал, где лежат скрипты и из чего состоит первая программа.</span></a><a href="kos-prodvinutoe.html"><b>kOS: продвинутое</b><span>Функции, списки, библиотека из нескольких файлов, триггеры и их подводные камни, узлы манёвра из кода и защита от «улетел в космос».</span></a><a href="telemetriya.html"><b>Телеметрия: разбирать полёт по числам</b><span>Как заставить kOS писать телеметрию в файл на диске, где этот файл лежит, что с ним делать после посадки и почему для архива нужна связь.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="kos-osnovy.html">kOS: основы</a></div>
+</ol></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="kos-osnovy.html"><b>kOS: основы</b><span>Бортовой компьютер kOS: как поставить процессор, открыть терминал, где лежат скрипты и из чего состоит первая программа.</span></a><a href="kos-vyvod-orbita.html"><b>Скрипт вывода на орбиту: разбор ошибок</b><span>Инженерный журнал четырёх попыток вывести спутник скриптом kOS: почему ракета кувыркалась, куда делись 1500 м/с, отчего сломались антенны и как чинится каждая из этих бед.</span></a><a href="kos-telnet.html"><b>kOS по telnet: пульт снаружи игры</b><span>Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».</span></a><a href="telemetriya.html"><b>Телеметрия: разбирать полёт по числам</b><span>Как заставить kOS писать телеметрию в файл на диске, где этот файл лежит, что с ним делать после посадки и почему для архива нужна связь.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="kos-interfeys.html">kOS: интерфейс, графика и HUD</a>, <a href="kos-osnovy.html">kOS: основы</a>, <a href="kos-vyvod-orbita.html">Скрипт вывода на орбиту: разбор ошибок</a></div>
     <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
