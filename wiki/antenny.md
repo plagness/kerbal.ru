@@ -3,7 +3,7 @@ title: Антенны: выбор и дальность
 category: Связь и сеть
 summary: Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.
 order: 30
-related: [svyaz-osnovy, sozvezdiya, energetika]
+related: [svyaz-osnovy, chastoty, sozvezdiya, energetika]
 ---
 
 ## Два типа

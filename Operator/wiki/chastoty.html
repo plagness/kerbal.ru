@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Что такое «Оператор» — вики kerbal.ru</title>
-<meta name="description" content="Философия сборки: «ванила+» на стоковой системе, долгая программа вместо разовых полётов, без хардкора RP-1.">
+<title>Частоты и наземные станции — вики kerbal.ru</title>
+<meta name="description" content="Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <nav id="wnav">
 <div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-rocket"/></svg>Начало</div>
 <a class="wnav-item" href="start.html" data-title="с чего начать">С чего начать</a>
-<a class="wnav-item is-on" href="sborka.html" data-title="что такое «оператор»">Что такое «Оператор»</a>
+<a class="wnav-item" href="sborka.html" data-title="что такое «оператор»">Что такое «Оператор»</a>
 <a class="wnav-item" href="ustanovka.html" data-title="установка и обновление">Установка и обновление</a>
 <a class="wnav-item" href="nastroyki.html" data-title="настройки: сложность и моды">Настройки: сложность и моды</a>
 <a class="wnav-item" href="problemy.html" data-title="частые проблемы">Частые проблемы</a>
@@ -135,7 +135,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <div class="cat" data-cat><div class="cat-h"><svg class="ic"><use href="#i-satellite"/></svg>Связь и сеть</div>
 <a class="wnav-item" href="svyaz-osnovy.html" data-title="связь: как работает commnet">Связь: как работает CommNet</a>
 <a class="wnav-item" href="sozvezdiya.html" data-title="созвездия и покрытие">Созвездия и покрытие</a>
-<a class="wnav-item" href="chastoty.html" data-title="частоты и наземные станции">Частоты и наземные станции</a>
+<a class="wnav-item is-on" href="chastoty.html" data-title="частоты и наземные станции">Частоты и наземные станции</a>
 <a class="wnav-item" href="antenny.html" data-title="антенны: выбор и дальность">Антенны: выбор и дальность</a>
 <a class="wnav-item" href="set-planet.html" data-title="сеть связи у других планет">Сеть связи у других планет</a>
 <a class="wnav-item" href="diagnostika-svyazi.html" data-title="диагностика связи">Диагностика связи</a>
@@ -180,55 +180,151 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <a class="wnav-item" href="glossariy.html" data-title="глоссарий">Глоссарий</a>
 </div>
 </nav></aside>
-  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Начало</div><h1>Что такое «Оператор»</h1><p class="lede">Философия сборки: «ванила+» на стоковой системе, долгая программа вместо разовых полётов, без хардкора RP-1.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
+  <main><div class="crumbs"><a href="/Operator">Оператор</a> / <a href="./">Вики</a> / Связь и сеть</div><h1>Частоты и наземные станции</h1><p class="lede">Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.</p><div class="toc"><div class="toc-h">Содержание</div><div class="toc">
 <ul>
-<li><a href="#_1">Идея</a></li>
-<li><a href="#_2">Что добавлено и зачем</a></li>
-<li><a href="#_3">Чего в сборке нет — намеренно</a></li>
-<li><a href="#_4">Как это ощущается</a></li>
+<li><a href="#_1">Что такое частота</a></li>
+<li><a href="#_2">Три места, где живут частоты</a></li>
+<li><a href="#_3">Наземные станции — тоже объекты сети</a></li>
+<li><a href="#_4">Ловушка: станция без частоты</a></li>
+<li><a href="#_5">Зачем вообще разносить частоты</a></li>
+<li><a href="#_6">Что мод не делает</a></li>
 </ul>
 </div>
-</div><article class="art"><p>«Оператор» — курируемая сборка KSP 1.12.5 на <strong>стоковой</strong> Кербол-системе. Никакого реального масштаба, никаких настоящих топливных смесей, никаких таймеров постройки. Смысл сборки в другом: ты не пилот одной ракеты, а оператор космической программы, которая живёт десятки полётов.</p>
-<h2 id="_1">Идея</h2>
-<p>Ванильная карьера заканчивается там, где ты слетал на Еву и посадил флаг. «Оператор» растягивает середину игры: вместо «слетать» — «обеспечить». Спутники → сеть покрытия → станции и базы → автоматика. Каждый уровень опирается на предыдущий и даёт повод строить следующий.</p>
-<p>Отсюда и подбор модов: почти всё расширяет стоковую логику, а не заменяет её.</p>
-<h2 id="_2">Что добавлено и зачем</h2>
-<p><strong>Связь и сеть.</strong> CommNet Constellation (частоты и раздельные сети), Antenna Helper («Помощник антенн» — считает дальность и уровень сигнала прямо в ангаре), JX2 Antenna (дальняя связь до внешних планет), контракт-пак Constellations. Ядро вижена — см. <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a> и <a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a>.</p>
-<p><strong>Станции и базы.</strong> Station Parts Expansion Redux, Station Science, Planetary Base Systems, Universal Storage 2, KAS, Extraplanetary Launchpads. Долгоживущие объекты, которым нужны экипаж, питание и снабжение → <a class="wikilink" href="stancii.html" title="Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.">Орбитальные станции</a>, <a class="wikilink" href="bazy.html" title="KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.">Наземные базы и снабжение</a>.</p>
-<p><strong>Автоматика.</strong> MechJeb 2, kOS, kRPC, Routine Mission Manager, Background Resource Processing, Kerbal Alarm Clock, Haystack. Переход от ручного пилотирования к операциям как коду → <a class="wikilink" href="avtomatika.html" title="MechJeb, будильники, Haystack, повторяющиеся рейсы и фоновый расчёт ресурсов — четыре слоя автоматизации сборки «Оператор».">Автоматика полётов и рутина</a>, <a class="wikilink" href="kos-osnovy.html" title="Бортовой компьютер kOS: как поставить процессор, открыть терминал, где лежат скрипты и из чего состоит первая программа.">kOS: основы</a>.</p>
-<p><strong>Наука и разведка.</strong> SCANsat, DMagic Orbital Science, [x] Science!, Science Relay, зонды Coatl Aerospace. Поток целей и приборов → <a class="wikilink" href="nauka-osnovy.html" title="Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.">Наука: как собирать эффективно</a>, <a class="wikilink" href="pribory.html" title="Обзор приборов DMagic, SCANsat, Coatl и Station Science — что делает, где применять, что одноразовое.">Научные приборы сборки</a>, <a class="wikilink" href="geologiya.html" title="Биомы как главный множитель науки, биомные карты SCANsat, разведка рельефа и ресурсов, контракты полевых исследований.">Геология и биомы</a>.</p>
-<p><strong>Прогрессия.</strong> Contract Configurator с паками (Constellations, CleverSats, Field Research, Kerbin Space Station), Strategia, Community Tech Tree → <a class="wikilink" href="kontrakty.html" title="Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.">Контракты и стратегии</a>.</p>
-<p><strong>Детали и тяга.</strong> ReStock/ReStock+, линейка Near Future, Cryo Engines, Kerbal Atomics, Far Future, SpaceY, Mk2/Mk3 Expansion, Knes, Airplane Plus → <a class="wikilink" href="dvigateli.html" title="Линейка тяги в сборке — от керосиновых носителей до плазмы: что, когда и какой ценой по энергии и теплу.">Двигатели и топливо</a>, <a class="wikilink" href="energetika.html" title="Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.">Энергетика и тепло</a>.</p>
-<h2 id="_3">Чего в сборке нет — намеренно</h2>
+</div><article class="art"><p>Стоковый CommNet — это один общий эфир: все слышат всех, вопрос только в дальности. <strong>CommNet Constellation</strong> добавляет поверх него радиоканалы. Пока ты об этом не знаешь, мод выглядит как «цветные линии на карте». На деле он меняет базовое правило: теперь связь возможна, только если у обеих сторон <strong>совпала частота</strong>.</p>
+<p>Механика дальности при этом не меняется — она разобрана в <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>, и всё оттуда остаётся в силе.</p>
+<h2 id="_1">Что такое частота</h2>
+<p>Частота — это число от 0 до 99 999. Два объекта слышат друг друга, если:</p>
+<ol>
+<li>между ними есть прямая видимость и хватает дальности (обычный CommNet), <strong>и</strong></li>
+<li>у них есть хотя бы одна <strong>общая частота</strong>.</li>
+</ol>
+<p>Оба условия обязательны. Аппарат в километре от ЦУПа с частотой 7 не свяжется с ЦУПом на частоте 0 — эфир разный.</p>
+<p><strong>Созвездие</strong> — это просто именованная частота с цветом. <code>Public Broadcasting</code> = частота 0 — общий канал, существует всегда.</p>
+<h2 id="_2">Три места, где живут частоты</h2>
+<p>Это главное, что нужно понять. Частота хранится не в одном месте, а в трёх, и все три должны сойтись.</p>
 <table>
 <thead>
 <tr>
-<th>Убрано</th>
-<th>Почему</th>
+<th>Где</th>
+<th>Что это</th>
+<th>Как выглядит в сейве</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Real Solar System / реальный масштаб</td>
-<td>Стоковая система читаемая и прощает ошибки</td>
+<td><strong>Антенна</strong></td>
+<td>у каждой антенны своя частота</td>
+<td><code>CNConstellationAntennaModule { Frequency = 0; InUse = True }</code></td>
 </tr>
 <tr>
-<td>Realism Overhaul, Real Fuels</td>
-<td>Смеси топлив и ullage — это уже другая игра, RP-1</td>
+<td><strong>Аппарат</strong></td>
+<td>список частот = объединение частот его антенн</td>
+<td><code>CNCCommNetVessel { FreqDictionaryKeys / FreqDictionaryValues }</code></td>
 </tr>
 <tr>
-<td>Kerbal Construction Time</td>
-<td>Таймеры постройки превращают программу в ожидание</td>
-</tr>
-<tr>
-<td>Принципиально-жёсткий Kerbalism</td>
-<td>Отказы и радиация ломают темп «ванилы+»</td>
+<td><strong>Наземная станция</strong></td>
+<td>свой независимый список частот</td>
+<td><code>GroundStation { Frequencies { Frequency = 0 } }</code></td>
 </tr>
 </tbody>
 </table>
-<p>Сборка помечена как несовместимая с RP-1: это две разные философии, и смешивать их не нужно. Если хочется реализма — есть отдельная сборка RO/RSS/RP-1.</p>
-<h2 id="_4">Как это ощущается</h2>
-<p>Полёты остаются стоковыми по сложности, но перестают быть одноразовыми. Каждый запуск во что-то встраивается: спутник закрывает дыру в покрытии, модуль расширяет станцию, скрипт снимает с тебя очередной ручной рейс. Начать — с <a class="wikilink" href="start.html" title="Первые часы в сборке «Оператор»: какие контракты брать, первый суборбитальный и орбитальный полёт, и куда не стоит лезть сразу.">С чего начать</a>.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="start.html"><b>С чего начать</b><span>Первые часы в сборке «Оператор»: какие контракты брать, первый суборбитальный и орбитальный полёт, и куда не стоит лезть сразу.</span></a><a href="avtomatika.html"><b>Автоматика полётов и рутина</b><span>MechJeb, будильники, Haystack, повторяющиеся рейсы и фоновый расчёт ресурсов — четыре слоя автоматизации сборки «Оператор».</span></a><a href="kontrakty.html"><b>Контракты и стратегии</b><span>Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="dvigateli.html">Двигатели и топливо</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="kos-osnovy.html">kOS: основы</a>, <a href="start.html">С чего начать</a></div>
+<p>Список аппарата собирается сам (<code>FreqListOperation = AutoBuild</code>): мод суммирует мощность всех включённых антенн по каждой частоте. В логе это видно строкой:</p>
+<pre><code>[CommNet Constellation] CommNet Vessel 'LKO Relay A' has the single freq 0 of 9036576 power
+</code></pre>
+<p>Читается так: «аппарат вещает на одной частоте — 0, суммарная мощность 9,04 М». Если поставить две антенны на разные частоты, строк станет две, и мощность разделится между каналами.</p>
+<blockquote>
+<p>Мощность <strong>не</strong> складывается через частоты. Две антенны по 5 М на одной частоте дают один сильный канал; они же на разных частотах — два слабых. Разносить частоты «для надёжности» — вредный рефлекс.</p>
+</blockquote>
+<h2 id="_3">Наземные станции — тоже объекты сети</h2>
+<p>Стоковый Кербин несёт семь площадок: ЦУП и шесть дополнительных (Байкербанур, Кратер Рим, Массив Харвестера, Остров Най, Северная Станция Один, Меса Юг). В стоке они либо все включены, либо все выключены галочкой сложности <code>enableGroundStations</code>.</p>
+<p>CNC делает из них полноценные объекты со своими свойствами:</p>
+<ul>
+<li><strong>свой список частот</strong> — как у аппарата;</li>
+<li><strong>свой уровень (TechLevel)</strong> и своя мощность;</li>
+<li><strong>апгрейд за деньги</strong> — прямо в панели мода.</li>
+</ul>
+<p>Уровни и цены прописаны в <code>GameData/CommNetConstellation/cnc_settings.cfg</code>:</p>
+<pre><code>UpgradeableGroundStationCosts  = 100000; 200000; 500000
+UpgradeableGroundStationPowers = 5E+08;  20E+09; 80E+09
+KSCMissionControlPowers        = 2E+09;  50E+09; 250E+09
+</code></pre>
+<p>Отсюда важный вывод для игры за «Оператора»: <strong>дополнительные станции можно прокачивать отдельно от Центра слежения</strong>. Новая станция стартует с 500 М — это в четыре раза слабее ЦУПа первого уровня. За 100 000 она поднимается до 20 Г, что уже сравнимо с ЦУПом второго уровня. Дешёвый способ закрыть дыру в покрытии, пока нет денег на кеостационарную тройку.</p>
+<h2 id="_4">Ловушка: станция без частоты</h2>
+<p>Самая коварная вещь в моде. Наземная станция с <strong>пустым</strong> списком частот не связывается ни с кем. Не «слабый сигнал» — вообще нет приёмника. При этом:</p>
+<ul>
+<li>в панели мода станция видна и выглядит нормально;</li>
+<li>на карте она отрисована;</li>
+<li>галочка сложности <code>enableGroundStations = True</code> стоит;</li>
+<li>аппарат исправен, антенны развёрнуты, мощности с избытком.</li>
+</ul>
+<p>А связи нет. Никогда, ни на одном витке.</p>
+<p>Это состояние может записаться в сохранение при первом запуске карьеры — если сейв сохранился раньше, чем мод успел раздать станциям частоты из своего конфига. Дальше сейв перекрывает конфиг, и дефолт из <code>cnc_settings.cfg</code> уже не применяется.</p>
+<p><strong>Как проверить по сейву.</strong> Открой <code>saves/&lt;игра&gt;/persistent.sfs</code>, найди <code>SCENARIO { name = CNCCommNetScenario }</code>. Здоровая станция выглядит так:</p>
+<pre><code>GroundStation
+{
+    ID = Kerbin: KSC
+    TechLevel = 2
+    Frequencies
+    {
+        Frequency = 0
+    }
+}
+</code></pre>
+<p>Если блока <code>Frequencies</code> нет — это и есть поломка.</p>
+<p><strong>Как проверить по логу.</strong> В <code>KSP.log</code> при загрузке мод пишет по строке на каждую добавленную станцию:</p>
+<pre><code>[CommNet Constellation] Stock CommNet Home 'Kerbin: KSC' added
+</code></pre>
+<p>а при раздаче частот — строки вида <code>Added g-station freq: 0</code>. Есть первые и <strong>нет</strong> вторых — сеть глухая.</p>
+<p><strong>Как починить.</strong> Не выходя из игры: открой панель CommNet Constellation → список наземных станций → выбери станцию → задай частоту <strong>0</strong> (созвездие <code>Public Broadcasting</code>). Применяется сразу, перезапуск не нужен. Пройди так по всем семи станциям — тогда покрытие Кербина станет практически круглосуточным.</p>
+<p>Симптомы, которые даёт эта поломка, и как отличить её от других причин — в <a class="wikilink" href="diagnostika-svyazi.html" title="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">Диагностика связи</a>.</p>
+<h2 id="_5">Зачем вообще разносить частоты</h2>
+<p>Пока сеть маленькая, честный ответ — незачем. Частота 0 на всём работает, и это правильный старт. Разделение начинает окупаться, когда сетей становится несколько:</p>
+<ul>
+<li><strong>Изоляция.</strong> Научная цепочка у Дюны не участвует в маршрутизации кербинского трафика. Пути сигнала становятся предсказуемыми, а не «как игра посчитала».</li>
+<li><strong>Диагностика.</strong> На карте каждое созвездие своего цвета — видно, чей канал порвался.</li>
+<li><strong>Замкнутые группы.</strong> Ретранслятор можно заставить обслуживать строго свою группу и не тратить мощность на чужаков.</li>
+</ul>
+<p>Разумный план частот для «Оператора»:</p>
+<table>
+<thead>
+<tr>
+<th>Частота</th>
+<th>Кто на ней</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>все наземные станции, все аппараты по умолчанию</td>
+<td>общий эфир, аварийный канал</td>
+</tr>
+<tr>
+<td>0 + 10</td>
+<td>кербинская тройка на кеостационаре</td>
+<td>своя навигационная сеть поверх общей</td>
+</tr>
+<tr>
+<td>0 + 11</td>
+<td>полярная пара</td>
+<td>отдельно видно, где рвётся покрытие шапок</td>
+</tr>
+<tr>
+<td>0 + 2x</td>
+<td>каждая межпланетная цепочка своя</td>
+<td>Мун — 20, Дюна — 21, Джул — 22</td>
+</tr>
+</tbody>
+</table>
+<p>Ключевой приём: <strong>частоту 0 не снимать ни с чего</strong>. Пусть аппарат вещает на двух частотах — своей и общей. Тогда даже если план частот запутается, аппарат останется досягаем.</p>
+<h2 id="_6">Что мод не делает</h2>
+<ul>
+<li>Не меняет формулу дальности и не даёт бонусов к мощности.</li>
+<li>Не переопределяет типы антенн: прямая остаётся прямой, ретранслятор — ретранслятором (<a class="wikilink" href="antenny.html" title="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">Антенны: выбор и дальность</a>).</li>
+<li>Не заменяет геометрию: горизонт и затенение телом работают как в стоке.</li>
+<li>Не влияет на скорость передачи науки — только на сам факт наличия канала.</li>
+</ul>
+<p>Мод отвечает ровно на один вопрос: «кто кого имеет право слышать». Всё остальное решает стоковый CommNet.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="svyaz-osnovy.html"><b>Связь: как работает CommNet</b><span>Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.</span></a><a href="diagnostika-svyazi.html"><b>Диагностика связи</b><span>Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.</span></a><a href="sozvezdiya.html"><b>Созвездия и покрытие</b><span>Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="problemy.html">Частые проблемы</a>, <a href="sozvezdiya.html">Созвездия и покрытие</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a></div>
     <footer>Вики сборки «Оператор» · kerbal.ru 26.17 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
