@@ -3,7 +3,7 @@ title: Энергетика и тепло
 category: Техника
 summary: Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.
 order: 10
-related: [dvigateli, stancii, avtomatika]
+related: [toplivo, dvigateli, stancii, avtomatika]
 ---
 
 Питание — первое, что убивает дальние миссии. Аппарат не взрывается: он просто перестаёт отвечать, потому что заряда не хватило на приём команды.
