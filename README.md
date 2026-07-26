@@ -46,6 +46,7 @@ builds/                  каталог сборок; имя папки = id с�
     build.json           что ставить (mods.core/recommended/optional) + ckan-опции
     README.md            описание сборки
     config/              опц. конфиг сборки (зеркалит GameData/), напр. мягкий пресет KCT
+    screens/             скриншоты сборки: screens.json (подписи) + .jpg до ~500 КБ
   _catalog.json          индекс для сайта/меню (генерируется)
 install.sh               менеджер сборок (Linux/macOS/Steam Deck)
 tools/                   валидаторы, генератор каталога, статистика переводов
@@ -68,6 +69,17 @@ Localization-патчи → `GameData/zzz-kerbalru-translations/<mod>/` (пре�
 ## Авторам сборок
 Добавь `builds/<id>/build.json` (образец — `builds/operator/build.json`) + `README.md`. Моды — по CKAN-id;
 `ckan.compatVersions` — для модов с отставшим тегом версии; `config/` — для конфигов сборки.
+
+**Скриншоты.** Кадры живут в `builds/<id>/screens/` и попадают и на сайт, и в `.md`:
+
+```bash
+tools/add_screenshot.sh ~/Downloads/кадр.png operator 02-set-pokrytiya   # → 2200 px, JPEG q80, ~400 КБ
+# дописать запись в builds/operator/screens/screens.json (title, caption, alt)
+python3 tools/gen_gallery.py                                            # → галерея на странице + screens/README.md
+```
+
+Галерея на странице сборки и обзорный `screens/README.md` генерируются из одного `screens.json` — руками
+разметку не правь, она перезапишется. Пример: [«Оператор»](builds/operator/screens/README.md).
 
 ## Переводчикам
 Добавь/дополни `translations/<mod>/`. Политика — **умный перевод**: по максимуму на русский, латиницей только

@@ -366,6 +366,22 @@
   .dl:hover{transform:translateY(-2px);filter:brightness(1.05);color:#0a140b}
   .dl.sec{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--txt)}
   .dl.sec:hover{border-color:var(--line-cyan);color:#fff}
+  /* галерея скриншотов — горизонтальная лента, генерится tools/gen_gallery.py */
+  .gal-strip{display:flex;gap:15px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding:2px 2px 15px;margin:4px -2px 0;scrollbar-width:thin;scrollbar-color:var(--line-cyan) transparent}
+  .gal-strip::-webkit-scrollbar{height:9px}
+  .gal-strip::-webkit-scrollbar-track{background:rgba(255,255,255,.035);border-radius:99px}
+  .gal-strip::-webkit-scrollbar-thumb{background:rgba(166,232,110,.34);border-radius:99px}
+  .gal-strip::-webkit-scrollbar-thumb:hover{background:var(--cyan)}
+  .gal-strip:focus-visible{outline:1px solid var(--line-cyan);outline-offset:6px;border-radius:12px}
+  .gal-item{flex:0 0 min(548px,86%);scroll-snap-align:start;display:flex;flex-direction:column;gap:11px;text-decoration:none;color:inherit}
+  .gal-item img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--line);border-radius:13px;background:var(--bg-0);transition:border-color .2s,transform .2s}
+  .gal-item:hover img,.gal-item:focus-visible img{border-color:var(--line-cyan);transform:translateY(-2px)}
+  .gal-cap{font-size:.85rem;color:var(--txt-dim);line-height:1.5}
+  .gal-cap b{display:block;font-family:var(--sans);font-weight:700;font-size:.93rem;color:var(--txt);margin-bottom:3px}
+  .gal-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:2px}
+  .gal-btn{font-size:.95rem;line-height:1;color:var(--txt-dim);background:transparent;border:1px solid var(--line);border-radius:9px;padding:8px 14px;cursor:pointer;transition:.18s}
+  .gal-btn:hover{border-color:var(--line-cyan);color:var(--green)}
+  @media (max-width:720px){.gal-item{flex:0 0 90%}.gal-nav{display:none}}
 </style>
 </head>
 <body>
@@ -481,8 +497,20 @@ curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
     </div>
   </section>
 
+  <!-- GALLERY:operator:START -->
+  <section class="reveal" id="screens">
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-world"/></svg></span><span class="sec-num">03 / СКРИНШОТЫ</span><h2>Как это выглядит</h2><span class="rule"></span></div>
+    <div class="card gallery">
+      <div class="gal-strip" tabindex="0" aria-label="Скриншоты сборки">
+        <a class="gal-item" href="/builds/operator/screens/01-lko-relay-orbita.jpg" target="_blank" rel="noopener"><img src="/builds/operator/screens/01-lko-relay-orbita.jpg" alt="Спутник-ретранслятор на орбите Кербина, окна [x] Science!, MechJeb и SCANsat" loading="lazy" decoding="async" width="2200" height="1237"><span class="gal-cap"><b>Ретранслятор на низкой орбите</b>«LKO Relay A» на 261 км: развёрнутые панели и ретрансляторы HG-5, окно [x] Science! с готовой к передаче наукой, карта SCANsat поверх рельефа и «Помощник подъёма» MechJeb слева.</span></a>
+      </div>
+      <div class="gal-nav"><button class="gal-btn" type="button" data-gal="-1" aria-label="Назад">←</button><button class="gal-btn" type="button" data-gal="1" aria-label="Вперёд">→</button></div>
+    </div>
+  </section>
+  <!-- GALLERY:operator:END -->
+
   <section class="reveal" id="mods">
-    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-layout-grid"/></svg></span><span class="sec-num">03 / ЧТО ВНУТРИ</span><h2>Из чего собран «Оператор»</h2><span class="rule"></span></div>
+    <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-layout-grid"/></svg></span><span class="sec-num">04 / ЧТО ВНУТРИ</span><h2>Из чего собран «Оператор»</h2><span class="rule"></span></div>
     <div class="card">
       <p style="margin-top:0">60 модов, сгруппированных по роли в космической программе. Расширяют стоковую ваниль, не ломая систему и не превращая игру в хардкор.</p>
       <div class="feature"><div class="feature-h"><svg class="ic"><use href="#i-satellite"/></svg><h4>Связь и сеть покрытия</h4></div><p>Ядро вижена: строишь спутниковую сеть, следишь за зоной покрытия и тянешь дальнюю связь к внешним планетам. Контракты сами ведут от первого ретранслятора к глобальной сети.</p><div class="modgrid"><span class="mod">CommNet Constellation</span><span class="mod">Antenna Helper</span><span class="mod">JX2 Antenna</span><span class="mod">Beamed Power</span><span class="mod">Contract Pack: Constellations</span></div></div>
@@ -1134,6 +1162,25 @@ document.addEventListener('click',function(event){
   if(!/Win/i.test(navigator.platform||navigator.userAgent)){
     var nb=document.querySelector('.os-tab[data-os="nix"]'); if(nb) nb.click();
   }
+
+  // галерея: стрелки не нужны, пока лента помещается целиком
+  (function(){
+    var gal=document.querySelector('.gallery'); if(!gal) return;
+    var strip=gal.querySelector('.gal-strip'), nav=gal.querySelector('.gal-nav');
+    var sync=function(){ nav.style.display = strip.scrollWidth>strip.clientWidth+4 ? '' : 'none'; };
+    sync(); addEventListener('resize',sync);
+  })();
+
+  // галерея: кнопки листают ленту на один кадр (прокрутка колесом/тачпадом работает сама)
+  document.querySelectorAll('.gal-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var strip=btn.closest('.gallery').querySelector('.gal-strip');
+      var item=strip.querySelector('.gal-item');
+      if(!item) return;
+      var step=item.getBoundingClientRect().width+15;
+      strip.scrollBy({left:step*Number(btn.getAttribute('data-gal')),behavior:'smooth'});
+    });
+  });
 </script>
 </body>
 </html>
