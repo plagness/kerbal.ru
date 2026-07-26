@@ -235,7 +235,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#_3">Аппарат не слушается руля</a></li>
 <li><a href="#_4">Аппарат виляет и раскачивается</a></li>
 <li><a href="#_5">Ошибки парсера</a><ul>
-<li><a href="#_6">Однобуквенные имена — мина</a></li>
+<li><a href="#_6">Имена, которые нельзя занимать</a></li>
 <li><a href="#_7">Одна деталь — несколько модулей</a></li>
 </ul>
 </li>
@@ -359,12 +359,45 @@ SET STEERINGMANAGER:ROLLCONTROLANGLERANGE TO 5.  // не гоняться за �
 </tbody>
 </table>
 <p>Точка после каждой команды — не украшение, а разделитель. Больше половины «непонятных» ошибок это она.</p>
-<h3 id="_6">Однобуквенные имена — мина</h3>
-<p><code>R()</code>, <code>V()</code>, <code>Q()</code> — встроенные функции kOS: поворот, вектор, кватернион. Назвать так переменную или параметр нельзя, скрипт не запустится вовсе:</p>
-<pre><code class="language-kos">FUNCTION vCirc { PARAMETER r. ... }     // ✗ затирает R()
-FUNCTION vCirc { PARAMETER rad. ... }   // ✓
+<h3 id="_6">Имена, которые нельзя занимать</h3>
+<p>kOS не даст объявить переменную или параметр с именем встроенной функции или встроенной переменной — скрипт не запустится вовсе:</p>
+<pre><code>Not allowed to SET a name that will clobber or hide
+the BUILTIN_FUNCTION called 'v'.
 </code></pre>
-<p>Проверять стоит заранее: <code>R</code>, <code>V</code>, <code>Q</code>, <code>NODE</code>, <code>LIST</code>, <code>PATH</code>, <code>MIN</code>, <code>MAX</code>, <code>ROUND</code>, <code>STAGE</code>, <code>THROTTLE</code>.</p>
+<p>Ловушка в том, что это самые естественные имена. На одной библиотеке из девяти модулей мы поймали три штуки подряд:</p>
+<table>
+<thead>
+<tr>
+<th>Хотелось назвать</th>
+<th>Кто занял</th>
+<th>Как назвали</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code> — радиус</td>
+<td><code>R()</code>, поворот</td>
+<td><code>rad</code></td>
+</tr>
+<tr>
+<td><code>v</code> — вектор скорости</td>
+<td><code>V()</code>, конструктор вектора</td>
+<td><code>vel</code></td>
+</tr>
+<tr>
+<td><code>alt</code> — высота</td>
+<td>встроенная <code>ALT</code></td>
+<td><code>hgt</code></td>
+</tr>
+<tr>
+<td><code>path</code> — путь к файлу</td>
+<td><code>PATH()</code></td>
+<td><code>fpath</code></td>
+</tr>
+</tbody>
+</table>
+<p>Полный список того, что стоит проверять до запуска: односимвольные <code>R</code>, <code>V</code>, <code>Q</code>; переменные <code>ALT</code>, <code>ETA</code>, <code>TIME</code>, <code>BODY</code>, <code>SHIP</code>, <code>STATUS</code>, <code>TARGET</code>, <code>STAGE</code>, <code>THROTTLE</code>, <code>STEERING</code>, <code>SAS</code>, <code>RCS</code>, <code>PANELS</code>, <code>GEAR</code>, <code>LIGHTS</code>, <code>CONFIG</code>, <code>TERMINAL</code>, <code>CORE</code>; функции <code>NODE</code>, <code>LIST</code>, <code>LEX</code>, <code>PATH</code>, <code>MIN</code>, <code>MAX</code>, <code>ROUND</code>, <code>HEADING</code>, <code>LATLNG</code>, <code>VANG</code>, <code>VDOT</code>, <code>VCRS</code>, <code>VXCL</code>, <code>ANGLEAXIS</code>, <code>LOOKDIRUP</code>.</p>
+<p>Ошибка вылезает при <strong>компиляции</strong>, то есть до первой команды двигателю. Поэтому дешевле всего ловить её прогоном модуля на стартовом столе — секунда против потерянной ракеты.</p>
 <h3 id="_7">Одна деталь — несколько модулей</h3>
 <p><code>PART:GETMODULE("имя")</code> возвращает <strong>первый</strong> подходящий модуль. Если в детали их два — например, магнитометр и датчик радиации в одной мачте, — второй потеряется молча. Перебирай по индексу:</p>
 <pre><code class="language-kos">LOCAL i IS 0.
