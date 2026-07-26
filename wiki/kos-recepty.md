@@ -3,7 +3,7 @@ title: kOS: готовые рецепты
 category: Автоматика
 summary: Четыре рабочих скрипта kOS с разбором построчно: взлёт, циркуляризация, вывод спутника с заданным наклонением, посадка на Муну.
 order: 20
-related: [kos-osnovy, sozvezdiya, avtomatika]
+related: [kos-biblioteka, kos-osnovy, sozvezdiya, avtomatika]
 ---
 
 Готовые скрипты под сборку «Оператор». Все конструкции — базовые (`LOCK`, `WAIT UNTIL`, `UNTIL`, `STAGE`, `NODE`), проверены на kOS 1.6. Если ещё не читал [[kos-osnovy]] — начни оттуда.
