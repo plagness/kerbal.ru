@@ -374,6 +374,9 @@
   .gal-strip::-webkit-scrollbar-thumb:hover{background:var(--cyan)}
   .gal-strip:focus-visible{outline:1px solid var(--line-cyan);outline-offset:6px;border-radius:12px}
   .gal-item{flex:0 0 min(548px,86%);scroll-snap-align:start;display:flex;flex-direction:column;gap:11px;text-decoration:none;color:inherit}
+  /* нечего прокручивать — кадр занимает всю ширину карточки, поля симметричны */
+  .gal-strip.is-fit{justify-content:center;padding-bottom:2px}
+  .gal-strip.is-fit .gal-item{flex:0 0 100%}
   .gal-item img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--line);border-radius:13px;background:var(--bg-0);transition:border-color .2s,transform .2s}
   .gal-item:hover img,.gal-item:focus-visible img{border-color:var(--line-cyan);transform:translateY(-2px)}
   .gal-cap{font-size:.85rem;color:var(--txt-dim);line-height:1.5}
@@ -1167,7 +1170,12 @@ document.addEventListener('click',function(event){
   (function(){
     var gal=document.querySelector('.gallery'); if(!gal) return;
     var strip=gal.querySelector('.gal-strip'), nav=gal.querySelector('.gal-nav');
-    var sync=function(){ nav.style.display = strip.scrollWidth>strip.clientWidth+4 ? '' : 'none'; };
+    var sync=function(){
+      strip.classList.remove('is-fit');                       // мерим в «прокручиваемом» состоянии
+      var scrolls = strip.scrollWidth>strip.clientWidth+4;
+      strip.classList.toggle('is-fit',!scrolls);
+      nav.style.display = scrolls ? '' : 'none';
+    };
     sync(); addEventListener('resize',sync);
   })();
 
