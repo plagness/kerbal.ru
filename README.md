@@ -6,9 +6,9 @@
 Kerbal Space Program 1.12.5.
 
 [![сайт](https://img.shields.io/badge/сайт-kerbal.ru-a6e86e?style=flat-square)](https://kerbal.ru)
-[![релиз](https://img.shields.io/github/v/release/plagness/kerbal.ru?style=flat-square&label=релиз&color=a6e86e)](https://github.com/plagness/kerbal.ru/releases)
-[![звёзды](https://img.shields.io/github/stars/plagness/kerbal.ru?style=flat-square&label=звёзды&color=f0c067)](https://github.com/plagness/kerbal.ru/stargazers)
-[![скачивания](https://img.shields.io/github/downloads/plagness/kerbal.ru/total?style=flat-square&label=скачано&color=ff9d48)](https://github.com/plagness/kerbal.ru/releases)
+[![релиз](https://img.shields.io/github/v/release/plagness/kerbal.ru?style=flat-square&label=%D1%80%D0%B5%D0%BB%D0%B8%D0%B7&color=a6e86e)](https://github.com/plagness/kerbal.ru/releases)
+[![звёзды](https://img.shields.io/github/stars/plagness/kerbal.ru?style=flat-square&label=%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%D1%8B&color=f0c067)](https://github.com/plagness/kerbal.ru/stargazers)
+[![скачивания](https://img.shields.io/github/downloads/plagness/kerbal.ru/total?style=flat-square&label=%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D0%BD%D0%BE&color=ff9d48)](https://github.com/plagness/kerbal.ru/releases)
 [![переводы](https://img.shields.io/badge/переводов-111%20модов-a6e86e?style=flat-square)](docs/COVERAGE.md)
 [![вики](https://img.shields.io/badge/вики-50%20статей-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
 
@@ -210,7 +210,7 @@ dist/                  сборочные артефакты: .ckan-метапа
 |---|---:|---|
 | Переводов модов | **111** | `▁▁████` |
 | Статей вики | **50** | `▁▁▁▁██` |
-| Коммитов | **134** | `▁▄▆▆▇█` |
+| Коммитов | **138** | `▁▄▆▆▇█` |
 | Звёзд на GitHub | **2** | релизов: 17 |
 | Скачиваний релизов | **9** | operator: 6 · rp1: 0 |
 
@@ -218,8 +218,8 @@ dist/                  сборочные артефакты: .ckan-метапа
 
 ### Кто это делает
 
-- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 134 коммитов, с 2026-07-22
-- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 62 коммитов, с 2026-07-22
+- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 138 коммитов, с 2026-07-22
+- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 66 коммитов, с 2026-07-22
 
 Список собирается из git и включает соавторов из трейлера `Co-Authored-By` — их GitHub в списке контрибьюторов API не показывает.
 <!-- STATS:END -->

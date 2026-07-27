@@ -306,15 +306,22 @@ def refresh_counts(path: Path, data: dict) -> None:
     """Числа в бейджах и тексте README — те же, что в статистике."""
     t = data["totals"]
     text = path.read_text(encoding="utf-8")
+    wiki_word = plural_ru(t["wiki"], "статья", "статьи", "статей")
     subs = [
         (r"переводов-\d+%20модов", f"переводов-{t['translations']}%20модов"),
-        (r"вики-\d+%20стать[яйи]", f"вики-{t['wiki']}%20{plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}"),
-        (r"вики сборок?[^|]*?\d+ стат\w+", f"wiki/ {t['wiki']} {plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}"),
-        (r"— \d+ стать[яйи]: связь", f"— {t['wiki']} {plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}: связь"),
+        (r"вики-\d+%20стат\w+", f"вики-{t['wiki']}%20{wiki_word}"),
+        (r"— \d+ стат\w+: связь", f"— {t['wiki']} {wiki_word}: связь"),
     ]
-    new = text
+    new, dead = text, []
     for pat, rep in subs:
+        if not re.search(pat, new):
+            # Текст README поменяли, шаблон больше ни во что не попадает: молча
+            # разошедшиеся цифры хуже, чем шумная строка в выводе.
+            dead.append(pat)
+            continue
         new = re.sub(pat, rep, new)
+    for pat in dead:
+        print(f"  ! шаблон не нашёл совпадений, число могло устареть: {pat}", file=sys.stderr)
     if new != text:
         path.write_text(new, encoding="utf-8")
         print(f"  → {path.name}: числа в тексте синхронизированы")

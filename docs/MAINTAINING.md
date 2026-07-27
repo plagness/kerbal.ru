@@ -214,11 +214,11 @@ python3 tools/sync_project_data.py --check
 
 ## 8. Релиз и обновление
 
-Установщики по умолчанию читают последний GitHub Release. В каталоге KSP они создают:
+Установщик читает каталог сборок из `main` и ставит моды через CKAN. В каталоге KSP он создаёт:
 
-- `.kerbalru-version` — установленная версия;
-- `.kerbalru-files` — manifest файлов, которыми управляет проект;
-- `kerbal.ru-backups/` — резервные копии перед заменой или удалением managed-файла.
+- `.kerbalru-build.json` — какая сборка стоит, её состав и когда поставлена;
+- `settings.cfg.bak-kerbalru` — копия настроек до включения русского языка;
+- `kerbal/`, `AGENTS.md`, `Ships/Script/` — вики, инструкция агенту и полётные скрипты.
 
 Обычный релизный цикл:
 
@@ -226,7 +226,7 @@ python3 tools/sync_project_data.py --check
 2. выполнить `python3 tools/bump_release.py` (например, `v26.1` → `v26.2`) и добавить запись в `CHANGELOG.md` (секция `[Unreleased]` → новая версия);
 3. проверить чистую установку и обновление поверх предыдущего релиза через `install.sh`;
 4. влить релизный PR в `main`;
-5. создать и отправить тег `v$(cat VERSION)` — workflow выпустит GitHub Release;
+5. создать и отправить тег `v$(cat VERSION)` — workflow выпустит GitHub Release; приложить ассеты: `gh release upload v$(cat VERSION) dist/*.zip dist/*.ckan`;
 6. **обязательно написать содержательное описание релиза** (`gh release edit vX.Y --notes "..."`, разделы «В релизе» / «Текущие показатели» / «Дальше», по образцу v26.1/v26.2) — workflow сам вызывает `--generate-notes`, это ТОЛЬКО список коммитов, не описание для пользователя; без этого шага релиз выглядит пустым;
 7. проверить `install.sh --list` и обычное обновление (`--update` / `--ru-only`) через публичный `kerbal.ru`.
 
