@@ -113,9 +113,9 @@ curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build operator
 
 ```
 <KSP>/AGENTS.md                    инструкция агенту: что рядом, правила, куда слать правки
-<KSP>/kerbalru/wiki/*.md           вики сборки — та же, что на сайте
-<KSP>/kerbalru/kos/README.md       устройство библиотеки полётных скриптов
-<KSP>/kerbalru/tools/kos.py        telnet-клиент к терминалу kOS
+<KSP>/kerbal/wiki/*.md           вики сборки — та же, что на сайте
+<KSP>/kerbal/kos/README.md       устройство библиотеки полётных скриптов
+<KSP>/kerbal/tools/kos.py        telnet-клиент к терминалу kOS
 <KSP>/Ships/Script/lib/*.ks        модули: подъём, орбита, наука, стейджинг, телеметрия
 <KSP>/Ships/Script/missions/*.ks   шаблон миссии и разобранные примеры
 <KSP>/Ships/Script/check/          проверочный прогон библиотеки на стартовом столе

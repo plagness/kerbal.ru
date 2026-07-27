@@ -222,19 +222,25 @@ apply_toolkit(){ # инструментарий игрока и ИИ-агент�
   # связь, наука, kOS и диагностика у них общие. Пометка об этом уйдёт в AGENTS.md.
   local wc=0 wiki_bid="$bid"
   [ -d "$BUILDS_DIR/$wiki_bid/wiki" ] || wiki_bid="$(for d in "$BUILDS_DIR"/*/; do [ -d "$d/wiki" ] && basename "$d" && break; done)"
-  mkdir -p "$KSP_PATH/kerbalru/tools"
+  # до v26.18 инструментарий лежал в kerbalru/ — переносим, чтобы не плодить копии
+  if [ -d "$KSP_PATH/kerbalru" ] && [ ! -d "$KSP_PATH/kerbal" ]; then
+    mv "$KSP_PATH/kerbalru" "$KSP_PATH/kerbal" && say "Папка kerbalru/ переименована в kerbal/."
+  elif [ -d "$KSP_PATH/kerbalru" ]; then
+    rm -rf "$KSP_PATH/kerbalru"
+  fi
+  mkdir -p "$KSP_PATH/kerbal/tools"
   if [ -n "$wiki_bid" ] && [ -d "$BUILDS_DIR/$wiki_bid/wiki" ]; then
-    rm -rf "$KSP_PATH/kerbalru/wiki"; mkdir -p "$KSP_PATH/kerbalru/wiki"
+    rm -rf "$KSP_PATH/kerbal/wiki"; mkdir -p "$KSP_PATH/kerbal/wiki"
     # _SPEC.md и прочие служебные — формат для авторов, игроку не нужны
     for f in "$BUILDS_DIR/$wiki_bid/wiki/"*.md; do
       [ -f "$f" ] || continue
       case "$(basename "$f")" in _*) continue ;; esac
-      cp -p "$f" "$KSP_PATH/kerbalru/wiki/"
+      cp -p "$f" "$KSP_PATH/kerbal/wiki/"
     done
-    wc="$(ls -1 "$KSP_PATH/kerbalru/wiki/"*.md 2>/dev/null | wc -l | tr -d ' ')"
+    wc="$(ls -1 "$KSP_PATH/kerbal/wiki/"*.md 2>/dev/null | wc -l | tr -d ' ')"
   fi
-  [ -f "$root/kos/README.md" ] && { mkdir -p "$KSP_PATH/kerbalru/kos"; cp -p "$root/kos/README.md" "$KSP_PATH/kerbalru/kos/"; }
-  [ -f "$root/kos/tools/kos.py" ] && cp -p "$root/kos/tools/kos.py" "$KSP_PATH/kerbalru/tools/"
+  [ -f "$root/kos/README.md" ] && { mkdir -p "$KSP_PATH/kerbal/kos"; cp -p "$root/kos/README.md" "$KSP_PATH/kerbal/kos/"; }
+  [ -f "$root/kos/tools/kos.py" ] && cp -p "$root/kos/tools/kos.py" "$KSP_PATH/kerbal/tools/"
 
   # AGENTS.md в корне игры: агента запускают там, туда он и смотрит первым делом
   local tpl="$root/tools/templates/AGENTS.game.md"
