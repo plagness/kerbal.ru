@@ -1,7 +1,7 @@
 # Покрытие переводом — реальные цифры (проверено по игровому кэшу)
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · **Охват** · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · **Охват** · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 > 🔄 **Концепт проекта сменён (2026-07-24): kerbal.ru — хаб (библиотека переводов + каталог сборок), не одна сборка RP-1.**

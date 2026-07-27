@@ -1,7 +1,7 @@
 # Производительность сборки RO/RSS/RP-1 (KSP 1.12.5)
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 > ЧЕРНОВИК. Синтез пяти разведотчётов по реальной установке на Mac M1 Pro 16 ГБ.
@@ -459,7 +459,7 @@ KSP читает `settings.cfg` на старте, держит настройк
   нормально, его машина.
 
 Реализация — тем же приёмом, что уже применяется для `LANGUAGE = ru` в `install-ru.sh` (sed по
-ключу + бэкап `settings.cfg.bak-kerbalru`), но по списку ключей из `perf/settings/*.env`:
+ключу + бэкап `settings.cfg.bak-kerbalru`), но по списку ключей из `builds/rp1/perf/settings/*.env`:
 
 ```
 для каждой строки KEY=VALUE из common.env + <profile>.env:
@@ -523,7 +523,7 @@ uname_s = uname -s
 ```
 
 Deck-специфичные вещи (кап FPS, TDP, GPU-clock, FSR) — **не в файлах игры**, а в Game Mode Deck →
-их автоустановка **не** трогает; кладём в `perf/README.md` как чеклист для пользователя (+пункт
+их автоустановка **не** трогает; кладём в `builds/rp1/perf/README.md` как чеклист для пользователя (+пункт
 роадмапа «один клик из Gaming Mode»).
 
 ### 6.6. Идемпотентность и MM-кэш (обязательное требование)

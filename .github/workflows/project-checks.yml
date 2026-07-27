@@ -15,12 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check Unix installer
-        run: bash -n install-ru.sh
-
-      - name: Check PowerShell installer
-        shell: pwsh
-        run: |
-          $null = [scriptblock]::Create((Get-Content install-ru.ps1 -Raw))
+        run: bash -n install.sh
 
       - name: Check HTML JavaScript
         run: |
@@ -65,6 +60,9 @@ jobs:
           ast.parse(Path('tools/audit_ru_coverage.py').read_text(encoding='utf-8'))
           ast.parse(Path('tools/sync_project_data.py').read_text(encoding='utf-8'))
           ast.parse(Path('tools/bump_release.py').read_text(encoding='utf-8'))
+          ast.parse(Path('tools/gen_stats.py').read_text(encoding='utf-8'))
+          ast.parse(Path('tools/gen_docs.py').read_text(encoding='utf-8'))
+          ast.parse(Path('tools/gen_wiki.py').read_text(encoding='utf-8'))
 
           version = Path('VERSION').read_text(encoding='utf-8').strip()
           if not re.fullmatch(r'\d{2}\.[1-9]\d*', version):

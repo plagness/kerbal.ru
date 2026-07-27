@@ -1,7 +1,7 @@
 # Обновление и управление сборкой kerbal.ru
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 `install.sh` — **менеджер сборок**: он находит уже установленную сборку по
@@ -95,7 +95,7 @@ curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build operator
 Актуальный состав каталога — `builds/_catalog.json` (генерируется `tools/gen_catalog.py`),
 библиотека переводов — `translations/_index.json`. В curl-режиме `install.sh` тянет каталог и
 переводы из ветки `main`. Стабильные снимки помечаются тегами вида `vГОД.НОМЕР`
-(`v26.1` — первый релиз 2026 года), см. [CHANGELOG.md](../CHANGELOG.md) и
+(`v26.1` — первый релиз 2026 года), см. [CHANGELOG.md](CHANGELOG.md) и
 [GitHub Releases](https://github.com/plagness/kerbal.ru/releases).
 
 ## Для maintainer: номер релиза

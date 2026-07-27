@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Собрать вики сборки из Markdown-исходников: wiki/*.md → Operator/wiki/*.html.
+"""Собрать вики сборок из Markdown-исходников.
+
+  builds/<id>/wiki/*.md  →  <Страница сборки>/wiki/*.html
+
+Вики принадлежит сборке и лежит внутри её папки: у каждой сборки своя.
+Куда публиковать и как называть — словарь BUILDS ниже; новая сборка со своей
+вики добавляется одной строкой.
 
 Настоящая вики: категории, боковая навигация, перелинковка [[slug]] (несуществующие
 ссылки — красные, как в MediaWiki), оглавление статьи, «связанные статьи», обратные
@@ -22,8 +28,12 @@ except ImportError:
     sys.exit("Нужен python-markdown:  pip3 install markdown")
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "wiki"
-OUT = ROOT / "Operator" / "wiki"
+# id сборки → (папка страницы на сайте, название сборки в родительном падеже)
+BUILDS = {
+    "operator": ("Operator", "«Оператор»"),
+}
+SRC = ROOT / "builds" / "operator" / "wiki"     # переопределяется в main()
+OUT = ROOT / "Operator" / "wiki"                # на каждую сборку
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # порядок категорий в навигации
@@ -276,7 +286,7 @@ def page(title: str, desc: str, body: str, arts: dict, current: str | None) -> s
   <aside class="side"><details class="side-box" open id="wnavbox"><summary>Все статьи вики</summary>{sidebar(arts, current)}</details></aside>
   <main>{body}
     <footer>Вики сборки «Оператор» · kerbal.ru {VERSION} · правится в
-      <a href="https://github.com/plagness/kerbal.ru/tree/main/wiki">wiki/*.md</a> —
+      <a href="https://github.com/plagness/kerbal.ru/tree/main/builds/operator/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
   </main>
 </div>
@@ -306,10 +316,13 @@ def page(title: str, desc: str, body: str, arts: dict, current: str | None) -> s
 """
 
 
-def main() -> int:
+def build_wiki(build_id: str, page_dir: str, name: str) -> int:
+    global SRC, OUT
+    SRC = ROOT / "builds" / build_id / "wiki"
+    OUT = ROOT / page_dir / "wiki"
     arts = load_articles()
     if not arts:
-        print("× нет статей в wiki/*.md")
+        print(f"× нет статей в builds/{build_id}/wiki/*.md")
         return 1
     OUT.mkdir(parents=True, exist_ok=True)
     backlinks: dict = {}
@@ -362,15 +375,15 @@ def main() -> int:
     todo = (f'<p style="color:var(--txt-faint);font-size:.85rem;margin-top:22px">Ещё не написаны (красные ссылки): '
             + ", ".join(html.escape(s) for s in missing) + "</p>") if missing else ""
     hub = (f'<div class="crumbs"><a href="/Operator">Оператор</a> / Вики</div>'
-           f'<h1>Вики сборки «Оператор»</h1>'
+           f'<h1>Вики сборки {html.escape(name)}</h1>'
            f'<p class="lede">Как играть в эту сборку: связь и сеть спутников, автоматика на kOS, наука и геология, '
            f'станции, техника и контракты. {len(arts)} статей, всё связано перекрёстными ссылками.</p>'
            f'<div class="hub-cats">{"".join(cats_html)}</div>{todo}')
     (OUT / "index.html").write_text(
-        page("Вики сборки «Оператор» — kerbal.ru",
+        page(f"Вики сборки {name} — kerbal.ru",
              "Документация по сборке: kOS, связь, наука, станции, техника.", hub, arts, None), encoding="utf-8")
 
-    print(f"✓ Operator/wiki/: {len(arts)} статей + хаб")
+    print(f"✓ {page_dir}/wiki/: {len(arts)} статей + хаб")
     by_cat = {}
     for a in arts.values():
         by_cat.setdefault(a["category"], []).append(a["slug"])
@@ -380,6 +393,20 @@ def main() -> int:
     if missing:
         print(f"  ⚠ красные ссылки (нет статьи): {', '.join(missing)}")
     return 0
+
+
+def main() -> int:
+    """Собирает вики всех сборок из BUILDS; аргументы — id конкретных сборок."""
+    wanted = sys.argv[1:] or list(BUILDS)
+    code = 0
+    for build_id in wanted:
+        if build_id not in BUILDS:
+            print(f"× неизвестная сборка: {build_id} (есть: {', '.join(BUILDS)})")
+            code = 1
+            continue
+        page_dir, name = BUILDS[build_id]
+        code |= build_wiki(build_id, page_dir, name)
+    return code
 
 
 if __name__ == "__main__":

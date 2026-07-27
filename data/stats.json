@@ -1,6 +1,6 @@
 {
   "_comment": "Генерируется tools/gen_stats.py. Руками не править.",
-  "generatedAt": "2026-07-27T10:50:11Z",
+  "generatedAt": "2026-07-27T11:00:53Z",
   "repo": {
     "stars": 2,
     "forks": 0,
@@ -213,7 +213,7 @@
       "github": "plagness",
       "avatar": "https://avatars.githubusercontent.com/u/35403646?v=4",
       "url": "https://github.com/plagness",
-      "commits": 129,
+      "commits": 131,
       "firstCommit": "2026-07-22",
       "lastCommit": "2026-07-27",
       "roles": [
@@ -229,9 +229,9 @@
       "github": "claude",
       "avatar": "https://avatars.githubusercontent.com/u/81847?v=4",
       "url": "https://github.com/claude",
-      "commits": 57,
+      "commits": 59,
       "firstCommit": "2026-07-22",
-      "lastCommit": "2026-07-26",
+      "lastCommit": "2026-07-27",
       "roles": [
         "Переводы модов",
         "Вики и документация",
@@ -242,10 +242,10 @@
     }
   ],
   "totals": {
-    "commits": 129,
+    "commits": 131,
     "contributors": 2,
     "translations": 111,
-    "wiki": 51,
+    "wiki": 50,
     "kosScripts": 14,
     "days": 6
   },
@@ -286,15 +286,15 @@
       "date": "2026-07-26",
       "commits": 123,
       "translations": 111,
-      "wiki": 50,
+      "wiki": 49,
       "builds": 2,
       "kos": 0
     },
     {
       "date": "2026-07-27",
-      "commits": 129,
+      "commits": 131,
       "translations": 111,
-      "wiki": 51,
+      "wiki": 50,
       "builds": 2,
       "kos": 14
     }

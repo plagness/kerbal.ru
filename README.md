@@ -10,10 +10,10 @@ Kerbal Space Program 1.12.5.
 [![звёзды](https://img.shields.io/github/stars/plagness/kerbal.ru?style=flat-square&label=звёзды&color=f0c067)](https://github.com/plagness/kerbal.ru/stargazers)
 [![скачивания](https://img.shields.io/github/downloads/plagness/kerbal.ru/total?style=flat-square&label=скачано&color=ff9d48)](https://github.com/plagness/kerbal.ru/releases)
 [![переводы](https://img.shields.io/badge/переводов-111%20модов-a6e86e?style=flat-square)](docs/COVERAGE.md)
-[![вики](https://img.shields.io/badge/вики-51%20статья-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
+[![вики](https://img.shields.io/badge/вики-50%20статей-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
 
 [Сборки](#каталог-сборок) · [Установка](#быстрый-старт) · [Переводы](#библиотека-переводов) ·
-[kOS](#скрипты-полёта) · [Вики](https://kerbal.ru/Operator/wiki/) · [Участие](CONTRIBUTING.md)
+[kOS](#скрипты-полёта) · [Вики](https://kerbal.ru/Operator/wiki/) · [Участие](.github/CONTRIBUTING.md)
 
 </div>
 
@@ -39,13 +39,12 @@ flowchart LR
   I -->|переводы| G
   I -->|конфиги сборки| G
 
-  T[translations/<br/>по папке на мод] --> I
-  B[builds/&lt;id&gt;/<br/>build.json] --> I
+  T[translations/&lt;mod&gt;/<br/>по папке на мод] --> I
+  B[builds/&lt;id&gt;/<br/>build.json · config · screens · wiki] --> I
   E[engine/<br/>ui-translator.dll] --> I
 
-  T -.генератор.-> S[kerbal.ru<br/>сайт и каталог]
+  T -.генератор.-> S[kerbal.ru<br/>сайт, каталог, вики]
   B -.генератор.-> S
-  W[wiki/ 51 статья] -.генератор.-> S
 ```
 
 Переводы переживают сборки: мод убрали из каталога — его папка в `translations/` остаётся.
@@ -81,7 +80,7 @@ curl -fsSL https://kerbal.ru/install.sh | bash -s -- --list        # катал�
 | **[«Оператор»](builds/operator/)** — курируемая | Спутники → сеть покрытия → орбитальные станции → автоматика на kOS. «Ванила+» для долгой игры | сток | 60 | 2/5 |
 | **[RO / RSS / RP-1](https://kerbal.ru/KSP-RO)** — зеркало | Реальная Солнечная система, реальная физика, историческая карьера с 1951 года | RSS | — | 5/5 |
 
-У «Оператора» есть собственная [вики](https://kerbal.ru/Operator/wiki/) — 51 статья: связь и CommNet,
+У «Оператора» есть собственная [вики](https://kerbal.ru/Operator/wiki/) — 50 статей: связь и CommNet,
 частоты наземных станций, диагностика, наука, kOS, подключение ИИ-агентов, разбор реальных инцидентов в игре.
 
 ### Как это выглядит
@@ -137,21 +136,30 @@ m_orbit(s).                 // дальше само
 ## Структура репозитория
 
 ```
-translations/          библиотека переводов — ПО ПАПКЕ НА МОД
+builds/                КАТАЛОГ СБОРОК; имя папки = id сборки
+  <id>/
+    build.json           что ставить (core/recommended/optional) + опции ckan
+    README.md            описание сборки
+    config/              конфиг сборки (зеркалит GameData/), необязательно
+    screens/             скриншоты: screens.json + .jpg до ~500 КБ
+    wiki/                вики ЭТОЙ сборки: *.md → <Страница>/wiki/*.html
+    perf/                профили производительности, если есть
+
+translations/          БИБЛИОТЕКА ПЕРЕВОДОВ — по папке на мод
   <mod>/
     translation.json     метаданные: мод, папка в GameData, метод, статус
     Localization/*.cfg   перевод через #LOC-ключи и/или MM-патчи заголовков
     KerbalRuUiTranslations/<Mod>.txt   словарь для хардкод-модов
+
+docs/                  ДОКУМЕНТАЦИЯ проекта (+ docs/archive/ — отработавшее)
+.github/               участие и правила: CONTRIBUTING, SECURITY, шаблоны
 engine/                движок перевода интерфейса (Harmony) — общий
-builds/                каталог сборок; имя папки = id сборки
-  <id>/build.json        что ставить (core/recommended/optional) + опции ckan
-  <id>/config/           опциональный конфиг сборки (зеркалит GameData/)
-  <id>/screens/          скриншоты: screens.json + .jpg до ~500 КБ
 kos/                   библиотека kOS: модули, шаблоны миссий, telnet-клиент
-wiki/                  исходники вики «Оператора» (.md → сайт)
+tools/                 генераторы и валидаторы (см. MAINTAINING.md)
+
 install.sh             менеджер сборок (Linux/macOS/Steam Deck)
-tools/                 валидаторы, генераторы каталога/вики/галереи/статистики
-docs/ data/ assets/ index.html
+index.html · Operator/ · KSP-RO.html · assets/ · data/ · vendor/ · dist/
+                       сайт: страницы, данные, статика, готовые .ckan
 ```
 
 ### Карта документации
@@ -163,10 +171,10 @@ docs/ data/ assets/ index.html
 | [docs/MAINTAINING.md](docs/MAINTAINING.md) | как устроены переводы, правила и валидаторы |
 | [docs/COVERAGE.md](docs/COVERAGE.md) | что переведено, что нет, что в кандидатах |
 | [docs/UI-TRANSLATION.md](docs/UI-TRANSLATION.md) | Harmony-движок для текста внутри DLL |
-| [docs/ROADMAP.md](docs/ROADMAP.md) · [CHANGELOG.md](CHANGELOG.md) | планы и история |
-| [docs/PERFORMANCE.md](docs/PERFORMANCE.md) · [perf/](perf/README.md) | профили производительности |
+| [docs/ROADMAP.md](docs/ROADMAP.md) · [CHANGELOG.md](docs/CHANGELOG.md) | планы и история |
+| [docs/PERFORMANCE.md](docs/PERFORMANCE.md) · [builds/rp1/perf/](builds/rp1/perf/README.md) | профили производительности |
 | [docs/FOR-AGENTS.md](docs/FOR-AGENTS.md) · [AGENTS.md](AGENTS.md) | вход для ИИ-агентов |
-| [CONTRIBUTING.md](CONTRIBUTING.md) · [GOVERNANCE.md](GOVERNANCE.md) · [SUPPORT.md](SUPPORT.md) | участие, решения, помощь |
+| [CONTRIBUTING.md](.github/CONTRIBUTING.md) · [GOVERNANCE.md](.github/GOVERNANCE.md) · [SUPPORT.md](.github/SUPPORT.md) | участие, решения, помощь |
 
 ---
 
@@ -182,7 +190,7 @@ docs/ data/ assets/ index.html
   затем `python3 tools/gen_gallery.py`. Кадр попадёт и на сайт, и в `.md`.
 - **Баг** — приложи `KSP.log`. Без него диагноз — гадание.
 
-Подробно — [CONTRIBUTING.md](CONTRIBUTING.md).
+Подробно — [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ---
 
@@ -194,8 +202,8 @@ docs/ data/ assets/ index.html
 | | Сейчас | Рост по дням |
 |---|---:|---|
 | Переводов модов | **111** | `▁▁████` |
-| Статей вики | **51** | `▁▁▁▁██` |
-| Коммитов | **129** | `▁▄▆▇██` |
+| Статей вики | **50** | `▁▁▁▁██` |
+| Коммитов | **131** | `▁▄▆▆▇█` |
 | Звёзд на GitHub | **2** | релизов: 17 |
 | Скачиваний релизов | **9** | operator: 6 · rp1: 0 |
 
@@ -203,8 +211,8 @@ docs/ data/ assets/ index.html
 
 ### Кто это делает
 
-- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 129 коммитов, с 2026-07-22
-- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 57 коммитов, с 2026-07-22
+- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 131 коммитов, с 2026-07-22
+- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 59 коммитов, с 2026-07-22
 
 Список собирается из git и включает соавторов из трейлера `Co-Authored-By` — их GitHub в списке контрибьюторов API не показывает.
 <!-- STATS:END -->

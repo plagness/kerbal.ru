@@ -1,7 +1,7 @@
 # Кодекс поведения
 
 <!-- NAV:START -->
-[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](../docs/STATUS.md) · [Установка](../docs/QUICKSTART.md) · [Переводы](../docs/MAINTAINING.md) · [Охват](../docs/COVERAGE.md) · [Планы](../docs/ROADMAP.md) · [kOS](../kos/README.md) · [Участие](CONTRIBUTING.md)
 <!-- NAV:END -->
 
 kerbal.ru — открытое русскоязычное сообщество вокруг перевода модов Kerbal Space Program и сопровождения готовых русских сборок. Мы хотим, чтобы участвовать было безопасно и спокойно независимо от опыта, возраста, происхождения, пола, инвалидности, взглядов или способа участия.

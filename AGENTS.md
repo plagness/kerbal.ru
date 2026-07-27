@@ -1,7 +1,7 @@
 # Инструкция для ИИ-агентов
 
 <!-- NAV:START -->
-[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 Если пользователь просит установить, обновить или настроить kerbal.ru, сначала прочитай [руководство для агентов](docs/FOR-AGENTS.md) и следуй ему. Не переводи уже поддерживаемые моды заново и не заменяй файлы пользователя за пределами описанного процесса установки.

@@ -1,7 +1,7 @@
 # Быстрый старт — русская сборка KSP в пару команд
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · **Установка** · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · **Установка** · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 Для владельцев лицензионной Kerbal Space Program в Steam (версия **1.12.5**).

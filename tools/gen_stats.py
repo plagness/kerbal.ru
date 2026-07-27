@@ -172,8 +172,9 @@ def growth() -> list[dict]:
             "commits": commits,
             "translations": len({f.split("/")[1] for f in files
                                  if f.startswith("translations/") and "/" in f[13:]}),
+            # вики принадлежит сборке: builds/<id>/wiki/*.md (без служебных _*)
             "wiki": sum(1 for f in files
-                        if f.startswith("wiki/") and f.endswith(".md")),
+                        if re.match(r"^(builds/[^/]+/)?wiki/[^_/][^/]*\.md$", f)),
             "builds": len({f.split("/")[1] for f in files
                            if f.startswith("builds/") and "/" in f[7:]}),
             "kos": sum(1 for f in files if f.startswith("kos/") and f.endswith(".ks")),
@@ -308,7 +309,7 @@ def refresh_counts(path: Path, data: dict) -> None:
     subs = [
         (r"переводов-\d+%20модов", f"переводов-{t['translations']}%20модов"),
         (r"вики-\d+%20стать[яйи]", f"вики-{t['wiki']}%20{plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}"),
-        (r"wiki/ \d+ стат\w+", f"wiki/ {t['wiki']} {plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}"),
+        (r"вики сборок?[^|]*?\d+ стат\w+", f"wiki/ {t['wiki']} {plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}"),
         (r"— \d+ стать[яйи]: связь", f"— {t['wiki']} {plural_ru(t['wiki'], 'статья', 'статьи', 'статей')}: связь"),
     ]
     new = text

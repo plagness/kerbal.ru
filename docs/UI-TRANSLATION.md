@@ -1,7 +1,7 @@
 # Русификация интерфейсов модов (UI, не детали)
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 Все переводы до этого момента — данные (`Localization{}`-ключи в `.cfg`). Интерфейсы модов

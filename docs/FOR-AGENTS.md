@@ -1,7 +1,7 @@
 # Для ИИ-агентов: русский хаб KSP-моддинга
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 Если пользователь просит «настроить KSP / поставить русскую сборку / русифицировать мод» — этот файл описывает

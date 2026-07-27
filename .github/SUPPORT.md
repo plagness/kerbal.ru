@@ -1,15 +1,15 @@
 # Поддержка
 
 <!-- NAV:START -->
-[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](../docs/STATUS.md) · [Установка](../docs/QUICKSTART.md) · [Переводы](../docs/MAINTAINING.md) · [Охват](../docs/COVERAGE.md) · [Планы](../docs/ROADMAP.md) · [kOS](../kos/README.md) · [Участие](CONTRIBUTING.md)
 <!-- NAV:END -->
 
 ## Где задать вопрос
 
 - [GitHub Discussions](https://github.com/plagness/kerbal.ru/discussions) — установка, обновление, Steam Deck, терминология и общие вопросы.
 - [Issues](https://github.com/plagness/kerbal.ru/issues/new/choose) — воспроизводимый баг, пропущенная строка или конкретное предложение.
-- [Быстрый старт](docs/QUICKSTART.md) — установка с нуля.
-- [Обновление и откат](docs/UPDATING.md) — переход между версиями.
+- [Быстрый старт](../docs/QUICKSTART.md) — установка с нуля.
+- [Обновление и откат](../docs/UPDATING.md) — переход между версиями.
 
 ## Что приложить к вопросу
 

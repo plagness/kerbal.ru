@@ -27,13 +27,14 @@ NAV: list[tuple[str, str]] = [
     ("docs/COVERAGE.md", "Охват"),
     ("docs/ROADMAP.md", "Планы"),
     ("kos/README.md", "kOS"),
-    ("CONTRIBUTING.md", "Участие"),
+    (".github/CONTRIBUTING.md", "Участие"),
 ]
 # Документы, которые сами в строке не участвуют, но шапку получают.
 EXTRA = [
     "docs/UPDATING.md", "docs/UI-TRANSLATION.md", "docs/PERFORMANCE.md",
-    "docs/FOR-AGENTS.md", "AGENTS.md", "CHANGELOG.md", "GOVERNANCE.md",
-    "SUPPORT.md", "SECURITY.md", "CODE_OF_CONDUCT.md", "perf/README.md",
+    "docs/FOR-AGENTS.md", "AGENTS.md", "docs/CHANGELOG.md",
+    ".github/GOVERNANCE.md", ".github/SUPPORT.md", ".github/SECURITY.md",
+    ".github/CODE_OF_CONDUCT.md", "builds/rp1/perf/README.md",
 ]
 
 

@@ -1,7 +1,7 @@
 # kOS-библиотека сборки «Оператор»
 
 <!-- NAV:START -->
-[Обзор](../README.md) · [Статус](../docs/STATUS.md) · [Установка](../docs/QUICKSTART.md) · [Переводы](../docs/MAINTAINING.md) · [Охват](../docs/COVERAGE.md) · [Планы](../docs/ROADMAP.md) · **kOS** · [Участие](../CONTRIBUTING.md)
+[Обзор](../README.md) · [Статус](../docs/STATUS.md) · [Установка](../docs/QUICKSTART.md) · [Переводы](../docs/MAINTAINING.md) · [Охват](../docs/COVERAGE.md) · [Планы](../docs/ROADMAP.md) · **kOS** · [Участие](../.github/CONTRIBUTING.md)
 <!-- NAV:END -->
 
 Готовые блоки для автоматизации полётов в Kerbal Space Program через
