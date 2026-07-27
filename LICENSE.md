@@ -22,8 +22,8 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 - Three.js (`vendor/`) — MIT, уведомление содержится в исходном файле библиотеки.
 - Tabler Icons — MIT; SVG встроены в `index.html`.
-- Планетарные изображения — NASA/JPL/USGS; источники и условия перечислены в [`assets/textures/README.md`](assets/textures/README.md).
-- Модель Saturn V — NASA 3D Resources; источник указан в [`assets/models/README.md`](assets/models/README.md).
+- Планетарные изображения — NASA/JPL/USGS; источники и условия перечислены в [`assets/textures/README.md`](site/assets/textures/README.md).
+- Модель Saturn V — NASA 3D Resources; источник указан в [`assets/models/README.md`](site/assets/models/README.md).
 - Kerbal Space Program, логотипы и связанные обозначения принадлежат соответствующим правообладателям. Игра в репозиторий не входит.
 
 Если найден материал с неверной или неполной атрибуцией, открой issue до дальнейшего распространения.

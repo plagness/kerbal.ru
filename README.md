@@ -161,9 +161,12 @@ engine/                движок перевода интерфейса (Harmo
 kos/                   библиотека kOS: модули, шаблоны миссий, telnet-клиент
 tools/                 генераторы и валидаторы (см. MAINTAINING.md)
 
+site/                  САЙТ kerbal.ru: index.html, Operator/, KSP-RO.html,
+                       assets/ · data/ · vendor/ · CNAME. Публикуется workflow
+                       .github/workflows/pages.yml — он же доносит в артефакт
+                       install.sh, dist/*.ckan и кадры из builds/<id>/screens/
 install.sh             менеджер сборок (Linux/macOS/Steam Deck)
-index.html · Operator/ · KSP-RO.html · assets/ · data/ · vendor/ · dist/
-                       сайт: страницы, данные, статика, готовые .ckan
+dist/                  сборочные артефакты: .ckan-метапакеты (ZIP — в релизах)
 ```
 
 ### Карта документации

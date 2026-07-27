@@ -18,7 +18,7 @@
 | Каталог сборок | `operator` (60 модов, курируемая) · `rp1` (RO/RSS/RP-1, зеркало) |
 | Вики «Оператора» | 51 статья, 0 битых ссылок, 0 сирот |
 | kOS-библиотека | `kos/` — 14 скриптов: модули, шаблоны миссий, telnet-клиент |
-| Живые цифры | `data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
+| Живые цифры | `site/data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
 | Сайт | хаб + `/Operator` + `/KSP-RO` + `/Operator/wiki` на GitHub Pages |
 | Установка | Windows — `.ckan`-метапакет + ZIP без терминала; Linux/macOS/Deck — `install.sh` |
 | Последний релиз | v26.17 |
@@ -34,7 +34,7 @@
 ### Наши
 - [ ] **`install.ps1` не нужен** — Windows-путь закрыт `.ckan`-метапакетом и ZIP-архивом (v26.14).
       Формально пункт можно закрывать; оставлен как напоминание проверить, не просят ли пользователи терминальный путь.
-- [ ] **`data/project.json`** — секции `inventory`/`coverage`/`mods`/`uiTranslation` и `site.content.hero.lead`/`about`
+- [ ] **`site/data/project.json`** — секции `inventory`/`coverage`/`mods`/`uiTranslation` и `site.content.hero.lead`/`about`
       обслуживают только `/KSP-RO`; хаб их не читает. Помечено в `_concept`, разбирать при рефакторинге страницы RO.
 
 ### Чужие моды (не чиним, знаем)

@@ -21,9 +21,9 @@ jobs:
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          const html = fs.readFileSync('index.html', 'utf8');
+          const html = fs.readFileSync('site/index.html', 'utf8');
           // Инлайн-скрипты всех страниц сайта плюс общий stats.js.
-          for (const page of ['index.html', 'Operator/index.html', 'KSP-RO.html']) {
+          for (const page of ['site/index.html', 'site/Operator/index.html', 'site/KSP-RO.html']) {
             const source = fs.readFileSync(page, 'utf8');
             for (const match of source.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
               new Function(match[1]);
@@ -32,8 +32,8 @@ jobs:
               throw new Error(`${page} does not load assets/js/stats.js`);
             }
           }
-          new Function(fs.readFileSync('assets/js/stats.js', 'utf8'));
-          const data = JSON.parse(fs.readFileSync('data/project.json', 'utf8'));
+          new Function(fs.readFileSync('site/assets/js/stats.js', 'utf8'));
+          const data = JSON.parse(fs.readFileSync('site/data/project.json', 'utf8'));
           const siteMods = data.site.modCatalog.map(mod => mod.id);
           const inventoryComponents = data.site.inventoryGroups.reduce(
             (total, group) => total + group.entries.length,
@@ -54,7 +54,7 @@ jobs:
           if (!html.includes('renderModCatalog(data,active)')) throw new Error('site does not render the JSON mod catalog');
           if (!html.includes('normalizeCatalog(data)')) throw new Error('site does not merge the JSON inventory into the catalog');
           if (!html.includes('[data-ui-translation]')) throw new Error('site does not render uiTranslation');
-          const stats = JSON.parse(fs.readFileSync('data/stats.json', 'utf8'));
+          const stats = JSON.parse(fs.readFileSync('site/data/stats.json', 'utf8'));
           if (!stats.people || !stats.people.length) throw new Error('stats.json has no contributors');
           console.log(`JavaScript of 3 pages + stats.js, ${siteMods.length} dynamic mods, ${data.site.inventoryGroups.length} inventory groups, ${stats.people.length} contributors: ok`);
           NODE
