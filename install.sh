@@ -15,7 +15,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo
 BUILDS_DIR=""
 KSP_PATH=""
 WANT_BUILD=""
-MODE=""            # "" | update | switch | ru-only | list
+MODE=""            # "" | update | switch | ru-only | docs | list
 ASSUME_YES=false
 
 say(){ printf '\033[1;36m» %s\033[0m\n' "$*"; }
@@ -34,6 +34,7 @@ kerbal.ru — установка и управление сборками KSP
   --build <id>     поставить/сменить на конкретную сборку (без интерактива)
   --update         обновить текущую установленную сборку
   --ru-only        только обновить переводы поверх текущей сборки
+  --docs           только обновить вики, kOS-скрипты и AGENTS.md (моды не трогает)
   --list           показать каталог сборок и выйти
   --yes            не спрашивать подтверждений (для CI/скриптов)
   --help           показать справку
@@ -48,6 +49,7 @@ while [ "$#" -gt 0 ]; do
     --build) [ "$#" -ge 2 ] || { err "После --build нужен id сборки"; exit 2; }; WANT_BUILD="$2"; shift ;;
     --update)  MODE="update" ;;
     --ru-only) MODE="ru-only" ;;
+    --docs)    MODE="docs" ;;
     --list)    MODE="list" ;;
     --yes|-y)  ASSUME_YES=true ;;
     --help|-h) usage; exit 0 ;;
@@ -188,6 +190,72 @@ LANGUAGE = ru
   ok "Русский язык + переводы под установленные моды ($tc мод(ов))."
 }
 
+apply_toolkit(){ # инструментарий игрока и ИИ-агента: kOS-скрипты, вики, AGENTS.md
+  # Зачем: у игрока (и у агента, которого он посадит помогать) всё под рукой, без похода
+  # в браузер — библиотека полётных скриптов там, где её видит kOS, документация рядом
+  # с игрой. Копии — снимок на момент установки; за свежим AGENTS.md отправляет на гит.
+  local bid="${1:-${CURRENT:-}}" root; root="$(dirname "$BUILDS_DIR")"
+  [ -n "$bid" ] || bid="$(list_build_ids | head -n1)"
+
+  # kOS: Archive-том у kOS — это <KSP>/Ships/Script, оттуда пути вида 0:/lib/util.ks
+  local kc=0
+  if [ -d "$root/kos" ]; then
+    mkdir -p "$KSP_PATH/Ships/Script"
+    # lib/ и check/ — наш код, перезаписываем целиком
+    for d in lib check; do
+      [ -d "$root/kos/$d" ] || continue
+      rm -rf "$KSP_PATH/Ships/Script/$d"
+      cp -R "$root/kos/$d" "$KSP_PATH/Ships/Script/"
+    done
+    # missions/ — файлы, которые игрок правит под свои задачи: не затираем правки,
+    # доносим только отсутствующие
+    mkdir -p "$KSP_PATH/Ships/Script/missions"
+    for f in "$root/kos/missions/"*.ks; do
+      [ -f "$f" ] || continue
+      [ -e "$KSP_PATH/Ships/Script/missions/$(basename "$f")" ] || cp -p "$f" "$KSP_PATH/Ships/Script/missions/"
+    done
+    kc="$(find "$KSP_PATH/Ships/Script" -name '*.ks' | wc -l | tr -d ' ')"
+  fi
+
+  # документация: вики сборки + справка по библиотеке + telnet-клиент.
+  # У сборки может не быть своей вики (напр. rp1) — тогда кладём вики «Оператора»:
+  # связь, наука, kOS и диагностика у них общие. Пометка об этом уйдёт в AGENTS.md.
+  local wc=0 wiki_bid="$bid"
+  [ -d "$BUILDS_DIR/$wiki_bid/wiki" ] || wiki_bid="$(for d in "$BUILDS_DIR"/*/; do [ -d "$d/wiki" ] && basename "$d" && break; done)"
+  mkdir -p "$KSP_PATH/kerbalru/tools"
+  if [ -n "$wiki_bid" ] && [ -d "$BUILDS_DIR/$wiki_bid/wiki" ]; then
+    rm -rf "$KSP_PATH/kerbalru/wiki"; mkdir -p "$KSP_PATH/kerbalru/wiki"
+    # _SPEC.md и прочие служебные — формат для авторов, игроку не нужны
+    for f in "$BUILDS_DIR/$wiki_bid/wiki/"*.md; do
+      [ -f "$f" ] || continue
+      case "$(basename "$f")" in _*) continue ;; esac
+      cp -p "$f" "$KSP_PATH/kerbalru/wiki/"
+    done
+    wc="$(ls -1 "$KSP_PATH/kerbalru/wiki/"*.md 2>/dev/null | wc -l | tr -d ' ')"
+  fi
+  [ -f "$root/kos/README.md" ] && { mkdir -p "$KSP_PATH/kerbalru/kos"; cp -p "$root/kos/README.md" "$KSP_PATH/kerbalru/kos/"; }
+  [ -f "$root/kos/tools/kos.py" ] && cp -p "$root/kos/tools/kos.py" "$KSP_PATH/kerbalru/tools/"
+
+  # AGENTS.md в корне игры: агента запускают там, туда он и смотрит первым делом
+  local tpl="$root/tools/templates/AGENTS.game.md"
+  if [ -f "$tpl" ]; then
+    local bname wname pdir ver note=""
+    bname="$(bj "$bid" "d['name']" 2>/dev/null || echo "$bid")"
+    pdir="$(bj "$wiki_bid" "d.get('page','')" 2>/dev/null || echo "")"
+    ver="$(cat "$root/VERSION" 2>/dev/null || echo "?")"
+    if [ -n "$wiki_bid" ] && [ "$wiki_bid" != "$bid" ]; then
+      wname="$(bj "$wiki_bid" "d['name']" 2>/dev/null || echo "$wiki_bid")"
+      note="У этой сборки своей вики пока нет — рядом лежит вики сборки «$wname»: связь, наука, kOS и диагностика у них общие, отличается состав модов."
+    fi
+    sed -e "s|{{BUILD_ID}}|$bid|g" -e "s|{{BUILD_NAME}}|$bname|g" \
+        -e "s|{{WIKI_BUILD_ID}}|${wiki_bid:-operator}|g" \
+        -e "s|{{PAGE_DIR}}|${pdir:-Operator}|g" -e "s|{{VERSION}}|v$ver|g" \
+        -e "s|{{DATE}}|$(date -u +%Y-%m-%d)|g" \
+        -e "s|{{WIKI_NOTE}}|$note|g" "$tpl" > "$KSP_PATH/AGENTS.md"
+  fi
+  ok "Инструментарий на месте: $kc kOS-скриптов, $wc статей вики, AGENTS.md для ИИ-агента."
+}
+
 disable_burst_on_mac(){ # KSPBurst-компилятор (Unity Burst) не компилируется на macOS/Apple Silicon и
   # спамит исключениями (BackgroundResourceProcessing) → просадка FPS, глюки. Убираем компилятор,
   # плагины оставляем → BRP переходит на managed-код без ошибок. См. память burst-mac-incompat.
@@ -240,6 +308,7 @@ install_build(){ # install_build <build-id> ; предполагает уже ч
     cp -R "$BUILDS_DIR/$bid/config/." "$KSP_PATH/GameData/"
     ok "Конфиг сборки развёрнут (config/ → GameData/)."
   fi
+  apply_toolkit "$bid"
   write_state "$bid"
   ok "Сборка «$(bj "$bid" "d['name']")» установлена. Запускай игру."
 }
@@ -268,11 +337,13 @@ select_build_interactive(){
 if [ -n "$WANT_BUILD" ]; then
   [ -f "$BUILDS_DIR/$WANT_BUILD/build.json" ] || { err "Нет такой сборки: $WANT_BUILD (см. --list)"; exit 2; }
   if [ "$MODE" = "ru-only" ]; then apply_translations; exit 0; fi
+  if [ "$MODE" = "docs" ]; then apply_toolkit "$WANT_BUILD"; exit 0; fi
   do_switch "$WANT_BUILD"; exit 0
 fi
 
-# режимы --update / --ru-only
+# режимы --update / --ru-only / --docs
 if [ "$MODE" = "ru-only" ]; then apply_translations; exit 0; fi
+if [ "$MODE" = "docs" ]; then apply_toolkit; exit 0; fi
 if [ "$MODE" = "update" ]; then
   [ -n "$CURRENT" ] || { err "Сборка не установлена — нечего обновлять. Запусти без --update для выбора."; exit 2; }
   install_build "$CURRENT"; exit 0
@@ -295,14 +366,16 @@ if [ -n "$CURRENT" ]; then
   [1] Обновить текущую сборку «$CURRENT»
   [2] Поставить другую сборку
   [3] Только обновить переводы
-  [4] Отмена
+  [4] Только обновить вики и kOS-скрипты
+  [5] Отмена
 EOF
-  printf '\033[1;36m» Выбор [1-4]: \033[0m' > /dev/tty
+  printf '\033[1;36m» Выбор [1-5]: \033[0m' > /dev/tty
   a=""; read -r a < /dev/tty 2>/dev/null || a=""
   case "$a" in
     1) install_build "$CURRENT" ;;
     2) do_switch "$(select_build_interactive)" ;;
     3) apply_translations ;;
+    4) apply_toolkit ;;
     *) say "Отменено." ;;
   esac
 else

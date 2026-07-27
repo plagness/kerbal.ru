@@ -1,6 +1,7 @@
 {
   "id": "operator",
   "name": "Оператор",
+  "page": "Operator",
   "status": "curated",
   "tagline": "Спутники → сеть покрытия → станции → автоматика. Оператор космопрограммы.",
   "kspVersion": "1.12.5",

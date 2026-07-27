@@ -1,12 +1,15 @@
 {
   "id": "rp1",
   "name": "RO/RSS/RP-1 (Realistic Progression)",
+  "page": "KSP-RO",
   "status": "mirror",
   "tagline": "Реальная Солнечная система, реальная физика, историческая карьера с 1951 г. Хардкор-реализм.",
   "kspVersion": "1.12.5",
   "system": "rss",
   "difficulty": 5,
-  "incompatibleWith": ["operator"],
+  "incompatibleWith": [
+    "operator"
+  ],
   "mods": {
     "core": [
       "RP-1-ExpressInstall",
