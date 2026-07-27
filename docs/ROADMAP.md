@@ -1,5 +1,9 @@
 # Roadmap
 
+<!-- NAV:START -->
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · **Планы** · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+<!-- NAV:END -->
+
 Состояние проекта и планы. Отмечай `[x]` по мере выполнения.
 Полная раскладка «что переведено / что нет» — в [COVERAGE.md](COVERAGE.md).
 

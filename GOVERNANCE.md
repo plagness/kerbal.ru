@@ -1,5 +1,9 @@
 # Управление проектом
 
+<!-- NAV:START -->
+[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+<!-- NAV:END -->
+
 kerbal.ru развивается публично и прагматично: обсуждение открыто для всех, а ответственность за выпуск и безопасность остаётся у maintainer.
 
 ## Роли

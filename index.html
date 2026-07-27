@@ -317,6 +317,12 @@
 
   footer{text-align:center;color:var(--txt-faint);font-size:.82rem;padding:46px 0 64px;margin-top:28px;border-top:1px solid var(--line);}
   footer a{color:var(--cyan);text-decoration:none}footer a:hover{text-decoration:underline}
+  /* Живые цифры GitHub — не отдельным блоком, а подписью к тому, что уже есть. */
+  .gh-stat{display:inline-flex;align-items:center;gap:5px;color:var(--gold)}
+  .gh-stat svg{width:13px;height:13px;fill:currentColor}
+  .release-chip .gh-stat{margin-left:2px;padding-left:9px;border-left:1px solid var(--line)}
+  footer .gh .gh-stat{margin-left:9px;padding-left:9px;border-left:1px solid var(--line)}
+  .install-guide-link .gh-hint{margin-left:6px;color:var(--txt-faint);font-size:.78em}
   footer .team-orbit{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 15px}
   footer .team-avatar{width:40px;height:40px;display:block;flex:none;border:2px solid rgba(166,232,110,.38);border-radius:50%;background:var(--bg-1);box-shadow:0 8px 25px -14px var(--green-glow);transition:transform .18s,border-color .18s,box-shadow .18s}
   footer .team-avatar:hover{transform:translateY(-2px) scale(1.04);border-color:var(--green);box-shadow:0 10px 30px -13px var(--green-glow)}
@@ -358,7 +364,10 @@
   .build-card .tag{color:var(--txt-dim);font-size:.95rem;margin:12px 0 0}
   .build-card .bstats{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.5px}
   .build-card .bstats b{color:var(--green)}
-  .build-card .go{margin-top:18px;color:var(--green);font-weight:600;font-size:.82rem}
+  .build-card .go{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;color:var(--green);font-weight:600;font-size:.82rem}
+  .build-card .go-dl{display:inline-flex;align-items:center;gap:5px;color:var(--txt-faint);font-family:'JetBrains Mono',monospace;font-weight:400;font-size:.74rem}
+  .build-card .go-dl:empty{display:none}
+  .build-card .go-dl .ic{font-size:.9rem}
   .bc-badge{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.8px;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line-cyan);color:var(--cyan);white-space:nowrap}
   .bc-badge.mirror{border-color:var(--line-hot);color:var(--orange)}
 </style>
@@ -437,17 +446,17 @@
   <section class="reveal" id="builds">
     <div class="sec-head"><span class="sec-ico"><svg class="ic"><use href="#i-packages"/></svg></span><span class="sec-num">01 / КАТАЛОГ</span><h2>Готовые русские сборки</h2><span class="rule"></span></div>
     <div class="build-grid">
-      <a class="build-card" href="/Operator">
+      <a class="build-card" href="/Operator" data-build-id="operator">
         <div class="bc-top"><h3>Оператор</h3><span class="bc-badge">курируемая</span></div>
         <p class="tag">Спутники → сеть покрытия → орбитальные станции → автоматика (kOS). «Ванила+» на стоковой системе, долгая игра.</p>
         <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>сток</b></span><span>модов&nbsp;<b>60</b></span><span>сложность&nbsp;<b>4/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
+        <div class="go">Открыть сборку →<span class="go-dl" data-build-downloads></span></div>
       </a>
-      <a class="build-card" href="/KSP-RO">
+      <a class="build-card" href="/KSP-RO" data-build-id="rp1">
         <div class="bc-top"><h3>RO / RSS / RP-1</h3><span class="bc-badge mirror">зеркало</span></div>
         <p class="tag">Реальная Солнечная система, реальная физика, историческая карьера с 1951 года. Вершина реализма и хардкора.</p>
         <div class="bstats"><span>KSP <b>1.12.5</b></span><span><b>RSS</b></span><span>реализм</span><span>сложность&nbsp;<b>5/5</b></span></div>
-        <div class="go">Открыть сборку →</div>
+        <div class="go">Открыть сборку →<span class="go-dl" data-build-downloads></span></div>
       </a>
     </div>
   </section>
@@ -680,8 +689,12 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
       return'<article class="device-card"><div class="device-head"><span class="device-icon"><svg class="ic"><use href="#i-cpu"/></svg></span><span class="device-title"><b>'+escapeHtml(device.name)+'</b><small>'+escapeHtml(device.hardware)+' · '+escapeHtml(device.platform)+'</small></span><span class="device-status">'+escapeHtml(device.statusLabel)+'</span></div><div class="device-metrics"><span class="device-metric"><b>'+measurement(device.averageFps,' FPS')+'</b><small>средний FPS</small></span><span class="device-metric"><b>'+measurement(device.onePercentLowFps,' FPS')+'</b><small>1% low</small></span><span class="device-metric"><b>'+measurement(device.peakRamGb,' ГБ')+'</b><small>пик RAM</small></span><span class="device-metric"><b>'+measurement(device.loadTimeSeconds,' с')+'</b><small>загрузка</small></span></div><p class="device-notes">'+escapeHtml(device.resolution||'Разрешение не указано')+' · '+escapeHtml(device.preset||'Пресет не указан')+' · '+escapeHtml(device.buildVersion||'Версия замера не указана')+'<br>'+escapeHtml(device.notes)+'</p></article>';
     }).join('');
   }
+  /* Аватарки в подвале — стартовый список из project.json.
+     Поверх него assets/js/stats.js рисует участников по истории git:
+     туда попадают и соавторы, которых API contributors не отдаёт. */
   function renderContributors(site){
     var target=document.querySelector('[data-contributors]');if(!target)return;
+    if(window.__kerbalStats)return;
     target.innerHTML=(site.contributors||[]).map(function(person){
       var login=escapeHtml(person.github),profile='https://github.com/'+login;
       var label=escapeHtml(person.name||person.github)+' — '+escapeHtml((person.roles||[]).join(', '));
@@ -716,6 +729,7 @@ window.addEventListener('pageshow',function(){var top=function(){window.scrollTo
     ['[data-install-paths]','[data-mod-list]','[data-performance-devices]','[data-contributors]'].forEach(function(selector){var target=document.querySelector(selector);if(target)target.innerHTML=message});
     console.warn('project data fallback:',error.message)
   });
+
 })();
 /* ---------- UI: tabs + copy + reveal ---------- */
 document.querySelectorAll('.tabs').forEach(function(group){
@@ -1098,5 +1112,6 @@ document.addEventListener('click',function(event){
   window.dispatchEvent(new Event('resize'));
 })();
 </script>
+<script src="/assets/js/stats.js" defer></script>
 </body>
 </html>

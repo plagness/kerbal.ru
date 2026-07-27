@@ -1,5 +1,9 @@
 # Профиль производительности kerbal.ru (`install.sh --perf`)
 
+<!-- NAV:START -->
+[Обзор](../README.md) · [Статус](../docs/STATUS.md) · [Установка](../docs/QUICKSTART.md) · [Переводы](../docs/MAINTAINING.md) · [Охват](../docs/COVERAGE.md) · [Планы](../docs/ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+<!-- NAV:END -->
+
 > **Legacy (сборка `rp1`).** Материалы этого каталога — declutter/оптимизация старой сборки
 > RO/RSS/RP-1 (флаг `--perf` в текущем `install.sh` не реализован). При новом концепте (хаб +
 > каталог сборок) это **низкий приоритет**; оставлено как справка по перф-профилям RSS-сборки.

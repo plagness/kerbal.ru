@@ -1,5 +1,9 @@
 # Политика безопасности
 
+<!-- NAV:START -->
+[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+<!-- NAV:END -->
+
 ## Поддерживаемые версии
 
 Исправления безопасности выпускаются только для последнего стабильного релиза kerbal.ru и текущей ветки `main`. Старые версии обновляются переходом на последний релиз.

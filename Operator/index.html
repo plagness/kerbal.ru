@@ -317,6 +317,15 @@
 
   footer{text-align:center;color:var(--txt-faint);font-size:.82rem;padding:46px 0 64px;margin-top:28px;border-top:1px solid var(--line);}
   footer a{color:var(--cyan);text-decoration:none}footer a:hover{text-decoration:underline}
+  /* Живые цифры GitHub (assets/js/stats.js) — подписью к тому, что уже есть. */
+  .gh-stat{display:inline-flex;align-items:center;gap:5px;color:var(--gold)}
+  .gh-stat svg{width:13px;height:13px;fill:currentColor}
+  .release-chip .gh-stat{margin-left:2px;padding-left:9px;border-left:1px solid var(--line)}
+  footer .gh .gh-stat{margin-left:9px;padding-left:9px;border-left:1px solid var(--line)}
+  .install-guide-link .gh-hint{margin-left:6px;color:var(--txt-faint);font-size:.78em}
+  .dl-stat{display:inline-flex;align-items:center;gap:5px;color:var(--txt-faint);font-family:'JetBrains Mono',monospace;font-size:.74rem}
+  .dl-stat:empty{display:none}
+  .dl-stat .ic{font-size:.9rem}
   footer .team-orbit{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 15px}
   footer .team-avatar{width:40px;height:40px;display:block;flex:none;border:2px solid rgba(166,232,110,.38);border-radius:50%;background:var(--bg-1);box-shadow:0 8px 25px -14px var(--green-glow);transition:transform .18s,border-color .18s,box-shadow .18s}
   footer .team-avatar:hover{transform:translateY(-2px) scale(1.04);border-color:var(--green);box-shadow:0 10px 30px -13px var(--green-glow)}
@@ -454,7 +463,7 @@
       <a class="btn btn-ghost" href="/KSP-RO"><svg class="ic"><use href="#i-world"/></svg><span>RO/RSS/RP-1</span></a>
     </div>
     <div class="project-meta">
-      <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
+      <a class="release-chip" data-build-id="operator" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b><span class="dl-stat" data-build-downloads></span></a>
       <span class="project-data-state">обновлено <time data-project-updated datetime="2026-07-22">22.07.2026</time></span>
     </div>
   </header>
@@ -506,6 +515,8 @@ curl -fsSL https://kerbal.ru/install.sh | bash</pre></div>
     <div class="card gallery">
       <div class="gal-strip" tabindex="0" aria-label="Скриншоты сборки">
         <a class="gal-item" href="/builds/operator/screens/01-lko-relay-orbita.jpg" target="_blank" rel="noopener"><img src="/builds/operator/screens/01-lko-relay-orbita.jpg" alt="Спутник-ретранслятор на орбите Кербина, окна [x] Science!, MechJeb и SCANsat" loading="lazy" decoding="async" width="2200" height="1237"><span class="gal-cap"><b>Ретранслятор на низкой орбите</b>«LKO Relay A» на 261 км: развёрнутые панели и ретрансляторы HG-5, окно [x] Science! с готовой к передаче наукой, карта SCANsat поверх рельефа и «Помощник подъёма» MechJeb слева.</span></a>
+        <a class="gal-item" href="/builds/operator/screens/02-kos-telnet-nochnoy-pusk.jpg" target="_blank" rel="noopener"><img src="/builds/operator/screens/02-kos-telnet-nochnoy-pusk.jpg" alt="Ночной пуск ракеты, терминал kOS с запущенной миссией и подключённым telnet-клиентом" loading="lazy" decoding="async" width="2200" height="1237"><span class="gal-cap"><b>Ночной пуск под управлением kOS</b>«Дальняк-1» уходит с побережья: в терминале kOS работает миссия из нашей библиотеки — цель 4758 × 4592 км, наклонение 8,5°, азимут посчитан с поправкой на вращение Кербина. Снизу «1 telnet client attached»: скрипт ведёт внешний агент по сети. В [x] Science! порог передачи 0,1 — нулевую науку не шлём.</span></a>
+        <a class="gal-item" href="/builds/operator/screens/03-podyom-mechjeb-scansat.jpg" target="_blank" rel="noopener"><img src="/builds/operator/screens/03-podyom-mechjeb-scansat.jpg" alt="Ракета на гравитационном развороте, русские окна MechJeb, SmartRCS и SCANsat" loading="lazy" decoding="async" width="2200" height="1237"><span class="gal-cap"><b>Подъём: автопилот, РСУ и картография</b>Гравитационный разворот над побережьем: «Помощник подъёма» ведёт на 260 км, «УмныйРСУ» экономит монотопливо, SCANsat уже пишет рельеф и держит в списке два аппарата — «LKO Relay A» и «Стрекоза-1». Весь интерфейс модов на русском.</span></a>
       </div>
       <div class="gal-nav"><button class="gal-btn" type="button" data-gal="-1" aria-label="Назад">←</button><button class="gal-btn" type="button" data-gal="1" aria-label="Вперёд">→</button></div>
     </div>
@@ -1190,5 +1201,6 @@ document.addEventListener('click',function(event){
     });
   });
 </script>
+<script src="/assets/js/stats.js" defer></script>
 </body>
 </html>

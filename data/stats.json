@@ -1,0 +1,302 @@
+{
+  "_comment": "Генерируется tools/gen_stats.py. Руками не править.",
+  "generatedAt": "2026-07-27T10:50:11Z",
+  "repo": {
+    "stars": 2,
+    "forks": 0,
+    "watchers": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-22",
+    "topics": [
+      "ckan",
+      "commnet",
+      "github-pages",
+      "kerbal-space-program",
+      "kos",
+      "ksp",
+      "localization",
+      "mod-translation",
+      "modpack",
+      "real-solar-system",
+      "realism-overhaul",
+      "rp-1",
+      "russian",
+      "spaceflight",
+      "steam-deck",
+      "threejs",
+      "translation"
+    ],
+    "releases": 17,
+    "downloads": 9,
+    "downloadsByKind": {
+      "translations": 3,
+      "build": 6,
+      "ckan": 0
+    },
+    "downloadsByBuild": {
+      "operator": 6,
+      "rp1": 0
+    },
+    "byRelease": [
+      {
+        "version": "v26.17",
+        "date": "2026-07-26",
+        "downloads": 5,
+        "assets": [
+          {
+            "name": "kerbalru-translations-26.17.zip",
+            "downloads": 2
+          },
+          {
+            "name": "kerbalru-translations-operator-26.17.zip",
+            "downloads": 3
+          },
+          {
+            "name": "operator.ckan",
+            "downloads": 0
+          },
+          {
+            "name": "rp1.ckan",
+            "downloads": 0
+          }
+        ]
+      },
+      {
+        "version": "v26.16",
+        "date": "2026-07-26",
+        "downloads": 0,
+        "assets": [
+          {
+            "name": "kerbalru-translations-26.16.zip",
+            "downloads": 0
+          },
+          {
+            "name": "kerbalru-translations-operator-26.16.zip",
+            "downloads": 0
+          },
+          {
+            "name": "operator.ckan",
+            "downloads": 0
+          },
+          {
+            "name": "rp1.ckan",
+            "downloads": 0
+          }
+        ]
+      },
+      {
+        "version": "v26.15",
+        "date": "2026-07-26",
+        "downloads": 3,
+        "assets": [
+          {
+            "name": "kerbalru-translations-26.15.zip",
+            "downloads": 1
+          },
+          {
+            "name": "kerbalru-translations-operator-26.15.zip",
+            "downloads": 2
+          },
+          {
+            "name": "operator.ckan",
+            "downloads": 0
+          },
+          {
+            "name": "rp1.ckan",
+            "downloads": 0
+          }
+        ]
+      },
+      {
+        "version": "v26.14",
+        "date": "2026-07-26",
+        "downloads": 1,
+        "assets": [
+          {
+            "name": "kerbalru-translations-operator-26.14.zip",
+            "downloads": 1
+          },
+          {
+            "name": "operator.ckan",
+            "downloads": 0
+          },
+          {
+            "name": "rp1.ckan",
+            "downloads": 0
+          }
+        ]
+      },
+      {
+        "version": "v26.13",
+        "date": "2026-07-25",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.12",
+        "date": "2026-07-25",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.11",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.10",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.9",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.8",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.7",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.6",
+        "date": "2026-07-24",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.5",
+        "date": "2026-07-23",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.4",
+        "date": "2026-07-22",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.3",
+        "date": "2026-07-22",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.2",
+        "date": "2026-07-22",
+        "downloads": 0,
+        "assets": []
+      },
+      {
+        "version": "v26.1",
+        "date": "2026-07-22",
+        "downloads": 0,
+        "assets": []
+      }
+    ]
+  },
+  "people": [
+    {
+      "id": "plagness",
+      "name": "Valery Tenevoy",
+      "github": "plagness",
+      "avatar": "https://avatars.githubusercontent.com/u/35403646?v=4",
+      "url": "https://github.com/plagness",
+      "commits": 129,
+      "firstCommit": "2026-07-22",
+      "lastCommit": "2026-07-27",
+      "roles": [
+        "Куратор проекта",
+        "Локализация",
+        "Разработка сайта"
+      ],
+      "bio": "Поддерживает русификатор, релизы, документацию и инфраструктуру kerbal.ru."
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "github": "claude",
+      "avatar": "https://avatars.githubusercontent.com/u/81847?v=4",
+      "url": "https://github.com/claude",
+      "commits": 57,
+      "firstCommit": "2026-07-22",
+      "lastCommit": "2026-07-26",
+      "roles": [
+        "Переводы модов",
+        "Вики и документация",
+        "kOS-библиотека",
+        "Инструменты сборки"
+      ],
+      "bio": "Работает в паре с куратором: разбор модов, тексты вики, полётные скрипты и генераторы сайта."
+    }
+  ],
+  "totals": {
+    "commits": 129,
+    "contributors": 2,
+    "translations": 111,
+    "wiki": 51,
+    "kosScripts": 14,
+    "days": 6
+  },
+  "growth": [
+    {
+      "date": "2026-07-22",
+      "commits": 25,
+      "translations": 0,
+      "wiki": 0,
+      "builds": 0,
+      "kos": 0
+    },
+    {
+      "date": "2026-07-23",
+      "commits": 72,
+      "translations": 0,
+      "wiki": 0,
+      "builds": 0,
+      "kos": 0
+    },
+    {
+      "date": "2026-07-24",
+      "commits": 101,
+      "translations": 109,
+      "wiki": 0,
+      "builds": 2,
+      "kos": 0
+    },
+    {
+      "date": "2026-07-25",
+      "commits": 107,
+      "translations": 111,
+      "wiki": 0,
+      "builds": 2,
+      "kos": 0
+    },
+    {
+      "date": "2026-07-26",
+      "commits": 123,
+      "translations": 111,
+      "wiki": 50,
+      "builds": 2,
+      "kos": 0
+    },
+    {
+      "date": "2026-07-27",
+      "commits": 129,
+      "translations": 111,
+      "wiki": 51,
+      "builds": 2,
+      "kos": 14
+    }
+  ]
+}

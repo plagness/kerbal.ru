@@ -1,18 +1,59 @@
+<div align="center">
+
 # kerbal.ru — русский хаб KSP-моддинга
 
-**Не одна сборка, а две вещи сразу:**
+**Библиотека переводов модов + каталог готовых русских сборок с установщиком.**
+Kerbal Space Program 1.12.5.
 
-1. **Библиотека переводов модов** (`translations/`) — русификация модов Kerbal Space Program 1.12.5,
-   по **одной папке на мод**. Нужен перевод конкретного мода — берёшь его папку и кладёшь себе в `GameData`.
-2. **Каталог готовых русских сборок + удобный установщик** (`builds/` + `install.sh`) — выбираешь сборку,
-   и она ставится «в пару кликов»: официальный CKAN тянет моды, поверх ложатся наши переводы, включается русский.
+[![сайт](https://img.shields.io/badge/сайт-kerbal.ru-a6e86e?style=flat-square)](https://kerbal.ru)
+[![релиз](https://img.shields.io/github/v/release/plagness/kerbal.ru?style=flat-square&label=релиз&color=a6e86e)](https://github.com/plagness/kerbal.ru/releases)
+[![звёзды](https://img.shields.io/github/stars/plagness/kerbal.ru?style=flat-square&label=звёзды&color=f0c067)](https://github.com/plagness/kerbal.ru/stargazers)
+[![скачивания](https://img.shields.io/github/downloads/plagness/kerbal.ru/total?style=flat-square&label=скачано&color=ff9d48)](https://github.com/plagness/kerbal.ru/releases)
+[![переводы](https://img.shields.io/badge/переводов-111%20модов-a6e86e?style=flat-square)](docs/COVERAGE.md)
+[![вики](https://img.shields.io/badge/вики-51%20статья-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
 
-Мы **не храним и не распространяем чужие моды** — только свои дескрипторы сборок и переводы; сами моды всегда
-ставит официальный **CKAN**.
+[Сборки](#каталог-сборок) · [Установка](#быстрый-старт) · [Переводы](#библиотека-переводов) ·
+[kOS](#скрипты-полёта) · [Вики](https://kerbal.ru/Operator/wiki/) · [Участие](CONTRIBUTING.md)
+
+</div>
 
 ---
 
-## Быстрый старт (пользователю)
+## Что это
+
+Две вещи, которые работают вместе, но полезны и по отдельности:
+
+1. **Библиотека переводов** (`translations/`) — русификация модов KSP **по одной папке на мод**.
+   Нужен перевод конкретного мода — берёшь его папку и кладёшь в `GameData`. Всё.
+2. **Каталог сборок** (`builds/` + `install.sh`) — выбираешь готовую русскую сборку, и она ставится
+   в пару команд: официальный CKAN тянет моды, поверх ложатся наши переводы, включается русский.
+
+Мы **не храним и не раздаём чужие моды** — только свои дескрипторы сборок и переводы.
+Моды всегда ставит официальный **CKAN**. Ассеты игры не извлекаем и не публикуем.
+
+```mermaid
+flowchart LR
+  U([Игрок]) --> I[install.sh<br/>менеджер сборок]
+  I --> C{{CKAN}}
+  C -->|тянет моды| G[(GameData)]
+  I -->|переводы| G
+  I -->|конфиги сборки| G
+
+  T[translations/<br/>по папке на мод] --> I
+  B[builds/&lt;id&gt;/<br/>build.json] --> I
+  E[engine/<br/>ui-translator.dll] --> I
+
+  T -.генератор.-> S[kerbal.ru<br/>сайт и каталог]
+  B -.генератор.-> S
+  W[wiki/ 51 статья] -.генератор.-> S
+```
+
+Переводы переживают сборки: мод убрали из каталога — его папка в `translations/` остаётся.
+Кому-то она пригодится отдельно.
+
+---
+
+## Быстрый старт
 
 ```bash
 # выбрать сборку интерактивно (меню)
@@ -24,75 +65,153 @@ curl -fsSL https://kerbal.ru/install.sh | bash -s -- --build operator
 curl -fsSL https://kerbal.ru/install.sh | bash -s -- --list        # каталог сборок
 ```
 
-Установщик — **менеджер сборок**: при повторном запуске он находит уже стоящую сборку и предлагает
-**обновить / сменить / только переводы**. Состояние пишется в `<KSP>/.kerbalru-build.json`.
-
+Установщик — **менеджер сборок**: при повторном запуске находит уже стоящую сборку и предлагает
+**обновить / сменить / только переводы**. Состояние — в `<KSP>/.kerbalru-build.json`.
 Флаги: `--build <id>` · `--update` · `--ru-only` · `--list` · `--yes`.
+
+**Windows** — без терминала: `.ckan`-метапакет и ZIP-архив из [релизов](https://github.com/plagness/kerbal.ru/releases).
+Подробно — [QUICKSTART.md](docs/QUICKSTART.md), обновление — [UPDATING.md](docs/UPDATING.md).
+
+---
+
+## Каталог сборок
+
+| Сборка | Что это | Система | Модов | Сложность |
+|---|---|---|---|---|
+| **[«Оператор»](builds/operator/)** — курируемая | Спутники → сеть покрытия → орбитальные станции → автоматика на kOS. «Ванила+» для долгой игры | сток | 60 | 4/5 |
+| **[RO / RSS / RP-1](https://kerbal.ru/KSP-RO)** — зеркало | Реальная Солнечная система, реальная физика, историческая карьера с 1951 года | RSS | — | 5/5 |
+
+У «Оператора» есть собственная [вики](https://kerbal.ru/Operator/wiki/) — 51 статья: связь и CommNet,
+частоты наземных станций, диагностика, наука, kOS, подключение ИИ-агентов, разбор реальных инцидентов в игре.
+
+### Как это выглядит
+
+[![Ночной пуск под управлением kOS](builds/operator/screens/02-kos-telnet-nochnoy-pusk.jpg)](builds/operator/screens/README.md)
+
+Все кадры с подписями — [builds/operator/screens/](builds/operator/screens/README.md).
+
+---
+
+## Библиотека переводов
+
+Три метода, выбираются по тому, где мод хранит текст:
+
+| Метод | Когда | Что кладём |
+|---|---|---|
+| `keyed` | мод поддерживает `#LOC`-ключи | `Localization/ru.cfg` |
+| `mm-title` | текст в конфигах деталей | ModuleManager-патч `:FINAL` |
+| `ui-dict` | текст зашит в DLL | словарь `Англ⇥Рус` + Harmony-движок |
+
+Перевод отсутствующего мода — безопасный no-op. Localization-патчи ложатся в
+`GameData/zzz-kerbalru-translations/<mod>/`: префикс `zzz-` гарантирует применение
+после Realism Overhaul, чтобы наши `:FINAL`-переводы заголовков выигрывали.
+
+Взять перевод одного мода: скопируй `translations/<mod>/` в свой `GameData/`
+(для хардкод-модов нужен ещё `engine/Plugins/KerbalRuUiTranslator.dll`) и выставь `LANGUAGE = ru`.
+
+Полная раскладка охвата — [COVERAGE.md](docs/COVERAGE.md), правила перевода — [MAINTAINING.md](docs/MAINTAINING.md),
+устройство ui-движка — [UI-TRANSLATION.md](docs/UI-TRANSLATION.md).
+
+---
+
+## Скрипты полёта
+
+`kos/` — открытая библиотека блоков для kOS: подъём, узлы манёвра, наука, телеметрия, индикация.
+Файл миссии содержит только цель и порядок шагов — всё остальное считается:
+
+```kos
+RUNONCEPATH("0:/lib/mission.ks").
+SET s TO m_defaults().
+SET s["ap"]  TO 7867078.    // апоцентр, м
+SET s["pe"]  TO 3331362.    // перицентр, м
+SET s["inc"] TO 20.1.       // наклонение
+m_orbit(s).                 // дальше само
+```
+
+Всё проверено в живых полётах, включая грабли (левосторонняя система координат KSP,
+имена встроенных функций, автостейджинг, срыв антенн при передаче в атмосфере) —
+разборы в [вики](https://kerbal.ru/Operator/wiki/kos-biblioteka.html), правила участия в [kos/README.md](kos/README.md).
 
 ---
 
 ## Структура репозитория
 
 ```
-translations/            библиотека переводов — ПО ПАПКЕ НА МОД
+translations/          библиотека переводов — ПО ПАПКЕ НА МОД
   <mod>/
-    translation.json     метаданные: mod, folder (папка в GameData), method (keyed/ui-dict), status
-    Localization/*.cfg    перевод через #LOC-ключи (ru.cfg) и/или MM-патчи title (RuLocPatch.cfg)
-    KerbalRuUiTranslations/<Mod>.txt   словарь ui-translator (Англ⇥Рус) для хардкод-модов
-engine/
-  Plugins/KerbalRuUiTranslator.dll     движок перевода интерфейса (Harmony) — общий
-builds/                  каталог сборок; имя папки = id сборки
-  <id>/
-    build.json           что ставить (mods.core/recommended/optional) + ckan-опции
-    README.md            описание сборки
-    config/              опц. конфиг сборки (зеркалит GameData/), напр. мягкий пресет KCT
-    screens/             скриншоты сборки: screens.json (подписи) + .jpg до ~500 КБ
-  _catalog.json          индекс для сайта/меню (генерируется)
-kos/                     библиотека kOS-скриптов: модули, шаблоны миссий,
-                         проверочный прогон и telnet-клиент (см. kos/README.md)
-install.sh               менеджер сборок (Linux/macOS/Steam Deck)
-tools/                   валидаторы, генератор каталога, статистика переводов
-docs/  data/  assets/  index.html  vendor/
+    translation.json     метаданные: мод, папка в GameData, метод, статус
+    Localization/*.cfg   перевод через #LOC-ключи и/или MM-патчи заголовков
+    KerbalRuUiTranslations/<Mod>.txt   словарь для хардкод-модов
+engine/                движок перевода интерфейса (Harmony) — общий
+builds/                каталог сборок; имя папки = id сборки
+  <id>/build.json        что ставить (core/recommended/optional) + опции ckan
+  <id>/config/           опциональный конфиг сборки (зеркалит GameData/)
+  <id>/screens/          скриншоты: screens.json + .jpg до ~500 КБ
+kos/                   библиотека kOS: модули, шаблоны миссий, telnet-клиент
+wiki/                  исходники вики «Оператора» (.md → сайт)
+install.sh             менеджер сборок (Linux/macOS/Steam Deck)
+tools/                 валидаторы, генераторы каталога/вики/галереи/статистики
+docs/ data/ assets/ index.html
 ```
 
-### Как перевод попадает в игру
-`install.sh` (`--build`/`--update`/`--ru-only`) кладёт под **реально установленные моды**:
-движок → `GameData/kerbalru-ui-translator/Plugins/`; ui-словари → `.../KerbalRuUiTranslations/`;
-Localization-патчи → `GameData/zzz-kerbalru-translations/<mod>/` (префикс `zzz-` гарантирует применение
-после Realism Overhaul, чтобы наши `:FINAL`-переводы `title` выигрывали). Всё безопасно: перевод
-отсутствующего мода = no-op.
+### Карта документации
+
+| Документ | О чём |
+|---|---|
+| [docs/STATUS.md](docs/STATUS.md) | живое состояние проекта — читать первым |
+| [docs/QUICKSTART.md](docs/QUICKSTART.md) · [docs/UPDATING.md](docs/UPDATING.md) | установка и обновление |
+| [docs/MAINTAINING.md](docs/MAINTAINING.md) | как устроены переводы, правила и валидаторы |
+| [docs/COVERAGE.md](docs/COVERAGE.md) | что переведено, что нет, что в кандидатах |
+| [docs/UI-TRANSLATION.md](docs/UI-TRANSLATION.md) | Harmony-движок для текста внутри DLL |
+| [docs/ROADMAP.md](docs/ROADMAP.md) · [CHANGELOG.md](CHANGELOG.md) | планы и история |
+| [docs/PERFORMANCE.md](docs/PERFORMANCE.md) · [perf/](perf/README.md) | профили производительности |
+| [docs/FOR-AGENTS.md](docs/FOR-AGENTS.md) · [AGENTS.md](AGENTS.md) | вход для ИИ-агентов |
+| [CONTRIBUTING.md](CONTRIBUTING.md) · [GOVERNANCE.md](GOVERNANCE.md) · [SUPPORT.md](SUPPORT.md) | участие, решения, помощь |
 
 ---
 
-## Продвинутым: взять перевод одного мода
-Скопируй папку `translations/<mod>/` к себе в `GameData/` (Localization-файлы работают из любого места; для
-хардкод-модов нужен ещё `engine/Plugins/KerbalRuUiTranslator.dll`) и выставь `LANGUAGE = ru` в `settings.cfg`.
+## Участие
 
-## Авторам сборок
-Добавь `builds/<id>/build.json` (образец — `builds/operator/build.json`) + `README.md`. Моды — по CKAN-id;
-`ckan.compatVersions` — для модов с отставшим тегом версии; `config/` — для конфигов сборки.
+Полезны переводчики, редакторы, тестировщики и те, кто умеет хорошо описывать ошибки.
+Один переведённый мод или один найденный английский заголовок — уже вклад.
 
-**Скриншоты.** Кадры живут в `builds/<id>/screens/` и попадают и на сайт, и в `.md`:
+- **Перевод мода** — добавь `translations/<mod>/`. Политика «умного перевода»: по максимуму на русский,
+  латиницей только настоящие бренды, модели, единицы и технические токены; токены (`\n`, `<<1>>`, `<color>`) сохраняются.
+- **Своя сборка** — добавь `builds/<id>/build.json` (образец — `builds/operator/build.json`) и `README.md`.
+- **Скриншот** — `tools/add_screenshot.sh <файл> <сборка> <slug>`, запись в `screens.json`,
+  затем `python3 tools/gen_gallery.py`. Кадр попадёт и на сайт, и в `.md`.
+- **Баг** — приложи `KSP.log`. Без него диагноз — гадание.
 
-```bash
-tools/add_screenshot.sh ~/Downloads/кадр.png operator 02-set-pokrytiya   # → 2200 px, JPEG q80, ~400 КБ
-# дописать запись в builds/operator/screens/screens.json (title, caption, alt)
-python3 tools/gen_gallery.py                                            # → галерея на странице + screens/README.md
-```
-
-Галерея на странице сборки и обзорный `screens/README.md` генерируются из одного `screens.json` — руками
-разметку не правь, она перезапишется. Пример: [«Оператор»](builds/operator/screens/README.md).
-
-## Пишущим скрипты
-`kos/` — открытая библиотека блоков для автоматизации полётов: подъём, узлы манёвра, наука,
-телеметрия, индикация. Файл миссии содержит только цель и порядок шагов. Всё проверено в полёте;
-разборы граблей — в [вики](https://kerbal.ru/Operator/wiki/kos-biblioteka.html). Правила участия —
-в [kos/README.md](kos/README.md).
-
-## Переводчикам
-Добавь/дополни `translations/<mod>/`. Политика — **умный перевод**: по максимуму на русский, латиницей только
-настоящие бренды/модели/единицы/технические токены; сохраняй токены (`\n`, `<<1>>`, `<color>`).
+Подробно — [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-Домен **kerbal.ru** (GitHub Pages). Ассеты игры (текстуры/иконки KSP) не извлекаем и не публикуем.
+<!-- STATS:START -->
+## Проект в цифрах
+
+Живой срез на 2026-07-27. Считается по истории репозитория и GitHub API генератором `tools/gen_stats.py` — руками этот блок не правится.
+
+| | Сейчас | Рост по дням |
+|---|---:|---|
+| Переводов модов | **111** | `▁▁████` |
+| Статей вики | **51** | `▁▁▁▁██` |
+| Коммитов | **129** | `▁▄▆▇██` |
+| Звёзд на GitHub | **2** | релизов: 17 |
+| Скачиваний релизов | **9** | operator: 6 · rp1: 0 |
+
+Первый коммит — 2026-07-22, дней работы — 6.
+
+### Кто это делает
+
+- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 129 коммитов, с 2026-07-22
+- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 57 коммитов, с 2026-07-22
+
+Список собирается из git и включает соавторов из трейлера `Co-Authored-By` — их GitHub в списке контрибьюторов API не показывает.
+<!-- STATS:END -->
+
+<div align="center">
+
+Домен **[kerbal.ru](https://kerbal.ru)** на GitHub Pages · независимый фан-проект ·
+не аффилирован с Squad, Private Division и Intercept Games
+
+</div>

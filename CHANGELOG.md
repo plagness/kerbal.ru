@@ -1,5 +1,9 @@
 # История изменений
 
+<!-- NAV:START -->
+[Обзор](README.md) · [Статус](docs/STATUS.md) · [Установка](docs/QUICKSTART.md) · [Переводы](docs/MAINTAINING.md) · [Охват](docs/COVERAGE.md) · [Планы](docs/ROADMAP.md) · [kOS](kos/README.md) · [Участие](CONTRIBUTING.md)
+<!-- NAV:END -->
+
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/). Номера релизов имеют вид `vYY.N`, где `YY` — год, а `N` — номер выпуска в этом году.
 
 ## [Unreleased]

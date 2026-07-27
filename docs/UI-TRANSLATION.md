@@ -1,5 +1,9 @@
 # Русификация интерфейсов модов (UI, не детали)
 
+<!-- NAV:START -->
+[Обзор](../README.md) · [Статус](STATUS.md) · [Установка](QUICKSTART.md) · [Переводы](MAINTAINING.md) · [Охват](COVERAGE.md) · [Планы](ROADMAP.md) · [kOS](../kos/README.md) · [Участие](../CONTRIBUTING.md)
+<!-- NAV:END -->
+
 Все переводы до этого момента — данные (`Localization{}`-ключи в `.cfg`). Интерфейсы модов
 (окна MechJeb2, панели Kerbalism, окно FAR и т.д.) — это **текст, зашитый прямо в скомпилированный
 C#**, а не в `Localization`-ключи. Ни один из проверенных модов не использует `Localizer.Format`/`#LOC_`

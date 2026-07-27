@@ -317,6 +317,15 @@
 
   footer{text-align:center;color:var(--txt-faint);font-size:.82rem;padding:46px 0 64px;margin-top:28px;border-top:1px solid var(--line);}
   footer a{color:var(--cyan);text-decoration:none}footer a:hover{text-decoration:underline}
+  /* Живые цифры GitHub (assets/js/stats.js) — подписью к тому, что уже есть. */
+  .gh-stat{display:inline-flex;align-items:center;gap:5px;color:var(--gold)}
+  .gh-stat svg{width:13px;height:13px;fill:currentColor}
+  .release-chip .gh-stat{margin-left:2px;padding-left:9px;border-left:1px solid var(--line)}
+  footer .gh .gh-stat{margin-left:9px;padding-left:9px;border-left:1px solid var(--line)}
+  .install-guide-link .gh-hint{margin-left:6px;color:var(--txt-faint);font-size:.78em}
+  .dl-stat{display:inline-flex;align-items:center;gap:5px;color:var(--txt-faint);font-family:'JetBrains Mono',monospace;font-size:.74rem}
+  .dl-stat:empty{display:none}
+  .dl-stat .ic{font-size:.9rem}
   footer .team-orbit{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 15px}
   footer .team-avatar{width:40px;height:40px;display:block;flex:none;border:2px solid rgba(166,232,110,.38);border-radius:50%;background:var(--bg-1);box-shadow:0 8px 25px -14px var(--green-glow);transition:transform .18s,border-color .18s,box-shadow .18s}
   footer .team-avatar:hover{transform:translateY(-2px) scale(1.04);border-color:var(--green);box-shadow:0 10px 30px -13px var(--green-glow)}
@@ -425,7 +434,7 @@
       <a class="btn btn-ghost" href="#install"><svg class="ic"><use href="#i-book-2"/></svg><span data-content="hero.secondaryAction">Как установить</span></a>
     </div>
     <div class="project-meta">
-      <a class="release-chip" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b></a>
+      <a class="release-chip" data-build-id="rp1" data-release-link href="https://github.com/plagness/kerbal.ru/releases/tag/v26.1"><span data-release-channel>stable</span><b data-project-version>v26.1</b><span class="dl-stat" data-build-downloads></span></a>
       <span class="project-data-state">обновлено <time data-project-updated datetime="2026-07-22">22.07.2026</time></span>
     </div>
   </header>
@@ -1205,5 +1214,6 @@ document.addEventListener('click',function(event){
     var nb=document.querySelector('.os-tab[data-os="nix"]'); if(nb) nb.click();
   }
 </script>
+<script src="/assets/js/stats.js" defer></script>
 </body>
 </html>
