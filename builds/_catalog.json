@@ -8,7 +8,7 @@
       "tagline": "Спутники → сеть покрытия → станции → автоматика. Оператор космопрограммы.",
       "kspVersion": "1.12.5",
       "system": "stock",
-      "difficulty": 4,
+      "difficulty": 2,
       "language": "ru",
       "incompatibleWith": [
         "rp1"
@@ -40,5 +40,5 @@
       }
     }
   ],
-  "generatedAt": "2026-07-26"
+  "generatedAt": "2026-07-27"
 }

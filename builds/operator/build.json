@@ -5,8 +5,10 @@
   "tagline": "Спутники → сеть покрытия → станции → автоматика. Оператор космопрограммы.",
   "kspVersion": "1.12.5",
   "system": "stock",
-  "difficulty": 4,
-  "incompatibleWith": ["rp1"],
+  "difficulty": 2,
+  "incompatibleWith": [
+    "rp1"
+  ],
   "mods": {
     "core": [
       "ReStock",
@@ -76,7 +78,12 @@
     ]
   },
   "ckan": {
-    "compatVersions": ["1.11", "1.10", "1.9", "1.8"],
+    "compatVersions": [
+      "1.11",
+      "1.10",
+      "1.9",
+      "1.8"
+    ],
     "noRecommends": false,
     "allowIncompatible": []
   },
