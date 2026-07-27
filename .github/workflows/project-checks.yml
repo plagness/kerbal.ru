@@ -22,9 +22,17 @@ jobs:
           node - <<'NODE'
           const fs = require('fs');
           const html = fs.readFileSync('index.html', 'utf8');
-          for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
-            new Function(match[1]);
+          // Инлайн-скрипты всех страниц сайта плюс общий stats.js.
+          for (const page of ['index.html', 'Operator/index.html', 'KSP-RO.html']) {
+            const source = fs.readFileSync(page, 'utf8');
+            for (const match of source.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
+              new Function(match[1]);
+            }
+            if (!source.includes('assets/js/stats.js')) {
+              throw new Error(`${page} does not load assets/js/stats.js`);
+            }
           }
+          new Function(fs.readFileSync('assets/js/stats.js', 'utf8'));
           const data = JSON.parse(fs.readFileSync('data/project.json', 'utf8'));
           const siteMods = data.site.modCatalog.map(mod => mod.id);
           const inventoryComponents = data.site.inventoryGroups.reduce(
@@ -46,7 +54,9 @@ jobs:
           if (!html.includes('renderModCatalog(data,active)')) throw new Error('site does not render the JSON mod catalog');
           if (!html.includes('normalizeCatalog(data)')) throw new Error('site does not merge the JSON inventory into the catalog');
           if (!html.includes('[data-ui-translation]')) throw new Error('site does not render uiTranslation');
-          console.log(`inline JavaScript, ${siteMods.length} dynamic mods and ${data.site.inventoryGroups.length} inventory groups: ok`);
+          const stats = JSON.parse(fs.readFileSync('data/stats.json', 'utf8'));
+          if (!stats.people || !stats.people.length) throw new Error('stats.json has no contributors');
+          console.log(`JavaScript of 3 pages + stats.js, ${siteMods.length} dynamic mods, ${data.site.inventoryGroups.length} inventory groups, ${stats.people.length} contributors: ok`);
           NODE
 
       - name: Check project data, Python and localization configs
@@ -68,9 +78,9 @@ jobs:
           if not re.fullmatch(r'\d{2}\.[1-9]\d*', version):
               raise SystemExit(f'Invalid VERSION: {version!r}')
 
-          configs = list(Path('GameData').rglob('*.cfg'))
+          configs = list(Path('translations').rglob('*.cfg'))
           if not configs:
-              raise SystemExit('No localization configs found')
+              raise SystemExit('No localization configs found in translations/')
           print(f'{len(configs)} localization configs found')
           PY
 
