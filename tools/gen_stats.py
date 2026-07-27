@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "data" / "stats.json"
+OUT = ROOT / "site" / "data" / "stats.json"
 REPO = "plagness/kerbal.ru"
 API = f"https://api.github.com/repos/{REPO}"
 
@@ -88,7 +88,7 @@ def collect_people() -> list[dict]:
 
     # Роли и био для людей описаны в project.json — не дублируем их здесь.
     described = {}
-    pj = ROOT / "data" / "project.json"
+    pj = ROOT / "site" / "data" / "project.json"
     if pj.exists():
         for person in json.loads(pj.read_text(encoding="utf-8")).get(
                 "site", {}).get("contributors", []):

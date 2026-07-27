@@ -11,7 +11,7 @@ keeps GitHub-rendered files and the release VERSION marker in lockstep.
 
 # NOTE (2026-07-24, концепт-хаб): README переписан и БОЛЬШЕ НЕ содержит генерируемого
 # блока <!-- project-data:start/end -->, поэтому README-таргет СНЯТ из expected_files().
-# Живые генерируемые таргеты — VERSION и CITATION.cff (release.version/date из data/project.json).
+# Живые генерируемые таргеты — VERSION и CITATION.cff (release.version/date из site/data/project.json).
 # generated_readme_block()/replace_block() оставлены как dead-code на случай возврата блока в README.
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data/project.json"
+DATA_PATH = ROOT / "site/data/project.json"
 README_PATH = ROOT / "README.md"
 VERSION_PATH = ROOT / "VERSION"
 CITATION_PATH = ROOT / "CITATION.cff"
@@ -505,7 +505,7 @@ def generated_readme_block(data: dict) -> str:
             START,
             "| Что измеряем | Сейчас | Источник |",
             "|---|---:|---|",
-            f'| Версия русификатора | **[{release["version"]}]({release["url"]})** | `data/project.json` |',
+            f'| Версия русификатора | **[{release["version"]}]({release["url"]})** | `site/data/project.json` |',
             f'| Поддерживаемые нами моды | **{inventory["kerbalRuMods"]}** | Собственные `ru.cfg` и MM-патчи |',
             f'| Интерфейс модов | **{ui["modsCovered"]} {plural_ru(ui["modsCovered"], "словарь", "словаря", "словарей")} · '
             f'{spaced(ui["linesTranslated"])} {plural_ru(ui["linesTranslated"], "строка", "строки", "строк")}** | {ui["statusLabel"]} |',

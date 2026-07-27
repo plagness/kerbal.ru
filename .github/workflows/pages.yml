@@ -1,0 +1,78 @@
+# Публикация kerbal.ru на GitHub Pages.
+#
+# Сайт живёт в site/, но по некоторым адресам должны отдаваться файлы, которые
+# логичнее держать рядом с их источником, а не внутри сайта:
+#
+#   /install.sh                        менеджер сборок (корень репозитория)
+#   /dist/*.ckan                       метапакеты CKAN (сборочные артефакты)
+#   /builds/<id>/screens/*.jpg         кадры сборок (лежат в папке своей сборки)
+#
+# Поэтому артефакт собирается здесь, а не публикуется веткой напрямую.
+# Ни один URL при этом не изменился — раскладка ровно та же, что была в корне.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Параллельные деплои не нужны: побеждает последний пуш, текущий не рвём.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать сайт
+        run: |
+          set -euo pipefail
+          out=_site
+          mkdir -p "$out"
+          cp -R site/. "$out"/
+          cp install.sh "$out"/
+          [ -d dist ] && mkdir -p "$out/dist" && cp dist/*.ckan "$out/dist"/ || true
+          for d in builds/*/screens; do
+            [ -d "$d" ] || continue
+            mkdir -p "$out/$d"
+            cp "$d"/*.jpg "$out/$d"/ 2>/dev/null || true
+          done
+
+      - name: Проверить, что артефакт полный
+        run: |
+          set -euo pipefail
+          fail=0
+          for f in _site/index.html _site/CNAME _site/install.sh \
+                   _site/Operator/index.html _site/Operator/wiki/index.html \
+                   _site/KSP-RO.html _site/data/project.json _site/data/stats.json \
+                   _site/assets/js/stats.js _site/dist/operator.ckan; do
+            [ -f "$f" ] || { echo "нет обязательного файла: $f"; fail=1; }
+          done
+          shots=$(find _site/builds -name '*.jpg' 2>/dev/null | wc -l)
+          [ "$shots" -gt 0 ] || { echo "не попали скриншоты сборок"; fail=1; }
+          wiki=$(find _site -path '*/wiki/*.html' | wc -l)
+          [ "$wiki" -gt 1 ] || { echo "не попала вики"; fail=1; }
+          exit $fail
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

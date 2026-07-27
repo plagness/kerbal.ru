@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Advance the project release in data/project.json and sync consumers.
+"""Advance the project release in site/data/project.json and sync consumers.
 
 With no argument, increments the sequence for the current calendar year:
   python3 tools/bump_release.py
@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data/project.json"
+DATA_PATH = ROOT / "site/data/project.json"
 
 
 def main() -> int:

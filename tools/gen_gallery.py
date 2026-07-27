@@ -19,6 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE = ROOT / "site"          # страницы сборок публикуются отсюда
 RAW = "https://github.com/plagness/kerbal.ru/blob/main"
 
 # сборка -> (папка страницы на сайте, название сборки, заголовок раздела, номер раздела)
@@ -114,7 +115,7 @@ def main() -> None:
             print(f"— {build}: скриншотов нет, пропуск")
             continue
 
-        splice(ROOT / page_dir / "index.html", f"GALLERY:{build}",
+        splice(SITE / page_dir / "index.html", f"GALLERY:{build}",
                render_html(build, shots, title, num))
         md = ROOT / "builds" / build / "screens" / "README.md"
         md.write_text(render_md(build, shots), encoding="utf-8")

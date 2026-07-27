@@ -32,8 +32,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILDS = {
     "operator": ("Operator", "«Оператор»"),
 }
+SITE = ROOT / "site"                            # папка публикации сайта
 SRC = ROOT / "builds" / "operator" / "wiki"     # переопределяется в main()
-OUT = ROOT / "Operator" / "wiki"                # на каждую сборку
+OUT = SITE / "Operator" / "wiki"                # на каждую сборку
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # порядок категорий в навигации
@@ -319,7 +320,7 @@ def page(title: str, desc: str, body: str, arts: dict, current: str | None) -> s
 def build_wiki(build_id: str, page_dir: str, name: str) -> int:
     global SRC, OUT
     SRC = ROOT / "builds" / build_id / "wiki"
-    OUT = ROOT / page_dir / "wiki"
+    OUT = SITE / page_dir / "wiki"
     arts = load_articles()
     if not arts:
         print(f"× нет статей в builds/{build_id}/wiki/*.md")

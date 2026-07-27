@@ -4,7 +4,7 @@
 Examples:
   python3 tools/audit_ru_coverage.py "/path/to/Kerbal Space Program"
   python3 tools/audit_ru_coverage.py --json
-  python3 tools/audit_ru_coverage.py --write-project-data data/project.json
+  python3 tools/audit_ru_coverage.py --write-project-data site/data/project.json
 
 The last form updates the authoritative verified counters, per-mod counters and
 audit date, then switches the website from a projection to live-cache data.
@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PROJECT_DATA = ROOT / "data/project.json"
+DEFAULT_PROJECT_DATA = ROOT / "site/data/project.json"
 _CANDIDATES = [
     os.path.expanduser("~/.local/share/Steam/steamapps/common/Kerbal Space Program"),
     os.path.expanduser("~/.steam/steam/steamapps/common/Kerbal Space Program"),
