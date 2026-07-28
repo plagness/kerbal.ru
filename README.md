@@ -10,7 +10,7 @@ Kerbal Space Program 1.12.5.
 [![звёзды](https://img.shields.io/github/stars/plagness/kerbal.ru?style=flat-square&label=%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%D1%8B&color=f0c067)](https://github.com/plagness/kerbal.ru/stargazers)
 [![скачивания](https://img.shields.io/github/downloads/plagness/kerbal.ru/total?style=flat-square&label=%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D0%BD%D0%BE&color=ff9d48)](https://github.com/plagness/kerbal.ru/releases)
 [![переводы](https://img.shields.io/badge/переводов-111%20модов-a6e86e?style=flat-square)](docs/COVERAGE.md)
-[![вики](https://img.shields.io/badge/вики-50%20статей-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
+[![вики](https://img.shields.io/badge/вики-51%20статья-a6e86e?style=flat-square)](https://kerbal.ru/Operator/wiki/)
 
 [Сборки](#каталог-сборок) · [Установка](#быстрый-старт) · [Переводы](#библиотека-переводов) ·
 [kOS](#скрипты-полёта) · [Вики](https://kerbal.ru/Operator/wiki/) · [Участие](.github/CONTRIBUTING.md)
@@ -80,7 +80,7 @@ curl -fsSL https://kerbal.ru/install.sh | bash -s -- --list        # катал�
 | **[«Оператор»](builds/operator/)** — курируемая | Спутники → сеть покрытия → орбитальные станции → автоматика на kOS. «Ванила+» для долгой игры | сток | 60 | 2/5 |
 | **[RO / RSS / RP-1](https://kerbal.ru/KSP-RO)** — зеркало | Реальная Солнечная система, реальная физика, историческая карьера с 1951 года | RSS | — | 5/5 |
 
-У «Оператора» есть собственная [вики](https://kerbal.ru/Operator/wiki/) — 50 статей: связь и CommNet,
+У «Оператора» есть собственная [вики](https://kerbal.ru/Operator/wiki/) — 51 статья: связь и CommNet,
 частоты наземных станций, диагностика, наука, kOS, подключение ИИ-агентов, разбор реальных инцидентов в игре.
 
 ### Как это выглядит
@@ -204,22 +204,22 @@ dist/                  сборочные артефакты: .ckan-метапа
 <!-- STATS:START -->
 ## Проект в цифрах
 
-Живой срез на 2026-07-27. Считается по истории репозитория и GitHub API генератором `tools/gen_stats.py` — руками этот блок не правится.
+Живой срез на 2026-07-28. Считается по истории репозитория и GitHub API генератором `tools/gen_stats.py` — руками этот блок не правится.
 
 | | Сейчас | Рост по дням |
 |---|---:|---|
-| Переводов модов | **111** | `▁▁████` |
-| Статей вики | **50** | `▁▁▁▁██` |
-| Коммитов | **138** | `▁▄▆▆▇█` |
-| Звёзд на GitHub | **2** | релизов: 17 |
-| Скачиваний релизов | **9** | operator: 6 · rp1: 0 |
+| Переводов модов | **111** | `▁▁█████` |
+| Статей вики | **51** | `▁▁▁▁███` |
+| Коммитов | **144** | `▁▄▅▆▇██` |
+| Звёзд на GitHub | **2** | релизов: 18 |
+| Скачиваний релизов | **11** | operator: 8 · rp1: 0 |
 
-Первый коммит — 2026-07-22, дней работы — 6.
+Первый коммит — 2026-07-22, дней работы — 7.
 
 ### Кто это делает
 
-- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 138 коммитов, с 2026-07-22
-- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 66 коммитов, с 2026-07-22
+- **[Valery Tenevoy](https://github.com/plagness)** — Куратор проекта, Локализация, Разработка сайта · 144 коммитов, с 2026-07-22
+- **[Claude](https://github.com/claude)** — Переводы модов, Вики и документация, kOS-библиотека, Инструменты сборки · 72 коммитов, с 2026-07-22
 
 Список собирается из git и включает соавторов из трейлера `Co-Authored-By` — их GitHub в списке контрибьюторов API не показывает.
 <!-- STATS:END -->

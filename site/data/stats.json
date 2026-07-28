@@ -1,6 +1,6 @@
 {
   "_comment": "Генерируется tools/gen_stats.py. Руками не править.",
-  "generatedAt": "2026-07-27T11:35:21Z",
+  "generatedAt": "2026-07-28T21:02:40Z",
   "repo": {
     "stars": 2,
     "forks": 0,
@@ -26,22 +26,45 @@
       "threejs",
       "translation"
     ],
-    "releases": 17,
-    "downloads": 9,
+    "releases": 18,
+    "downloads": 11,
     "downloadsByKind": {
       "translations": 3,
-      "build": 6,
+      "build": 8,
       "ckan": 0
     },
     "downloadsByBuild": {
-      "operator": 6,
+      "operator": 8,
       "rp1": 0
     },
     "byRelease": [
       {
+        "version": "v26.18",
+        "date": "2026-07-27",
+        "downloads": 1,
+        "assets": [
+          {
+            "name": "kerbalru-translations-26.18.zip",
+            "downloads": 0
+          },
+          {
+            "name": "kerbalru-translations-operator-26.18.zip",
+            "downloads": 1
+          },
+          {
+            "name": "operator.ckan",
+            "downloads": 0
+          },
+          {
+            "name": "rp1.ckan",
+            "downloads": 0
+          }
+        ]
+      },
+      {
         "version": "v26.17",
         "date": "2026-07-26",
-        "downloads": 5,
+        "downloads": 6,
         "assets": [
           {
             "name": "kerbalru-translations-26.17.zip",
@@ -49,7 +72,7 @@
           },
           {
             "name": "kerbalru-translations-operator-26.17.zip",
-            "downloads": 3
+            "downloads": 4
           },
           {
             "name": "operator.ckan",
@@ -213,9 +236,9 @@
       "github": "plagness",
       "avatar": "https://avatars.githubusercontent.com/u/35403646?v=4",
       "url": "https://github.com/plagness",
-      "commits": 138,
+      "commits": 144,
       "firstCommit": "2026-07-22",
-      "lastCommit": "2026-07-27",
+      "lastCommit": "2026-07-28",
       "roles": [
         "Куратор проекта",
         "Локализация",
@@ -229,9 +252,9 @@
       "github": "claude",
       "avatar": "https://avatars.githubusercontent.com/u/81847?v=4",
       "url": "https://github.com/claude",
-      "commits": 66,
+      "commits": 72,
       "firstCommit": "2026-07-22",
-      "lastCommit": "2026-07-27",
+      "lastCommit": "2026-07-28",
       "roles": [
         "Переводы модов",
         "Вики и документация",
@@ -242,12 +265,12 @@
     }
   ],
   "totals": {
-    "commits": 138,
+    "commits": 144,
     "contributors": 2,
     "translations": 111,
-    "wiki": 50,
+    "wiki": 51,
     "kosScripts": 14,
-    "days": 6
+    "days": 7
   },
   "growth": [
     {
@@ -292,9 +315,17 @@
     },
     {
       "date": "2026-07-27",
-      "commits": 138,
+      "commits": 140,
       "translations": 111,
       "wiki": 50,
+      "builds": 2,
+      "kos": 14
+    },
+    {
+      "date": "2026-07-28",
+      "commits": 144,
+      "translations": 111,
+      "wiki": 51,
       "builds": 2,
       "kos": 14
     }
