@@ -381,8 +381,10 @@ def build_wiki(build_id: str, page_dir: str, name: str) -> int:
            f'станции, техника и контракты. {len(arts)} статей, всё связано перекрёстными ссылками.</p>'
            f'<div class="hub-cats">{"".join(cats_html)}</div>{todo}')
     (OUT / "index.html").write_text(
-        page(f"Вики сборки {name} — kerbal.ru",
-             "Документация по сборке: kOS, связь, наука, станции, техника.", hub, arts, None), encoding="utf-8")
+        page(f"Вики сборки {name} — гайды по модам KSP на русском",
+             f"Вики русской сборки модов Kerbal Space Program {name}: {len(arts)} статей на русском — "
+             "связь и сеть спутников, наука, автоматика на kOS, станции, техника, контракты. "
+             "Разборы реальных проблем в игре с логами и цифрами.", hub, arts, None), encoding="utf-8")
 
     print(f"✓ {page_dir}/wiki/: {len(arts)} статей + хаб")
     by_cat = {}

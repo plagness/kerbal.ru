@@ -53,13 +53,17 @@ jobs:
           for f in _site/index.html _site/CNAME _site/install.sh \
                    _site/Operator/index.html _site/Operator/wiki/index.html \
                    _site/KSP-RO.html _site/data/project.json _site/data/stats.json \
-                   _site/assets/js/stats.js _site/dist/operator.ckan; do
+                   _site/assets/js/stats.js _site/dist/operator.ckan \
+                   _site/sitemap.xml _site/robots.txt _site/assets/og.jpg; do
             [ -f "$f" ] || { echo "нет обязательного файла: $f"; fail=1; }
           done
           shots=$(find _site/builds -name '*.jpg' 2>/dev/null | wc -l)
           [ "$shots" -gt 0 ] || { echo "не попали скриншоты сборок"; fail=1; }
           wiki=$(find _site -path '*/wiki/*.html' | wc -l)
           [ "$wiki" -gt 1 ] || { echo "не попала вики"; fail=1; }
+          # SEO-разметка ставится генератором поверх готового HTML — легко забыть прогнать
+          nocanon=$(grep -rL 'rel="canonical"' _site --include='*.html' | wc -l)
+          [ "$nocanon" -eq 0 ] || { echo "страниц без canonical: $nocanon (прогони tools/gen_seo.py)"; fail=1; }
           exit $fail
 
       - uses: actions/configure-pages@v5

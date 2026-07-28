@@ -1,0 +1,9 @@
+# kerbal.ru — русский хаб KSP-моддинга
+User-agent: *
+Allow: /
+
+# Служебное: скачивать можно, индексировать как страницы незачем.
+Disallow: /dist/
+Disallow: /data/
+
+Sitemap: https://kerbal.ru/sitemap.xml
