@@ -80,3 +80,20 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # IndexNow: сообщаем Яндексу и Bing, что страницы обновились, вместо того
+      # чтобы ждать обхода. Google протокол не поддерживает — ему только sitemap.
+      # Ключ лежит на сайте файлом <key>.txt: так поисковик проверяет, что мы
+      # действительно владеем доменом. Ошибка отправки деплой не роняет.
+      - name: Сообщить поисковикам об обновлении
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          key=23ce6d9fc03e4e0984a0256b69833c31
+          urls=$(curl -fsSL https://kerbal.ru/sitemap.xml \
+                 | sed -n 's:.*<loc>\(.*\)</loc>.*:"\1":p' | paste -sd, -)
+          [ -n "$urls" ] || { echo "карта сайта пуста — пропуск"; exit 0; }
+          body="{\"host\":\"kerbal.ru\",\"key\":\"$key\",\"keyLocation\":\"https://kerbal.ru/$key.txt\",\"urlList\":[$urls]}"
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+                 -H 'Content-Type: application/json' -d "$body")
+          echo "IndexNow ответил: $code (200/202 — принято)"
