@@ -14,6 +14,7 @@ RUNONCEPATH("0:/lib/deploy.ks").
 RUNONCEPATH("0:/lib/sci.ks").
 RUNONCEPATH("0:/lib/telem.ks").
 RUNONCEPATH("0:/lib/hud.ks").
+RUNONCEPATH("0:/lib/rendezvous.ks").
 PRINT "== модули загружены ==".
 
 PRINT "util:   азимут под 8.5° = " + ROUND(u_launchAzimuth(8.5),2)
@@ -50,4 +51,17 @@ h_tick(SHIP:FACING:VECTOR).
 WAIT 2.
 h_off().
 PRINT "hud:    стрелки рисуются".
+
+// Рандеву проверяем только в чистой арифметике: цель не нужна, орбита своя.
+PRINT "rendez: угол своей плоскости с собой = " + ROUND(r_planeAngle(SHIP:ORBIT, SHIP:ORBIT),3) + "°".
+PRINT "rendez: угол по ходу 90° = "
+      + ROUND(r_angleAlong(SHIP:UP:VECTOR, SHIP:NORTH:VECTOR,
+                           VCRS(SHIP:UP:VECTOR, SHIP:NORTH:VECTOR)),1) + "°".
+IF HASTARGET {
+  PRINT "rendez: до цели " + ROUND(TARGET:POSITION:MAG/1000,1) + " км, плоскость "
+        + ROUND(r_relInc(TARGET),2) + "°, фаза " + ROUND(r_phase(TARGET),1)
+        + "°, нужная фаза " + ROUND(r_phaseNeeded(TARGET),1) + "°".
+} ELSE {
+  PRINT "rendez: цель не выбрана — проверены только формулы".
+}
 PRINT "== проверка пройдена ==".

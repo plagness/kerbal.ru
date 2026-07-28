@@ -3,7 +3,7 @@ title: "kOS: справочник библиотеки kerbal.ru"
 category: Автоматика
 summary: Каждая функция из lib/*.ks — что принимает, что возвращает, что делает с кораблём. Плюс порядок загрузки, соглашения об именах и настройки, которые задаются перед вызовом.
 order: 36
-related: [kos-biblioteka, kos-avtomatizaciya, kos-spravochnik, kos-otladka]
+related: [kos-biblioteka, kos-avtomatizaciya, kos-spravochnik, kos-otladka, rendezvous]
 ---
 
 Точный справочник по [библиотеке](https://github.com/plagness/kerbal.ru/tree/main/kos), которую установщик кладёт в `Ships/Script/`. Если [[kos-biblioteka]] объясняет **почему** модули устроены так, то здесь — **что именно** вызывать: сигнатуры, возвращаемые значения и побочные эффекты.

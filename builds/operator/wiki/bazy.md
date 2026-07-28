@@ -3,7 +3,7 @@ title: Наземные базы и снабжение
 category: Станции и базы
 summary: KPBS, добыча и переработка руды, внепланетные верфи Extraplanetary Launchpads — как база начинает кормить программу.
 order: 20
-related: [stancii, energetika, dvigateli]
+related: [stancii, energetika, dvigateli, rendezvous]
 ---
 
 База отличается от [[stancii|станции]] одним: она стоит на грунте, а значит имеет доступ к ресурсам. Смысл базы — перестать возить топливо с Кербина.
