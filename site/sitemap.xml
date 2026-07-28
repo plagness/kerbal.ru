@@ -91,6 +91,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://kerbal.ru/Operator/wiki/eva.html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kerbal.ru/Operator/wiki/flot.html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://kerbal.ru/Operator/wiki/geologiya.html</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
@@ -338,6 +350,12 @@
   </url>
   <url>
     <loc>https://kerbal.ru/Operator/wiki/ustanovka.html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kerbal.ru/Operator/wiki/vozvrat.html</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

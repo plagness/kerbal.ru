@@ -3,7 +3,7 @@ title: Подключаем ИИ-агентов
 category: Автоматика
 summary: Как дать Claude Code, Codex, OpenCode или Grok доступ к папке игры: что они видят, готовый файл контекста, настройка по инструментам, правила безопасности и рабочие запросы.
 order: 55
-related: [neyronka, kos-telnet, kos-otladka, telemetriya, kos-api, kos-avtomatizaciya]
+related: [neyronka, kos-telnet, kos-otladka, telemetriya, kos-api, kos-avtomatizaciya, flot]
 ---
 
 Речь про **агента с доступом к файловой системе** — он читает твой сейв и логи, пишет `.ks` прямо в папку игры и разбирает результат полёта. Это не «ИИ играет за тебя»: кнопки жмёшь ты, агент работает с текстом вокруг игры.

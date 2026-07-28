@@ -3,7 +3,7 @@ title: Орбитальные станции
 category: Станции и базы
 summary: Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.
 order: 10
-related: [bazy, pribory, avtomatika, rendezvous]
+related: [bazy, pribory, avtomatika, rendezvous, eva]
 ---
 
 ## Зачем она
