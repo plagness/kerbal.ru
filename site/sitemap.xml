@@ -157,6 +157,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://kerbal.ru/Operator/wiki/kos-spravochnik.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://kerbal.ru/Operator/wiki/kos-telnet.html</loc>
     <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
