@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 from datetime import date
 from pathlib import Path
@@ -180,14 +181,40 @@ Sitemap: {BASE}/sitemap.xml
 """
 
 
+def refresh_fallbacks(pages: list[Path]) -> int:
+    """Статические значения версии и даты в HTML — то, что видят без JS.
+
+    Их перезаписывает скрипт из data/project.json, но поисковые роботы
+    исполняют JS выборочно, и в выдаче оказывается версия годичной давности.
+    Держим разметку в согласии с данными.
+    """
+    data = json.loads((SITE / "data" / "project.json").read_text(encoding="utf-8"))
+    rel, updated = data["release"], data["updatedAt"][:10]
+    d, m, y = updated[8:10], updated[5:7], updated[:4]
+    n = 0
+    for path in pages:
+        text = path.read_text(encoding="utf-8")
+        new = re.sub(r'(data-project-version[^>]*>)v[\d.]+', rf'\g<1>{rel["version"]}', text)
+        new = re.sub(r'(data-project-updated datetime=")[\d-]+(">)[\d.]+',
+                     rf'\g<1>{updated}\g<2>{d}.{m}.{y}', new)
+        new = new.replace("releases/tag/v26.1\"", f'releases/tag/{rel["version"]}"')
+        new = re.sub(r'(archive/refs/tags/)v[\d.]+(\.zip)', rf'\g<1>{rel["version"]}\g<2>', new)
+        if new != text:
+            path.write_text(new, encoding="utf-8")
+            n += 1
+    return n
+
+
 def main() -> None:
     pages = [p for p in sorted(SITE.rglob("*.html"))]
+    stale = refresh_fallbacks(pages)
     changed = sum(patch(p) for p in pages)
 
     (SITE / "sitemap.xml").write_text(sitemap(pages), encoding="utf-8")
     (SITE / "robots.txt").write_text(ROBOTS, encoding="utf-8")
 
-    print(f"✓ SEO: {len(pages)} страниц, мета обновлена у {changed}")
+    print(f"✓ SEO: {len(pages)} страниц, мета обновлена у {changed}, "
+          f"версия в разметке подтянута у {stale}")
     print(f"  → site/sitemap.xml ({len(pages)} адресов)")
     print(f"  → site/robots.txt")
 
