@@ -83,7 +83,16 @@ GLOBAL FUNCTION x_nodeAimPeri {
 // больше попыток, зато без риска улететь незнамо куда. Отдельно, за
 // пределами этой функции, x_go всё равно проверяет итоговый перицентр перед
 // WARPTO — эта защита не убрана и остаётся последним рубежом.
+// dest ОБЯЗАТЕЛЕН — не для расчёта, а для единственной проверки, которая
+// стоила аварии: «мы уже физически ВНУТРИ dest». x_hasEncounter()/
+// x_encounterPeri() читают NEXTPATCH — а если SHIP:BODY уже стал dest,
+// NEXTPATCH означает «когда покинем dest», не «когда войдём», и его
+// PERIAPSIS — уже не про то, что мы прицеливаем. o_burn внутри может
+// WARPTO нас прямо в СВП тела, если узел стоит близко к границе, — и без
+// этой проверки следующая проба вычисляла поправку по ложным числам,
+// потребовала 17892,9 м/с и сожгла топливо вхолостую.
 GLOBAL FUNCTION x_aimPeri {
+  PARAMETER dest.
   PARAMETER wantAlt.
   PARAMETER tol IS 15000.
   PARAMETER tries IS 15.
@@ -109,11 +118,17 @@ GLOBAL FUNCTION x_aimPeri {
     // нелинейная на всём перелёте разом. Правит по совету из живого полёта
     // (2026-07-31): подгонку делают БЛИЖЕ К ЦЕЛИ, у самого подхода к Муну —
     // там чувствительность прямая и локальная, не растянутая на весь путь.
-    LOCAL ut IS TIME:SECONDS + ETA:APOAPSIS * 0.85.
+    // 0.6, не 0.85 — на 85% реальный вход в СВП уже случился раньше
+    // расчётной точки, отсюда и авария; берём с запасом до границы.
+    LOCAL ut IS TIME:SECONDS + ETA:APOAPSIS * 0.6.
     LOCAL nd IS x_nodeAimPeri(wantAlt, ut, step).
     o_burn(nd).
     SET spent TO spent + ABS(step).
     SET n TO n + 1.
+    IF SHIP:BODY = dest {
+      PRINT "  уже внутри СВП " + dest:NAME + " — подгонка прицела больше не имеет смысла, стоп.".
+      RETURN TRUE.
+    }
     IF NOT x_hasEncounter() { BREAK. }   // прожиг мог сорвать энкаунтер вовсе
     LOCAL after IS x_encounterPeri().
     PRINT "  прицел: перицентр " + ROUND(after/1000,1)
@@ -194,7 +209,23 @@ GLOBAL FUNCTION x_go {
   o_burn(nd).
   PRINT "  переходная: апоцентр " + ROUND(SHIP:APOAPSIS/1000,0) + " км".
 
-  x_aimPeri(wantAlt).
+  x_aimPeri(dest, wantAlt).
+
+  // x_aimPeri могла уже довезти нас ВНУТРЬ dest (её собственный o_burn
+  // не останавливается на границе СВП). Тогда ждать WARPTO некуда — мы
+  // уже там, а WAIT UNTIL SHIP:BODY = dest ниже никогда не поймает смену,
+  // потому что смена уже случилась.
+  IF SHIP:BODY = dest {
+    PRINT "  уже внутри СВП " + dest:NAME + ": пери " + ROUND(SHIP:PERIAPSIS/1000,1) + " км".
+    IF SHIP:PERIAPSIS < 0 {
+      PRINT "  ! перицентр под поверхностью — захват может не успеть, времени на манёвр может не быть.".
+    }
+    o_burn(o_nodeCircularizeAtPeri()).
+    PRINT "=== на орбите " + dest:NAME + ": " + ROUND(SHIP:APOAPSIS/1000,1)
+          + " / " + ROUND(SHIP:PERIAPSIS/1000,1) + " км, накл "
+          + ROUND(SHIP:ORBIT:INCLINATION,1) + "°".
+    RETURN TRUE.
+  }
 
   // ЖЁСТКАЯ ГРАНИЦА БЕЗОПАСНОСТИ (2026-07-31, после столкновения с Муной).
   // x_aimPeri раньше не проверялся вообще — WARPTO домотал прямо до
