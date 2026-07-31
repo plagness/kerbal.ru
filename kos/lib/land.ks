@@ -101,12 +101,20 @@ GLOBAL FUNCTION l_go {
 // гарантирует полушарие: деорбит стартует, пока корабль над нужной
 // стороной, а спуск сносит недалеко относительно размера тела.
 
-// TRUE, если корабль сейчас над полушарием, обращённым к refBody.
-GLOBAL FUNCTION l_facingBody {
+// Косинус угла между «вверх с корабля» и направлением на refBody —
+// >0 значит над ближней стороной. Вынесено отдельно от l_facingBody,
+// чтобы поиск мог печатать тренд и не гадать вслепую, сколько ещё ждать.
+GLOBAL FUNCTION l_facingCos {
   PARAMETER refBody.
   LOCAL zenith IS -SHIP:BODY:POSITION.                     // центр тела → корабль
   LOCAL toRef IS refBody:POSITION - SHIP:BODY:POSITION.     // центр тела → refBody
-  RETURN VDOT(zenith:NORMALIZED, toRef:NORMALIZED) > 0.
+  RETURN VDOT(zenith:NORMALIZED, toRef:NORMALIZED).
+}
+
+// TRUE, если корабль сейчас над полушарием, обращённым к refBody.
+GLOBAL FUNCTION l_facingBody {
+  PARAMETER refBody.
+  RETURN l_facingCos(refBody) > 0.
 }
 
 // СТАРАЯ ВЕРСИЯ (для памяти, не звать напрямую в l_go): проверяла «смотрим
@@ -139,17 +147,23 @@ GLOBAL FUNCTION l_waitFacing {
 // сторону хотя бы раз, если орбита вообще её пересекает).
 GLOBAL FUNCTION l_waitFacingAtPeri {
   PARAMETER refBody.
-  PARAMETER maxTries IS 30.
+  // Дрейф прилегания к стороне идёт с периодом порядка периода вращения
+  // тела / периода нашей орбиты (для Муны ~43 витка на полный цикл) —
+  // 30 витков одно время казалось «с запасом», но старт вблизи начала
+  // «дальней» половины цикла исчерпал лимит вхолостую. 50 витков —
+  // с запасом покрывает полный цикл при любой стартовой фазе.
+  PARAMETER maxTries IS 50.
   LOCAL n IS 0.
   UNTIL n >= maxTries {
     IF ETA:PERIAPSIS > 60 { WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 60). }
     WAIT UNTIL ETA:PERIAPSIS <= 60.
-    IF l_facingBody(refBody) {
-      PRINT "  перицентр витка " + (n+1) + " — над нужной стороной, сажусь на этом заходе.".
+    LOCAL c IS l_facingCos(refBody).
+    IF c > 0 {
+      PRINT "  перицентр витка " + (n+1) + " — над нужной стороной (cos=" + ROUND(c,2) + "), сажусь на этом заходе.".
       RETURN TRUE.
     }
     SET n TO n + 1.
-    PRINT "  перицентр витка " + n + " — не над " + refBody:NAME + ", жду следующий (" + n + "/" + maxTries + ")…".
+    PRINT "  перицентр витка " + n + " — не над " + refBody:NAME + " (cos=" + ROUND(c,2) + "), жду следующий (" + n + "/" + maxTries + ")…".
     WARPTO(TIME:SECONDS + SHIP:ORBIT:PERIOD * 0.5).   // уйти от этого перицентра, не застрять на нём же
   }
   PRINT "  ! не нашли подходящий перицентр за " + maxTries + " витков.".
