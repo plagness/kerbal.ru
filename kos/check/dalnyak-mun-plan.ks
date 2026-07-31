@@ -9,12 +9,13 @@ SET spec TO LEXICON(
   "tasks", LIST(
     LEXICON("title", "SCANsat: высотометрия низкого разрешения", "items", q_taskScanAltimetry()),
     LEXICON("title", "SCANsat: мультиспектральный (биомы)", "items", q_taskScanBiome()),
-    LEXICON("title", "Созвездие: 4 спутника", "items", q_taskConstellation(4, "sat-"))
+    LEXICON("title", "Созвездие: 5 спутников (без тегов, по названию)",
+            "items", q_taskConstellationByTitle(5, "субспутник"))
   ),
   "budget", LIST(
     LEXICON("label", "перелёт Кербин → Мун", "dv", 856, "optional", FALSE),
     LEXICON("label", "захват на рабочую орбиту", "dv", 320, "optional", FALSE),
-    LEXICON("label", "развод 4 спутников (фаза)", "dv", 100, "optional", FALSE),
+    LEXICON("label", "развод 5 спутников (фаза)", "dv", 120, "optional", FALSE),
     LEXICON("label", "смена плоскости 90° под полюса", "dv", 770, "optional", TRUE),
     LEXICON("label", "посадка без обратного взлёта", "dv", 650, "optional", FALSE)
   )

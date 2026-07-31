@@ -8,7 +8,7 @@
 //   SET s["body"]    TO MUN.
 //   SET s["parkAlt"] TO 18000.     // низкая орбита — отсюда выпускаем спутники
 //   SET s["mapAlt"]  TO 250000.    // картографическая полярная (0 = не подниматься)
-//   SET s["landers"] TO LIST("sat-1", "sat-2", "sat-3", "sat-4").  // метки декаплеров
+//   SET s["landers"] TO LIST("sat-1", "sat-2", "sat-3", "sat-4").  // метки ИЛИ названия деталей
 //   SET s["selfLand"] TO TRUE.     // сама шина садится ПОСЛЕ развода спутников
 //   SET s["faceBody"] TO KERBIN.   // сесть на сторону, обращённую к Кербину
 //   SET s["sci"]     TO TRUE.      // снимать/передавать науку на каждом рубеже
@@ -17,10 +17,13 @@
 // Тот же принцип, что у m_orbit() в lib/mission.ks: файл миссии содержит
 // только параметры цели, порядок шагов и решения по ходу («сколько отделяемых
 // нагрузок», «нужна ли подгонка плоскости», «садится ли шина сама в конце») —
-// здесь, одним местом. «landers» — общее имя для всего, что отделяется по
-// метке декаплера: это могут быть посадочные зонды, а могут быть спутники
-// созвездия, которые остаются на орбите. Наклонение к телу этим модулем
-// НЕ задаётся — закладывай его на пуске у родителя, см. [[rendezvous]].
+// здесь, одним местом. «landers» — общее имя для всего, что отделяется:
+// это могут быть посадочные зонды, а могут быть спутники созвездия,
+// которые остаются на орбите. Каждый элемент — МЕТКА (TAG) декаплера,
+// а если тег не найден (например, VAB не прокачан до переименования
+// деталей) — ПОДСТРОКА НАЗВАНИЯ, тогда отделяется первая ещё прикреплённая
+// деталь с таким названием (см. ds_release). Наклонение к телу этим
+// модулем НЕ задаётся — закладывай его на пуске у родителя, см. [[rendezvous]].
 
 RUNONCEPATH("0:/lib/rendezvous.ks").
 RUNONCEPATH("0:/lib/transfer.ks").
@@ -42,27 +45,44 @@ GLOBAL FUNCTION ds_defaults {
   ).
 }
 
-// Выпустить лендер по метке декаплера. Ищет ЛЮБОЙ модуль с событием
-// «decouple»/«расстыковать» на детали с этой меткой — не завязываемся
-// на конкретный тип декаплера.
+// Отделить деталь по метке декаплера. Ищет ЛЮБОЙ модуль с событием
+// «decouple»/«расстыковать»/«отделить» на детали с этой меткой — не
+// завязываемся на конкретный тип декаплера (стоковый или US: Стабилизирующий
+// отделитель дают разные события, US-субспутники — свой USDecouple).
+GLOBAL FUNCTION ds_fireDecouple {
+  PARAMETER p.
+  LOCAL fired IS FALSE.
+  LOCAL i IS 0.
+  UNTIL i >= p:MODULES:LENGTH {
+    LOCAL m IS p:GETMODULEBYINDEX(i).
+    FOR ev IN LIST("decouple", "расстыковать", "отделить") {
+      IF m:HASEVENT(ev) { m:DOEVENT(ev). SET fired TO TRUE. }
+    }
+    SET i TO i + 1.
+  }
+  RETURN fired.
+}
+
+// selector — метка (TAG) ИЛИ, если тег не найден (например, VAB не
+// прокачан до переименования деталей), подстрока НАЗВАНИЯ. По названию
+// снимает ПЕРВУЮ ещё прикреплённую деталь, которая подходит — так пять
+// одинаковых «US: Базовый субспутник» без тегов отделяются по одному:
+// после каждого отделения в LIST PARTS остаются только уцелевшие.
 GLOBAL FUNCTION ds_release {
-  PARAMETER tag.
-  LOCAL found IS FALSE.
+  PARAMETER selector.
   LIST PARTS IN pl.
   FOR p IN pl {
-    IF p:TAG = tag {
-      SET found TO TRUE.
-      LOCAL i IS 0.
-      UNTIL i >= p:MODULES:LENGTH {
-        LOCAL m IS p:GETMODULEBYINDEX(i).
-        IF m:HASEVENT("decouple") { m:DOEVENT("decouple"). }
-        IF m:HASEVENT("расстыковать") { m:DOEVENT("расстыковать"). }
-        SET i TO i + 1.
-      }
+    IF p:TAG = selector {
+      IF ds_fireDecouple(p) { PRINT "  выпущен по метке: " + selector. RETURN TRUE. }
     }
   }
-  IF found { PRINT "  выпущен: " + tag. } ELSE { PRINT "  ! метка не найдена: " + tag. }
-  RETURN found.
+  FOR p IN pl {
+    IF p:TITLE:CONTAINS(selector) {
+      IF ds_fireDecouple(p) { PRINT "  выпущен по названию: " + p:TITLE. RETURN TRUE. }
+    }
+  }
+  PRINT "  ! ни метка, ни название не найдены: " + selector.
+  RETURN FALSE.
 }
 
 GLOBAL FUNCTION ds_run {

@@ -93,11 +93,20 @@ GLOBAL FUNCTION q_report {
 // паков контрактов десятки. Добавляй свои по этому же шаблону: список
 // LEXICON("label", "ok") — дальше в q_report().
 
+// Список названий проверен не полностью по каталогу мода — конкретные
+// детали отличаются по паку (например, «Радарная антенна R-EO-1» не
+// угадывалась по имени, добавлена только после проверки её модулей
+// SCANsat/SCANexperiment через telnet). Названия SCANsat- и
+// мультиспектральных сканеров ниже расширяй по факту, а не по каталогу
+// заранее — то же самое MODULE-класс "SCANsat" носят и другие типы
+// сканеров мода (в т.ч. ресурсные), поэтому по одному классу модуля
+// высотометрию от мультиспектрального не отличить — только по названию.
 GLOBAL FUNCTION q_taskScanAltimetry {
   RETURN LIST(
-    LEXICON("label", "высотомер SCAN или R-3B на борту", "ok",
+    LEXICON("label", "высотомер SCAN, R-3B, R-EO-1 или SAR-*", "ok",
       q_hasPart("высотомер SCAN") OR q_hasPart("R-3B") OR q_hasPart("SCAN SAR")
-      OR q_hasPart("SAR-X") OR q_hasPart("SAR-C") OR q_hasPart("SAR-L")),
+      OR q_hasPart("SAR-X") OR q_hasPart("SAR-C") OR q_hasPart("SAR-L")
+      OR q_hasPart("R-EO-1")),
     LEXICON("label", "есть ёмкость под заряд (ЭЧ > 0)", "ok", q_ecCapacity() > 0)
   ).
 }
@@ -120,13 +129,29 @@ GLOBAL FUNCTION q_taskLandBiomes {
   ).
 }
 
-// n — сколько спутников созвездия отделяется, prefix — метка декаплеров
-// (по умолчанию "sat-", у Дальняк-Мун — sat-1…sat-4).
+// n — сколько спутников созвездия отделяется, prefix — метка декаплеров.
+// Требует прокачанного VAB (переименование деталей) — если тегов нет,
+// используй q_taskConstellationByTitle.
 GLOBAL FUNCTION q_taskConstellation {
   PARAMETER n IS 4.
   PARAMETER prefix IS "sat-".
   RETURN LIST(
     LEXICON("label", "декаплеров с меткой " + prefix + "N: нужно " + n, "ok", q_countTag(prefix) >= n),
+    LEXICON("label", "антенна на борту (для связи спутников после отделения)", "ok", q_hasModule("DeployableAntenna"))
+  ).
+}
+
+// То же самое, но без тегов — считает по названию детали. Годится, когда
+// VAB не прокачан до переименования: n одинаковых деталей неотличимы
+// друг от друга, но их можно просто пересчитать и отделять по одной,
+// см. ds_release в lib/deepspace.ks.
+GLOBAL FUNCTION q_taskConstellationByTitle {
+  PARAMETER n IS 4.
+  PARAMETER titleSubstr IS "субспутник".
+  RETURN LIST(
+    LEXICON("label", "деталей «" + titleSubstr + "»: нужно " + n
+                     + " (сейчас " + q_countPart(titleSubstr) + ")",
+            "ok", q_countPart(titleSubstr) >= n),
     LEXICON("label", "антенна на борту (для связи спутников после отделения)", "ok", q_hasModule("DeployableAntenna"))
   ).
 }
