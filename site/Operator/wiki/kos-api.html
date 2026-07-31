@@ -267,6 +267,10 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#utilks">util.ks — углы, азимут, окно пуска</a></li>
 <li><a href="#orbitks">orbit.ks — узлы манёвра</a></li>
 <li><a href="#ascentks">ascent.ks — подъём</a></li>
+<li><a href="#transferks">transfer.ks — перелёт к другому телу</a></li>
+<li><a href="#landks">land.ks — посадка на тело без атмосферы</a></li>
+<li><a href="#eventsks">events.ks — событийная автоматика</a></li>
+<li><a href="#deepspaceks">deepspace.ks — дальний вылет одной спецификацией</a></li>
 <li><a href="#sciks">sci.ks — наука</a></li>
 <li><a href="#_2">Остальные модули</a></li>
 <li><a href="#_3">Как проверить, не запуская</a></li>
@@ -337,9 +341,34 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <td>все</td>
 <td>миссия целиком</td>
 </tr>
+<tr>
+<td><code>rendezvous.ks</code></td>
+<td><code>ctrl</code>, <code>orbit</code></td>
+<td>догнать аппарат на орбите — <a class="wikilink" href="rendezvous.html" title="Как догнать аппарат на орбите: подгонка плоскости, фазовое окно, переход, гашение относительной скорости. Скриптом и руками, с разбором того, где автоматика заканчивается.">Рандеву и стыковка</a></td>
+</tr>
+<tr>
+<td><code>transfer.ks</code></td>
+<td><code>ctrl</code>, <code>orbit</code>, <code>rendezvous</code></td>
+<td>перелёт к другому телу той же СВП и захват</td>
+</tr>
+<tr>
+<td><code>land.ks</code></td>
+<td><code>util</code>, <code>ctrl</code>, <code>orbit</code></td>
+<td>деорбит и посадка на тело без атмосферы</td>
+</tr>
+<tr>
+<td><code>events.ks</code></td>
+<td>—</td>
+<td>одноразовые и сторожевые триггеры вместо линии <code>WAIT</code></td>
+</tr>
+<tr>
+<td><code>deepspace.ks</code></td>
+<td><code>rendezvous</code>, <code>transfer</code>, <code>deploy</code>, <code>sci</code></td>
+<td>дальний вылет одной спецификацией</td>
+</tr>
 </tbody>
 </table>
-<p><strong>Префикс в имени = модуль.</strong> <code>u_</code> — util, <code>o_</code> — orbit, <code>a_</code> — ascent, <code>s_</code> — stage, <code>c_</code> — ctrl, <code>d_</code> — deploy, <code>t_</code> — telem, <code>h_</code> — hud, <code>m_</code> — mission. У науки исторически <code>sci</code>. Это не украшение: в kOS все имена глобальны, префикс — единственная защита от столкновений.</p>
+<p><strong>Префикс в имени = модуль.</strong> <code>u_</code> — util, <code>o_</code> — orbit, <code>a_</code> — ascent, <code>s_</code> — stage, <code>c_</code> — ctrl, <code>d_</code> — deploy, <code>t_</code> — telem, <code>h_</code> — hud, <code>m_</code> — mission, <code>r_</code> — rendezvous, <code>x_</code> — transfer, <code>l_</code> — land, <code>e_</code> — events, <code>ds_</code> — deepspace. У науки исторически <code>sci</code>. Это не украшение: в kOS все имена глобальны, префикс — единственная защита от столкновений.</p>
 <h2 id="missionks">mission.ks — миссия целиком</h2>
 <table>
 <thead>
@@ -545,6 +574,11 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <td>узел: скруглить в апоцентре</td>
 </tr>
 <tr>
+<td><code>o_nodeCircularizeAtPeri()</code></td>
+<td>—</td>
+<td>узел: скруглить в перицентре — для захвата с гиперболы, где апоцентра нет</td>
+</tr>
+<tr>
 <td><code>o_nodeRaiseOpposite(alt)</code></td>
 <td>высота, м</td>
 <td>узел: поднять противоположную апсиду</td>
@@ -608,6 +642,156 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <p>Настройки <code>cfg</code>: <code>park</code> (апоцентр опорной), <code>az</code> (азимут), <code>vVert</code> (до какой скорости идём строго вверх, 60 м/с), <code>hDense</code> (граница плотного воздуха, 25 км), <code>aoaLo</code>/<code>aoaHi</code> (допуск угла атаки: 5° внизу, 20° выше), <code>hTwr</code>/<code>twrMax</code> (потолок перегрузки 2,3 до 22 км), <code>qMax</code> (потолок напора 0,32 атм), <code>aoaAlarm</code>, <code>onTick</code>.</p>
 <p><code>a_run</code> вешает аварийный триггер: падение со скоростью снижения ниже −10 м/с в диапазоне 3–60 км глушит тягу и возвращает <code>FALSE</code>.</p>
 <p>Расписание тангажа уплощалось по итогам реальных пусков: слишком крутой подъём приводит аппарат к апоцентру почти без горизонтальной скорости, и скругление стоит впятеро дороже. Числа в <code>a_pitchSchedule</code> — результат этих правок, а не теория.</p>
+<h2 id="transferks">transfer.ks — перелёт к другому телу</h2>
+<p>У <code>CelestialBody</code> в kOS те же суффиксы <code>ORBIT</code>/<code>POSITION</code>/<code>VELOCITY</code>, что у <code>Vessel</code> — поэтому геометрия перелёта к Муну использует те же функции <code>r_nodeMatchPlanes</code>/<code>r_nodeTransfer</code> из <code>rendezvous.ks</code>, что и рандеву с аппаратом. Новое здесь — прицельный перицентр у чужой сферы влияния и захват с гиперболы.</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x_hasEncounter()</code></td>
+<td>—</td>
+<td><code>TRUE</code>, если следующий патч орбиты — уже в чужой СВП</td>
+</tr>
+<tr>
+<td><code>x_encounterPeri()</code></td>
+<td>—</td>
+<td>высота перицентра в этой встрече, м; <code>-1</code> без энкаунтера</td>
+</tr>
+<tr>
+<td><code>x_nodeAimPeri(wantAlt, ut)</code></td>
+<td>цель, момент</td>
+<td>узел: боковой прожиг, знак подобран пробой (как в <code>r_nodeMatchPlanes</code>)</td>
+</tr>
+<tr>
+<td><code>x_aimPeri(wantAlt, tol, tries)</code></td>
+<td>цель, допуск (15 км), попыток (6)</td>
+<td>подгоняет перицентр итеративно, возвращает успех</td>
+</tr>
+<tr>
+<td><code>x_go(body, wantAlt)</code></td>
+<td>тело, высота круговой</td>
+<td>весь перелёт: плоскость → переход → прицел → захват</td>
+</tr>
+</tbody>
+</table>
+<p><code>x_go</code> наклонение к телу <strong>не подгоняет</strong> — закладывай его на пуске у родителя, как в <a class="wikilink" href="rendezvous.html" title="Как догнать аппарат на орбите: подгонка плоскости, фазовое окно, переход, гашение относительной скорости. Скриптом и руками, с разбором того, где автоматика заканчивается.">Рандеву и стыковка</a>: смена плоскости уже у цели дорога.</p>
+<h2 id="landks">land.ks — посадка на тело без атмосферы</h2>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l_vsLimit(alt)</code></td>
+<td>радарная высота, м</td>
+<td>предел вертикальной скорости, м/с — интерполяция таблицы из <a class="wikilink" href="vozvrat.html" title="Сход с орбиты, коридор входа, нагрев и теплозащита, парашюты и посадка. С расчётом тормозных импульсов и скоростей входа для низкой орбиты и возврата от Муна.">Возврат на Кербин</a></td>
+</tr>
+<tr>
+<td><code>l_nodeDeorbit(targetAlt)</code></td>
+<td>высота прицела (0)</td>
+<td>узел: опустить перицентр к поверхности</td>
+</tr>
+<tr>
+<td><code>l_descend(onTick, vertAt)</code></td>
+<td>колбэк, высота перехода на вертикаль (150 м)</td>
+<td>садится, держит <code>l_vsLimit</code></td>
+</tr>
+<tr>
+<td><code>l_go(targetAlt, onTick)</code></td>
+<td>высота прицела, колбэк</td>
+<td>деорбит + посадка одной командой</td>
+</tr>
+<tr>
+<td><code>l_defaults()</code> / <code>l_run(spec)</code></td>
+<td>— / лексикон</td>
+<td>посадка одной спецификацией, ключи <code>targetAlt</code>, <code>vertAt</code>, <code>sci</code></td>
+</tr>
+</tbody>
+</table>
+<p>Только для тел без атмосферы: с воздухом сопротивление меняет картину, там нужна связка «парашют → <code>l_descend</code>», а не она одна.</p>
+<h2 id="eventsks">events.ks — событийная автоматика</h2>
+<p>Замена линии <code>WAIT</code>/<code>IF</code> на список «что и когда» — переживает варп и смену фокуса, потому что условия проверяются заново, а не хранятся в счётчиках.</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e_new()</code></td>
+<td>—</td>
+<td>пустой список событий</td>
+</tr>
+<tr>
+<td><code>e_once(events, name, cond, fn)</code></td>
+<td>список, имя, условие, действие</td>
+<td>добавляет одноразовый триггер</td>
+</tr>
+<tr>
+<td><code>e_watch(events, name, cond, fn)</code></td>
+<td>список, имя, условие, действие</td>
+<td>добавляет сторожевой триггер (срабатывает каждый тик, пока условие истинно)</td>
+</tr>
+<tr>
+<td><code>e_tick(events)</code></td>
+<td>список</td>
+<td>один проход, <code>TRUE</code> если что-то сработало</td>
+</tr>
+<tr>
+<td><code>e_run(events, stopCond, onTick)</code></td>
+<td>список, стоп-условие, колбэк</td>
+<td>крутит <code>e_tick</code> до стоп-условия</td>
+</tr>
+<tr>
+<td><code>e_done(events)</code></td>
+<td>список</td>
+<td>все ли одноразовые события уже сработали</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deepspaceks">deepspace.ks — дальний вылет одной спецификацией</h2>
+<p>Та же идея, что у <code>m_orbit(spec)</code>: файл миссии содержит только параметры, решения — здесь.</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ds_defaults()</code></td>
+<td>—</td>
+<td>лексикон настроек дальнего вылета</td>
+</tr>
+<tr>
+<td><code>ds_release(tag)</code></td>
+<td>метка декаплера</td>
+<td>ищет деталь с этой меткой и отделяет; <code>TRUE</code>, если нашла</td>
+</tr>
+<tr>
+<td><code>ds_run(spec)</code></td>
+<td>лексикон</td>
+<td>перелёт → выпуск лендеров → картографическая орбита, весь цикл</td>
+</tr>
+</tbody>
+</table>
+<p>Ключи <code>spec</code>: <code>name</code>, <code>body</code> (тело, по умолчанию <code>MUN</code>), <code>parkAlt</code> (низкая орбита захвата, 18 км — отсюда выпускают лендеров), <code>mapAlt</code> (картографическая полярная, 250 км), <code>landers</code> (список меток декаплеров, пусто = лендеров нет), <code>sci</code> (снимать науку на рубежах), <code>log</code>.</p>
+<p>Лендеров <code>ds_run</code> разносит по равным долям витка, чтобы у них были разные наземные треки — точный выбор биома под каждым остаётся за игроком, автомат этого не гарантирует. Сканеры SCANsat скрипт не включает: их модуль и имена событий в библиотеке не сверены.</p>
 <h2 id="sciks">sci.ks — наука</h2>
 <table>
 <thead>

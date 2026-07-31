@@ -38,6 +38,15 @@ GLOBAL FUNCTION o_nodeRaisePeri {
   RETURN NODE(TIME:SECONDS + ETA:APOAPSIS, 0, 0, dv).
 }
 
+// Узел: скруглить орбиту В ПЕРИЦЕНТРЕ. Для захвата на гиперболическом
+// подлёте (после ETA:APOAPSIS не существует — апоцентра у гиперболы нет),
+// поэтому здесь жжём в ETA:PERIAPSIS, а не в апоцентре, как o_nodeCircularize.
+GLOBAL FUNCTION o_nodeCircularizeAtPeri {
+  LOCAL rad IS SHIP:PERIAPSIS + o_br().
+  LOCAL dv IS o_vCirc(rad) - o_vAt(rad, SHIP:ORBIT:SEMIMAJORAXIS).
+  RETURN NODE(TIME:SECONDS + ETA:PERIAPSIS, 0, 0, dv).
+}
+
 // Исполнить узел: навестись, перемотать, прожечь, снять.
 // onTick — необязательная функция, зовётся в цикле прожига (лог, HUD).
 GLOBAL FUNCTION o_burn {
