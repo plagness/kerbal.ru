@@ -173,6 +173,107 @@ GLOBAL FUNCTION q_bodyChecklist {
   RETURN items.
 }
 
+// ─── план: телеметрия + чекеры + Δv-бюджет одной функцией ─────────────
+//
+//   RUNONCEPATH("0:/lib/audit.ks").
+//   SET spec TO LEXICON(
+//     "tasks", LIST(
+//       LEXICON("title", "SCANsat: высотометрия", "items", q_taskScanAltimetry()),
+//       LEXICON("title", "Созвездие: 4 спутника", "items", q_taskConstellation(4, "sat-"))
+//     ),
+//     "budget", LIST(
+//       LEXICON("label", "перелёт к телу", "dv", 856, "optional", FALSE),
+//       LEXICON("label", "смена плоскости (опция)", "dv", 770, "optional", TRUE)
+//     )
+//   ).
+//   q_plan(spec).
+//
+// Ничего не жжёт и не ставит узлов — только читает SHIP и считает суммы.
+// Один и тот же q_plan обслуживает любой корабль: конкретика (какие
+// чекеры, какие цифры бюджета) приходит СНАРУЖИ, спецификацией, а не
+// прошита внутри функции.
+
+GLOBAL FUNCTION q_shipReport {
+  PRINT "имя:      " + SHIP:NAME.
+  PRINT "тело:     " + SHIP:BODY:NAME.
+  PRINT "статус:   " + SHIP:STATUS.
+  PRINT "высота:   " + ROUND(SHIP:ALTITUDE,0) + " м".
+  PRINT "масса:    " + ROUND(SHIP:MASS,2) + " т".
+  PRINT "Δv (вак): " + ROUND(SHIP:DELTAV:VACUUM,0) + " м/с  [стоковый счётчик; 0 значит,".
+  PRINT "          что в настройках выключен Advanced Tweakables → Delta-V readout]".
+  PRINT "заряд:    " + ROUND(q_ecCapacity(),0) + " ЭЧ ёмкость".
+  PRINT "деталей:  " + SHIP:PARTS:LENGTH.
+}
+
+// budget — список LEXICON("label", "dv", "optional"). Обязательные пункты
+// суммируются в бегущий итог, опциональные печатаются отдельно и в сумму
+// не входят (нужны или нет — решает конкретная миссия, не эта функция).
+// Возвращает сумму обязательных пунктов.
+GLOBAL FUNCTION q_dvBudget {
+  PARAMETER budget.
+  PRINT "=== бюджет Δv по фазам (ориентиры, не физический расчёт) ===".
+  LOCAL running IS 0.
+  FOR b IN budget {
+    IF b["optional"] {
+      PRINT "  [опция] " + b["label"] + ": " + b["dv"] + " м/с".
+    } ELSE {
+      SET running TO running + b["dv"].
+      PRINT "  " + b["label"] + ": " + b["dv"] + " м/с   (итого " + running + ")".
+    }
+  }
+  PRINT "  итого обязательных: " + running + " м/с".
+  LOCAL haveDv IS SHIP:DELTAV:VACUUM.
+  IF haveDv > 0 {
+    PRINT "  запас на борту: " + ROUND(haveDv,0) + " м/с, остаток "
+          + ROUND(haveDv - running,0) + " м/с".
+  } ELSE {
+    PRINT "  ! SHIP:DELTAV дал 0 — включи Advanced Tweakables → Delta-V readout,".
+    PRINT "    иначе бюджет свериться не может.".
+  }
+  RETURN running.
+}
+
+// Живой расчёт узла перехода к телу — ТОЛЬКО если уже на стабильной
+// орбите (не PRELAUNCH/суборбитальная). r_nodeTransfer создаёт NODE(),
+// но НЕ добавляет его в план полёта (ADD не вызывается) — чтение, не действие.
+// Требует RUNONCEPATH lib/transfer.ks заранее — эта функция её не тянет,
+// чтобы q_plan оставался лёгким, когда живой расчёт не нужен.
+GLOBAL FUNCTION q_liveTransfer {
+  PARAMETER dest.
+  IF SHIP:ALTITUDE < SHIP:BODY:ATM:HEIGHT OR SHIP:ORBIT:APOAPSIS <= 0 {
+    PRINT "=== живой расчёт перехода недоступен — не на стабильной орбите ===".
+    RETURN.
+  }
+  PRINT "=== живой расчёт (уже на орбите " + SHIP:BODY:NAME + ") ===".
+  LOCAL nd IS r_nodeTransfer(dest).
+  PRINT "  узел перехода к " + dest:NAME + ": " + ROUND(nd:DELTAV:MAG,1) + " м/с, через "
+        + ROUND(nd:ETA,0) + " с (" + ROUND(nd:ETA/60,1) + " мин)".
+  PRINT "  накл. к плоскости " + dest:NAME + ": " + ROUND(r_relInc(dest),2) + "°".
+}
+
+// Спецификация: "tasks" — список LEXICON("title","items") под q_report,
+// "budget" — необязательный список под q_dvBudget. Возвращает число
+// провалившихся пунктов по всем tasks вместе.
+GLOBAL FUNCTION q_plan {
+  PARAMETER spec.
+  PRINT "======================================".
+  q_shipReport().
+  PRINT " ".
+  LOCAL fail IS 0.
+  FOR t IN spec["tasks"] {
+    SET fail TO fail + q_report(t["title"], t["items"]).
+  }
+  IF spec:HASKEY("budget") {
+    PRINT " ".
+    q_dvBudget(spec["budget"]).
+  }
+  PRINT " ".
+  IF fail = 0 { PRINT "== комплектация: всё, что видно чекеру, на месте ==". }
+  ELSE { PRINT "== комплектация: не хватает " + fail + " пункт(ов), смотри выше ==". }
+  PRINT "======================================".
+  RETURN fail.
+}
+
 // Цифры — из [[missiya-mun]]: захват в картографическую 250 км ≈ 1150 м/с
 // от опорной 80 км; теневая сторона Муна до 19 ч, зондовому ядру нужно
 // 1400–3500 ЭЧ без РИТЭГа. Профиль «остаться на орбите картографом».

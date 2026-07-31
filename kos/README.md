@@ -195,20 +195,36 @@ ds_run(s).
 в вики: [миссия на Мун](https://kerbal.ru/Operator/wiki/missiya-mun.html) и
 [автоматизация запуска](https://kerbal.ru/Operator/wiki/kos-avtomatizaciya.html).
 
-### Чекер: есть ли на борту всё нужное
+### План: телеметрия + чекеры + Δv-бюджет одной спецификацией
 
-`check/dalnyak-mun-audit.ks` — на столе, до пуска, смотрит детали корабля
-и сверяет с тем, что просят контракты (SCANsat-сканеры, метки спутников,
-запас Δv под Мун):
+Тот же принцип, что у `ds_run`: логика — в `q_plan(spec)` из `lib/audit.ks`,
+файл на конкретный корабль — только параметры. Ничего не жжёт и не ставит
+узлов манёвра, только читает `SHIP` и считает.
 
 ```
-RUNPATH("0:/check/dalnyak-mun-audit.ks").
+RUNPATH("0:/check/dalnyak-mun-plan.ks").
 ```
 
-Не про этот конкретный корабль — общие блоки в `lib/audit.ks`:
-`q_hasPart`, `q_countTag`, `q_bodyChecklist` и заготовки под типовые задачи
-(`q_taskScanAltimetry`, `q_taskConstellation` и т.д.), из которых собирается
-чекер под любую другую миссию.
+Что внутри файла — не логика, а спецификация:
+
+```kos
+SET spec TO LEXICON(
+  "tasks", LIST(
+    LEXICON("title", "SCANsat: высотометрия", "items", q_taskScanAltimetry()),
+    LEXICON("title", "Созвездие: 4 спутника", "items", q_taskConstellation(4, "sat-"))
+  ),
+  "budget", LIST(
+    LEXICON("label", "перелёт к телу", "dv", 856, "optional", FALSE),
+    LEXICON("label", "смена плоскости (опция)", "dv", 770, "optional", TRUE)
+  )
+).
+q_plan(spec).
+```
+
+Общие блоки — в `lib/audit.ks`: `q_hasPart`, `q_countTag`, `q_bodyChecklist`,
+заготовки под типовые задачи (`q_taskScanAltimetry`, `q_taskConstellation`
+и т.д.), `q_shipReport`/`q_dvBudget`/`q_liveTransfer` под саму спецификацию
+плана. Новый корабль — новый `spec`, не новый скрипт с нуля.
 
 ## Правила, на которых всё держится
 

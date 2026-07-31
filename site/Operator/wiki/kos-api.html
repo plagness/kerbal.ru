@@ -271,7 +271,10 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#landks">land.ks — посадка на тело без атмосферы</a></li>
 <li><a href="#eventsks">events.ks — событийная автоматика</a></li>
 <li><a href="#deepspaceks">deepspace.ks — дальний вылет одной спецификацией</a></li>
-<li><a href="#auditks">audit.ks — чекеры по задаче и по телу</a></li>
+<li><a href="#auditks">audit.ks — чекеры по задаче и по телу</a><ul>
+<li><a href="#v-">План: телеметрия + чекеры + Δv-бюджет одной спецификацией</a></li>
+</ul>
+</li>
 <li><a href="#sciks">sci.ks — наука</a></li>
 <li><a href="#_2">Остальные модули</a></li>
 <li><a href="#_3">Как проверить, не запуская</a></li>
@@ -884,7 +887,41 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </tbody>
 </table>
 <p>И по телу — <code>q_bodyDefaults()</code> / <code>q_bodyChecklist(spec)</code> и два готовых пресета под Мун: <code>q_bodyMun()</code> (профиль «остаться картографом на орбите» — Δv ≥ 1150 м/с, заряд на теневую сторону ≥ 1400 ЭЧ либо РИТЭГ) и <code>q_bodyMunTour()</code> (профиль «развести спутники и сесть без обратного взлёта» — Δv ≥ 2700 м/с от опорной Кербина, заряд не проверяется: шина не сидит месяцами на орбите). <code>spec["dv"]</code> сверяется со <strong>стоковым</strong> счётчиком дельта-v игры (<code>SHIP:DELTAV:VACUUM</code>, KSP 1.11+) — если в настройках отключён Advanced Tweakables → Delta-V readout, вернётся 0, и это будет читаться как «не хватает», хотя на деле просто выключен показ.</p>
-<p><strong>Чего чекер не видит</strong> — и не должен: хватит ли топлива именно этому лендеру, мягко ли он сядет, попадёт ли в нужный биом. Каждый готовый прогон (<code>check/dalnyak-mun-audit.ks</code>) печатает список таких слепых зон отдельной строкой — не молчит о том, что не проверено.</p>
+<h3 id="v-">План: телеметрия + чекеры + Δv-бюджет одной спецификацией</h3>
+<p>Тот же принцип, что у <code>m_orbit</code>/<code>ds_run</code>: логика в библиотеке, файл под конкретный корабль — только параметры.</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q_shipReport()</code></td>
+<td>—</td>
+<td>печатает имя, тело, статус, высоту, массу, Δv, заряд, число деталей</td>
+</tr>
+<tr>
+<td><code>q_dvBudget(budget)</code></td>
+<td>список <code>LEXICON("label","dv","optional")</code></td>
+<td>печатает бегущий итог по обязательным пунктам, сверяет с <code>SHIP:DELTAV:VACUUM</code>, возвращает сумму</td>
+</tr>
+<tr>
+<td><code>q_liveTransfer(dest)</code></td>
+<td>тело</td>
+<td>если уже на стабильной орбите — считает узел перехода к <code>dest</code> через <code>r_nodeTransfer</code>, НЕ ставит его (<code>ADD</code> не вызывается); требует <code>RUNONCEPATH lib/transfer.ks</code></td>
+</tr>
+<tr>
+<td><code>q_plan(spec)</code></td>
+<td>лексикон <code>{"tasks": [...], "budget": [...]}</code></td>
+<td>телеметрия + все чекеры из <code>tasks</code> + бюджет, возвращает общее число провалов</td>
+</tr>
+</tbody>
+</table>
+<p>Пример — <code>check/dalnyak-mun-plan.ks</code>: собирает <code>q_taskScanAltimetry()</code>/<code>q_taskScanBiome()</code>/<code>q_taskConstellation(4,"sat-")</code> в <code>tasks</code>, бюджет фаз в <code>budget</code>, зовёт <code>q_plan(spec)</code>, потом отдельно <code>q_liveTransfer(MUN)</code>. Ни двигателей, ни узлов манёвра — только чтение и арифметика.</p>
+<p><strong>Чего чекер не видит</strong> — и не должен: хватит ли топлива именно этому лендеру, мягко ли он сядет, попадёт ли в нужный биом. Готовый прогон печатает список таких слепых зон отдельной строкой — не молчит о том, что не проверено.</p>
 <h2 id="sciks">sci.ks — наука</h2>
 <table>
 <thead>
