@@ -102,7 +102,12 @@ GLOBAL FUNCTION ds_run {
     LOCAL per IS SHIP:ORBIT:PERIOD.
     LOCAL step IS per / spec["landers"]:LENGTH.
     FOR tag IN spec["landers"] {
-      PRINT "  над «" + SHIP:GEOPOSITION:BIOME + "» — выпускаю " + tag.
+      // SHIP:GEOPOSITION:BIOME падает «Suffix not found» с орбиты Муна —
+      // в kOS нет общей проверки «есть ли суффикс», а «в высоком космосе
+      // биомы, как правило, недоступны» уже отмечено в [[geologiya]].
+      // Печатаем координаты вместо биома — не роняем миссию ради подписи.
+      PRINT "  над " + ROUND(SHIP:GEOPOSITION:LAT,1) + "°/" + ROUND(SHIP:GEOPOSITION:LNG,1)
+            + "° — выпускаю " + tag.
       ds_release(tag).
       IF spec["sci"] { sciSweep("развод " + tag, TRUE). }
       WAIT step.
