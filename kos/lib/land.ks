@@ -20,13 +20,13 @@ RUNONCEPATH("0:/lib/orbit.ks").
 // число = скорость снижения). Узлы таблицы: 10 км→150, 5 км→100, 2 км→60,
 // 500 м→25, 100 м→10, касание→5.
 GLOBAL FUNCTION l_vsLimit {
-  PARAMETER alt.
-  IF alt > 10000 { RETURN 150. }
-  IF alt > 5000  { RETURN 100 + (alt - 5000) / 5000 * 50. }
-  IF alt > 2000  { RETURN  60 + (alt - 2000) / 3000 * 40. }
-  IF alt >  500  { RETURN  25 + (alt -  500) / 1500 * 35. }
-  IF alt >  100  { RETURN  10 + (alt -  100) /  400 * 15. }
-  RETURN 5 + alt / 100 * 5.
+  PARAMETER radarAlt.       // не alt — ALT занят встроенным
+  IF radarAlt > 10000 { RETURN 150. }
+  IF radarAlt > 5000  { RETURN 100 + (radarAlt - 5000) / 5000 * 50. }
+  IF radarAlt > 2000  { RETURN  60 + (radarAlt - 2000) / 3000 * 40. }
+  IF radarAlt >  500  { RETURN  25 + (radarAlt -  500) / 1500 * 35. }
+  IF radarAlt >  100  { RETURN  10 + (radarAlt -  100) /  400 * 15. }
+  RETURN 5 + radarAlt / 100 * 5.
 }
 
 // Опустить перицентр к поверхности — деорбит. targetAlt по умолчанию 0 —

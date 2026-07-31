@@ -86,35 +86,37 @@ GLOBAL FUNCTION x_aimPeri {
 
 // ─── перелёт целиком ──────────────────────────────────────────────────
 
-// Перелёт к телу body внутри той же сферы влияния и заход на круговую
+// Перелёт к телу dest внутри той же сферы влияния и заход на круговую
 // орбиту высотой wantAlt. Наклонение НЕ подгоняется здесь — закладывай
 // его на пуске у родительского тела ([[rendezvous]], тот же принцип).
+// Имя параметра НЕ body — это встроенная функция kOS, CLOBBERBUILTINS
+// ловит попытку её перекрыть уже при компиляции, до пуска.
 GLOBAL FUNCTION x_go {
-  PARAMETER body.
+  PARAMETER dest.
   PARAMETER wantAlt.
 
-  PRINT "=== перелёт к " + body:NAME + ", цель " + ROUND(wantAlt/1000,1) + " км".
+  PRINT "=== перелёт к " + dest:NAME + ", цель " + ROUND(wantAlt/1000,1) + " км".
 
-  IF r_relInc(body) > 0.5 { o_burn(r_nodeMatchPlanes(body)). }
+  IF r_relInc(dest) > 0.5 { o_burn(r_nodeMatchPlanes(dest)). }
 
-  LOCAL nd IS r_nodeTransfer(body).
+  LOCAL nd IS r_nodeTransfer(dest).
   o_burn(nd).
   PRINT "  переходная: апоцентр " + ROUND(SHIP:APOAPSIS/1000,0) + " км".
 
   x_aimPeri(wantAlt).
 
-  PRINT "  жду вход в сферу влияния " + body:NAME + "…".
-  LOCAL deadline IS TIME:SECONDS + body:ORBIT:PERIOD.   // с запасом на весь виток тела
+  PRINT "  жду вход в сферу влияния " + dest:NAME + "…".
+  LOCAL deadline IS TIME:SECONDS + dest:ORBIT:PERIOD.   // с запасом на весь виток тела
   WARPTO(TIME:SECONDS + ETA:APOAPSIS - 60).
-  WAIT UNTIL SHIP:BODY = body OR TIME:SECONDS > deadline.
-  IF SHIP:BODY <> body {
+  WAIT UNTIL SHIP:BODY = dest OR TIME:SECONDS > deadline.
+  IF SHIP:BODY <> dest {
     PRINT "  ! в сферу влияния не вошли — перелёт не удался".
     RETURN FALSE.
   }
 
-  PRINT "  вошли в СВП " + body:NAME + ": пери " + ROUND(SHIP:PERIAPSIS/1000,1) + " км".
+  PRINT "  вошли в СВП " + dest:NAME + ": пери " + ROUND(SHIP:PERIAPSIS/1000,1) + " км".
   o_burn(o_nodeCircularizeAtPeri()).
-  PRINT "=== на орбите " + body:NAME + ": " + ROUND(SHIP:APOAPSIS/1000,1)
+  PRINT "=== на орбите " + dest:NAME + ": " + ROUND(SHIP:APOAPSIS/1000,1)
         + " / " + ROUND(SHIP:PERIAPSIS/1000,1) + " км, накл "
         + ROUND(SHIP:ORBIT:INCLINATION,1) + "°".
   RETURN TRUE.
