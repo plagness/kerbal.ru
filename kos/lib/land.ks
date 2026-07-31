@@ -79,7 +79,17 @@ GLOBAL FUNCTION l_descend {
 GLOBAL FUNCTION l_go {
   PARAMETER targetAlt IS 0.
   PARAMETER onTick IS { }.
-  o_burn(l_nodeDeorbit(targetAlt)).
+  // Если перицентр уже НИЖЕ цели — мы уже падаем на поверхность (уже был
+  // отдельный прожиг, снёсший перицентр под 0). l_nodeDeorbit жжёт В
+  // АПОЦЕНТРЕ — на таком заходе к моменту, когда WARPTO дотащит до
+  // апоцентра, аппарат уже врежется. Поймано вживую: второй «деорбитный»
+  // узел на уже падающей траектории привёл к столкновению до прожига.
+  // В этом случае деорбит не нужен вообще — сразу тормозим.
+  IF SHIP:PERIAPSIS > targetAlt {
+    o_burn(l_nodeDeorbit(targetAlt)).
+  } ELSE {
+    PRINT "  перицентр уже " + ROUND(SHIP:PERIAPSIS/1000,1) + " км — уже падаем, деорбит не нужен, торможу сразу.".
+  }
   l_descend(onTick).
 }
 
