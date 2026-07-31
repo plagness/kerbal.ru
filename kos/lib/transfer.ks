@@ -104,6 +104,11 @@ GLOBAL FUNCTION x_checkBudget {
   WAIT 0.
   LOCAL need IS nd:DELTAV:MAG.
   LOCAL have IS SHIP:DELTAV:VACUUM.
+  IF need < 1 {
+    PRINT "  ! " + label + " не даёт рабочего узла (Δv ~0) — смотри диагностику выше, прожиг не даю.".
+    IF HASNODE { REMOVE nd. }
+    RETURN FALSE.
+  }
   IF have > 0 AND need > have * 0.9 {
     PRINT "  ! " + label + " просит " + ROUND(need,0) + " м/с, на борту " + ROUND(have,0)
           + " м/с — это не мелкий недолёт, а перепутанные плоскости.".

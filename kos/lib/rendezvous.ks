@@ -136,16 +136,35 @@ GLOBAL FUNCTION r_utAtPhase {
 }
 
 // Узел перехода к орбите цели.
+//
+// ДИАГНОСТИКА ПОСЛЕ ЖИВОЙ АВАРИИ (2026-07-31): при переходе НОО Кербина
+// (~679 км) → Мун (SMA ~12 000 км) узел дважды подряд вышел ОТРИЦАТЕЛЬНЫМ
+// (тормозным) вместо ожидаемых +857 м/с — независимая проверка формулы
+// питоном (см. STATUS.md) подтвердила, что математика верна и должна
+// давать +857. Причина живого расхождения не найдена — нужна телеметрия
+// в момент сбоя, которой не было. Ниже — печать всех промежуточных
+// величин на будущее, и защита по СМЫСЛУ: переход к телу с БОЛЬШЕЙ
+// орбитой не может требовать торможения, это раскрутит перицентр внутрь
+// планеты, а не наружу.
 GLOBAL FUNCTION r_nodeTransfer {
   PARAMETER tgt.
   LOCAL ut IS r_utAtPhase(tgt, r_phaseNeeded(tgt)).
   IF ut < 0 { RETURN NODE(TIME:SECONDS + 60, 0, 0, 0). }
   LOCAL rad IS (POSITIONAT(SHIP, ut) - POSITIONAT(SHIP:BODY, ut)):MAG.
-  LOCAL at IS (rad + tgt:ORBIT:SEMIMAJORAXIS) / 2.
-  LOCAL dv IS SQRT(SHIP:BODY:MU * (2 / rad - 1 / at))
-            - VELOCITYAT(SHIP, ut):ORBIT:MAG.
+  LOCAL tgtSma IS tgt:ORBIT:SEMIMAJORAXIS.
+  LOCAL at IS (rad + tgtSma) / 2.
+  LOCAL vNow IS VELOCITYAT(SHIP, ut):ORBIT:MAG.
+  LOCAL vAt IS SQRT(SHIP:BODY:MU * (2 / rad - 1 / at)).
+  LOCAL dv IS vAt - vNow.
+  PRINT "  переход: rad=" + ROUND(rad,0) + " tgtSma=" + ROUND(tgtSma,0)
+        + " at=" + ROUND(at,0) + " vNow=" + ROUND(vNow,1) + " vAt=" + ROUND(vAt,1).
   PRINT "  переход: старт через " + ROUND(ut - TIME:SECONDS, 0) + " с, "
         + ROUND(dv, 1) + " м/с".
+  IF tgtSma > rad AND dv < 0 {
+    PRINT "  ! цель дальше нас, а узел тормозной — это ушло бы к планете, не к цели.".
+    PRINT "  ! прожиг не даю, узел с нулевым Δv.".
+    RETURN NODE(ut, 0, 0, 0).
+  }
   RETURN NODE(ut, 0, 0, dv).
 }
 
