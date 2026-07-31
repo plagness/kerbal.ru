@@ -99,6 +99,11 @@ tools/        telnet-клиент для управления снаружи и�
 | **events** | `e_once(ev, name, cond, fn)` | одноразовый триггер вместо линии `WAIT` |
 | | `e_watch(ev, name, cond, fn)` | сторожевой триггер, срабатывает пока условие истинно |
 | **deepspace** | `ds_defaults()` / `ds_run(spec)` | дальний вылет одной спецификацией: тело, орбиты, лендеры, наука |
+| **audit** | `q_hasPart(substr)` | есть ли деталь с таким названием |
+| | `q_countTag(prefix)` | сколько деталей с меткой на такой префикс |
+| | `q_report(title, items)` | отчёт по чекеру: что есть, чего нет |
+| | `q_taskScanAltimetry()` / `q_taskScanBiome()` / `q_taskLandBiomes(n)` | готовые чекеры под задачи |
+| | `q_bodyChecklist(spec)` / `q_bodyMun()` | чекер по телу: Δv, заряд, теплозащита |
 | **sci** | `sciZone()` | текущий рубеж полёта |
 | | `sciModules()` | научные модули, разрешённые сейчас |
 | | `sciSweep(label, mayTransmit)` | снять науку, при разрешении передать |
@@ -167,6 +172,21 @@ ds_run(s).
 фокуса на него). Архитектура и цифры разобраны в вики:
 [миссия на Мун](https://kerbal.ru/Operator/wiki/missiya-mun.html) и
 [автоматизация запуска](https://kerbal.ru/Operator/wiki/kos-avtomatizaciya.html).
+
+### Чекер: есть ли на борту всё нужное
+
+`check/dalnyak-mun-audit.ks` — на столе, до пуска, смотрит детали корабля
+и сверяет с тем, что просят контракты (SCANsat-сканеры, метки лендеров,
+запас Δv и заряда под Мун):
+
+```
+RUNPATH("0:/check/dalnyak-mun-audit.ks").
+```
+
+Не про этот конкретный корабль — общие блоки в `lib/audit.ks`:
+`q_hasPart`, `q_countTag`, `q_bodyChecklist` и заготовки под типовые задачи
+(`q_taskScanAltimetry`, `q_taskLandBiomes` и т.д.), из которых собирается
+чекер под любую другую миссию.
 
 ## Правила, на которых всё держится
 

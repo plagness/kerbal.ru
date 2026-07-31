@@ -19,6 +19,7 @@ RUNONCEPATH("0:/lib/transfer.ks").
 RUNONCEPATH("0:/lib/events.ks").
 RUNONCEPATH("0:/lib/land.ks").
 RUNONCEPATH("0:/lib/deepspace.ks").
+RUNONCEPATH("0:/lib/audit.ks").
 PRINT "== модули загружены ==".
 
 PRINT "util:   азимут под 8.5° = " + ROUND(u_launchAzimuth(8.5),2)
@@ -101,5 +102,11 @@ PRINT "land:   предел на 10000/2000/100/0 м = "
 SET ds TO ds_defaults().
 PRINT "deepspace: по умолчанию — " + ds["body"]:NAME + ", парковка "
       + ROUND(ds["parkAlt"]/1000,1) + " км, карта " + ROUND(ds["mapAlt"]/1000,0) + " км".
+
+// audit: чекеры реально смотрят детали на столе — печатают то, что есть,
+// без остановки миссии (это просто отчёт, не ошибка компиляции).
+PRINT "audit:  меток lander-*: " + q_countTag("lander-")
+      + ", ёмкость ЭЧ " + ROUND(q_ecCapacity(),0).
+q_report("пример: SCANsat высотометрия", q_taskScanAltimetry()).
 
 PRINT "== проверка пройдена ==".

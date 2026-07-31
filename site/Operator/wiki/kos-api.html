@@ -271,6 +271,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#landks">land.ks — посадка на тело без атмосферы</a></li>
 <li><a href="#eventsks">events.ks — событийная автоматика</a></li>
 <li><a href="#deepspaceks">deepspace.ks — дальний вылет одной спецификацией</a></li>
+<li><a href="#auditks">audit.ks — чекеры по задаче и по телу</a></li>
 <li><a href="#sciks">sci.ks — наука</a></li>
 <li><a href="#_2">Остальные модули</a></li>
 <li><a href="#_3">Как проверить, не запуская</a></li>
@@ -366,9 +367,14 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <td><code>rendezvous</code>, <code>transfer</code>, <code>deploy</code>, <code>sci</code></td>
 <td>дальний вылет одной спецификацией</td>
 </tr>
+<tr>
+<td><code>audit.ks</code></td>
+<td>—</td>
+<td>чекеры: есть ли на борту нужное под задачу и под тело</td>
+</tr>
 </tbody>
 </table>
-<p><strong>Префикс в имени = модуль.</strong> <code>u_</code> — util, <code>o_</code> — orbit, <code>a_</code> — ascent, <code>s_</code> — stage, <code>c_</code> — ctrl, <code>d_</code> — deploy, <code>t_</code> — telem, <code>h_</code> — hud, <code>m_</code> — mission, <code>r_</code> — rendezvous, <code>x_</code> — transfer, <code>l_</code> — land, <code>e_</code> — events, <code>ds_</code> — deepspace. У науки исторически <code>sci</code>. Это не украшение: в kOS все имена глобальны, префикс — единственная защита от столкновений.</p>
+<p><strong>Префикс в имени = модуль.</strong> <code>u_</code> — util, <code>o_</code> — orbit, <code>a_</code> — ascent, <code>s_</code> — stage, <code>c_</code> — ctrl, <code>d_</code> — deploy, <code>t_</code> — telem, <code>h_</code> — hud, <code>m_</code> — mission, <code>r_</code> — rendezvous, <code>x_</code> — transfer, <code>l_</code> — land, <code>e_</code> — events, <code>ds_</code> — deepspace, <code>q_</code> — audit. У науки исторически <code>sci</code>. Это не украшение: в kOS все имена глобальны, префикс — единственная защита от столкновений.</p>
 <h2 id="missionks">mission.ks — миссия целиком</h2>
 <table>
 <thead>
@@ -792,6 +798,78 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </table>
 <p>Ключи <code>spec</code>: <code>name</code>, <code>body</code> (тело, по умолчанию <code>MUN</code>), <code>parkAlt</code> (низкая орбита захвата, 18 км — отсюда выпускают лендеров), <code>mapAlt</code> (картографическая полярная, 250 км), <code>landers</code> (список меток декаплеров, пусто = лендеров нет), <code>sci</code> (снимать науку на рубежах), <code>log</code>.</p>
 <p>Лендеров <code>ds_run</code> разносит по равным долям витка, чтобы у них были разные наземные треки — точный выбор биома под каждым остаётся за игроком, автомат этого не гарантирует. Сканеры SCANsat скрипт не включает: их модуль и имена событий в библиотеке не сверены.</p>
+<h2 id="auditks">audit.ks — чекеры по задаче и по телу</h2>
+<p>Проверка не пуском, а <strong>чтением деталей на столе</strong>: находит ли скрипт нужный прибор по названию, нужный модуль по классу, нужное число меток лендеров. Отдельно от <code>libcheck.ks</code> — тот ловит опечатки в коде, <code>audit.ks</code> смотрит, чем укомплектован конкретно ЭТОТ корабль.</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Принимает</th>
+<th>Возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q_hasPart(substr)</code></td>
+<td>подстрока (без учёта регистра)</td>
+<td>есть ли деталь с таким названием</td>
+</tr>
+<tr>
+<td><code>q_countPart(substr)</code></td>
+<td>подстрока</td>
+<td>сколько таких деталей</td>
+</tr>
+<tr>
+<td><code>q_hasModule(substr)</code></td>
+<td>подстрока класса модуля</td>
+<td>есть ли деталь с таким модулем (<code>ModuleDeployableAntenna</code>, <code>Ablator</code>…)</td>
+</tr>
+<tr>
+<td><code>q_countTag(prefix)</code></td>
+<td>префикс метки</td>
+<td>сколько деталей с меткой, начинающейся так — считает лендеров <code>lander-1/2/3</code></td>
+</tr>
+<tr>
+<td><code>q_ecCapacity()</code></td>
+<td>—</td>
+<td>суммарная ёмкость электрозаряда, ЭЧ</td>
+</tr>
+<tr>
+<td><code>q_report(title, items)</code></td>
+<td>заголовок, список <code>LEXICON("label","ok")</code></td>
+<td>печатает <code>[OK]</code>/<code>[!]</code> по каждому пункту, возвращает число непройденных</td>
+</tr>
+</tbody>
+</table>
+<p>Готовые списки под контракты (образцы, не полная база — паков контрактов десятки, добавляй свои по этому же шаблону):</p>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Что проверяет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q_taskScanAltimetry()</code></td>
+<td>высотомер SCAN/R-3B/SAR-* на борту, есть ёмкость под заряд</td>
+</tr>
+<tr>
+<td><code>q_taskScanBiome()</code></td>
+<td>мультиспектральный сканер (SCAN/MS-1/MS-R/MS-2A), заряд</td>
+</tr>
+<tr>
+<td><code>q_taskLandBiomes(n)</code></td>
+<td><code>n</code> меток <code>lander-N</code>, <code>n</code> зондовых ядер сверх шины</td>
+</tr>
+<tr>
+<td><code>q_taskGooOrMaterials()</code></td>
+<td>капсула слизи или контейнер материаловедения</td>
+</tr>
+</tbody>
+</table>
+<p>И по телу — <code>q_bodyDefaults()</code> / <code>q_bodyChecklist(spec)</code> / <code>q_bodyMun()</code> (готовый пресет: Δv ≥ 1150 м/с, заряд на теневую сторону ≥ 1400 ЭЧ либо РИТЭГ). <code>spec["dv"]</code> сверяется со <strong>стоковым</strong> счётчиком дельта-v игры (<code>SHIP:DELTAV:VACUUM</code>, KSP 1.11+) — если в настройках отключён Advanced Tweakables → Delta-V readout, вернётся 0, и это будет читаться как «не хватает», хотя на деле просто выключен показ.</p>
+<p><strong>Чего чекер не видит</strong> — и не должен: хватит ли топлива именно этому лендеру, мягко ли он сядет, попадёт ли в нужный биом. Каждый готовый прогон (<code>check/dalnyak-mun-audit.ks</code>) печатает список таких слепых зон отдельной строкой — не молчит о том, что не проверено.</p>
 <h2 id="sciks">sci.ks — наука</h2>
 <table>
 <thead>
