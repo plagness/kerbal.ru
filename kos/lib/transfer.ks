@@ -96,12 +96,19 @@ GLOBAL FUNCTION x_aimPeri {
 GLOBAL FUNCTION x_checkBudget {
   PARAMETER nd.
   PARAMETER label.
+  // У неприкреплённого узла нельзя спросить :DELTAV — «Must attach node
+  // first» (тот же приём, что в o_burn: ADD, потом WAIT 0, потом читаем).
+  // Если проверка проходит, узел остаётся в плане — o_burn его подхватит,
+  // не добавляя повторно (NEXTNODE уже будет равен nd).
+  IF NOT HASNODE OR NEXTNODE <> nd { ADD nd. }
+  WAIT 0.
   LOCAL need IS nd:DELTAV:MAG.
   LOCAL have IS SHIP:DELTAV:VACUUM.
   IF have > 0 AND need > have * 0.9 {
     PRINT "  ! " + label + " просит " + ROUND(need,0) + " м/с, на борту " + ROUND(have,0)
           + " м/с — это не мелкий недолёт, а перепутанные плоскости.".
     PRINT "  ! проверь наклонение опорной орбиты против ORBIT:INCLINATION цели, прожиг не даю.".
+    IF HASNODE { REMOVE nd. }
     RETURN FALSE.
   }
   RETURN TRUE.
