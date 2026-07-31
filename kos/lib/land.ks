@@ -72,6 +72,33 @@ GLOBAL FUNCTION l_go {
   l_descend(onTick).
 }
 
+// ─── посадка на нужной стороне тела ────────────────────────────────
+//
+// Мун приливно заперт: сторона, обращённая к Кербину, — фиксированное
+// полушарие, не блуждает во времени. Точное место посадки этот приём
+// НЕ даёт (это отдельная нерешённая задача, см. kos/README.md) — только
+// гарантирует полушарие: деорбит стартует, пока корабль над нужной
+// стороной, а спуск сносит недалеко относительно размера тела.
+
+// TRUE, если корабль сейчас над полушарием, обращённым к refBody.
+GLOBAL FUNCTION l_facingBody {
+  PARAMETER refBody.
+  LOCAL zenith IS -SHIP:BODY:POSITION.                     // центр тела → корабль
+  LOCAL toRef IS refBody:POSITION - SHIP:BODY:POSITION.     // центр тела → refBody
+  RETURN VDOT(zenith:NORMALIZED, toRef:NORMALIZED) > 0.
+}
+
+// Дождаться витка, на котором корабль окажется над нужным полушарием.
+GLOBAL FUNCTION l_waitFacing {
+  PARAMETER refBody.
+  PARAMETER maxOrbits IS 3.
+  IF l_facingBody(refBody) { RETURN TRUE. }
+  PRINT "  жду виток над стороной, обращённой к " + refBody:NAME + "…".
+  LOCAL deadline IS TIME:SECONDS + SHIP:ORBIT:PERIOD * maxOrbits.
+  WAIT UNTIL l_facingBody(refBody) OR TIME:SECONDS > deadline.
+  RETURN l_facingBody(refBody).
+}
+
 // ─── одной спецификацией, как ds_run() в lib/deepspace.ks ─────────────
 //
 //   RUNONCEPATH("0:/lib/land.ks"). RUNONCEPATH("0:/lib/sci.ks").

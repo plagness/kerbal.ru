@@ -10,6 +10,7 @@
 //   SET s["mapAlt"]  TO 250000.    // картографическая полярная (0 = не подниматься)
 //   SET s["landers"] TO LIST("sat-1", "sat-2", "sat-3", "sat-4").  // метки декаплеров
 //   SET s["selfLand"] TO TRUE.     // сама шина садится ПОСЛЕ развода спутников
+//   SET s["faceBody"] TO KERBIN.   // сесть на сторону, обращённую к Кербину
 //   SET s["sci"]     TO TRUE.      // снимать/передавать науку на каждом рубеже
 //   ds_run(s).
 //
@@ -35,7 +36,8 @@ GLOBAL FUNCTION ds_defaults {
     "mapAlt", 250000,     // картографическая полярная, м; 0 = не подниматься
     "landers", LIST(),    // метки декаплеров, пусто = отделяемых нагрузок нет
     "selfLand", FALSE,    // TRUE — шина сама садится после развода нагрузок
-    "sci", TRUE,          // снимать/передавать науку на рубежах
+    "faceBody", -1,       // -1 = без разницы; иначе тело (напр. KERBIN) — сесть на сторону, к нему обращённую
+    "sci", TRUE,          // снимать/передавать науку на рубежах и при каждом отделении
     "log", "0:/deepspace.csv"
   ).
 }
@@ -81,12 +83,14 @@ GLOBAL FUNCTION ds_run {
     FOR tag IN spec["landers"] {
       PRINT "  над «" + SHIP:GEOPOSITION:BIOME + "» — выпускаю " + tag.
       ds_release(tag).
+      IF spec["sci"] { sciSweep("развод " + tag, TRUE). }
       WAIT step.
     }
   }
 
   IF spec["selfLand"] {
     PRINT "=== шина садится сама".
+    IF spec["faceBody"] <> -1 { l_waitFacing(spec["faceBody"]). }
     l_go(0).
     d_all().
     IF spec["sci"] { sciSweep("на поверхности " + spec["body"]:NAME, TRUE). }
