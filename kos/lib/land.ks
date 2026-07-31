@@ -52,7 +52,8 @@ GLOBAL FUNCTION l_descend {
   // орбите — поймано вживую). Домотать варпом можно смело: тяга ещё не
   // нужна высоко, l_vsLimit(10000+) всё равно даёт потолок 150 м/с.
   IF ALT:RADAR > 15000 AND ETA:PERIAPSIS > 30 {
-    PRINT "  варп через пустое падение до перицентра…".
+    PRINT "  варп через пустое падение до перицентра (на Солнце для заряда)…".
+    c_faceSun().
     WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 20).
     WAIT UNTIL ALT:RADAR <= 15000 OR SHIP:STATUS = "LANDED" OR SHIP:STATUS = "SPLASHED".
   }

@@ -24,6 +24,18 @@ GLOBAL FUNCTION c_rcsTick {
   c_rcs(TIME:SECONDS < C_RCS_UNTIL).
 }
 
+// Развернуть корабль на Солнце и подержать так — перед долгим WARPTO без
+// топлива на прожиг панели должны заряжаться, а не смотреть в темноту.
+// Поймано вживую: разряд EC во время многочасового варпа между узлами.
+GLOBAL FUNCTION c_faceSun {
+  PARAMETER holdSec IS 5.
+  SAS OFF.
+  LOCK STEERING TO SUN:POSITION.
+  WAIT holdSec.
+  UNLOCK STEERING.
+  SAS ON.
+}
+
 // Вернуть управление человеку
 GLOBAL FUNCTION c_release {
   LOCK THROTTLE TO 0.

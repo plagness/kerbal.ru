@@ -79,7 +79,17 @@ GLOBAL FUNCTION o_burn {
   WAIT UNTIL VANG(SHIP:FACING:VECTOR, nd:DELTAV) < 2 OR nd:ETA < bt.
   c_rcs(FALSE).
 
-  IF nd:ETA > bt/2 + 30 { WARPTO(TIME:SECONDS + nd:ETA - bt/2 - 15). }
+  // До узла может быть долгий безмоторный варп — держать нос всё это
+  // время на векторе прожига незачем и опасно для питания: если этот
+  // вектор смотрит не на Солнце, панели не заряжаются несколько часов
+  // варпа, EC садится вхолостую. Поймано вживую. Разворачиваем на
+  // Солнце на время ожидания, перед самим прожигом наводимся заново.
+  IF nd:ETA > bt/2 + 30 {
+    c_faceSun().
+    WARPTO(TIME:SECONDS + nd:ETA - bt/2 - 15).
+    LOCK STEERING TO nd:DELTAV.
+    WAIT UNTIL VANG(SHIP:FACING:VECTOR, nd:DELTAV) < 2 OR nd:ETA <= bt/2.
+  }
   WAIT UNTIL nd:ETA <= bt/2.
 
   LOCK THROTTLE TO MIN(1, MAX(0.05, nd:DELTAV:MAG / (acc * 3))).
