@@ -18,7 +18,9 @@ RUNONCEPATH("0:/lib/orbit.ks").
 
 // Предел вертикальной скорости на заданной радарной высоте, м/с (положительное
 // число = скорость снижения). Узлы таблицы: 10 км→150, 5 км→100, 2 км→60,
-// 500 м→25, 100 м→10, касание→5.
+// 500 м→25, 100 м→10, касание→1.5.
+// Было касание→5 — при 90%-й отработке (см. l_descend) это давало реальное
+// касание ~5 м/с вместо желаемых 1-2. Поймано вживую на посадке.
 GLOBAL FUNCTION l_vsLimit {
   PARAMETER radarAlt.       // не alt — ALT занят встроенным
   IF radarAlt > 10000 { RETURN 150. }
@@ -26,7 +28,7 @@ GLOBAL FUNCTION l_vsLimit {
   IF radarAlt > 2000  { RETURN  60 + (radarAlt - 2000) / 3000 * 40. }
   IF radarAlt >  500  { RETURN  25 + (radarAlt -  500) / 1500 * 35. }
   IF radarAlt >  100  { RETURN  10 + (radarAlt -  100) /  400 * 15. }
-  RETURN 5 + radarAlt / 100 * 5.
+  RETURN 1.5 + radarAlt / 100 * 8.5.
 }
 
 // Опустить перицентр к поверхности — деорбит. targetAlt по умолчанию 0 —
@@ -72,7 +74,10 @@ GLOBAL FUNCTION l_descend {
   UNLOCK STEERING.
   RCS OFF.
   SAS ON.
-  PRINT "=== посадка завершена: " + SHIP:STATUS + ", биом «" + SHIP:GEOPOSITION:BIOME + "»".
+  // GEOPOSITION:BIOME падает с «Suffix not found» на части поверхности
+  // Муны (не везде определён) — та же ловушка, что и в deepspace.ks.
+  // Не рискуем, печатаем координаты вместо биома.
+  PRINT "=== посадка завершена: " + SHIP:STATUS + ", " + ROUND(SHIP:GEOPOSITION:LAT,2) + "/" + ROUND(SHIP:GEOPOSITION:LNG,2).
 }
 
 // Деорбит и посадка одной командой.
