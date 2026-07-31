@@ -104,7 +104,12 @@ GLOBAL FUNCTION x_aimPeri {
       BREAK.
     }
     LOCAL before IS x_encounterPeri().
-    LOCAL ut IS TIME:SECONDS + 30.
+    // Жечь у САМОГО отлёта (было +30 с) — грубая ошибка: чувствительность
+    // «боковой прожиг у Кербина → перицентр у Муна» непредсказуемая и
+    // нелинейная на всём перелёте разом. Правит по совету из живого полёта
+    // (2026-07-31): подгонку делают БЛИЖЕ К ЦЕЛИ, у самого подхода к Муну —
+    // там чувствительность прямая и локальная, не растянутая на весь путь.
+    LOCAL ut IS TIME:SECONDS + ETA:APOAPSIS * 0.85.
     LOCAL nd IS x_nodeAimPeri(wantAlt, ut, step).
     o_burn(nd).
     SET spent TO spent + ABS(step).
