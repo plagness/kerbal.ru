@@ -1,6 +1,6 @@
 // lib/transfer.ks — перелёт к другому телу той же сферы влияния (Мун, Минмус)
 // и заход на круговую орбиту вокруг него.
-// Зависит от: lib/ctrl.ks, lib/orbit.ks, lib/rendezvous.ks
+// Зависит от: lib/util.ks, lib/ctrl.ks, lib/orbit.ks, lib/rendezvous.ks
 // kerbal.ru · сборка «Оператор»
 //
 //   RUNONCEPATH("0:/lib/transfer.ks").
@@ -13,6 +13,7 @@
 // подгонка прицельного перицентра ДО входа в чужую сферу влияния и захват
 // на гиперболическом подлёте, где апоцентра ещё не существует.
 
+RUNONCEPATH("0:/lib/util.ks").
 RUNONCEPATH("0:/lib/ctrl.ks").
 RUNONCEPATH("0:/lib/orbit.ks").
 RUNONCEPATH("0:/lib/rendezvous.ks").
@@ -61,24 +62,45 @@ GLOBAL FUNCTION x_nodeAimPeri {
 // Прогнать подгонку прицела до попадания в допуск или до предела попыток.
 // Каждая проба — реальный узел на плане полёта, поэтому дорого по времени
 // выполнения; вызывать сразу после узла перехода, пока запас есть.
+//
+// АВАРИЯ (2026-07-31): фиксированный шаг пробы (15 м/с) на живом перелёте
+// сдвигал перицентр всего на 0,6–0,8 км за попытку, а нужно было пройти
+// 299 км (перицентр -199 км при цели 100 км — минус означает «ПОД
+// поверхностью», Мун радиусом 200 км). За 6 попыток дошли до ~-195 км, всё
+// ещё смертельно, и x_go пошёл дальше — WARPTO домотал прямо до
+// столкновения. Фикс — адаптивный шаг: меряем чувствительность на первой
+// пробе (км сдвига на 1 м/с) и дальше считаем шаг напрямую под остаток
+// ошибки, а не тычемся тем же микрошагом снова и снова.
 GLOBAL FUNCTION x_aimPeri {
   PARAMETER wantAlt.
   PARAMETER tol IS 15000.
-  PARAMETER tries IS 6.
+  PARAMETER tries IS 10.
 
   IF NOT x_hasEncounter() {
     PRINT "  ! энкаунтера нет — подгонять пока нечего".
     RETURN FALSE.
   }
   LOCAL n IS 0.
+  LOCAL step IS 15.        // м/с, стартовый шаг пробы — дальше подстраивается
   UNTIL ABS(x_encounterPeri() - wantAlt) <= tol OR n >= tries {
+    LOCAL before IS x_encounterPeri().
     LOCAL ut IS TIME:SECONDS + 30.
-    LOCAL nd IS x_nodeAimPeri(wantAlt, ut).
+    LOCAL nd IS x_nodeAimPeri(wantAlt, ut, step).
     o_burn(nd).
     SET n TO n + 1.
-    IF x_hasEncounter() {
-      PRINT "  прицел: перицентр " + ROUND(x_encounterPeri()/1000,1)
-            + " км (цель " + ROUND(wantAlt/1000,1) + " км)".
+    IF NOT x_hasEncounter() { BREAK. }   // прожиг мог сорвать энкаунтер вовсе
+    LOCAL after IS x_encounterPeri().
+    PRINT "  прицел: перицентр " + ROUND(after/1000,1)
+          + " км (цель " + ROUND(wantAlt/1000,1) + " км), шаг " + ROUND(step,1) + " м/с".
+    LOCAL moved IS after - before.
+    LOCAL err IS wantAlt - after.
+    IF ABS(moved) > 200 {
+      // видна реальная чувствительность — считаем следующий шаг напрямую,
+      // а не гадаем: сколько км сдвинул 1 м/с, столько и просим на остаток.
+      LOCAL sensitivity IS moved / step.       // м перицентра на 1 м/с прожига
+      SET step TO u_clamp(err / sensitivity, -2000, 2000).
+    } ELSE {
+      SET step TO step * 5.    // движения почти не видно — шаг был слишком мал
     }
   }
   RETURN x_hasEncounter() AND ABS(x_encounterPeri() - wantAlt) <= tol.
@@ -144,6 +166,20 @@ GLOBAL FUNCTION x_go {
   PRINT "  переходная: апоцентр " + ROUND(SHIP:APOAPSIS/1000,0) + " км".
 
   x_aimPeri(wantAlt).
+
+  // ЖЁСТКАЯ ГРАНИЦА БЕЗОПАСНОСТИ (2026-07-31, после столкновения с Муной).
+  // x_aimPeri раньше не проверялся вообще — WARPTO домотал прямо до
+  // столкновения, потому что подгонка не сошлась, а x_go не глядя летел
+  // дальше. Здесь — последний рубеж перед варпом: если энкаунтера нет
+  // или прицел остался в опасной зоне (меньше половины заказанной
+  // высоты — курс либо в поверхность, либо близко к ней), лёт
+  // ОСТАНАВЛИВАЕТСЯ ДО входа в сферу влияния, а не после столкновения.
+  IF NOT x_hasEncounter() OR x_encounterPeri() < wantAlt * 0.5 {
+    PRINT "  ! перицентр не в безопасной зоне (" + ROUND(x_encounterPeri()/1000,1)
+          + " км при заказанных " + ROUND(wantAlt/1000,1) + " км) — курс мог вести".
+    PRINT "  ! в поверхность или мимо. Лечу ДО сферы влияния — не варплю вслепую.".
+    RETURN FALSE.
+  }
 
   PRINT "  жду вход в сферу влияния " + dest:NAME + "…".
   LOCAL deadline IS TIME:SECONDS + dest:ORBIT:PERIOD.   // с запасом на весь виток тела
