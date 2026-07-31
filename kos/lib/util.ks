@@ -148,7 +148,12 @@ GLOBAL FUNCTION u_greatCircleDist {
   LOCAL dLat IS lat2 - lat1.
   LOCAL dLng IS lng2 - lng1.
   LOCAL a IS SIN(dLat/2)^2 + COS(lat1) * COS(lat2) * SIN(dLng/2)^2.
-  RETURN 2 * bodyRadius * ARCTAN2(SQRT(a), SQRT(1 - a)).
+  // ARCTAN2 в kOS возвращает ГРАДУСЫ — переводим угол в радианы перед
+  // умножением на радиус, иначе дистанция завышена в 180/pi ≈ 57 раз
+  // (поймано вживую: 20665 км при радиусе Муны 200 км — физически
+  // невозможно, максимум половина окружности ~628 км).
+  LOCAL angDeg IS 2 * ARCTAN2(SQRT(a), SQRT(1 - a)).
+  RETURN bodyRadius * angDeg * CONSTANT:PI / 180.
 }
 
 // Когда аппарат окажется в заданной точке витка.
