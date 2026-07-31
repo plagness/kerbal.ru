@@ -57,3 +57,39 @@ GLOBAL FUNCTION d_scan {
   PRINT "  сканеров включено: " + n.
   RETURN n.
 }
+
+// Запустить «долгую» науку без расходников — накапливается сама по ходу
+// полёта, ничего не жжёт кроме EC, включать один раз и забыть:
+//   - USAdvancedScience (US2-отсеки Goo/MapCam/MatBay) — у каждого своё
+//     событие открытия/разворачивания, имя не унифицировано (проверено
+//     вживую: «развернуть отсек слизи», «открыть сервисную дверь»,
+//     «открыть дверцы») — берём ПЕРВОЕ событие модуля, не угадывая имя.
+//   - DMUniversalStorageScience (RPWS, магнитометр) — событие
+//     «toggle …» включает непрерывный мониторинг; «log … data» — это
+//     РАЗОВЫЙ отчёт, не трогаем его здесь (можно вызывать отдельно).
+// ModuleResourceScanner НЕ включаем — у него в этой версии мода вообще
+// нет событий (проверено вживую, ALLEVENTNAMES пуст): работает сам по
+// себе, никакого действия не требует.
+GLOBAL FUNCTION d_sciContinuous {
+  LOCAL n IS 0.
+  LIST PARTS IN pl.
+  FOR p IN pl {
+    LOCAL i IS 0.
+    UNTIL i >= p:MODULES:LENGTH {
+      LOCAL mn IS p:MODULES[i].
+      LOCAL m IS p:GETMODULEBYINDEX(i).
+      IF mn = "USAdvancedScience" {
+        LOCAL el IS m:ALLEVENTNAMES.
+        IF el:LENGTH > 0 { m:DOEVENT(el[0]). SET n TO n + 1. }
+      }
+      IF mn = "DMUniversalStorageScience" {
+        FOR ev IN m:ALLEVENTNAMES {
+          IF ev:STARTSWITH("toggle") { m:DOEVENT(ev). SET n TO n + 1. }
+        }
+      }
+      SET i TO i + 1.
+    }
+  }
+  PRINT "  долгая наука запущена: " + n + " приборов.".
+  RETURN n.
+}
