@@ -924,7 +924,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </tr>
 </tbody>
 </table>
-<p>Пример — <code>check/dalnyak-mun-plan.ks</code>: собирает <code>q_taskScanAltimetry()</code>/<code>q_taskScanBiome()</code>/<code>q_taskConstellation(4,"sat-")</code> в <code>tasks</code>, бюджет фаз в <code>budget</code>, зовёт <code>q_plan(spec)</code>, потом отдельно <code>q_liveTransfer(MUN)</code>. Ни двигателей, ни узлов манёвра — только чтение и арифметика.</p>
+<p>Спецификацию под конкретный корабль в файл не сохраняют — собирают <code>tasks</code>/<code>budget</code> из готовых <code>q_task*</code>/<code>q_body*</code> и шлют <code>q_plan(spec)</code> прямо в терминал (через telnet — одной строкой, см. <a class="wikilink" href="kos-telnet.html" title="Как открыть терминал kOS наружу, почему обычный telnet-клиент не работает, готовый клиент на Python и что это даёт связке «человек + ИИ-агент».">kOS по telnet: пульт снаружи игры</a>). Ни двигателей, ни узлов манёвра — только чтение и арифметика, поэтому это безопасно гонять хоть каждый раз заново.</p>
 <p><strong>Чего чекер не видит</strong> — и не должен: хватит ли топлива именно этому лендеру, мягко ли он сядет, попадёт ли в нужный биом. Готовый прогон печатает список таких слепых зон отдельной строкой — не молчит о том, что не проверено.</p>
 <h2 id="sciks">sci.ks — наука</h2>
 <table>
@@ -966,13 +966,19 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <td>—</td>
 <td>добор: сколько передано; <code>0</code> = больше нечего</td>
 </tr>
+<tr>
+<td><code>sciAudit()</code></td>
+<td>—</td>
+<td>на столе, ничего не деплоит: сколько модулей соберёт <code>sciSweep</code>, сколько известны как несовместимые, список незнакомых</td>
+</tr>
 </tbody>
 </table>
-<p>Настройки: <code>SCI_MIN_VALUE</code> (0.1) — порог, ниже которого замер не передаётся, а сбрасывается; <code>SCI_ALLOW_ANIM</code> — разрешить выдвижные приборы (включается только в вакууме); счётчики <code>SCI_SENT</code>, <code>SCI_DUMPED</code>.</p>
-<p><strong>Два правила, оплаченные потерянными антеннами и приборами:</strong></p>
+<p>Настройки: <code>SCI_MIN_VALUE</code> (0.1) — порог, ниже которого замер не передаётся, а сбрасывается; <code>SCI_ALLOW_ANIM</code> — разрешить выдвижные приборы (включается только в вакууме); <code>SCI_INCOMPATIBLE</code> — модули с «наука» в названии класса, но НЕ с интерфейсом <code>HASDATA</code>/<code>DEPLOY</code>/<code>DATA</code>/<code>TRANSMIT</code>/<code>DUMP</code> (пример — <code>SCANexperiment</code> у SCANsat: своё событие «анализировать данные: тип», <code>HASDATA</code> на нём падает с «Suffix not found» — поймано на живом корабле через telnet); счётчики <code>SCI_SENT</code>, <code>SCI_DUMPED</code>.</p>
+<p><strong>Три правила, оплаченные потерянными антеннами, приборами и одним падением скрипта:</strong></p>
 <ol>
 <li>В атмосфере науку только собираем. Передача <strong>сама раскрывает</strong> складную антенну — в набегающем потоке её срывает.</li>
 <li>Модули перебираются по индексу, а не через <code>GETMODULE</code>: тот возвращает только первый, а у мачты CA-AMA научных модулей два.</li>
+<li><strong>Не добавляй модуль в <code>SCI_PASSIVE</code>/<code>SCI_ANIM</code> по названию класса.</strong> «Science»/«Experiment» в имени не гарантирует совместимый интерфейс — проверяй суффиксы на реальном корабле (<code>m:HASDATA</code> и т.п.) до того, как включать в сбор, иначе <code>sciSweep</code> падает прямо во время полёта, а не на столе. <code>sciAudit()</code> для этого и существует.</li>
 </ol>
 <h2 id="_2">Остальные модули</h2>
 <table>

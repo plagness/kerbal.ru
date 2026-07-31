@@ -1,6 +1,10 @@
 // lib/ascent.ks — подъём с поверхности на опорную орбиту.
 // Зависит от: lib/util.ks, lib/ctrl.ks, lib/stage.ks
 // kerbal.ru · сборка «Оператор»
+
+RUNONCEPATH("0:/lib/util.ks").
+RUNONCEPATH("0:/lib/ctrl.ks").
+RUNONCEPATH("0:/lib/stage.ks").
 //
 // Настройки передаются лексиконом, чтобы модуль не знал ничего о миссии:
 //   park     целевой апоцентр опорной, м

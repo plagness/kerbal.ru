@@ -1,6 +1,16 @@
 // lib/orbit.ks — орбитальная механика и узлы манёвра.
 // Зависит от: lib/ctrl.ks, lib/stage.ks
 // kerbal.ru · сборка «Оператор»
+//
+// Заголовок объявлял зависимость годами, а RUNONCEPATH не было ни одного —
+// работало только пока каждый вызывающий файл (mission.ks) сам грузил
+// ctrl/stage РАНЬШЕ orbit.ks. deepspace.ks грузит orbit.ks через
+// transfer.ks/rendezvous.ks, ctrl/stage в этой цепочке никто не тянет —
+// o_burn падал на s_tick() с «Undefined Variable Name» посреди прожига.
+// Поймано в реальном полёте через telnet.
+
+RUNONCEPATH("0:/lib/ctrl.ks").
+RUNONCEPATH("0:/lib/stage.ks").
 
 GLOBAL FUNCTION o_mu { RETURN SHIP:BODY:MU. }
 GLOBAL FUNCTION o_br { RETURN SHIP:BODY:RADIUS. }

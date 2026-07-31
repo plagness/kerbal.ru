@@ -14,6 +14,15 @@
 GLOBAL SCI_PASSIVE IS "ModuleScienceExperiment".
 GLOBAL SCI_ANIM IS LIST("DMModuleScienceAnimateGeneric", "DMBasicScienceModule").
 GLOBAL SCI_ALLOW_ANIM IS FALSE.
+
+// Модули, у которых В НАЗВАНИИ есть «наука»/«experiment», но интерфейс
+// ДРУГОЙ — не HASDATA/DEPLOY/DATA/TRANSMIT/DUMP, а свои события. Пробовать
+// их через sciSweep — падать с «Suffix not found» посреди сбора, ровно как
+// SCANexperiment (SCANsat) на живом корабле: своё событие
+// «анализировать данные: <тип>», проверено через telnet, HASDATA нет
+// вообще. Пополняй список ТОЛЬКО после проверки на реальном корабле —
+// сама проверка в sciAudit() ниже.
+GLOBAL SCI_INCOMPATIBLE IS LIST("SCANexperiment").
 GLOBAL SCI_LAST IS "".
 GLOBAL SCI_SENT IS 0.
 GLOBAL SCI_DUMPED IS 0.
@@ -103,6 +112,42 @@ FUNCTION sciTick {
     SET SCI_LAST TO z.
     sciSweep(z, sciVacuum()).
   }
+}
+
+// Аудит на столе: что sciSweep реально соберёт, что известно как
+// несовместимое (SCI_INCOMPATIBLE), и — главное — что похоже на научный
+// модуль по названию, но не опознано ни там, ни там. Третья категория и
+// есть риск: добавишь такой в SCI_PASSIVE/SCI_ANIM не глядя — получишь
+// «Suffix not found» посреди полёта, а не на столе. Ничего не деплоит,
+// не передаёт — только читает MODULES по факту установленных деталей.
+FUNCTION sciAudit {
+  LIST PARTS IN pl.
+  LOCAL known IS 0.
+  LOCAL knownIncompatible IS 0.
+  LOCAL unknown IS LIST().
+  FOR p IN pl {
+    LOCAL i IS 0.
+    UNTIL i >= p:MODULES:LENGTH {
+      LOCAL mn IS p:MODULES[i].
+      IF mn = SCI_PASSIVE OR SCI_ANIM:CONTAINS(mn) {
+        SET known TO known + 1.
+      } ELSE IF SCI_INCOMPATIBLE:CONTAINS(mn) {
+        SET knownIncompatible TO knownIncompatible + 1.
+      } ELSE IF mn:CONTAINS("Science") OR mn:CONTAINS("Experiment") {
+        unknown:ADD(p:TITLE + " -> " + mn).
+      }
+      SET i TO i + 1.
+    }
+  }
+  PRINT "sci: соберёт sciSweep — " + known + " модул(ей)".
+  PRINT "sci: известны, но НЕ через sciSweep (свой интерфейс) — " + knownIncompatible.
+  IF unknown:LENGTH > 0 {
+    PRINT "sci: !! незнакомые научные модули — проверь через telnet перед пуском:".
+    FOR u IN unknown { PRINT "  " + u. }
+  } ELSE {
+    PRINT "sci: незнакомых научных модулей на борту не найдено.".
+  }
+  RETURN unknown:LENGTH.
 }
 
 FUNCTION sciRetry {

@@ -86,20 +86,48 @@ GLOBAL FUNCTION x_aimPeri {
 
 // ─── перелёт целиком ──────────────────────────────────────────────────
 
+// Проверить узел ПЕРЕД прожигом: просит больше 90% того, что реально на
+// борту (SHIP:DELTAV:VACUUM), — не жжём, а печатаем и отказываем. Родилось
+// из реальной аварии: опорная орбита была полярной (85°), а Мун лежит
+// у экватора Кербина — подгонка плоскости попросила 3682,8 м/с при
+// ~2300 на борту. Без этой проверки o_burn жжёт что дают, до последней
+// капли, и разбирается уже постфактум. 90%, а не 100% — запас на то,
+// что после подгонки плоскости ещё нужен сам переход и захват.
+GLOBAL FUNCTION x_checkBudget {
+  PARAMETER nd.
+  PARAMETER label.
+  LOCAL need IS nd:DELTAV:MAG.
+  LOCAL have IS SHIP:DELTAV:VACUUM.
+  IF have > 0 AND need > have * 0.9 {
+    PRINT "  ! " + label + " просит " + ROUND(need,0) + " м/с, на борту " + ROUND(have,0)
+          + " м/с — это не мелкий недолёт, а перепутанные плоскости.".
+    PRINT "  ! проверь наклонение опорной орбиты против ORBIT:INCLINATION цели, прожиг не даю.".
+    RETURN FALSE.
+  }
+  RETURN TRUE.
+}
+
 // Перелёт к телу dest внутри той же сферы влияния и заход на круговую
 // орбиту высотой wantAlt. Наклонение НЕ подгоняется здесь — закладывай
-// его на пуске у родительского тела ([[rendezvous]], тот же принцип).
-// Имя параметра НЕ body — это встроенная функция kOS, CLOBBERBUILTINS
-// ловит попытку её перекрыть уже при компиляции, до пуска.
+// его на пуске у родительского тела так, чтобы плоскость совпадала с
+// dest:ORBIT:INCLINATION (для Муна это обычно 0° — экватор родителя,
+// НЕ полярная!), см. [[rendezvous]]. Имя параметра НЕ body — это
+// встроенная функция kOS, CLOBBERBUILTINS ловит попытку её перекрыть
+// уже при компиляции, до пуска.
 GLOBAL FUNCTION x_go {
   PARAMETER dest.
   PARAMETER wantAlt.
 
   PRINT "=== перелёт к " + dest:NAME + ", цель " + ROUND(wantAlt/1000,1) + " км".
 
-  IF r_relInc(dest) > 0.5 { o_burn(r_nodeMatchPlanes(dest)). }
+  IF r_relInc(dest) > 0.5 {
+    LOCAL matchNd IS r_nodeMatchPlanes(dest).
+    IF NOT x_checkBudget(matchNd, "смена плоскости") { RETURN FALSE. }
+    o_burn(matchNd).
+  }
 
   LOCAL nd IS r_nodeTransfer(dest).
+  IF NOT x_checkBudget(nd, "переход") { RETURN FALSE. }
   o_burn(nd).
   PRINT "  переходная: апоцентр " + ROUND(SHIP:APOAPSIS/1000,0) + " км".
 
