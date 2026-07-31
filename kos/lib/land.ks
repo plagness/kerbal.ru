@@ -150,27 +150,70 @@ GLOBAL FUNCTION l_waitFacingAtPeri {
 // напр. waypoint от SCANsat/контракта. Как l_waitFacingAtPeri, но
 // сравнивает GEOPOSITION у самого перицентра с целью через
 // u_greatCircleDist, а не грубый dot-product по полушарию.
+// Измерить дистанцию до цели у ближайшего перицентра, не сдвигая скрипт
+// дальше (для планирования шага снаружи).
+GLOBAL FUNCTION l_distAtNextPeri {
+  PARAMETER targetLat, targetLng.
+  IF ETA:PERIAPSIS > 60 { WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 60). }
+  WAIT UNTIL ETA:PERIAPSIS <= 60.
+  RETURN u_greatCircleDist(SHIP:GEOPOSITION:LAT, SHIP:GEOPOSITION:LNG,
+                            targetLat, targetLng, SHIP:BODY:RADIUS) / 1000.
+}
+
+// Найти перицентр над целью. Долгота цели относительно перицентра
+// дрейфует медленно (тело вращается под почти неподвижным в инерциале
+// перицентром) — на грубом переборе по 0.5 витка это могло бы занять
+// сотни витков. Сначала КРУПНЫМИ прыжками (coarseOrbits витков за раз)
+// ищем окрестность минимума, ловим момент, когда дистанция начинает
+// расти обратно (проскочили) — откатываемся на один крупный шаг назад и
+// добираем ТОЧНО по одному витку, как раньше.
 GLOBAL FUNCTION l_waitOverSite {
   PARAMETER targetLat, targetLng.
-  PARAMETER tolKm IS 150.            // как близко считать «над точкой»
-  PARAMETER maxTries IS 40.
+  PARAMETER tolKm IS 150.
+  PARAMETER coarseOrbits IS 12.
+  PARAMETER maxCoarse IS 40.
+  PARAMETER maxFine IS 15.
+
+  LOCAL orbP IS SHIP:ORBIT:PERIOD.
+  LOCAL d IS l_distAtNextPeri(targetLat, targetLng).
+  PRINT "  старт: " + ROUND(d,0) + " км от цели.".
+  IF d <= tolKm { RETURN TRUE. }
+
+  // ─── грубый проход ───
   LOCAL n IS 0.
-  LOCAL bestDist IS -1.
-  UNTIL n >= maxTries {
-    IF ETA:PERIAPSIS > 60 { WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 60). }
-    WAIT UNTIL ETA:PERIAPSIS <= 60.
-    LOCAL d IS u_greatCircleDist(SHIP:GEOPOSITION:LAT, SHIP:GEOPOSITION:LNG,
-                                  targetLat, targetLng, SHIP:BODY:RADIUS) / 1000.
-    IF bestDist < 0 OR d < bestDist { SET bestDist TO d. }
-    IF d <= tolKm {
-      PRINT "  перицентр витка " + (n+1) + " — " + ROUND(d,0) + " км от цели, сажусь на этом заходе.".
+  LOCAL prevD IS d.
+  UNTIL n >= maxCoarse {
+    WARPTO(TIME:SECONDS + orbP * coarseOrbits - orbP * 0.5).   // подвести к концу прыжка минус запас на точный подход к перицентру
+    LOCAL nd IS l_distAtNextPeri(targetLat, targetLng).
+    SET n TO n + 1.
+    PRINT "  грубый шаг " + n + " (+" + coarseOrbits + " вит.): " + ROUND(nd,0) + " км от цели.".
+    IF nd <= tolKm {
+      PRINT "  попали в допуск на грубом шаге, сажусь.".
       RETURN TRUE.
     }
-    SET n TO n + 1.
-    PRINT "  перицентр витка " + n + " — " + ROUND(d,0) + " км от цели (допуск " + tolKm + "), жду следующий (" + n + "/" + maxTries + ")…".
-    WARPTO(TIME:SECONDS + SHIP:ORBIT:PERIOD * 0.5).
+    IF nd > prevD {
+      PRINT "  проскочили минимум (было " + ROUND(prevD,0) + ", стало " + ROUND(nd,0) + ") — ухожу в точный поиск с прошлого шага.".
+      SET n TO n - 1.
+      BREAK.
+    }
+    SET prevD TO nd.
   }
-  PRINT "  ! не подошли ближе " + ROUND(bestDist,0) + " км за " + maxTries + " витков.".
+
+  // ─── точный проход по одному витку от найденной окрестности ───
+  LOCAL m IS 0.
+  LOCAL bestDist IS prevD.
+  UNTIL m >= maxFine {
+    LOCAL fd IS l_distAtNextPeri(targetLat, targetLng).
+    IF fd < bestDist { SET bestDist TO fd. }
+    IF fd <= tolKm {
+      PRINT "  точный виток " + (m+1) + " — " + ROUND(fd,0) + " км от цели, сажусь на этом заходе.".
+      RETURN TRUE.
+    }
+    SET m TO m + 1.
+    PRINT "  точный виток " + m + " — " + ROUND(fd,0) + " км от цели (допуск " + tolKm + "), " + m + "/" + maxFine + "…".
+    WARPTO(TIME:SECONDS + orbP * 0.5).
+  }
+  PRINT "  ! не подошли ближе " + ROUND(bestDist,0) + " км.".
   RETURN FALSE.
 }
 
