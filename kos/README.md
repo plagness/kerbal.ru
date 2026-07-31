@@ -158,26 +158,29 @@ m_orbit(s).
 RUNONCEPATH("0:/lib/deepspace.ks").
 
 SET s TO ds_defaults().
-SET s["body"]    TO MUN.
-SET s["parkAlt"] TO 18000.       // низкая орбита — отсюда выпускают лендеров
-SET s["mapAlt"]  TO 250000.      // картографическая полярная
-SET s["landers"] TO LIST("lander-1", "lander-2", "lander-3").
-SET s["sci"]     TO TRUE.
+SET s["body"]     TO MUN.
+SET s["parkAlt"]  TO 100000.      // рабочая орбита созвездия
+SET s["mapAlt"]   TO 0.           // не поднимаемся — шина садится сама
+SET s["landers"]  TO LIST("sat-1", "sat-2", "sat-3", "sat-4").
+SET s["selfLand"] TO TRUE.        // шина сама садится после развода спутников
+SET s["sci"]      TO TRUE.
 
 ds_run(s).
 ```
 
-Готовый пример — `missions/dalnyak-mun.ks` (шина) и
-`missions/dalnyak-mun-lander.ks` (посадка одного лендера после переключения
-фокуса на него). Архитектура и цифры разобраны в вики:
-[миссия на Мун](https://kerbal.ru/Operator/wiki/missiya-mun.html) и
+`landers` — общее имя для всего, что отделяется по метке декаплера: лендеры,
+которые садятся сами, или спутники, которые остаются на орбите — механика
+одна, `selfLand` решает, что дальше делает сама шина.
+
+Готовый пример — `missions/dalnyak-mun.ks`. Архитектура и цифры разобраны
+в вики: [миссия на Мун](https://kerbal.ru/Operator/wiki/missiya-mun.html) и
 [автоматизация запуска](https://kerbal.ru/Operator/wiki/kos-avtomatizaciya.html).
 
 ### Чекер: есть ли на борту всё нужное
 
 `check/dalnyak-mun-audit.ks` — на столе, до пуска, смотрит детали корабля
-и сверяет с тем, что просят контракты (SCANsat-сканеры, метки лендеров,
-запас Δv и заряда под Мун):
+и сверяет с тем, что просят контракты (SCANsat-сканеры, метки спутников,
+запас Δv под Мун):
 
 ```
 RUNPATH("0:/check/dalnyak-mun-audit.ks").
@@ -185,7 +188,7 @@ RUNPATH("0:/check/dalnyak-mun-audit.ks").
 
 Не про этот конкретный корабль — общие блоки в `lib/audit.ks`:
 `q_hasPart`, `q_countTag`, `q_bodyChecklist` и заготовки под типовые задачи
-(`q_taskScanAltimetry`, `q_taskLandBiomes` и т.д.), из которых собирается
+(`q_taskScanAltimetry`, `q_taskConstellation` и т.д.), из которых собирается
 чекер под любую другую миссию.
 
 ## Правила, на которых всё держится

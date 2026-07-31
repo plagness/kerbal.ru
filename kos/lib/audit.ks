@@ -120,6 +120,17 @@ GLOBAL FUNCTION q_taskLandBiomes {
   ).
 }
 
+// n — сколько спутников созвездия отделяется, prefix — метка декаплеров
+// (по умолчанию "sat-", у Дальняк-Мун — sat-1…sat-4).
+GLOBAL FUNCTION q_taskConstellation {
+  PARAMETER n IS 4.
+  PARAMETER prefix IS "sat-".
+  RETURN LIST(
+    LEXICON("label", "декаплеров с меткой " + prefix + "N: нужно " + n, "ok", q_countTag(prefix) >= n),
+    LEXICON("label", "антенна на борту (для связи спутников после отделения)", "ok", q_hasModule("DeployableAntenna"))
+  ).
+}
+
 GLOBAL FUNCTION q_taskGooOrMaterials {
   RETURN LIST(
     LEXICON("label", "капсула с загадочной слизью или контейнер материаловедения", "ok",
@@ -164,10 +175,21 @@ GLOBAL FUNCTION q_bodyChecklist {
 
 // Цифры — из [[missiya-mun]]: захват в картографическую 250 км ≈ 1150 м/с
 // от опорной 80 км; теневая сторона Муна до 19 ч, зондовому ядру нужно
-// 1400–3500 ЭЧ без РИТЭГа.
+// 1400–3500 ЭЧ без РИТЭГа. Профиль «остаться на орбите картографом».
 GLOBAL FUNCTION q_bodyMun {
   LOCAL s IS q_bodyDefaults().
   SET s["dv"] TO 1150.
   SET s["ecReserve"] TO 1400.
+  RETURN s.
+}
+
+// Профиль «развести спутники и сесть, без обратного взлёта» — от опорной
+// орбиты Кербина: перелёт 856 + захват на рабочую ~300 + развод по фазе
+// ~100 + один манёвр смены плоскости под полярное покрытие ~770 +
+// посадка без взлёта ~700, с запасом. Заряд не критичен — шина не сидит
+// месяцами на орбите, весь профиль укладывается в один-два дня полёта.
+GLOBAL FUNCTION q_bodyMunTour {
+  LOCAL s IS q_bodyDefaults().
+  SET s["dv"] TO 2700.
   RETURN s.
 }
