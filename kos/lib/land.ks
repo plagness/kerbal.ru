@@ -60,9 +60,16 @@ GLOBAL FUNCTION l_descend {
   PRINT "=== посадка: жду касания поверхности".
   SAS OFF.
   c_rcs(TRUE).
+  // Горизонтальная скорость относительно поверхности — раньше ниже
+  // vertAt нос безусловно переключался на «строго вверх» и переставал
+  // гасить снос, даже если он был большим. При касании с остаточным
+  // боковым сносом аппарат заваливался на бок (поймано вживую дважды).
+  // Теперь переключение на «вверх» — только когда снос УЖЕ мал (<3 м/с),
+  // иначе продолжаем ретроградно гасить его вне зависимости от высоты.
+  LOCK horizSpeed TO VXCL(SHIP:UP:VECTOR, SHIP:VELOCITY:SURFACE):MAG.
   // Оба LOCK — динамические выражения, kOS сам пересчитывает их каждый
   // тик: перезапирать в цикле не нужно, см. o_burn для того же приёма.
-  LOCK STEERING TO CHOOSE UP IF ALT:RADAR < vertAt ELSE SHIP:SRFRETROGRADE.
+  LOCK STEERING TO CHOOSE UP IF (ALT:RADAR < vertAt AND horizSpeed < 3) ELSE SHIP:SRFRETROGRADE.
   LOCK THROTTLE TO u_clamp((-SHIP:VERTICALSPEED - l_vsLimit(ALT:RADAR) * 0.9) / 20, 0, 1).
 
   UNTIL SHIP:STATUS = "LANDED" OR SHIP:STATUS = "SPLASHED" {
