@@ -44,6 +44,17 @@ GLOBAL FUNCTION l_descend {
   PARAMETER onTick IS { }.
   PARAMETER vertAt IS 150.       // ниже этой высоты нос строго вверх, не по потоку
 
+  // Деорбит обычно жжётся у апоцентра — до реального касания земли ещё
+  // почти виток пустого падения. Раньше l_descend просто сидела в цикле
+  // WAIT 0 всё это время (до ~часа реального времени на вытянутой
+  // орбите — поймано вживую). Домотать варпом можно смело: тяга ещё не
+  // нужна высоко, l_vsLimit(10000+) всё равно даёт потолок 150 м/с.
+  IF ALT:RADAR > 15000 AND ETA:PERIAPSIS > 30 {
+    PRINT "  варп через пустое падение до перицентра…".
+    WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 20).
+    WAIT UNTIL ALT:RADAR <= 15000 OR SHIP:STATUS = "LANDED" OR SHIP:STATUS = "SPLASHED".
+  }
+
   PRINT "=== посадка: жду касания поверхности".
   SAS OFF.
   c_rcs(TRUE).
@@ -89,12 +100,14 @@ GLOBAL FUNCTION l_facingBody {
 }
 
 // Дождаться витка, на котором корабль окажется над нужным полушарием.
+// Домотать варпом можно смело — до того момента менять нечего, ждём.
 GLOBAL FUNCTION l_waitFacing {
   PARAMETER refBody.
   PARAMETER maxOrbits IS 3.
   IF l_facingBody(refBody) { RETURN TRUE. }
   PRINT "  жду виток над стороной, обращённой к " + refBody:NAME + "…".
   LOCAL deadline IS TIME:SECONDS + SHIP:ORBIT:PERIOD * maxOrbits.
+  WARPTO(TIME:SECONDS + SHIP:ORBIT:PERIOD * 0.4).   // грубый скачок вперёд, не точный расчёт
   WAIT UNTIL l_facingBody(refBody) OR TIME:SECONDS > deadline.
   RETURN l_facingBody(refBody).
 }
