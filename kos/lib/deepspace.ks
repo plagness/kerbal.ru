@@ -94,6 +94,7 @@ GLOBAL FUNCTION ds_run {
     RETURN FALSE.
   }
   IF spec["sci"] { sciSweep("захват " + spec["body"]:NAME, TRUE). }
+  d_scan().     // включаем сканеры сразу — чем раньше, тем больше витков успеют отснять
 
   IF spec["landers"]:LENGTH > 0 {
     PRINT "=== развод отделяемых нагрузок на орбите " + ROUND(spec["parkAlt"]/1000,1) + " км".
@@ -129,8 +130,6 @@ GLOBAL FUNCTION ds_run {
   PRINT "=== " + spec["name"] + ": на месте " + ROUND(SHIP:APOAPSIS/1000,1)
         + " / " + ROUND(SHIP:PERIAPSIS/1000,1) + " км, накл "
         + ROUND(SHIP:ORBIT:INCLINATION,1) + "°".
-  PRINT "  сканеры SCANsat kOS не включает — имена их событий не сверены,".
-  PRINT "  переключи с приборной панели вручную.".
   IF spec["landers"]:LENGTH > 0 {
     PRINT "  посадка отделённой нагрузки — после переключения фокуса на неё:".
     PRINT "    SET s TO l_defaults(). l_run(s).   (lib/land.ks)".
