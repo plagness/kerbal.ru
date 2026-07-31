@@ -140,6 +140,17 @@ GLOBAL FUNCTION u_argLat {
   RETURN ang.
 }
 
+// Дуговое расстояние по поверхности тела между двумя точками (широта/
+// долгота, °), м. Обычная сферическая формула гаверсинуса — тело
+// считаем сферой, для посадочной точности этого достаточно.
+GLOBAL FUNCTION u_greatCircleDist {
+  PARAMETER lat1, lng1, lat2, lng2, bodyRadius.
+  LOCAL dLat IS lat2 - lat1.
+  LOCAL dLng IS lng2 - lng1.
+  LOCAL a IS SIN(dLat/2)^2 + COS(lat1) * COS(lat2) * SIN(dLng/2)^2.
+  RETURN 2 * bodyRadius * ARCTAN2(SQRT(a), SQRT(1 - a)).
+}
+
 // Когда аппарат окажется в заданной точке витка.
 // Считаем по среднему движению — точно для круговой орбиты, а парковочная
 // у нас околокруговая, так что погрешность в пределах секунд.

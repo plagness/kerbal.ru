@@ -146,6 +146,34 @@ GLOBAL FUNCTION l_waitFacingAtPeri {
   RETURN FALSE.
 }
 
+// Дождаться перицентра над конкретной точкой (не просто полушарием) —
+// напр. waypoint от SCANsat/контракта. Как l_waitFacingAtPeri, но
+// сравнивает GEOPOSITION у самого перицентра с целью через
+// u_greatCircleDist, а не грубый dot-product по полушарию.
+GLOBAL FUNCTION l_waitOverSite {
+  PARAMETER targetLat, targetLng.
+  PARAMETER tolKm IS 150.            // как близко считать «над точкой»
+  PARAMETER maxTries IS 40.
+  LOCAL n IS 0.
+  LOCAL bestDist IS -1.
+  UNTIL n >= maxTries {
+    IF ETA:PERIAPSIS > 60 { WARPTO(TIME:SECONDS + ETA:PERIAPSIS - 60). }
+    WAIT UNTIL ETA:PERIAPSIS <= 60.
+    LOCAL d IS u_greatCircleDist(SHIP:GEOPOSITION:LAT, SHIP:GEOPOSITION:LNG,
+                                  targetLat, targetLng, SHIP:BODY:RADIUS) / 1000.
+    IF bestDist < 0 OR d < bestDist { SET bestDist TO d. }
+    IF d <= tolKm {
+      PRINT "  перицентр витка " + (n+1) + " — " + ROUND(d,0) + " км от цели, сажусь на этом заходе.".
+      RETURN TRUE.
+    }
+    SET n TO n + 1.
+    PRINT "  перицентр витка " + n + " — " + ROUND(d,0) + " км от цели (допуск " + tolKm + "), жду следующий (" + n + "/" + maxTries + ")…".
+    WARPTO(TIME:SECONDS + SHIP:ORBIT:PERIOD * 0.5).
+  }
+  PRINT "  ! не подошли ближе " + ROUND(bestDist,0) + " км за " + maxTries + " витков.".
+  RETURN FALSE.
+}
+
 // ─── одной спецификацией, как ds_run() в lib/deepspace.ks ─────────────
 //
 //   RUNONCEPATH("0:/lib/land.ks"). RUNONCEPATH("0:/lib/sci.ks").
