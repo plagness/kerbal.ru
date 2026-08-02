@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 120,
+    "mods": 121,
     "keyedMods": 47,
-    "uiMods": 40,
-    "keys": 16023
+    "uiMods": 41,
+    "keys": 16050
   },
   "mods": [
     {
@@ -312,6 +312,14 @@
       "status": "draft"
     },
     {
+      "id": "JanitorsCloset",
+      "mod": "Janitor's Closet",
+      "folder": "JanitorsCloset",
+      "method": "ui-dict",
+      "keys": 23,
+      "status": "draft"
+    },
+    {
       "id": "JX2Antenna",
       "mod": "JX2Antenna",
       "folder": "JX2Antenna",
@@ -428,7 +436,7 @@
       "mod": "kOS (Kerbal Operating System)",
       "folder": "kOS",
       "method": "ui-dict",
-      "keys": 49,
+      "keys": 53,
       "status": "draft"
     },
     {

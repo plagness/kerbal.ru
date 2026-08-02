@@ -1,0 +1,47 @@
+# Janitor's Closet — ui-словарь. DLL: GameData/JanitorsCloset/Plugins/JanitorsCloset.dll
+# (linuxgurugamer/JanitorsCloset). У мода нет своей Localization-системы — весь текст
+# литерален в C# (классический IMGUI: GUILayout.Label/Button). Строки сверены байт-в-байт
+# с исходником github.com/linuxgurugamer/JanitorsCloset (JanitorsCloset.cs, ShowBlocked.cs,
+# PermaPrune.cs, ShowRenamed.cs, JanitorsToolbar.cs).
+#
+# ПРИНЦИПИАЛЬНО НЕ покрыто (движок матчит точную строку, а эти строки склеены рантаймом
+# с живыми числами — никогда не совпадут с фиксированным ключом словаря):
+#  - "Parts count: N\nModels: N (X Gb)\nTextures: N (X Gb)" (AssetsLabel) — счётчики деталей.
+#  - "Mod Filter (N, N, N, N, N, N)" — активные фильтры добавляются в текст кнопки.
+#  - "Renamed files: N (X Gb)" — счётчик переименованных файлов.
+#  Базовые состояния без чисел ("Mod Filter" без фильтров) — покрыты ниже.
+#
+# Формат: Английский<TAB>Русский.
+
+# --- Главная панель ---
+Block all	Заблокировать всё
+Block VAB	Заблокировать в VAB
+Block SPH	Заблокировать в SPH
+Show Blocked	Показать заблокированные
+Unblock	Разблокировать
+Unblock All	Разблокировать всё
+PermaPrune	Удаление файлов
+Mod Filter	Фильтр модов
+Export/Import	Экспорт/импорт
+
+# --- Контекстное меню детали в списке (JanitorsToolbar) ---
+Hide here	Скрыть здесь
+Hide everywhere	Скрыть везде
+Move to new folder	Переместить в новую папку
+Move to folder	Переместить в папку
+Add to Blacklist	В чёрный список
+Identify	Подсветить
+
+# --- Окно "Show Blocked" ---
+Mod Name	Название мода
+Where	Где
+
+# --- Окно PermaPrune (безвозвратное удаление файлов заблокированных модов) ---
+Permanent Prune	Удалить безвозвратно
+Undo Permanent Prune	Отменить удаление
+ Cancel 	 Отмена
+ Close 	 Закрыть
+OK	OK
+
+# --- Окно "Show Renamed" ---
+Copy to clipboard	Копировать в буфер

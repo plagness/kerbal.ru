@@ -15,6 +15,12 @@
 #     оставлены как есть.
 #  5. Диалоги telnet (PopupDialog): заголовки, вопросы да/нет, кнопки.
 #  6. Кнопки/подписи диалогов миграции boot-файлов и настроек.
+#  7. Диалог выбора менеджера связи (kOSConnectivityParameters.CheckNewManagers) — текст
+#     подтверждён байт-в-байт по исходнику github.com/KSP-KOS/KOS
+#     src/kOS/Communication/kOSConnectivityParameters.cs (SELECT_DIALOG_TEXT: конкатенация
+#     без реальных \n, одна строка — ПОКРЫВАЕТСЯ, в отличие от многострочных тел выше).
+#     Имена классов-менеджеров (CommNetConnectivityManager и т.д.) — идентификаторы,
+#     не переводим; только суффикс "(Selected)" у выбранного варианта.
 #
 # Пропущено НАМЕРЕННО (движок не сматчит или это не UI):
 #  - Многострочные тела диалогов (реальные \n в строке DLL — построчный формат
@@ -77,3 +83,9 @@ Yes: migrate settings	Да: перенести настройки
 No: start with new default settings	Нет: начать с настроек по умолчанию
 All settings except telnet settings are now stored in the game's save file. Settings stored here will be ignored.	Все настройки, кроме telnet, теперь хранятся в файле сохранения игры. Настройки здесь будут проигнорированы.
 Changes to these settings are saved and globally affect all saved games.	Изменения этих настроек сохраняются и глобально влияют на все сохранённые игры.
+
+# --- Диалог выбора менеджера связи (см. блок 7 выше) ---
+kOS has detected that there are one or more new connectivity managers available, or that your selected manager is no longer available.  A connectivity manager determines how kOS will interact with a communications network with regard to both inter-vessel and vessel-kerbin communication and file transfer.  Please select a manager to use.	kOS обнаружил один или несколько новых менеджеров связи, либо выбранный вами менеджер больше недоступен.  Менеджер связи определяет, как kOS будет взаимодействовать с сетью связи — для передачи данных между аппаратами, для связи аппарат-Кербин и для передачи файлов.  Выберите менеджер для использования.
+CommNetConnectivityManager (Selected)	CommNetConnectivityManager (выбран)
+PermitAllConnectivityManager (Selected)	PermitAllConnectivityManager (выбран)
+RemoteTechConnectivityManager (Selected)	RemoteTechConnectivityManager (выбран)
