@@ -544,6 +544,12 @@ Universal Storage 2). Цикл: ручной манёвр оператора в 
       обслуживают только `/KSP-RO`; хаб их не читает. Помечено в `_concept`, разбирать при рефакторинге страницы RO.
 
 ### Чужие моды (не чиним, знаем)
+- **Filter Extensions: `resource name already exists, abandoning generation for ...`** (v26.42, живой
+      лог) — штатное поведение, не баг. У мода есть ручной список подкатегорий «Filter by Resource»
+      (`000_FilterExtensions_Configs/Default/StockCategories.cfg`: Liquid Fuel/Oxidizer/Electric
+      Charge/Mono Propellant/Solid Fuel и т.д.) + отдельный авто-генератор, который пытается сделать
+      подкатегорию под КАЖДЫЙ обнаруженный в игре ресурс. Когда для ресурса уже есть ручная
+      подкатегория — генератор корректно это видит и пропускает, защита от дублей. Ничего не сломано.
 - **B9PartSwitch: `The tank type LiquidFuel/LFO/OX/LF/LFOX already exists`** (v26.42, живой лог).
       Разобрано до конца (не как Xenon-баг v26.30 — там реально чинили, здесь сознательно не стали):
       `LiquidFuel`/`LFO` определены без взаимного `:NEEDS[]`-исключения в B9PartSwitch/DefaultTankTypes.cfg
