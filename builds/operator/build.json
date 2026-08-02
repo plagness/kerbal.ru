@@ -89,7 +89,15 @@
       "kOSforAll",
       "ContractConfigurator-UnmannedContracts",
       "ContractConfigurator-ExplorationPlus",
-      "DangItContinued"
+      "DangItContinued",
+      "kOS-MechJeb2",
+      "RasterPropMonitor-Core",
+      "ProbeControlRoomRecontrolled",
+      "kOSPropMonitor",
+      "Trajectories",
+      "PreciseNode",
+      "WaypointManager",
+      "FilterExtensions"
     ],
     "optional": [
       "kRPC",

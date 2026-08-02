@@ -15,13 +15,13 @@
 |---|---|
 | Библиотека переводов | **111 модов, 14 748 ключей** (40 keyed + 40 ui-словарей + доборы) |
 | Валидатор | 0 ошибок по 149 `.cfg` (519 предупреждений — намеренные бренды/заглушки) |
-| Каталог сборок | `operator` (72 мода, курируемая) · `rp1` (RO/RSS/RP-1, зеркало) |
+| Каталог сборок | `operator` (86 модов, курируемая) · `rp1` (RO/RSS/RP-1, зеркало) |
 | Вики «Оператора» | 57 статей, 0 битых ссылок, 0 сирот |
 | kOS-библиотека | `kos/` — 24 скрипта: модули, шаблоны миссий, чекеры, telnet-клиент |
 | Живые цифры | `site/data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
 | Сайт | хаб + `/Operator` + `/KSP-RO` + `/Operator/wiki`; исходники в `site/`, публикует workflow `pages.yml` |
 | Установка | Windows — `.ckan`-метапакет + ZIP без терминала; Linux/macOS/Deck — `install.sh` |
-| Последний релиз | v26.19 |
+| Последний релиз | v26.20 |
 
 ## «Оператор» — играбельность
 
@@ -45,6 +45,20 @@
   не подтверждены запуском).
 - 🔴 Транзитом с Kerbal Weather Project подтянулись Kerbal Konstructs / Kerbin Side Remastered / KerBalloons
   (не планировались явно, декоративная наземная застройка, планету не трогают).
+
+### v26.20 (2026-08-02): точечные kOS-мосты + комната управления
+
+Восемь модов вдогонку — kOS-SCANSat/LaserDist/kOSforAll/kOS-MechJeb2 (мосты), PreciseNode/Trajectories/
+WaypointManager/FilterExtensions (точность), Contract Pack Unmanned/ExplorationPlus, Dang It!, и
+RasterPropMonitor-Core+ProbeControlRoomRecontrolled+kOSPropMonitor («комната управления» для
+беспилотников — телеметрия и kOS-терминал прямо в игре). Подробности — CHANGELOG.md,
+[[mody-rasshirenie]].
+
+- 🔴 `RasterPropMonitor-Core` тянет в Recommends тяжёлый IVA-стек для пилотирования от первого лица
+  (FreeIva/ASET Props/Through The Eyes/Reviva, ~130 МБ) — снесено вручную сразу после установки,
+  повторится при переустановке через `install.sh` (см. известные ограничения в CHANGELOG).
+- 🔴 Всё ещё не запускали игру после v26.19 — новая связь (RemoteTech) и весь этот довесок непроверены
+  живым запуском.
 
 ## Дальняк-Мун: первый живой полёт к Муне (2026-07-31)
 
