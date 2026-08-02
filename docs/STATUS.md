@@ -21,7 +21,7 @@
 | Живые цифры | `site/data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
 | Сайт | хаб + `/Operator` + `/KSP-RO` + `/Operator/wiki`; исходники в `site/`, публикует workflow `pages.yml` |
 | Установка | Windows — `.ckan`-метапакет + ZIP без терминала; Linux/macOS/Deck — `install.sh` |
-| Последний релиз | v26.38 |
+| Последний релиз | v26.39 |
 
 ## «Оператор» — играбельность
 
