@@ -70,7 +70,11 @@
       "StageRecovery",
       "JX2Antenna",
       "BeamedPowerPlugin",
-      "ExtraPlanetaryLaunchpads"
+      "ExtraPlanetaryLaunchpads",
+      "Astrogator",
+      "kOS-Astrogator",
+      "KerbalEngineerRedux",
+      "kOS-KerbalEngineer"
     ],
     "optional": [
       "kRPC",
