@@ -15,9 +15,9 @@
       ],
       "mods": {
         "core": 21,
-        "recommended": 36,
+        "recommended": 49,
         "optional": 2,
-        "total": 59
+        "total": 72
       }
     },
     {
@@ -40,5 +40,5 @@
       }
     }
   ],
-  "generatedAt": "2026-07-27"
+  "generatedAt": "2026-08-02"
 }

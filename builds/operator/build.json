@@ -22,8 +22,8 @@
       "CommunityTechTree",
       "ContractConfigurator",
       "ContractConfigurator-Constellations",
-      "CommNetConstellation",
-      "AntennaHelper",
+      "RemoteTech",
+      "StockRT",
       "MechJeb2",
       "SCANsat",
       "Snacks",
@@ -74,7 +74,16 @@
       "Astrogator",
       "kOS-Astrogator",
       "KerbalEngineerRedux",
-      "kOS-KerbalEngineer"
+      "kOS-KerbalEngineer",
+      "ContractConfigurator-RemoteTech",
+      "EnvironmentalVisualEnhancements",
+      "Spectra",
+      "Spectra-Scatterer",
+      "DistantObject",
+      "AutomatedScienceSampler",
+      "CameraTools",
+      "HullcamVDSContinued",
+      "KerbalWeatherProject"
     ],
     "optional": [
       "kRPC",
