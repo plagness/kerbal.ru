@@ -1,8 +1,8 @@
 {
-  "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours / ZZZRadioTelescope / AnomalySurveyor)",
+  "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours / ZZZRadioTelescope / AnomalySurveyor / ResearchAdvancementDivision)",
   "folder": "ContractPacks",
   "method": "mm-contract+ui-dict",
-  "keys": 1007,
+  "keys": 1155,
   "uiDictKeys": 326,
   "status": "draft"
 }

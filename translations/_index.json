@@ -3,8 +3,8 @@
   "totals": {
     "mods": 130,
     "keyedMods": 56,
-    "uiMods": 41,
-    "keys": 18645
+    "uiMods": 40,
+    "keys": 18873
   },
   "mods": [
     {
@@ -177,10 +177,10 @@
     },
     {
       "id": "ContractPacks",
-      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours / ZZZRadioTelescope / AnomalySurveyor)",
+      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours / ZZZRadioTelescope / AnomalySurveyor / ResearchAdvancementDivision)",
       "folder": "ContractPacks",
       "method": "mm-contract+ui-dict",
-      "keys": 1007,
+      "keys": 1155,
       "status": "draft"
     },
     {
@@ -939,8 +939,8 @@
       "id": "Strategia",
       "mod": "Strategia",
       "folder": "Strategia",
-      "method": "ui-dict",
-      "keys": 116,
+      "method": "ui-dict+mm-title",
+      "keys": 196,
       "status": "draft"
     },
     {

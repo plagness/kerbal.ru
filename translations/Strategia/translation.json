@@ -1,7 +1,9 @@
 {
   "mod": "Strategia",
   "folder": "Strategia",
-  "method": "ui-dict",
-  "keys": 116,
-  "status": "draft"
+  "method": "ui-dict+mm-title",
+  "keys": 196,
+  "status": "draft",
+  "uiDictKeys": 116,
+  "mmTitleKeys": 80
 }
