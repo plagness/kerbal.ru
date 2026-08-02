@@ -5,6 +5,8 @@
 # Ведущие/хвостовые пробелы и двоеточия сохранены точно. Многострочные строки с реальным \n
 # (2 сообщения об ошибке установки) невозможно задать ключом в построчном файле — они опущены.
 Docking Port	Стыковочный узел
+Manual	Руководство
+Tracking	Отслеживание
 Thank you for implementing the Routine Mission Manager. This application allows you, as a space program administrators, to track certain flights in a manner which allows you to order similar missions in the future, without requiring your continues hands-on guidance and oversight of these missions. As such, the routine mission manager will save time executing the routine missions which will allow you to focus more time on pushing the borders of space exploration. 	Благодарим за внедрение Менеджера рутинных миссий. Это приложение позволяет вам как администратору космической программы отслеживать определённые полёты так, чтобы в будущем заказывать похожие миссии без постоянного ручного управления и надзора за ними. Тем самым менеджер рутинных миссий экономит время на выполнении рутинных миссий, позволяя уделять больше внимания расширению границ освоения космоса. 
 What type of flights can tracked? What are the variations of the subsequent orders of these mission? What are the details and conditions which define these operations? Is there a manual which explains any of this?	Какие типы полётов можно отслеживать? Какие варианты последующих заказов этих миссий доступны? Какие детали и условия определяют эти операции? Есть ли руководство, объясняющее всё это?
 You are reading it now. 	Вы читаете его прямо сейчас. 
@@ -227,6 +229,7 @@ mission tracking-REENTRY	отслеживание миссии — ВХОД В �
 mission tracking-RETURN	отслеживание миссии — ВОЗВРАТ
 mission tracking ended	отслеживание миссии завершено
 stop tracking	прекратить отслеживание
+tracking	отслеживание
 Start Mission	Начать миссию
 Start Return Mission	Начать миссию возврата
 Mission Part	Часть миссии

@@ -46,6 +46,7 @@ Show Available Crew	Показать доступный экипаж
 Open Stresstimator	Открыть Stresstimator
 Close Stresstimator	Закрыть Stresstimator
 Stop simulators (Estimates will be unavailable)	Остановить симуляторы (оценки станут недоступны)
+Snacks enabled	Снеки включены
 <color=yellow><b>Vessel has no crewed parts to simulate.</b></color>	<color=yellow><b>На аппарате нет обитаемых деталей для симуляции.</b></color>
 <color=yellow><b>Vessel needs crew to run simulation.</b></color>	<color=yellow><b>Для симуляции аппарату нужен экипаж.</b></color>
 <color=white><b>Simulation in progress, please wait...</b></color>	<color=white><b>Идёт симуляция, подождите…</b></color>

@@ -62,7 +62,11 @@ Auto	Авто
 Update Interval	Интервал обновления
 Flight Path Angle	Угол траектории полёта
 Coast Before	Пассивный участок до
+Coast During	Пассивный участок во время
 Coast After	Пассивный участок после
+Use LAN relative to launch site	ДВУ относительно площадки старта
+PSG Settings	Настройки PSG
+Qα limit has been clamped to between 0 and 10000 Pa-rad	Ограничение Qα принудительно установлено в диапазон 0–10000 Па-рад
 Fixed Coast Length:	Фиксированная длина пассивного участка:
 Ullage lead time: 	Время осадки топлива заранее: 
 Spinup stage: 	Ступень раскрутки: 
@@ -98,6 +102,7 @@ Position	Положение
 Deadband	Мёртвая зона
 SmoothIn	Плавный вход
 SmoothOut	Плавный выход
+Smooth Control:	Плавное управление:
 Pos PTerm	П-член (позиция)
 Pos ITerm	И-член (позиция)
 Pos DTerm	Д-член (позиция)
@@ -289,6 +294,7 @@ Hz	Гц
 km	км
 Alt: 	Высота: 
  (unguided)	 (неуправляемая)
+ (fixed)	 (фиксированная)
  (optimize)	 (оптимизация)
 Module disabling does not kill throttle	Отключение модуля не сбрасывает тягу
 Delays: 	Задержки: 

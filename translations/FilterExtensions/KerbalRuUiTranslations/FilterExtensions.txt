@@ -1,0 +1,219 @@
+# FilterExtensions -- словарь UI-строк редактора (VAB/SPH) для мода FilterExtensions
+# (000_FilterExtensions + 000_FilterExtensions_Configs). ПОЧЕМУ ui-dict, а не MM-патч:
+# имена категорий/подкатегорий в GameData/000_FilterExtensions_Configs/*.cfg -- это
+# литерал `name = ...`, который САМ является идентификатором: на него ссылаются списки
+# порядка `list = N,<name>` (в других файлах тоже) и по нему же мёрджатся подкатегории
+# с одинаковым именем, объявленные в РАЗНЫХ .cfg (пример -- шесть вариантов
+# "Data Transmitter*" в SubCategories_Antannae.cfg И SubCategories_Science.cfg).
+# Патчить `@name` в обход этого реально сломать порядок/мёрдж в месте, которое легко
+# пропустить. Вместо этого ловим уже ОТРИСОВАННЫЙ текст сайдбара (UGUI/TMPro) --
+# байты name= в .cfg не трогаем вообще, вся машинерия FilterExtensions остаётся целой.
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# ⚠️ Движок хранит ОДИН плоский словарь на всю игру (Dictionary<string,string>, см.
+# tools/ui-translator/src/KerbalRuUiTranslator.cs, Dict[en]=ru без scope по мoду) --
+# одинаковая английская строка из любого мода получает один и тот же перевод ВЕЗДЕ.
+# Перед добавлением каждой строки этот файл сверен со всеми остальными
+# translations/*/KerbalRuUiTranslations/*.txt (см. отчёт агента). Там, где строка уже
+# была занята другим модом, ниже стоит комментарий с источником; если её текущий смысл
+# подходит и для FilterExtensions -- строка объявлена здесь же с тем же значением
+# (риска нет, значение идентично независимо от порядка загрузки файлов).
+#
+# Бренды/названия модов-источников категорий (латиница, НЕ переводим, поэтому их
+# здесь нет вообще): B9 Aerospace, B9 Aerospace Procedural Wings, BDArmory, Bluedog
+# Design Bureau, CCTV, Coatl Aerospace, Commonwealth Rockets / CRE, Dodo Labs, Far
+# Future Technologies, Firespitter, Hephaistos, HullCameraVDS, KSP Interstellar,
+# KW Rocketry, Knes, Luciole, Mandatory RCS Part Pack, Modular Rocket Systems, Near
+# Future Technologies, Novapunch, Orbital ATK Antares, RLA Reborn, RN Industries*,
+# RO Capsules/Engines/Tanks, SCANsat, SPEngine, Space Launch System, Squad, Tantares
+# Space Technologies, Umbra Space Industries, Wild Blue Industries, DMagicOrbital
+# Science, HGR & HGR_Redux, RemoteTech (сам бренд), StationPartsExpansionRedux,
+# SurfaceExperimentPackage, TarsierSpaceTech, UniversalStorage, UniversalStorage2,
+# ProceduralFairings, ProceduralParts, SM Marine, RCS, GPS -- реальные бренды/коды,
+# оставлены латиницей и намеренно отсутствуют в этом словаре.
+#
+# Размерные/кодовые обозначения (Mk 2 [1.5 x 2.5 m], Size 3 [3.75 m], OPT Avatar
+# [3 x 8.2 m] и т.п. -- все подкатегории "Filter by Cross-Section Profile" с числом в
+# скобках) намеренно не переведены -- общепринятые в русских KSP-сообществах коды.
+
+# --- CATEGORY: верхние вкладки сайдбара ---
+Filter by Function	Фильтр по функции
+Filter by Cross-Section Profile	Фильтр по профилю сечения
+Filter by Resource	Фильтр по ресурсу
+Kerbonauts and Control	Кербонавты и управление
+Aero Parts	Аэродинамические детали
+Fuel Tanks	Топливные баки
+Engines	Двигатели
+Structural Parts	Конструкционные детали
+Landing Parts	Посадочные детали
+ISRU	Добыча ресурсов
+Electrical	Электрика
+Science Parts	Научные детали
+Cargo	Грузы
+Servos, Hinges, Pistons, Rotors & Controllers	Сервоприводы, петли, поршни, роторы и контроллеры
+Naval Parts	Морские детали
+Planetary Base Systems	Планетарные базовые системы
+KAS & KIS	KAS и KIS
+Aviation Lights	Аэронавигационные огни
+
+# --- SUBCATEGORY: экипаж ---
+Kerbal	Кербонавт
+Kerbals	Кербонавты
+Multiple Kerbals	Несколько кербонавтов
+Passengers	Пассажиры
+
+# --- SUBCATEGORY: аэродинамика / крылья ---
+Aerodynamics	Аэродинамика
+Air Intake	Воздухозаборник
+Intake Air	Забортный воздух
+Control Surface	Управляющая поверхность
+Fairings	Обтекатели
+Nose Cones	Носовые конусы
+Wings	Крылья
+
+# --- SUBCATEGORY: конструкция / стыковка / крепление ---
+Adapter	Переходник
+Coupling	Соединители
+Multi-Coupler	Мульти-переходники
+Decouplers	Разделители
+# "Docking Ports" совпадает с translations/HaystackContinued/KerbalRuUiTranslations
+# (уже "Стыковочные узлы") -- значение то же, объявлено здесь без конфликта.
+Docking Ports	Стыковочные узлы
+Girder	Ферма
+Ladders	Лестницы
+Other Parts	Прочие детали
+Strut	Растяжка
+Surface Attach	Крепление к поверхности
+Undefined	Без категории
+# "Structural" (голое, категория Stock) совпадает с B9PartSwitch-subtypes.txt
+# ("Конструкция") -- значение то же.
+Structural	Конструкция
+
+# --- SUBCATEGORY: топливо / двигатели / тяга ---
+Ablative Heat Shields	Абляционные теплозащитные экраны
+Ablator	Абляционный материал
+Ammo	Боеприпасы
+Atmospheric Thrust	Тяга в атмосфере
+High Thrust	Высокая тяга
+Huge Thrust	Огромная тяга
+Liquid Fuel	Жидкое топливо
+Liquid Fuel Tank	Бак жидкого топлива
+Low Thrust	Низкая тяга
+Medium Thrust	Средняя тяга
+Mono Propellant	Монотопливо
+Monopropellant Tank	Бак монотоплива
+Nuclear Rockets	Ядерные двигатели
+Oxidizer	Окислитель
+Oxidizer Tank	Бак окислителя
+Prop Engines	Поршневые двигатели
+Radial Tank	Радиальный бак
+Solid Fuel	Твёрдое топливо
+Vacuum Thrust	Тяга в вакууме
+Xenon Gas	Ксенон
+Xenon Gas Tank	Бак ксенона
+
+# --- SUBCATEGORY: управление / связь / робототехника ---
+Command and Control	Командование и управление
+Command with RCS	Командные модули с RCS
+Communications	Связь
+# "Controller" совпадает с MechJeb2.txt/Waterfall.txt ("Контроллер") -- значение то же.
+Controller	Контроллер
+Data Transmitter	Передатчик данных
+Data Transmitter (Direct)	Передатчик данных (направленный)
+Data Transmitter (Dish)	Передатчик данных (тарелка)
+Data Transmitter (Internal)	Передатчик данных (встроенный)
+Data Transmitter (Omni)	Передатчик данных (всенаправленный)
+Data Transmitter (Relay)	Передатчик данных (ретранслятор)
+Guidance and Targeting	Наведение и целеуказание
+KAS parts	Детали KAS
+KIS parts	Детали KIS
+Manned Command	Пилотируемые командные модули
+Radar	Радар
+Reaction Wheels with Control	Маховики с управлением
+Reaction Wheels without Control	Маховики без управления
+RemoteTech (DISH)	RemoteTech (тарелка)
+RemoteTech (OMNI)	RemoteTech (всенаправленная)
+RemoteTech (PASSIVE)	RemoteTech (пассивная)
+Robotics	Робототехника
+# "Rotation" (голое, робототехника) совпадает с Firespitter/RCSBuildAid/Waterfall
+# ("Вращение") -- значение то же.
+Rotation	Вращение
+Rotation Servo	Сервопривод вращения
+Rotors	Роторы
+Servos	Сервоприводы
+
+# --- SUBCATEGORY: электрика ---
+Generators	Генераторы
+Lights	Освещение
+Power Storage	Накопители энергии
+Radioisotope Generators	Радиоизотопные генераторы
+Solar Panels	Солнечные панели
+# "Electric Charge" совпадает с KerbalEngineer.txt ("Заряд батареи") -- подходит и как
+# подпись вкладки-фильтра, оставлено то же значение вместо своего варианта.
+Electric Charge	Заряд батареи
+
+# --- SUBCATEGORY: посадка / шасси / лебёдки ---
+Landing Gear	Шасси
+Landing Legs	Посадочные опоры
+Launch Clamp	Стартовые опоры
+Rover Wheels and Tracks	Колёса и гусеницы роверов
+
+# --- SUBCATEGORY: грузы / отсеки ---
+Cargo Bay	Грузовой отсек
+Cargo Containers	Грузовые контейнеры
+Payload	Полезная нагрузка
+Science Cargo	Научный груз
+
+# --- SUBCATEGORY: наука ---
+Experiments	Эксперименты
+Labs	Лаборатории
+Sample slots	Слоты образцов
+Scanners	Сканеры
+Science	Наука
+Sensors	Датчики
+
+# --- SUBCATEGORY: ISRU ---
+Ore	Руда
+Resource Extractors	Добывающие модули
+Resource Processor	Переработка ресурсов
+
+# --- SUBCATEGORY: "Filter by Cross-Section Profile" -- записи без размерного кода ---
+Procedural	Процедурный
+RetroFuture Rectanguler	RetroFuture (прямоугольный)
+RetroFuture Square	RetroFuture (квадратный)
+
+# --- SUBCATEGORY: детали кораблей (Naval Parts) ---
+Carrier Parts	Детали авианосца
+Marine Command	Судовые командные модули
+Marine Drive	Судовые двигатели
+Marine Structural	Судовые конструкции
+Modern Ships	Современные корабли
+Subs	Подлодки
+WWII Hulls	Корпуса ВМВ
+
+# --- SUBCATEGORY: разное ---
+CLS Passable	CLS: проходимые
+Hinges	Шарниры
+Missiles and Bombs	Ракеты и бомбы
+# "Parachutes" совпадает с RealChute.txt ("Парашюты") -- значение то же.
+Parachutes	Парашюты
+Pistons	Поршни
+Radiators	Радиаторы
+Turrets and Guns	Турели и орудия
+Utility	Утилиты
+# "Thermal" (голое, категория Stock) совпадает с B9PartSwitch-subtypes.txt и
+# KerbalEngineer.txt (оба -- "Нагрев"); специально НЕ поставлен более точный вариант
+# "Терморегуляция", чтобы не разъехаться с уже загруженным чужим значением.
+Thermal	Нагрев
+
+# --- НЕ переведено сознательно: коллизия с чужим словарём, где перевод в этом
+# контексте был бы неверным. FilterExtensions SubCategories_Stock.cfg "Ground" --
+# стоковая категория шасси/колёс (icon = stockIcon_ground). translations/Conformal
+# Decals/KerbalRuUiTranslations/ConformalDecals.txt уже занимает ту же строку
+# "Ground" -> "Земля" (декали, другой смысл, вероятно текстурный слой). Движок --
+# один глобальный словарь без scope по моду (см. шапку файла), переопределять чужую
+# строку здесь значило бы либо сломать перевод ConformalDecals, либо получить
+# непредсказуемый результат в зависимости от порядка загрузки файлов на разных ОС.
+# Оставлено как есть: вкладка FilterExtensions "Ground" унаследует "Земля", что
+# семантически неверно для шасси -- см. отчёт агента, решение за поддерживающим.
+# Ground	(намеренно не объявлено)
