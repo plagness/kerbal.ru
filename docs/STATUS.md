@@ -544,6 +544,16 @@ Universal Storage 2). Цикл: ручной манёвр оператора в 
       обслуживают только `/KSP-RO`; хаб их не читает. Помечено в `_concept`, разбирать при рефакторинге страницы RO.
 
 ### Чужие моды (не чиним, знаем)
+- **B9PartSwitch: `The tank type LiquidFuel/LFO/OX/LF/LFOX already exists`** (v26.42, живой лог).
+      Разобрано до конца (не как Xenon-баг v26.30 — там реально чинили, здесь сознательно не стали):
+      `LiquidFuel`/`LFO` определены без взаимного `:NEEDS[]`-исключения в B9PartSwitch/DefaultTankTypes.cfg
+      + Mk2Expansion/Mk3Expansion — но `tankMass`/`tankCost`/`unitsPerVolume` у всех трёх побайтово
+      идентичны, разница только в косметическом `title`-ключе. `OX`/`LFOX` (NearFutureConstruction vs
+      CryoTanks, тоже без исключения друг против друга при обоюдном отсутствии `:NEEDS[!CryoTanks]`
+      именно для этих трёх типов) — тоже идентичны. Единственное реальное расхождение — `LF`:
+      `tankCost = 0` (NFC) vs `tankCost = 0.3` (CryoTanks), кто первый зарегистрируется — тот и
+      победит. Мелко (0.3 кредита за юнит объёма подтипа), не Xenon-уровня (там было 120 vs 4.5) —
+      патчить не стали, реального игрового вреда нет.
 - **Background Resource Processing на Apple Silicon**: `BackgroundSolarPanel.GetBehaviour` бросает
       `NullReferenceException` пачками. Пока аппарат в фокусе — не влияет; в фоне у него не учитываются панели,
       то есть батареи разряжаются без подзарядки. Баг совместимости мода, не сборки.
