@@ -544,6 +544,10 @@ Universal Storage 2). Цикл: ручной манёвр оператора в 
       обслуживают только `/KSP-RO`; хаб их не читает. Помечено в `_concept`, разбирать при рефакторинге страницы RO.
 
 ### Чужие моды (не чиним, знаем)
+- **SaveConfirmationSound**: `PersistantControl.SaveConfirmationSound.LateUpdate() →
+      UnityEngine.Component.GetComponents[T]()` — `NullReferenceException`, разово за сессию v26.42
+      (1×, не спам). Похоже на гонку при инициализации сцены (AudioSource ещё не готов на первом
+      кадре). Не блокирует, звук подтверждения сохранения продолжает работать. Не расследовали глубже.
 - **Filter Extensions: `resource name already exists, abandoning generation for ...`** (v26.42, живой
       лог) — штатное поведение, не баг. У мода есть ручной список подкатегорий «Filter by Resource»
       (`000_FilterExtensions_Configs/Default/StockCategories.cfg`: Liquid Fuel/Oxidizer/Electric
