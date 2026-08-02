@@ -110,7 +110,10 @@
       "ChattererExtended",
       "KDEX",
       "SpaceAge",
-      "ContractConfigurator-GrandTours"
+      "ContractConfigurator-GrandTours",
+      "RCSBuildAid",
+      "PlanetShine",
+      "BetterTimeWarpCont"
     ],
     "optional": [
       "kRPC",
