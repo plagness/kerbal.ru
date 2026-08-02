@@ -101,7 +101,16 @@
       "kOS-Career",
       "kOS-EVA",
       "AGExt",
-      "kOS-StockCamera"
+      "kOS-StockCamera",
+      "KIS",
+      "TweakScale",
+      "EditorExtensionsRedux",
+      "ParallaxContinued",
+      "Chatterer",
+      "ChattererExtended",
+      "KDEX",
+      "SpaceAge",
+      "ContractConfigurator-GrandTours"
     ],
     "optional": [
       "kRPC",
