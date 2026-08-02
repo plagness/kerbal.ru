@@ -105,7 +105,6 @@
       "KIS",
       "TweakScale",
       "EditorExtensionsRedux",
-      "ParallaxContinued",
       "Chatterer",
       "ChattererExtended",
       "KDEX",
@@ -113,11 +112,11 @@
       "ContractConfigurator-GrandTours",
       "RCSBuildAid",
       "PlanetShine",
-      "BetterTimeWarpCont"
+      "BetterTimeWarpCont",
+      "DockingPortAlignmentIndicator"
     ],
     "optional": [
-      "kRPC",
-      "KerbalKonstructs"
+      "kRPC"
     ]
   },
   "ckan": {

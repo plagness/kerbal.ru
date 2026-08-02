@@ -8,6 +8,45 @@
 
 ## [Unreleased]
 
+## [26.24] — 2026-08-02
+
+**Первая живая проверка после марафона v26.19→v26.23.** Игра запущена, kOS↔RemoteTech подтверждён
+рабочим (`ADDONS:AVAILABLE("RT") = True`, StockRT реально пропатчил антенны Knes/Coatl без ручных
+патчей), но `KSP.log` вскрыл три реальных проблемы — не теоретических, а зафиксированных в логе.
+
+### Исправлено
+
+- **24 типа контрактов Constellations не загружались** (`ArgumentException: Requested value
+  'RELAY'/'EITHER' was not found`) — баг апстрима Contract Configurator: `HasAntennaParameter.AntennaType`
+  допускает только `Dish`/`Omni`, а контракты Constellations написаны с `RELAY`/`EITHER`. Ошибка молчала
+  годами, пока не было RemoteTech (проверка версии в загрузчике не пропускала код до разбора). Фикс —
+  `contractconfigurator-rt-antennatype-fix.cfg`: убирает строку `antennaType`, параметр остаётся без
+  различия типа антенны.
+
+### Убрано
+
+- **Kerbin Side Remastered** (+ **Kerbal Konstructs**, **Custom Pre Launch Checks**) — попала транзитом
+  через Recommends у Kerbal Weather Project. Живой лог: 525 ошибок `Texture ... not found`, весь набор
+  статических объектов КЦ ссылается на несуществующие ассеты. Kerbal Weather Project без неё работает
+  штатно (зависимость была Recommends, не Depends).
+- **Parallax Continued** — два разных подтверждённых исключения в KSP.log (`dest texture data size was
+  too small` на скайбоксе главного меню, `NullReferenceException: buffer is null` при выходе из меню).
+  Не теоретический Mac-риск из v26.22/26.23 — факт из живого лога.
+
+### Добавлено
+
+- **Docking Port Alignment Indicator** — 34 ошибки `Cannot find an InternalModule of typename
+  'DPAI_RPM'` в логе показали, что чужие IVA-конфиги давно ждали именно этот мод.
+
+### Известные ограничения
+
+- Та же ловушка Recommends, что с `RasterPropMonitor-Core` в v26.20: `DockingPortAlignmentIndicator`
+  тянет полный `RasterPropMonitor` → `FreeIva`/`DE-IVAExtension`. Снесено вручную второй раз.
+- **39 из ~44 модов этой сессии (v26.19→v26.24) ещё не заведены в библиотеку переводов**
+  (`translations/_index.json`) — план по приоритету в [[mody-rasshirenie]]/STATUS.md.
+- Оператор начал новую карьеру («New Era») — миграционные заботы про RT-цели существующих аппаратов
+  становятся неактуальны для этого сейва.
+
 ## [26.23] — 2026-08-02
 
 Финальный проход по удобствам постройки и визуалу перед стартом + консолидированный аудит всей
