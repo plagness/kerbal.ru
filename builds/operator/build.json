@@ -137,7 +137,11 @@
       "ZZZRadioTelescope",
       "BetterScienceLabsContinued",
       "SolarScience",
-      "ResearchAdvancementDivision"
+      "ResearchAdvancementDivision",
+      "InfernalRoboticsNext",
+      "IR-ConnectionSystem",
+      "IR-Kinematics",
+      "IR-Canadarm"
     ],
     "optional": [
       "kRPC"
