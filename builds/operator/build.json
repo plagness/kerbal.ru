@@ -83,7 +83,13 @@
       "AutomatedScienceSampler",
       "CameraTools",
       "HullcamVDSContinued",
-      "KerbalWeatherProject"
+      "KerbalWeatherProject",
+      "kOS-SCANSat",
+      "LaserDist",
+      "kOSforAll",
+      "ContractConfigurator-UnmannedContracts",
+      "ContractConfigurator-ExplorationPlus",
+      "DangItContinued"
     ],
     "optional": [
       "kRPC",
