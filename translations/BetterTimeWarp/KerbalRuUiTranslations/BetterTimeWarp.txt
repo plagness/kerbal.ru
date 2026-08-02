@@ -13,11 +13,12 @@
 # "Create"/"OK" не были заняты -- объявлены здесь впервые.
 #
 # ⚠️ НЕ переведено -- ограничения движка:
-# 1) GUILayout.SelectionGrid НЕ патчится (нет перехватчика в KerbalRuUiTranslator.cs) --
-#    список тёмпов варпа (QuikWarpWindow.warpNames/physNames, включая литералы "Standard Warp"
-#    и "Standard Physics Warp" из конструктора TimeWarpRates) рисуется именно через
-#    SelectionGrid и остаётся на английском независимо от словаря. Само название темпа --
-#    пользовательский ввод (TextField), для кастомных записей перевод в принципе неприменим.
+# 1) Список тёмпов варпа (QuikWarpWindow.warpNames/physNames) рисуется через
+#    GUILayout.SelectionGrid -- патч добавлен в KerbalRuUiTranslator.cs (2026-08-03), два
+#    предустановленных названия по умолчанию ("Standard Warp"/"Standard Physics Warp", см.
+#    CurrentTimeWarp/CurrentPhysWarp в PluginData/BetterTimeWarp.cfg -- значения сверены с
+#    реально установленным модом, не угаданы) переведены ниже. Остальные записи в списке --
+#    пользовательский ввод (TextField), для кастомных названий перевод в принципе неприменим.
 # 2) Динамическая конкатенация с рантайм-значениями -- не совпадёт с ключом словаря:
 #    строки таблицы темпов "<b><color=lime>N:</color></b> <color=white>Xx</color>" (номер и
 #    множитель), "Disable Index: " + число, "<b>Physics Timestep:</b> ...", "<b>Physics
@@ -37,6 +38,8 @@
 
 # --- Быстрое окно (QuikWarpWindow) ---
 Advanced	Дополнительно
+Standard Warp	Стандартный варп
+Standard Physics Warp	Стандартный варп физики
 
 # --- Расширенное окно (TimeWarpWindow) ---
 Create	Создать

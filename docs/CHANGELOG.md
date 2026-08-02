@@ -8,6 +8,23 @@
 
 ## [Unreleased]
 
+## [26.41] — 2026-08-03
+
+Выполнено в отдельной параллельной сессии (фоновая задача, заведённая агентом batch5 в v26.40) —
+оператор перезапустил её и принёс готовый результат.
+
+**Закрыт архитектурный пробел `GUILayout.SelectionGrid`**, заведённый фоновой задачей в v26.40:
+`KerbalRuUiTranslator.cs` получил 4 новых Harmony-патча — `GUILayout.SelectionGrid(int, string[],
+int, GUILayoutOption[])` (+GUIStyle-перегрузка) и не-Layout `GUI.SelectionGrid(Rect, int, string[],
+int)` (+GUIStyle-перегрузка). Область реального использования проверена не предположением, а
+`monodis`-сканом IL уже установленных модов в живой сборке: string[]-перегрузки `GUILayout.
+SelectionGrid` реально вызывают Waterfall, MechJeb2, Chatterer, Scatterer, KerbalActuators,
+JanitorsCloset, RemoteTech, BetterTimeWarp; не-Layout `GUI.SelectionGrid` — EnvironmentalVisual
+Enhancements (`Utils.dll`). Тест-харнесс (`Harmony.PatchAll` против настоящих `UnityEngine.
+IMGUIModule.dll`) подтвердил резолв всех новых точек перехвата: 31→35 запатченных методов, 0 ошибок.
+Разблокировало перевод списка тёмпов варпа BetterTimeWarp (`QuikWarpWindow.warpNames/physNames`,
++2 строки "Standard Warp"/"Standard Physics Warp"). Оба валидатора — 0 новых ошибок/коллизий.
+
 ## [26.40] — 2026-08-03
 
 **Полный аудит покрытия библиотеки.** Механическим diff'ом (живые папки GameData сборки «Оператор»

@@ -270,6 +270,59 @@ namespace KerbalRuUiTranslator
         }
     }
 
+    // GUILayout.SelectionGrid(int, string[], int, GUILayoutOption[]) (+ GUIStyle overload) - grid
+    // of exclusive buttons, same shape as Toolbar above but with an xCount wrap parameter.
+    // Confirmed used (monodis IL scan of installed GameData, not assumed) by BetterTimeWarp's
+    // warp-rate picker (QuikWarpWindow/TimeWarpWindow.warpNames/physNames - the actual gap this
+    // patch closes), plus Waterfall, MechJeb2, Chatterer, Scatterer, KerbalActuators,
+    // JanitorsCloset, RemoteTech. The GUIContent[]-taking overload ([x] Science!, WaypointManager's
+    // icon picker) needs no separate patch - GUIContent.text is already translated at construction
+    // by the ctor patches above.
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.SelectionGrid), new[] { typeof(int), typeof(string[]), typeof(int), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_SelectionGrid_s
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
+    }
+
+    [HarmonyPatch(typeof(GUILayout), nameof(GUILayout.SelectionGrid), new[] { typeof(int), typeof(string[]), typeof(int), typeof(GUIStyle), typeof(GUILayoutOption[]) })]
+    class Patch_GUILayout_SelectionGrid_s_style
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
+    }
+
+    // GUI.SelectionGrid(Rect, int, string[], int) (+ GUIStyle overload) - non-Layout variant.
+    // Confirmed used (monodis IL scan) by EnvironmentalVisualEnhancements (Utils.dll) - the array
+    // there is built at runtime from config data, not a static literal, so this patch is a no-op
+    // for that specific call site today, but the entry point is real and must be covered for any
+    // mod that does pass static labels through it.
+    [HarmonyPatch(typeof(GUI), nameof(GUI.SelectionGrid), new[] { typeof(Rect), typeof(int), typeof(string[]), typeof(int) })]
+    class Patch_GUI_SelectionGrid_s
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
+    }
+
+    [HarmonyPatch(typeof(GUI), nameof(GUI.SelectionGrid), new[] { typeof(Rect), typeof(int), typeof(string[]), typeof(int), typeof(GUIStyle) })]
+    class Patch_GUI_SelectionGrid_s_style
+    {
+        static void Prefix(ref string[] texts)
+        {
+            if (texts == null) return;
+            for (int i = 0; i < texts.Length; i++) texts[i] = Loader.Translate(texts[i]);
+        }
+    }
+
     // Window titles - the single most important entry point (every mod window has one).
     [HarmonyPatch(typeof(GUI), nameof(GUI.Window), new[] { typeof(int), typeof(Rect), typeof(GUI.WindowFunction), typeof(string) })]
     class Patch_GUI_Window_s

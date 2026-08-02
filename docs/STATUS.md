@@ -21,7 +21,7 @@
 | Живые цифры | `site/data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
 | Сайт | хаб + `/Operator` + `/KSP-RO` + `/Operator/wiki`; исходники в `site/`, публикует workflow `pages.yml` |
 | Установка | Windows — `.ckan`-метапакет + ZIP без терминала; Linux/macOS/Deck — `install.sh` |
-| Последний релиз | v26.40 |
+| Последний релиз | v26.41 |
 
 ## «Оператор» — играбельность
 
@@ -180,6 +180,17 @@ title лежат на глубине 3-4 уровня внутри динами�
 селектора с индексами/wildcard, не только с прецедентом «где-то видел похожее».
 
 ### v26.32 (2026-08-02): батч 4 — реакция на живой фидбек, полная зачистка непереведённых контрактов
+### v26.41 (2026-08-03): движок — патч GUILayout.SelectionGrid (фоновая задача из v26.40)
+
+Отдельная параллельная сессия (тот самый chip-таск, заведённый агентом в v26.40) добавила в
+`KerbalRuUiTranslator.cs` 4 Harmony-патча под `GUILayout.SelectionGrid`/`GUI.SelectionGrid`
+(Layout+не-Layout, с GUIStyle и без). Охват подтверждён `monodis`-сканом IL реально установленных
+модов (не предположением): Waterfall/MechJeb2/Chatterer/Scatterer/KerbalActuators/JanitorsCloset/
+RemoteTech/BetterTimeWarp используют string[]-перегрузку, EnvironmentalVisualEnhancements — не-Layout.
+Тест-харнесс подтвердил резолв: 31→35 запатченных методов. Разблокировало перевод списка тёмпов
+варпа BetterTimeWarp («Standard Warp»/«Standard Physics Warp» — значения сверены с реально
+установленным `PluginData/BetterTimeWarp.cfg`, не угаданы). DLL пересобрана и задеплоена.
+
 ### v26.40 (2026-08-03): Полный аудит покрытия — 21 новый переведённый мод
 
 Оператор попросил «покапаться глубже» — механический diff нашёл 70 установленных модов без папки
