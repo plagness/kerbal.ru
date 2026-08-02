@@ -21,7 +21,7 @@
 | Живые цифры | `site/data/stats.json` ← `tools/gen_stats.py`; на сайте — звёзды и скачивания в существующих элементах |
 | Сайт | хаб + `/Operator` + `/KSP-RO` + `/Operator/wiki`; исходники в `site/`, публикует workflow `pages.yml` |
 | Установка | Windows — `.ckan`-метапакет + ZIP без терминала; Linux/macOS/Deck — `install.sh` |
-| Последний релиз | v26.33 |
+| Последний релиз | v26.34 |
 
 ## «Оператор» — играбельность
 
@@ -180,6 +180,31 @@ title лежат на глубине 3-4 уровня внутри динами�
 селектора с индексами/wildcard, не только с прецедентом «где-то видел похожее».
 
 ### v26.32 (2026-08-02): батч 4 — реакция на живой фидбек, полная зачистка непереведённых контрактов
+### v26.34 (2026-08-02): KerBalloons + кастомные ачивки + ещё 3 бага
+
+Живая сессия продолжается. Синхронизировал `build.json` — `Achievements`/`FinalFrontier` были
+поставлены через CKAN на предыдущем шаге, но манифест/вики не обновились. Живой мониторинг нашёл ещё
+три компилированных бага (не блокируют, задокументированы в разделе «Чужие моды» ниже): `Snacks`
+NRE на каждом входе в редактор, `DangIt.FailureModule.RuntimeFetch()` NRE-пачка на входе в лётную
+сцену, `KPRS` сетевой сбой при недоступном радиостриме.
+
+Оператор уточнил ранее неверно понятое «кербалунс» — это **KerBalloons** (аэростатические баллоны
+под атмосферу Kerbin/Duna/Laythe/Eve), физически стоял, но не был переведён вообще. Перевёл сам:
+`translations/KerBalloons/` — 13 деталей + 4 PARTUPGRADE (mm-title) + SUBTYPE-title для
+B9PartSwitch-подтипов размера/планеты (через `:HAS[#moduleID[...]]`, паттерн v26.33) + 11-строчный
+ui-словарь для PAW-кнопок мода.
+
+Собрал кастомный ачивка-пак `operator-custom-achievements.cfg` (7 ачивок: сеть покрытия OPM +
+систематическое освоение внешней системы) — по прямому чтению исходника `linuxgurugamer/Achievements`
+выяснилось, что реально конфигурируемых через .cfg типов только 3 (`ORBITACHIEVEMENT`/`LANDING`/
+`SURFACESAMPLE`), остальное зашито в DLL. Final Frontier ленты оставлены как есть — `RibbonPacks/`
+мода это только замена иконок под уже существующие компилированные типы событий, кастомных условий
+через конфиг не задать.
+
+Параллельно запущен Workflow: перевод категорий/подкатегорий FilterExtensions (ui-dict — `name=` в
+.cfg переиспользуется как идентификатор в списках порядка и мёрдже подкатегорий, MM-патч рискован) +
+продолжение поиска непереведённого. См. следующую запись по завершении.
+
 ### v26.33 (2026-08-02): antennaType — пятая попытка + реальный найденный краш DangIt!
 
 Четвёртый живой запуск подряд. Фикс v26.31 (`@PARAMETER,*`) тоже не сработал — те же 24
@@ -413,6 +438,37 @@ Universal Storage 2). Цикл: ручной манёвр оператора в 
 - **ReStock**: `Cannot replace texture 'orange-jumbo-'` (18×) — косметика.
 - **`Cannot find PartModule 'KethaneWetMassIndicator'`** (16×) — мод ждёт Kethane, мы его не ставим.
 - **US2**: `Cannot clone model US_M_Wedge_ScienceBay` (13×). Ни одна из этих ошибок не ломает игру.
+- **ProbeControlRoom**: `CivilianKerbal.CreateKerbal() → Kerbal.Awake()` бросает `NullReferenceException`
+      при переключении в IVA беспилотного зонда (6× за сессию v26.33). Совпадает один в один с открытым
+      апстрим-issue [FirstPersonKSP/KSP-ProbeControlRoom#42](https://github.com/FirstPersonKSP/KSP-ProbeControlRoom/issues/42)
+      («PCR has a bug that its some times kill kerman in the crewed parts which don't has IVA»). Баг в
+      скомпилированной DLL, MM-патчем не лечится. Не блокирует полёт, просто не открывается IVA-камера.
+- **CollisionFXReUpdated**: `CollisionFX.DustImpact()` бросает `NotImplementedException` на
+      `OnCollisionEnter` (5× за сессию v26.33, не подряд, не блокирует). Смотрели HEAD-исходник
+      (`VoidCosmo/CollisionFX-ReUpdated`) — метод там полностью реализован, throw не найден; расхождение
+      с установленной версией (1.1.0) не объяснено, в `settings.cfg` тумблера «выключить dust impact» нет.
+      Не докопались, не критично — оставлено как есть.
+- **CommercialOfferings (Routine Mission Manager)**: `RoutineControl.LoadRoutineArrivalMissions()` /
+      `LoadRoutineDepartureMissions()` — `NullReferenceException` разово при входе в лётную сцену
+      (6× за сессию v26.33, ровно при входе, не повторяется). Похоже на пустой список routine-миссий
+      на свежем сейве без null-проверки. Не расследовали глубже, не блокирует.
+- **SpaceAge**: `[SpaceAge] ERROR: Key crew already exists in ChronicleEvent Launch.` — самоотловленная
+      строка в логе (не исключение), разово за сессию v26.33. Возможно конфликт с синтетическим
+      «гражданским» кербалом ProbeControlRoom при записи хроники экипажа. Не расследовали глубже.
+- **DangIt Continued**: `nsDangIt.FailureModule+<RuntimeFetch>c__Iterator0.MoveNext()` бросает
+      `NullReferenceException` пачкой (24× подряд за секунду) при входе в лётную сцену — похоже, один раз
+      на каждую деталь с `FailureModule` на активном аппарате. Не блокирует полёт, отказы деталей всё равно
+      работают. Компилированная корутина, MM-патчем не лечится.
+- **KPRS (Kerbal Public Radio Service)**: `KPRS.SoundPlayer+<LoadClipCoroutine>` ловит
+      `InvalidOperationException: Unknown Error` от `UnityWebRequest`/`DownloadHandlerAudioClip` при попытке
+      подгрузить аудиоклип по сети (6× за сессию v26.33) — сетевой стрим радиостанции недоступен/не
+      отвечает. Не критично: сама радио-панель не крашится, просто конкретный трек не проигрывается.
+- **Snacks**: `SnacksPartResource.addResourcesIfNeeded() → PartResourceList.Contains()` бросает
+      `NullReferenceException` при каждом входе в редактор (ВАБ/СПХ), 2× за сессию v26.33 — ровно
+      по разу на каждый заход. Похоже, что мод перебирает ВСЕ загруженные части (`PartLoader.LoadedPartsList`,
+      включая ни разу не заспавненные префабы) и падает на части, у которой `PartResourceList` ещё не
+      проинициализирован рантаймом Unity. Не блокирует: редактор открывается нормально, ресурс Snacks на
+      реальные детали добавляется. Не расследовали глубже (компилированная DLL).
 
 ### Не наше, но ловим в поддержке
 - **CommNet Constellation**: наземные станции могут остаться без частот, и тогда связи нет никогда —

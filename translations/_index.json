@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 130,
+    "mods": 132,
     "keyedMods": 56,
-    "uiMods": 40,
-    "keys": 18873
+    "uiMods": 41,
+    "keys": 18891
   },
   "mods": [
     {
@@ -288,6 +288,14 @@
       "status": "migrated"
     },
     {
+      "id": "FilterExtensions",
+      "mod": "FilterExtensions",
+      "folder": "000_FilterExtensions",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "migrated"
+    },
+    {
       "id": "Firespitter",
       "mod": "Firespitter",
       "folder": "Firespitter",
@@ -422,6 +430,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "KerBalloons",
+      "mod": "KerBalloons",
+      "folder": "KerBalloons",
+      "method": "mm-title",
+      "keys": 18,
+      "status": "draft"
     },
     {
       "id": "KerbalPlanetaryBaseSystems",

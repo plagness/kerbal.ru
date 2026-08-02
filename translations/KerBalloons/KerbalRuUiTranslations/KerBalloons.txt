@@ -1,0 +1,16 @@
+# KerBalloons.txt — ui-словарь (строки захардкожены в KerBalloons.dll, до Localizer не доходят).
+# Источник: strings-дамп GameData/KerBalloons/Plugins/KerBalloons.dll (PAW-кнопки, окно настройки
+# баллона InfoBalloonWin/ConfigBalloonWin).
+# Формат: Английский<TAB>Русский. Движок матчит строку ЦЕЛИКОМ (ordinal), промах = строка как есть.
+
+Inflate Balloon	Надуть баллон
+Deflate Balloon	Сдуть баллон
+Configure Balloon	Настроить баллон
+Show Balloon Info	Показать информацию о баллоне
+Alternate Skin	Альтернативная раскраска
+Use alternate skin	Использовать альтернативную раскраску
+Enable Speed Limiter	Включить ограничитель скорости
+Toggle Display	Переключить отображение
+Recording Frequency	Частота записи
+Log data in mod folder	Записывать данные в папку мода
+Enable some additional logging	Включить дополнительное логирование

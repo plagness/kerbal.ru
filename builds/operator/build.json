@@ -144,7 +144,10 @@
       "InfernalRoboticsNext",
       "IR-ConnectionSystem",
       "IR-Kinematics",
-      "IR-Canadarm"
+      "IR-Canadarm",
+      "Achievements",
+      "FinalFrontier",
+      "KerBalloons"
     ],
     "optional": [
       "kRPC"
