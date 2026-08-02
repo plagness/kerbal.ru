@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Если kerbal.ru помог вашему проекту или публикации, укажите репозиторий и использованную версию."
 title: "kerbal.ru: русский хаб KSP-моддинга — библиотека переводов модов и каталог сборок"
 type: software
-version: 26.18
-date-released: 2026-07-27
+version: 26.19
+date-released: 2026-08-02
 authors:
   - family-names: Tenevoy
     given-names: Valery
