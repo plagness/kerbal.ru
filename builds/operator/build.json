@@ -145,9 +145,14 @@
       "IR-ConnectionSystem",
       "IR-Kinematics",
       "IR-Canadarm",
-      "Achievements",
       "FinalFrontier",
-      "KerBalloons"
+      "KerBalloons",
+      "OrbitalKeeper",
+      "CommunityDeltaVMaps",
+      "CommunityDeltaVMaps-OPM",
+      "ExperimentTracker",
+      "DockRotate",
+      "AutomaticLabHousekeeper"
     ],
     "optional": [
       "kRPC"
