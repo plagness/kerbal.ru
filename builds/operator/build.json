@@ -97,7 +97,11 @@
       "Trajectories",
       "PreciseNode",
       "WaypointManager",
-      "FilterExtensions"
+      "FilterExtensions",
+      "kOS-Career",
+      "kOS-EVA",
+      "AGExt",
+      "kOS-StockCamera"
     ],
     "optional": [
       "kRPC",
