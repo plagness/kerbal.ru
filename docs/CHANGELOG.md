@@ -8,6 +8,49 @@
 
 ## [Unreleased]
 
+## [26.40] — 2026-08-03
+
+**Полный аудит покрытия библиотеки.** Механическим diff'ом (живые папки GameData сборки «Оператор»
+против `translations/*/translation.json.folder`) нашлось 70 установленных модов без единой строчки
+перевода. Отфильтровано до 35 реальных кандидатов (остальное — чистые библиотеки без своего текста:
+Harmony, ClickThroughBlocker, ToolbarController и т.п., их не трогали). Workflow из 6 параллельных
+агентов проверил и перевёл — итог: **21 новый мод переведён**, keyed/mm-title/ui-dict вперемешку, ~700
+строк/деталей суммарно.
+
+**Переведено**: OrbitalKeeper (158 keyed, у мода была собственная ru-локализация под НЕВЕРНЫМ тегом
+`ru-ru` вместо `ru` — молча игнорировалась игрой, перетегирована), DockRotate (keyed+3 детали),
+AutomaticLabHousekeeper (21 keyed), ExperimentTracker (8 ui-dict), MagicSmokeIndustries/
+InfernalRoboticsNext-ядро (76 деталей mm-title + 78 ui-dict), IRConnectionSystem (2 детали + 58
+ui-dict), IRCanadarm (14 деталей), Chatterer (189 ui-dict), GPWS (13 ui-dict), ShipEffectsContinued
+и SaveConfirmationSound (общий install-checker), BetterScienceLabsContinued (11 деталей+эксперимент),
+SolarScience (28 keyed+mm-science), MinorPlanetSampling (2 PAW-лейбла), JoolBiomes (5 — описание Джула
++ 4 биома), WaypointManager (75 ui-dict — подтверждённый реальный пробел), BetterTimeWarp (39 ui-dict),
+StockRT (1 деталь — виртуальный техноузел-заглушка), Spectra (3 — имена пресетов качества Scatterer),
+KPRS (30 ui-dict, полный IL-разбор DLL), MunSeeker (19 — деталь радиотелескопа + 2 контракта).
+
+**Честно пропущено, с обоснованием** (папку не заводили): CommunityDeltaVMaps(+OPM) — чистый
+Unity AssetBundle с картинками, ни строки текста; IRKinematics — только debug-логи и служебные ID;
+RocketSoundEnhancement(+Default), CollisionFXReUpdated — ноль GUI-строк в DLL; TarsierSpaceTech,
+BiomeCorrections — уже полностью переведены (свои `ru`-ключи/сток-ключи Squad); NavyFish — уже
+переведён автором мода **полностью** (нашли лишь мелкую недоработку апстрима — не хватает ключа
+`#cancel`, не наш файл, не патчили); ProbeControlRoom, kPM — текст есть, но рисуется собственным
+движком JSI/RasterPropMonitor мимо GUI.Label/UnityUI/TMPro — ни один из трёх методов репозитория
+физически не может туда добраться (нужен новый, четвёртый метод — RPM page-перехват, не сделан);
+KerboKatz, XyphosAerospace, ReentryParticleEffectRenewed — подтверждённо без текста вообще.
+
+**Побочные находки:**
+- **JoolBiomes несёт СВОЙ баг** (не наш, чинить вне периметра библиотеки): его же MM-патч на RESULTS
+  стоковых экспериментов использует `[*]`-в-скобках на узле без поля `name` — тот самый паттерн-ловушка,
+  задокументированный в MAINTAINING.md после нашей собственной саги с antennaType. ~14 строк
+  флейвор-текста мода никогда не показываются игроку ни на одном языке — не наша недоработка перевода.
+- Найден и задокументирован (не патчен) архитектурный пробел движка: `GUILayout.SelectionGrid`
+  (список темпов варпа у BetterTimeWarp и др.) вообще не перехватывается `KerbalRuUiTranslator.cs` —
+  заведена фоновая задача на добавление патча.
+
+Валидаторы (`validate_localization.py` + `ui-translator/validate_dict.py`) — 0 ошибок, 0 новых
+коллизий словаря сверх уже известных 5 (все допатчены раньше). `translations/_index.json`: 132→153
+мода, ключей 18891→19648.
+
 ## [26.39] — 2026-08-03
 
 По скриншоту оператора (экран стратегий Administration Facility, «Programme Neidon II») —

@@ -1,0 +1,103 @@
+# KPRS (Kerbal Public Radio Service) — русская локализация UI
+# Формат: Английский<TAB>Русский.
+#
+# Метод: полный monodis-IL разбор K.P.R.S.dll (MONO_PATH = KSP Managed + сам DLL),
+# каждая строка прослежена по IL до места использования — отделены реально
+# рендерящиеся GUILayout.Label/Button/KSPField.guiName/KSPEvent.guiName/
+# CustomParameterUI-атрибуты от строк, уходящих только в KSP_Log (не UI).
+#
+# Что переведено (какие окна/поля):
+# 1. Тулбар-кнопка (AddToAllToolbars/RegisterMod) — тултип-имя мода.
+# 2. Главное окно радио (KPBR.RadioWin/OnGUI) — статус антенны, статус станции,
+#    "сейчас играет", префикс станции в списке.
+# 3. Окно выбора станции передатчика (KPBR_TransmitterPartModule.RadioWin) —
+#    заголовок окна, поясняющий текст, кнопки.
+# 4. KSPEvent.guiName передатчика (Select/Activate/Deactivate Station) — PAW.
+# 5. KSPField.guiName приёмника/передатчика (Radio station, Transmitter Amplifier)
+#    и заголовки/GetInfo() модулей (IModuleInfo.GetModuleTitle/GetInfo) — панель
+#    "Modules" в VAB/SPH и PAW.
+# 6. Заголовок диалога неверной установки (InstallChecker) — по образцу
+#    translations/KerbalAlarmClock и translations/ToolbarControl: заголовок
+#    переводим, тело диалога — нет (см. «Пропущено» ниже).
+# 7. Раздел расширенных настроек сложности (StockSettings : CustomParameterNode,
+#    DisplaySection "KPRS") — название и подсказки 5 полей.
+#
+# Пропущено намеренно:
+# - "Location" (KSPField.guiName передатчика) — уже объявлено в
+#   translations/ContractConfigurator/KerbalRuUiTranslations/ContractConfigurator.txt
+#   с тем же смыслом (место/локация), повторно не объявляем.
+# - "Close"/"OK" — уже покрыты translations/_common-ui/KerbalRuUiTranslations/
+#   kerbalru-paw.txt и другими словарями с тем же смыслом.
+# - "K.P.R.S." / "KPBR" / "KPRS" как отдельные ID (ModName тулбара, Section/
+#   DisplaySection настроек) — короткие фирменные акронимы мода, не текст.
+# - Debug/Log-строки через KSP_Log.Log (Info/Error): "PlaySelectedStation,
+#   selectedStation: ", "Station: ", "Station not found in stationlist: ",
+#   "Playlist info: ", ", clipName: " и т.п. — разработческая диагностика в лог,
+#   не GUI.
+# - "Play" — не текст кнопки, а строка-идентификатор playerName, передаваемая
+#   в SoundPlayer.PlaySound(string) для лога/дедупликации звука.
+# - "<color=#99ff00ff>Requires:</color>" + "- ElectricCharge: " + "/sec" в
+#   GetInfo() класса RadioPartModule — это вывод СТОКОВОГО
+#   ModuleResourceHandler.PrintModuleResources(), уже локализуется движком игры;
+#   не наши строки. (У KPBR_TransmitterPartModule.GetInfo() аналогичный текст
+#   набран вручную через StringBuilder — эта копия переведена отдельно, см. ниже.)
+# - Имена станций/каналов (STATION.name: Kurgut, monkiiengineer, Xenotherium,
+#   ACheese, Dreamliner, AtomicTech, RedBishopNoobton, Poke, Omoz, smushanoob,
+#   TheNova, PicoSpace, schlosrat, News, Squiddy, LinuxGuruGamer, Halban,
+#   NorminalUser) — позывные/никнеймы авторов радиоканалов, собственные имена,
+#   не переводятся (аналог брендов/юзернеймов).
+# - Тело диалога установки ("K.P.R.S. has been installed incorrectly and will
+#   not function properly...\n\nIncorrect path(s):\n") — склеено Concat со
+#   списком путей, динамика.
+# - Названные аргументы атрибутов CustomFloatParameterUI (minValue/maxValue/
+#   stepCount/displayFormat/asPercentage) и константы форматирования ("F2","F0")
+#   — не текст, поля рефлексии/формат-строки.
+#
+# Термины: ElectricCharge → Электрозаряд (конвенция репозитория); "Deploy"/
+# "Retract" вне этого мода, но по аналогии с NearFutureSolar/
+# KerbalPlanetaryBaseSystems используется Развернуть/Сложить в других частях
+# сборки — здесь такого события нет.
+
+# --- Тулбар-кнопка и регистрация мода ---
+Kerbal Public Radio Service	Общественная радиослужба Кербина
+
+# --- Главное окно радио (KPBR) ---
+No active radio antenna found	Активная радиоантенна не найдена
+No station selected	Станция не выбрана
+Stn: 	Ст.:
+Currently Playing: 	Сейчас играет:
+
+# --- Окно выбора станции передатчика (KPBR_TransmitterPartModule) ---
+KPBR Transmitter Station Selection	KPBR — выбор станции передатчика
+Select Station for this transmitter	Выберите станцию для этого передатчика
+(blue stations are already used and cannot be selected)	(синие станции уже заняты и недоступны для выбора)
+Select Station	Выбрать станцию
+Clear Selected	Сбросить выбор
+
+# --- KSPEvent.guiName передатчика (PAW) ---
+Activate Station	Включить станцию
+Deactivate Station	Выключить станцию
+
+# --- KSPField.guiName / заголовки и GetInfo() модулей ---
+Radio station	Радиостанция
+Transmitter Amplifier	Усилитель передатчика
+Radio Receiver	Радиоприёмник
+Radio Transmitter	Радиопередатчик
+KPRS Radio Receiver 	KPRS — радиоприёмник
+KPBR_Radio Transmitter	KPBR — радиопередатчик
+<color=#99ff00ff>Requires:</color>	<color=#99ff00ff>Требуется:</color>
+- ElectricCharge: 	- Электрозаряд:
+/sec	/с
+
+# --- Диалог неверной установки ---
+Incorrect K.P.R.S. Installation	Неверная установка K.P.R.S.
+
+# --- Расширенные настройки сложности, раздел "KPRS" ---
+Use ElectricCharge	Использовать электрозаряд
+EC Usage Multiplier	Множитель расхода ЭЗ
+How much ec is used in normal operation.  This is multiplied with the standard EC usage for the parts to come up with a final EC cost	Сколько электрозаряда расходуется в обычном режиме. Множитель применяется к штатному расходу ЭЗ деталей, давая итоговую стоимость
+Initial Volume	Начальная громкость
+Minimum Signal Strength	Минимальная сила сигнала
+The minimum strength of a signal being received.  This is an artifical minimum to allow you to receive any signal, anywhere, regardless of distance	Минимальная сила принимаемого сигнала. Это искусственный минимум, чтобы сигнал был слышен всегда и на любом расстоянии
+UI Scale	Масштаб интерфейса
+Size of the radio box	Размер окна радио

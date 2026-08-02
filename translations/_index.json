@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 132,
-    "keyedMods": 56,
-    "uiMods": 41,
-    "keys": 18891
+    "mods": 153,
+    "keyedMods": 58,
+    "uiMods": 50,
+    "keys": 19648
   },
   "mods": [
     {
@@ -64,6 +64,14 @@
       "status": "migrated"
     },
     {
+      "id": "AutomaticLabHousekeeper",
+      "mod": "AutomaticLabHousekeeper",
+      "folder": "AutomaticLabHousekeeper",
+      "method": "keyed",
+      "keys": 21,
+      "status": "draft"
+    },
+    {
       "id": "B9_Aerospace_ProceduralWings",
       "mod": "B9_Aerospace_ProceduralWings",
       "folder": "B9_Aerospace_ProceduralWings",
@@ -112,11 +120,35 @@
       "status": "draft"
     },
     {
+      "id": "BetterScienceLabsContinued",
+      "mod": "BetterScienceLabsContinued",
+      "folder": "BetterScienceLabsContinued",
+      "method": "mm-title+mm-science",
+      "keys": 11,
+      "status": "draft"
+    },
+    {
+      "id": "BetterTimeWarp",
+      "mod": "Better Time Warp",
+      "folder": "BetterTimeWarp",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "draft"
+    },
+    {
       "id": "CameraTools",
       "mod": "CameraTools",
       "folder": "CameraTools",
       "method": "keyed",
       "keys": 152,
+      "status": "draft"
+    },
+    {
+      "id": "Chatterer",
+      "mod": "Chatterer",
+      "folder": "Chatterer",
+      "method": "ui-dict",
+      "keys": 189,
       "status": "draft"
     },
     {
@@ -232,6 +264,14 @@
       "status": "draft"
     },
     {
+      "id": "DockRotate",
+      "mod": "DockRotate",
+      "folder": "DockRotate",
+      "method": "keyed+mm-title",
+      "keys": 37,
+      "status": "draft"
+    },
+    {
       "id": "DynamicBatteryStorage",
       "mod": "DynamicBatteryStorage",
       "folder": "DynamicBatteryStorage",
@@ -262,6 +302,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "ExperimentTracker",
+      "mod": "ExperimentTracker",
+      "folder": "ExperimentTracker",
+      "method": "ui-dict",
+      "keys": 8,
+      "status": "draft"
     },
     {
       "id": "ExtraplanetaryLaunchpads",
@@ -312,6 +360,14 @@
       "status": "migrated"
     },
     {
+      "id": "GPWS",
+      "mod": "GPWS",
+      "folder": "GPWS",
+      "method": "ui-dict",
+      "keys": 13,
+      "status": "draft"
+    },
+    {
       "id": "HaystackContinued",
       "mod": "HaystackContinued",
       "folder": "HaystackContinued",
@@ -336,11 +392,35 @@
       "status": "draft"
     },
     {
+      "id": "IRCanadarm",
+      "mod": "IRCanadarm (аддон InfernalRoboticsNext — манипулятор Canadarm/Canadarm2)",
+      "folder": "IRCanadarm",
+      "method": "mm-title",
+      "keys": 14,
+      "status": "draft"
+    },
+    {
+      "id": "IRConnectionSystem",
+      "mod": "IRConnectionSystem (аддон InfernalRoboticsNext — захваты/крепления)",
+      "folder": "IRConnectionSystem",
+      "method": "mm-title+ui-dict",
+      "keys": 60,
+      "status": "draft"
+    },
+    {
       "id": "JanitorsCloset",
       "mod": "Janitor's Closet",
       "folder": "JanitorsCloset",
       "method": "ui-dict",
       "keys": 23,
+      "status": "draft"
+    },
+    {
+      "id": "JoolBiomes",
+      "mod": "JoolBiomes",
+      "folder": "JoolBiomes",
+      "method": "mm-title",
+      "keys": 5,
       "status": "draft"
     },
     {
@@ -496,6 +576,14 @@
       "status": "draft"
     },
     {
+      "id": "KPRS",
+      "mod": "KPRS",
+      "folder": "KPRS",
+      "method": "ui-dict",
+      "keys": 30,
+      "status": "draft"
+    },
+    {
       "id": "KSCSwitcher",
       "mod": "KSCSwitcher",
       "folder": "KSCSwitcher",
@@ -528,6 +616,14 @@
       "status": "draft"
     },
     {
+      "id": "MagicSmokeIndustries",
+      "mod": "MagicSmokeIndustries (InfernalRoboticsNext — ядро)",
+      "folder": "MagicSmokeIndustries",
+      "method": "mm-title+keyed+ui-dict",
+      "keys": 156,
+      "status": "draft"
+    },
+    {
       "id": "MechJeb2",
       "mod": "MechJeb2",
       "folder": "MechJeb2",
@@ -541,6 +637,14 @@
       "folder": "MiningExpansion",
       "method": "keyed",
       "keys": 131,
+      "status": "draft"
+    },
+    {
+      "id": "MinorPlanetSampling",
+      "mod": "MinorPlanetSampling",
+      "folder": "MinorPlanetSampling",
+      "method": "mm-title",
+      "keys": 2,
       "status": "draft"
     },
     {
@@ -566,6 +670,14 @@
       "method": "keyed",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "MunSeeker",
+      "mod": "MunSeeker",
+      "folder": "MunSeeker",
+      "method": "mm-title",
+      "keys": 19,
+      "status": "draft"
     },
     {
       "id": "NASA-CountDown",
@@ -645,6 +757,14 @@
       "folder": "OPM",
       "method": "keyed",
       "keys": 2302,
+      "status": "draft"
+    },
+    {
+      "id": "OrbitalKeeper",
+      "mod": "OrbitalKeeper",
+      "folder": "OrbitalKeeper",
+      "method": "keyed",
+      "keys": 158,
       "status": "draft"
     },
     {
@@ -840,6 +960,14 @@
       "status": "migrated"
     },
     {
+      "id": "SaveConfirmationSound",
+      "mod": "SaveConfirmationSound",
+      "folder": "SaveConfirmationSound",
+      "method": "ui-dict",
+      "keys": 1,
+      "status": "draft"
+    },
+    {
       "id": "SCANsat",
       "mod": "SCANsat",
       "folder": "SCANsat",
@@ -864,6 +992,14 @@
       "status": "draft"
     },
     {
+      "id": "ShipEffectsContinued",
+      "mod": "ShipEffectsContinued",
+      "folder": "ShipEffectsContinued",
+      "method": "ui-dict",
+      "keys": 1,
+      "status": "draft"
+    },
+    {
       "id": "Skopos",
       "mod": "Skopos",
       "folder": "Skopos",
@@ -885,6 +1021,14 @@
       "folder": "WildBlueIndustries/Snacks",
       "method": "ui-dict",
       "keys": 41,
+      "status": "draft"
+    },
+    {
+      "id": "SolarScience",
+      "mod": "SolarScience",
+      "folder": "SolarScience",
+      "method": "keyed+mm-title+mm-science",
+      "keys": 28,
       "status": "draft"
     },
     {
@@ -928,6 +1072,14 @@
       "status": "draft"
     },
     {
+      "id": "Spectra",
+      "mod": "Spectra",
+      "folder": "Spectra",
+      "method": "ui-dict",
+      "keys": 3,
+      "status": "draft"
+    },
+    {
       "id": "StageRecovery",
       "mod": "StageRecovery",
       "folder": "StageRecovery",
@@ -949,6 +1101,14 @@
       "folder": "StationScience",
       "method": "keyed+mm-title",
       "keys": 187,
+      "status": "draft"
+    },
+    {
+      "id": "StockRT",
+      "mod": "StockRT",
+      "folder": "StockRT",
+      "method": "mm-title",
+      "keys": 1,
       "status": "draft"
     },
     {
@@ -1046,6 +1206,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "WaypointManager",
+      "mod": "Waypoint Manager",
+      "folder": "WaypointManager",
+      "method": "ui-dict",
+      "keys": 0,
+      "status": "draft"
     },
     {
       "id": "WildBlueIndustries",

@@ -1,0 +1,41 @@
+# GPWS -- словарь UI-строк окна настроек (GameData/GPWS, Ground Proximity Warning System).
+# Метод ui-dict: строки захардкожены в GPWS.dll как аргументы legacy-IMGUI
+# (GUILayout.Label/Toggle/Button, GUIContent) -- движок KerbalRuUiTranslator ловит их по
+# точному совпадению текста (Harmony-патч на GUILayout/GUIContent/GUI.*).
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# GPWS -- Ground Proximity Warning System, устоявшаяся аббревиатура реальной авиации
+# (система предупреждения об опасном сближении с землёй), оставлена латиницей намеренно --
+# как и SSTV/GPS в других словарях этой библиотеки.
+#
+# Сознательно НЕ объявлены 9 строк-шаблонов с рантайм-плейсхолдером {0}
+# ("Descent Rate Factor: {0}", "Horizontal Speed Factor: {0}", "Landing Speed: {0} m/s",
+# "Max AOA: {0} deg", "Safety Factor: {0}", "Show {0} settings", "Take Off Speed: {0} m/s",
+# "V1 Speed: {0} m/s", "Volume: {0}%") -- это литералы string.Format-шаблонов в IL, но в
+# GUILayout.Label/GUIContent (то, что реально ловит Harmony-патч) попадает уже
+# ПОДСТАВЛЕННЫЙ рантайм-текст с числом вместо {0}, который никогда побайтово не совпадёт
+# с шаблоном-ключом. Тот же паттерн, разобранный для install-checker'а в
+# translations/RetractableLiftingSurface/KerbalRuUiTranslations/RetractableLiftingSurface.txt
+# (динамически собранная строка не может быть ключом плоского словаря).
+#
+# "Horizontal Speed" совпадает с translations/KerbalEngineer/KerbalRuUiTranslations/
+# KerbalEngineer.txt ("Горизонт. скорость") -- значение то же (горизонтальная скорость),
+# переиспользовано без коллизии.
+
+# --- Окно "GPWS Setting" -- переключатели режимов предупреждения ---
+GPWS Setting	Настройки GPWS
+System Enable	Включить систему
+Altitude Callouts	Оповещения о высоте
+Altitude Loss After Takeoff	Потеря высоты после взлёта
+Bank Angle	Угол крена
+Closure to Terrain	Сближение с землёй
+Descent Rate	Скорость снижения
+Final Speed	Конечная скорость
+Gear Alt	Высота выпуска шасси
+Gear Up	Шасси убрано
+Horizontal Speed	Горизонт. скорость
+Terrain Clearance	Высота над землёй
+
+# --- Проверка установки (install-checker) ---
+Incorrect GPWS Installation	Неверная установка GPWS

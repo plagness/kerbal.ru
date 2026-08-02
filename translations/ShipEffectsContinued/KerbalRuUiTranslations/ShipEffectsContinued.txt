@@ -1,0 +1,20 @@
+# ShipEffectsContinued -- словарь UI-строк (GameData/ShipEffectsContinued).
+# Мод -- чистый звуковой плагин без настроечного окна: ShipEffectsContinued.dll не
+# ссылается ни на один тип GUI (нет GUILayout/GUI.*/UnityEngine.UI/TMPro/ApplicationLauncher
+# в метаданных сборки) -- единственный пользовательский текст мода это popup-диалог
+# проверки правильности установки (InstallChecker через стоковый
+# PopupDialog.SpawnPopupDialog, строка "SpawnPopupDialog" подтверждена в сборке).
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# Тело сообщения диалога ("Ship Effects Continued has been installed incorrectly ...
+# Incorrect path(s):") собирается конкатенацией с рантайм-списком путей (см. разбор той
+# же конструкции в translations/RetractableLiftingSurface/KerbalRuUiTranslations/
+# RetractableLiftingSurface.txt) -- никогда не совпадёт с фиксированным ключом словаря,
+# сознательно не объявлено. Переведён только неизменный заголовок диалога.
+#
+# Кнопка "OK" того же диалога уже объявлена в
+# translations/RetractableLiftingSurface/KerbalRuUiTranslations/RetractableLiftingSurface.txt
+# ("ОК") -- тот же смысл (кнопка подтверждения), повторно не объявляется.
+
+Incorrect Ship Effects Continued Installation	Неверная установка Корабельных эффектов

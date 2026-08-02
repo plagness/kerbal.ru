@@ -1,0 +1,117 @@
+# MagicSmokeIndustries — словарь UI-строк InfernalRoboticsNext.dll (ядро IR: окно управления
+# сервоприводами/группами в полёте и редакторе, контекстное меню детали).
+# Извлечено прямым разбором метаданных .NET (#US heap + строки из custom-attribute блобов
+# KSPField/KSPEvent guiName) — НЕ строковым grep по strings(1), который путает служебные
+# идентификаторы GameObject/префабов (ServoGroupMoveLeftButton, IKEndEffectorButton и т.п.,
+# их в словарь не включаем — это имена объектов Unity-иерархии, а не отображаемый текст) с
+# реальными подписями кнопок/тултипов.
+#
+# ⚠️ Пропущены строки с ЛИТЕРАЛЬНЫМ переносом строки внутри значения (\n как настоящий байт
+# 0x0A в скомпилированной С#-строке, не два символа "\n"): "Hold to move\nto default position",
+# "Hold to move\n to default position", "Add new group to the\n end of the list.",
+# "Drag to reorder the servo\n or put it into a different group",
+# "You can rename servos\n Names do not have to be unique",
+# "Debug mode, no EC consumption.\nRequires scene change" — движок словаря грузит файл
+# File.ReadAllLines() построчно и сравнивает точным совпадением (KerbalRuUiTranslator.cs,
+# метод LoadFile/Translate), экранирование `\n` не разворачивается ни при загрузке словаря,
+# ни при сопоставлении — писать в .txt настоящий перенос строки нельзя (разорвёт запись на
+# две строки словаря), а писать текст "\n" как два символа гарантированно НЕ совпадёт со
+# строкой в памяти игры (там правда 0x0A). Ключ с любым вариантом такой записи никогда не
+# сработает — не добавляем заведомо мёртвые записи.
+#
+# ⚠️ Движок хранит ОДИН плоский словарь на всю игру (см. docs/MAINTAINING.md §7) — перед
+# добавлением каждой строки этот файл сверен со всеми translations/*/KerbalRuUiTranslations/*.txt.
+# Уже заняты (значение подходит по смыслу — переиспользуем чужой перевод, здесь НЕ объявляем
+# повторно, чтобы не плодить дубли ключей): "Robotics" (FilterExtensions.txt → «Робототехника»,
+# категория-фильтр в VAB/SPH), "Delete preset" (RealChute.txt → «Удалить пресет»),
+# "Filter by Function" (FilterExtensions.txt/RealChute.txt → «Фильтр по функции»),
+# "Toggle Motor" (BahaSP.txt → «Переключить мотор»).
+# Пропущены с УЖЕ конфликтующим между собой смыслом в разных модах (RealChute vs
+# RoutineMissionManager для "Manual"; ROLib vs RoutineMissionManager для "Tracking") — не
+# усугубляем добавлением третьего значения, оставляем существующий (нерешённый) конфликт как
+# есть, режимы ввода "Manual"/"Tracking" в контекстном меню серво останутся английскими.
+Left-Click on a part to select. Right-Click or press 'ESC' to abort.	Левый клик — выбрать деталь. Правый клик или Esc — отменить.
+Show/hide UI settings	Показать/скрыть настройки интерфейса
+Close window	Закрыть окно
+Switch to Editor Mode	Переключиться в режим редактора
+Toggle Preset Mode	Переключить режим пресетов
+Panic! Stop all servos!	Паника! Остановить все сервоприводы!
+Show/hide group's servos	Показать/скрыть сервоприводы группы
+Speed Multiplier	Множитель скорости
+Toggle negative movement	Переключить движение в минус
+Hold to move negative	Удерживайте для движения в минус
+Hold to move positive	Удерживайте для движения в плюс
+Toggle positive movement	Переключить движение в плюс
+Move to previous preset	К предыдущему пресету
+Move to default position	В исходное положение
+Move to next preset	К следующему пресету
+Select End Effector	Выбрать концевой эффектор
+Show End Effector Position	Показать позицию концевого эффектора
+Limiter	Ограничитель
+Direct Mode	Прямой режим
+Relax	Расслабить
+Select Target	Выбрать цель
+Lock/unlock the servo	Заблокировать/разблокировать сервопривод
+Invert/uninvert servo axis	Инвертировать/восстановить ось сервопривода
+Open/close presets	Открыть/закрыть пресеты
+Return to Flight Mode	Вернуться в полётный режим
+Show/hide advanced servo parameters	Показать/скрыть расширенные параметры сервопривода
+Toggle IRBuildAid	Переключить IRBuildAid
+Drag to reorder the group	Перетащите, чтобы изменить порядок группы
+Delete Group	Удалить группу
+Toggle IR BuildAid Helper	Переключить помощник IR BuildAid
+Engage/disengage limits	Включить/выключить ограничители
+Show advanced fields	Показать расширенные поля
+Close preset window	Закрыть окно пресетов
+Add preset	Добавить пресет
+Set as default position	Сделать исходным положением
+Move to this position	Переместить в это положение
+
+# --- Контекстное меню детали (KSPField/KSPEvent guiName) ---
+Base Speed	Базовая скорость
+Current Position	Текущее положение
+Damping Force	Демпфирующее усилие
+Deflection Range	Диапазон отклонения
+Max Power Consumption	Макс. энергопотребление
+Max Speed	Макс. скорость
+Motor Size	Размер мотора
+Neutral Position	Нейтральное положение
+Pitch Control	Управление тангажом
+Roll Control	Управление креном
+Yaw Control	Управление рысканьем
+Throttle Control	Управление тягой
+X Control	Управление X
+Y Control	Управление Y
+Z Control	Управление Z
+Track Sun	Слежение за Солнцем
+Track Angle	Угол слежения
+Pitch Speed	Скорость тангажа
+Roll Speed	Скорость крена
+Yaw Speed	Скорость рысканья
+Throttle Speed	Скорость тяги
+X Speed	Скорость X
+Y Speed	Скорость Y
+Z Speed	Скорость Z
+Target Position	Целевое положение
+Spring Force	Усилие пружины
+Power Consumption	Энергопотребление
+Invert Direction	Инвертировать направление
+Move Center	В центр
+Move +	Движение +
+Move -	Движение -
+Move To Next Preset	К следующему пресету
+Move To Previous Preset	К предыдущему пресету
+Toggle Lock	Переключить блокировку
+Remove from Symmetry	Убрать из симметрии
+Link Input	Связать ввод
+IR Same Vessel Interaction	Взаимодействие в пределах аппарата
+
+# --- Режимы сервопривода (значения availableModeS/availableInputModeS из part.cfg,
+#     выпадающий список в контекстном меню) ---
+Servo	Сервопривод
+Rotor	Ротор
+Control	Управление
+Linked	Связан
+
+# --- Разное ---
+Group	Группа

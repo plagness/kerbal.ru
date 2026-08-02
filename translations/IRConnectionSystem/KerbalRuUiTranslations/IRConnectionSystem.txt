@@ -1,0 +1,89 @@
+# IRConnectionSystem — словарь UI-строк IRConnectionSystem.dll (магнитный/механический захват,
+# причальный механизм ModuleIRBM, захватные узлы ModuleIRGF/ModuleIRLEE — контекстное меню и
+# информационная панель детали).
+# Извлечено прямым разбором метаданных .NET (#US heap + строки из custom-attribute блобов
+# KSPField/KSPEvent guiName), не строковым grep — то же обоснование, что в
+# translations/MagicSmokeIndustries/KerbalRuUiTranslations/MagicSmokeIndustries.txt.
+#
+# ⚠️ Пропущены три многострочных блока подсказки "Requires: ... Electric Charge ... for
+# latching"/"...for releasing"/"...for latching and releasing" — содержат литеральный перенос
+# строки (настоящий байт 0x0A), словарь не может их сопоставить (см. обоснование в
+# MagicSmokeIndustries.txt, тот же движок).
+# ⚠️ Пропущены фрагменты конкатенации (в рантайме склеиваются с переменными данными — именем
+# аппарата/детали, поэтому НИКОГДА не совпадут со словарной строкой целиком): "Attached to ",
+# "Docked to ", "AutoCapture: ", "Crossfeed: ", "<color=green>available</color>",
+# "<color=red>no</color>", "<color=green>supported</color>".
+# ⚠️ Пропущены служебные идентификаторы — не отображаемый текст, а имена полей ConfigNode/
+# методов/GameObject: BM, GF, LEE (значения nodeType, сверяются с part.cfg), portName, state,
+# dockUId, MakeActive, TogglePort, ToggleMode, ContextMenuActivateToggle, EnableXFeed/
+# DisableXFeed, SetAsTarget/UnsetTarget и все debug-сообщения (OnLoad/AttachOnCollision/
+# JointToStatic/GetPartByID/Sound...).
+#
+# Уже заняты в общем словаре (значение подходит — переиспользуем, здесь НЕ объявляем повторно):
+# "Idle" (ExtraplanetaryLaunchpads.txt → «Простой»), "Inactive" (_common-ui/…mixed-mods.txt →
+# «Неактивно»), "Active" (_common-ui/…mixed-mods.txt → «Активна»), "Docked"
+# (HaystackContinued.txt → «Пристыкован»), "Activate"/"Deactivate" (BahaSP.txt →
+# «Активировать»/«Деактивировать»), "State" (ExtraplanetaryLaunchpads.txt → «Состояние»),
+# "Construction" (RP-1/RP0.txt → «Строительство»), "Name" (много модов → «Имя»).
+# "Passive" переведено как «Пассивна» (женский род) НЕ по грамматике самого узла (порт/разъём —
+# м.р.), а нарочно для согласования с уже существующим "Active"→«Активна» из общего словаря:
+# оба значения чередуются в одном и том же поле состояния, разнобой в роде между парой был бы
+# заметнее, чем некорректное согласование с подразумеваемым существительным.
+Ground attached	Закреплён на грунте
+Activate Port	Активировать порт
+Deactivate Port	Деактивировать порт
+Mode: Active	Режим: активный
+Mode: Passive	Режим: пассивный
+Rename Port	Переименовать порт
+Robotic Connector	Роботизированный разъём
+Berthing Mechanism	Причальный механизм
+Ready	Готов
+Captured	Захвачен
+Released	Отпущен
+Attached	Прикреплён
+Passive	Пассивна
+Enable	Включить
+Disable	Выключить
+Grapple Fixture	Захватный узел
+Disable Grapple Fixture	Отключить захватный узел
+Deactivate Grapple Fixture	Деактивировать захватный узел
+Activate Grapple Fixture	Активировать захватный узел
+Capturing	Захватывание
+Capture	Захватить
+AutoCapture	Автозахват
+Capturing: Manual	Захват: вручную
+Capturing: Auto	Захват: автоматически
+Latching End Effector	Защёлкивающийся концевой эффектор
+Deactivate End Effector	Деактивировать концевой эффектор
+Activate End Effector	Активировать концевой эффектор
+Restore	Восстановить
+Approaching	Сближение
+Approaching (passive)	Сближение (пассивно)
+Latching	Защёлкивание
+Pre Latched	Предзащёлкнут
+Latch Failed	Защёлкивание не удалось
+Latched	Защёлкнут
+Latched (passive)	Защёлкнут (пассивно)
+Latching Failed	Ошибка защёлкивания
+Latch	Защёлкнуть
+Pre Latch	Предзащёлкнуть
+Release	Отпустить
+Release (passive)	Отпустить (пассивно)
+Distancing	Отдаление
+Distanced	Отдалён
+Perform docking	Выполнить стыковку
+Dock	Пристыковать
+Undock	Отстыковать
+Electric Charge required	Требуется электрозаряд
+Electric Charge required (connected)	Требуется электрозаряд (подключено)
+Current Draw	Потребление тока
+Port Name	Имя порта
+BM status	BM: статус
+BM distance	BM: дистанция
+BM alignment	BM: выравнивание
+BM angle	BM: угол
+GF status	GF: статус
+LEE status	LEE: статус
+LEE distance	LEE: дистанция
+LEE alignment	LEE: выравнивание
+LEE angle	LEE: угол

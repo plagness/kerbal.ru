@@ -1,0 +1,21 @@
+# SaveConfirmationSound -- словарь UI-строк (GameData/SaveConfirmationSound).
+# Мод -- один звук клика при сохранении игры, без настроечного окна и без PAW-полей
+# (settings.cfg -- только Debug/SoundLocation/MinimumTimeBetweenSounds, читаются
+# напрямую кодом, не выводятся в GUI). Единственный пользовательский текст -- тот же
+# install-checker popup, что и у ShipEffectsContinued/GPWS/RetractableLiftingSurface/
+# FerramAerospaceResearch/ToolbarControl (общий шаблонный код проверки, скопированный
+# между модами).
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# Тело сообщения диалога ("SaveConfirmationSound has been installed incorrectly ...
+# Incorrect path(s):") собирается конкатенацией с рантайм-списком путей (см. разбор той
+# же конструкции в translations/RetractableLiftingSurface/KerbalRuUiTranslations/
+# RetractableLiftingSurface.txt) -- сознательно не объявлено. Переведён только
+# неизменный заголовок диалога.
+#
+# Кнопка "OK" того же диалога уже объявлена в
+# translations/RetractableLiftingSurface/KerbalRuUiTranslations/RetractableLiftingSurface.txt
+# ("ОК") -- повторно не объявляется.
+
+Incorrect SaveConfirmationSound Installation	Неверная установка SaveConfirmationSound

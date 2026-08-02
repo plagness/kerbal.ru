@@ -1,0 +1,45 @@
+# ExperimentTracker -- словарь UI-строк диспетчера экспериментов (linuxgurugamer/ExperimentTracker,
+# https://github.com/linuxgurugamer/ExperimentTracker). Локализации (#LOC/Localizer) у мода нет
+# вообще -- весь GUI хардкожен литералами в ExperimentTracker/ExperimentTracker.cs (legacy IMGUI,
+# GUILayout через обёртку ClickThruBlocker.GUILayoutWindow) и InstallChecker.cs (стоковый
+# PopupDialog/TMPro). Извлечение и проверка -- строки сверены прямо с исходником (git clone
+# linuxgurugamer/ExperimentTracker), не только сканом DLL.
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# СОЗНАТЕЛЬНО НЕ ВКЛЮЧЕНО (не пропуск, а решение):
+# - "Biome: "/"Situation: "/"Body: " (infWindow, ExperimentTracker.cs:118-120) -- компилятор
+#   склеивает их с динамическим значением (biome/ситуация/тело) ДО вызова GUILayout.Label,
+#   т.е. в GUI всегда попадает УЖЕ конкатенированная строка вида "Biome: Highlands" --
+#   точного совпадения с голым префиксом никогда не будет (тот же случай, что "] Version "
+#   у других модов этого репозитория).
+# - Тело диалога неверной установки (InstallChecker.cs: "Experiment Tracker has been installed
+#   incorrectly ... Incorrect path(s):\n" + список путей) -- список путей всегда дописан в конец
+#   динамически, точного совпадения не будет. Заголовок диалога статичен и переведён ниже.
+# - Debug.Log-строки ("Missing config file", "log level ", "exception caught: ", "-ERROR- ",
+#   "] Version ") -- разработческая диагностика в KSP.log, не GUI игрока.
+# - "TitleNotAvailable"/"VersionNotAvailable" -- служебные заглушки-сентинелы на случай сбоя
+#   reflection при чтении имени/версии сборки; не связный UI-текст.
+# - "Kerbin" (StockScience.cs:22) -- сравнение имени тела в коде, на экран не выводится.
+# - "ExperimentTracker" (голое, без слов вокруг) -- заголовок главного окна (Text.MODNAME) и
+#   тултип кнопки тулбара: это имя мода как есть (бренд), не переводим -- см. ту же практику
+#   у TestFlight/RealChute/B9PartSwitch (бренд остаётся латиницей, вокруг он же переведён,
+#   см. "Incorrect Experiment Tracker Installation" ниже).
+# - Comments/CompanyName/FileDescription/FileVersion/InternalName/LegalCopyright/
+#   LegalTrademarks/OriginalFilename/ProductName/ProductVersion/StringFileInfo/VarFileInfo/
+#   Translation -- поля стандартного Win32 VERSIONINFO PE-ресурса, не UI, на экран не попадают.
+# - Кнопки с текстом e.experimentActionName (сам эксперимент, напр. "Crew Report"/"EVA Report") --
+#   это имя чужого ModuleScienceExperiment, не текст ExperimentTracker; общие имена стоковых
+#   экспериментов уже покрыты translations/_common-ui/KerbalRuUiTranslations/kerbalru-paw.txt.
+
+Info	Инфо
+Close	Закрыть
+Close all	Закрыть всё
+Deploy all	Развернуть всё
+Nothing to do	Нечего делать
+↑Hide finished experiments↑	↑Скрыть завершённые эксперименты↑
+↓Show finished experiments↓	↓Показать завершённые эксперименты↓
+
+# Диалог неверной установки (InstallChecker.cs) -- заголовок статичен ("Incorrect " + MODNAME +
+# " Installation", MODNAME = const "Experiment Tracker"), тело и лог-дубль динамические (см. выше).
+Incorrect Experiment Tracker Installation	Неверная установка Experiment Tracker

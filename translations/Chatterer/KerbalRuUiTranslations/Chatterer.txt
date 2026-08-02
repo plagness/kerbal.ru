@@ -1,0 +1,226 @@
+# Chatterer -- словарь UI-строк окна настроек радиопереговоров (GameData/Chatterer).
+# Метод ui-dict: строки захардкожены в Chatterer.dll как аргументы legacy-IMGUI
+# (GUILayout.Label/Button/Toggle, GUIContent) -- движок KerbalRuUiTranslator ловит их
+# по точному совпадению текста (Harmony-патч на GUILayout/GUIContent/GUI.*).
+# Строки лога ("[CHATR] ..."), отладочные Debug.Log/LogError и Application.* --
+# никогда не попадают на экран игроку, исключены сознательно.
+#
+# Формат: Английский<TAB>Русский. Несовпадение = строка остаётся как есть (безопасно).
+#
+# Не переведено сознательно -- коллизия с чужим словарём другого смысла:
+# "Rate: " (параметр частоты модуляции хоруса, см. Chorus modulation rate) уже занята
+# translations/RP-1/KerbalRuUiTranslations/RP0.txt -> "Темп: " (темп/скорость игрового
+# времени карьеры RP-1 -- другой смысл). Движок хранит один плоский словарь без scope
+# по моду (см. tools/ui-translator/src/KerbalRuUiTranslator.cs), переопределять чужую
+# строку здесь означало бы либо сломать перевод RP-1, либо получить непредсказуемый
+# результат в зависимости от порядка загрузки файлов. Оставлено английским.
+# Rate: 	(намеренно не объявлено)
+#
+# Quindar -- позывной тон NASA перед радиопередачей; SSTV -- Slow-Scan Television,
+# радиопротокол передачи изображений. Оба -- устоявшиеся англоязычные термины
+# реальной космонавтики/радиосвязи, оставлены латиницей намеренно.
+# Blizzy78 -- ник автора альтернативного тулбара (мод Toolbar Controller), имя
+# собственное, латиницей.
+
+# --- Главное окно / общие настройки ---
+ Filters	 Фильтры
+Chatter Filters	Фильтры переговоров
+Debug Mode	Режим отладки
+It does something	Что-то да делает
+Spam the log with more or less usefull reports	Управляет подробностью отчётов в логе
+Hide stock Applaunch button	Скрыть кнопку в стоковой панели приложений
+Use Blizzy78's toolbar only	Использовать только панель Blizzy78
+Show tooltips	Показывать подсказки
+Show advanced options	Показать доп. настройки
+More chatter and beep options are displayed	Показываются доп. настройки переговоров и сигналов
+Reset all chatterer settings to default	Сбросить все настройки Chatterer по умолчанию
+Reset default settings	Сбросить настройки по умолчанию
+Use per-vessel settings	Использовать настройки для каждого корабля
+Every vessel will keep its own individual settings	У каждого корабля будут свои собственные настройки
+Current skin	Текущий скин
+Select next skin	Следующий скин
+Select previous skin	Предыдущий скин
+Open/Close Chatterer UI	Открыть/закрыть интерфейс Chatterer
+Next page	Следующая страница
+Previous page	Предыдущая страница
+
+# --- Источники сигналов (beepsource) ---
+Add a new beepsource	Добавить новый источник сигналов
+Remove the last beepsource	Удалить последний источник сигналов
+Pitch of this beepsource	Высота тона этого источника сигналов
+Volume of this beepsource	Громкость этого источника сигналов
+Set this sample to play from this beepsource	Задать этот сэмпл для этого источника сигналов
+How often this beepsource will play	Как часто будет играть этот источник сигналов
+Beep frequency: 	Частота сигналов: 
+Beep pitch: 	Высота тона сигналов: 
+Beep sample:	Сэмпл сигнала:
+Beep timing:	Режим таймера сигналов:
+Beep volume: 	Громкость сигналов: 
+Click to change the current beep sample	Нажмите, чтобы сменить текущий сэмпл сигнала
+Disable beeps during chatter	Отключать сигналы во время переговоров
+No beeps	Без сигналов
+Play this sample once	Проиграть этот сэмпл один раз
+Stop beeps from beeping while chatter is playing	Останавливать сигналы во время переговоров
+Switch between timing modes	Переключить режим таймера
+1-2 min	1–2 мин
+2-5 min	2–5 мин
+5-10 min	5–10 мин
+Copy beepsource to clipboard	Копировать источник сигналов в буфер обмена
+Paste beepsource from clipboard	Вставить источник сигналов из буфера обмена
+
+# --- Радиопереговоры (chatter) ---
+Chatter frequency: 	Частота переговоров: 
+Chatter volume: 	Громкость переговоров: 
+How often chatter will play	Как часто будут звучать переговоры
+No chatter	Без переговоров
+Remove this chatter set from the list	Удалить этот набор переговоров из списка
+Toggle this chatter set on/off	Вкл./выкл. этот набор переговоров
+Try to load chatter set with this name	Попробовать загрузить набор переговоров с этим именем
+Show currently loaded chatter audio	Показать загруженные звуки переговоров
+Volume of chatter audio	Громкость звука переговоров
+
+# --- Quindar / SSTV / горячие клавиши ---
+Quindar volume: 	Громкость Quindar: 
+SSTV frequency: 	Частота SSTV: 
+SSTV on science transmitted	SSTV при передаче науки
+SSTV volume: 	Громкость SSTV: 
+No SSTV	Без SSTV
+How often SSTV will play	Как часто будет звучать SSTV
+Volume of SSTV source	Громкость источника SSTV
+Clear insta-SSTV key	Очистить клавишу мгновенного SSTV
+Clear insta-chatter key	Очистить клавишу мгновенных переговоров
+Insta-SSTV key: 	Клавиша мгновенного SSTV: 
+Insta-chatter key: 	Клавиша мгновенных переговоров: 
+Press new Insta-SSTV key...	Нажмите новую клавишу мгновенного SSTV…
+Press new Insta-chatter key...	Нажмите новую клавишу мгновенных переговоров…
+Press this key to play SSTV now	Нажмите эту клавишу, чтобы включить SSTV сейчас
+Press this key to play chatter now	Нажмите эту клавишу, чтобы включить переговоры сейчас
+Select a new insta-SSTV key	Выбрать новую клавишу мгновенного SSTV
+Select a new insta-chatter key	Выбрать новую клавишу мгновенных переговоров
+
+# --- Фоновые сцены / зонд / сэмплы ---
+Background Sample Selector	Выбор фонового сэмпла
+Background sample file name	Имя файла фонового сэмпла
+Background sounds only in IVA	Фоновые звуки только в кабине
+Set this sample to play from this backgroundsource	Задать этот сэмпл для фонового источника
+Volume level for this Background audio	Громкость этого фонового звука
+Probe sample file name	Имя файла сэмпла зонда
+Play Probe sample files randomly	Проигрывать файлы сэмплов зонда в случайном порядке
+Play only when in internal view	Проигрывать только в виде из кабины
+Click to skip to a new random soundscape	Нажмите, чтобы переключиться на случайную фоновую сцену
+Soundscape frequency: 	Частота фоновой сцены: 
+Soundscape volume: 	Громкость фоновой сцены: 
+How often soundscapes will play	Как часто будут звучать фоновые сцены
+Sample Selector	Выбор сэмпла
+Sample: 	Сэмпл: 
+Click to change the selected sample	Нажмите, чтобы сменить выбранный сэмпл
+Click to apply	Нажмите, чтобы применить
+Current preset: 	Текущий пресет: 
+
+# --- Атмосферные звуки (AAE: шлюз, дыхание, ветер) ---
+Airlock volume: 	Громкость шлюза: 
+Breath volume: 	Громкость дыхания: 
+Wind volume: 	Громкость ветра: 
+Volume level for Airlock	Громкость шлюза
+Volume level for EVA breathing	Громкость дыхания на ВКД
+Volume level for Soundscapes	Громкость фоновых сцен
+Volume level for surface wind	Громкость ветра на поверхности
+Makes science yielling noises	Радостные возгласы при науке
+
+# --- Фильтры (хорус/дисторшн/эхо/ФВЧ/ФНЧ/реверберация) ---
+Adjust filters for chatter audio	Настроить фильтры для звука переговоров
+Open filter settings window for this beepsource	Открыть окно фильтров для этого источника сигналов
+Copy Chorus	Копировать хорус
+Copy Dist	Копировать дисторшн
+Copy Echo	Копировать эхо
+Copy HiPass	Копировать ФВЧ
+Copy LoPass	Копировать ФНЧ
+Copy Reverb	Копировать реверберацию
+Copy all	Копировать всё
+Load Chorus	Загрузить хорус
+Load Dist	Загрузить дисторшн
+Load Echo	Загрузить эхо
+Load HiPass	Загрузить ФВЧ
+Load LoPass	Загрузить ФНЧ
+Load Reverb	Загрузить реверберацию
+Paste all	Вставить всё
+Copy all filter values to clipboard	Копировать все параметры фильтров в буфер обмена
+Copy chorus values to clipboard	Копировать параметры хоруса в буфер обмена
+Copy distortion values to clipboard	Копировать параметры дисторшна в буфер обмена
+Copy echo values to clipboard	Копировать параметры эха в буфер обмена
+Copy highpass values to clipboard	Копировать параметры ФВЧ в буфер обмена
+Copy lowpass values to clipboard	Копировать параметры ФНЧ в буфер обмена
+Copy reverb values to clipboard	Копировать параметры реверберации в буфер обмена
+Load chorus values from clipboard	Загрузить параметры хоруса из буфера обмена
+Load distortion values from clipboard	Загрузить параметры дисторшна из буфера обмена
+Load echo values from clipboard	Загрузить параметры эха из буфера обмена
+Load highpass values from clipboard	Загрузить параметры ФВЧ из буфера обмена
+Load lowpass values from clipboard	Загрузить параметры ФНЧ из буфера обмена
+Load reverb values from clipboard	Загрузить параметры реверберации из буфера обмена
+Paste all filter values from clipboard	Вставить все параметры фильтров из буфера обмена
+Turn chorus filter on/off	Вкл./выкл. хорус
+Turn distortion filter on/off	Вкл./выкл. дисторшн
+Turn echo filter on/off	Вкл./выкл. эхо
+Turn highpass filter on/off	Вкл./выкл. ФВЧ
+Turn lowpass filter on/off	Вкл./выкл. ФНЧ
+Turn reverb filter on/off	Вкл./выкл. реверберацию
+Reset chorus filter to default	Сбросить хорус по умолчанию
+Reset distortion filter to default	Сбросить дисторшн по умолчанию
+Reset echo filter to default	Сбросить эхо по умолчанию
+Reset highpass filter to default	Сбросить ФВЧ по умолчанию
+Reset lowpass filter to default	Сбросить ФНЧ по умолчанию
+Reset reverb filter to default	Сбросить реверберацию по умолчанию
+User reverb settings	Пользовательские настройки реверберации
+Cutoff freq: 	Частота среза: 
+Decay HF ratio: 	Затухание ВЧ: 
+Decay ratio: 	Затухание: 
+Decay time: 	Время затухания: 
+Delay: 	Задержка: 
+Density: 	Плотность: 
+Depth: 	Глубина: 
+Diffusion: 	Диффузия: 
+Distortion level: 	Уровень искажения: 
+Distortion value	Величина искажения
+Dry level: 	Уровень сухого сигнала: 
+Dry mix: 	Доля сухого сигнала: 
+Early reflections level relative to room effect	Уровень ранних отражений относительно эффекта помещения
+Echo decay per delay	Затухание эха на каждом повторе
+Echo delay in ms	Задержка эха, мс
+HF reference: 	Опорная ВЧ: 
+HF to LF decay time ratio	Отношение времени затухания ВЧ к НЧ
+Highpass cutoff frequency in Hz	Частота среза ФВЧ, Гц
+Highpass self-resonance dampening	Демпфирование резонанса ФВЧ
+Late reverb delay time rel. to first reflection	Задержка поздней реверберации относительно первого отражения
+Late reverberation level relative to room effect	Уровень поздней реверберации относительно эффекта помещения
+Lowpass cutoff frequency in Hz	Частота среза ФНЧ, Гц
+Lowpass self-resonance dampening	Демпфирование резонанса ФНЧ
+Mix level of dry signal in output in mB	Доля сухого сигнала на выходе, мБ
+Reference high frequency in Hz	Опорная высокая частота, Гц
+Reference low-frequency in Hz	Опорная низкая частота, Гц
+Reflections delay: 	Задержка отражений: 
+Reflections level: 	Уровень отражений: 
+Resonance Q: 	Резонанс Q: 
+Reverb decay time at low-frequencies	Время затухания реверберации на низких частотах
+Reverb delay: 	Задержка реверберации: 
+Reverb density (modal density)	Плотность реверберации (модальная плотность)
+Reverb diffusion (echo density)	Диффузия реверберации (плотность эха)
+Reverb level: 	Уровень реверберации: 
+Room HF: 	ВЧ помещения: 
+Room LF: 	НЧ помещения: 
+Room effect high-frequency level in mB	Уровень ВЧ эффекта помещения, мБ
+Room effect level at low frequencies in mB	Уровень эффекта помещения на НЧ, мБ
+Room effect low-frequency level in mB	Уровень НЧ эффекта помещения, мБ
+Room: 	Помещение: 
+Chorus delay in ms	Задержка хоруса, мс
+Chorus modulation depth	Глубина модуляции хоруса
+Chorus modulation rate in Hz	Частота модуляции хоруса, Гц
+Volume of 1st chorus tap	Громкость 1-го тона хоруса
+Volume of 2nd chorus tap	Громкость 2-го тона хоруса
+Volume of 3rd chorus tap	Громкость 3-го тона хоруса
+Volume of echo signal to pass to output	Громкость эха на выходе
+Volume of original signal to pass to output	Громкость исходного сигнала на выходе
+Volume of beeps before and after chatter	Громкость сигналов до и после переговоров
+Wet mix 1: 	Доля сигнала эффекта 1: 
+Wet mix 2: 	Доля сигнала эффекта 2: 
+Wet mix 3: 	Доля сигнала эффекта 3: 
+Wet mix: 	Доля сигнала эффекта: 

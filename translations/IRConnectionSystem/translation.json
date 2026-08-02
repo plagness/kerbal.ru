@@ -1,0 +1,9 @@
+{
+  "mod": "IRConnectionSystem (аддон InfernalRoboticsNext — захваты/крепления)",
+  "folder": "IRConnectionSystem",
+  "method": "mm-title+ui-dict",
+  "keys": 60,
+  "mmTitleKeys": 2,
+  "uiDictKeys": 58,
+  "status": "draft"
+}

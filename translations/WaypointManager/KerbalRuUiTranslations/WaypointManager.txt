@@ -1,0 +1,141 @@
+# WaypointManager -- ui-dict словарь окна списка путевых точек, окна настроек, редактора
+# пользовательских точек и HUD-панели навигации в полёте. Источник строк -- официальный
+# форк jrossignol/WaypointManager под сопровождением linuxgurugamer (сборка 2.8.4.7):
+# github.com/linuxgurugamer/WaypointManager, файлы WaypointManager.cs, CustomWaypointGUI.cs,
+# ImportExport.cs, WaypointFlightRenderer.cs -- строки сверены с исходником построчно, не
+# угадывались по strings(1) (легаси-IMGUI не хранит текст в Localization, весь UI жёстко
+# зашит в DLL как строковые литералы -- единственный применимый метод здесь ui-dict).
+#
+# Терминология: waypoint -> "путевая точка"/"точка" (см. translations/AtmosphereAutopilot,
+# ContractPacks, KerbalEngineer -- уже устоявшийся вариант в библиотеке); celestial body ->
+# "небесное тело" (translations/ContractPacks, FerramAerospaceResearch); target -> "цель".
+#
+# ⚠️ Общий словарь на всю игру (см. MAINTAINING.md) -- сверено со всеми существующими
+# translations/*/KerbalRuUiTranslations/*.txt перед добавлением. Общеупотребимые слова ниже
+# уже заняты другими модами с ТЕМ ЖЕ смыслом -- значения переиспользованы 1:1, конфликтов нет:
+# Apply/Cancel/Close/Save/Edit/Delete/Settings/Reset/Import/None/Latitude/Longitude/Altitude/
+# Distance/Heading/OK/Yes/No (см. DistantObject, HaystackContinued, KerbalEngineer, MechJeb2,
+# RealChute, RP-1, ContractConfigurator и др.). "Active" уже занято под тем же смыслом
+# ("активное состояние") в ExtraplanetaryLaunchpads/RealFuels/kerbalru-mixed-mods ("Активна") --
+# переиспользовано здесь для варианта "показывать только активную точку", хотя грамматически
+# это не идеальное согласование (список из "Все/Активна/Нет") -- намеренно ради единого словаря.
+#
+# НЕ переведено -- коллизия с чужим словарём другого смысла. Заголовок окна создания точки
+# "Add Waypoint" совпадает с translations/MechJeb2/KerbalRuUiTranslations/MechJeb2.txt
+# ("Добавить точку МАРШРУТА" -- кнопка добавления путевой точки в маршрут ровера-автопилота,
+# другой контекст). Значение MechJeb2 сюда не подходит (WaypointManager создаёт произвольную
+# точку интереса, не точку маршрута), а порядок загрузки файлов не гарантирован
+# кроссплатформенно (см. шапку файла) -- переопределять чужую строку означало бы либо сломать
+# перевод MechJeb2, либо получить непредсказуемый результат. Оставлено как есть: заголовок
+# окна добавления унаследует "Добавить точку маршрута" или останется английским в зависимости
+# от порядка загрузки -- решение за поддерживающим.
+#
+# ⚠️ НЕ переведено -- ограничения движка (см. tools/ui-translator/src/KerbalRuUiTranslator.cs):
+# 1) Динамическая конкатенация -- движок матчит ТОЧНОЕ значение строки, попадающей в сеттер;
+#    если строка склеивается с переменными данными в рантайме (номер версии, имя точки,
+#    дистанция, координаты), результат каждый раз разный и никогда не совпадёт с ключом
+#    словаря. Из-за этого недостижимы: заголовок главного окна "Waypoint Manager <версия>"
+#    (WaypointManager.cs:275, версия меняется при каждом обновлении мода), "Dist: "/"Lat: "/
+#    "Lon: " (WaypointLineGUI, склеены с форматированным числом), "UI Scaling (N%)", строки
+#    HUD-панели навигации (WaypointFlightRenderer.ShowText -- "Distance to <point>:" и т.п.,
+#    все с именем точки), имя точки/тело/название контракта в списке (динамические данные),
+#    диалоги подтверждения "Delete waypoint '<имя>'?" / "Overwrite custom waypoint file '<имя>'?"
+#    (CustomWaypointGUI.cs) -- сами диалоговые ЗАГОЛОВКИ статичны и переведены, тело -- нет.
+# 2) GUILayout.SelectionGrid НЕ патчится движком (нет перехватчика в KerbalRuUiTranslator.cs,
+#    только GUILayout.Toolbar) -- элементы IconPickerGUI.icons (только иконки, текста нет)
+#    это не задевает, но стоит иметь в виду для будущих модов с текстовыми SelectionGrid.
+# 3) Многострочный текст справки (ImportExport.cs, кнопка "Custom WP Help") склеен из двух
+#    констант с \n внутри -- формат словаря построчный (English<TAB>Russian), ключ с
+#    переносом строки физически не выразить одной строкой файла. Заголовок диалога
+#    ("Custom File Help") и кнопки ("Ok"/"Close") переведены, тело диалога -- нет.
+# 4) Диалог "Incorrect WaypointManager Installation" (InstallChecker.cs) -- заголовок
+#    технически статичен (склейка из констант) и переведён; тело диалога содержит список
+#    путей рантайма -- динамическое, не переведено. Триггерится только при поломанной
+#    установке мода вручную, через install.sh/CKAN не воспроизводится.
+
+# --- Заголовки окон ---
+Waypoint Manager Settings	Настройки Waypoint Manager
+Icon Selector	Выбор значка
+Custom Waypoint Selection	Выбор пользовательских точек
+Custom File Help	Справка по файлу
+Overwrite export file?	Перезаписать файл экспорта?
+Edit Waypoint	Изменить точку
+Edit Stock Waypoint	Изменить стоковую точку
+Delete Waypoint	Удалить точку
+Incorrect WaypointManager Installation	Неверная установка WaypointManager
+
+# --- Главное окно: группировка, кнопки шапки ---
+Group by: 	Группировать по:
+Contract	Контракт
+Celestial Body	Небесное тело
+Create Custom Waypoint	Создать точку
+Settings	Настройки
+Hide Stock Waypoint	Скрыть стоковую точку
+No contract	Без контракта
+
+# --- Окно настроек ---
+Distance calculation	Расчёт дистанции
+Lateral	По горизонтали
+Calculates distance as the horizontal distance only.  Useful if you're looking to hit a landing spot exactly.	Считает только горизонтальное расстояние. Полезно, если нужно точно попасть в точку посадки.
+Straight line	По прямой
+Calculates distance in a direct line.	Считает расстояние по прямой линии.
+Compromise	Компромисс
+Uses lateral distance if the vessel and waypoint altitude are relatively close, otherwise uses straight line distance.	Использует горизонтальное расстояние, если высоты аппарата и точки близки, иначе -- расстояние по прямой.
+Waypoints to display in-flight	Точки, отображаемые в полёте
+All	Все
+Display all waypoints on the given celestial body while in flight.	Показывать все точки на текущем небесном теле во время полёта.
+Active	Активна
+Display only the active waypoint while in flight.	Показывать только активную точку во время полёта.
+None	Нет
+Do not display any waypoints while in flight.	Не показывать точки во время полёта.
+Values to display below altimeter	Показывать под альтиметром
+Distance to target	Дистанция до цели
+Time to target	Время до цели
+Heading to target	Курс на цель
+Glide slope angles	Углы глиссады
+Coordinates of target	Координаты цели
+Location display style	Формат отображения координат
+Degrees/Minutes/Seconds	Градусы/минуты/секунды
+Decimal	Десятичный
+Waypoint Opacity	Прозрачность точки
+Reset	Сброс
+Export Custom Waypoints	Экспорт пользовательских точек
+Exports the custom waypoints to GameData/WaypointManager/CustomWaypoints.cfg	Экспортирует пользовательские точки в GameData/WaypointManager/CustomWaypoints.cfg
+Import Custom Waypoints	Импорт пользовательских точек
+Imports the custom waypoints from GameData/WaypointManager/CustomWaypoints.cfg	Импортирует пользовательские точки из GameData/WaypointManager/CustomWaypoints.cfg
+Cancel Import of Custom Waypoints	Отменить импорт точек
+Cancels the import of custom waypoints from GameData/WaypointManager/CustomWaypoints.cfg	Отменяет импорт пользовательских точек из GameData/WaypointManager/CustomWaypoints.cfg
+Background Display (grey scale)	Оттенок серого фона
+Background Display Opacity	Прозрачность фона
+Nav Window position can be dragged by holding Control + mouse left/right and dragging	Окно навигации можно перетащить, удерживая Control и двигая мышью
+Reset Display Position	Сбросить позицию окна
+
+# --- Редактор точки (создание/изменение) ---
+Latitude	Широта
+Longitude	Долгота
+Altitude	Высота
+Use terrain height for altitude	Высота по рельефу
+Automatically set the altitude to ground level.	Автоматически устанавливает высоту на уровень земли.
+Use Active Vessel Location	Взять координаты аппарата
+Set the location parameters to that of the currently active vessel.	Устанавливает координаты по текущему активному аппарату.
+Set Location on Map	Указать на карте
+Cancel Set Location	Отменить выбор на карте
+Set the location by clicking on the map.	Устанавливает координаты кликом по карте.
+Save	Сохранить
+Apply	Применить
+Cancel	Отмена
+Yes	Да
+No	Нет
+OK	ОК
+Ok	ОК
+
+# --- Импорт/экспорт пользовательских точек ---
+Import	Импорт
+Custom WP Help	Справка по точкам
+Close	Закрыть
+
+# --- HUD-панель навигации в полёте (WaypointFlightRenderer) ---
+Activate Navigation	Включить навигацию
+Deactivate Navigation	Выключить навигацию
+Edit Custom Waypoint	Редактировать точку
+Delete Custom Waypoint	Удалить точку

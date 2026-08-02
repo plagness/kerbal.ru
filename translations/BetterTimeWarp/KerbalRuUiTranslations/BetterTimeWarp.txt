@@ -1,0 +1,85 @@
+# BetterTimeWarp -- ui-dict словарь окон выбора темпа варпа (быстрого и расширенного),
+# настроек физики при варпе и интеграции в стоковое меню настроек (Difficulty Options).
+# Источник -- linuxgurugamer/BetterTimeWarpContinued (сборка 2.3.14.2): BetterTimeWarp.cs
+# (легаси-IMGUI окна, часть строк с rich-text тегами <color>/<b> -- это литералы, GUILayout
+# всё равно получает их ТОЧНОЕ значение, тег переводится вместе с текстом внутри) и
+# Settings.cs (GameParameters.CustomParameterUI -- рендерится стоковым экраном настроек
+# сложности через UnityEngine.UI.Text, тоже патчится движком, см. заголовок
+# KerbalRuUiTranslator.cs "KSP.UI.Screens settings pages").
+#
+# ⚠️ Общий словарь на всю игру -- сверено со всеми translations/*/KerbalRuUiTranslations/*.txt.
+# Save/Cancel/Edit/Delete переиспользованы 1:1 из уже занятых значений (тот же смысл,
+# см. Waterfall/Firespitter/MechJeb2/RP-1/ContractConfigurator). "Select"/"Simple"/"Advanced"/
+# "Create"/"OK" не были заняты -- объявлены здесь впервые.
+#
+# ⚠️ НЕ переведено -- ограничения движка:
+# 1) GUILayout.SelectionGrid НЕ патчится (нет перехватчика в KerbalRuUiTranslator.cs) --
+#    список тёмпов варпа (QuikWarpWindow.warpNames/physNames, включая литералы "Standard Warp"
+#    и "Standard Physics Warp" из конструктора TimeWarpRates) рисуется именно через
+#    SelectionGrid и остаётся на английском независимо от словаря. Само название темпа --
+#    пользовательский ввод (TextField), для кастомных записей перевод в принципе неприменим.
+# 2) Динамическая конкатенация с рантайм-значениями -- не совпадёт с ключом словаря:
+#    строки таблицы темпов "<b><color=lime>N:</color></b> <color=white>Xx</color>" (номер и
+#    множитель), "Disable Index: " + число, "<b>Physics Timestep:</b> ...", "<b>Physics
+#    Timescale:</b> ...", "<b>Lossless Upper Threshold:</b> ..." (все со значением
+#    Time.fixedDeltaTime/timeScale), диалог "Deleted <имя> time warp rates". Заголовки
+#    диалогов подтверждения удаления/редактирования -- это литерал "Better Time Warp"
+#    (бренд мода, намеренно не объявлен -- остаётся как есть, см. правило не переводить
+#    собственные названия модов).
+# 3) toolbar[] в PhysicsSettingsWindow ("1", "1/2", "1/3", "1/4" в цветных тегах) -- числовые
+#    дроби, не текст, переводить нечего (проходят через GUILayout.Toolbar, который движок
+#    патчит, но менять там нечего).
+# 4) Settings.cs: подсказки "Autosave Interval (min)" и "Autosave Short Interval (sec)"
+#    склеены из нескольких строковых констант с \n внутри (компилятор C# сворачивает
+#    конкатенацию литералов в один embedded-newline литерал атрибута) -- словарь построчный
+#    (English<TAB>Russian), ключ с переносом строки одной строкой файла не выразить. Сами
+#    заголовки полей переведены, эти две подсказки -- нет.
+
+# --- Быстрое окно (QuikWarpWindow) ---
+Advanced	Дополнительно
+
+# --- Расширенное окно (TimeWarpWindow) ---
+Create	Создать
+Physics Warp?	Варп физики?
+Disable EC usage	Отключать эл. заряд
+Disable EC usage at high warp rates	Отключает потребление электричества на высоком варпе
+Disable Index: 	Порог отключения:
+Save	Сохранить
+Cancel	Отмена
+Select	Выбрать
+Edit	Изменить
+Delete	Удалить
+Simple	Простой
+<color=lime>Physics Settings</color>	<color=lime>Настройки физики</color>
+
+# --- Окно настроек физики (PhysicsSettingsWindow) ---
+<b><color=#b7fe00>Scale Camera Speed</color></b>	<b><color=#b7fe00>Масштабировать скорость камеры</color></b>
+<color=white>Removes the time based smoothing of the camera so that it doesn't lag at really low warp</color>	<color=white>Убирает временное сглаживание камеры, чтобы не подтормаживала на низком варпе</color>
+<b><color=#b7fe00>Use Lossless Physics</color></b> <color=red><i>Experimental!</i></color>	<b><color=#b7fe00>Физика без потерь</color></b> <color=red><i>Экспериментально!</i></color>
+<color=white>Increases the physics simulation rate so that you can maintain accurate physics at high warp</color>	<color=white>Повышает частоту симуляции физики, чтобы сохранить точность на высоком варпе</color>
+<color=#bbb><b>Note:</b> Lossless Physics causes extreme lag above 50-100x time warp, depending on your computer. <i>You have been warned!</i></color>	<color=#bbb><b>Заметка:</b> физика без потерь вызывает сильные подтормаживания выше 50-100x варпа, в зависимости от компьютера. <i>Вы предупреждены!</i></color>
+<b>Lossless Physics Accuracy:</b>	<b>Точность физики без потерь:</b>
+<color=white>1/2 is recommended, but if you have a weaker computer then 1/3 or 1/4 will be easier on your CPU.</color>	<color=white>Рекомендуется 1/2, но на слабом компьютере 1/3 или 1/4 разгрузят процессор.</color>
+
+# --- Диалоги подтверждения (заголовки "Better Time Warp" -- бренд, не переведены) ---
+Cannot save because there are non-numbers in the editing fields	В полях ввода есть нечисловые значения, сохранение невозможно
+Error	Ошибка
+Cannot edit standard warp rates	Стандартные темпы варпа нельзя изменить
+Cannot delete standard warp rates	Стандартные темпы варпа нельзя удалить
+OK	ОК
+
+# --- Стоковое меню настроек (Settings.cs, GameParameters.CustomParameterUI) ---
+Mod Enabled?	Мод включён?
+Changing this requires restarting the game	Изменение требует перезапуска игры
+Always hide the button?	Всегда скрывать кнопку?
+Hide the button in the flight scene?	Скрывать кнопку в полёте?
+Hide the dropdown button in the flight scene?	Скрывать выпадающую кнопку в полёте?
+Lock window positions in flight?	Зафиксировать окна в полёте?
+Lock window positions (other than flight)?	Зафиксировать окна вне полёта?
+Stock autosave settings (persistent.sfs)	Настройки автосохранения (persistent.sfs)
+Autosave Interval (min)	Интервал автосохранения (мин)
+Autosave Short Interval (sec)	Короткий интервал автосохранения (сек)
+Reset Intervals to Default	Сбросить интервалы по умолчанию
+Reset autosave intervals and write to settings.cfg	Сбросить интервалы автосохранения и записать в settings.cfg
+Write Intervals to settings.cfg	Записать интервалы в settings.cfg
+Don't forget to write changed intervals to settings.cfg	Не забудьте записать изменённые интервалы в settings.cfg
