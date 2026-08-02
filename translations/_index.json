@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 111,
-    "keyedMods": 40,
+    "mods": 120,
+    "keyedMods": 47,
     "uiMods": 40,
-    "keys": 14748
+    "keys": 16023
   },
   "mods": [
     {
@@ -37,6 +37,14 @@
       "folder": "AntennaHelper",
       "method": "keyed",
       "keys": 73,
+      "status": "draft"
+    },
+    {
+      "id": "Astrogator",
+      "mod": "Astrogator",
+      "folder": "Astrogator",
+      "method": "keyed",
+      "keys": 50,
       "status": "draft"
     },
     {
@@ -93,6 +101,14 @@
       "folder": "BeamedPowerStandalone",
       "method": "keyed",
       "keys": 96,
+      "status": "draft"
+    },
+    {
+      "id": "CameraTools",
+      "mod": "CameraTools",
+      "folder": "CameraTools",
+      "method": "keyed",
+      "keys": 152,
       "status": "draft"
     },
     {
@@ -153,10 +169,10 @@
     },
     {
       "id": "ContractPacks",
-      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation)",
+      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours)",
       "folder": "ContractPacks",
       "method": "mm-contract+ui-dict",
-      "keys": 91,
+      "keys": 135,
       "status": "draft"
     },
     {
@@ -173,6 +189,14 @@
       "folder": "CryoTanks",
       "method": "keyed-supplement",
       "keys": 2,
+      "status": "draft"
+    },
+    {
+      "id": "DangIt",
+      "mod": "DangIt",
+      "folder": "DangIt",
+      "method": "keyed",
+      "keys": 279,
       "status": "draft"
     },
     {
@@ -280,6 +304,14 @@
       "status": "draft"
     },
     {
+      "id": "HullCameraVDS",
+      "mod": "HullCameraVDS",
+      "folder": "HullCameraVDS",
+      "method": "mm-title",
+      "keys": 21,
+      "status": "draft"
+    },
+    {
       "id": "JX2Antenna",
       "mod": "JX2Antenna",
       "folder": "JX2Antenna",
@@ -360,6 +392,22 @@
       "status": "migrated"
     },
     {
+      "id": "KerbalWeatherProject",
+      "mod": "KerbalWeatherProject",
+      "folder": "KerbalWeatherProject",
+      "method": "keyed",
+      "keys": 88,
+      "status": "draft"
+    },
+    {
+      "id": "KIS",
+      "mod": "KIS — Kerbal Inventory System",
+      "folder": "KIS",
+      "method": "keyed",
+      "keys": 104,
+      "status": "draft"
+    },
+    {
       "id": "Knes",
       "mod": "Knes",
       "folder": "Knes",
@@ -406,6 +454,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "LaserDist",
+      "mod": "LaserDist",
+      "folder": "LaserDist",
+      "method": "mm-title",
+      "keys": 3,
+      "status": "draft"
     },
     {
       "id": "MechJeb2",
@@ -600,6 +656,14 @@
       "status": "migrated"
     },
     {
+      "id": "RemoteTech",
+      "mod": "RemoteTech",
+      "folder": "RemoteTech",
+      "method": "keyed",
+      "keys": 339,
+      "status": "draft"
+    },
+    {
       "id": "RetractableLiftingSurface",
       "mod": "RetractableLiftingSurface",
       "folder": "RetractableLiftingSurface",
@@ -734,6 +798,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "SpaceAge",
+      "mod": "SpaceAge",
+      "folder": "SpaceAge",
+      "method": "keyed",
+      "keys": 195,
+      "status": "draft"
     },
     {
       "id": "SpaceDust",
