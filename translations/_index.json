@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "totals": {
-    "mods": 121,
-    "keyedMods": 47,
+    "mods": 130,
+    "keyedMods": 56,
     "uiMods": 41,
-    "keys": 16050
+    "keys": 18645
   },
   "mods": [
     {
@@ -13,6 +13,14 @@
       "folder": "*",
       "method": "ui-dict",
       "keys": 183,
+      "status": "draft"
+    },
+    {
+      "id": "AGExt",
+      "mod": "Action Groups Extended",
+      "folder": "Diazo/AGExt",
+      "method": "keyed",
+      "keys": 55,
       "status": "draft"
     },
     {
@@ -169,10 +177,10 @@
     },
     {
       "id": "ContractPacks",
-      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours)",
+      "mod": "Contract Packs (Constellations / CleverSat / FieldResearch / KerbinSpaceStation / RemoteTech / ExplorationPlus / UnmannedContracts / GrandTours / ZZZRadioTelescope / AnomalySurveyor)",
       "folder": "ContractPacks",
       "method": "mm-contract+ui-dict",
-      "keys": 135,
+      "keys": 1007,
       "status": "draft"
     },
     {
@@ -189,6 +197,14 @@
       "folder": "CryoTanks",
       "method": "keyed-supplement",
       "keys": 2,
+      "status": "draft"
+    },
+    {
+      "id": "CustomAsteroids",
+      "mod": "Custom Asteroids",
+      "folder": "CustomAsteroids",
+      "method": "keyed",
+      "keys": 178,
       "status": "draft"
     },
     {
@@ -344,11 +360,27 @@
       "status": "draft"
     },
     {
+      "id": "KDEX",
+      "mod": "Kerbal Dust Experiment (KDEX)",
+      "folder": "masTerTorch",
+      "method": "keyed",
+      "keys": 74,
+      "status": "draft"
+    },
+    {
       "id": "KerbalAlarmClock",
       "mod": "Kerbal Alarm Clock (Updated)",
       "folder": "TriggerTech",
       "method": "keyed+ui-dict",
       "keys": 550,
+      "status": "draft"
+    },
+    {
+      "id": "KerbalAtomics",
+      "mod": "Kerbal Atomics",
+      "folder": "KerbalAtomics",
+      "method": "keyed",
+      "keys": 41,
       "status": "draft"
     },
     {
@@ -390,6 +422,14 @@
       "method": "ui-dict",
       "keys": 0,
       "status": "migrated"
+    },
+    {
+      "id": "KerbalPlanetaryBaseSystems",
+      "mod": "Kerbal Planetary Base Systems",
+      "folder": "PlanetaryBaseInc",
+      "method": "keyed",
+      "keys": 726,
+      "status": "draft"
     },
     {
       "id": "KerbalRenamer",
@@ -512,6 +552,14 @@
       "status": "migrated"
     },
     {
+      "id": "NASA-CountDown",
+      "mod": "NASA CountDown Clock Updated",
+      "folder": "NASA_CountDown",
+      "method": "keyed",
+      "keys": 46,
+      "status": "draft"
+    },
+    {
       "id": "NearFutureAeronautics",
       "mod": "Near Future Aeronautics",
       "folder": "NearFutureAeronautics",
@@ -600,6 +648,14 @@
       "status": "migrated"
     },
     {
+      "id": "PreciseNode",
+      "mod": "Precise Node",
+      "folder": "PreciseNode",
+      "method": "keyed",
+      "keys": 82,
+      "status": "draft"
+    },
+    {
       "id": "ProceduralFairings",
       "mod": "ProceduralFairings",
       "folder": "ProceduralFairings",
@@ -669,6 +725,22 @@
       "folder": "RemoteTech",
       "method": "keyed",
       "keys": 339,
+      "status": "draft"
+    },
+    {
+      "id": "ReStock",
+      "mod": "ReStock",
+      "folder": "ReStock",
+      "method": "keyed",
+      "keys": 128,
+      "status": "draft"
+    },
+    {
+      "id": "ReStockPlus",
+      "mod": "ReStock+",
+      "folder": "ReStockPlus",
+      "method": "keyed",
+      "keys": 393,
       "status": "draft"
     },
     {

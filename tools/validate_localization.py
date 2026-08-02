@@ -79,6 +79,11 @@ KNOWN_UPSTREAM_DUPLICATE_KEYS = {
     # StationScience's english.cfg defines this stock-namespace kuarq flavour
     # key twice with different text; we mirror it verbatim.
     "translations/StationScience/Localization/ru.cfg:#autoLOC_prograde_MunSrfLanded",
+    # Precise Node's own en-us.cfg defines these two keys twice (same value
+    # both times -- verified in the installed mod's Localization/en-us.cfg);
+    # we mirror the upstream key set 1:1, harmless (last-wins, identical value).
+    "translations/PreciseNode/Localization/ru.cfg:#PN_TripInfo",
+    "translations/PreciseNode/Localization/ru.cfg:#PN_Time",
 }
 
 
