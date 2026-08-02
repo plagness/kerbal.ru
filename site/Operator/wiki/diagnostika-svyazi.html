@@ -2,32 +2,6 @@
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Диагностика связи — вики kerbal.ru</title>
-<!-- SEO:START -->
-<link rel="canonical" href="https://kerbal.ru/Operator/wiki/diagnostika-svyazi.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kerbal.ru/Operator/wiki/diagnostika-svyazi.html">
-<meta property="og:title" content="Диагностика связи — вики kerbal.ru">
-<meta property="og:description" content="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">
-<meta property="og:image" content="https://kerbal.ru/assets/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="kerbal.ru">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Диагностика связи — вики kerbal.ru">
-<meta name="twitter:description" content="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">
-<meta name="twitter:image" content="https://kerbal.ru/assets/og.jpg">
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Диагностика связи",
-  "description": "Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.",
-  "inLanguage": "ru",
-  "url": "https://kerbal.ru/Operator/wiki/diagnostika-svyazi.html",
-  "isPartOf": {"@type": "WebSite", "@id": "https://kerbal.ru/#website"},
-  "author": {"@type": "Organization", "name": "kerbal.ru"}
-}</script>
-<!-- SEO:END -->
 <meta name="description" content="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -272,7 +246,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#_7">Кто на что влияет</a></li>
 </ul>
 </div>
-</div><article class="art"><p>Связь ломается тихо. Игра не пишет «твоя сеть настроена неправильно» — она просто перестаёт слушаться, и это выглядит как десяток разных багов: не идёт WASD, не ставится манёвр, серая кнопка «Передать». Причина при этом почти всегда одна.</p>
+</div><article class="art"><blockquote>
+<p>⚠️ <strong>Устарело (v26.19, 2026-08).</strong> Статья описывает старую систему связи — CommNet + CommNet Constellation
+(частоты). Сборка перешла на <strong>RemoteTech</strong> (задержка сигнала, выбор цели у тарелок вместо частот) — см.
+<a class="wikilink" href="mody-yadro.html" title="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">Каталог модов: ядро сборки</a>. Механика ниже для RemoteTech НЕ актуальна, статья ждёт переписи после живой проверки новой
+системы. Общий разбор перехода — docs/STATUS.md в репозитории.</p>
+</blockquote>
+<p>Связь ломается тихо. Игра не пишет «твоя сеть настроена неправильно» — она просто перестаёт слушаться, и это выглядит как десяток разных багов: не идёт WASD, не ставится манёвр, серая кнопка «Передать». Причина при этом почти всегда одна.</p>
 <p>Эта статья — про то, как за пять минут отличить «я за горизонтом» от «у меня сломана сеть», не гадая.</p>
 <h2 id="_1">Один корень, три симптома</h2>
 <table>
@@ -529,8 +509,8 @@ CommNet Vessel 'X' has the single freq 0 of 9036576 power   ← аппарат �
 <p><strong>Science Relay</strong> заслуживает упоминания как обходной путь: он позволяет слить данные на другой свой аппарат, у которого связь есть. В логе это видно строкой <code>[Science_Relay] Connected vessels detected for science transmission: N</code>. Ноль — передавать некому, работает только обычный путь до ЦУПа.</p>
 <blockquote>
 <p>Правило, которое экономит вечера: прежде чем винить мод, проверь геометрию и частоты. В нашей практике каждый случай «непонятного бага со связью» оказывался одним из этих двух.</p>
-</blockquote></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="svyaz-osnovy.html"><b>Связь: как работает CommNet</b><span>Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.</span></a><a href="chastoty.html"><b>Частоты и наземные станции</b><span>Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.</span></a><a href="problemy.html"><b>Частые проблемы</b><span>Симптом → причина → что делать: неуправляемый зонд, потеря связи и науки, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="agenty.html">Подключаем ИИ-агентов</a>, <a href="chastoty.html">Частоты и наземные станции</a>, <a href="kos-otladka.html">kOS: отладка и лимиты</a>, <a href="problemy.html">Частые проблемы</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a></div>
-    <footer>Вики сборки «Оператор» · kerbal.ru 26.18 · правится в
+</blockquote></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="svyaz-osnovy.html"><b>Связь: как работает CommNet</b><span>Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.</span></a><a href="chastoty.html"><b>Частоты и наземные станции</b><span>Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.</span></a><a href="problemy.html"><b>Частые проблемы</b><span>Симптом → причина → что делать: неуправляемый зонд, потеря связи и науки, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="agenty.html">Подключаем ИИ-агентов</a>, <a href="chastoty.html">Частоты и наземные станции</a>, <a href="kos-otladka.html">kOS: отладка и лимиты</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="problemy.html">Частые проблемы</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a></div>
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.26 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/builds/operator/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
   </main>

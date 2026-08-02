@@ -8,6 +8,60 @@
 
 ## [Unreleased]
 
+## [26.26] — 2026-08-02
+
+Второй Workflow-раунд — звук/эффекты, атмосферная физика, особенности планет, углубление науки.
+4 независимых поисковика + 4 верификатора (по одному на тему), каждая находка перепроверена лично
+через `mono ckan.exe show` (полная цепочка Depends/Recommends минимум на 1 уровень) до установки.
+21 новая позиция (24 CKAN-идентификатора, включая парный `RocketSoundEnhancement-Config-Default`).
+
+### Добавлено
+
+**Звук и обратная связь**: GPWS, NASA CountDown Clock Updated, Kerbal Public Radio Service, Collision
+FX-ReUpdated, Rocket Sound Enhancement (+Config Default), Docking Port Sound FX, Ship Effects
+Continued, Save Confirmation Sound Updated — все проверены на чистые зависимости, ни один не тянет
+IVA-стек или Burst.
+
+**Атмосферная физика**: Reentry Particle Effect Renewed — включает неиспользуемый стоковый эффект
+плазмы при входе в атмосферу.
+
+**Особенности планет**: Contract Pack: Anomaly Surveyor, Custom Asteroids + профили Stock-Inner/
+Stockalike/OPM-Outer, Minor Planet Sampling, Jool Biomes, Spectra EVE Minmus Geysers, Biome
+Corrections.
+
+**Углубление науки**: Tarsier Space Technology with Galaxies, Triple-Z RadioTelescope, Better Science
+Labs Continued, Solar Science (SOL), Contract Pack: Research Advancement Division.
+
+### Осознанно не взято (перепроверено, не теория)
+
+- **KerbalFX-AeroFX** — жёстко требует KSPBurst; лично проверено на уровне файлов (не только метаданных
+  CKAN): `000_KSPBurst` на диске весит 1.6 МБ — это `KSPBurst-Lite`, настоящий пакет (407 МБ) лежит
+  нераспакованным в кэше CKAN. Реестр считает `KSPBurst` установленным (маркер `^`), а по факту
+  нативного компилятора нет — тот же сценарий, что уже уронил BRP 100k+ исключениями.
+- **Jet Sounds Continued** / **Ground Proximity** — функционально пересекаются с уже взятыми Rocket
+  Sound Enhancement и GPWS соответственно, дубли не ставим без проверки на практике.
+- **Firefly** — тот же FX-слой входа в атмосферу, что и взятый Reentry Particle Effect; ставить оба
+  одновременно даст визуальное дублирование.
+- **Кластер ветра** (KerbalWind/WindAPI/Beaufort), **Variometer** — все жёстко тянут FAR (полная замена
+  аэродинамики), решение не пересматриваем.
+- **CactEye** — дублирует Tarsier (оба телескопы), взят только Tarsier.
+- **BetterDres**, **TheThirdMun**, **MagicaHornetPlanetPack** — замещают/добавляют небесные тела, вне
+  рамок «стоковая система не меняется».
+- **SWAOD → OrbitalKeeper** — автоматически компенсирует орбитальный распад в фоне, тот же критерий
+  отказа, что уже применялся к GravityTurn (никаких автопилотов вместо ручной/kOS-логики).
+- Полный список отклонённого — в [[mody-rasshirenie]] (разделы «Звук и обратная связь», «Наука»,
+  «Кандидаты»).
+
+### Известные ограничения
+
+- **`CustomAsteroids-Pops-Stock-Outer`** (кометы за орбитой Джула) не установлен — не решение, а
+  ограничение CKAN-резолвера: при явном запросе всех четырёх Pops-профилей разом решатель
+  детерминированно отбрасывает именно этот один (воспроизведено трижды, независимо от порядка модов
+  и от того, стоят ли остальные три уже или ставятся с нуля). Stock-Inner + Stockalike + OPM-Outer
+  дают достаточное покрытие.
+- Установка выполнена с `--no-recommends` (после трёх инцидентов раздувания через Recommends в этой
+  сессии) — каждый мод в списке лично проверен, что не требует ничего сверх уже стоящего.
+
 ## [26.25] — 2026-08-02
 
 Первый батч перевода из марафона v26.19→v26.24 — 9 модов + 4 контракт-пака, отобраны по

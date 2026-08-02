@@ -2,32 +2,6 @@
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Созвездия и покрытие — вики kerbal.ru</title>
-<!-- SEO:START -->
-<link rel="canonical" href="https://kerbal.ru/Operator/wiki/sozvezdiya.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kerbal.ru/Operator/wiki/sozvezdiya.html">
-<meta property="og:title" content="Созвездия и покрытие — вики kerbal.ru">
-<meta property="og:description" content="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">
-<meta property="og:image" content="https://kerbal.ru/assets/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="kerbal.ru">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Созвездия и покрытие — вики kerbal.ru">
-<meta name="twitter:description" content="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">
-<meta name="twitter:image" content="https://kerbal.ru/assets/og.jpg">
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Созвездия и покрытие",
-  "description": "Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.",
-  "inLanguage": "ru",
-  "url": "https://kerbal.ru/Operator/wiki/sozvezdiya.html",
-  "isPartOf": {"@type": "WebSite", "@id": "https://kerbal.ru/#website"},
-  "author": {"@type": "Organization", "name": "kerbal.ru"}
-}</script>
-<!-- SEO:END -->
 <meta name="description" content="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -270,7 +244,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#_5">Что просят контракты</a></li>
 </ul>
 </div>
-</div><article class="art"><p>Сеть покрытия — то, ради чего собран «Оператор». Одиночный ретранслятор закрывает дыру на один виток; постоянное покрытие требует созвездия. Механика CommNet разобрана в <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>, здесь — геометрия и практика.</p>
+</div><article class="art"><blockquote>
+<p>⚠️ <strong>Устарело (v26.19, 2026-08).</strong> Статья описывает старую систему связи — CommNet + CommNet Constellation
+(частоты). Сборка перешла на <strong>RemoteTech</strong> (задержка сигнала, выбор цели у тарелок вместо частот) — см.
+<a class="wikilink" href="mody-yadro.html" title="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">Каталог модов: ядро сборки</a>. Механика ниже для RemoteTech НЕ актуальна, статья ждёт переписи после живой проверки новой
+системы. Общий разбор перехода — docs/STATUS.md в репозитории.</p>
+</blockquote>
+<p>Сеть покрытия — то, ради чего собран «Оператор». Одиночный ретранслятор закрывает дыру на один виток; постоянное покрытие требует созвездия. Механика CommNet разобрана в <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>, здесь — геометрия и практика.</p>
 <h2 id="_1">Кеостационар</h2>
 <p>Синхронная орбита Кербина считается из периода вращения планеты (21 549,4 с) и её GM (3,5316·10¹² м³/с²):</p>
 <table>
@@ -373,7 +353,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </tbody>
 </table>
 <p>Заказы требуют источник питания на борту (панели, РИТЭГ или реактор — см. <a class="wikilink" href="energetika.html" title="Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.">Энергетика и тепло</a>) и умеют напоминать: комбинирование антенн нелинейно, а настройки сложности меняют мощность связи. Что ставить на сам спутник — в <a class="wikilink" href="antenny.html" title="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">Антенны: выбор и дальность</a>; как автоматизировать серию однотипных запусков — в <a class="wikilink" href="avtomatika.html" title="MechJeb, будильники, Haystack, повторяющиеся рейсы и фоновый расчёт ресурсов — четыре слоя автоматизации сборки «Оператор».">Автоматика полётов и рутина</a>.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="svyaz-osnovy.html"><b>Связь: как работает CommNet</b><span>Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.</span></a><a href="chastoty.html"><b>Частоты и наземные станции</b><span>Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.</span></a><a href="antenny.html"><b>Антенны: выбор и дальность</b><span>Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.</span></a><a href="kontrakty.html"><b>Контракты и стратегии</b><span>Contract Configurator и паки Constellations, CleverSat, Kerbin Space Station, Field Research плюс стратегии Strategia — как они задают ритм долгой программы.</span></a><a href="flot.html"><b>Управление флотом</b><span>Когда аппаратов больше десяти: схема именования, поиск через Haystack, будильники Kerbal Alarm Clock, повтор рутинных запусков через Routine Mission Manager и что происходит с аппаратами вне фокуса.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="antenny.html">Антенны: выбор и дальность</a>, <a href="avtomatika.html">Автоматика полётов и рутина</a>, <a href="derevo-tehnologiy.html">Дерево технологий</a>, <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="flot.html">Управление флотом</a>, <a href="glossariy.html">Глоссарий</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="kos-osnovy.html">kOS: основы</a>, <a href="kos-recepty.html">kOS: готовые рецепты</a>, <a href="missiya-mun.html">Миссия на Мун</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="nastroyki.html">Настройки: сложность и моды</a>, <a href="nauka-osnovy.html">Наука: как собирать эффективно</a>, <a href="neyronka.html">Нейросеть как второй пилот</a>, <a href="problemy.html">Частые проблемы</a>, <a href="sborka.html">Что такое «Оператор»</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="start.html">С чего начать</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a>, <a href="tela-sistemy.html">Тела системы: Кербол и OPM</a></div>
-    <footer>Вики сборки «Оператор» · kerbal.ru 26.18 · правится в
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.26 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/builds/operator/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
   </main>

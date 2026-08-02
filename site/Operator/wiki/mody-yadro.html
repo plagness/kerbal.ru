@@ -2,32 +2,6 @@
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Каталог модов: ядро сборки — вики kerbal.ru</title>
-<!-- SEO:START -->
-<link rel="canonical" href="https://kerbal.ru/Operator/wiki/mody-yadro.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kerbal.ru/Operator/wiki/mody-yadro.html">
-<meta property="og:title" content="Каталог модов: ядро сборки — вики kerbal.ru">
-<meta property="og:description" content="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">
-<meta property="og:image" content="https://kerbal.ru/assets/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="kerbal.ru">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Каталог модов: ядро сборки — вики kerbal.ru">
-<meta name="twitter:description" content="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">
-<meta name="twitter:image" content="https://kerbal.ru/assets/og.jpg">
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Каталог модов: ядро сборки",
-  "description": "Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.",
-  "inLanguage": "ru",
-  "url": "https://kerbal.ru/Operator/wiki/mody-yadro.html",
-  "isPartOf": {"@type": "WebSite", "@id": "https://kerbal.ru/#website"},
-  "author": {"@type": "Organization", "name": "kerbal.ru"}
-}</script>
-<!-- SEO:END -->
 <meta name="description" content="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -273,7 +247,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </ul>
 </div>
 </div><article class="art"><p><strong>Ядро</strong> — моды, которые ставятся всегда. Их ровно 21. На них держится всё остальное: <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">связь</a>, <a class="wikilink" href="nauka-osnovy.html" title="Ситуации, множители тел, выжимание экспериментов и порядок сбора науки от Кербина до Минмуса.">наука</a>, <a class="wikilink" href="stancii.html" title="Зачем нужна станция, наука Station Science, модули SSPX, жизнеобеспечение Snacks и контракты на обслуживание.">станции</a>, <a class="wikilink" href="avtomatika.html" title="MechJeb, будильники, Haystack, повторяющиеся рейсы и фоновый расчёт ресурсов — четыре слоя автоматизации сборки «Оператор».">автоматика</a>. Выкинуть что-то из ядра технически можно, но тогда часть вики перестанет соответствовать твоей игре, а половина контрактов и деталей исчезнет из дерева.</p>
-<p>Расширения — 36 рекомендованных и 3 опциональных — в <a class="wikilink" href="mody-rasshirenie.html" title="36 рекомендованных и 3 опциональных мода «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a>. Как всё это ставится — <a class="wikilink" href="ustanovka.html" title="Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.">Установка и обновление</a>.</p>
+<p>Расширения — 36 рекомендованных и 3 опциональных — в <a class="wikilink" href="mody-rasshirenie.html" title="103 рекомендованных и 1 опциональный мод «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a>. Как всё это ставится — <a class="wikilink" href="ustanovka.html" title="Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.">Установка и обновление</a>.</p>
 <p>Версии ниже — по эталонной установке на KSP 1.12.5.</p>
 <h2 id="_1">Детали и визуал</h2>
 <table>
@@ -338,6 +312,12 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </table>
 <p>Реакторы работают не «включил и забыл»: они греются через <strong>SystemHeat</strong> (тянется зависимостью) и требуют радиаторов, а после запуска накапливают отработанное топливо. Панели и реакторы вместе с <strong>Dynamic Battery Storage</strong> (тоже зависимость) перестают дёргать баланс ЭЧ на каждом кадре — это чинит стоковый баг с «мигающим» электричеством на больших аппаратах.</p>
 <h2 id="_3">Связь и сеть</h2>
+<blockquote>
+<p>⚠️ <strong>Смена системы связи (v26.19, 2026-08).</strong> CommNet Constellation и Antenna Helper заменены на <strong>RemoteTech</strong>.
+Раздел ниже уже описывает новую систему; статьи <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>, <a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a>, <a class="wikilink" href="antenny.html" title="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">Антенны: выбор и дальность</a>, <a class="wikilink" href="chastoty.html" title="Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.">Частоты и наземные станции</a>,
+<a class="wikilink" href="diagnostika-svyazi.html" title="Почему пропало управление и не уходит наука: уровни управления, расчёт горизонта, где смотреть в сейве и логе, чек-лист от дешёвых проверок к дорогим.">Диагностика связи</a> ещё написаны под старую (CommNet-частоты) и требуют переписи под RT-механику
+(проверка вживую, не переписано пока — см. <a class="wikilink" href="problemy.html" title="Симптом → причина → что делать: неуправляемый зонд, потеря связи и науки, дёрганая физика на Mac, зацикленный звук, ошибки ModuleManager, английский текст, память и сейвы после смены сборки.">Частые проблемы</a> и STATUS.md в репо).</p>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -348,14 +328,14 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </thead>
 <tbody>
 <tr>
-<td><strong>CommNet Constellation</strong></td>
-<td>Даёт антеннам и наземным станциям <strong>частоты</strong>; связываются только совпадающие</td>
-<td>Ядро вижена сборки — разделение сетей, см. <a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a></td>
+<td><strong>RemoteTech</strong> 1.9.12</td>
+<td>Полностью заменяет CommNet: реальная задержка сигнала (скорость света), тарелки требуют выбора цели (Cone Mode/прямая связь/ЦУП), без связи — управление только по заранее загруженной программе</td>
+<td>Задержка команд ложится на философию kOS: пишешь скрипт заранее, а не реагируешь вручную. Ядро сети — вместо частот CommNet Constellation</td>
 </tr>
 <tr>
-<td><strong>Antenna Helper</strong> 1.0.7</td>
-<td>Считает дальность и уровень сигнала в ангаре, в полёте и в ЦУП</td>
-<td>Проверить покрытие <strong>до</strong> запуска, а не после — <a class="wikilink" href="antenny.html" title="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">Антенны: выбор и дальность</a></td>
+<td><strong>StockRT</strong> 1.33</td>
+<td>Патчит RT-механику на ЛЮБЫЕ уже существующие антенны (стоковые и модовые) без своих деталей — не нужно менять сотни партов Near Future/Coatl/Knes/US2/DMagic/SpaceY по одной</td>
+<td>Без него пришлось бы вручную патчить антенны каждого из 100+ модов сборки</td>
 </tr>
 <tr>
 <td><strong>Near Future Exploration</strong> 1.1.3</td>
@@ -364,7 +344,9 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </tr>
 </tbody>
 </table>
-<p><strong>CommNet Constellation</strong> — самый недооценённый мод ядра. В ваниле CommNet один общий эфир: любой ретранслятор помогает любому аппарату. Здесь у каждой антенны есть номер частоты, и ты сам решаешь, кто с кем разговаривает: научная сеть отдельно, служебная отдельно, дальний космос отдельно. Это превращает «навесить релеев побольше» в проектирование. Разбор — <a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a> и <a class="wikilink" href="set-planet.html" title="Ретрансляторы у Дюны, Джула и планет OPM: схема «тяжёлый плюс рабочие», бюджет дальности до Кербина, питание и тень вдали от солнца.">Сеть связи у других планет</a>.</p>
+<p><strong>Почему RemoteTech, а не CommNet Constellation.</strong> Раньше выбор был осознанно в пользу CNC («RemoteTech — он про ручное наведение», решение с самого начала сборки). Пересмотрено: RT не требует физического наведения тарелки (это подтверждено документацией мода — цель выбирается из меню, ориентация корабля не влияет), зато даёт настоящую задержку сигнала и обязательную маршрутизацию через реле — то есть даёт «сеть» больше смысла, чем частоты CNC, и естественно ложится на kOS (<code>ADDONS:RT</code> — официальная встроенная интеграция).</p>
+<p><strong>Antenna Helper убран</strong> — он считал дальность по модели CommNet, под RT эти цифры не имеют смысла. Прямого RT-аналога в CKAN не нашлось.</p>
+<p><strong>Про существующие сохранения.</strong> У аппаратов, запущенных до перехода, тарелки не будут иметь выбранной RT-цели — это игровое состояние, которое нельзя восстановить патчем конфига (это НЕ то же самое, что настройка мода — это осознанный игровой выбор игрока, которого ещё не было). После обновления сборки на уже летающих аппаратах нужно один раз зайти в интерфейс антенны и выбрать цель вручную (для «Избыток-1» — 1-2 тарелки). Всенаправленные (omni) антенны продолжат работать сразу без настройки.</p>
 <h2 id="_4">Наука и зонды</h2>
 <table>
 <thead>
@@ -469,7 +451,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <tr>
 <td><strong>KSPBurst</strong> 1.7.4</td>
 <td>Подкладывает Unity Burst — моды с job-кодом считают быстрее</td>
-<td>Ускоряет фоновые расчёты, в первую очередь Background Resource Processing (<a class="wikilink" href="mody-rasshirenie.html" title="36 рекомендованных и 3 опциональных мода «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a>)</td>
+<td>Ускоряет фоновые расчёты, в первую очередь Background Resource Processing (<a class="wikilink" href="mody-rasshirenie.html" title="103 рекомендованных и 1 опциональный мод «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -554,8 +536,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 </tr>
 </tbody>
 </table>
-<p>Правило простое: если папки нет в списках <a class="wikilink" href="mody-yadro.html" title="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">Каталог модов: ядро сборки</a> и <a class="wikilink" href="mody-rasshirenie.html" title="36 рекомендованных и 3 опциональных мода «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a> — это зависимость. Не удаляй её вручную, пользуйся CKAN.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="mody-rasshirenie.html"><b>Каталог модов: расширения</b><span>36 рекомендованных и 3 опциональных мода «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.</span></a><a href="sborka.html"><b>Что такое «Оператор»</b><span>Философия сборки: «ванила+» на стоковой системе, долгая программа вместо разовых полётов, без хардкора RP-1.</span></a><a href="ustanovka.html"><b>Установка и обновление</b><span>Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="agenty.html">Подключаем ИИ-агентов</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a></div>
-    <footer>Вики сборки «Оператор» · kerbal.ru 26.18 · правится в
+<p>Правило простое: если папки нет в списках <a class="wikilink" href="mody-yadro.html" title="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">Каталог модов: ядро сборки</a> и <a class="wikilink" href="mody-rasshirenie.html" title="103 рекомендованных и 1 опциональный мод «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.">Каталог модов: расширения</a> — это зависимость. Не удаляй её вручную, пользуйся CKAN.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="mody-rasshirenie.html"><b>Каталог модов: расширения</b><span>103 рекомендованных и 1 опциональный мод «Оператора» — что даёт каждый, на каком этапе игры пригодится и где он на любителя.</span></a><a href="sborka.html"><b>Что такое «Оператор»</b><span>Философия сборки: «ванила+» на стоковой системе, долгая программа вместо разовых полётов, без хардкора RP-1.</span></a><a href="ustanovka.html"><b>Установка и обновление</b><span>Три пути поставить «Оператор» — CKAN мышкой на Windows, install.sh на Linux/macOS/Steam Deck или вручную; плюс обновление, смена сборки и файл состояния.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="agenty.html">Подключаем ИИ-агентов</a>, <a href="antenny.html">Антенны: выбор и дальность</a>, <a href="chastoty.html">Частоты и наземные станции</a>, <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a>, <a href="sozvezdiya.html">Созвездия и покрытие</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a></div>
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.26 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/builds/operator/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
   </main>

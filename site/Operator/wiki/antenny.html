@@ -2,32 +2,6 @@
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Антенны: выбор и дальность — вики kerbal.ru</title>
-<!-- SEO:START -->
-<link rel="canonical" href="https://kerbal.ru/Operator/wiki/antenny.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kerbal.ru/Operator/wiki/antenny.html">
-<meta property="og:title" content="Антенны: выбор и дальность — вики kerbal.ru">
-<meta property="og:description" content="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">
-<meta property="og:image" content="https://kerbal.ru/assets/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="kerbal.ru">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Антенны: выбор и дальность — вики kerbal.ru">
-<meta name="twitter:description" content="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">
-<meta name="twitter:image" content="https://kerbal.ru/assets/og.jpg">
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Антенны: выбор и дальность",
-  "description": "Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.",
-  "inLanguage": "ru",
-  "url": "https://kerbal.ru/Operator/wiki/antenny.html",
-  "isPartOf": {"@type": "WebSite", "@id": "https://kerbal.ru/#website"},
-  "author": {"@type": "Organization", "name": "kerbal.ru"}
-}</script>
-<!-- SEO:END -->
 <meta name="description" content="Какую антенну ставить на аппарат, как считается дальность CommNet и сколько это стоит по электричеству.">
 <meta name="theme-color" content="#07110d">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -270,7 +244,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <li><a href="#_6">Энергия</a></li>
 </ul>
 </div>
-</div><article class="art"><h2 id="_1">Два типа</h2>
+</div><article class="art"><blockquote>
+<p>⚠️ <strong>Устарело (v26.19, 2026-08).</strong> Статья описывает старую систему связи — CommNet + CommNet Constellation
+(частоты). Сборка перешла на <strong>RemoteTech</strong> (задержка сигнала, выбор цели у тарелок вместо частот) — см.
+<a class="wikilink" href="mody-yadro.html" title="Полный разбор ядра «Оператора» — 21 мод: что делает каждый, зачем он здесь и какие служебные библиотеки тянутся следом.">Каталог модов: ядро сборки</a>. Механика ниже для RemoteTech НЕ актуальна, статья ждёт переписи после живой проверки новой
+системы. Общий разбор перехода — docs/STATUS.md в репозитории.</p>
+</blockquote>
+<h2 id="_1">Два типа</h2>
 <p>Базовые понятия CommNet — в <a class="wikilink" href="svyaz-osnovy.html" title="Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.">Связь: как работает CommNet</a>; здесь только выбор железа.</p>
 <p><strong>Прямая</strong> (DIRECT) — аппарат может говорить с ЗСК и пользоваться чужими ретрансляторами, но сам ретранслятором не работает.
 <strong>Ретранслятор</strong> (RELAY) — то же самое плюс возможность пропускать через себя чужой трафик. Спутник созвездия (см. <a class="wikilink" href="sozvezdiya.html" title="Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.">Созвездия и покрытие</a>) обязан быть RELAY, иначе сеть не соберётся.</p>
@@ -393,7 +373,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 0;color:v
 <p>Проверяй это <strong>в ангаре, а не в полёте</strong>. «Помощник антенн» (Antenna Helper) показывает: <code>Мощность</code>, <code>Макс. дальность</code>, <code>Макс. расстояние при 100%</code>, а строка <code>Состояние</code> прямо говорит «N из M антенн суммируются». Выбираешь цель (<code>Планета / Луна</code> → <code>Мин</code>/<code>Макс</code> расстояние) и сразу видишь <code>Сигнал на макс. расстоянии</code>. В окне Станции слежения он же рисует круги покрытия — удобно проверять готовое созвездие.</p>
 <h2 id="_6">Энергия</h2>
 <p>Передача стоит электричество: стоковые ретрансляторы жрут <strong>24 ЭЧ на пакет</strong>, 88-88 — 20, JX2 — 22. Мелкий зонд с одной батарейкой сажает её на передаче большого эксперимента за секунды. Считай передатчик такой же нагрузкой, как двигатель — см. <a class="wikilink" href="energetika.html" title="Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.">Энергетика и тепло</a>.</p></article><div class="sec-label">Связанные статьи</div><div class="rel"><a href="svyaz-osnovy.html"><b>Связь: как работает CommNet</b><span>Механика CommNet в сборке — дальность антенн, DSN, слепые зоны, ретрансляторы и почему первый зонд теряет управление.</span></a><a href="chastoty.html"><b>Частоты и наземные станции</b><span>Как CommNet Constellation превращает связь в радиосеть с каналами: частота на каждой антенне, частоты у наземных станций, апгрейд станций за деньги и главная ловушка — станция без частоты.</span></a><a href="sozvezdiya.html"><b>Созвездия и покрытие</b><span>Как построить сеть вокруг Кербина: три спутника на кеостационаре, полярники, фазировка и разделение сетей по частотам.</span></a><a href="energetika.html"><b>Энергетика и тепло</b><span>Солнце, РИТЭГи и реакторы для дальних миссий, тепловые петли SystemHeat и подбор радиаторов Heat Control.</span></a></div><div class="backlinks">Сюда ссылаются: <a href="chastoty.html">Частоты и наземные станции</a>, <a href="diagnostika-svyazi.html">Диагностика связи</a>, <a href="dolgaya-igra.html">Долгая игра: как вести программу</a>, <a href="energetika.html">Энергетика и тепло</a>, <a href="glossariy.html">Глоссарий</a>, <a href="konstruirovanie.html">Конструирование аппаратов</a>, <a href="kontrakty.html">Контракты и стратегии</a>, <a href="mezhplanetnye.html">Межпланетные перелёты</a>, <a href="mody-rasshirenie.html">Каталог модов: расширения</a>, <a href="mody-yadro.html">Каталог модов: ядро сборки</a>, <a href="pervyy-sputnik.html">Первый спутник: собираем и выводим</a>, <a href="set-planet.html">Сеть связи у других планет</a>, <a href="sozvezdiya.html">Созвездия и покрытие</a>, <a href="stancii.html">Орбитальные станции</a>, <a href="svyaz-osnovy.html">Связь: как работает CommNet</a>, <a href="tela-sistemy.html">Тела системы: Кербол и OPM</a></div>
-    <footer>Вики сборки «Оператор» · kerbal.ru 26.18 · правится в
+    <footer>Вики сборки «Оператор» · kerbal.ru 26.26 · правится в
       <a href="https://github.com/plagness/kerbal.ru/tree/main/builds/operator/wiki">wiki/*.md</a> —
       присылай дополнения через <a href="https://github.com/plagness/kerbal.ru/issues">issue</a>.</footer>
   </main>
